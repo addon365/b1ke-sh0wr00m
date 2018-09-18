@@ -1,0 +1,84 @@
+﻿
+using Api.Database.Entity.Enquiries;
+using Api.Domain.Enquiries;
+using Swc.Service;
+using System;
+using System.Collections.Generic;
+using Threenine.Data;
+
+namespace ViewModel
+{
+    public class EnquiryViewModel : ViewModelBase
+    {
+        private readonly IEnquiriesService _repository;
+        private  Enquiries _currentEnquiry;
+
+        public EnquiryViewModel()
+        {
+            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();            
+            
+
+            WireCommands();
+        }
+
+        private void WireCommands()
+        {
+            UpdateEnquiryCommand = new RelayCommand(UpdateEnquiry);
+            InsertEnquiryCommand = new RelayCommand(InsertEnquiry);
+            FindEnquiryCommand = new RelayCommand(FindEnquiry);
+        }
+        
+        public RelayCommand UpdateEnquiryCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand InsertEnquiryCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand FindEnquiryCommand
+        {
+            get;
+            private set;
+        }
+       
+
+        public Enquiries CurrentEnquiry
+        {
+            get
+            {
+                return _currentEnquiry;
+            }
+
+            set
+            {
+                if (_currentEnquiry != value)
+                {
+                    _currentEnquiry = value;
+                    OnPropertyChanged("CurrentEnquiry");
+                    InsertEnquiryCommand.IsEnabled = true;
+                    FindEnquiryCommand.IsEnabled = true;
+                    UpdateEnquiryCommand.IsEnabled = true;
+                }
+            }
+        }
+
+        public void UpdateEnquiry()
+        {
+           
+        }
+        public void InsertEnquiry()
+        {
+            _repository.GetAllActive();
+            _repository.Insert(CurrentEnquiry);
+        }
+        public void FindEnquiry()
+        {
+            
+        }
+    }
+
+ 
+}

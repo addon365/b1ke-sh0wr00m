@@ -1,0 +1,7 @@
+﻿[
+  { "name": "Enabled" },
+  { "name": "Disabled" },
+  { "name": "Moderate" },
+  { "name": "Review" },
+  { "name": "Defunct" }
+]
