@@ -1,5 +1,7 @@
 ﻿
+using Api.Database.Entity;
 using Api.Database.Entity.Enquiries;
+using Api.Database.Entity.Products;
 using Api.Domain.Enquiries;
 using Swc.Service;
 using System;
@@ -27,7 +29,10 @@ namespace ViewModel
             InsertEnquiryCommand = new RelayCommand(InsertEnquiry);
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
         }
-        
+        IEnumerable<MarketingZone> lstMarketingZone { get; set; }
+        IEnumerable<Product> lstProducts { get; set; }
+        IEnumerable<ExtraFittingsAccessories> lstExtraAccessories { get; set; }
+        IEnumerable<EnquiryType> enquiryTypes { get; set; }
         public RelayCommand UpdateEnquiryCommand
         {
             get;

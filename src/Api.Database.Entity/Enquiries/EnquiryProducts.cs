@@ -8,11 +8,12 @@ namespace Api.Database.Entity.Enquiries
 {
     public class EnquiryProduct:BaseEntity
     {
-        public int EnquiryId { get; set; }
-        public int ProductId { get; set; }
+        public Guid EnquiryId { get; set; }
+        public Guid ProductId { get; set; }
         public double OnRoadPrice { get; set; }
         public double AccessoriesAmount { get; set; }
         public double TotalAmount { get; set; }
+        [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }
         [ForeignKey("ProductId")] public virtual Product product { get; set; }
          
     }

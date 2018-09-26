@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity.ExchangeQuotation
+namespace Api.Database.Entity.ExchangeQuotations
 {
     public class ExchangeQuotation:BaseEntity
     {

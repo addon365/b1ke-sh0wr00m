@@ -41,7 +41,7 @@ namespace Api.Database.Tests
             var threat = Builder<Threat>.CreateNew().With(x => x.ThreatType = Builder<ThreatType>.CreateNew().Build())
                 .With(x => x.Status = Builder<Status>.CreateNew().Build()).Build();
 
-            context.Status.Add(status);
+            context.Statuses.Add(status);
             context.Type.Add(threatType);
             context.Threats.Add(threat);
             context.SaveChanges();

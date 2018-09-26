@@ -48,6 +48,7 @@ namespace addon.BikeShowRoomService.WebService
 
             return enquiries;
         }
+     
 
         public string  Insert(Enquiries enquiries)
         {
@@ -59,6 +60,11 @@ namespace addon.BikeShowRoomService.WebService
         public Enquiries GetEnquiries(string identifier)
         {
             return null;
+        }
+
+        public InitilizeEnquiry GetInitilizeEnquiries()
+        {
+            throw new NotImplementedException();
         }
     }
 }

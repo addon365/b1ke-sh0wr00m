@@ -49,6 +49,54 @@ namespace Api.Database.Migrations
                     b.ToTable("Enquiries");
                 });
 
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<Guid>("EnquiryId");
+
+                    b.Property<Guid>("ExchangeQuotationId");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnquiryId");
+
+                    b.HasIndex("ExchangeQuotationId");
+
+                    b.ToTable("EnquiryExchangeQuotations");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryFinanceQuotation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<Guid>("EnquiryId");
+
+                    b.Property<Guid>("FinanceQuotationId");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnquiryId");
+
+                    b.HasIndex("FinanceQuotationId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("EnquiryFinanceQuotations");
+                });
+
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryStatus", b =>
                 {
                     b.Property<Guid>("Id")
@@ -67,7 +115,7 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EnquiryStatus");
+                    b.ToTable("EnquiryStatuses");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryType", b =>
@@ -86,6 +134,94 @@ namespace Api.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EnquriyType");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.ExchangeQuotations.ExchangeQuotation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<double>("Expected");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<string>("Model");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<int>("NoOfOwner");
+
+                    b.Property<double>("Quotated");
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExchangeQuotations");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.FinanceQuotations.FinanceQuotation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<double>("DownPayment");
+
+                    b.Property<double>("EMIAmount");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<int>("TenureInMonths");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FinanceQuotations");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Products.ExtraFittingsAccessories", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("AccessoriesProductId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ExtraFittings");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Products.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<double>("Price");
+
+                    b.Property<string>("ProductName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Profile", b =>
@@ -130,7 +266,7 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("Statuses");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Threats.Threat", b =>
@@ -211,6 +347,45 @@ namespace Api.Database.Migrations
                     b.HasOne("Api.Database.Entity.Enquiries.EnquiryStatus", "Status")
                         .WithMany("Enquiries")
                         .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
+                        .WithMany()
+                        .HasForeignKey("EnquiryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.ExchangeQuotations.ExchangeQuotation", "exchangequotation")
+                        .WithMany()
+                        .HasForeignKey("ExchangeQuotationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryFinanceQuotation", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
+                        .WithMany()
+                        .HasForeignKey("EnquiryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.FinanceQuotations.FinanceQuotation", "financequotation")
+                        .WithMany()
+                        .HasForeignKey("FinanceQuotationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Products.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Products.ExtraFittingsAccessories", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Products.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

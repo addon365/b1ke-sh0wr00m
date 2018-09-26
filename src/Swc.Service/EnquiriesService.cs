@@ -6,6 +6,7 @@ using Api.Domain.Enquiries;
 using Threenine.Data;
 using Api.Database.Entity.Enquiries;
 using Api.Database.Entity;
+using Api.Database.Entity.Products;
 
 namespace Swc.Service
 {
@@ -27,6 +28,16 @@ namespace Swc.Service
 
           return enquiries;
           
+        }
+        public InitilizeEnquiry GetInitilizeEnquiries()
+        {
+            InitilizeEnquiry ie = new InitilizeEnquiry();
+            
+            ie.Products = _unitOfWork.GetRepository<Product>().Get();
+            ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().Get();
+
+            return ie;
+
         }
 
         public string  Insert(Enquiries enquiries)
@@ -62,6 +73,7 @@ namespace Swc.Service
             enquiry.Status = enquirystatus;
             enquiry.EnquiryTypeId = enquirystatus.Id;
             enquiry.EnquiryType = enquirytype;
+           
             _unitOfWork.GetRepository<Profile>().Add(profile);
             _unitOfWork.GetRepository<EnquiryStatus>().Add(enquirystatus);
             _unitOfWork.GetRepository<EnquiryType>().Add(enquirytype);

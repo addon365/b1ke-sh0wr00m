@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity.FinanceQuotation
+namespace Api.Database.Entity.FinanceQuotations
 {
     public class FinanceQuotation:BaseEntity
     {

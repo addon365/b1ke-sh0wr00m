@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Api.Database.Entity.Products;
+using Api.Database.Entity.ExchangeQuotations;
+using Api.Database.Entity.FinanceQuotations;
 
 namespace Api.Database
 {
@@ -23,12 +26,17 @@ namespace Api.Database
         //}
         public DbSet<Threat> Threats { get; set; }
         public DbSet<ThreatType> Type { get; set; }
-        public DbSet<Status> Status { get; set; }
-
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ExtraFittingsAccessories> ExtraFittings { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EnquiryType> EnquriyType { get; set; }
-        public DbSet<EnquiryStatus> EnquiryStatus { get; set; }
+        public DbSet<EnquiryStatus> EnquiryStatuses { get; set; }
+        public DbSet<EnquiryExchangeQuotation> EnquiryExchangeQuotations { get; set; }
+        public DbSet<EnquiryFinanceQuotation> EnquiryFinanceQuotations { get; set; }
+        public DbSet<ExchangeQuotation> ExchangeQuotations { get; set; }
+        public DbSet<FinanceQuotation> FinanceQuotations { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Api.Database.Entity
 {
-    public class Zonal:BaseEntity
+    public class MarketingZone : BaseEntity
     {
         public string Identifier { get; set; }
         public string ZonalName { get; set; }

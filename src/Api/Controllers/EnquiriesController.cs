@@ -31,9 +31,9 @@ namespace swcApi.Controllers
         ///<remarks>
         ///</remarks>
         [HttpGet]
-        public IEnumerable<Enquiry> Get()
+        public InitilizeEnquiry Get()
         {
-            return _enquiriesService.GetAllActive();
+            return _enquiriesService.GetInitilizeEnquiries();
         }
 
 
