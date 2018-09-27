@@ -17,9 +17,9 @@ namespace ViewModel
 
         public EnquiryViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();            
-            
+            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
+            EnquiryMasterData=_repository.GetInitilizeEnquiries();
             WireCommands();
         }
 
@@ -29,6 +29,7 @@ namespace ViewModel
             InsertEnquiryCommand = new RelayCommand(InsertEnquiry);
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
         }
+        public InitilizeEnquiry EnquiryMasterData { get; }
         IEnumerable<MarketingZone> lstMarketingZone { get; set; }
         IEnumerable<Product> lstProducts { get; set; }
         IEnumerable<ExtraFittingsAccessories> lstExtraAccessories { get; set; }

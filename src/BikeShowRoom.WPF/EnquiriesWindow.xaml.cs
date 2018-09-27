@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-
+using ViewModel;
 
 namespace BikeShowRoom.WPF
 {
@@ -17,64 +17,55 @@ namespace BikeShowRoom.WPF
         List<Enquiry> enquiries;
         List<Profile> profiles;
         List<EnquiryProduct> enquiryProducts;
-        List<Product> products;
-        List<MarketingZone> zonals;
+       
         public EnquiryWindow()
         {
             InitializeComponent();
+            var vm= new EnquiryViewModel();
+            this.DataContext = vm;
             enquiries = new List<Enquiry>();
             profiles = new List<Profile>();
             enquiryProducts = new List<EnquiryProduct>();
-            products = new List<Product>();
-            products.Add(new Product { Id = Guid.NewGuid(), ProductName = "Hero Spleder Plus", Price = 53700 });
-            products.Add(new Product { Id = Guid.NewGuid(), ProductName = "Bajaji Pulsor", Price = 86020 });
-            products.Add(new Product { Id = Guid.NewGuid(), ProductName = "Bajaji CD 100", Price = 45090 });
-            products.Add(new Product { Id = Guid.NewGuid(), ProductName = "Honda Activa", Price = 56300 });
-            cmbVehicle.ItemsSource = products;
-            cmbVehicle.DisplayMemberPath = "ProductName";
+            
 
-            zonals = new List<MarketingZone>();
-            zonals.Add(new MarketingZone { Id = Guid.NewGuid(), ZonalName = "Manali" });
-            zonals.Add(new MarketingZone { Id = Guid.NewGuid(), ZonalName = "West Mambalam" });
-            zonals.Add(new MarketingZone { Id = Guid.NewGuid(), ZonalName = "Koyembedu" });
-            zonals.Add(new MarketingZone { Id = Guid.NewGuid(), ZonalName = "SriPerambathur" });
-            cmbZonal.ItemsSource = zonals;
-            cmbZonal.DisplayMemberPath = "ZonalName";
+          
             
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Enquiry enquiry = new Enquiry();
-            enquiry.Id=Guid.NewGuid();
 
-            Profile profile = new Profile();
-            profile.Id = Guid.NewGuid();
-            profile.Name = txtName.Text;
-            profile.MobileNumber = txtMobileNo.Text;
-            profile.Address = txtAddress.Text;
-            enquiry.ProfileId = profile.Id;
+            var products=cmbVehicle.ItemsSource as IEnumerable<Product>;
+            //Enquiry enquiry = new Enquiry();
+            //enquiry.Id=Guid.NewGuid();
 
-            Product product = cmbVehicle.SelectedItem as Product;
-            EnquiryProduct enquiryProduct = null;
-            if (product!=null)
-            {
-                enquiryProduct = new EnquiryProduct();
-                enquiryProduct.Id = Guid.NewGuid();
-                enquiryProduct.EnquiryId = enquiry.Id;
-                enquiryProduct.ProductId = product.Id;
+            //Profile profile = new Profile();
+            //profile.Id = Guid.NewGuid();
+            //profile.Name = txtName.Text;
+            //profile.MobileNumber = txtMobileNo.Text;
+            //profile.Address = txtAddress.Text;
+            //enquiry.ProfileId = profile.Id;
+
+            //Product product = cmbVehicle.SelectedItem as Product;
+            //EnquiryProduct enquiryProduct = null;
+            //if (product!=null)
+            //{
+            //    enquiryProduct = new EnquiryProduct();
+            //    enquiryProduct.Id = Guid.NewGuid();
+            //    enquiryProduct.EnquiryId = enquiry.Id;
+            //    enquiryProduct.ProductId = product.Id;
                 
-            }
+            //}
 
-            enquiries.Add(enquiry);
-            profiles.Add(profile);
-            foreach (EnquiryProduct ep in enquiryProducts)
-            {
-                if(ep.EnquiryId==null)
-                    ep.EnquiryId = enquiry.Id;
-            }
-            if (enquiryProduct!=null)
-            enquiryProducts.Add(enquiryProduct);
+            //enquiries.Add(enquiry);
+            //profiles.Add(profile);
+            //foreach (EnquiryProduct ep in enquiryProducts)
+            //{
+            //    if(ep.EnquiryId==null)
+            //        ep.EnquiryId = enquiry.Id;
+            //}
+            //if (enquiryProduct!=null)
+            //enquiryProducts.Add(enquiryProduct);
 
 
             

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class justcheckn1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,11 +81,29 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "marketingZones",
+                schema: "swc",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    ZonalDescription = table.Column<string>(nullable: true),
+                    ZonalName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_marketingZones", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 schema: "swc",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
@@ -402,6 +420,10 @@ namespace Api.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExtraFittings",
+                schema: "swc");
+
+            migrationBuilder.DropTable(
+                name: "marketingZones",
                 schema: "swc");
 
             migrationBuilder.DropTable(

@@ -11,8 +11,8 @@ using System;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20180925054248_init")]
-    partial class init
+    [Migration("20180927041828_justcheckn1")]
+    partial class justcheckn1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,6 +185,26 @@ namespace Api.Database.Migrations
                     b.ToTable("FinanceQuotations");
                 });
 
+            modelBuilder.Entity("Api.Database.Entity.MarketingZone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("ZonalDescription");
+
+                    b.Property<string>("ZonalName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("marketingZones");
+                });
+
             modelBuilder.Entity("Api.Database.Entity.Products.ExtraFittingsAccessories", b =>
                 {
                     b.Property<Guid>("Id")
@@ -209,6 +229,8 @@ namespace Api.Database.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("CompanyId");
 
                     b.Property<DateTime>("Created");
 

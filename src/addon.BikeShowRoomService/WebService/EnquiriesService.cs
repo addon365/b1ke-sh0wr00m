@@ -64,7 +64,21 @@ namespace addon.BikeShowRoomService.WebService
 
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = _httpClient.GetAsync("api/Enquiries").Result;
+            InitilizeEnquiry enquiries = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                enquiries = JsonConvert.DeserializeObject<InitilizeEnquiry>(json);
+
+
+
+            }
+
+            return enquiries;
         }
     }
 }

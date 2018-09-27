@@ -1,0 +1,17 @@
+[
+  {
+    "Identifier": "Ref001",
+    "ProductName": "Pulsor",
+    "Price": "1000"
+  },
+  {
+    "Identifier": "Ref002",
+    "ProductName": "CD-100",
+    "Price": "2000"
+  },
+  {
+    "Identifier": "Ref003",
+    "ProductName": "EXCEL",
+    "Price": "3000"
+  }
+]

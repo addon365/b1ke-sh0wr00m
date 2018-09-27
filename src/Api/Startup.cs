@@ -52,7 +52,7 @@ namespace swcApi
                     Version = "v1" ,
                     Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://threenine.co.uk"}
+                    Contact = new Contact { Name = "addon technologies", Email ="tamilselvan@addon.cc", Url ="http://addon.cc"}
                 });
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
                  c.IncludeXmlComments(filePath);  

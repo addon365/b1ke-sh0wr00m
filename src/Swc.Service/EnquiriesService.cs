@@ -32,7 +32,7 @@ namespace Swc.Service
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
             InitilizeEnquiry ie = new InitilizeEnquiry();
-            
+            ie.MarketingZones = _unitOfWork.GetRepository<MarketingZone>().Get();
             ie.Products = _unitOfWork.GetRepository<Product>().Get();
             ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().Get();
 
