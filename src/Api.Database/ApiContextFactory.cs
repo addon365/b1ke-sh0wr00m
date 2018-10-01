@@ -20,7 +20,7 @@ public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
         {
             var builder = new DbContextOptionsBuilder<ApiContext>();
             builder.UseSqlServer(
-                "Server=(localdb)\\mssqllocaldb;Database=config59;Trusted_Connection=True;MultipleActiveResultSets=true");
+                "Server=(localdb)\\mssqllocaldb;Database=config61;Trusted_Connection=True;MultipleActiveResultSets=true");
 
             return new ApiContext(builder.Options);
         }

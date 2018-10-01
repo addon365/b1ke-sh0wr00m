@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class justcheckn1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,8 @@ namespace Api.Database.Migrations
                     Created = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 25, nullable: false)
+                    Name = table.Column<string>(maxLength: 25, nullable: false),
+                    ProgrammerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,49 +36,12 @@ namespace Api.Database.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    ProgrammerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EnquriyType", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExchangeQuotations",
-                schema: "swc",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Expected = table.Column<double>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    NoOfOwner = table.Column<int>(nullable: false),
-                    Quotated = table.Column<double>(nullable: false),
-                    Year = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExchangeQuotations", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FinanceQuotations",
-                schema: "swc",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    DownPayment = table.Column<double>(nullable: false),
-                    EMIAmount = table.Column<double>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    TenureInMonths = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FinanceQuotations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -266,6 +230,37 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EnquiryAccessories",
+                schema: "swc",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    EnquiryId = table.Column<Guid>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnquiryAccessories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EnquiryAccessories_Enquiries_EnquiryId",
+                        column: x => x.EnquiryId,
+                        principalSchema: "swc",
+                        principalTable: "Enquiries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EnquiryAccessories_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalSchema: "swc",
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EnquiryExchangeQuotations",
                 schema: "swc",
                 columns: table => new
@@ -273,8 +268,13 @@ namespace Api.Database.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
-                    ExchangeQuotationId = table.Column<Guid>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false)
+                    Expected = table.Column<double>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    Model = table.Column<string>(nullable: true),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    NoOfOwner = table.Column<int>(nullable: false),
+                    Quotated = table.Column<double>(nullable: false),
+                    Year = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,13 +286,6 @@ namespace Api.Database.Migrations
                         principalTable: "Enquiries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EnquiryExchangeQuotations_ExchangeQuotations_ExchangeQuotationId",
-                        column: x => x.ExchangeQuotationId,
-                        principalSchema: "swc",
-                        principalTable: "ExchangeQuotations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -302,10 +295,13 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
+                    DownPayment = table.Column<double>(nullable: false),
+                    EMIAmount = table.Column<double>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
-                    FinanceQuotationId = table.Column<Guid>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false)
+                    ProductId = table.Column<Guid>(nullable: false),
+                    TenureInMonths = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -315,13 +311,6 @@ namespace Api.Database.Migrations
                         column: x => x.EnquiryId,
                         principalSchema: "swc",
                         principalTable: "Enquiries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EnquiryFinanceQuotations_FinanceQuotations_FinanceQuotationId",
-                        column: x => x.FinanceQuotationId,
-                        principalSchema: "swc",
-                        principalTable: "FinanceQuotations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -352,28 +341,28 @@ namespace Api.Database.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EnquiryAccessories_EnquiryId",
+                schema: "swc",
+                table: "EnquiryAccessories",
+                column: "EnquiryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EnquiryAccessories_ProductId",
+                schema: "swc",
+                table: "EnquiryAccessories",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EnquiryExchangeQuotations_EnquiryId",
                 schema: "swc",
                 table: "EnquiryExchangeQuotations",
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EnquiryExchangeQuotations_ExchangeQuotationId",
-                schema: "swc",
-                table: "EnquiryExchangeQuotations",
-                column: "ExchangeQuotationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EnquiryFinanceQuotations_EnquiryId",
                 schema: "swc",
                 table: "EnquiryFinanceQuotations",
                 column: "EnquiryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EnquiryFinanceQuotations_FinanceQuotationId",
-                schema: "swc",
-                table: "EnquiryFinanceQuotations",
-                column: "FinanceQuotationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryFinanceQuotations_ProductId",
@@ -411,6 +400,10 @@ namespace Api.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EnquiryAccessories",
+                schema: "swc");
+
+            migrationBuilder.DropTable(
                 name: "EnquiryExchangeQuotations",
                 schema: "swc");
 
@@ -431,15 +424,7 @@ namespace Api.Database.Migrations
                 schema: "swc");
 
             migrationBuilder.DropTable(
-                name: "ExchangeQuotations",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
                 name: "Enquiries",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
-                name: "FinanceQuotations",
                 schema: "swc");
 
             migrationBuilder.DropTable(

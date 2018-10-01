@@ -44,9 +44,10 @@ namespace swcApi.Controllers
         /// This is a remark to add additional information about this method
         ///</remarks>
         [HttpPost]
-        public IActionResult Post([FromBody] Enquiries referrer)
+        public IActionResult Post([FromBody] InsertEnquiry referrer)
         {
-            if (referrer == null)
+            
+                if (referrer == null)
             {
                 return BadRequest();
             }

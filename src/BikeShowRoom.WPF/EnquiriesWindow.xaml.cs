@@ -22,6 +22,7 @@ namespace BikeShowRoom.WPF
         {
             InitializeComponent();
             var vm= new EnquiryViewModel();
+            vm.CurrentEnquiry = new Api.Domain.Enquiries.Enquiries();
             this.DataContext = vm;
             enquiries = new List<Enquiry>();
             profiles = new List<Profile>();

@@ -15,6 +15,7 @@ namespace Api.Domain.Enquiries
         public string Name { get; set; }
         public string MobileNumber { get; set; }
         public string Place { get; set; }
+        public string Address { get; set; }
         //public int EnquiryTypeId { get; set; }
 
 

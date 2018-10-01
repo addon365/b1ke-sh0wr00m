@@ -8,7 +8,7 @@ namespace Swc.Service
     {
         IEnumerable<Enquiry> GetAllActive();
         InitilizeEnquiry GetInitilizeEnquiries();
-        string Insert(Enquiries enquiries);
+        string Insert(InsertEnquiry enquiries);
         Enquiries GetEnquiries(string identifier);
 
     }

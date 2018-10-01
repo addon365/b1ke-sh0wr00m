@@ -10,6 +10,7 @@ using Swc.Service;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace addon.BikeShowRoomService.WebService
 {
@@ -50,9 +51,10 @@ namespace addon.BikeShowRoomService.WebService
         }
      
 
-        public string  Insert(Enquiries enquiries)
+        public string  Insert(InsertEnquiry insertenquiry)
         {
-            
+
+            _httpClient.PostAsync("api/Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));
             return null;
 
         }

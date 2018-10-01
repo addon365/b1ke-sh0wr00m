@@ -14,6 +14,7 @@ namespace ViewModel
     {
         private readonly IEnquiriesService _repository;
         private  Enquiries _currentEnquiry;
+        private MarketingZone _currentMarketingZone;
 
         public EnquiryViewModel()
         {
@@ -49,7 +50,23 @@ namespace ViewModel
             get;
             private set;
         }
-       
+       public MarketingZone CurrentMarketingZone
+        {
+            get
+            {
+                return _currentMarketingZone;
+            }
+
+            set
+            {
+                if (_currentMarketingZone != value)
+                {
+                    _currentMarketingZone = value;
+                    OnPropertyChanged("MarketingZone");
+                   
+                }
+            }
+        }
 
         public Enquiries CurrentEnquiry
         {
@@ -77,8 +94,11 @@ namespace ViewModel
         }
         public void InsertEnquiry()
         {
-            _repository.GetAllActive();
-            _repository.Insert(CurrentEnquiry);
+            
+            InsertEnquiry ie = new InsertEnquiry();
+            ie.enquiries = CurrentEnquiry;
+
+            _repository.Insert(ie);
         }
         public void FindEnquiry()
         {

@@ -1,0 +1,11 @@
+﻿[
+  {
+    "Name": "ShowRoom",
+    "ProgrammerId": 100
+  },
+  {
+    "Name": "Campaign",
+    "ProgrammerId": 200
+  }
+ 
+]

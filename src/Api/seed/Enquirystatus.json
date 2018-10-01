@@ -1,0 +1,13 @@
+﻿[
+  {
+    "name": "Open",
+    "Description": "Current or open status",
+    "ProgrammerId": 100
+  },
+  {
+    "name": "Closed",
+    "Description": "No more followup",
+    "ProgrammerId": 200
+  }
+ 
+]

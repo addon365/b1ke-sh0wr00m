@@ -11,8 +11,8 @@ using System;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20180927041828_justcheckn1")]
-    partial class justcheckn1
+    [Migration("20181001112905_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,30 @@ namespace Api.Database.Migrations
                     b.ToTable("Enquiries");
                 });
 
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryAccessories", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<Guid>("EnquiryId");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnquiryId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("EnquiryAccessories");
+                });
+
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -59,15 +83,23 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid>("EnquiryId");
 
-                    b.Property<Guid>("ExchangeQuotationId");
+                    b.Property<double>("Expected");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<string>("Model");
 
                     b.Property<DateTime>("Modified");
+
+                    b.Property<int>("NoOfOwner");
+
+                    b.Property<double>("Quotated");
+
+                    b.Property<int>("Year");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EnquiryId");
-
-                    b.HasIndex("ExchangeQuotationId");
 
                     b.ToTable("EnquiryExchangeQuotations");
                 });
@@ -79,19 +111,23 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<double>("DownPayment");
+
+                    b.Property<double>("EMIAmount");
+
                     b.Property<Guid>("EnquiryId");
 
-                    b.Property<Guid>("FinanceQuotationId");
+                    b.Property<string>("Identifier");
 
                     b.Property<DateTime>("Modified");
 
                     b.Property<Guid>("ProductId");
 
+                    b.Property<int>("TenureInMonths");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EnquiryId");
-
-                    b.HasIndex("FinanceQuotationId");
 
                     b.HasIndex("ProductId");
 
@@ -114,6 +150,8 @@ namespace Api.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(25);
 
+                    b.Property<int>("ProgrammerId");
+
                     b.HasKey("Id");
 
                     b.ToTable("EnquiryStatuses");
@@ -132,57 +170,11 @@ namespace Api.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int>("ProgrammerId");
+
                     b.HasKey("Id");
 
                     b.ToTable("EnquriyType");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.ExchangeQuotations.ExchangeQuotation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<double>("Expected");
-
-                    b.Property<string>("Identifier");
-
-                    b.Property<string>("Model");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<int>("NoOfOwner");
-
-                    b.Property<double>("Quotated");
-
-                    b.Property<int>("Year");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExchangeQuotations");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.FinanceQuotations.FinanceQuotation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<double>("DownPayment");
-
-                    b.Property<double>("EMIAmount");
-
-                    b.Property<string>("Identifier");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<int>("TenureInMonths");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FinanceQuotations");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.MarketingZone", b =>
@@ -373,16 +365,24 @@ namespace Api.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryAccessories", b =>
                 {
                     b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
                         .WithMany()
                         .HasForeignKey("EnquiryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Api.Database.Entity.ExchangeQuotations.ExchangeQuotation", "exchangequotation")
+                    b.HasOne("Api.Database.Entity.Products.Product", "product")
                         .WithMany()
-                        .HasForeignKey("ExchangeQuotationId")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
+                        .WithMany()
+                        .HasForeignKey("EnquiryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -391,11 +391,6 @@ namespace Api.Database.Migrations
                     b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
                         .WithMany()
                         .HasForeignKey("EnquiryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Api.Database.Entity.FinanceQuotations.FinanceQuotation", "financequotation")
-                        .WithMany()
-                        .HasForeignKey("FinanceQuotationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Api.Database.Entity.Products.Product", "product")

@@ -13,6 +13,7 @@ namespace Api.Database.Entity.Enquiries
         [StringLength(255)]
         public string  Description { get; set; }
 
+        public int ProgrammerId { get; set; }
 
         public virtual ICollection<Enquiry> Enquiries { get; set; }
     }

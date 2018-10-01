@@ -48,29 +48,19 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
-
-            //Ensure we have some status
-            //if (!context.Status.Any())
-            //{
-            //    var stati = JsonConvert.DeserializeObject<List<Status>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "status.json"));
-            //    context.AddRange(stati);
-            //    context.SaveChanges();
-
-            //}
-            //if (!context.Status.Any())
-            //{
-            //    var stati = JsonConvert.DeserializeObject<List<EnquiryStatus>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "status.json"));
-            //    context.AddRange(stati);
-            //    context.SaveChanges();
-
-            //}
-            //Ensure we create initial Threat List
-            //if (!context.Threats.Any())
-            //{
-            //    var threats = JsonConvert.DeserializeObject<List<Threat>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "threats.json"));
-            //    context.AddRange(threats);
-            //    context.SaveChanges();
-            //}
+            if (!context.EnquiryStatuses.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<EnquiryStatus>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "EnquiryStatus.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.EnquriyType.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<EnquiryType>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "EnquiryType.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+    
         }
     }
 

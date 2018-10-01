@@ -17,7 +17,7 @@
             <remarks>
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.EnquiriesController.Post(Api.Domain.Enquiries.Enquiries)">
+        <member name="M:swcApi.Controllers.EnquiriesController.Post(Api.Domain.Enquiries.InsertEnquiry)">
              <summary>
               Returns a collection of values
              </summary>
