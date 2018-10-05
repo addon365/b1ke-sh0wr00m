@@ -9,6 +9,7 @@ using Swc.Service;
 using Swashbuckle.AspNetCore;
 using Api.Domain.Enquiries;
 using Api.Database.Entity.Enquiries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace swcApi.Controllers
 {
@@ -30,6 +31,7 @@ namespace swcApi.Controllers
         /// </summary>
         ///<remarks>
         ///</remarks>
+        [AllowAnonymous]
         [HttpGet]
         public InitilizeEnquiry Get()
         {

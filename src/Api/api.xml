@@ -4,6 +4,17 @@
         <name>swcApi</name>
     </assembly>
     <members>
+        <member name="T:swcApi.Controllers.EchoController">
+            <summary>
+            Echo Contollers is to test the server running status.
+            </summary>
+        </member>
+        <member name="M:swcApi.Controllers.EchoController.SayWelcome">
+            <summary>
+            Just return welcome message without any authentication.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:swcApi.Controllers.EnquiriesController">
             <inheritdoc />
         </member>
