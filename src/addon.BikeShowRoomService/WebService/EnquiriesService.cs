@@ -25,7 +25,7 @@ namespace addon.BikeShowRoomService.WebService
         public EnquiriesService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:61780/");
+            _httpClient.BaseAddress = new Uri("http://localhost:5000/");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));

@@ -18,6 +18,12 @@ namespace BikeShowRoom.WPF
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //TODO: Need to add license key (can provide from environment varaible too)
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("License Key Comes Here");
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             //IUnityContainer container = new UnityContainer();
