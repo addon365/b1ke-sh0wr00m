@@ -44,6 +44,35 @@
             
             </remarks>
         </member>
+        <member name="T:swcApi.Controllers.ProductController">
+            <inheritdoc />
+        </member>
+        <member name="M:swcApi.Controllers.ProductController.#ctor(Swc.Service.IProductService)">
+            <inheritdoc />
+        </member>
+        <member name="M:swcApi.Controllers.ProductController.Get">
+             <summary>
+              Returns a list of all active referrer spammers
+             </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="M:swcApi.Controllers.ProductController.ProductPost(Api.Database.Entity.Products.Product)">
+             <summary>
+              Returns a collection of values
+             </summary>
+            <remarks>
+             This is a remark to add additional information about this method
+            </remarks>
+        </member>
+        <member name="M:swcApi.Controllers.ProductController.Detail(System.String)">
+             <summary>
+              Returns Details of a selected Referrer
+             </summary>
+            <remarks>
+            
+            </remarks>
+        </member>
         <member name="T:swcApi.Controllers.ReferrerController">
             <inheritdoc />
         </member>
