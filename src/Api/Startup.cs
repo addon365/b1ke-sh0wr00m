@@ -21,6 +21,10 @@ using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
+using swcApi.Utils;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace swcApi
 {
@@ -30,12 +34,17 @@ namespace swcApi
         {
             Configuration = configuration;
         }
+
+         
         
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
+
             // Add framework services.
             services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name)))
                 .AddUnitOfWork<ApiContext>();
@@ -44,7 +53,7 @@ namespace swcApi
             services.AddTransient<IProductService, ProductService>();
 
             services.AddMvc();
-            services.AddSwaggerGen(c =>
+           /* services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", 
                 new Info 
@@ -53,14 +62,40 @@ namespace swcApi
                     Version = "v1" ,
                     Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "threenine.co.uk", Email ="support@threenine.co.uk", Url ="https://threenine.co.uk"}
+                    Contact = new Contact { Name = "addon technologies", Email ="tamilselvan@addon.cc", Url ="http://addon.cc"}
                 });
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
                  c.IncludeXmlComments(filePath);  
             }
-          );
+          );*/
+
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
         }
-       
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -68,14 +103,10 @@ namespace swcApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseAuthentication();
             app.UseMvc();
             app.UseStaticFiles();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWC API V1");
-            });
+            
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())

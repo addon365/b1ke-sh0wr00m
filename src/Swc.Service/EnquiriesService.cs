@@ -32,7 +32,7 @@ namespace Swc.Service
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
             InitilizeEnquiry ie = new InitilizeEnquiry();
-            
+            ie.MarketingZones = _unitOfWork.GetRepository<MarketingZone>().Get();
             ie.Products = _unitOfWork.GetRepository<Product>().Get();
             ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().Get();
 
@@ -40,9 +40,9 @@ namespace Swc.Service
 
         }
 
-        public string  Insert(Enquiries enquiries)
+        public string  Insert(InsertEnquiry InsertEnquiries)
         {
-           
+
             #region  autoMap
             // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
             // TODO :  Expected Volumes could be immense to so we need to optimise 
@@ -56,37 +56,37 @@ namespace Swc.Service
             //enquiry.EnquiryType = refType;
             //enquiry.Status = status;
             #endregion
-            var enquirystatus = new EnquiryStatus();
-            enquirystatus.Name = "Registred";
+            //var enquirystatus = new EnquiryStatus();
+            //enquirystatus.Name = "Registred";
 
-            var enquirytype = new EnquiryType();
-            enquirytype.Name = "InHouse";
+            //var enquirytype = new EnquiryType();
+            //enquirytype.Name = "InHouse";
 
             var enquiry = new Enquiry();
             var profile = new Profile();
-            profile.Name = enquiries.Name;
+            profile.Name = InsertEnquiries.enquiries.Name;
             enquiry.Profile = profile;
-            enquiry.Identifier = enquiries.Identifier;
-            
+            enquiry.Identifier = InsertEnquiries.enquiries.Identifier;
+
             enquiry.ProfileId = profile.Id;
-            enquiry.StatusId = enquirystatus.Id;
-            enquiry.Status = enquirystatus;
-            enquiry.EnquiryTypeId = enquirystatus.Id;
-            enquiry.EnquiryType = enquirytype;
-           
+            enquiry.StatusId=_unitOfWork.GetRepository<EnquiryStatus>()
+                .Get(predicate: x => x.ProgrammerId==100).First().Id;
+            enquiry.EnquiryTypeId = _unitOfWork.GetRepository<EnquiryType>()
+           .Get(predicate: x => x.ProgrammerId == 100).First().Id;
             _unitOfWork.GetRepository<Profile>().Add(profile);
-            _unitOfWork.GetRepository<EnquiryStatus>().Add(enquirystatus);
-            _unitOfWork.GetRepository<EnquiryType>().Add(enquirytype);
             _unitOfWork.GetRepository<Enquiry>().Add(enquiry);
+            //_unitOfWork.GetRepository<EnquiryStatus>().Add(enquirystatus);
+            //_unitOfWork.GetRepository<EnquiryType>().Add(enquirytype);
+
             try
             {
                 _unitOfWork.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string msg = ex.Message;
             }
-            return enquiry.Identifier;
+            return InsertEnquiries.enquiries.Identifier;
 
         }
 

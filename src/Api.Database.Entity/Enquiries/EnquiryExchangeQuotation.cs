@@ -1,5 +1,4 @@
-﻿using Api.Database.Entity.ExchangeQuotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -10,7 +9,11 @@ namespace Api.Database.Entity.Enquiries
     {
         public Guid EnquiryId { get; set; }
         [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }
-        public Guid ExchangeQuotationId { get; set; }
-        [ForeignKey("ExchangeQuotationId")] public virtual ExchangeQuotation exchangequotation { get; set; }
+        public string Identifier { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+        public int NoOfOwner { get; set; }
+        public double Expected { get; set; }
+        public double Quotated { get; set; }
     }
 }

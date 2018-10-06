@@ -1,0 +1,17 @@
+[
+  {
+    "Identifier": "Ref001",
+    "ZonalName": "West Mambalam",
+    "ZonalDescription": "T-Nagar,Vadapalani"
+  },
+  {
+    "Identifier": "Ref002",
+    "ZonalName": "Manali",
+    "ZonalDescription": "Manali"
+  },
+  {
+    "Identifier": "Ref003",
+    "ZonalName": "Koyembedu",
+    "ZonalDescription": "Market"
+  }
+]

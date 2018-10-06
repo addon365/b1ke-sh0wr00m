@@ -14,12 +14,13 @@ namespace ViewModel
     {
         private readonly IEnquiriesService _repository;
         private  Enquiries _currentEnquiry;
+        private MarketingZone _currentMarketingZone;
 
         public EnquiryViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();            
-            
+            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
+            EnquiryMasterData=_repository.GetInitilizeEnquiries();
             WireCommands();
         }
 
@@ -29,6 +30,7 @@ namespace ViewModel
             InsertEnquiryCommand = new RelayCommand(InsertEnquiry);
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
         }
+        public InitilizeEnquiry EnquiryMasterData { get; }
         IEnumerable<MarketingZone> lstMarketingZone { get; set; }
         IEnumerable<Product> lstProducts { get; set; }
         IEnumerable<ExtraFittingsAccessories> lstExtraAccessories { get; set; }
@@ -48,7 +50,23 @@ namespace ViewModel
             get;
             private set;
         }
-       
+       public MarketingZone CurrentMarketingZone
+        {
+            get
+            {
+                return _currentMarketingZone;
+            }
+
+            set
+            {
+                if (_currentMarketingZone != value)
+                {
+                    _currentMarketingZone = value;
+                    OnPropertyChanged("MarketingZone");
+                   
+                }
+            }
+        }
 
         public Enquiries CurrentEnquiry
         {
@@ -76,8 +94,11 @@ namespace ViewModel
         }
         public void InsertEnquiry()
         {
-            _repository.GetAllActive();
-            _repository.Insert(CurrentEnquiry);
+            
+            InsertEnquiry ie = new InsertEnquiry();
+            ie.enquiries = CurrentEnquiry;
+
+            _repository.Insert(ie);
         }
         public void FindEnquiry()
         {

@@ -9,6 +9,7 @@ using Swc.Service;
 using Swashbuckle.AspNetCore;
 using Api.Domain.Enquiries;
 using Api.Database.Entity.Enquiries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace swcApi.Controllers
 {
@@ -30,6 +31,7 @@ namespace swcApi.Controllers
         /// </summary>
         ///<remarks>
         ///</remarks>
+        [AllowAnonymous]
         [HttpGet]
         public InitilizeEnquiry Get()
         {
@@ -44,9 +46,10 @@ namespace swcApi.Controllers
         /// This is a remark to add additional information about this method
         ///</remarks>
         [HttpPost]
-        public IActionResult Post([FromBody] Enquiries referrer)
+        public IActionResult Post([FromBody] InsertEnquiry referrer)
         {
-            if (referrer == null)
+            
+                if (referrer == null)
             {
                 return BadRequest();
             }

@@ -12,5 +12,6 @@ namespace Api.Database.Entity.Products
         public string Identifier { get; set; }
         public string ProductName { get; set; }
         public double Price { get; set; }
+        public Guid CompanyId { get; set; }
     }
 }

@@ -10,6 +10,8 @@ using Api.Database.Entity.Threats;
 using Newtonsoft.Json;
 using Api.Database;
 using Api.Database.Entity.Enquiries;
+using Api.Database.Entity.Products;
+using Api.Database.Entity;
 
 namespace swcApi
 {
@@ -18,56 +20,47 @@ namespace swcApi
 
         public static bool AllMigrationsApplied(this DbContext context)
         {
-            //var applied = context.GetService<IHistoryRepository>()
-            //    .GetAppliedMigrations()
-            //    .Select(m => m.MigrationId);
+            var applied = context.GetService<IHistoryRepository>()
+                .GetAppliedMigrations()
+                .Select(m => m.MigrationId);
 
-            //var total = context.GetService<IMigrationsAssembly>()
-            //    .Migrations
-            //    .Select(m => m.Key);
+            var total = context.GetService<IMigrationsAssembly>()
+                .Migrations
+                .Select(m => m.Key);
 
-            //return !total.Except(applied).Any();
-            return true;
+            return !total.Except(applied).Any();
+            
         }
 
         public static void EnsureSeeded(this ApiContext context)
         {
 
-            //if (!context.Type.Any())
-            //{
-            //    var types = JsonConvert.DeserializeObject<List<ThreatType>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "types.json"));
-            //    context.AddRange(types);
-            //    context.SaveChanges();
-            //}
-            //if (!context.Type.Any())
-            //{
-            //    var types = JsonConvert.DeserializeObject<List<EnquiryType>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "types.json"));
-            //    context.AddRange(types);
-            //    context.SaveChanges();
-            //}
-
-            //Ensure we have some status
-            //if (!context.Status.Any())
-            //{
-            //    var stati = JsonConvert.DeserializeObject<List<Status>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "status.json"));
-            //    context.AddRange(stati);
-            //    context.SaveChanges();
-
-            //}
-            //if (!context.Status.Any())
-            //{
-            //    var stati = JsonConvert.DeserializeObject<List<EnquiryStatus>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "status.json"));
-            //    context.AddRange(stati);
-            //    context.SaveChanges();
-
-            //}
-            //Ensure we create initial Threat List
-            //if (!context.Threats.Any())
-            //{
-            //    var threats = JsonConvert.DeserializeObject<List<Threat>>(File.ReadAllText(@"seed" + Path.DirectorySeparatorChar + "threats.json"));
-            //    context.AddRange(threats);
-            //    context.SaveChanges();
-            //}
+            if (!context.Products.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
+          
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.marketingZones.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<MarketingZone>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "MarketingZones.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.EnquiryStatuses.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<EnquiryStatus>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "EnquiryStatus.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.EnquriyType.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<EnquiryType>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "EnquiryType.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+    
         }
     }
 

@@ -2,14 +2,11 @@
 using Api.Database.Entity.Threats;
 using Api.Database.Entity.Enquiries;
 using Api.Database.Entity;
-
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Api.Database.Entity.Products;
-using Api.Database.Entity.ExchangeQuotations;
-using Api.Database.Entity.FinanceQuotations;
 
 namespace Api.Database
 {
@@ -35,8 +32,8 @@ namespace Api.Database
         public DbSet<EnquiryStatus> EnquiryStatuses { get; set; }
         public DbSet<EnquiryExchangeQuotation> EnquiryExchangeQuotations { get; set; }
         public DbSet<EnquiryFinanceQuotation> EnquiryFinanceQuotations { get; set; }
-        public DbSet<ExchangeQuotation> ExchangeQuotations { get; set; }
-        public DbSet<FinanceQuotation> FinanceQuotations { get; set; }
+        public DbSet<EnquiryAccessories> EnquiryAccessories { get; set; }
+        public DbSet<MarketingZone> marketingZones { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
