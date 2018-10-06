@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Api.Domain.Enquiries
 {
-    public class InsertEnquiry
+    public class InsertEnquiryModel
     {
-        public Enquiries enquiries {get;set;}
+        public Enquiries Enquiry {get;set;}
         public IEnumerable<EnquiryProduct> EnquiryProducts { get; set; }
         public IEnumerable<EnquiryFinanceQuotation> enquiryFinanceQuotations { get; set; }
         public IEnumerable<EnquiryExchangeQuotation> enquiryExchangeQuotations { get; set; }

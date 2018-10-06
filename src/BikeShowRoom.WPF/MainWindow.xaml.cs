@@ -38,10 +38,10 @@ namespace BikeShowRoom.WPF
 
             //var enquir = new EnquiriesService(u);
 
-            var viewmodel= new EnquiryViewModel();
-            viewmodel.CurrentEnquiry = new Enquiries();
-            viewmodel.CurrentEnquiry.Name = "Tamilselvan";
-            this.DataContext = viewmodel;
+            //var viewmodel= new EnquiryViewModel();
+            //viewmodel.CurrentEnquiry = new Enquiries();
+            //viewmodel.CurrentEnquiry.Name = "Tamilselvan";
+            //this.DataContext = viewmodel;
         }
 
         

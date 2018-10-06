@@ -13,6 +13,6 @@ namespace Api.Database.Entity.Enquiries
         public string Identifier { get; set; }
         public Guid ProductId { get; set; }
         [ForeignKey("ProductId")] public virtual Product product { get; set; }
-
+        public Guid AccessoriesId { get; set; }
     }
 }

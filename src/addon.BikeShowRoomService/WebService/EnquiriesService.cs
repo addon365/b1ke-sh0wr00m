@@ -51,7 +51,7 @@ namespace addon.BikeShowRoomService.WebService
         }
      
 
-        public string  Insert(InsertEnquiry insertenquiry)
+        public string  Insert(InsertEnquiryModel insertenquiry)
         {
 
             _httpClient.PostAsync("api/Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));

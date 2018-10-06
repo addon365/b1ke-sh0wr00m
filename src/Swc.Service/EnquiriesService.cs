@@ -40,7 +40,7 @@ namespace Swc.Service
 
         }
 
-        public string  Insert(InsertEnquiry InsertEnquiries)
+        public string  Insert(InsertEnquiryModel InsertEnquiries)
         {
 
             #region  autoMap
@@ -64,9 +64,9 @@ namespace Swc.Service
 
             var enquiry = new Enquiry();
             var profile = new Profile();
-            profile.Name = InsertEnquiries.enquiries.Name;
+            profile.Name = InsertEnquiries.Enquiry.Name;
             enquiry.Profile = profile;
-            enquiry.Identifier = InsertEnquiries.enquiries.Identifier;
+            enquiry.Identifier = InsertEnquiries.Enquiry.Identifier;
 
             enquiry.ProfileId = profile.Id;
             enquiry.StatusId=_unitOfWork.GetRepository<EnquiryStatus>()
@@ -86,7 +86,7 @@ namespace Swc.Service
             {
                 string msg = ex.Message;
             }
-            return InsertEnquiries.enquiries.Identifier;
+            return InsertEnquiries.Enquiry.Identifier;
 
         }
 

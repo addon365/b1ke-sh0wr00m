@@ -44,7 +44,7 @@ namespace swcApi.Controllers
         /// This is a remark to add additional information about this method
         ///</remarks>
         [HttpPost]
-        public IActionResult Post([FromBody] InsertEnquiry referrer)
+        public IActionResult Post([FromBody] InsertEnquiryModel referrer)
         {
             
                 if (referrer == null)
