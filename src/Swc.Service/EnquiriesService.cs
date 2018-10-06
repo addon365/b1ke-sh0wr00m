@@ -75,8 +75,14 @@ namespace Swc.Service
            .Get(predicate: x => x.ProgrammerId == 100).First().Id;
             _unitOfWork.GetRepository<Profile>().Add(profile);
             _unitOfWork.GetRepository<Enquiry>().Add(enquiry);
-            //_unitOfWork.GetRepository<EnquiryStatus>().Add(enquirystatus);
-            //_unitOfWork.GetRepository<EnquiryType>().Add(enquirytype);
+            foreach(EnquiryProduct ep in InsertEnquiries.EnquiryProducts)
+            {
+                ep.product = null;
+                ep.EnquiryId = enquiry.Id;
+            _unitOfWork.GetRepository<EnquiryProduct>().Add(ep);
+            }
+
+
 
             try
             {

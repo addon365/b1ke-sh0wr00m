@@ -30,6 +30,7 @@ namespace Api.Database
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<EnquiryType> EnquriyType { get; set; }
         public DbSet<EnquiryStatus> EnquiryStatuses { get; set; }
+        public DbSet<EnquiryProduct> EnquiryProducts { get; set; }
         public DbSet<EnquiryExchangeQuotation> EnquiryExchangeQuotations { get; set; }
         public DbSet<EnquiryFinanceQuotation> EnquiryFinanceQuotations { get; set; }
         public DbSet<EnquiryAccessories> EnquiryAccessories { get; set; }

@@ -245,7 +245,7 @@ namespace ViewModel
             EnquiryProduct enquiryProduct = new EnquiryProduct();
             enquiryProduct.product = _enquiryProduct;
             enquiryProduct.ProductId = _enquiryProduct.Id;
-
+            
             EnquiryProducts.Add(enquiryProduct);
         }
         public void AddFinanceQuotation()
