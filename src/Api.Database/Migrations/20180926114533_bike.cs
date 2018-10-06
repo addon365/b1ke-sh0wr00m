@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class bike : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

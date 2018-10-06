@@ -41,6 +41,7 @@ namespace swcApi
                 .AddUnitOfWork<ApiContext>();
             services.AddTransient<IReferrerService, ReferrerService>();
             services.AddTransient<IEnquiriesService, EnquiriesService>();
+            services.AddTransient<IProductService, ProductService>();
 
             services.AddMvc();
             services.AddSwaggerGen(c =>
