@@ -10,17 +10,20 @@ namespace ViewModel
     {
         private readonly ProductService _repositoryProduct;
         private Product currentProduct;
+        private ProductCompany _productCompany;
 
         public ProductViewModel()
         {
             currentProduct = new Product();
             _repositoryProduct = new ProductService();
+            ProductCompanies = _repositoryProduct.GetCompanies();
+            
             WireCommands();
         }
         private void WireCommands()
         {
 
-            InsertCommand = new RelayCommand(AddEnquiry);
+            InsertCommand = new RelayCommand(AddProduct);
            
         }
         public RelayCommand InsertCommand
@@ -28,7 +31,26 @@ namespace ViewModel
             get;
             private set;
         }
-       
+
+        public IEnumerable<ProductCompany> ProductCompanies { get; set; }
+        
+        public ProductCompany CurrentProductCompany
+        {
+            get
+            {
+                return _productCompany;
+            }
+
+            set
+            {
+
+                _productCompany = value;
+                OnPropertyChanged("CurrentProductCompany");
+                
+
+
+            }
+        }
         public Product CurrentProduct
         {
             get
@@ -46,8 +68,9 @@ namespace ViewModel
                 
             }
         }
-        public void AddEnquiry()
+        public void AddProduct()
         {
+            CurrentProduct.CompanyId = CurrentProductCompany.Id;
             _repositoryProduct.Insert(CurrentProduct);
         }
     }

@@ -255,7 +255,13 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<double>("GST");
+
+                    b.Property<string>("HSN");
+
                     b.Property<string>("Identifier");
+
+                    b.Property<double>("InsuranceAmount");
 
                     b.Property<DateTime>("Modified");
 
@@ -263,9 +269,31 @@ namespace Api.Database.Migrations
 
                     b.Property<string>("ProductName");
 
+                    b.Property<double>("RoadTax");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Products.ProductCompany", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CompanyName");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<int>("ProgrammerID");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCompanies");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Profile", b =>

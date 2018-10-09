@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ViewModel;
 
-namespace BikeShowRoom.WPF
+namespace BikeShowRoom.WPF.Enquiries
 {
     /// <summary>
     /// Interaction logic for Enquiries.xaml

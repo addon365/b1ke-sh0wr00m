@@ -53,21 +53,21 @@ namespace swcApi
             services.AddTransient<IProductService, ProductService>();
 
             services.AddMvc();
-           /* services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", 
-                new Info 
+                c.SwaggerDoc("v1",
+                new Info
                 {
-                    Title = "Stop Web Crawlers API", 
-                    Version = "v1" ,
+                    Title = "Stop Web Crawlers API",
+                    Version = "v1",
                     Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
                     TermsOfService = "None",
-                    Contact = new Contact { Name = "addon technologies", Email ="tamilselvan@addon.cc", Url ="http://addon.cc"}
+                    Contact = new Contact { Name = "addon technologies", Email = "tamilselvan@addon.cc", Url = "http://addon.cc" }
                 });
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
-                 c.IncludeXmlComments(filePath);  
+                c.IncludeXmlComments(filePath);
             }
-          );*/
+          );
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

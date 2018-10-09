@@ -7,6 +7,7 @@ using Threenine.Data;
 using Api.Database.Entity.Enquiries;
 using Api.Database.Entity;
 using Api.Database.Entity.Products;
+using System.Threading.Tasks;
 
 namespace Swc.Service
 {
@@ -40,7 +41,7 @@ namespace Swc.Service
 
         }
 
-        public string  Insert(InsertEnquiryModel InsertEnquiries)
+        public async Task<string> Insert(InsertEnquiryModel InsertEnquiries)
         {
 
             #region  autoMap
@@ -81,17 +82,22 @@ namespace Swc.Service
                 ep.EnquiryId = enquiry.Id;
             _unitOfWork.GetRepository<EnquiryProduct>().Add(ep);
             }
-
-
-
-            try
+            foreach(EnquiryFinanceQuotation efq in InsertEnquiries.enquiryFinanceQuotations)
             {
-                _unitOfWork.SaveChanges();
+                efq.product = null;
+                efq.EnquiryId = enquiry.Id;
+                _unitOfWork.GetRepository<EnquiryFinanceQuotation>().Add(efq);
             }
-            catch (Exception ex)
+            foreach(EnquiryExchangeQuotation eeq in InsertEnquiries.enquiryExchangeQuotations)
             {
-                string msg = ex.Message;
+                eeq.EnquiryId = enquiry.Id;
+                _unitOfWork.GetRepository<EnquiryExchangeQuotation>().Add(eeq);
             }
+
+
+           
+                 _unitOfWork.SaveChanges();
+           
             return InsertEnquiries.Enquiry.Identifier;
 
         }

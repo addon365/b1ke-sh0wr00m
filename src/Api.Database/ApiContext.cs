@@ -35,6 +35,7 @@ namespace Api.Database
         public DbSet<EnquiryFinanceQuotation> EnquiryFinanceQuotations { get; set; }
         public DbSet<EnquiryAccessories> EnquiryAccessories { get; set; }
         public DbSet<MarketingZone> marketingZones { get; set; }
+        public DbSet<ProductCompany> ProductCompanies { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

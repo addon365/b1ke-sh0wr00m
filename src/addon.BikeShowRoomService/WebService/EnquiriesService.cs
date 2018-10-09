@@ -11,12 +11,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace addon.BikeShowRoomService.WebService
 {
     public class EnquiriesService : IEnquiriesService
     {
-      
+
         private readonly HttpClient _httpClient;
         private const string Enabled = "Enabled";
         private const string Referer = "Referer";
@@ -29,36 +30,50 @@ namespace addon.BikeShowRoomService.WebService
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
+            //var response = _httpClient.PostAsync("api/user/authenticate",null).ConfigureAwait(true)
+            //                    .GetAwaiter()
+            //                    .GetResult();
+            //byte[] tokenAsByArray = response.Content.ReadAsByteArrayAsync().Result;
+            //var header = new AuthenticationHeaderValue("Bearer", Convert.ToBase64String(tokenAsByArray));
+            //_httpClient.DefaultRequestHeaders.Authorization = header;
         }
-        public  IEnumerable<Enquiry> GetAllActive()
+        public IEnumerable<Enquiry> GetAllActive()
         {
-           
+
             HttpResponseMessage response = _httpClient.GetAsync("api/Enquiries").Result;
             IEnumerable<Enquiry> enquiries = null;
             if (response.IsSuccessStatusCode)
             {
-                var json =response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
-                
+
                 enquiries = JsonConvert.DeserializeObject<IEnumerable<Enquiry>>(json);
 
-                
+
 
             }
 
             return enquiries;
         }
-     
 
-        public string  Insert(InsertEnquiryModel insertenquiry)
+
+        public async Task<string> Insert(InsertEnquiryModel insertenquiry)
         {
+            try { 
 
-            _httpClient.PostAsync("api/Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));
-            return null;
+            var response = await _httpClient.PostAsync("api/Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));
+            //await Task.Delay(10000);
+            
+            return response.Content.ToString();
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
 
         }
-
+       
         public Enquiries GetEnquiries(string identifier)
         {
             return null;

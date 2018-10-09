@@ -55,9 +55,9 @@ namespace swcApi.Controllers
             }
            
            var identifier = _enquiriesService.Insert(referrer);
-            
 
-            return CreatedAtRoute("EnquiriesDetail", new{ identifier} ,referrer);
+
+            return Ok() ;
         }
 
         /// <summary>

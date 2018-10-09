@@ -184,13 +184,15 @@ namespace ViewModel
         {
            
         }
-        public void InsertEnquiry()
+        public async void InsertEnquiry()
         {
 
             if (!InsertValidation())
                 return;
 
-           if(CurrentExchangeQuotation.Model!="")
+            InsertEnquiryCommand.IsEnabled = false;
+
+            if (CurrentExchangeQuotation.Model!="")
             {
                 AddExchangeQuotation();
             }
@@ -200,15 +202,12 @@ namespace ViewModel
             insertEnquiryModel.enquiryFinanceQuotations = FinanceQuotations;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
             
-            _repository.Insert(insertEnquiryModel);
-            ClearEnquiry();
-        }
-        void ClearEnquiry()
-        {
+            await _repository.Insert(insertEnquiryModel);
+          
 
-            CurrentEnquiry = new Enquiries();
-
+            initInsert();
         }
+        
         bool InsertValidation()
         {
             if (_currentEnquiry == null)
@@ -250,8 +249,8 @@ namespace ViewModel
         }
         public void AddFinanceQuotation()
         {
- 
 
+            CurrentFinanceQuotation.ProductId = CurrentEnquiryProduct.Id;
             FinanceQuotations.Add(CurrentFinanceQuotation);
         }
         public void AddExchangeQuotation()

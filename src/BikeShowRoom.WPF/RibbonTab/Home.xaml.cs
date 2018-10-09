@@ -35,9 +35,30 @@ namespace BikeShowRoom.WPF
 
         private void btnEnquiry_Click(object sender, RoutedEventArgs e)
         {
-            EnquiryWindow n = new EnquiryWindow();
+            Enquiries.EnquiryWindow n = new Enquiries.EnquiryWindow();
           
             n.ShowDialog();
+        }
+
+        private void btnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            Products.ProductWindow n = new Products.ProductWindow();
+        
+            n.ShowDialog();
+        }
+
+        private void btnProductCompany_Click(object sender, RoutedEventArgs e)
+        {
+            Products.ProductCompanyWindow n = new Products.ProductCompanyWindow();
+
+            n.ShowDialog();
+        }
+
+        private void btnEnquiryType_Click(object sender, RoutedEventArgs e)
+        {
+            Enquiries.EnquiriesTypeWindow n = new Enquiries.EnquiriesTypeWindow();
+            n.ShowDialog();
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Api.Database.Entity.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swc.Service;
 using System;
@@ -16,6 +17,7 @@ namespace swcApi.Controllers
         private readonly IProductService _productService;
 
         /// <inheritdoc />
+        /// 
         public ProductController(IProductService productService)
         {
             _productService = productService;
@@ -33,16 +35,26 @@ namespace swcApi.Controllers
         }
 
 
+        [AllowAnonymous]
+        [Route("Companies")]
+        [HttpGet]
+        public IEnumerable<ProductCompany> GetCompanies()
+        {
+            return _productService.GetCompanies();
+        }
+
+
         /// <summary>
         ///  Returns a collection of values
         /// </summary>
         ///<remarks>
         /// This is a remark to add additional information about this method
         ///</remarks>
+
         [HttpPost]
         public IActionResult ProductPost([FromBody] Product referrer)
         {
-                if (referrer == null)
+            if (referrer == null)
             {
                 return BadRequest();
             }
@@ -50,7 +62,7 @@ namespace swcApi.Controllers
             var identifier = _productService.Insert(referrer);
 
 
-            return CreatedAtRoute("ProductDetail", new { identifier }, referrer);
+            return Ok();
         }
 
         /// <summary>

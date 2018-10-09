@@ -1,0 +1,55 @@
+﻿<Window x:Class="BikeShowRoom.WPF.Products.ProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="ProductInsertWindow" Height="450" Width="500">
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+
+                </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="ProductName" VerticalAlignment="Top"/>
+        <TextBox  Height="23" Text="{Binding Path=CurrentProduct.ProductName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Price" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox   Height="23"   Text="{Binding Path=CurrentProduct.Price,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Row="1" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="HSN Code" VerticalAlignment="Top" Grid.Row="2"/>
+        <TextBox   Height="23"   Text="{Binding Path=CurrentProduct.HSN,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Row="2" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="GST %" VerticalAlignment="Top" Grid.Row="3"/>
+                <TextBox   Height="23"   Text="{Binding Path=CurrentProduct.GST,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Row="3" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Insurance" VerticalAlignment="Top" Grid.Row="4"/>
+                <TextBox   Height="23"   Text="{Binding Path=CurrentProduct.InsuranceAmount,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Row="4" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Road Tax" VerticalAlignment="Top" Grid.Row="5"/>
+                <TextBox   Height="23"   Text="{Binding Path=CurrentProduct.RoadTax,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Row="5" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Company" VerticalAlignment="Top" Grid.Row="6"/>
+                <ComboBox Height="24" Grid.Column="1" Grid.Row="6" ItemsSource="{Binding ProductCompanies}" DisplayMemberPath="CompanyName" SelectedItem="{Binding CurrentProductCompany}"/>
+            </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+            <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" />
+            <Button  Content="Cancel" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

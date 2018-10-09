@@ -13,15 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViewModel;
 
-namespace BikeShowRoom.WPF
+namespace BikeShowRoom.WPF.Products
 {
     /// <summary>
     /// Interaction logic for ProductInsertWindow.xaml
     /// </summary>
-    public partial class ProductInsertWindow : Window
+    public partial class ProductWindow : Window
     {
         ProductViewModel viewmodel;
-        public ProductInsertWindow()
+        public ProductWindow()
         {
             InitializeComponent();
             viewmodel = new ProductViewModel();

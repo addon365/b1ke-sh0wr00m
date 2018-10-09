@@ -49,6 +49,7 @@
         </member>
         <member name="M:swcApi.Controllers.ProductController.#ctor(Swc.Service.IProductService)">
             <inheritdoc />
+            
         </member>
         <member name="M:swcApi.Controllers.ProductController.Get">
              <summary>

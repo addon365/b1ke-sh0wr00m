@@ -60,7 +60,13 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
-    
+            if (!context.ProductCompanies.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<ProductCompany>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductCompanies.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+
         }
     }
 

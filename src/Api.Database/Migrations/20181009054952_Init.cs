@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,6 +62,23 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductCompanies",
+                schema: "swc",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CompanyName = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    ProgrammerID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCompanies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 schema: "swc",
                 columns: table => new
@@ -69,10 +86,14 @@ namespace Api.Database.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     CompanyId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
+                    GST = table.Column<double>(nullable: false),
+                    HSN = table.Column<string>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
+                    InsuranceAmount = table.Column<double>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
                     Price = table.Column<double>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true)
+                    ProductName = table.Column<string>(nullable: true),
+                    RoadTax = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,6 +256,7 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    AccessoriesId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
@@ -322,6 +344,39 @@ namespace Api.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EnquiryProducts",
+                schema: "swc",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    AccessoriesAmount = table.Column<double>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    EnquiryId = table.Column<Guid>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    OnRoadPrice = table.Column<double>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    TotalAmount = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnquiryProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EnquiryProducts_Enquiries_EnquiryId",
+                        column: x => x.EnquiryId,
+                        principalSchema: "swc",
+                        principalTable: "Enquiries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EnquiryProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalSchema: "swc",
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Enquiries_EnquiryTypeId",
                 schema: "swc",
@@ -371,6 +426,18 @@ namespace Api.Database.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EnquiryProducts_EnquiryId",
+                schema: "swc",
+                table: "EnquiryProducts",
+                column: "EnquiryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EnquiryProducts_ProductId",
+                schema: "swc",
+                table: "EnquiryProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ExtraFittings_ProductId",
                 schema: "swc",
                 table: "ExtraFittings",
@@ -412,11 +479,19 @@ namespace Api.Database.Migrations
                 schema: "swc");
 
             migrationBuilder.DropTable(
+                name: "EnquiryProducts",
+                schema: "swc");
+
+            migrationBuilder.DropTable(
                 name: "ExtraFittings",
                 schema: "swc");
 
             migrationBuilder.DropTable(
                 name: "marketingZones",
+                schema: "swc");
+
+            migrationBuilder.DropTable(
+                name: "ProductCompanies",
                 schema: "swc");
 
             migrationBuilder.DropTable(

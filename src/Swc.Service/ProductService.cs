@@ -26,14 +26,14 @@ namespace Swc.Service
         }
 
 
-       
+
 
         public string Insert(Product product)
         {
-            var products = new Product();
-            products.ProductName = product.ProductName;
-            products.Price = product.Price;
-            _unitOfWork.GetRepository<Product>().Add(products);
+            //var products = new Product();
+            //products.ProductName = product.ProductName;
+            //products.Price = product.Price;
+            _unitOfWork.GetRepository<Product>().Add(product);
             try
             {
                 _unitOfWork.SaveChanges();
@@ -49,5 +49,10 @@ namespace Swc.Service
             var product = _unitOfWork.GetRepository<Product>().Get(x => x.Identifier == identifier);
             return Mapper.Map<Product>(product);
         }
+        public IEnumerable<ProductCompany> GetCompanies()
+            {
+            var Companies = _unitOfWork.GetRepository<ProductCompany>().Get();
+            return Companies;
+            }
     }
 }

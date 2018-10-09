@@ -16,10 +16,28 @@ namespace addon.BikeShowRoomService.WebService
         public ProductService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:61780/");
+            _httpClient.BaseAddress = new Uri("http://localhost:5000/");
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                  new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+        public IEnumerable<ProductCompany> GetCompanies()
+        {
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product/Companies").Result;
+            IEnumerable<ProductCompany> companies = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                companies = JsonConvert.DeserializeObject<IEnumerable<ProductCompany>>(json);
+
+
+                
+            }
+
+            return companies;
         }
         public IEnumerable<Product> GetAllActive()
         {

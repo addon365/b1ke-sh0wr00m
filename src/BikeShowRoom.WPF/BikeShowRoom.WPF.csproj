@@ -189,13 +189,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ProductEditWindow.xaml.cs">
-      <DependentUpon>ProductEditWindow.xaml</DependentUpon>
+    <Compile Include="Enquiries\EnquiriesStatusWindow.xaml.cs">
+      <DependentUpon>EnquiriesStatusWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProductInsertWindow.xaml.cs">
-      <DependentUpon>ProductInsertWindow.xaml</DependentUpon>
+    <Compile Include="Enquiries\EnquiriesTypeWindow.xaml.cs">
+      <DependentUpon>EnquiriesTypeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProductWindow.xaml.cs">
+    <Compile Include="Products\ProductCompanyWindow.xaml.cs">
+      <DependentUpon>ProductCompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductWindow.xaml.cs">
       <DependentUpon>ProductWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RibbonTab\Folder.xaml.cs">
@@ -214,7 +217,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EnquiriesWindow.xaml">
+    <Page Include="Enquiries\EnquiriesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\EnquiriesStatusWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\EnquiriesTypeWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -229,22 +240,18 @@
     <Compile Include="ContactWindow.xaml.cs">
       <DependentUpon>ContactWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EnquiriesWindow.xaml.cs">
+    <Compile Include="Enquiries\EnquiriesWindow.xaml.cs">
       <DependentUpon>EnquiriesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProductEditWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Products\ProductCompanyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProductInsertWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProductWindow.xaml">
+    <Page Include="Products\ProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

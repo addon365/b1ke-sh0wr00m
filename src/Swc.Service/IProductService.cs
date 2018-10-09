@@ -11,5 +11,6 @@ namespace Swc.Service
         IEnumerable<Product> GetAllActive();
         string Insert(Product product);
         Product GetProduct(string identifier);
+        IEnumerable<ProductCompany> GetCompanies();
     }
 }
