@@ -44,6 +44,21 @@ namespace Swc.Service
             }
             return product.Identifier;
         }
+        public void Delete(Product product)
+        {
+            try { 
+                
+            _unitOfWork.GetRepository<Product>().Delete(product.Id);
+                
+              
+            _unitOfWork.SaveChanges();
+              
+            }
+            catch(Exception ex)
+            {
+                string msg = ex.Message;
+            }
+        }
         public Product GetProduct(string identifier)
         {
             var product = _unitOfWork.GetRepository<Product>().Get(x => x.Identifier == identifier);
@@ -54,5 +69,10 @@ namespace Swc.Service
             var Companies = _unitOfWork.GetRepository<ProductCompany>().Get();
             return Companies;
             }
+        public IEnumerable<ProductType> GetTypes()
+        {
+            var Types = _unitOfWork.GetRepository<ProductType>().Get();
+            return Types;
+        }
     }
 }

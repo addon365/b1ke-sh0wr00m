@@ -37,29 +37,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.11\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.1.4\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Abstractions.2.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=2.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Abstractions.2.1.4\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore.AutoHistory, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.AutoHistory.2.0.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.AutoHistory.dll</HintPath>
+    <Reference Include="Microsoft.EntityFrameworkCore.AutoHistory, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.AutoHistory.2.1.0\lib\netstandard2.0\Microsoft.EntityFrameworkCore.AutoHistory.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.2.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=2.1.4.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.2.1.4\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.1.2\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.1.2\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
@@ -91,12 +91,15 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Data.WPF, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Licensing, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Licensing.16.3.0.21\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.SfSkinManager.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfSkinManager.WPF.16.3.0.21\lib\net46\Syncfusion.SfSkinManager.WPF.dll</HintPath>
     </Reference>
@@ -107,8 +110,8 @@
       <HintPath>..\packages\Syncfusion.Tools.WPF.16.3.0.21\lib\net46\Syncfusion.Tools.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
@@ -118,15 +121,17 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
@@ -136,14 +141,29 @@
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.1\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -153,8 +173,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Threenine.Data, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Threenine.Data.1.1.3\lib\netstandard2.0\Threenine.Data.dll</HintPath>
+    <Reference Include="Threenine.Data, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Threenine.Data.1.1.4\lib\netstandard2.0\Threenine.Data.dll</HintPath>
     </Reference>
     <Reference Include="Threenine.Map, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Threenine.Map.1.0.2\lib\netstandard2.0\Threenine.Map.dll</HintPath>
@@ -197,6 +217,9 @@
     </Compile>
     <Compile Include="Products\ProductCompanyWindow.xaml.cs">
       <DependentUpon>ProductCompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductListWindow.xaml.cs">
+      <DependentUpon>ProductListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Products\ProductWindow.xaml.cs">
       <DependentUpon>ProductWindow.xaml</DependentUpon>
@@ -250,6 +273,10 @@
     <Page Include="Products\ProductCompanyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Products\ProductListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Products\ProductWindow.xaml">
       <SubType>Designer</SubType>

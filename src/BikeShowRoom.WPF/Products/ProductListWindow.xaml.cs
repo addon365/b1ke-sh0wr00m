@@ -16,21 +16,16 @@ using ViewModel;
 namespace BikeShowRoom.WPF.Products
 {
     /// <summary>
-    /// Interaction logic for ProductInsertWindow.xaml
+    /// Interaction logic for ProductListWindow.xaml
     /// </summary>
-    public partial class ProductWindow : Window
+    public partial class ProductListWindow : Window
     {
-        ProductViewModel viewmodel;
-        public ProductWindow()
+        ProductListViewModel viewmodel;
+        public ProductListWindow()
         {
             InitializeComponent();
-            viewmodel = new ProductViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
+            viewmodel = new ProductListViewModel();
             base.DataContext = viewmodel;
         }
-
-        
-
-      
     }
 }

@@ -43,6 +43,13 @@ namespace swcApi.Controllers
             return _productService.GetCompanies();
         }
 
+        [AllowAnonymous]
+        [Route("Types")]
+        [HttpGet]
+        public IEnumerable<ProductType> GetTypes()
+        {
+            return _productService.GetTypes();
+        }
 
         /// <summary>
         ///  Returns a collection of values
@@ -60,6 +67,21 @@ namespace swcApi.Controllers
             }
 
             var identifier = _productService.Insert(referrer);
+
+
+            return Ok();
+        }
+        [AllowAnonymous]
+        [Route("Delete")]
+        [HttpPost]
+        public IActionResult Delete([FromBody] Product product)
+        {
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
+            _productService.Delete(product);
 
 
             return Ok();

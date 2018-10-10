@@ -1,0 +1,17 @@
+[
+  {
+    "Identifier": "Ref001",
+    "Name": "Bikes",
+    "ProgrammerID": 100
+  },
+  {
+    "Identifier": "Ref002",
+    "Name": "Accessories",
+    "ProgrammerID": 200
+  },
+  {
+    "Identifier": "Ref003",
+    "Name": "Spares",
+    "ProgrammerID": 300
+  }
+]

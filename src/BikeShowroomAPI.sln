@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeShowRoom.WPF", "BikeSho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\ViewModel.csproj", "{DCB74093-CD12-478B-BE5A-7886295E1A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon.BikeShowRoomService", "addon.BikeShowRoomService\addon.BikeShowRoomService.csproj", "{B4493FD9-C5A3-42A3-8B48-3287216DD7D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon.BikeShowRoomService", "addon.BikeShowRoomService\addon.BikeShowRoomService.csproj", "{B4493FD9-C5A3-42A3-8B48-3287216DD7D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

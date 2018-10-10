@@ -38,7 +38,7 @@ namespace swcApi
             if (!context.Products.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
-          
+                
                 context.AddRange(types);
                 context.SaveChanges();
             }
@@ -65,6 +65,14 @@ namespace swcApi
                 var types = JsonConvert.DeserializeObject<List<ProductCompany>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductCompanies.json"));
                 context.AddRange(types);
                 context.SaveChanges();
+                
+            }
+            if (!context.ProductTypes.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<ProductType>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductTypes.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+
             }
 
         }

@@ -11,14 +11,21 @@ namespace ViewModel
         private readonly ProductService _repositoryProduct;
         private Product currentProduct;
         private ProductCompany _productCompany;
-
+        private ProductType _productType;
         public ProductViewModel()
         {
-            currentProduct = new Product();
             _repositoryProduct = new ProductService();
-            ProductCompanies = _repositoryProduct.GetCompanies();
-            
+            currentProduct = new Product();
+            InitInsert();
+        
             WireCommands();
+        }
+        private void InitInsert()
+        {
+            
+            ProductCompanies = _repositoryProduct.GetCompanies();
+            ProductTypes = _repositoryProduct.GetTypes();
+
         }
         private void WireCommands()
         {
@@ -33,7 +40,8 @@ namespace ViewModel
         }
 
         public IEnumerable<ProductCompany> ProductCompanies { get; set; }
-        
+        public IEnumerable<ProductType> ProductTypes { get; set; }
+
         public ProductCompany CurrentProductCompany
         {
             get
@@ -47,6 +55,23 @@ namespace ViewModel
                 _productCompany = value;
                 OnPropertyChanged("CurrentProductCompany");
                 
+
+
+            }
+        }
+        public ProductType CurrentProductType
+        {
+            get
+            {
+                return _productType;
+            }
+
+            set
+            {
+
+                _productType = value;
+                OnPropertyChanged("CurrentProductType");
+
 
 
             }
@@ -70,8 +95,41 @@ namespace ViewModel
         }
         public void AddProduct()
         {
+
+            if (!ValidateProduct())
+                return;
+
+            InsertCommand.IsEnabled = false;
             CurrentProduct.CompanyId = CurrentProductCompany.Id;
+
+            CurrentProduct.TypeId = CurrentProductType.Id;
             _repositoryProduct.Insert(CurrentProduct);
+
+            CurrentProduct = new Product();
+            InitInsert();
+
         }
+        private bool ValidateProduct()
+        {
+
+            if (CurrentProduct == null)
+                return false;
+
+            if (CurrentProductCompany == null)
+                return false;
+
+            if (CurrentProductType == null)
+                return false;
+
+            return true;
+        }
+        private void LoadData()
+        {
+            Product p = new Product();
+            p.ProductName = "Pulsor";
+            p.Identifier = "00184";
+            CurrentProduct = p;
+        }
+        
     }
 }

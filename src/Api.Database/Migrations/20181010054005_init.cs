@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Api.Database.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,9 +17,10 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 255, nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
+                    Description = table.Column<string>(maxLength: 255, nullable: true),
                     ProgrammerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -36,6 +36,7 @@ namespace Api.Database.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     ProgrammerId = table.Column<int>(nullable: false)
                 },
@@ -51,10 +52,11 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
-                    ZonalDescription = table.Column<string>(nullable: true),
-                    ZonalName = table.Column<string>(nullable: true)
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    ZonalName = table.Column<string>(nullable: true),
+                    ZonalDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,10 +69,11 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CompanyName = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    CompanyName = table.Column<string>(nullable: true),
                     ProgrammerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -84,20 +87,41 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CompanyId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    GST = table.Column<double>(nullable: false),
-                    HSN = table.Column<string>(nullable: true),
-                    Identifier = table.Column<string>(nullable: true),
-                    InsuranceAmount = table.Column<double>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Price = table.Column<double>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
                     ProductName = table.Column<string>(nullable: true),
-                    RoadTax = table.Column<double>(nullable: false)
+                    Price = table.Column<double>(nullable: false),
+                    InsuranceAmount = table.Column<double>(nullable: false),
+                    RoadTax = table.Column<double>(nullable: false),
+                    HSN = table.Column<string>(nullable: true),
+                    GST = table.Column<double>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false),
+                    TypeId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductTypes",
+                schema: "swc",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    ParentId = table.Column<Guid>(nullable: false),
+                    ProgrammerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -106,13 +130,14 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Address = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
-                    MobileNumber = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Place = table.Column<string>(nullable: true)
+                    MobileNumber = table.Column<string>(nullable: true),
+                    Place = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,9 +151,10 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 255, nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 25, nullable: false)
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(maxLength: 25, nullable: false),
+                    Description = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,6 +169,7 @@ namespace Api.Database.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -156,10 +183,11 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    AccessoriesProductId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false)
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    AccessoriesProductId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,10 +208,11 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    EnquiryTypeId = table.Column<Guid>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
                     ProfileId = table.Column<Guid>(nullable: false),
+                    EnquiryTypeId = table.Column<Guid>(nullable: false),
                     StatusId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
@@ -219,17 +248,18 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Host = table.Column<string>(nullable: true),
-                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('swc-',[Id])"),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Protocol = table.Column<string>(nullable: true),
-                    QueryString = table.Column<string>(nullable: true),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('swc-',[Id])"),
                     Referer = table.Column<string>(maxLength: 255, nullable: true),
-                    StatusId = table.Column<Guid>(nullable: false),
-                    TypeId = table.Column<Guid>(nullable: false),
+                    Host = table.Column<string>(nullable: true),
                     UserAgent = table.Column<string>(nullable: true),
                     XForwardHost = table.Column<string>(nullable: true),
-                    XForwardProto = table.Column<string>(nullable: true)
+                    XForwardProto = table.Column<string>(nullable: true),
+                    QueryString = table.Column<string>(nullable: true),
+                    Protocol = table.Column<string>(nullable: true),
+                    TypeId = table.Column<Guid>(nullable: false),
+                    StatusId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -256,12 +286,13 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    AccessoriesId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false)
+                    ProductId = table.Column<Guid>(nullable: false),
+                    AccessoriesId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -289,14 +320,15 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
-                    Expected = table.Column<double>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
-                    Modified = table.Column<DateTime>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
                     NoOfOwner = table.Column<int>(nullable: false),
-                    Quotated = table.Column<double>(nullable: false),
-                    Year = table.Column<int>(nullable: false)
+                    Expected = table.Column<double>(nullable: false),
+                    Quotated = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -317,12 +349,13 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    EnquiryId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
                     DownPayment = table.Column<double>(nullable: false),
                     EMIAmount = table.Column<double>(nullable: false),
-                    EnquiryId = table.Column<Guid>(nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false),
                     TenureInMonths = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -350,12 +383,13 @@ namespace Api.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    AccessoriesAmount = table.Column<double>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    EnquiryId = table.Column<Guid>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
-                    OnRoadPrice = table.Column<double>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: false),
+                    EnquiryId = table.Column<Guid>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
+                    OnRoadPrice = table.Column<double>(nullable: false),
+                    AccessoriesAmount = table.Column<double>(nullable: false),
                     TotalAmount = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -492,6 +526,10 @@ namespace Api.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductCompanies",
+                schema: "swc");
+
+            migrationBuilder.DropTable(
+                name: "ProductTypes",
                 schema: "swc");
 
             migrationBuilder.DropTable(

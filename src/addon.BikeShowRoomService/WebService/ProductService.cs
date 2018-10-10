@@ -39,6 +39,24 @@ namespace addon.BikeShowRoomService.WebService
 
             return companies;
         }
+        public IEnumerable<ProductType> GetTypes()
+        {
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product/Types").Result;
+            IEnumerable<ProductType> types = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                types = JsonConvert.DeserializeObject<IEnumerable<ProductType>>(json);
+
+
+
+            }
+
+            return types;
+        }
         public IEnumerable<Product> GetAllActive()
         {
             HttpResponseMessage response = _httpClient.GetAsync("api/Product").Result;
@@ -67,12 +85,21 @@ namespace addon.BikeShowRoomService.WebService
             var httpResponce = _httpClient.PostAsync("api/Product", byteContent);
 
 
-            Console.WriteLine(httpResponce);
+            //Console.WriteLine(httpResponce);
             return null;
         }
         public Product GetProduct(string identifier)
         {
             throw new NotImplementedException();
+        }
+        public void Delete(Product product)
+        {
+            string json = JsonConvert.SerializeObject(product, Formatting.Indented);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var stringContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
+            var httpResponce = _httpClient.PostAsync("api/Product/Delete", byteContent);
         }
 
 

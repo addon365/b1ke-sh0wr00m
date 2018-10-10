@@ -15,5 +15,6 @@ namespace Api.Database.Entity.Products
         public string HSN { get; set; }
         public double GST { get; set; }
         public Guid CompanyId { get; set; }
+        public Guid TypeId { get; set; }
     }
 }
