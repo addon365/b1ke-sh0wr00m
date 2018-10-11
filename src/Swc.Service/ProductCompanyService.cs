@@ -2,6 +2,7 @@
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Threenine.Data;
 
@@ -19,7 +20,7 @@ namespace Swc.Service
         }
         public IEnumerable<ProductCompany> GetAllProductCompanies()
         {
-            var productcompanies = _unitOfWork.GetRepository<ProductCompany>().Get();
+            var productcompanies = _unitOfWork.GetRepository<ProductCompany>().GetList().Items;
 
             return productcompanies;
         }
@@ -39,7 +40,7 @@ namespace Swc.Service
         }
         public ProductCompany GetProductCompany(string identifier)
         {
-            var productcompany = _unitOfWork.GetRepository<ProductCompany>().Get(x => x.Identifier == identifier);
+            var productcompany = _unitOfWork.GetRepository<ProductCompany>().GetList().Items.Where(x => x.Identifier == identifier);
             return Mapper.Map<ProductCompany>(productcompany);
         }
     }

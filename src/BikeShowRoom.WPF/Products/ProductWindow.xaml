@@ -52,13 +52,10 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-<<<<<<< HEAD
-            <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" Click="insertBtn_Click" />
-            <Button  Content="Cancel" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2"/>
-=======
+
             <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" />
             <Button  Content="Cancel"  VerticalAlignment="Top" Width="75"  Grid.Column="2"/>
->>>>>>> 8e9c6b23e7a17c14bc901274ba226b082143b447
+
             </Grid>
         </Grid>
     </Grid>
