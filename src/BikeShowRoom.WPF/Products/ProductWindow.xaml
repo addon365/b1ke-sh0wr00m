@@ -47,7 +47,7 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-            <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" />
+            <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" Click="insertBtn_Click" />
             <Button  Content="Cancel" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2"/>
             </Grid>
         </Grid>

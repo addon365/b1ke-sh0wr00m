@@ -20,11 +20,11 @@ namespace BikeShowRoom.WPF.Products
     /// </summary>
     public partial class ProductCompanyWindow : Window
     {
-        ProductViewModel viewmodel;
+        ProductCompanyViewModel viewmodel;
         public ProductCompanyWindow()
         {
             InitializeComponent();
-            viewmodel = new ProductViewModel();
+            viewmodel = new ProductCompanyViewModel();
             viewmodel.InsertCommand.IsEnabled = true;
             base.DataContext = viewmodel;
         }

@@ -24,7 +24,6 @@ namespace ViewModel
         {
 
             InsertCommand = new RelayCommand(AddProduct);
-           
         }
         public RelayCommand InsertCommand
         {
@@ -68,6 +67,8 @@ namespace ViewModel
                 
             }
         }
+       
+        
         public void AddProduct()
         {
             CurrentProduct.CompanyId = CurrentProductCompany.Id;

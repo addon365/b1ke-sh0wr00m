@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BikeShowRoom.WPF"
         mc:Ignorable="d"
-        Title="ProductInsertWindow" Height="450" Width="500">
+        Title="CompanyInsertWindow" Height="450" Width="500">
     <Grid>
         <Grid Margin="10">
             <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
 
                 </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Company Name" VerticalAlignment="Top"/>
-        <TextBox  Height="23" Text="{Binding Path=CurrentProduct.ProductName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
+                <TextBox  Height="23" Text="{Binding Path=CurrentProductCompany.CompanyName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
        
             </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -32,8 +32,8 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-            <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" />
-            <Button  Content="Cancel" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2"/>
+            <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" Click="insertBtn_Click" />
+            <Button  Content="Cancel" Command="{Binding CancelCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2"/>
             </Grid>
         </Grid>
     </Grid>
