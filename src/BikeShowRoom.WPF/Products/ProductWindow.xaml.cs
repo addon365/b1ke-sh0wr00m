@@ -23,16 +23,31 @@ namespace BikeShowRoom.WPF.Products
         ProductViewModel viewmodel;
         public ProductWindow()
         {
+            try { 
             InitializeComponent();
             viewmodel = new ProductViewModel();
             viewmodel.InsertCommand.IsEnabled = true;
             base.DataContext = viewmodel;
+            }
+            catch(Exception ex)
+            {
+                if(ex.InnerException==null)
+                { 
+                MessageBox.Show("Error 1" + ex.Message);
+                }
+                else
+                {
+                    MessageBox.Show("Error 2" + ex.InnerException.Message);
+
+                    if(ex.InnerException.InnerException!=null)
+                    {
+                        MessageBox.Show("Error 3" + ex.InnerException.InnerException.Message);
+                    }
+                }
+            }
         }
 
-        private void insertBtn_Click(object sender, RoutedEventArgs e)
-        {
-           this.Hide();
-        }
+        
 
       
     }

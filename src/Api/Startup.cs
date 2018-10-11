@@ -54,46 +54,46 @@ namespace swcApi
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
 
             services.AddMvc();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1",
-                new Info
-                {
-                    Title = "Stop Web Crawlers API",
-                    Version = "v1",
-                    Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
-                    TermsOfService = "None",
-                    Contact = new Contact { Name = "addon technologies", Email = "tamilselvan@addon.cc", Url = "http://addon.cc" }
-                });
-                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
-                c.IncludeXmlComments(filePath);
-            }
-          );
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1",
+            //    new Info
+            //    {
+            //        Title = "Stop Web Crawlers API",
+            //        Version = "v1",
+            //        Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
+            //        TermsOfService = "None",
+            //        Contact = new Contact { Name = "addon technologies", Email = "tamilselvan@addon.cc", Url = "http://addon.cc" }
+            //    });
+            //    var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
+            //    c.IncludeXmlComments(filePath);
+            //}
+            //);
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
             // configure jwt authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            //var appSettings = appSettingsSection.Get<AppSettings>();
+            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddJwtBearer(x =>
+            //{
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = true;
+            //    x.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false
+            //    };
+            //});
 
         }
 

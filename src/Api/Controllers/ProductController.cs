@@ -34,6 +34,18 @@ namespace swcApi.Controllers
             return _productService.GetAllActive();
         }
 
+        /// <summary>
+        ///  Returns Details of a selected Referrer
+        /// </summary>
+        ///<remarks>
+        ///
+        ///</remarks>
+        [HttpGet("{Id}")]
+        public IEnumerable<Product> Get(int Id)
+        {
+            return _productService.GetProductByType(Id);
+
+        }
 
         [AllowAnonymous]
         [Route("Companies")]
@@ -43,6 +55,13 @@ namespace swcApi.Controllers
             return _productService.GetCompanies();
         }
 
+        [AllowAnonymous]
+        [Route("Types")]
+        [HttpGet]
+        public IEnumerable<ProductType> GetTypes()
+        {
+            return _productService.GetTypes();
+        }
 
         /// <summary>
         ///  Returns a collection of values
@@ -64,6 +83,21 @@ namespace swcApi.Controllers
 
             return Ok();
         }
+        [AllowAnonymous]
+        [Route("Delete")]
+        [HttpPost]
+        public IActionResult Delete([FromBody] Product product)
+        {
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
+            _productService.Delete(product);
+
+
+            return Ok();
+        }
 
         /// <summary>
         ///  Returns Details of a selected Referrer
@@ -80,5 +114,6 @@ namespace swcApi.Controllers
 
             return Ok(referer);
         }
+        
     }
 }
