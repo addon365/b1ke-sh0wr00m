@@ -25,7 +25,7 @@ namespace Swc.Service
         }
         public IEnumerable<Enquiry> GetAllActive()
         {
-            var enquiries = _unitOfWork.GetRepository<Enquiry>().Get();
+            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
 
           return enquiries;
           
@@ -33,9 +33,9 @@ namespace Swc.Service
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
             InitilizeEnquiry ie = new InitilizeEnquiry();
-            ie.MarketingZones = _unitOfWork.GetRepository<MarketingZone>().Get();
-            ie.Products = _unitOfWork.GetRepository<Product>().Get();
-            ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().Get();
+            ie.MarketingZones = _unitOfWork.GetRepository<MarketingZone>().GetList().Items;
+            ie.Products = _unitOfWork.GetRepository<Product>().GetList().Items;
+            ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().GetList().Items;
 
             return ie;
 
@@ -47,8 +47,8 @@ namespace Swc.Service
             #region  autoMap
             // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
             // TODO :  Expected Volumes could be immense to so we need to optimise 
-            //var refType = _unitOfWork.GetRepository<EnquiryType>().Get(x => x.Name == Referer).SingleOrDefault();
-            //var status = _unitOfWork.GetRepository<EnquiryStatus>().Get(x => x.Name == Moderate).SingleOrDefault();
+            //var refType = _unitOfWork.GetRepository<EnquiryType>().GetList(x => x.Name == Referer).SingleOrDefault();
+            //var status = _unitOfWork.GetRepository<EnquiryStatus>().GetList(x => x.Name == Moderate).SingleOrDefault();
 
             //var enquiry = Mapper.Map<Enquiry>(enquiries);
 
@@ -71,9 +71,9 @@ namespace Swc.Service
 
             enquiry.ProfileId = profile.Id;
             enquiry.StatusId=_unitOfWork.GetRepository<EnquiryStatus>()
-                .Get(predicate: x => x.ProgrammerId==100).First().Id;
+                .GetList().Items.Where(predicate: x => x.ProgrammerId==100).First().Id;
             enquiry.EnquiryTypeId = _unitOfWork.GetRepository<EnquiryType>()
-           .Get(predicate: x => x.ProgrammerId == 100).First().Id;
+           .GetList().Items.Where(predicate: x => x.ProgrammerId == 100).First().Id;
             _unitOfWork.GetRepository<Profile>().Add(profile);
             _unitOfWork.GetRepository<Enquiry>().Add(enquiry);
             foreach(EnquiryProduct ep in InsertEnquiries.EnquiryProducts)
@@ -104,7 +104,7 @@ namespace Swc.Service
 
         public Enquiries GetEnquiries(string identifier)
         {
-            //var enquiry = _unitOfWork.GetRepository<Enquiry>().Get(x => x.Identifier == identifier).SingleOrDefault();
+            //var enquiry = _unitOfWork.GetRepository<Enquiry>().GetList(x => x.Identifier == identifier).SingleOrDefault();
             //return Mapper.Map<Enquiries>(enquiry);
             return null;
         }

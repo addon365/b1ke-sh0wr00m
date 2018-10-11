@@ -66,5 +66,11 @@ namespace BikeShowRoom.WPF
             Products.ProductListWindow n = new Products.ProductListWindow();
             n.ShowDialog();
         }
+
+        private void btnBikeAccessories_Click(object sender, RoutedEventArgs e)
+        {
+            Products.BikeAccessories n = new Products.BikeAccessories();
+            n.ShowDialog();
+        }
     }
 }

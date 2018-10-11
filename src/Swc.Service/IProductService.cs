@@ -14,6 +14,7 @@ namespace Swc.Service
         Product GetProduct(string identifier);
         IEnumerable<ProductCompany> GetCompanies();
         IEnumerable<ProductType> GetTypes();
+        IEnumerable<Product> GetProductByType(int ProgrammerId);
 
     }
 }

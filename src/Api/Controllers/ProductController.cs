@@ -34,6 +34,18 @@ namespace swcApi.Controllers
             return _productService.GetAllActive();
         }
 
+        /// <summary>
+        ///  Returns Details of a selected Referrer
+        /// </summary>
+        ///<remarks>
+        ///
+        ///</remarks>
+        [HttpGet("{Id}")]
+        public IEnumerable<Product> Get(int Id)
+        {
+            return _productService.GetProductByType(Id);
+
+        }
 
         [AllowAnonymous]
         [Route("Companies")]
@@ -102,5 +114,6 @@ namespace swcApi.Controllers
 
             return Ok(referer);
         }
+        
     }
 }

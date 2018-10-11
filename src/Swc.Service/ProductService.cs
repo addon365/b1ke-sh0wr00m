@@ -5,7 +5,7 @@ using Api.Database.Entity.Products;
 using Api.Domain.Enquiries;
 using AutoMapper;
 using Threenine.Data;
-
+using System.Linq;
 namespace Swc.Service
 {
     public class ProductService : IProductService
@@ -20,7 +20,16 @@ namespace Swc.Service
         }
         public IEnumerable<Product> GetAllActive()
         {
-            var products = _unitOfWork.GetRepository<Product>().Get();
+            var products = _unitOfWork.GetRepository<Product>().GetList().Items;
+
+            return products;
+        }
+        public IEnumerable<Product> GetProductByType(int ProgrammerId)
+        {
+            var typeid = _unitOfWork.GetRepository<ProductType>().GetList().Items.Where(y => y.ProgrammerId == ProgrammerId).First<ProductType>().Id;
+
+         
+            var products = _unitOfWork.GetRepository<Product>().GetList().Items.Where(x=>x.TypeId==typeid);
 
             return products;
         }
@@ -61,17 +70,17 @@ namespace Swc.Service
         }
         public Product GetProduct(string identifier)
         {
-            var product = _unitOfWork.GetRepository<Product>().Get(x => x.Identifier == identifier);
+            var product = _unitOfWork.GetRepository<Product>().GetList().Items.Where(x => x.Identifier == identifier);
             return Mapper.Map<Product>(product);
         }
         public IEnumerable<ProductCompany> GetCompanies()
             {
-            var Companies = _unitOfWork.GetRepository<ProductCompany>().Get();
+            var Companies = _unitOfWork.GetRepository<ProductCompany>().GetList().Items;
             return Companies;
             }
         public IEnumerable<ProductType> GetTypes()
         {
-            var Types = _unitOfWork.GetRepository<ProductType>().Get();
+            var Types = _unitOfWork.GetRepository<ProductType>().GetList().Items;
             return Types;
         }
     }

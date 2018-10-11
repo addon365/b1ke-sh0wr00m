@@ -58,6 +58,14 @@
             <remarks>
             </remarks>
         </member>
+        <member name="M:swcApi.Controllers.ProductController.Get(System.Int32)">
+             <summary>
+              Returns Details of a selected Referrer
+             </summary>
+            <remarks>
+            
+            </remarks>
+        </member>
         <member name="M:swcApi.Controllers.ProductController.ProductPost(Api.Database.Entity.Products.Product)">
              <summary>
               Returns a collection of values

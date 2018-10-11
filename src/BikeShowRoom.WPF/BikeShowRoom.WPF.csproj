@@ -173,8 +173,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Threenine.Data, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Threenine.Data.1.1.4\lib\netstandard2.0\Threenine.Data.dll</HintPath>
+    <Reference Include="Threenine.Data, Version=1.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Threenine.Data.1.1.5\lib\netstandard2.0\Threenine.Data.dll</HintPath>
     </Reference>
     <Reference Include="Threenine.Map, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Threenine.Map.1.0.2\lib\netstandard2.0\Threenine.Map.dll</HintPath>
@@ -217,6 +217,9 @@
     </Compile>
     <Compile Include="Products\ProductCompanyWindow.xaml.cs">
       <DependentUpon>ProductCompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\BikeAccessories.xaml.cs">
+      <DependentUpon>BikeAccessories.xaml</DependentUpon>
     </Compile>
     <Compile Include="Products\ProductListWindow.xaml.cs">
       <DependentUpon>ProductListWindow.xaml</DependentUpon>
@@ -271,6 +274,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Products\ProductCompanyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Products\BikeAccessories.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

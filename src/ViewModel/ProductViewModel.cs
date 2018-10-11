@@ -14,24 +14,25 @@ namespace ViewModel
         private ProductType _productType;
         public ProductViewModel()
         {
-            _repositoryProduct = new ProductService();
-            currentProduct = new Product();
-            InitInsert();
-        
-            WireCommands();
+            try
+            {
+                _repositoryProduct = new ProductService();
+                currentProduct = new Product();
+                InitInsert();
+
+                WireCommands();
+            }
+            catch (Exception ex)
+            { throw ex; }
         }
         private void InitInsert()
         {
-            
             ProductCompanies = _repositoryProduct.GetCompanies();
             ProductTypes = _repositoryProduct.GetTypes();
-
         }
         private void WireCommands()
         {
-
             InsertCommand = new RelayCommand(AddProduct);
-           
         }
         public RelayCommand InsertCommand
         {
@@ -48,15 +49,10 @@ namespace ViewModel
             {
                 return _productCompany;
             }
-
             set
             {
-
                 _productCompany = value;
                 OnPropertyChanged("CurrentProductCompany");
-                
-
-
             }
         }
         public ProductType CurrentProductType
@@ -65,15 +61,10 @@ namespace ViewModel
             {
                 return _productType;
             }
-
             set
             {
-
                 _productType = value;
                 OnPropertyChanged("CurrentProductType");
-
-
-
             }
         }
         public Product CurrentProduct
@@ -85,24 +76,21 @@ namespace ViewModel
 
             set
             {
-              
-                    currentProduct = value;
-                    OnPropertyChanged("CurrentProduct");
-                    InsertCommand.IsEnabled = true;
-
-                
+                currentProduct = value;
+                OnPropertyChanged("CurrentProduct");
+                InsertCommand.IsEnabled = true;
             }
         }
         public void AddProduct()
         {
 
-            if (!ValidateProduct())
-                return;
+            //if (!ValidateProduct())
+            //    return;
 
             InsertCommand.IsEnabled = false;
-            CurrentProduct.CompanyId = CurrentProductCompany.Id;
+            //CurrentProduct.CompanyId = CurrentProductCompany.Id;
 
-            CurrentProduct.TypeId = CurrentProductType.Id;
+            //CurrentProduct.TypeId = CurrentProductType.Id;
             _repositoryProduct.Insert(CurrentProduct);
 
             CurrentProduct = new Product();

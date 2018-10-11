@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Swc.Service;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -15,8 +16,10 @@ namespace addon.BikeShowRoomService.WebService
 
         public ProductService()
         {
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:5000/");
+            _httpClient.BaseAddress = new Uri("https://swcapi20181010045554.azurewebsites.net/");
+           
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(
                  new MediaTypeWithQualityHeaderValue("application/json"));
@@ -60,6 +63,24 @@ namespace addon.BikeShowRoomService.WebService
         public IEnumerable<Product> GetAllActive()
         {
             HttpResponseMessage response = _httpClient.GetAsync("api/Product").Result;
+            IEnumerable<Product> products = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                products = JsonConvert.DeserializeObject<IEnumerable<Product>>(json);
+
+
+
+            }
+
+            return products;
+        }
+        public IEnumerable<Product> GetProductByType(int ProgrammerId)
+        {
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product/"+ ProgrammerId).Result;
             IEnumerable<Product> products = null;
             if (response.IsSuccessStatusCode)
             {
