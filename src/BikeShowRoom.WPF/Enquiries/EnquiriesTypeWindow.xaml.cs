@@ -25,7 +25,7 @@ namespace BikeShowRoom.WPF.Enquiries
         {
             InitializeComponent();
             viewmodel = new ProductViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
+            viewmodel.InsertTypeCommand.IsEnabled = true;
             base.DataContext = viewmodel;
         }
 
@@ -34,6 +34,9 @@ namespace BikeShowRoom.WPF.Enquiries
            this.Hide();
         }
 
-      
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

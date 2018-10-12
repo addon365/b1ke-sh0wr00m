@@ -53,6 +53,22 @@ namespace Swc.Service
             }
             return product.Identifier;
         }
+        public string InsertProductType(ProductType producttype)
+        {
+            //var products = new Product();
+            //products.ProductName = product.ProductName;
+            //products.Price = product.Price;
+            _unitOfWork.GetRepository<ProductType>().Add(producttype);
+            try
+            {
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+            return producttype.Identifier;
+        }
         public void Delete(Product product)
         {
             try { 

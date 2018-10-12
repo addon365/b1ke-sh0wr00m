@@ -33,8 +33,14 @@ namespace ViewModel
         private void WireCommands()
         {
             InsertCommand = new RelayCommand(AddProduct);
+            InsertTypeCommand= new RelayCommand(AddProductType);
         }
         public RelayCommand InsertCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand InsertTypeCommand
         {
             get;
             private set;
@@ -65,6 +71,7 @@ namespace ViewModel
             {
                 _productType = value;
                 OnPropertyChanged("CurrentProductType");
+                InsertTypeCommand.IsEnabled =true ;
             }
         }
         public Product CurrentProduct
@@ -82,7 +89,10 @@ namespace ViewModel
             }
         }
        
-        
+        public void AddProductType()
+        {
+            _repositoryProduct.InsertProductType(CurrentProductType);
+        }
         public void AddProduct()
         {
 

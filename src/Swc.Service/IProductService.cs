@@ -10,6 +10,7 @@ namespace Swc.Service
     {
         IEnumerable<Product> GetAllActive();
         string Insert(Product product);
+        string InsertProductType(ProductType product);
         void Delete(Product product);
         Product GetProduct(string identifier);
         IEnumerable<ProductCompany> GetCompanies();

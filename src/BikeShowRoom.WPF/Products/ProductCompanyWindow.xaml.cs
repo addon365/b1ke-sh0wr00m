@@ -34,6 +34,9 @@ namespace BikeShowRoom.WPF.Products
            this.Hide();
         }
 
-      
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

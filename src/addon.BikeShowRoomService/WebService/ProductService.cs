@@ -109,6 +109,19 @@ namespace addon.BikeShowRoomService.WebService
             //Console.WriteLine(httpResponce);
             return null;
         }
+        public string InsertProductType(ProductType producttype)
+        {
+            string json = JsonConvert.SerializeObject(producttype, Formatting.Indented);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var stringContent = new StringContent(JsonConvert.SerializeObject(producttype), Encoding.UTF8, "application/json");
+            var httpResponce = _httpClient.PostAsync("api/Product", byteContent);
+
+
+            //Console.WriteLine(httpResponce);
+            return null;
+        }
         public Product GetProduct(string identifier)
         {
             throw new NotImplementedException();
