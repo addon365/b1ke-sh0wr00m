@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -187,7 +187,10 @@ namespace Api.Database.Migrations
                     Modified = table.Column<DateTime>(nullable: false),
                     Deleted = table.Column<DateTime>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
-                    AccessoriesProductId = table.Column<Guid>(nullable: false)
+                    AccessoriesProductId = table.Column<Guid>(nullable: false),
+                    Unit = table.Column<double>(nullable: false),
+                    UnitPrice = table.Column<double>(nullable: false),
+                    Amount = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

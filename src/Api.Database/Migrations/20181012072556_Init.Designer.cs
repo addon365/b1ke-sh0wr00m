@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20181010054005_init")]
-    partial class init
+    [Migration("20181012072556_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("swc")
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.0-preview2-35157")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -250,6 +250,8 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid>("AccessoriesProductId");
 
+                    b.Property<double>("Amount");
+
                     b.Property<DateTime>("Created");
 
                     b.Property<DateTime>("Deleted");
@@ -257,6 +259,10 @@ namespace Api.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<Guid>("ProductId");
+
+                    b.Property<double>("Unit");
+
+                    b.Property<double>("UnitPrice");
 
                     b.HasKey("Id");
 
