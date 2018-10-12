@@ -25,6 +25,7 @@ using swcApi.Utils;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
 
 namespace swcApi
 {
@@ -54,6 +55,11 @@ namespace swcApi
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
 
             services.AddMvc();
+            services.AddApiVersioning(o =>
+            {
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1,0);
+            });
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1",
