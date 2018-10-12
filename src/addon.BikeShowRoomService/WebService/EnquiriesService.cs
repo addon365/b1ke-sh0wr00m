@@ -25,17 +25,7 @@ namespace addon.BikeShowRoomService.WebService
 
         public EnquiriesService()
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:5000/");
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-            //var response = _httpClient.PostAsync("api/user/authenticate",null).ConfigureAwait(true)
-            //                    .GetAwaiter()
-            //                    .GetResult();
-            //byte[] tokenAsByArray = response.Content.ReadAsByteArrayAsync().Result;
-            //var header = new AuthenticationHeaderValue("Bearer", Convert.ToBase64String(tokenAsByArray));
-            //_httpClient.DefaultRequestHeaders.Authorization = header;
+            _httpClient = WebDataClient.Client;
         }
         public IEnumerable<Enquiry> GetAllActive()
         {
