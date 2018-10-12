@@ -16,13 +16,7 @@ namespace addon.BikeShowRoomService.WebService
 
         public ProductService()
         {
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://swcapi20181010045554.azurewebsites.net/");
-           
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                 new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient = WebDataClient.Client;
         }
         public IEnumerable<ProductCompany> GetCompanies()
         {

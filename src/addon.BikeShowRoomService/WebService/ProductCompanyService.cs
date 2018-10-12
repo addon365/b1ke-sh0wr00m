@@ -15,11 +15,7 @@ namespace addon.BikeShowRoomService.WebService
 
         public ProductCompanyService()
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:5000/");
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-                 new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient = WebDataClient.Client;
         }
         public IEnumerable<ProductCompany> GetAllProductCompanies()
         {
