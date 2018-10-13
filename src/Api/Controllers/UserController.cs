@@ -15,7 +15,7 @@ using swcApi.Utils;
 namespace swcApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/User")]
+    [Route("api/v{version:apiVersion}/User")]
     public class UserController : Controller
     {
         private readonly AppSettings _appSettings;
@@ -31,7 +31,7 @@ namespace swcApi.Controllers
         public IActionResult Authenticate()
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(AppSettings.SECRET);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]

@@ -12,7 +12,7 @@ namespace swcApi.Controllers
     /// Echo Contollers is to test the server running status.
     /// </summary>
     [Produces("application/json")]
-    [Route("api/Echo")]
+    [Route("api/v{version:apiVersion}/Echo")]
     public class EchoController : Controller
     {
         /// <summary>

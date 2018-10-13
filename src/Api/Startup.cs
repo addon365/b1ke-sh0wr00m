@@ -25,6 +25,7 @@ using swcApi.Utils;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
 
 namespace swcApi
 {
@@ -55,6 +56,11 @@ namespace swcApi
             services.AddTransient<IEnquiryTypeService, EnquiryTypeService>();
 
             services.AddMvc();
+            services.AddApiVersioning(o =>
+            {
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1,0);
+            });
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1",
@@ -77,24 +83,26 @@ namespace swcApi
 
             // configure jwt authentication
             //var appSettings = appSettingsSection.Get<AppSettings>();
-            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            //services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //.AddJwtBearer(x =>
-            //{
-            //    x.RequireHttpsMetadata = false;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(key),
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false
-            //    };
-            //});
+            //TODO: Need to get secret from AppSettings.json
+            //Refer :https://stackoverflow.com/questions/47032896/get-azure-appsettings-in-a-controller
+            var key = Encoding.ASCII.GetBytes(AppSettings.SECRET);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
         }
 
