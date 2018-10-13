@@ -43,5 +43,21 @@ namespace Swc.Service
             var productcompany = _unitOfWork.GetRepository<ProductCompany>().GetList().Items.Where(x => x.Identifier == identifier);
             return Mapper.Map<ProductCompany>(productcompany);
         }
+        public void Delete(ProductCompany productcompany)
+        {
+            try
+            {
+
+                _unitOfWork.GetRepository<ProductCompany>().Delete(productcompany.Id);
+
+
+                _unitOfWork.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+        }
     }
 }

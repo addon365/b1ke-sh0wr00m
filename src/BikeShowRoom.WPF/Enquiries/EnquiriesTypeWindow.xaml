@@ -22,10 +22,10 @@
                     <RowDefinition Height="30"/>
 
                 </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Type Id" VerticalAlignment="Top"/>
-                <TextBox  Height="23" Text="{Binding Path=CurrentProductType.Identifier,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Text="Type Name" VerticalAlignment="Top"/>
-                <TextBox  Height="23" Text="{Binding Path=CurrentProductType.Name,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="EnquiryType Id" VerticalAlignment="Top"/>
+                <TextBox  Height="23" Text="{Binding Path=CurrentEnquiryType.ProgrammerId,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Text="EnquiryType Name" VerticalAlignment="Top"/>
+                <TextBox  Height="23" Text="{Binding Path=CurrentEnquiryType.Name,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
             </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -33,8 +33,8 @@
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Button  Content="Save" Command="{Binding InsertTypeCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" Click="insertBtn_Click" />
-                <Button  Content="Cancel" Command="{Binding InsertTypeCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2" Click="cancelBtn_Click"/>
+                <Button  Content="Save" Command="{Binding InsertCommand}"  VerticalAlignment="Top" Width="75" Grid.Column="1" Click="insertBtn_Click" />
+                <Button  Content="Cancel" Command="{Binding CancelCommand}"  VerticalAlignment="Top" Width="75"  Grid.Column="2" Click="cancelBtn_Click"/>
             </Grid>
         </Grid>
     </Grid>

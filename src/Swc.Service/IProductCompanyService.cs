@@ -10,6 +10,7 @@ namespace Swc.Service
         IEnumerable<ProductCompany> GetAllProductCompanies();
         string Insert(ProductCompany productcompany);
         ProductCompany GetProductCompany(string identifier);
-       
+        void Delete(ProductCompany productcompany);
+
     }
 }

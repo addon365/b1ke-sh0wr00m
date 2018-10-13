@@ -16,25 +16,20 @@ using ViewModel;
 namespace BikeShowRoom.WPF.Enquiries
 {
     /// <summary>
-    /// Interaction logic for ProductInsertWindow.xaml
+    /// Interaction logic for EnquriesTypeListWindow.xaml
     /// </summary>
-    public partial class EnquiriesTypeWindow : Window
+    public partial class EnquriesTypeListWindow : Window
     {
         EnquiryTypeViewModel viewmodel;
-        public EnquiriesTypeWindow()
+        public EnquriesTypeListWindow()
         {
             InitializeComponent();
             viewmodel = new EnquiryTypeViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
             base.DataContext = viewmodel;
+            viewmodel.DeleteCommand.IsEnabled = true;
         }
 
-        private void insertBtn_Click(object sender, RoutedEventArgs e)
-        {
-           this.Hide();
-        }
-
-        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        private void deletebtn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
         }

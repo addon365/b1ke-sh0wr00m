@@ -52,6 +52,7 @@ namespace swcApi
             services.AddTransient<IEnquiriesService, EnquiriesService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
+            services.AddTransient<IEnquiryTypeService, EnquiryTypeService>();
 
             services.AddMvc();
             //services.AddSwaggerGen(c =>

@@ -22,8 +22,14 @@ namespace ViewModel
         {
 
             InsertCommand = new RelayCommand(AddProductCompany);
+            DeleteCommand = new RelayCommand(DeleteProductCompany);
         }
         public RelayCommand InsertCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand DeleteCommand
         {
             get;
             private set;
@@ -50,6 +56,12 @@ namespace ViewModel
         {
             CurrentProductCompany.ProgrammerID = 1001;
             _repositoryProductCompany.Insert(CurrentProductCompany);
+        }
+        public void DeleteProductCompany()
+        {
+            ProductCompany p = CurrentProductCompany;
+            _repositoryProductCompany.Delete(p);
+
         }
     }
 }

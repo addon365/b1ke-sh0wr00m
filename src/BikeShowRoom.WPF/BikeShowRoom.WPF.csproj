@@ -219,6 +219,12 @@
     <Compile Include="Enquiries\EnquiriesTypeWindow.xaml.cs">
       <DependentUpon>EnquiriesTypeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enquiries\EnquriesTypeListWindow.xaml.cs">
+      <DependentUpon>EnquriesTypeListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductCompanyListWindow.xaml.cs">
+      <DependentUpon>ProductCompanyListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Products\ProductCompanyWindow.xaml.cs">
       <DependentUpon>ProductCompanyWindow.xaml</DependentUpon>
     </Compile>
@@ -259,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Enquiries\EnquriesTypeListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -277,6 +287,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Products\ProductCompanyListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Products\ProductCompanyWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

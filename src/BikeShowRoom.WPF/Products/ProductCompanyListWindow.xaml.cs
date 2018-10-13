@@ -13,28 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViewModel;
 
-namespace BikeShowRoom.WPF.Enquiries
+namespace BikeShowRoom.WPF.Products
 {
     /// <summary>
-    /// Interaction logic for ProductInsertWindow.xaml
+    /// Interaction logic for ProductCompanyListWindow.xaml
     /// </summary>
-    public partial class EnquiriesTypeWindow : Window
+    public partial class ProductCompanyListWindow : Window
     {
-        EnquiryTypeViewModel viewmodel;
-        public EnquiriesTypeWindow()
+        ProductCompanyViewModel viewmodel;
+        public ProductCompanyListWindow()
         {
             InitializeComponent();
-            viewmodel = new EnquiryTypeViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
+            viewmodel = new ProductCompanyViewModel();
             base.DataContext = viewmodel;
+            viewmodel.DeleteCommand.IsEnabled = true;
         }
 
-        private void insertBtn_Click(object sender, RoutedEventArgs e)
-        {
-           this.Hide();
-        }
-
-        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        public void Deletebtn_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
         }

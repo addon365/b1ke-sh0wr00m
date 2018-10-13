@@ -1,4 +1,5 @@
 ﻿using Api.Database.Entity.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swc.Service;
 using System;
@@ -45,6 +46,22 @@ namespace swcApi.Controllers
             if (referer == null) return NotFound();
 
             return Ok(referer);
+        }
+
+        [AllowAnonymous]
+        [Route("Delete")]
+        [HttpPost]
+        public IActionResult Delete([FromBody] ProductCompany productcompany)
+        {
+            if (productcompany == null)
+            {
+                return BadRequest();
+            }
+
+            _productcompanyService.Delete(productcompany);
+
+
+            return Ok();
         }
     }
 }

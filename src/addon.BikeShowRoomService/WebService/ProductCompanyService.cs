@@ -52,5 +52,14 @@ namespace addon.BikeShowRoomService.WebService
         {
             throw new NotImplementedException();
         }
+        public void Delete(ProductCompany productcompany)
+        {
+            string json = JsonConvert.SerializeObject(productcompany, Formatting.Indented);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var stringContent = new StringContent(JsonConvert.SerializeObject(productcompany), Encoding.UTF8, "application/json");
+            var httpResponce = _httpClient.PostAsync("api/ProductCompany/Delete", byteContent);
+        }
     }
 }
