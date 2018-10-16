@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Api.Database.Entity.Products;
+using Api.Database.Entity.User;
 
 namespace Api.Database
 {
@@ -37,7 +38,7 @@ namespace Api.Database
         public DbSet<MarketingZone> marketingZones { get; set; }
         public DbSet<ProductCompany> ProductCompanies { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
-
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
