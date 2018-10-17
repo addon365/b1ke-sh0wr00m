@@ -84,5 +84,17 @@ namespace BikeShowRoom.WPF
             Products.ProductCompanyListWindow n = new Products.ProductCompanyListWindow();
             n.ShowDialog();
         }
+
+        private void btnZonal_Click(object sender, RoutedEventArgs e)
+        {
+            Zonal.ZonalWindow n = new Zonal.ZonalWindow();
+            n.ShowDialog();
+        }
+
+        private void btnZonalList_Click(object sender, RoutedEventArgs e)
+        {
+            Zonal.ZonalListWindow n = new Zonal.ZonalListWindow();
+            n.ShowDialog();
+        }
     }
 }

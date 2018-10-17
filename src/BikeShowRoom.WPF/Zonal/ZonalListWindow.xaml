@@ -1,0 +1,29 @@
+﻿<Window x:Class="BikeShowRoom.WPF.Zonal.ZonalListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeShowRoom.WPF.Zonal"
+         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="ZonalListWindow" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Button x:Name="deletebtn_Click" Content="Delete" Height="24" Width="150" Command="{Binding DeleteCommand}" Click="Deletebtn_Click"/>
+            </Grid>
+            <syncfusion:SfDataGrid ItemsSource="{Binding marketingZones}" 
+                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding CurrentMarketingZone}" >
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn MappingName="Identifier"/>
+                    <syncfusion:GridTextColumn MappingName="ZonalName"/>
+                    <syncfusion:GridTextColumn MappingName="ZonalDescription"/>
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+        </Grid>
+    </Grid>
+</Window>
