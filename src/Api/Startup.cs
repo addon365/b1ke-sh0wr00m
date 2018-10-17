@@ -54,8 +54,12 @@ namespace swcApi
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
             services.AddTransient<IEnquiryTypeService, EnquiryTypeService>();
+<<<<<<< HEAD
             services.AddTransient<IZonalService, ZonalService>();
 
+=======
+            services.AddTransient<IUserService, UserService>();
+>>>>>>> b83b20604892840e525d8205f34516312f69da4c
             services.AddMvc();
             services.AddApiVersioning(o =>
             {
