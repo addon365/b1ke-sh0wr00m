@@ -7,8 +7,9 @@ using Swc.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Threenine.Data;
-
+using System.Linq;
 namespace ViewModel
 {
     public class EnquiryViewModel : ViewModelBase
@@ -23,9 +24,46 @@ namespace ViewModel
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
-            EnquiryMasterData=_repository.GetInitilizeEnquiries();
+            EnquiryMasterData = _repository.GetInitilizeEnquiries();
             WireCommands();
-            initInsert();
+            InitInsert();
+            InitDefaultValues();
+        }
+        [Conditional("DEBUG")]
+        private void InitDefaultValues()
+        {
+
+            CurrentEnquiry = new Api.Domain.Enquiries.Enquiries
+            {
+                Name = "User",
+                Address = "14,street, Choolaimedu ",
+                MobileNumber = "9645645666",
+                Identifier = "Identifier1",
+                Place = "Choolaimedu"
+            };
+
+            CurrentEnquiryProduct = EnquiryMasterData.Products.FirstOrDefault();
+
+            CurrentFinanceQuotation = new EnquiryFinanceQuotation
+            {
+                DownPayment = 222,
+                EMIAmount = 3333,
+                TenureInMonths = 12,
+            };
+            CurrentExchangeQuotation = new EnquiryExchangeQuotation
+            {
+                Expected = 22333.66,
+                Model = "Indigo",
+                NoOfOwner = 1,
+                Year = 2000,
+                Quotated = 55676,
+                
+
+            };
+            CurrentMarketingZone = EnquiryMasterData.MarketingZones.FirstOrDefault();
+
+            AddEnquiryProduct();
+
         }
         #region Commands
         private void WireCommands()
@@ -35,10 +73,10 @@ namespace ViewModel
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
             AddEnquiryProductCommand = new RelayCommand(AddEnquiryProduct);
             AddFinanceQuotationCommand = new RelayCommand(AddFinanceQuotation);
-          
+
         }
-        
-     
+
+
         public RelayCommand UpdateEnquiryCommand
         {
             get;
@@ -64,7 +102,7 @@ namespace ViewModel
             get;
             private set;
         }
-      
+
         #endregion
         public InitilizeEnquiry EnquiryMasterData { get; }
         public MarketingZone CurrentMarketingZone
@@ -80,13 +118,17 @@ namespace ViewModel
                 {
                     _currentMarketingZone = value;
                     OnPropertyChanged("MarketingZone");
-                   
+
                 }
             }
         }
         private ObservableCollection<EnquiryProduct> _enquiryProducts = new ObservableCollection<EnquiryProduct>();
-        public ObservableCollection<EnquiryProduct> EnquiryProducts { get
-            { return _enquiryProducts; } set { _enquiryProducts = value; } }
+        public ObservableCollection<EnquiryProduct> EnquiryProducts
+        {
+            get
+            { return _enquiryProducts; }
+            set { _enquiryProducts = value; }
+        }
 
         private ObservableCollection<EnquiryFinanceQuotation> _enquiryFinanceQuotations = new ObservableCollection<EnquiryFinanceQuotation>();
         public ObservableCollection<EnquiryFinanceQuotation> FinanceQuotations
@@ -104,7 +146,7 @@ namespace ViewModel
             set { _enquiryExchangeQuotations = value; }
         }
 
-    
+
         public IEnumerable<EnquiryAccessories> enquiryAccessories { get; set; }
 
         public Enquiries CurrentEnquiry
@@ -176,13 +218,13 @@ namespace ViewModel
                     _exchangeQuotation = value;
                     OnPropertyChanged("CurrentExchangeQuotation");
 
-                   
+
                 }
             }
         }
         public void UpdateEnquiry()
         {
-           
+
         }
         public async void InsertEnquiry()
         {
@@ -192,7 +234,7 @@ namespace ViewModel
 
             InsertEnquiryCommand.IsEnabled = false;
 
-            if (CurrentExchangeQuotation.Model!="")
+            if (CurrentExchangeQuotation.Model != "")
             {
                 AddExchangeQuotation();
             }
@@ -201,13 +243,13 @@ namespace ViewModel
             insertEnquiryModel.EnquiryProducts = EnquiryProducts;
             insertEnquiryModel.enquiryFinanceQuotations = FinanceQuotations;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
-            
-            await _repository.Insert(insertEnquiryModel);
-          
 
-            initInsert();
+            await _repository.Insert(insertEnquiryModel);
+
+
+            InitInsert();
         }
-        
+
         bool InsertValidation()
         {
             if (_currentEnquiry == null)
@@ -218,13 +260,13 @@ namespace ViewModel
 
             return true;
         }
-        void initInsert()
+        void InitInsert()
         {
-
             CurrentEnquiry = new Api.Domain.Enquiries.Enquiries();
             CurrentEnquiryProduct = new Product();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
+
         }
         public void FindEnquiry()
         {
@@ -237,14 +279,14 @@ namespace ViewModel
             enquiries.Address = "Walajapet";
             enquiries.MobileNumber = "9894496128";
             CurrentEnquiry = enquiries;
-           
+
         }
         public void AddEnquiryProduct()
         {
             EnquiryProduct enquiryProduct = new EnquiryProduct();
             enquiryProduct.product = _enquiryProduct;
             enquiryProduct.ProductId = _enquiryProduct.Id;
-            
+
             EnquiryProducts.Add(enquiryProduct);
         }
         public void AddFinanceQuotation()
@@ -261,5 +303,5 @@ namespace ViewModel
         }
     }
 
- 
+
 }

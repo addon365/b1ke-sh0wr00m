@@ -201,9 +201,9 @@
                 <TextBlock Text="No of Owner" VerticalAlignment="Center" Grid.Row="2"/>
                         <TextBox Name="txtNoOfOwner" Grid.Column="1" Grid.Row="2" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.NoOfOwner}"/>
                 <TextBlock Text="Expected" VerticalAlignment="Center" Grid.Row="3"/>
-                <TextBox Name="txtExchangeExpectedAmt" Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray"/>
+                        <TextBox Name="txtExchangeExpectedAmt" Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Expected}"/>
                 <TextBlock Text="Quoted" VerticalAlignment="Center" Grid.Row="4"/>
-                <TextBox Name="txtExchangeQuotedAmt" Grid.Column="1" Grid.Row="4" Height="24" BorderBrush="Gray"/>
+                        <TextBox Name="txtExchangeQuotedAmt" Grid.Column="1" Grid.Row="4" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Quotated}"/>
                 </Grid>
             </Expander>
         </Grid>

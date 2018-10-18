@@ -36,8 +36,8 @@ namespace swcApi
             Configuration = configuration;
         }
 
-         
-        
+
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -54,17 +54,14 @@ namespace swcApi
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
             services.AddTransient<IEnquiryTypeService, EnquiryTypeService>();
-<<<<<<< HEAD
             services.AddTransient<IZonalService, ZonalService>();
-
-=======
             services.AddTransient<IUserService, UserService>();
->>>>>>> b83b20604892840e525d8205f34516312f69da4c
+
             services.AddMvc();
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
-                o.DefaultApiVersion = new ApiVersion(1,0);
+                o.DefaultApiVersion = new ApiVersion(1, 0);
             });
             //services.AddSwaggerGen(c =>
             //{
@@ -121,7 +118,7 @@ namespace swcApi
             app.UseAuthentication();
             app.UseMvc();
             app.UseStaticFiles();
-            
+
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
@@ -129,13 +126,13 @@ namespace swcApi
                     serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
                     serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
                 }
-               
+
             }
 
             //Set up code for automapper configuration 
-           MapConfigurationFactory.Scan<Startup>();
-           
-           
+            MapConfigurationFactory.Scan<Startup>();
+
+
         }
     }
 }
