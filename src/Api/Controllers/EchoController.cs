@@ -16,6 +16,7 @@ namespace swcApi.Controllers
     [Route("api/{license:license}/v{version:apiVersion}/Echo")]
     public class EchoController : Controller
     {
+        private readonly ILogger _logger;
 
         public EchoController(ILogger<EchoController> logger)
         {
