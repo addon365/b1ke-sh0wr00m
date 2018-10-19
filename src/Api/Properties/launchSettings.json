@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/v1.0/echo",
+      "launchUrl": "api/svb/v1.0/echo",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "swc": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/svb/v1.0/echo",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

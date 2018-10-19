@@ -28,7 +28,7 @@ namespace swcApi.Controllers
 
         [HttpGet("authorized")]
         [Authorize]
-        public IActionResult authorized()
+        public IActionResult Authorized()
         {
             return Ok("Hello, I am Authorized User");
         }
