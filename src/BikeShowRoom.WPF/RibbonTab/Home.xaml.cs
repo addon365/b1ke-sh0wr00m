@@ -69,7 +69,7 @@ namespace BikeShowRoom.WPF
 
         private void btnBikeAccessories_Click(object sender, RoutedEventArgs e)
         {
-            Products.BikeAccessories n = new Products.BikeAccessories();
+            Products.VehicleAccessories n = new Products.VehicleAccessories();
             n.ShowDialog();
         }
 
@@ -82,6 +82,12 @@ namespace BikeShowRoom.WPF
         private void btnProductCompanyList_Click(object sender, RoutedEventArgs e)
         {
             Products.ProductCompanyListWindow n = new Products.ProductCompanyListWindow();
+            n.ShowDialog();
+        }
+
+        private void btnEnquiryList_Click(object sender, RoutedEventArgs e)
+        {
+            Enquiries.EnquriesListWindow n = new Enquiries.EnquriesListWindow();
             n.ShowDialog();
         }
     }

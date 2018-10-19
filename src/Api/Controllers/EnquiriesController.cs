@@ -33,12 +33,18 @@ namespace swcApi.Controllers
         ///</remarks>
         [AllowAnonymous]
         [HttpGet]
-        public InitilizeEnquiry Get()
+        public IEnumerable<Enquiry> Get()
+        {
+            return _enquiriesService.GetAllActive();
+        }
+
+        [AllowAnonymous]
+        [Route("InitilizeEnquiries")]
+        [HttpGet]
+        public InitilizeEnquiry GetInitilizeEnquiries()
         {
             return _enquiriesService.GetInitilizeEnquiries();
         }
-
-
         /// <summary>
         ///  Returns a collection of values
         /// </summary>

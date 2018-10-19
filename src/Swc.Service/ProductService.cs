@@ -33,10 +33,6 @@ namespace Swc.Service
 
             return products;
         }
-
-
-
-
         public string Insert(Product product)
         {
             //var products = new Product();

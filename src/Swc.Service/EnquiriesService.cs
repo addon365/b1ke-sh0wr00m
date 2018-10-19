@@ -8,6 +8,7 @@ using Api.Database.Entity.Enquiries;
 using Api.Database.Entity;
 using Api.Database.Entity.Products;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Swc.Service
 {
@@ -25,8 +26,14 @@ namespace Swc.Service
         }
         public IEnumerable<Enquiry> GetAllActive()
         {
-            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
 
+            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
+            foreach(Enquiry enquiry in enquiries)
+            {
+                enquiry.Profile = _unitOfWork.GetRepository<Profile>().GetList().Items.Where(predicate: x => x.Id == enquiry.ProfileId).FirstOrDefault();
+                enquiry.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
+                enquiry.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
+            }
           return enquiries;
           
         }
@@ -66,6 +73,9 @@ namespace Swc.Service
             var enquiry = new Enquiry();
             var profile = new Profile();
             profile.Name = InsertEnquiries.Enquiry.Name;
+            profile.MobileNumber = InsertEnquiries.Enquiry.MobileNumber;
+            profile.Place = InsertEnquiries.Enquiry.Place;
+            profile.Address = InsertEnquiries.Enquiry.Address;
             enquiry.Profile = profile;
             enquiry.Identifier = InsertEnquiries.Enquiry.Identifier;
 

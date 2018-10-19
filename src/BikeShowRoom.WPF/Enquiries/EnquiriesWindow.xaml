@@ -166,7 +166,7 @@
                 <TextBlock Text="Tenure" VerticalAlignment="Center" Grid.Row="2"/>
                         <TextBox Name="txtTenure" Grid.Column="1" Grid.Row="2" Height="24" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.TenureInMonths}"/>
                         <Button Name="btnAddAnotherFinacePlan" Content="Add One More" Grid.Row="4" Grid.Column="1" Width="150" Height="28" Command="{Binding AddFinanceQuotationCommand}"/>
-                        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top"  ItemsSource="{Binding FinanceQuotations}">
+                        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top"  ItemsSource="{Binding FinanceQuotations}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                                 <DataGridTextColumn Header="Down Payment" Binding="{Binding DownPayment}" Width="*"/>
                                 <DataGridTextColumn Header="EMI" Binding="{Binding EMIAmount}" Width="*"/>

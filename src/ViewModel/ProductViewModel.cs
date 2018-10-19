@@ -96,13 +96,13 @@ namespace ViewModel
         public void AddProduct()
         {
 
-            //if (!ValidateProduct())
-            //    return;
+            if (!ValidateProduct())
+                return;
 
             InsertCommand.IsEnabled = false;
-            //CurrentProduct.CompanyId = CurrentProductCompany.Id;
+            CurrentProduct.CompanyId = CurrentProductCompany.Id;
 
-            //CurrentProduct.TypeId = CurrentProductType.Id;
+            CurrentProduct.TypeId = CurrentProductType.Id;
             _repositoryProduct.Insert(CurrentProduct);
 
             CurrentProduct = new Product();

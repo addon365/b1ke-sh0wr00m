@@ -83,6 +83,20 @@ namespace swcApi.Controllers
 
             return Ok();
         }
+
+        [HttpPost("accessories")]
+        public IActionResult AccessoriesPost([FromBody] Product referrer)
+        {
+            if (referrer == null)
+            {
+                return BadRequest();
+            }
+
+            var identifier = _productService.Insert(referrer);
+
+
+            return Ok();
+        }
         [AllowAnonymous]
         [Route("Delete")]
         [HttpPost]

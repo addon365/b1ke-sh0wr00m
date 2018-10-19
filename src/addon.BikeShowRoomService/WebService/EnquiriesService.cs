@@ -40,7 +40,7 @@ namespace addon.BikeShowRoomService.WebService
 
                 enquiries = JsonConvert.DeserializeObject<IEnumerable<Enquiry>>(json);
 
-
+                string j = json;
 
             }
 
@@ -71,7 +71,7 @@ namespace addon.BikeShowRoomService.WebService
 
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("api/Enquiries").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("api/Enquiries/InitilizeEnquiries").Result;
             InitilizeEnquiry enquiries = null;
             if (response.IsSuccessStatusCode)
             {

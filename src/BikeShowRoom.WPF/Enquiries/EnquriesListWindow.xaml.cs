@@ -13,18 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ViewModel;
 
-namespace BikeShowRoom.WPF.Products
+namespace BikeShowRoom.WPF.Enquiries
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
-    public partial class BikeAccessories : Window
+    public partial class EnquriesListWindow : Window
     {
-        BikeAccessoriesViewModel viewmodel;
-        public BikeAccessories()
+        EnquiriesListViewModel viewmodel;
+        public EnquriesListWindow()
         {
             InitializeComponent();
-            viewmodel = new BikeAccessoriesViewModel();
+            viewmodel = new EnquiriesListViewModel();
             base.DataContext = viewmodel;
         }
     }

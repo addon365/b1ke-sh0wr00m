@@ -1,0 +1,72 @@
+﻿<Window x:Class="BikeShowRoom.WPF.Products.VehicleAccessories"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeShowRoom.WPF.Products"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="Bike Accessories/Fittings" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+                
+            <ComboBox Height="24" ItemsSource="{Binding Bikes}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentSelectedVehicle}" />
+            <Button Command="{Binding SaveCommand}" Content="Save" Grid.Column="1" Height="25" Width="100"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Accessories"/>
+                <ComboBox  Grid.Row="1" Height="24" ItemsSource="{Binding Accessories}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentSelectedAccessories}" IsEnabled="{Binding IsProductSelected}"/>
+                <TextBlock Text="Quantity" Grid.Column="1"/>
+                <TextBox Height="24" Grid.Row="1" Grid.Column="1" BorderBrush="Gray" Text="{Binding CurrentFitting.Unit}" IsEnabled="{Binding IsProductSelected}"  />
+                <TextBlock Text="Unit Price" Grid.Column="2"/>
+                <TextBox Height="24" Grid.Row="1" Grid.Column="2" BorderBrush="Gray" Text="{Binding CurrentFitting.UnitPrice}" IsEnabled="{Binding IsProductSelected}"/>
+                <TextBlock Text="Amount" Grid.Column="3"/>
+                <TextBox Height="24" Grid.Row="1" Grid.Column="3" BorderBrush="Gray" Text="{Binding CurrentFitting.Amount}" AcceptsReturn="False" IsEnabled="{Binding IsProductSelected}">
+                    <TextBox.InputBindings>
+                        <KeyBinding 
+            Key="Enter" 
+            Command="{Binding AddCommand}" 
+            CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Command="{Binding AddCommand}" Content="Add" Grid.Column="4" IsEnabled="{Binding IsProductSelected}" Grid.Row="1"/>
+                <Button Command="{Binding DeleteCommand}" Content="Delete" Grid.Column="5" IsEnabled="{Binding IsProductSelected}" Grid.Row="1"/>
+            </Grid>
+            <syncfusion:SfDataGrid ItemsSource="{Binding ExtraFittings,Mode=TwoWay}" 
+                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding CurrentSelectedGridFitting}" >
+            <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn MappingName="AccessoriesProduct.Identifier" HeaderText="Code"/>
+                    <syncfusion:GridTextColumn MappingName="AccessoriesProduct.ProductName" HeaderText="Accessories"/>
+                    <syncfusion:GridTextColumn MappingName="Unit" HeaderText="Nos"/>
+                    <syncfusion:GridTextColumn MappingName="UnitPrice" HeaderText="Price"/>
+                    <syncfusion:GridTextColumn MappingName="Amount" HeaderText="Amount"/>
+                </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+        </Grid>
+    </Grid>
+</Window>

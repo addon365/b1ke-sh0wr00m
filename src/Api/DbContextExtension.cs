@@ -74,6 +74,12 @@ namespace swcApi
                 context.SaveChanges();
 
             }
+            if(!context.LicenseMasters.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<LicenseMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "LIcense.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
 
         }
     }

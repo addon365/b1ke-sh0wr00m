@@ -39,6 +39,7 @@ namespace Api.Database
         public DbSet<ProductCompany> ProductCompanies { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<LicenseMaster> LicenseMasters{get;set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

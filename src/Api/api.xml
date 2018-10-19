@@ -4,6 +4,13 @@
         <name>swcApi</name>
     </assembly>
     <members>
+        <member name="T:swcApi.Controllers.AccessoriesController">
+            <inheritdoc />
+        </member>
+        <member name="M:swcApi.Controllers.AccessoriesController.#ctor(Swc.Service.IAccessoriesService)">
+            <inheritdoc />
+            
+        </member>
         <member name="T:swcApi.Controllers.EchoController">
             <summary>
             Echo Contollers is to test the server running status.

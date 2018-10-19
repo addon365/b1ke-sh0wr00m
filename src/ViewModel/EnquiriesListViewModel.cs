@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ViewModel
 {
-    class EnquiriesListViewModel : ViewModelBase
+    public class EnquiriesListViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
         private IEnumerable<Enquiry> _enquiries;
@@ -15,7 +15,7 @@ namespace ViewModel
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
-            Enquiries = _repository.GetAllActive();
+            _enquiries = _repository.GetAllActive();
 
         }
         public IEnumerable<Enquiry> Enquiries

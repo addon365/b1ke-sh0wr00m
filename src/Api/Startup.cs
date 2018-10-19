@@ -26,6 +26,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace swcApi
 {
@@ -55,7 +56,10 @@ namespace swcApi
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
             services.AddTransient<IEnquiryTypeService, EnquiryTypeService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILicenseService, LicenseService>();
+            services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddMvc();
+            
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
@@ -104,6 +108,9 @@ namespace swcApi
                 };
             });
 
+            services.Configure<RouteOptions>(options =>
+            options.ConstraintMap.Add("license", typeof(LicenseRouteConstraint)));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,7 +121,19 @@ namespace swcApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
-            app.UseMvc();
+            //https://stackoverflow.com/questions/38298312/dynamic-routing-in-asp-net-core
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default",
+                    "{controller}/{action}/{id?}",
+                    new { controller = "echo" }
+                );
+
+                routes.MapRoute("user",
+                    "{license:license}/api/v{version:apiVersion}/{controller}"
+                 );
+            });
+
             app.UseStaticFiles();
             
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())

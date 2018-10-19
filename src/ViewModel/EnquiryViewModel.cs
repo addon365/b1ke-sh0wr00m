@@ -84,9 +84,16 @@ namespace ViewModel
                 }
             }
         }
-        private ObservableCollection<EnquiryProduct> _enquiryProducts = new ObservableCollection<EnquiryProduct>();
-        public ObservableCollection<EnquiryProduct> EnquiryProducts { get
-            { return _enquiryProducts; } set { _enquiryProducts = value; } }
+        private ObservableCollection<EnquiryProduct> _enquiryProducts;
+        public ObservableCollection<EnquiryProduct> EnquiryProducts
+        { get
+            {
+                return _enquiryProducts;
+            }
+            set
+            { _enquiryProducts = value;
+            }
+        }
 
         private ObservableCollection<EnquiryFinanceQuotation> _enquiryFinanceQuotations = new ObservableCollection<EnquiryFinanceQuotation>();
         public ObservableCollection<EnquiryFinanceQuotation> FinanceQuotations
@@ -203,9 +210,9 @@ namespace ViewModel
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
             
             await _repository.Insert(insertEnquiryModel);
-          
 
-            initInsert();
+
+            ClearData();
         }
         
         bool InsertValidation()
@@ -225,6 +232,12 @@ namespace ViewModel
             CurrentEnquiryProduct = new Product();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
+            _enquiryProducts=new ObservableCollection<EnquiryProduct>();
+    }
+        void ClearData()
+        {
+            initInsert();
+            EnquiryProducts.Clear();
         }
         public void FindEnquiry()
         {
@@ -244,7 +257,9 @@ namespace ViewModel
             EnquiryProduct enquiryProduct = new EnquiryProduct();
             enquiryProduct.product = _enquiryProduct;
             enquiryProduct.ProductId = _enquiryProduct.Id;
-            
+            enquiryProduct.OnRoadPrice = _enquiryProduct.Price;
+            enquiryProduct.AccessoriesAmount = 0;
+            enquiryProduct.TotalAmount = enquiryProduct.OnRoadPrice + enquiryProduct.AccessoriesAmount;
             EnquiryProducts.Add(enquiryProduct);
         }
         public void AddFinanceQuotation()
