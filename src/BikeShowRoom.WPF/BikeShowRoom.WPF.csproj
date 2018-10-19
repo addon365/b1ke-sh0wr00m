@@ -261,6 +261,12 @@
     <Compile Include="RibbonTab\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Zonal\ZonalListWindow.xaml.cs">
+      <DependentUpon>ZonalListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Zonal\ZonalWindow.xaml.cs">
+      <DependentUpon>ZonalWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="ContactWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -342,6 +348,14 @@
     <Page Include="RibbonTab\View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Zonal\ZonalListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zonal\ZonalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
