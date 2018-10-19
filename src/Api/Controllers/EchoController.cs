@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace swcApi.Controllers
 {
@@ -15,6 +16,11 @@ namespace swcApi.Controllers
     [Route("api/{license:license}/v{version:apiVersion}/Echo")]
     public class EchoController : Controller
     {
+
+        public EchoController(ILogger<EchoController> logger)
+        {
+            _logger = logger;
+        }
         /// <summary>
         /// Just return welcome message without any authentication.
         /// </summary>
@@ -23,13 +29,15 @@ namespace swcApi.Controllers
         [AllowAnonymous]
         public IActionResult SayWelcome()
         {
+            _logger.LogInformation("Invoking Say Welcome API");
             return Ok("Hi, Addon Technology Bikeshow showroom service is up and running.");
         }
 
         [HttpGet("authorized")]
         [Authorize]
-        public IActionResult Authorized()
+        public IActionResult authorized()
         {
+            _logger.LogInformation("Invoking Authorized API");
             return Ok("Hello, I am Authorized User");
         }
     }
