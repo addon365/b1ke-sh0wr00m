@@ -1,5 +1,8 @@
-﻿namespace Api.Database.Entity.User
+﻿using System;
+
+namespace Api.Database.Entity.User
 {
+    [Serializable]
     public class User : BaseEntity
     {
         public string UserId { get; set; }

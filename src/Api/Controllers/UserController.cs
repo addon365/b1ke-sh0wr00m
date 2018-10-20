@@ -59,7 +59,8 @@ namespace swcApi.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             string tokenString = tokenHandler.WriteToken(token);
             _logger.LogInformation(string.Format("Generated Token {0} for User {1}", tokenString, userId));
-            return Ok(tokenString);
+            user.SessionToken = tokenString;
+            return Ok(user);
         }
         [HttpGet("all")]
         public IActionResult GetUsers()

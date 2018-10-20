@@ -7,7 +7,7 @@ namespace addon.BikeShowRoomService
 {
     public class SessionInfo
     {
-       
+        public const string SessionFile= "SessionInfo.json";
         private static SessionInfo _objSelf;
         private DateTime _startDateTime;
         public static SessionInfo Instance

@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\addon.BikeShowRoomService\addon.BikeShowRoomService.csproj" />
     <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
     <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />

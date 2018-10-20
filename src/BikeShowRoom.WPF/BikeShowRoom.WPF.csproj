@@ -261,6 +261,10 @@
     <Compile Include="RibbonTab\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\InternetAvailability.cs" />
     <Compile Include="Zonal\ZonalListWindow.xaml.cs">
       <DependentUpon>ZonalListWindow.xaml</DependentUpon>
     </Compile>
@@ -349,6 +353,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Zonal\ZonalListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -426,6 +434,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\welcome.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BulletSplashScreen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Reload.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

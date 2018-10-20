@@ -1,8 +1,10 @@
 ﻿using addon.BikeShowRoomService;
 using Api.Database.Entity.User;
+using Newtonsoft.Json;
 using Swc.Service;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace ViewModel
@@ -14,7 +16,7 @@ namespace ViewModel
         public LoginViewModel()
         {
             _repository = new addon.BikeShowRoomService.WebService.UserService();
-         
+
             WireCommands();
             initInsert();
         }
@@ -52,6 +54,16 @@ namespace ViewModel
                 }
             }
         }
+        
+        [Conditional("DEBUG")]
+        private void StoreSessionInfoAsync(User user)
+        {
+           using(System.IO.StreamWriter writer=new System.IO.StreamWriter(SessionInfo.SessionFile))
+            {
+                string json = JsonConvert.SerializeObject(user);
+                writer.Write(json);
+            }
+        }
         public void ValidateUser()
         {
 
@@ -62,15 +74,15 @@ namespace ViewModel
 
             User user = _repository.Validate(CurrentUser.UserId, CurrentUser.Password);
 
-            if(user!=null)
+            if (user != null)
             {
                 SessionInfo si = SessionInfo.Instance;
                 si.user = user;
-
+                StoreSessionInfoAsync(user);
                 if (LoginSuccess != null)
                     LoginSuccess.ShowUI();
 
-               
+
             }
             else
             {
