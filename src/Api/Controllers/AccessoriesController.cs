@@ -40,6 +40,20 @@ namespace swcApi.Controllers
 
             return Ok();
         }
+        [HttpPost("update")]
+        public IActionResult AccessoriesUpdatePost([FromBody] IEnumerable<ExtraFittingsAccessories> referrer)
+        {
+            if (referrer == null)
+            {
+                return BadRequest();
+            }
+
+
+            var identifier = _accessoriesService.UpdateAccessories(referrer);
+
+
+            return Ok();
+        }
 
         [HttpGet("all")]
         public IActionResult GetAccessories()

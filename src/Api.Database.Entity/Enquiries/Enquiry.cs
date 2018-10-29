@@ -10,7 +10,7 @@ namespace Api.Database.Entity.Enquiries
 
         public string Identifier { get; set; }
         public Guid ProfileId { get; set; }
-        [ForeignKey("ProfileId")] public virtual Profile Profile { get; set; }
+        [ForeignKey("ProfileId")] public virtual Contact Profile { get; set; }
 
         public Guid EnquiryTypeId { get; set; }
         [ForeignKey("EnquiryTypeId")] public virtual EnquiryType EnquiryType { get; set; }

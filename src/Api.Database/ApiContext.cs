@@ -28,7 +28,7 @@ namespace Api.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<ExtraFittingsAccessories> ExtraFittings { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Contact> Profiles { get; set; }
         public DbSet<EnquiryType> EnquriyType { get; set; }
         public DbSet<EnquiryStatus> EnquiryStatuses { get; set; }
         public DbSet<EnquiryProduct> EnquiryProducts { get; set; }

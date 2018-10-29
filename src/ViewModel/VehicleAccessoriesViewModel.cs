@@ -3,6 +3,7 @@ using Api.Database.Entity.Products;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace ViewModel
@@ -10,6 +11,7 @@ namespace ViewModel
     public class VehicleAccessoriesViewModel : ViewModelBase
     {
         private readonly ProductService _repositoryProduct;
+        private bool EditMode = false;
         private readonly AccessoriesService _accessoriesService;
         private Product _currentSelectedVehicle, _currentSelectedAccessories;
         private ExtraFittingsAccessories _currentFitting, _currentSelectedGridFitting;
@@ -156,12 +158,20 @@ namespace ViewModel
 
         public void SaveAccessories()
         {
-
-            _accessoriesService.InsertAccessories(ExtraFittings);
+            if(!EditMode)
+                _accessoriesService.InsertAccessories(ExtraFittings);
+            else
+                _accessoriesService.UpdateAccessories(ExtraFittings);
         }
         public void GetFittings(Guid ProductId)
         {
            ExtraFittings= new ObservableCollection<ExtraFittingsAccessories>(_accessoriesService.GetAccessories(ProductId));
+
+            if(ExtraFittings.Count>0)
+            {
+                ExtraFittings.First().UnitPrice = 600;
+                EditMode = true;
+            }
         }
         public void DeleteAccessories()
         {
@@ -175,11 +185,12 @@ namespace ViewModel
 
             SaveCommand.IsEnabled = true;
             CurrentFitting.AccessoriesProductId = CurrentSelectedAccessories.Id;
-            CurrentFitting.AccessoriesProducts = CurrentSelectedAccessories;
+            CurrentFitting.AccessoriesProduct = CurrentSelectedAccessories;
             CurrentFitting.ProductId = CurrentSelectedVehicle.Id;
             CurrentFitting.Product = CurrentSelectedVehicle;
 
             ExtraFittings.Add(CurrentFitting);
+            CurrentSelectedAccessories = null;
         }
 
 

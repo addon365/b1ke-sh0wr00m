@@ -18,10 +18,10 @@ namespace BikeShowRoom.WPF.Products
     /// <summary>
     /// Interaction logic for ProductInsertWindow.xaml
     /// </summary>
-    public partial class ProductWindow : Window
+    public partial class SparesAccessories : Window
     {
         ProductViewModel viewmodel;
-        public ProductWindow()
+        public SparesAccessories()
         {
             try { 
             InitializeComponent();

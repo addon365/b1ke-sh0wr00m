@@ -12,7 +12,7 @@ using Threenine.Data;
 using System.Linq;
 namespace ViewModel
 {
-    public class EnquiryViewModel : ViewModelBase
+    public class VehicleSaleViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
         private Enquiries _currentEnquiry;
@@ -20,7 +20,7 @@ namespace ViewModel
         private Product _enquiryProduct;
         private EnquiryFinanceQuotation _financeQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
-        public EnquiryViewModel()
+        public VehicleSaleViewModel()
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
@@ -68,8 +68,8 @@ namespace ViewModel
         #region Commands
         private void WireCommands()
         {
-            UpdateEnquiryCommand = new RelayCommand(UpdateEnquiry);
-            InsertEnquiryCommand = new RelayCommand(InsertEnquiry);
+            UpdateCommand = new RelayCommand(Update);
+            InsertCommand = new RelayCommand(Insert);
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
             AddEnquiryProductCommand = new RelayCommand(AddEnquiryProduct);
             AddFinanceQuotationCommand = new RelayCommand(AddFinanceQuotation);
@@ -77,12 +77,12 @@ namespace ViewModel
         }
 
 
-        public RelayCommand UpdateEnquiryCommand
+        public RelayCommand UpdateCommand
         {
             get;
             private set;
         }
-        public RelayCommand InsertEnquiryCommand
+        public RelayCommand InsertCommand
         {
             get;
             private set;
@@ -169,9 +169,9 @@ namespace ViewModel
                 {
                     _currentEnquiry = value;
                     OnPropertyChanged("CurrentEnquiry");
-                    InsertEnquiryCommand.IsEnabled = true;
+                    InsertCommand.IsEnabled = true;
                     FindEnquiryCommand.IsEnabled = true;
-                    UpdateEnquiryCommand.IsEnabled = true;
+                    UpdateCommand.IsEnabled = true;
                 }
             }
         }
@@ -229,17 +229,17 @@ namespace ViewModel
                 }
             }
         }
-        public void UpdateEnquiry()
+        public void Update()
         {
 
         }
-        public async void InsertEnquiry()
+        public async void Insert()
         {
 
             if (!InsertValidation())
                 return;
 
-            InsertEnquiryCommand.IsEnabled = false;
+            InsertCommand.IsEnabled = false;
 
             if (CurrentExchangeQuotation.Model != "")
             {

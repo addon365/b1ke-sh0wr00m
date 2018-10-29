@@ -30,7 +30,7 @@ namespace Swc.Service
             var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
             foreach(Enquiry enquiry in enquiries)
             {
-                enquiry.Profile = _unitOfWork.GetRepository<Profile>().GetList().Items.Where(predicate: x => x.Id == enquiry.ProfileId).FirstOrDefault();
+                enquiry.Profile = _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ProfileId).FirstOrDefault();
                 enquiry.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
                 enquiry.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
             }
@@ -71,7 +71,7 @@ namespace Swc.Service
             //enquirytype.Name = "InHouse";
 
             var enquiry = new Enquiry();
-            var profile = new Profile();
+            var profile = new Contact();
             profile.Name = InsertEnquiries.Enquiry.Name;
             profile.MobileNumber = InsertEnquiries.Enquiry.MobileNumber;
             profile.Place = InsertEnquiries.Enquiry.Place;
@@ -84,7 +84,7 @@ namespace Swc.Service
                 .GetList().Items.Where(predicate: x => x.ProgrammerId==100).First().Id;
             enquiry.EnquiryTypeId = _unitOfWork.GetRepository<EnquiryType>()
            .GetList().Items.Where(predicate: x => x.ProgrammerId == 100).First().Id;
-            _unitOfWork.GetRepository<Profile>().Add(profile);
+            _unitOfWork.GetRepository<Contact>().Add(profile);
             _unitOfWork.GetRepository<Enquiry>().Add(enquiry);
             foreach(EnquiryProduct ep in InsertEnquiries.EnquiryProducts)
             {

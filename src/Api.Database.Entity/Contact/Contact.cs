@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Api.Database.Entity
 {
-    public class Profile:BaseEntity
+    public class Contact:BaseEntity
     {
         public string Identifier { get; set; }
         public string Name { get; set; }

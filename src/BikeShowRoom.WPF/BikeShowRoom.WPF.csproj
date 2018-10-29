@@ -219,6 +219,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CRM\FollowUp.xaml.cs">
+      <DependentUpon>FollowUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\VechicleSale.xaml.cs">
+      <DependentUpon>VechicleSale.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enquiries\EnquiriesStatusWindow.xaml.cs">
       <DependentUpon>EnquiriesStatusWindow.xaml</DependentUpon>
     </Compile>
@@ -239,6 +245,9 @@
     </Compile>
     <Compile Include="Products\ProductCompanyWindow.xaml.cs">
       <DependentUpon>ProductCompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\SparesAccessories.xaml.cs">
+      <DependentUpon>SparesAccessories.xaml</DependentUpon>
     </Compile>
     <Compile Include="Products\VehicleAccessories.xaml.cs">
       <DependentUpon>VehicleAccessories.xaml</DependentUpon>
@@ -272,6 +281,14 @@
       <DependentUpon>ZonalWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="ContactWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CRM\FollowUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sales\VechicleSale.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -322,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Products\ProductCompanyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Products\SparesAccessories.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

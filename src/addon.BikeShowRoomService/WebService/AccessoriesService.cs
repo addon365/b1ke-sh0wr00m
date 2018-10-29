@@ -67,5 +67,17 @@ namespace addon.BikeShowRoomService.WebService
 
             return null;
         }
+        public string UpdateAccessories(IEnumerable<ExtraFittingsAccessories> extrafittings)
+        {
+            IEnumerable<ExtraFittingsAccessories> lst = new List<ExtraFittingsAccessories>();
+
+            string str = JsonConvert.SerializeObject(extrafittings);
+            var response = _httpClient.PostAsync("api/Accessories/update", new StringContent(str, Encoding.UTF8, "application/json"));
+
+
+
+
+            return null;
+        }
     }
 }

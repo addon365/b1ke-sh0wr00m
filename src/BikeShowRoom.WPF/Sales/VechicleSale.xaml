@@ -1,0 +1,250 @@
+﻿<Window x:Class="BikeShowRoom.WPF.Sales.VechicleSale"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeShowRoom.WPF"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="Enquiries" Height="550" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <Grid Background="DodgerBlue">
+            <StackPanel Orientation="Horizontal">
+            <syncfusion:RibbonButton x:Name="btnSave" IconType="VectorImage" SizeForm="Large" Label="Save" Foreground="White" HorizontalAlignment="Left"  Command="{Binding InsertEnquiryCommand}" >
+                <syncfusion:RibbonButton.VectorImage>
+                    <Path Data="F1M161,211L133,211L133,189L161,189z" Fill="Gray" Stretch="Fill"/>
+                    <Path Data="F1M160,210L134,210L134,190L160,190z" Fill="White" Stretch="Fill" Margin="1"/>
+                    <Path Data="F1M148,202L158,202L158,201L148,201z" Fill="#FFB3B3B3" Height="1" Stretch="Fill" Width="10" HorizontalAlignment="Right" Margin="0,0,3,9" VerticalAlignment="Bottom"/>
+                    <Path Data="M0,10 L10,10 10,11 0,11 z M0,8.0000001 L10,8.0000001 10,9 0,9 z M0,4 L10,4 10,5 0,5 z M0,0 L10,0 10,1 0,1 z" Fill="#FFB3B3B3" HorizontalAlignment="Right" Margin="0,6,3,5" Stretch="Fill" Width="10" />
+                    <Path Data="M3.0770112,7 L5.0000001,10.570999 6.9230042,7 C8.6230012,7 10,8.5350037 10,10.429001 10,11.848999 8.1970063,13 6.9230042,13 L3.0770112,13 C1.8030091,13 8.9406967E-08,11.848999 0,10.429001 8.9406967E-08,8.5350037 1.3780061,7 3.0770112,7 z M5.0000001,0 C6.6570002,0 8.0000001,1.3429999 8.0000001,3 8.0000001,4.6570001 6.6570002,6 5.0000001,6 3.343,6 2.0000001,4.6570001 2.0000001,3 2.0000001,1.3429999 3.343,0 5.0000001,0 z" Fill="#FF4A7DB1" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="10" />
+                </syncfusion:RibbonButton.VectorImage>
+            </syncfusion:RibbonButton>
+            <syncfusion:RibbonButton  IconType="VectorImage" SizeForm="Large" Label="Find" Foreground="White" HorizontalAlignment="Left"  Command="{Binding FindEnquiryCommand}" >
+                <syncfusion:RibbonButton.VectorImage>
+                    <Path Data="F1M161,211L133,211L133,189L161,189z" Fill="Gray" Stretch="Fill"/>
+                    <Path Data="F1M160,210L134,210L134,190L160,190z" Fill="White" Stretch="Fill" Margin="1"/>
+                    <Path Data="F1M148,202L158,202L158,201L148,201z" Fill="#FFB3B3B3" Height="1" Stretch="Fill" Width="10" HorizontalAlignment="Right" Margin="0,0,3,9" VerticalAlignment="Bottom"/>
+                    <Path Data="M0,10 L10,10 10,11 0,11 z M0,8.0000001 L10,8.0000001 10,9 0,9 z M0,4 L10,4 10,5 0,5 z M0,0 L10,0 10,1 0,1 z" Fill="#FFB3B3B3" HorizontalAlignment="Right" Margin="0,6,3,5" Stretch="Fill" Width="10" />
+                    <Path Data="M3.0770112,7 L5.0000001,10.570999 6.9230042,7 C8.6230012,7 10,8.5350037 10,10.429001 10,11.848999 8.1970063,13 6.9230042,13 L3.0770112,13 C1.8030091,13 8.9406967E-08,11.848999 0,10.429001 8.9406967E-08,8.5350037 1.3780061,7 3.0770112,7 z M5.0000001,0 C6.6570002,0 8.0000001,1.3429999 8.0000001,3 8.0000001,4.6570001 6.6570002,6 5.0000001,6 3.343,6 2.0000001,4.6570001 2.0000001,3 2.0000001,1.3429999 3.343,0 5.0000001,0 z" Fill="#FF4A7DB1" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="10" />
+                </syncfusion:RibbonButton.VectorImage>
+            </syncfusion:RibbonButton>
+            </StackPanel>
+        </Grid>
+    <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        
+
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+        <GroupBox>
+            <GroupBox.Header>
+               Customer Details
+            </GroupBox.Header>
+            <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Name" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Height="24" BorderBrush="Gray" Text="{Binding CurrentEnquiry.Name,Mode=TwoWay}"/>
+            <TextBlock Text="Mobile" VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBox  Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="1" Text="{Binding CurrentEnquiry.MobileNumber}"/>
+            <TextBlock Text="Zonal" VerticalAlignment="Center" Grid.Row="2"/>
+            <ComboBox Name="cmbZonal" Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="2" ItemsSource="{Binding EnquiryMasterData.MarketingZones}" DisplayMemberPath="ZonalName" SelectedItem="{Binding CurrentMarketingZone}"/>
+            <TextBlock Text="Address" VerticalAlignment="Center" Grid.Row="3"/>
+                    <TextBox Name="txtAddress" Grid.Column="1" Height="48" BorderBrush="Gray" Grid.Row="3"  Grid.RowSpan="2" Text="{Binding CurrentEnquiry.Address}" />
+
+        </Grid>
+        </GroupBox>
+                <GroupBox Grid.Row="1">
+                    <GroupBox.Header>
+                        Payment Details
+                    </GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Mode" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct}"/>
+                        <TextBlock Text="Amount" Grid.Row="1" VerticalAlignment="Center" />
+                        <TextBox  Grid.Row="1" Grid.Column="1" BorderBrush="Gray" Height="24"/>
+                        <TextBlock Text="Description" Grid.Row="2" VerticalAlignment="Center" />
+                        <TextBox  Grid.Row="2" Grid.Column="1" BorderBrush="Gray" Height="24"/>
+                        <Button  Content="Add" Grid.Row="3"/>
+                        <DataGrid Grid.Row="4" Grid.ColumnSpan="2">
+                            
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <GroupBox Grid.Column="1">
+            <GroupBox.Header>
+                Vechicle Details
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Vehicle" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct}"/>
+                    <GroupBox Grid.Row="1" Grid.ColumnSpan="2">
+                        <GroupBox.Header>
+                            Amount Detail
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                        <TextBlock Text="On Road Amount" VerticalAlignment="Center" Grid.Row="0"/>
+                        <TextBox  Grid.Column="1" Height="24" Grid.Row="0" BorderBrush="Gray" />
+                        <TextBlock Text="Accessories Amount" VerticalAlignment="Center" Grid.Row="1"/>
+                        <TextBox  Grid.Column="1" Height="24" Grid.Row="1" BorderBrush="Gray" />
+
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="2" Grid.ColumnSpan="2">
+                        <GroupBox.Header>
+                            Vechicle Detail
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Chassis No" VerticalAlignment="Center" Grid.Row="0"/>
+                            <TextBox  Grid.Column="1" Height="24" Grid.Row="0" BorderBrush="Gray" />
+                            <TextBlock Text="Battery No" VerticalAlignment="Center" Grid.Row="1"/>
+                            <TextBox  Grid.Column="1" Height="24" Grid.Row="1" BorderBrush="Gray" />
+
+                        </Grid>
+                    </GroupBox>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                     
+                </Grid>
+               
+                    
+
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="280"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        <GroupBox Grid.Column="2">
+            <GroupBox.Header>
+                Finance Details
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                        <TextBlock Text="Company" VerticalAlignment="Center"/>
+                        <ComboBox  Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct}"/>
+                        <TextBlock Text="Amount" Grid.Row="1"/>
+                        <TextBlock Text="Amount" Grid.Row="1"/>
+
+                    </Grid>
+        </GroupBox>
+            <Expander Grid.Row="1" IsExpanded="True">
+                <Expander.Header>
+                    Exchange Details
+                </Expander.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+
+                    </Grid.RowDefinitions>
+                <TextBlock Text="Model" VerticalAlignment="Center"/>
+                        <TextBox Name="txtExchangeModel" Grid.Column="1" Height="24" BorderBrush="Gray" Margin="0,0,0,3.4" VerticalAlignment="Bottom" Text="{Binding CurrentExchangeQuotation.Model}"/>
+                <TextBlock Text="Year" VerticalAlignment="Center" Grid.Row="1"/>
+                <ComboBox Name="cmbExchangeYear" Grid.Column="1" Height="24" Grid.Row="1" BorderBrush="Gray" />
+                <TextBlock Text="No of Owner" VerticalAlignment="Center" Grid.Row="2"/>
+                        <TextBox Name="txtNoOfOwner" Grid.Column="1" Grid.Row="2" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.NoOfOwner}"/>
+                <TextBlock Text="Expected" VerticalAlignment="Center" Grid.Row="3"/>
+                        <TextBox Name="txtExchangeExpectedAmt" Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Expected}"/>
+                <TextBlock Text="Quoted" VerticalAlignment="Center" Grid.Row="4"/>
+                        <TextBox Name="txtExchangeQuotedAmt" Grid.Column="1" Grid.Row="4" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Quotated}"/>
+                </Grid>
+            </Expander>
+        </Grid>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="358,185,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+    </Grid>
+</Window>
