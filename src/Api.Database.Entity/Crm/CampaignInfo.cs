@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity.Contact
+namespace Api.Database.Entity.Crm
 {
     public class CampaignInfo:BaseEntity
     {

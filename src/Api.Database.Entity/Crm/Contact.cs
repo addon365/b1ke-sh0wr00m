@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity
+namespace Api.Database.Entity.Crm
 {
     public class Contact:BaseEntity
     {

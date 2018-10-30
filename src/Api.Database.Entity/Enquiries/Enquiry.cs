@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Api.Database.Entity.Crm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;

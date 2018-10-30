@@ -9,6 +9,7 @@ using Api.Database.Entity;
 using Api.Database.Entity.Products;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
+using Api.Database.Entity.Crm;
 
 namespace Swc.Service
 {
