@@ -63,13 +63,13 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Name" VerticalAlignment="Center"/>
-                    <TextBox Grid.Column="1" Height="24" BorderBrush="Gray" Text="{Binding CurrentEnquiry.Name,Mode=TwoWay}"/>
+                    <TextBox Grid.Column="1" Height="24" BorderBrush="Gray" Text="{Binding CurrentContact.Name}"/>
             <TextBlock Text="Mobile" VerticalAlignment="Center" Grid.Row="1"/>
-            <TextBox  Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="1" Text="{Binding CurrentEnquiry.MobileNumber}"/>
+                    <TextBox  Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="1" Text="{Binding CurrentContact.MobileNumber}"/>
             <TextBlock Text="Zonal" VerticalAlignment="Center" Grid.Row="2"/>
             <ComboBox Name="cmbZonal" Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="2" ItemsSource="{Binding EnquiryMasterData.MarketingZones}" DisplayMemberPath="ZonalName" SelectedItem="{Binding CurrentMarketingZone}"/>
             <TextBlock Text="Address" VerticalAlignment="Center" Grid.Row="3"/>
-                    <TextBox Name="txtAddress" Grid.Column="1" Height="48" BorderBrush="Gray" Grid.Row="3"  Grid.RowSpan="2" Text="{Binding CurrentEnquiry.Address}" />
+                    <TextBox Name="txtAddress" Grid.Column="1" Height="48" BorderBrush="Gray" Grid.Row="3"  Grid.RowSpan="2" Text="{Binding CurrentContact.Address}" />
 
         </Grid>
         </GroupBox>
@@ -91,48 +91,35 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Vehicle" VerticalAlignment="Center"/>
-                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct}"/>
+                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct.Product}"/>
                 <TextBlock Text="On Road Amount" VerticalAlignment="Center" Grid.Row="1"/>
                 <TextBlock Name="txtVechicleOnRoad" Grid.Column="1" Height="24" Grid.Row="1"/>
                 <Grid Grid.Row="2" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
                     </Grid.RowDefinitions>
-                        <CheckBox Name="chkNumberPlate" Content="Number Plate" Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked" />
-                        <CheckBox Name="chkRearViewMirror" Content="RearViewMirror" Grid.Column="1"  Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked"/>
-                        <CheckBox Name="chkSareeGuard" Content="Saree Guard" Grid.Row="1" Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked"/>
-                        <CheckBox Name="chkBuzzer" Content="Buzzer" Grid.Row="1" Grid.Column="1"  Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked"/>
-                        <CheckBox Name="chkBoxFibre" Content="Box Fibre" Grid.Row="2" Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked"/>
-                        <CheckBox Name="chkFloorMat" Content="Floor Mat" Grid.Row="2" Grid.Column="1"  Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked"/>
-                        <CheckBox Name="chkGripCover" Content="Grip Cover" Grid.Row="3"  Checked="chkAccessories_Checked" Unchecked="chkAccessories_Checked"/>
-                </Grid>
+                        <TextBlock Text="Accessories" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Height="24" BorderBrush="Gray" Text="{Binding CurrentEnquiryProduct.AccessoriesAmount,Mode=TwoWay}"/>
+                        <TextBlock Text="Others" Grid.Row="1" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Height="24" BorderBrush="Gray" Text="{Binding CurrentEnquiryProduct.OtherAmount,Mode=TwoWay}"/>
+                    </Grid>
                 <TextBlock Text="Amount" VerticalAlignment="Center" Grid.Row="3"/>
                 <TextBlock Name="txtAmount" Grid.Column="1" Height="24" Grid.Row="3"/>
                     <Button Name="btnAddAnotherVechicle" Content="Add One More" Grid.Row="4" Grid.Column="1" Width="150" Height="28" Command="{Binding AddEnquiryProductCommand}" />
+                    
                     <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top" ItemsSource="{Binding EnquiryProducts}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        
-                        <DataGridTextColumn Header="Vechicle" Binding="{Binding product.ProductName}" Width="*"/>
+                        <DataGridTextColumn Header="Vechicle" Binding="{Binding Product.ProductName}" Width="*"/>
                         <DataGridTextColumn Header="On Road" Binding="{Binding OnRoadPrice}" Width="60"/>
                         <DataGridTextColumn Header="Access" Binding="{Binding AccessoriesAmount}" Width="60"/>
                         <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount}" Width="60"/>
-                            <DataGridTemplateColumn Header="Delete" Width="75">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Delete" Tag="{Binding}" Click="VechicleGridDelete_Click"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                        </DataGrid.Columns>
+                    </DataGrid.Columns>
                 </DataGrid>
 
             </Grid>

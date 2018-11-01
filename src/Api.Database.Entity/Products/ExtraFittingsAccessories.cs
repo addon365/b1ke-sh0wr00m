@@ -10,7 +10,7 @@ namespace Api.Database.Entity.Products
         public Guid ProductId{ get; set; }
         [ForeignKey("ProductId")] public virtual Product Product { get; set; }
         public Guid AccessoriesProductId { get; set; }
-        public virtual Product AccessoriesProduct { get; set; }
+        public virtual Product AccessoriesProductItem { get; set; }
         public double Unit { get; set; }
         public double UnitPrice { get; set; }
         public virtual double Amount { get; set; }

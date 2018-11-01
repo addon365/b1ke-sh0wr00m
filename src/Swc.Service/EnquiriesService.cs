@@ -13,7 +13,7 @@ using Api.Database.Entity.Crm;
 
 namespace Swc.Service
 {
-    public class EnquiriesService : IEnquiriesService
+    public class EnquiryService : IEnquiriesService
     {
       
         private readonly IUnitOfWork _unitOfWork;
@@ -21,21 +21,27 @@ namespace Swc.Service
         private const string Referer = "Referer";
         private const string Moderate = "Moderate";
 
-        public EnquiriesService(IUnitOfWork unitOfWork)
+        public EnquiryService(IUnitOfWork unitOfWork)
         {
            _unitOfWork = unitOfWork;
         }
-        public IEnumerable<Enquiry> GetAllActive()
+        public IEnumerable<Enquiries> GetAllActive()
         {
-
+            List<Enquiries> lst = new List<Enquiries>();
             var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
             foreach(Enquiry enquiry in enquiries)
             {
-                enquiry.Profile = _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ProfileId).FirstOrDefault();
-                enquiry.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
-                enquiry.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
+                Enquiries e = new Enquiries();
+
+                e.Contact = _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ContactId).FirstOrDefault();
+                e.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
+                e.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
+                e.EnquiryProducts = _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id).FirstOrDefault();
+                if(e.EnquiryProducts!=null)
+                e.EnquiryProducts.Product= _unitOfWork.GetRepository<Product>().GetList().Items.Where(predicate: x => x.Id ==e.EnquiryProducts.ProductId).FirstOrDefault();
+                lst.Add(e);
             }
-          return enquiries;
+          return lst;
           
         }
         public InitilizeEnquiry GetInitilizeEnquiries()
@@ -51,6 +57,8 @@ namespace Swc.Service
 
         public async Task<string> Insert(InsertEnquiryModel InsertEnquiries)
         {
+            try
+            { 
 
             #region  autoMap
             // TODO : Move this to a cache lookup.  We don't want to query on every ADD.
@@ -72,24 +80,24 @@ namespace Swc.Service
             //enquirytype.Name = "InHouse";
 
             var enquiry = new Enquiry();
-            var profile = new Contact();
-            profile.Name = InsertEnquiries.Enquiry.Name;
-            profile.MobileNumber = InsertEnquiries.Enquiry.MobileNumber;
-            profile.Place = InsertEnquiries.Enquiry.Place;
-            profile.Address = InsertEnquiries.Enquiry.Address;
-            enquiry.Profile = profile;
+            var contact = new Contact();
+            contact.Name = InsertEnquiries.Enquiry.Contact.Name;
+            contact.MobileNumber = InsertEnquiries.Enquiry.Contact.MobileNumber;
+            contact.Place = InsertEnquiries.Enquiry.Contact.Place;
+            contact.Address = InsertEnquiries.Enquiry.Contact.Address;
+            enquiry.Contact = contact;
             enquiry.Identifier = InsertEnquiries.Enquiry.Identifier;
 
-            enquiry.ProfileId = profile.Id;
+            enquiry.ContactId = contact.Id;
             enquiry.StatusId=_unitOfWork.GetRepository<EnquiryStatus>()
                 .GetList().Items.Where(predicate: x => x.ProgrammerId==100).First().Id;
             enquiry.EnquiryTypeId = _unitOfWork.GetRepository<EnquiryType>()
            .GetList().Items.Where(predicate: x => x.ProgrammerId == 100).First().Id;
-            _unitOfWork.GetRepository<Contact>().Add(profile);
+            _unitOfWork.GetRepository<Contact>().Add(contact);
             _unitOfWork.GetRepository<Enquiry>().Add(enquiry);
             foreach(EnquiryProduct ep in InsertEnquiries.EnquiryProducts)
             {
-                ep.product = null;
+                ep.Product = null;
                 ep.EnquiryId = enquiry.Id;
             _unitOfWork.GetRepository<EnquiryProduct>().Add(ep);
             }
@@ -108,7 +116,11 @@ namespace Swc.Service
 
            
                  _unitOfWork.SaveChanges();
-           
+            }
+            catch(Exception ex)
+            {
+                string exmsg = ex.Message;
+            }
             return InsertEnquiries.Enquiry.Identifier;
 
         }

@@ -7,7 +7,7 @@ namespace Swc.Service
 {
     public interface IEnquiriesService
     {
-        IEnumerable<Enquiry> GetAllActive();
+        IEnumerable<Enquiries> GetAllActive();
         InitilizeEnquiry GetInitilizeEnquiries();
         Task<string> Insert(InsertEnquiryModel enquiries);
         Enquiries GetEnquiries(string identifier);

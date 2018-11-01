@@ -3,6 +3,7 @@ using Api.Domain.Enquiries;
 using Swc.Service;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ViewModel
@@ -10,7 +11,7 @@ namespace ViewModel
     public class EnquiriesListViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
-        private IEnumerable<Enquiry> _enquiries;
+        private IEnumerable<Enquiries> _enquiries;
         public EnquiriesListViewModel()
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
@@ -18,10 +19,11 @@ namespace ViewModel
             _enquiries = _repository.GetAllActive();
 
         }
-        public IEnumerable<Enquiry> Enquiries
+        public IEnumerable<Enquiries> Enquiries
         {
             get
             {
+        
                 return _enquiries;
             }
 

@@ -1,0 +1,19 @@
+﻿[
+  {
+    "name": "Cash",
+    "ProgrammerId": 100
+  },
+  {
+    "name": "Card",
+    "ProgrammerId": 200
+  },
+  {
+    "name": "Bank Transfer",
+    "ProgrammerId": 300
+  },
+  {
+    "name": "Cheque",
+    "ProgrammerId": 400
+  }
+
+]

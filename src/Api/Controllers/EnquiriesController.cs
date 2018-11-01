@@ -15,7 +15,7 @@ namespace swcApi.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     public class EnquiriesController : Controller
     {
         private readonly IEnquiriesService _enquiriesService;
@@ -33,7 +33,7 @@ namespace swcApi.Controllers
         ///</remarks>
         [AllowAnonymous]
         [HttpGet]
-        public IEnumerable<Enquiry> Get()
+        public IEnumerable<Enquiries> Get()
         {
             return _enquiriesService.GetAllActive();
         }

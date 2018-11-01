@@ -15,7 +15,7 @@ namespace ViewModel
     public class VehicleSaleViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
-        private Enquiries _currentEnquiry;
+        private Enquiry _currentEnquiry;
         private MarketingZone _currentMarketingZone;
         private Product _enquiryProduct;
         private EnquiryFinanceQuotation _financeQuotation;
@@ -27,44 +27,9 @@ namespace ViewModel
             EnquiryMasterData = _repository.GetInitilizeEnquiries();
             WireCommands();
             InitInsert();
-            InitDefaultValues();
         }
-        [Conditional("DEBUG")]
-        private void InitDefaultValues()
-        {
+  
 
-            CurrentEnquiry = new Api.Domain.Enquiries.Enquiries
-            {
-                Name = "User",
-                Address = "14,street, Choolaimedu ",
-                MobileNumber = "9645645666",
-                Identifier = "Identifier1",
-                Place = "Choolaimedu"
-            };
-
-            CurrentEnquiryProduct = EnquiryMasterData.Products.FirstOrDefault();
-
-            CurrentFinanceQuotation = new EnquiryFinanceQuotation
-            {
-                DownPayment = 222,
-                EMIAmount = 3333,
-                TenureInMonths = 12,
-            };
-            CurrentExchangeQuotation = new EnquiryExchangeQuotation
-            {
-                Expected = 22333.66,
-                Model = "Indigo",
-                NoOfOwner = 1,
-                Year = 2000,
-                Quotated = 55676,
-                
-
-            };
-            CurrentMarketingZone = EnquiryMasterData.MarketingZones.FirstOrDefault();
-
-            AddEnquiryProduct();
-
-        }
         #region Commands
         private void WireCommands()
         {
@@ -156,7 +121,7 @@ namespace ViewModel
 
         public IEnumerable<EnquiryAccessories> enquiryAccessories { get; set; }
 
-        public Enquiries CurrentEnquiry
+        public Enquiry CurrentEnquiry
         {
             get
             {
@@ -271,7 +236,7 @@ namespace ViewModel
         }
         void InitInsert()
         {
-            CurrentEnquiry = new Api.Domain.Enquiries.Enquiries();
+            CurrentEnquiry = new Enquiry();
             CurrentEnquiryProduct = new Product();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
@@ -285,24 +250,16 @@ namespace ViewModel
         }
         public void FindEnquiry()
         {
-            LoadEnquiryData();
+         
         }
-        void LoadEnquiryData()
-        {
-            Enquiries enquiries = new Enquiries();
-            enquiries.Name = "santhosh";
-            enquiries.Address = "Walajapet";
-            enquiries.MobileNumber = "9894496128";
-            CurrentEnquiry = enquiries;
-
-        }
+        
         public void AddEnquiryProduct()
         {
             if (!InsertValidation())
                 return;
 
             EnquiryProduct enquiryProduct = new EnquiryProduct();
-            enquiryProduct.product = _enquiryProduct;
+            enquiryProduct.Product = _enquiryProduct;
             enquiryProduct.ProductId = _enquiryProduct.Id;
 
             enquiryProduct.OnRoadPrice = _enquiryProduct.Price;

@@ -118,5 +118,11 @@
             
             </remarks>
         </member>
+        <member name="T:swcApi.Controllers.SalesController">
+            <inheritdoc />
+        </member>
+        <member name="M:swcApi.Controllers.SalesController.#ctor(Swc.Service.Sales.ISalesService)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Swc.Service.Sales;
 
 namespace swcApi
 {
@@ -51,7 +52,7 @@ namespace swcApi
             services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name)))
                 .AddUnitOfWork<ApiContext>();
             services.AddTransient<IReferrerService, ReferrerService>();
-            services.AddTransient<IEnquiriesService, EnquiriesService>();
+            services.AddTransient<IEnquiriesService, EnquiryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductCompanyService, ProductCompanyService>();
             services.AddTransient<IEnquiryTypeService, EnquiryTypeService>();
@@ -59,6 +60,7 @@ namespace swcApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddTransient<IAccessoriesService, AccessoriesService>();
+            services.AddTransient<ISalesService, SalesService>();
             services.AddMvc();
             
             services.AddApiVersioning(o =>

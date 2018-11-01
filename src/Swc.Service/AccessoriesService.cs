@@ -29,7 +29,7 @@ namespace Swc.Service
             var access = _unitOfWork.GetRepository<ExtraFittingsAccessories>().GetList().Items.Where(x => x.ProductId == ProductId);
             foreach (ExtraFittingsAccessories efc in access)
             {
-                efc.AccessoriesProduct = AllProducts.Where(y => y.Id == efc.AccessoriesProductId).First();
+                efc.AccessoriesProductItem = AllProducts.Where(y => y.Id == efc.AccessoriesProductId).First();
             }
             return access;
         }
@@ -41,7 +41,7 @@ namespace Swc.Service
                 foreach(ExtraFittingsAccessories ef in extrafittings)
                 {
                     ef.Product = null;
-                    ef.AccessoriesProduct = null;
+                    ef.AccessoriesProductItem = null;
                 }
                 _unitOfWork.GetRepository<ExtraFittingsAccessories>().Add(extrafittings);
                 _unitOfWork.SaveChanges();
@@ -60,7 +60,7 @@ namespace Swc.Service
                 foreach (ExtraFittingsAccessories ef in extrafittings)
                 {
                     ef.Product = null;
-                    ef.AccessoriesProduct = null;
+                    ef.AccessoriesProductItem = null;
                     
                 }
                 

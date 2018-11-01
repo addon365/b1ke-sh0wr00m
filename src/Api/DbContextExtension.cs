@@ -12,6 +12,8 @@ using Api.Database;
 using Api.Database.Entity.Enquiries;
 using Api.Database.Entity.Products;
 using Api.Database.Entity;
+using Api.Database.Entity.Finance;
+using Api.Database.Entity.Accounts;
 
 namespace swcApi
 {
@@ -77,6 +79,18 @@ namespace swcApi
             if(!context.LicenseMasters.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<LicenseMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "LIcense.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.PaymentModes.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<PaymentMode>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "PaymentMode.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.FinanceCompanies.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<FinanceCompany>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "FinanceCompanys.json"));
                 context.AddRange(types);
                 context.SaveChanges();
             }

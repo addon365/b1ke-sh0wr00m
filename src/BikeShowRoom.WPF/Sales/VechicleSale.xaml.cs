@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using ViewModel;
+using ViewModel.Sales;
 
 namespace BikeShowRoom.WPF.Sales
 {
@@ -19,10 +20,11 @@ namespace BikeShowRoom.WPF.Sales
         public VechicleSale()
         {
             InitializeComponent();
-            var vm= new EnquiryViewModel();
+            var vm= new SalesViewModel();
           
             this.DataContext = vm;
-   
+
+            vm.MsgBox = new MessageBoxClass();
             
 
           
@@ -30,5 +32,13 @@ namespace BikeShowRoom.WPF.Sales
         }
 
 
+    }
+
+    public class MessageBoxClass : IMsgBox
+    {
+        public void ShowUI(string msg)
+        {
+            MessageBox.Show(msg);
+        }
     }
 }

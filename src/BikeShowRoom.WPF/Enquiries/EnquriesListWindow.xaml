@@ -18,9 +18,9 @@
             <syncfusion:SfDataGrid ItemsSource="{Binding Enquiries}" 
                        AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1"  >
             <syncfusion:SfDataGrid.Columns>
-                <syncfusion:GridTextColumn MappingName="Identifier"/>
-                    <syncfusion:GridTextColumn MappingName="Profile.Name" HeaderText="Name"/>
-                    <syncfusion:GridTextColumn MappingName="Profile.MobileNumber" HeaderText="Mobile"/>
+                    <syncfusion:GridTextColumn MappingName="EnquiryProducts.Product.ProductName" HeaderText="Vechicle"/>
+                    <syncfusion:GridTextColumn MappingName="Contact.Name" HeaderText="Name"/>
+                    <syncfusion:GridTextColumn MappingName="Contact.MobileNumber" HeaderText="Mobile"/>
             </syncfusion:SfDataGrid.Columns>
         </syncfusion:SfDataGrid>
         </Grid>

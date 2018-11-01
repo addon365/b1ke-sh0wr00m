@@ -109,5 +109,11 @@ namespace BikeShowRoom.WPF
             CRM.FollowUp n = new CRM.FollowUp();
             n.ShowDialog();
         }
+
+        private void btnSales_Click(object sender, RoutedEventArgs e)
+        {
+            Sales.VechicleSale n = new Sales.VechicleSale();
+            n.ShowDialog();
+        }
     }
 }

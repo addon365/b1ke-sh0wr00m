@@ -17,9 +17,9 @@ namespace addon.BikeShowRoomService
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             _client = new HttpClient();
 #if production
-            _client.BaseAddress = new Uri("https://swcapi20181010045554.azurewebsites.net/");
+            _client.BaseAddress = new Uri("https://swcapi20181010045554.azurewebsites.net/api/svb/v1.0/");
 #else
-            _client.BaseAddress = new Uri("http://localhost:5000/");
+            _client.BaseAddress = new Uri("http://localhost:5000/api/svb/v1.0/");
 #endif
 
             _client.DefaultRequestHeaders.Accept.Clear();

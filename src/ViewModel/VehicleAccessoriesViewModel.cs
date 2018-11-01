@@ -185,7 +185,7 @@ namespace ViewModel
 
             SaveCommand.IsEnabled = true;
             CurrentFitting.AccessoriesProductId = CurrentSelectedAccessories.Id;
-            CurrentFitting.AccessoriesProduct = CurrentSelectedAccessories;
+            CurrentFitting.AccessoriesProductItem = CurrentSelectedAccessories;
             CurrentFitting.ProductId = CurrentSelectedVehicle.Id;
             CurrentFitting.Product = CurrentSelectedVehicle;
 

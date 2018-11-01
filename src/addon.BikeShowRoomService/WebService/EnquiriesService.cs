@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Api.Database.Entity.Threats;
 using Api.Domain.Enquiries;
 using Threenine.Data;
 using AutoMapper;
@@ -19,26 +17,24 @@ namespace addon.BikeShowRoomService.WebService
     {
 
         private readonly HttpClient _httpClient;
-        private const string Enabled = "Enabled";
-        private const string Referer = "Referer";
-        private const string Moderate = "Moderate";
+       
 
         public EnquiriesService()
         {
             _httpClient = WebDataClient.Client;
         }
-        public IEnumerable<Enquiry> GetAllActive()
+        public IEnumerable<Enquiries> GetAllActive()
         {
 
-            HttpResponseMessage response = _httpClient.GetAsync("api/Enquiries").Result;
-            IEnumerable<Enquiry> enquiries = null;
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries").Result;
+            IEnumerable<Enquiries> enquiries = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                enquiries = JsonConvert.DeserializeObject<IEnumerable<Enquiry>>(json);
+                enquiries = JsonConvert.DeserializeObject<IEnumerable<Enquiries>>(json);
 
                 string j = json;
 
@@ -52,7 +48,7 @@ namespace addon.BikeShowRoomService.WebService
         {
             try { 
 
-            var response = await _httpClient.PostAsync("api/Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));
+            var response = await _httpClient.PostAsync("Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));
             //await Task.Delay(10000);
             
             return response.Content.ToString();
@@ -71,7 +67,7 @@ namespace addon.BikeShowRoomService.WebService
 
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("api/Enquiries/InitilizeEnquiries").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries/InitilizeEnquiries").Result;
             InitilizeEnquiry enquiries = null;
             if (response.IsSuccessStatusCode)
             {

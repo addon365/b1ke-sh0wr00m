@@ -10,14 +10,17 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Threenine.Data;
 using System.Linq;
+using Api.Database.Entity.Crm;
+
 namespace ViewModel
 {
     public class EnquiryViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
-        private Enquiries _currentEnquiry;
+        private Enquiry _currentEnquiry;
+        private Contact _currentContact;
         private MarketingZone _currentMarketingZone;
-        private Product _enquiryProduct;
+        private EnquiryProduct _enquiryProduct;
         private EnquiryFinanceQuotation _financeQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
         public EnquiryViewModel()
@@ -33,7 +36,10 @@ namespace ViewModel
         private void InitDefaultValues()
         {
 
-            CurrentEnquiry = new Api.Domain.Enquiries.Enquiries
+            CurrentEnquiry = new Enquiry();
+
+
+            CurrentContact = new Contact
             {
                 Name = "User",
                 Address = "14,street, Choolaimedu ",
@@ -41,8 +47,7 @@ namespace ViewModel
                 Identifier = "Identifier1",
                 Place = "Choolaimedu"
             };
-
-            CurrentEnquiryProduct = EnquiryMasterData.Products.FirstOrDefault();
+            CurrentEnquiryProduct.Product = EnquiryMasterData.Products.FirstOrDefault();
 
             CurrentFinanceQuotation = new EnquiryFinanceQuotation
             {
@@ -133,6 +138,7 @@ namespace ViewModel
             set
             {
                 _enquiryProducts = value;
+                OnPropertyChanged("EnquiryProducts");
             }
         }
    
@@ -156,7 +162,7 @@ namespace ViewModel
 
         public IEnumerable<EnquiryAccessories> enquiryAccessories { get; set; }
 
-        public Enquiries CurrentEnquiry
+        public Enquiry CurrentEnquiry
         {
             get
             {
@@ -175,7 +181,24 @@ namespace ViewModel
                 }
             }
         }
-        public Product CurrentEnquiryProduct
+        public Contact CurrentContact
+        {
+            get
+            {
+                return _currentContact;
+            }
+
+            set
+            {
+                if (_currentContact != value)
+                {
+                    _currentContact = value;
+                    OnPropertyChanged("CurrentContact");
+                    
+                }
+            }
+        }
+        public EnquiryProduct CurrentEnquiryProduct
         {
             get
             {
@@ -246,7 +269,9 @@ namespace ViewModel
                 AddExchangeQuotation();
             }
             InsertEnquiryModel insertEnquiryModel = new InsertEnquiryModel();
+            CurrentEnquiry.Contact = CurrentContact;
             insertEnquiryModel.Enquiry = CurrentEnquiry;
+
             insertEnquiryModel.EnquiryProducts = EnquiryProducts;
             insertEnquiryModel.enquiryFinanceQuotations = FinanceQuotations;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
@@ -271,12 +296,15 @@ namespace ViewModel
         }
         void InitInsert()
         {
-            CurrentEnquiry = new Api.Domain.Enquiries.Enquiries();
-            CurrentEnquiryProduct = new Product();
+            CurrentEnquiry = new Enquiry();
+            CurrentContact = new Contact();
+            CurrentContact.Name="Selvan";
+            CurrentEnquiryProduct = new EnquiryProduct();
+            CurrentEnquiryProduct.Product = new Product();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
-            _enquiryProducts=new ObservableCollection<EnquiryProduct>();
+            EnquiryProducts=new ObservableCollection<EnquiryProduct>();
         }
         void ClearData()
         {
@@ -285,29 +313,21 @@ namespace ViewModel
         }
         public void FindEnquiry()
         {
-            LoadEnquiryData();
         }
-        void LoadEnquiryData()
-        {
-            Enquiries enquiries = new Enquiries();
-            enquiries.Name = "santhosh";
-            enquiries.Address = "Walajapet";
-            enquiries.MobileNumber = "9894496128";
-            CurrentEnquiry = enquiries;
-
-        }
+       
         public void AddEnquiryProduct()
         {
             if (!InsertValidation())
                 return;
 
             EnquiryProduct enquiryProduct = new EnquiryProduct();
-            enquiryProduct.product = _enquiryProduct;
-            enquiryProduct.ProductId = _enquiryProduct.Id;
+            enquiryProduct.Product = _enquiryProduct.Product;
+            enquiryProduct.ProductId = _enquiryProduct.Product.Id;
 
-            enquiryProduct.OnRoadPrice = _enquiryProduct.Price;
-            enquiryProduct.AccessoriesAmount = 0;
-            enquiryProduct.TotalAmount = enquiryProduct.OnRoadPrice + enquiryProduct.AccessoriesAmount;
+            enquiryProduct.OnRoadPrice = _enquiryProduct.Product.Price;
+            enquiryProduct.AccessoriesAmount = _enquiryProduct.AccessoriesAmount;
+            enquiryProduct.OtherAmount = _enquiryProduct.OtherAmount;
+            enquiryProduct.TotalAmount = enquiryProduct.OnRoadPrice + enquiryProduct.AccessoriesAmount+enquiryProduct.OtherAmount;
 
             EnquiryProducts.Add(enquiryProduct);
         }
