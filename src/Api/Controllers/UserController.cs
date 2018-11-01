@@ -16,7 +16,7 @@ using System.Text;
 namespace swcApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/v{version:apiVersion}/User")]
+    [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     public class UserController : Controller
     {
         private readonly AppSettings _appSettings;
