@@ -38,6 +38,10 @@ namespace Api.Database
         public DbSet<Contact> Profiles { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<MarketingZone> marketingZones { get; set; }
+        public DbSet<FollowUpMode> FollowUpModes { get; set; }
+        public DbSet<FollowUpStatus> FollowUpStatuses { get; set; }
+        public DbSet<CampaignInfo> CampaignInfos { get; set; }
+        public DbSet<Campaign> Campaigns { get; set; }
         #endregion
         #region Enquiry
         public DbSet<Enquiry> Enquiries { get; set; }

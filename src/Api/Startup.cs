@@ -28,6 +28,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Swc.Service.Sales;
+using Swc.Service.Crm;
 
 namespace swcApi
 {
@@ -61,6 +62,7 @@ namespace swcApi
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<ISalesService, SalesService>();
+            services.AddTransient<IFollowUpService, FollowUpService>();
             services.AddMvc();
             
             services.AddApiVersioning(o =>

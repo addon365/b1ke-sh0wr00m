@@ -25,6 +25,7 @@ namespace addon.BikeShowRoomService
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(
                  new MediaTypeWithQualityHeaderValue("application/json"));
+            
         }
         
         public static HttpClient Client
@@ -36,6 +37,12 @@ namespace addon.BikeShowRoomService
 
                 return _client;
             }
+        }
+
+        public static void UpdateAuthToken(string tokenAsBase64)
+        {     
+            var header = new AuthenticationHeaderValue("Bearer", tokenAsBase64);
+            Client.DefaultRequestHeaders.Authorization = header;
         }
 
     }

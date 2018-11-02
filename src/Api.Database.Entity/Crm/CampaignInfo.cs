@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Crm
 {
-    public class CampaignInfo:BaseEntity
+    public class CampaignInfo : BaseEntity
     {
         public Guid CampaignId { get; set; }
         public Guid ContactId { get; set; }
+        [ForeignKey("ContactId")] public virtual Contact Contact { get; set; }
         public Guid ModeId { get; set; }
+        [ForeignKey("ModeId")] public virtual FollowUpMode Mode { get; set; }
         public Guid StatusId { get; set; }
-        public string Description { get; set; }
+        [ForeignKey("StatusId")] public virtual FollowUpStatus Status { get; set; }
+        public string Comments { get; set; }
     }
 }

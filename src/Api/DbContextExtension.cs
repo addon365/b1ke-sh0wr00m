@@ -14,6 +14,7 @@ using Api.Database.Entity.Products;
 using Api.Database.Entity;
 using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
+using Api.Database.Entity.Crm;
 
 namespace swcApi
 {
@@ -94,7 +95,22 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
-
+            if (!context.FollowUpModes.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<FollowUpMode>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "FollowUpModes.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.FollowUpStatuses.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<FollowUpStatus>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "FollowUpStatuses.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
         }
     }
 

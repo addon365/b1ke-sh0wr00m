@@ -63,6 +63,7 @@ namespace ViewModel
             {
                 User user = JsonConvert.DeserializeObject<User>(json);
                 SessionInfo.Instance.user = user;
+                WebDataClient.UpdateAuthToken(user.SessionToken);
                 return true;
             }
             catch (Exception exception)

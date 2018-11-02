@@ -219,6 +219,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="CRM\FollowUp.xaml.cs">
       <DependentUpon>FollowUp.xaml</DependentUpon>
     </Compile>

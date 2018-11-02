@@ -28,7 +28,7 @@ namespace addon.BikeShowRoomService.WebService
           
                 using (var content = new FormUrlEncodedContent(postData))
                 {
-                    content.Headers.Clear();
+                    
                     content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
 
                     HttpResponseMessage response = _httpClient.PostAsync("user/authenticate", content).Result;

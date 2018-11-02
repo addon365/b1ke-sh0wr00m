@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "SMS",
+    "Description": "Followed up vai SMS"
+  },
+  {
+    "Name": "Call",
+    "Description": "Followed up via Phone Call"
+  },
+  {
+    "Name": "WhatsApp",
+    "Description": "Followed up via Whats App"
+  }
+]

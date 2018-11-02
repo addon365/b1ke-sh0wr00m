@@ -78,6 +78,8 @@ namespace ViewModel
             {
                 SessionInfo si = SessionInfo.Instance;
                 si.user = user;
+                WebDataClient.UpdateAuthToken(user.SessionToken);
+
                 StoreSessionInfoAsync(user);
                 if (LoginSuccess != null)
                     LoginSuccess.ShowUI();
