@@ -132,7 +132,7 @@ namespace ViewModel.Crm
             }
             else
             {
-                OnResult(true, "Success");
+                OnResult(true, "Successfully Updated Follow Up.");
                 this.CurrentInfo = new CampaignInfo
                 {
                     ContactId = contactId

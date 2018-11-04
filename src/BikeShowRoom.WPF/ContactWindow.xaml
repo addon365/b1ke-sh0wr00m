@@ -52,5 +52,13 @@
                 
             </syncfusion:GroupBar>
         </Grid>
+        <Popup  Name="popUpMessage"
+       PlacementTarget="{Binding ElementName=ContactsItem}"
+       Placement="Left"
+       HorizontalOffset="{Binding ActualWidth, ElementName=ContactsItem}"
+       VerticalOffset="{Binding ActualHeight, ElementName=ContactsItem}">
+
+            <TextBlock Padding="5" FontFamily="Bahnschrift" FontWeight="ExtraBold" Background="Black" Foreground="White"  FontSize="18" Name="popUpText" Text="This is popup text"></TextBlock>
+        </Popup>
     </Grid>
 </syncfusion:RibbonWindow>

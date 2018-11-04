@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViewModel;
 using ViewModel.Crm;
 
 namespace BikeShowRoom.WPF.CRM
@@ -29,6 +30,7 @@ namespace BikeShowRoom.WPF.CRM
         }
         public void CloseMe(bool isSuccess,string message)
         {
+            ContactWindow.OnResult(isSuccess, message);
             this.Close();
         }
        

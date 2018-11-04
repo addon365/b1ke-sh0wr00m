@@ -22,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace BikeShowRoom.WPF
 {
@@ -30,12 +31,13 @@ namespace BikeShowRoom.WPF
     /// </summary>
     public partial class ContactWindow : RibbonWindow
     {
-		
+        private static ContactWindow _contactWindow;
         public ContactWindow()
         {
-            InitializeComponent(); 
-			RemoveGroupBarOverFlowButton();
-			
+            InitializeComponent();
+            RemoveGroupBarOverFlowButton();
+            _contactWindow = this;
+            popUpMessage.IsOpen = false;
         }
 		
         public void RemoveGroupBarOverFlowButton()
@@ -47,6 +49,28 @@ namespace BikeShowRoom.WPF
                     item.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+        public static void OnResult(bool isSuccess, string message)
+        {
+            _contactWindow.ShowPopUp(isSuccess,message);
+        }
+        public void ShowPopUp(bool isSuccess,string message)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+                DispatcherTimer dispatcherTimer = new DispatcherTimer();
+                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+                popUpMessage.IsOpen = true;
+                popUpText.Text = message;
+                dispatcherTimer.Start();
+            }
+           
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            popUpMessage.IsOpen = false;
         }
     }
 }
