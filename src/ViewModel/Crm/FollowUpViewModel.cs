@@ -2,8 +2,6 @@
 using Swc.Service.Crm;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ViewModel.Crm
 {
@@ -16,13 +14,20 @@ namespace ViewModel.Crm
         private CampaignInfo _campaignInfo;
         private readonly IFollowUpService _repository;
 
-        public FollowUpViewModel(Result onResult = null)
+        public FollowUpViewModel(object contactObj=null,Result onResult = null)
         {
             this.OnResult = onResult;
             _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
             _followUpStatuses = _repository.GetFollowUpStatuses();
-            string contactId = "f991a068-342d-4838-839b-df0579e0b2c6";
-            Contact contact = _repository.GetContact(contactId);
+            _followUpModes = _repository.GetFollowUpModes();
+            if (contactObj==null)
+            {
+                Message = "Search and select contact first.";
+                return;
+            }
+           
+            Contact contact = (Contact)contactObj;
+            string contactId = contact.Id.ToString();
 
             WireCommands();
 
@@ -41,7 +46,6 @@ namespace ViewModel.Crm
                 ContactId = contact.Id,
                 Contact = contact
             };
-            _followUpModes = _repository.GetFollowUpModes();
             foreach (FollowUpMode followUpMode in _followUpModes)
             {
                 if (followUpMode.Name.Equals("Call"))
