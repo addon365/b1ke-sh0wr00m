@@ -63,7 +63,6 @@ namespace swcApi
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<IFollowUpService, FollowUpService>();
-            services.AddTransient<IContactService, ContactService>();
             services.AddMvc();
             
             services.AddApiVersioning(o =>
