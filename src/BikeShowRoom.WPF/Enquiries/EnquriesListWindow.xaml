@@ -13,12 +13,11 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid>
-                <Button Content="Print" Height="24" Width="150" Command="{Binding PrintCommand}"/>
+                <Button Content="Delete" Height="24" Width="150" Command="{Binding DeleteCommand}"/>
             </Grid>
             <syncfusion:SfDataGrid ItemsSource="{Binding Enquiries}" 
                        AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1"  >
             <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:GridTextColumn MappingName="Identifier" HeaderText="Id"/>
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts.Product.ProductName" HeaderText="Vechicle"/>
                     <syncfusion:GridTextColumn MappingName="Contact.Name" HeaderText="Name"/>
                     <syncfusion:GridTextColumn MappingName="Contact.MobileNumber" HeaderText="Mobile"/>

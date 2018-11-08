@@ -20,7 +20,7 @@ namespace addon.BikeShowRoomService.WebService
         }
         public IEnumerable<ProductCompany> GetCompanies()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("Product/Companies").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product/Companies").Result;
             IEnumerable<ProductCompany> companies = null;
             if (response.IsSuccessStatusCode)
             {
@@ -38,7 +38,7 @@ namespace addon.BikeShowRoomService.WebService
         }
         public IEnumerable<ProductType> GetTypes()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("Product/Types").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product/Types").Result;
             IEnumerable<ProductType> types = null;
             if (response.IsSuccessStatusCode)
             {
@@ -56,7 +56,7 @@ namespace addon.BikeShowRoomService.WebService
         }
         public IEnumerable<Product> GetAllActive()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("Product").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product").Result;
             IEnumerable<Product> products = null;
             if (response.IsSuccessStatusCode)
             {
@@ -74,7 +74,7 @@ namespace addon.BikeShowRoomService.WebService
         }
         public IEnumerable<Product> GetProductByType(int ProgrammerId)
         {
-            HttpResponseMessage response = _httpClient.GetAsync("Product/"+ ProgrammerId).Result;
+            HttpResponseMessage response = _httpClient.GetAsync("api/Product/"+ ProgrammerId).Result;
             IEnumerable<Product> products = null;
             if (response.IsSuccessStatusCode)
             {
@@ -97,7 +97,7 @@ namespace addon.BikeShowRoomService.WebService
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var stringContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
-            var httpResponce = _httpClient.PostAsync("Product", byteContent);
+            var httpResponce = _httpClient.PostAsync("api/Product", byteContent);
 
 
             //Console.WriteLine(httpResponce);
@@ -110,7 +110,7 @@ namespace addon.BikeShowRoomService.WebService
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var stringContent = new StringContent(JsonConvert.SerializeObject(producttype), Encoding.UTF8, "application/json");
-            var httpResponce = _httpClient.PostAsync("Product", byteContent);
+            var httpResponce = _httpClient.PostAsync("api/Product", byteContent);
 
 
             //Console.WriteLine(httpResponce);
@@ -127,7 +127,7 @@ namespace addon.BikeShowRoomService.WebService
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var stringContent = new StringContent(JsonConvert.SerializeObject(product), Encoding.UTF8, "application/json");
-            var httpResponce = _httpClient.PostAsync("Product/Delete", byteContent);
+            var httpResponce = _httpClient.PostAsync("api/Product/Delete", byteContent);
         }
 
 

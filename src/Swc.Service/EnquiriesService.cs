@@ -32,8 +32,7 @@ namespace Swc.Service
             foreach(Enquiry enquiry in enquiries)
             {
                 Enquiries e = new Enquiries();
-                e.Identifier = enquiry.Identifier;
-                e.Created = enquiry.Created;
+
                 e.Contact = _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ContactId).FirstOrDefault();
                 e.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
                 e.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
@@ -42,7 +41,7 @@ namespace Swc.Service
                 e.EnquiryProducts.Product= _unitOfWork.GetRepository<Product>().GetList().Items.Where(predicate: x => x.Id ==e.EnquiryProducts.ProductId).FirstOrDefault();
                 lst.Add(e);
             }
-          return lst.OrderBy(s=>s.Created);
+          return lst;
           
         }
         public InitilizeEnquiry GetInitilizeEnquiries()
@@ -87,20 +86,9 @@ namespace Swc.Service
             contact.Place = InsertEnquiries.Enquiry.Contact.Place;
             contact.Address = InsertEnquiries.Enquiry.Contact.Address;
             enquiry.Contact = contact;
-                var lst = _unitOfWork.GetRepository<Enquiry>()
-                         .GetList().Items;
+            enquiry.Identifier = InsertEnquiries.Enquiry.Identifier;
 
-                string identi = "1";
-                if(lst!=null)
-                {
-                    if(lst.Count>0)
-                        identi=(lst.Max(e => Convert.ToInt64(e.Identifier))+1).ToString();
-                }
-                    
-                
-            enquiry.Identifier =identi ;
-
-                enquiry.ContactId = contact.Id;
+            enquiry.ContactId = contact.Id;
             enquiry.StatusId=_unitOfWork.GetRepository<EnquiryStatus>()
                 .GetList().Items.Where(predicate: x => x.ProgrammerId==100).First().Id;
             enquiry.EnquiryTypeId = _unitOfWork.GetRepository<EnquiryType>()
@@ -137,23 +125,11 @@ namespace Swc.Service
 
         }
 
-        public InsertEnquiryModel GetEnquiries(string identifier)
+        public Enquiries GetEnquiries(string identifier)
         {
-           InsertEnquiryModel ine= new InsertEnquiryModel();
-            Enquiry enquiry = new Enquiry();
-            enquiry = _unitOfWork.GetRepository<Enquiry>().GetList().Items.Where(predicate: x => x.Identifier == identifier).FirstOrDefault();
-            if(enquiry==null)
-               return null;
-            
-            enquiry.Contact= _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ContactId).FirstOrDefault();
-            ine.Enquiry = enquiry;
-
-            ine.EnquiryProducts= _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryAccessories = _unitOfWork.GetRepository<EnquiryAccessories>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryExchangeQuotations= _unitOfWork.GetRepository<EnquiryExchangeQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryFinanceQuotations= _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-
-            return ine;
+            //var enquiry = _unitOfWork.GetRepository<Enquiry>().GetList(x => x.Identifier == identifier).SingleOrDefault();
+            //return Mapper.Map<Enquiries>(enquiry);
+            return null;
         }
     }
 }

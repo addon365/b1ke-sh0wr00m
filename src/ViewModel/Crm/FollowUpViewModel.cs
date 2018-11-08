@@ -23,11 +23,9 @@ namespace ViewModel.Crm
             _followUpStatuses = _repository.GetFollowUpStatuses();
             string contactId = "f991a068-342d-4838-839b-df0579e0b2c6";
             Contact contact = _repository.GetContact(contactId);
-            
+
             WireCommands();
 
-          
-                
             IList<CampaignInfo> campaignInfos = new List<CampaignInfo>();
             foreach (CampaignInfo campaignInfo in _repository.GetCampaingInfos(contactId))
             {

@@ -11,10 +11,9 @@ namespace Api.Domain.Enquiries
     public class Enquiries
     {
        
-            public string Identifier { get; set; }
-            public DateTime Created { get; set; }
+
             public Contact Contact { get; set; }
-            public EnquiryType EnquiryType { get; set; }
+            public  EnquiryType EnquiryType { get; set; }
             public EnquiryStatus Status { get; set; }
             public EnquiryProduct EnquiryProducts { get; set; }
             public EnquiryFinanceQuotation EnquiryFinanceQuotations { get; set; }

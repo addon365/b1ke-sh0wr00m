@@ -35,7 +35,7 @@ namespace Api.Database
       
        
         #region Crm
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Contact> Profiles { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<MarketingZone> marketingZones { get; set; }
         public DbSet<FollowUpMode> FollowUpModes { get; set; }
@@ -73,8 +73,6 @@ namespace Api.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          
-
             modelBuilder.HasDefaultSchema(schema: DBGlobals.SchemaName);
             modelBuilder.Entity<Threat>().HasIndex(i => i.Referer).IsUnique();
             modelBuilder.Entity<Threat>()
