@@ -5,6 +5,7 @@
 // licensing@syncfusion.com. Any infringement will be prosecuted under
 // applicable laws. 
 #endregion
+using BikeShowRoom.WPF.CRM.Contact;
 using Syncfusion.Windows.Tools.Controls;
 using System;
 using System.Collections.Generic;
@@ -104,16 +105,17 @@ namespace BikeShowRoom.WPF
             n.ShowDialog();
         }
 
-        private void btnFollowUp_Click(object sender, RoutedEventArgs e)
-        {
-            CRM.FollowUp n = new CRM.FollowUp();
-            n.ShowDialog();
-        }
+        
 
         private void btnSales_Click(object sender, RoutedEventArgs e)
         {
             Sales.VechicleSale n = new Sales.VechicleSale();
             n.ShowDialog();
+        }
+        private void rbnContactList_Click(object sender, RoutedEventArgs e)
+        {
+            ContactListWindow contactListWindow = new ContactListWindow(); ;
+            contactListWindow.ShowDialog();
         }
     }
 }

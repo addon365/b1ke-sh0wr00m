@@ -281,6 +281,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="CRM\Contact\ContactListWindow.xaml.cs">
+      <DependentUpon>ContactListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CRM\FollowUp.xaml.cs">
       <DependentUpon>FollowUp.xaml</DependentUpon>
     </Compile>
@@ -348,6 +351,10 @@
     <Page Include="ContactWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CRM\Contact\ContactListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CRM\FollowUp.xaml">
       <SubType>Designer</SubType>
