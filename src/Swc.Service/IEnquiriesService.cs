@@ -10,7 +10,7 @@ namespace Swc.Service
         IEnumerable<Enquiries> GetAllActive();
         InitilizeEnquiry GetInitilizeEnquiries();
         Task<string> Insert(InsertEnquiryModel enquiries);
-        Enquiries GetEnquiries(string identifier);
+        InsertEnquiryModel GetEnquiries(string identifier);
 
     }
 }
