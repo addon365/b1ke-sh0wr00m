@@ -22,10 +22,10 @@ namespace BikeShowRoom.WPF.CRM
     public partial class FollowUp : Window
     {
         FollowUpViewModel viewmodel;
-        public FollowUp(object contact)
+        public FollowUp()
         {
             InitializeComponent();
-            viewmodel = new FollowUpViewModel(contact,CloseMe);
+            viewmodel = new FollowUpViewModel(CloseMe);
             base.DataContext = viewmodel;
         }
         public void CloseMe(bool isSuccess,string message)
