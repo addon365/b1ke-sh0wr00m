@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CrystalDecisions.CrystalReports.Engine;
 using ViewModel;
 
 namespace BikeShowRoom.WPF.Enquiries
@@ -26,6 +27,16 @@ namespace BikeShowRoom.WPF.Enquiries
             InitializeComponent();
             viewmodel = new EnquiriesListViewModel();
             base.DataContext = viewmodel;
+            viewmodel.ReportObj = new Reports();
+        }
+    }
+    public class Reports : ICrystalReport
+    {
+        public void ShowReport(ReportDocument rep)
+        {
+            ReportViewer rpt = new ReportViewer(rep);
+            rpt.ShowDialog();
+            
         }
     }
 }

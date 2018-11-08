@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace swcApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     public class ZonalController : Controller
     {
         private readonly IZonalService _zonalService;
