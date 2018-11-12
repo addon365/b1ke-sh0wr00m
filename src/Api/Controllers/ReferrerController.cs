@@ -12,7 +12,7 @@ namespace swcApi.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     public class ReferrerController : Controller
     {
         private readonly IReferrerService _referrerService;

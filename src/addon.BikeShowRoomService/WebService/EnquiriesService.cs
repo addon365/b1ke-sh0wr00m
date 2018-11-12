@@ -60,9 +60,41 @@ namespace addon.BikeShowRoomService.WebService
 
         }
        
-        public Enquiries GetEnquiries(string identifier)
+        public InsertEnquiryModel GetEnquiries(string identifier)
         {
-            return null;
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries/"+identifier).Result;
+            InsertEnquiryModel enquiries = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                enquiries = JsonConvert.DeserializeObject<InsertEnquiryModel>(json);
+
+
+
+            }
+
+            return enquiries;
+        }
+        public MultiEnquiryModel GetMultiEnquiries(string identifier)
+        {
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries/Multi/" + identifier).Result;
+            MultiEnquiryModel enquiries = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                enquiries = JsonConvert.DeserializeObject<MultiEnquiryModel>(json);
+
+
+
+            }
+
+            return enquiries;
         }
 
         public InitilizeEnquiry GetInitilizeEnquiries()

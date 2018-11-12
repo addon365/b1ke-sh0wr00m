@@ -1,4 +1,5 @@
 ﻿using Api.Database.Entity.Crm;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +11,7 @@ namespace Api.Database.Entity.Enquiries
     {
 
         public string Identifier { get; set; }
+        public DateTime EnquiryDate { get; set; }
         public Guid ContactId { get; set; }
         [ForeignKey("ContactId")] public virtual Contact Contact { get; set; }
 
@@ -20,5 +22,6 @@ namespace Api.Database.Entity.Enquiries
         [ForeignKey("StatusId")] public virtual EnquiryStatus Status { get; set; }
 
         public List<EnquiryProduct> EnquiryProducts { get; set; }
+
     }
 }

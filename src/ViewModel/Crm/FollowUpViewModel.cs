@@ -14,22 +14,18 @@ namespace ViewModel.Crm
         private CampaignInfo _campaignInfo;
         private readonly IFollowUpService _repository;
 
-        public FollowUpViewModel(object contactObj=null,Result onResult = null)
+        public FollowUpViewModel(object contactObj = null, Result onResult = null)
         {
             this.OnResult = onResult;
             _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
             _followUpStatuses = _repository.GetFollowUpStatuses();
-            _followUpModes = _repository.GetFollowUpModes();
-            if (contactObj==null)
-            {
-                Message = "Search and select contact first.";
-                return;
-            }
-           
-            Contact contact = (Contact)contactObj;
-            string contactId = contact.Id.ToString();
+            string contactId = "f991a068-342d-4838-839b-df0579e0b2c6";
+            Contact ob =(Contact) contactObj;
+            Contact contact = _repository.GetContact(ob.Id.ToString());
 
             WireCommands();
+
+
 
             IList<CampaignInfo> campaignInfos = new List<CampaignInfo>();
             foreach (CampaignInfo campaignInfo in _repository.GetCampaingInfos(contactId))

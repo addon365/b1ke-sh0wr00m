@@ -12,7 +12,7 @@ namespace swcApi.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     public class AccessoriesController : Controller
     {
         private readonly IAccessoriesService _accessoriesService;

@@ -135,7 +135,7 @@
             </GroupBox.Header>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -146,18 +146,20 @@
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Down Payment" VerticalAlignment="Center"/>
-                        <TextBox Name="txtDownPayment" Grid.Column="1" Height="24" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.DownPayment}"/>
-                <TextBlock Text="EMI" VerticalAlignment="Center" Grid.Row="1"/>
-                        <TextBox Name="txtEMI" Grid.Column="1" Height="24" Grid.Row="1" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.EMIAmount}"/>
-                <TextBlock Text="Tenure" VerticalAlignment="Center" Grid.Row="2"/>
-                        <TextBox Name="txtTenure" Grid.Column="1" Grid.Row="2" Height="24" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.TenureInMonths}"/>
+                        <TextBlock Text="Select Product" VerticalAlignment="Center" />
+                        <ComboBox Grid.Column="1" Height="24" ItemsSource="{Binding EnquiryProducts}" DisplayMemberPath="Product.ProductName" SelectedItem="{Binding CurrentFinanceEnquiryProduct}"/>
+                        <TextBlock Text="First/Initial Payment" VerticalAlignment="Center" Grid.Row="1"/>
+                        <TextBox  Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="1"  Text="{Binding CurrentFinanceQuotation.InitialDownPayment}"/>
+                <TextBlock Text="Monthly EMI Amount" VerticalAlignment="Center" Grid.Row="2"/>
+                        <TextBox  Grid.Column="1" Height="24" Grid.Row="2" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.MonthlyEMIAmount}"/>
+                <TextBlock Text="Loan Months" VerticalAlignment="Center" Grid.Row="3"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.NumberOfMonths}"/>
                         <Button Name="btnAddAnotherFinacePlan" Content="Add One More" Grid.Row="4" Grid.Column="1" Width="150" Height="28" Command="{Binding AddFinanceQuotationCommand}"/>
                         <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top"  ItemsSource="{Binding FinanceQuotations}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                                <DataGridTextColumn Header="Down Payment" Binding="{Binding DownPayment}" Width="*"/>
-                                <DataGridTextColumn Header="EMI" Binding="{Binding EMIAmount}" Width="*"/>
-                                <DataGridTextColumn Header="Tenure" Binding="{Binding TenureInMonths}" Width="*"/>
+                                <DataGridTextColumn Header="Down Payment" Binding="{Binding InitialDownPayment}" Width="*"/>
+                                <DataGridTextColumn Header="EMI" Binding="{Binding MonthlyEMIAmount}" Width="*"/>
+                                <DataGridTextColumn Header="Tenure" Binding="{Binding NumberOfMonths}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -181,16 +183,16 @@
                         <RowDefinition/>
 
                     </Grid.RowDefinitions>
-                <TextBlock Text="Model" VerticalAlignment="Center"/>
-                        <TextBox Name="txtExchangeModel" Grid.Column="1" Height="24" BorderBrush="Gray" Margin="0,0,0,3.4" VerticalAlignment="Bottom" Text="{Binding CurrentExchangeQuotation.Model}"/>
+                <TextBlock Text="Model Name" VerticalAlignment="Center"/>
+                        <TextBox  Grid.Column="1" Height="24" BorderBrush="Gray" Margin="0,0,0,3.4" VerticalAlignment="Bottom" Text="{Binding CurrentExchangeQuotation.Model}"/>
                 <TextBlock Text="Year" VerticalAlignment="Center" Grid.Row="1"/>
-                <ComboBox Name="cmbExchangeYear" Grid.Column="1" Height="24" Grid.Row="1" BorderBrush="Gray" />
+                        <TextBox  Grid.Column="1" Height="24" Grid.Row="1" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Year}"/>
                 <TextBlock Text="No of Owner" VerticalAlignment="Center" Grid.Row="2"/>
                         <TextBox Name="txtNoOfOwner" Grid.Column="1" Grid.Row="2" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.NoOfOwner}"/>
-                <TextBlock Text="Expected" VerticalAlignment="Center" Grid.Row="3"/>
-                        <TextBox Name="txtExchangeExpectedAmt" Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Expected}"/>
-                <TextBlock Text="Quoted" VerticalAlignment="Center" Grid.Row="4"/>
-                        <TextBox Name="txtExchangeQuotedAmt" Grid.Column="1" Grid.Row="4" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.Quotated}"/>
+                <TextBlock Text="Expected Amount" VerticalAlignment="Center" Grid.Row="3"/>
+                        <TextBox  Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.ExpectedAmount}"/>
+                <TextBlock Text="Quoted Amount" VerticalAlignment="Center" Grid.Row="4"/>
+                        <TextBox  Grid.Column="1" Grid.Row="4" Height="24" BorderBrush="Gray" Text="{Binding CurrentExchangeQuotation.QuotatedAmount}"/>
                 </Grid>
             </Expander>
         </Grid>

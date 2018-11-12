@@ -43,7 +43,7 @@
              This is a remark to add additional information about this method
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.EnquiriesController.Detail(System.String)">
+        <member name="M:swcApi.Controllers.EnquiriesController.MultiDetail(System.String)">
              <summary>
               Returns Details of a selected Referrer
              </summary>

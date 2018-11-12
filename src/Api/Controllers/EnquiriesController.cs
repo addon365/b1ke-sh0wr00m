@@ -73,6 +73,15 @@ namespace swcApi.Controllers
         ///
         ///</remarks>
         [HttpGet]
+        [Route("Multi/{identifier}", Name = "EnquiriesMultiDetail")]
+        public IActionResult MultiDetail(string identifier)
+        {
+            var referer = _enquiriesService.GetMultiEnquiries(identifier);
+            if (referer == null) return NotFound();
+
+            return Ok(referer);
+        }
+        [HttpGet]
         [Route("{identifier}", Name = "EnquiriesDetail")]
         public IActionResult Detail(string identifier)
         {
