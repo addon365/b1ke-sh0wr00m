@@ -9,4 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reports\" />
+  </ItemGroup>
 </Project>

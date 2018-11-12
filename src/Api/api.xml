@@ -51,6 +51,25 @@
             
             </remarks>
         </member>
+        <member name="T:swcApi.Controllers.InquiryReportController">
+            <summary>
+            Provides REST API for dashboard for Angular Client App.
+            </summary>
+        </member>
+        <member name="M:swcApi.Controllers.InquiryReportController.#ctor(Swc.Service.Report.IInquiryReportService,Microsoft.Extensions.Options.IOptions{swcApi.Utils.AppSettings},Microsoft.Extensions.Logging.ILogger{swcApi.Controllers.UserController})">
+            <summary>
+            Injecting required instances
+            </summary>
+            <param name="inquiryReportService"></param>
+            <param name="appSettings"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:swcApi.Controllers.InquiryReportController.GetInquiriesBasedOnProduct">
+            <summary>
+            Returns the number of inquiries happened based on product in the given year.
+            </summary>
+            <returns>Number of Inquries based on product.</returns>
+        </member>
         <member name="T:swcApi.Controllers.ProductController">
             <inheritdoc />
         </member>

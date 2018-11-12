@@ -1,0 +1,32 @@
+<div class="root-container">
+  <header>
+    <mat-toolbar>
+      <div class="title"> SVB Bike Show Room </div>
+      <div class="user">
+        <div>
+          Hi {{user.userName}},
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">Logout</button>
+            <button mat-menu-item [routerLink]="['/change-password']">Change Password</button>
+            <button mat-menu-item>Settings</button>
+            <button mat-menu-item>Help</button>
+          </mat-menu>
+        </div>
+      </div>
+
+    </mat-toolbar>
+  </header>
+  <main class="main-content">
+    <div class="main-content" fxLayout="row">
+      <div>
+        <app-dashboard></app-dashboard>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <mat-toolbar>Copyright for good</mat-toolbar>
+  </footer>
+</div>

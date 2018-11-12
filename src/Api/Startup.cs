@@ -29,6 +29,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Swc.Service.Sales;
 using Swc.Service.Crm;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Swc.Service.Report;
 
 namespace swcApi
 {
@@ -64,6 +66,7 @@ namespace swcApi
             services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<IFollowUpService, FollowUpService>();
             services.AddTransient<IContactService, ContactService>();
+            services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddMvc();
             
             services.AddApiVersioning(o =>
@@ -71,6 +74,15 @@ namespace swcApi
                 o.AssumeDefaultVersionWhenUnspecified = true;
                 o.DefaultApiVersion = new ApiVersion(1, 0);
             });
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "App/dist";
+            });
+            services.AddNodeServices(options =>
+            {
+                options.ProjectPath = "App/dist";
+            });
+
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1",
@@ -141,7 +153,20 @@ namespace swcApi
             });
 
             app.UseStaticFiles();
-
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseHttpsRedirection();
+            app.UseMvc();
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "App";
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
+            
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())

@@ -5,11 +5,19 @@
     <Copyright>Three Nine Consulting</Copyright>
     <StartupObject>swcApi.Program</StartupObject>
     <UserSecretsId>baa2f579-d2a7-4eb4-89fb-1c171b2e2482</UserSecretsId>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
    </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>api.xml</DocumentationFile>
     <OutputPath>bin\Debug\netcoreapp2.0\</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="App\tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="App\src\app\models\user.ts" />
+    <None Remove="App\src\app\utils\AppContants.ts" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -35,6 +43,11 @@
     <ProjectReference Include="..\Api.Database\Api.Database.csproj" />
     <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />
     <ProjectReference Include="..\Swc.Service\Swc.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="App\src\app\models\user.ts" />
+    <TypeScriptCompile Include="App\src\app\utils\AppContants.ts" />
   </ItemGroup>
 
 </Project>
