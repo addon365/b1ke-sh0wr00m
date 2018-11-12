@@ -9,11 +9,11 @@ namespace Api.Database.Entity.Enquiries
     {
         public Guid EnquiryId { get; set; }
         [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }
-        public string Identifier { get; set; }
+     
         public string Model { get; set; }
         public int Year { get; set; }
         public int NoOfOwner { get; set; }
-        public double Expected { get; set; }
-        public double Quotated { get; set; }
+        public double ExpectedAmount { get; set; }
+        public double QuotatedAmount { get; set; }
     }
 }

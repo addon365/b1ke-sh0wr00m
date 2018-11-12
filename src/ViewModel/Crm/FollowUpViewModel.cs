@@ -20,7 +20,8 @@ namespace ViewModel.Crm
             _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
             _followUpStatuses = _repository.GetFollowUpStatuses();
             string contactId = "f991a068-342d-4838-839b-df0579e0b2c6";
-            Contact contact = _repository.GetContact(contactId);
+            Contact ob =(Contact) contactObj;
+            Contact contact = _repository.GetContact(ob.Id.ToString());
 
             WireCommands();
 

@@ -271,7 +271,7 @@ namespace ViewModel
         public void AddFinanceQuotation()
         {
 
-            CurrentFinanceQuotation.ProductId = CurrentEnquiryProduct.Id;
+            //CurrentFinanceQuotation.ProductId = CurrentEnquiryProduct.Id;
             FinanceQuotations.Add(CurrentFinanceQuotation);
         }
         public void AddExchangeQuotation()

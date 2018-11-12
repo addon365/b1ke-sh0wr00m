@@ -20,7 +20,7 @@ namespace ViewModel
         private Enquiry _currentEnquiry;
         private Contact _currentContact;
         private MarketingZone _currentMarketingZone;
-        private EnquiryProduct _enquiryProduct;
+        private EnquiryProduct _enquiryProduct,_FinanceEnquiryProduct;
         private EnquiryFinanceQuotation _financeQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
         public EnquiryViewModel()
@@ -51,17 +51,17 @@ namespace ViewModel
 
             CurrentFinanceQuotation = new EnquiryFinanceQuotation
             {
-                DownPayment = 222,
-                EMIAmount = 3333,
-                TenureInMonths = 12,
+                InitialDownPayment = 222,
+                MonthlyEMIAmount = 3333,
+                NumberOfMonths = 12,
             };
             CurrentExchangeQuotation = new EnquiryExchangeQuotation
             {
-                Expected = 22333.66,
+                ExpectedAmount = 22333.66,
                 Model = "Indigo",
                 NoOfOwner = 1,
                 Year = 2000,
-                Quotated = 55676,
+                QuotatedAmount = 55676,
                 
 
             };
@@ -216,6 +216,24 @@ namespace ViewModel
                 }
             }
         }
+        public EnquiryProduct CurrentFinanceEnquiryProduct
+        {
+            get
+            {
+                return _FinanceEnquiryProduct;
+            }
+
+            set
+            {
+                if (_FinanceEnquiryProduct != value)
+                {
+                    _FinanceEnquiryProduct = value;
+                    OnPropertyChanged("CurrentEnquiryProduct");
+
+                    AddFinanceQuotationCommand.IsEnabled = true;
+                }
+            }
+        }
         public EnquiryFinanceQuotation CurrentFinanceQuotation
         {
             get
@@ -268,6 +286,7 @@ namespace ViewModel
             {
                 AddExchangeQuotation();
             }
+            CurrentEnquiry.EnquiryDate = System.DateTime.Now;
             InsertEnquiryModel insertEnquiryModel = new InsertEnquiryModel();
             CurrentEnquiry.Contact = CurrentContact;
             insertEnquiryModel.Enquiry = CurrentEnquiry;
@@ -334,7 +353,7 @@ namespace ViewModel
         public void AddFinanceQuotation()
         {
 
-            CurrentFinanceQuotation.ProductId = CurrentEnquiryProduct.Id;
+            CurrentFinanceQuotation.EnquiryProductId=CurrentFinanceEnquiryProduct.Id;
             FinanceQuotations.Add(CurrentFinanceQuotation);
         }
         public void AddExchangeQuotation()

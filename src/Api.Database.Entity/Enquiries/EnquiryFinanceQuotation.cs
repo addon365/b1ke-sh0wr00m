@@ -8,15 +8,11 @@ namespace Api.Database.Entity.Enquiries
 {
     public class EnquiryFinanceQuotation:BaseEntity
     {
-        public Guid EnquiryId { get; set; }
-        [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }
-        public Guid ProductId { get; set; }
-        [ForeignKey("ProductId")] public virtual Product product { get; set; }
+        public Guid EnquiryProductId { get; set; }
+        [ForeignKey("EnquiryProductId")] public virtual EnquiryProduct enquiryProduct { get; set; }
      
-
-        public string Identifier { get; set; }
-        public double DownPayment { get; set; }
-        public double EMIAmount { get; set; }
-        public int TenureInMonths { get; set; }
+        public double InitialDownPayment { get; set; }
+        public double MonthlyEMIAmount { get; set; }
+        public int NumberOfMonths { get; set; }
     }
 }

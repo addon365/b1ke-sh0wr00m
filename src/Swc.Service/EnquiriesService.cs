@@ -28,13 +28,16 @@ namespace Swc.Service
         public IEnumerable<Enquiries> GetAllActive()
         {
             List<Enquiries> lst = new List<Enquiries>();
+
             var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
+        
+       
             foreach(Enquiry enquiry in enquiries)
             {
                 Enquiries e = new Enquiries();
                 e.Identifier = enquiry.Identifier;
                 e.Created = enquiry.Created;
-                e.Contact = _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ContactId).FirstOrDefault();
+                e.Contact = _unitOfWork.GetRepository<Contact>().GetList(predicate: x => x.Id == enquiry.ContactId).Items.FirstOrDefault();
                 e.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
                 e.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
                 e.EnquiryProducts = _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id).FirstOrDefault();
@@ -115,8 +118,7 @@ namespace Swc.Service
             }
             foreach(EnquiryFinanceQuotation efq in InsertEnquiries.enquiryFinanceQuotations)
             {
-                efq.product = null;
-                efq.EnquiryId = enquiry.Id;
+               
                 _unitOfWork.GetRepository<EnquiryFinanceQuotation>().Add(efq);
             }
             foreach(EnquiryExchangeQuotation eeq in InsertEnquiries.enquiryExchangeQuotations)
@@ -151,7 +153,37 @@ namespace Swc.Service
             ine.EnquiryProducts= _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
             ine.enquiryAccessories = _unitOfWork.GetRepository<EnquiryAccessories>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
             ine.enquiryExchangeQuotations= _unitOfWork.GetRepository<EnquiryExchangeQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryFinanceQuotations= _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
+            ine.enquiryFinanceQuotations = null; /*_unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);*/
+
+            return ine;
+        }
+        public MultiEnquiryModel GetMultiEnquiries(string identifier)
+        {
+            MultiEnquiryModel ine = new MultiEnquiryModel();
+            List<Enquiry> lstEnquiry = new List<Enquiry>();
+            List<Contact> lstContacts = new List<Contact>();
+            Enquiry enquiry = new Enquiry();
+            enquiry = _unitOfWork.GetRepository<Enquiry>().GetList().Items.Where(predicate: x => x.Identifier == identifier).FirstOrDefault();
+            if (enquiry == null)
+                return null;
+
+            lstEnquiry.Add(enquiry);
+            lstContacts.Add(_unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ContactId).FirstOrDefault());
+         
+            ine.enquiries = lstEnquiry;
+            ine.contacts = lstContacts;
+
+            List<DomainEnquiryProduct> lstEnquiryProducts = new List<DomainEnquiryProduct>();
+            foreach(EnquiryProduct ep in _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id))
+            {
+                DomainEnquiryProduct dp = new DomainEnquiryProduct { Id = ep.Id,EnquiryId=ep.EnquiryId, ProductId = ep.ProductId,OnRoadPrice=ep.OnRoadPrice,TotalAmount=ep.TotalAmount };
+                dp.ProductName = _unitOfWork.GetRepository<Product>().GetList().Items.Where(predicate: x => x.Id == dp.ProductId).FirstOrDefault().ProductName;
+                lstEnquiryProducts.Add(dp);
+            }
+            ine.EnquiryProducts =lstEnquiryProducts ;
+            ine.enquiryAccessories = _unitOfWork.GetRepository<EnquiryAccessories>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
+            ine.enquiryExchangeQuotations = _unitOfWork.GetRepository<EnquiryExchangeQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
+            //ine.enquiryFinanceQuotations = _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
 
             return ine;
         }

@@ -11,6 +11,7 @@ namespace Swc.Service
         InitilizeEnquiry GetInitilizeEnquiries();
         Task<string> Insert(InsertEnquiryModel enquiries);
         InsertEnquiryModel GetEnquiries(string identifier);
+        MultiEnquiryModel GetMultiEnquiries(string identifier);
 
     }
 }

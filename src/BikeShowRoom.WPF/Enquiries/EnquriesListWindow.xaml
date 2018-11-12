@@ -16,7 +16,7 @@
                 <Button Content="Print" Height="24" Width="150" Command="{Binding PrintCommand}"/>
             </Grid>
             <syncfusion:SfDataGrid ItemsSource="{Binding Enquiries}" 
-                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1"  >
+                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding SelectedEnquiries}" >
             <syncfusion:SfDataGrid.Columns>
                     <syncfusion:GridTextColumn MappingName="Identifier" HeaderText="Id"/>
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts.Product.ProductName" HeaderText="Vechicle"/>

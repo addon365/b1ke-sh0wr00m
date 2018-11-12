@@ -11,7 +11,7 @@ namespace Api.Database.Entity
         public Guid Id { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
-        public DateTime Deleted { get; set; }
+        public DateTime? Deleted { get; set; }
         public Guid? CreatedUserId { get; set; }
         public Guid? EmployeeId { get; set; }
         public Guid? CreatedDeviceId { get; set; }
