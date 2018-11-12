@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ViewModel;
 using ViewModel.Crm;
 
 namespace BikeShowRoom.WPF.CRM.Contact
@@ -25,15 +26,17 @@ namespace BikeShowRoom.WPF.CRM.Contact
         public ContactListWindow()
         {
             InitializeComponent();
-            viewModel = new ContactViewModel();
+            viewModel = new ContactViewModel(ShowUI);
             base.DataContext = viewModel;
         }
 
-        private void SfDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        public void ShowUI(bool success,string message,object data)
         {
-            SfDataGrid sfDataGrid = (SfDataGrid)sender;
-            FollowUp followUp = new FollowUp(sfDataGrid.SelectedItem);
+            FollowUpViewModel followUpViewModel = new FollowUpViewModel(data, null);
+            FollowUp followUp = new FollowUp(followUpViewModel);
             followUp.ShowDialog();
         }
+
+       
     }
 }

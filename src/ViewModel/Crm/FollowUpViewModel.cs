@@ -7,20 +7,23 @@ namespace ViewModel.Crm
 {
     public class FollowUpViewModel : ViewModelBase
     {
-        private Result OnResult;
+        
         private IEnumerable<FollowUpStatus> _followUpStatuses;
         private IEnumerable<CampaignInfo> _campaignInfos;
         private IEnumerable<FollowUpMode> _followUpModes;
         private CampaignInfo _campaignInfo;
         private readonly IFollowUpService _repository;
+        
 
         public FollowUpViewModel(object contactObj = null, Result onResult = null)
         {
             this.OnResult = onResult;
             _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
             _followUpStatuses = _repository.GetFollowUpStatuses();
-            string contactId = "f991a068-342d-4838-839b-df0579e0b2c6";
+            _followUpModes = _repository.GetFollowUpModes();
+            
             Contact ob =(Contact) contactObj;
+            string contactId = ob.Id.ToString();
             Contact contact = _repository.GetContact(ob.Id.ToString());
 
             WireCommands();
@@ -141,6 +144,10 @@ namespace ViewModel.Crm
             }
             InsertCampaignInfoCommand.IsEnabled = true;
         }
-
+        public Result OnResult
+        {
+            get;
+            set;
+        }
     }
 }

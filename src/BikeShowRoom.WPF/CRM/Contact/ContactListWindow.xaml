@@ -7,16 +7,25 @@
         xmlns:local="clr-namespace:BikeShowRoom.WPF.CRM.Contact"
         mc:Ignorable="d"
         Title="ContactListWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <Button MaxWidth="200" Content="Open Follow Up" Command="{Binding FollowUpOpenCommand}"></Button>
+        </StackPanel>
+    
     <Grid>
-        <syncfusion:SfDataGrid ItemsSource="{Binding Contacts}" 
-                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" MouseDoubleClick="SfDataGrid_MouseDoubleClick" >
+        <syncfusion:SfDataGrid  ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" 
+                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" >
+            <syncfusion:SfDataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding FollowUpOpenCommand}"/>
+            </syncfusion:SfDataGrid.InputBindings>
             <syncfusion:SfDataGrid.Columns>
                 <syncfusion:GridTextColumn MappingName="Name"/>
                 <syncfusion:GridTextColumn MappingName="MobileNumber"/>
                 <syncfusion:GridTextColumn MappingName="Place"/>
                 <syncfusion:GridTextColumn MappingName="Address"/>
-                
+
             </syncfusion:SfDataGrid.Columns>
         </syncfusion:SfDataGrid>
     </Grid>
+    </DockPanel>
 </Window>
