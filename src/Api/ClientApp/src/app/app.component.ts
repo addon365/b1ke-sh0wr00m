@@ -9,4 +9,8 @@ import { User } from './models/user';
 export class AppComponent {
   user: User = { userName: "Tamil" };
   title = 'app';
+
+  logout() {
+
+  }
 }
