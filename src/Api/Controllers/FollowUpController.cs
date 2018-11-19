@@ -12,6 +12,7 @@ using swcApi.Utils;
 
 namespace swcApi.Controllers
 {
+
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     public class FollowUpController : Controller

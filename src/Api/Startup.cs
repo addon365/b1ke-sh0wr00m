@@ -1,26 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using swcApi;
 using Threenine.Map;
 using Api.Database;
-using Api.Database.Entity.Threats;
 using Swc.Service;
-using Threenine.Data;
-using Api.Domain.Bots;
 using Threenine.Data.DependencyInjection;
-using Swashbuckle.AspNetCore;
-using Swashbuckle.AspNetCore.Swagger;
-using System.IO;
-using Microsoft.Extensions.PlatformAbstractions;
 using swcApi.Utils;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -74,30 +60,13 @@ namespace swcApi
                 o.AssumeDefaultVersionWhenUnspecified = true;
                 o.DefaultApiVersion = new ApiVersion(1, 0);
             });
+
+            // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "App/dist";
-            });
-            services.AddNodeServices(options =>
-            {
-                options.ProjectPath = "App/dist";
+                configuration.RootPath = "ClientApp/dist";
             });
 
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1",
-            //    new Info
-            //    {
-            //        Title = "Stop Web Crawlers API",
-            //        Version = "v1",
-            //        Description = "Stop Web Crawlers API to enable the update of Referer Spammer Lists",
-            //        TermsOfService = "None",
-            //        Contact = new Contact { Name = "addon technologies", Email = "tamilselvan@addon.cc", Url = "http://addon.cc" }
-            //    });
-            //    var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml");
-            //    c.IncludeXmlComments(filePath);
-            //}
-            //);
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -140,33 +109,33 @@ namespace swcApi
             }
             app.UseAuthentication();
             //https://stackoverflow.com/questions/38298312/dynamic-routing-in-asp-net-core
+           
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default",
                     "{controller}/{action}/{id?}",
                     new { controller = "echo" }
                 );
-
-                routes.MapRoute("user",
-                    "{license:license}/api/v{version:apiVersion}/{controller}"
-                 );
             });
 
-            app.UseStaticFiles();
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-            app.UseHttpsRedirection();
-            app.UseMvc();
+
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "App";
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            
+
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
@@ -177,7 +146,7 @@ namespace swcApi
 
             }
 
-            //Set up code for automapper configuration 
+            //Set up code for automapper configuration
             MapConfigurationFactory.Scan<Startup>();
 
 
