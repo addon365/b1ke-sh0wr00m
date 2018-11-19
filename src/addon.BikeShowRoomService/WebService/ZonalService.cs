@@ -19,7 +19,7 @@ namespace addon.BikeShowRoomService.WebService
         }
         public IEnumerable<MarketingZone> GetAllActive()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("api/Zonal").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("Zonal").Result;
             IEnumerable<MarketingZone> marketingZones = null;
             if (response.IsSuccessStatusCode)
             {
@@ -42,7 +42,7 @@ namespace addon.BikeShowRoomService.WebService
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var stringContent = new StringContent(JsonConvert.SerializeObject(marketingZone), Encoding.UTF8, "application/json");
-            var httpResponce = _httpClient.PostAsync("api/Zonal", byteContent);
+            var httpResponce = _httpClient.PostAsync("Zonal", byteContent);
 
 
             Console.WriteLine(httpResponce);

@@ -89,11 +89,13 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
+                 
+
                 </Grid.RowDefinitions>
                 <TextBlock Text="Vehicle" VerticalAlignment="Center"/>
                     <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct.Product}"/>
                 <TextBlock Text="On Road Amount" VerticalAlignment="Center" Grid.Row="1"/>
-                <TextBlock Name="txtVechicleOnRoad" Grid.Column="1" Height="24" Grid.Row="1"/>
+                    <TextBlock Name="txtVechicleOnRoad" Grid.Column="1" Height="24" Grid.Row="1" Text="{Binding CurrentEnquiryProduct.Product.Price}"/>
                 <Grid Grid.Row="2" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
@@ -112,17 +114,19 @@
                 <TextBlock Text="Amount" VerticalAlignment="Center" Grid.Row="3"/>
                 <TextBlock Name="txtAmount" Grid.Column="1" Height="24" Grid.Row="3"/>
                     <Button Name="btnAddAnotherVechicle" Content="Add One More" Grid.Row="4" Grid.Column="1" Width="150" Height="28" Command="{Binding AddEnquiryProductCommand}" />
-                    
-                    <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top" ItemsSource="{Binding EnquiryProducts}" AutoGenerateColumns="False">
+                    <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
+                        <DataGrid  Height="100" VerticalAlignment="Top" ItemsSource="{Binding EnquiryProducts}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedDataGridProduct}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Vechicle" Binding="{Binding Product.ProductName}" Width="*"/>
                         <DataGridTextColumn Header="On Road" Binding="{Binding OnRoadPrice}" Width="60"/>
                         <DataGridTextColumn Header="Access" Binding="{Binding AccessoriesAmount}" Width="60"/>
                         <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount}" Width="60"/>
                     </DataGrid.Columns>
-                </DataGrid>
+                    </DataGrid>
+                        <Button Content="Delete Product" Width="100" HorizontalAlignment="Right" Command="{Binding DeleteRowEnquiryProductCommand}"/>
+                    </StackPanel>
 
-            </Grid>
+                </Grid>
         </GroupBox>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>

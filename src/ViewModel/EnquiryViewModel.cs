@@ -20,7 +20,7 @@ namespace ViewModel
         private Enquiry _currentEnquiry;
         private Contact _currentContact;
         private MarketingZone _currentMarketingZone;
-        private EnquiryProduct _enquiryProduct,_FinanceEnquiryProduct;
+        private EnquiryProduct _enquiryProduct,_FinanceEnquiryProduct,_SelectedDataGridProduct;
         private EnquiryFinanceQuotation _financeQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
         public EnquiryViewModel()
@@ -51,6 +51,7 @@ namespace ViewModel
 
             CurrentFinanceQuotation = new EnquiryFinanceQuotation
             {
+               
                 InitialDownPayment = 222,
                 MonthlyEMIAmount = 3333,
                 NumberOfMonths = 12,
@@ -68,6 +69,7 @@ namespace ViewModel
             CurrentMarketingZone = EnquiryMasterData.MarketingZones.FirstOrDefault();
 
             AddEnquiryProduct();
+            CurrentFinanceEnquiryProduct = EnquiryProducts.FirstOrDefault();
 
         }
         #region Commands
@@ -78,9 +80,14 @@ namespace ViewModel
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
             AddEnquiryProductCommand = new RelayCommand(AddEnquiryProduct);
             AddFinanceQuotationCommand = new RelayCommand(AddFinanceQuotation);
+            DeleteRowEnquiryProductCommand = new RelayCommand(RemoveEnquiryProduct);
 
         }
-
+        public RelayCommand DeleteRowEnquiryProductCommand
+        {
+            get;
+            private set;
+        }
 
         public RelayCommand UpdateEnquiryCommand
         {
@@ -141,22 +148,34 @@ namespace ViewModel
                 OnPropertyChanged("EnquiryProducts");
             }
         }
-   
 
-        private ObservableCollection<EnquiryFinanceQuotation> _enquiryFinanceQuotations = new ObservableCollection<EnquiryFinanceQuotation>();
+
+        private ObservableCollection<EnquiryFinanceQuotation> _enquiryFinanceQuotations;
         public ObservableCollection<EnquiryFinanceQuotation> FinanceQuotations
         {
             get
-            { return _enquiryFinanceQuotations; }
-            set { _enquiryFinanceQuotations = value; }
+            {
+                return _enquiryFinanceQuotations;
+            }
+            set
+            {
+                _enquiryFinanceQuotations = value;
+                OnPropertyChanged("FinanceQuotations");
+            }
         }
 
-        private ObservableCollection<EnquiryExchangeQuotation> _enquiryExchangeQuotations = new ObservableCollection<EnquiryExchangeQuotation>();
+        private ObservableCollection<EnquiryExchangeQuotation> _enquiryExchangeQuotations;
         public ObservableCollection<EnquiryExchangeQuotation> ExchangeQuotations
         {
             get
-            { return _enquiryExchangeQuotations; }
-            set { _enquiryExchangeQuotations = value; }
+            {
+                return _enquiryExchangeQuotations;
+            }
+            set
+            {
+                _enquiryExchangeQuotations = value;
+                OnPropertyChanged("ExchangeQuotations");
+            }
         }
 
 
@@ -213,6 +232,24 @@ namespace ViewModel
                     OnPropertyChanged("CurrentEnquiryProduct");
 
                     AddEnquiryProductCommand.IsEnabled = true;
+                }
+            }
+        }
+        public EnquiryProduct SelectedDataGridProduct
+        {
+            get
+            {
+                return _SelectedDataGridProduct;
+            }
+
+            set
+            {
+                if (_SelectedDataGridProduct != value)
+                {
+                    _SelectedDataGridProduct = value;
+                    OnPropertyChanged("SelectedDataGridProduct");
+                    DeleteRowEnquiryProductCommand.IsEnabled = true;
+
                 }
             }
         }
@@ -317,18 +354,21 @@ namespace ViewModel
         {
             CurrentEnquiry = new Enquiry();
             CurrentContact = new Contact();
-            CurrentContact.Name="Selvan";
             CurrentEnquiryProduct = new EnquiryProduct();
             CurrentEnquiryProduct.Product = new Product();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
             EnquiryProducts=new ObservableCollection<EnquiryProduct>();
+            FinanceQuotations = new ObservableCollection<EnquiryFinanceQuotation>();
+            ExchangeQuotations = new ObservableCollection<EnquiryExchangeQuotation>();
         }
         void ClearData()
         {
             InitInsert();
             EnquiryProducts.Clear();
+            FinanceQuotations.Clear();
+            ExchangeQuotations.Clear();
         }
         public void FindEnquiry()
         {
@@ -349,18 +389,25 @@ namespace ViewModel
             enquiryProduct.TotalAmount = enquiryProduct.OnRoadPrice + enquiryProduct.AccessoriesAmount+enquiryProduct.OtherAmount;
 
             EnquiryProducts.Add(enquiryProduct);
+            CurrentEnquiryProduct = new EnquiryProduct();
         }
         public void AddFinanceQuotation()
         {
 
             CurrentFinanceQuotation.EnquiryProductId=CurrentFinanceEnquiryProduct.Id;
             FinanceQuotations.Add(CurrentFinanceQuotation);
+            CurrentFinanceQuotation = new EnquiryFinanceQuotation();
+            
         }
         public void AddExchangeQuotation()
         {
 
             ExchangeQuotations.Clear();
             ExchangeQuotations.Add(CurrentExchangeQuotation);
+        }
+        public void RemoveEnquiryProduct()
+        {
+            EnquiryProducts.Remove(SelectedDataGridProduct);
         }
     }
 
