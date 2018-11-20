@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     let series: SeriesOptions = { name: "Year 2018", data: [] };
 
     keyValues.forEach(function (keyValue) {
-      series.data.push([keyValue.key, keyValue.value]);
+      series.data.push([keyValue.name, keyValue.value]);
     });
     this.chart.addSeries(series);
   }
