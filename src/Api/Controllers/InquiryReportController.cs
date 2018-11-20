@@ -48,5 +48,16 @@ namespace swcApi.Controllers
             return result;
 
         }
+        /// <summary>
+        /// Returns the number of inquiries happened based on product in the given year.
+        /// </summary>
+        /// <returns>Number of Inquries based on product.</returns>
+        [HttpGet("inquiredMonthly")]
+        public IEnumerable<KeyValuePair<string, int>> GetMonthlyInquired()
+        {
+            var result = _inquiryReportService.GetMonthlyInquired(DateTime.Now, DateTime.Now);
+            return result;
+
+        }
     }
 }

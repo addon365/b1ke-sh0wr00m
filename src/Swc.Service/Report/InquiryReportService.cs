@@ -19,12 +19,10 @@ namespace Swc.Service.Report
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate, DateTime toDate)
+        public IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate,
+            DateTime toDate)
         {
             var enquiries = _unitOfWork.GetReadOnlyRepository<Enquiry>().GetList().Items;
-            //var enquiryProducts = _unitOfWork.GetReadOnlyRepository<Enquiry>()
-            //     .GetList(include: source =>
-            //     source.Include(e => e.EnquiryProducts));
 
             IList<EnquiryProduct> listOfEnquiryProduct = new List<EnquiryProduct>();
             foreach (Enquiry enquiry in enquiries)
@@ -45,10 +43,71 @@ namespace Swc.Service.Report
                     listOfProduct.Add(product);
             }
             var result = listOfProduct.GroupBy(product => product.ProductName)
-                .Select(productGroup => new KeyValuePair<string, int>(productGroup.Key, productGroup.Count()));
+                .Select(productGroup =>
+                new KeyValuePair<string, int>(productGroup.Key, productGroup.Count()));
             return result;
         }
+        public IEnumerable<KeyValuePair<string, int>> GetMonthlyInquired(DateTime fromDate,
+            DateTime toDate)
+        {
 
+            //var dictProducts = GetDictOfProducts();
+            //IDictionary<int, IList<string>> dictEnquiries =
+            //    new Dictionary<int, IList<string>>();
+            //var enquiryWithProducts = _unitOfWork.GetReadOnlyRepository<Enquiry>()
+            //     .GetList(predicate: enquiry => enquiry.EnquiryDate.Year == 2018,
+            //    include: source =>
+            //     source.Include(e => e.EnquiryProducts)).Items;
+            //foreach (Enquiry enquiry in enquiryWithProducts)
+            //{
+            //    int month = enquiry.EnquiryDate.Month;
+                
+            //    foreach (EnquiryProduct enquiryProduct in enquiry.EnquiryProducts)
+            //    {
+            //        string productId = enquiryProduct.ProductId.ToString();
+            //        string productName = dictProducts[productId].ProductName;
+            //        if (dictEnquiries.ContainsKey(month))
+            //            dictEnquiries[month].Add(productName);
+            //        else
+            //        {
+            //            dictEnquiries.Add(month, new List<string>());
+            //            dictEnquiries[month].Add(productName);
+            //        }
+            //    }
+            //}
+            //IList<KeyValuePair<string, IList<int>>> series = 
+            //    new List<KeyValuePair<string, IList<int>>>();
+            //IDictionary<string, IList<int>> dictSeries =
+            //    new Dictionary<string, IList<int>>();
+            //foreach (int key in dictEnquiries.Keys)
+            //{
+            //    var temp = dictEnquiries[key].GroupBy(keySelector => keySelector)
+            //        .Select(
+            //        selector => {
+            //        if (dictSeries.ContainsKey(selector.Key){
+            //            dictSeries[selector.Key].Add(selector.Count())
+            //    }
+            //}
+               
+            //}
+            return null;
+        }
+        private IDictionary<string, Product> GetDictOfProducts()
+        {
+            var productKeyValuePair = _unitOfWork.GetReadOnlyRepository<Product>()
+                    .GetList().Items
+                    .Select(product =>
+                    new KeyValuePair<string, Product>(product.Id.ToString(), product)
+                    );
+            IDictionary<string, Product> dictProducts =
+                new Dictionary<string, Product>(productKeyValuePair.Count());
+            foreach (KeyValuePair<string, Product> productKeyValue in productKeyValuePair)
+            {
+                dictProducts.Add(productKeyValue);
+            }
+            return dictProducts;
+        }
 
     }
+
 }

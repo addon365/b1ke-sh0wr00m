@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+src/Api/ClientApp/src/app/utils/AppContants.js
+src/Api/ClientApp/src/app/utils/AppContants.js.map

@@ -1,5 +1,5 @@
 export interface KeyValuePair
 {
-    key:string;
+    name:string;
     value:number;
 }

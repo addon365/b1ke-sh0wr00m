@@ -11,10 +11,15 @@ import { KeyValuePair } from './models/keyvaluepair';
 })
 export class InquiryService {
   URL: string = AppContants.BASE_URL + "InquiryReport/basedOnProduct";
+  MonthlyInquiredURL: string = AppContants.BASE_URL + "InquiryReport/inquiredMonthly";
 
   constructor(private httpClient: HttpClient) { }
 
   getInquirieReport(): Observable<KeyValuePair[]> {
     return this.httpClient.get<KeyValuePair[]>(this.URL);
   }
+  getInquirieMonthlyReport(): Observable<KeyValuePair[]> {
+    return this.httpClient.get<KeyValuePair[]>(this.MonthlyInquiredURL);
+  }
+
 }

@@ -1,9 +1,11 @@
 ﻿[
   {
+    "Id": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "Name": "ShowRoom",
     "ProgrammerId": 100
   },
   {
+    "Id": "db55bfb6-58f4-4466-9b18-c8496e412b4f",
     "Name": "Campaign",
     "ProgrammerId": 200
   }
