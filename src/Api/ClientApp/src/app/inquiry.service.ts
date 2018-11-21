@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppContants } from './utils/AppContants';
 import { KeyValuePair } from './models/keyvaluepair';
+import { InquiredModel } from './models/inquiredmodel';
 
 
 
@@ -15,11 +16,11 @@ export class InquiryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getInquirieReport(): Observable<KeyValuePair[]> {
-    return this.httpClient.get<KeyValuePair[]>(this.URL);
+  getInquirieReport(): Observable<KeyValuePair<number>[]> {
+    return this.httpClient.get<KeyValuePair<number>[]>(this.URL);
   }
-  getInquirieMonthlyReport(): Observable<KeyValuePair[]> {
-    return this.httpClient.get<KeyValuePair[]>(this.MonthlyInquiredURL);
+  getInquirieMonthlyReport(): Observable<KeyValuePair<InquiredModel[]>[]> {
+    return this.httpClient.get<KeyValuePair<InquiredModel[]>[]>(this.MonthlyInquiredURL);
   }
 
 }

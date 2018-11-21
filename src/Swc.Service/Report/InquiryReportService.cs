@@ -1,5 +1,6 @@
 ﻿using Api.Database.Entity.Enquiries;
 using Api.Database.Entity.Products;
+using Api.Database.Entity.Report;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -47,50 +48,12 @@ namespace Swc.Service.Report
                 new KeyValuePair<string, int>(productGroup.Key, productGroup.Count()));
             return result;
         }
-        public IEnumerable<KeyValuePair<string, int>> GetMonthlyInquired(DateTime fromDate,
+        public IEnumerable<InquiredMonthly> GetMonthlyInquired(DateTime fromDate,
             DateTime toDate)
         {
-
-            //var dictProducts = GetDictOfProducts();
-            //IDictionary<int, IList<string>> dictEnquiries =
-            //    new Dictionary<int, IList<string>>();
-            //var enquiryWithProducts = _unitOfWork.GetReadOnlyRepository<Enquiry>()
-            //     .GetList(predicate: enquiry => enquiry.EnquiryDate.Year == 2018,
-            //    include: source =>
-            //     source.Include(e => e.EnquiryProducts)).Items;
-            //foreach (Enquiry enquiry in enquiryWithProducts)
-            //{
-            //    int month = enquiry.EnquiryDate.Month;
-                
-            //    foreach (EnquiryProduct enquiryProduct in enquiry.EnquiryProducts)
-            //    {
-            //        string productId = enquiryProduct.ProductId.ToString();
-            //        string productName = dictProducts[productId].ProductName;
-            //        if (dictEnquiries.ContainsKey(month))
-            //            dictEnquiries[month].Add(productName);
-            //        else
-            //        {
-            //            dictEnquiries.Add(month, new List<string>());
-            //            dictEnquiries[month].Add(productName);
-            //        }
-            //    }
-            //}
-            //IList<KeyValuePair<string, IList<int>>> series = 
-            //    new List<KeyValuePair<string, IList<int>>>();
-            //IDictionary<string, IList<int>> dictSeries =
-            //    new Dictionary<string, IList<int>>();
-            //foreach (int key in dictEnquiries.Keys)
-            //{
-            //    var temp = dictEnquiries[key].GroupBy(keySelector => keySelector)
-            //        .Select(
-            //        selector => {
-            //        if (dictSeries.ContainsKey(selector.Key){
-            //            dictSeries[selector.Key].Add(selector.Count())
-            //    }
-            //}
-               
-            //}
-            return null;
+            var result = _unitOfWork.GetReadOnlyRepository<InquiredMonthly>()
+                .Query(ReportQueries.PRODUCTS_BASED_MONTH, new object[] { }).ToList();
+            return result;
         }
         private IDictionary<string, Product> GetDictOfProducts()
         {

@@ -1,4 +1,5 @@
 ﻿using Api.Database.Entity.Enquiries;
+using Api.Database.Entity.Report;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Swc.Service.Report
     /// </summary>
     public interface IInquiryReportService
     {
-        IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate,DateTime toDate);
-        IEnumerable<KeyValuePair<string, int>> GetMonthlyInquired(DateTime fromDate, DateTime toDate);
+        IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate, DateTime toDate);
+        IEnumerable<InquiredMonthly> GetMonthlyInquired(DateTime fromDate, DateTime toDate);
     }
 }

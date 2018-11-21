@@ -1,5 +1,5 @@
-export interface KeyValuePair
+export interface KeyValuePair<T>
 {
-    name:string;
-    value:number;
+    key:string;
+    value:T;
 }

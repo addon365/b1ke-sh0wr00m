@@ -12,6 +12,7 @@ using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Employee;
 using Api.Database.Entity.Crm;
+using Api.Database.Entity.Report;
 
 namespace Api.Database
 {
@@ -68,6 +69,10 @@ namespace Api.Database
         #endregion
         #region Employee
         public DbSet<Employee> Employees { get; set; }
+        #endregion
+
+        #region Report
+        public DbSet<InquiredMonthly> InquiredProducts { get; set; }
         #endregion
 
 

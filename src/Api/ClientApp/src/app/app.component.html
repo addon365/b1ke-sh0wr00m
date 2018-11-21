@@ -20,11 +20,25 @@
     </mat-toolbar>
   </header>
   <main class="main-content">
-    <div class="main-content" fxLayout="row">
-      <div>
-        <app-dashboard></app-dashboard>
-      </div>
-    </div>
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #sidenav class="sidenav" mode="side" opened>
+        <mat-nav-list>
+          <mat-list-item>
+            <button mat-icon-button routerLink="/dashboard">
+              <mat-icon>dashboard</mat-icon>
+            </button>
+            <a matLine routerLink="/dashboard"> Dashboard </a>
+          </mat-list-item>
+        </mat-nav-list>
+
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <div class="content">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </main>
   <footer>
     <mat-toolbar>Copyright for good</mat-toolbar>

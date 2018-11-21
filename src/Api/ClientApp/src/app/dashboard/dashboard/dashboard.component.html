@@ -1,4 +1,12 @@
-<mat-card>
-  <div [chart]="chart"></div>
-</mat-card>
-
+<div fxLayout="row wrap"  fxLayoutGap="20px">
+  <div class="item">
+    <mat-card>
+      <div [chart]="chart"></div>
+    </mat-card>
+  </div>
+  <div class="item">
+    <mat-card>
+      <div [chart]="inquiredMonthlyChart"></div>
+    </mat-card>
+  </div>
+</div>
