@@ -3,3 +3,7 @@
   height: 500px;
   margin: 8px;
 }
+.content{
+  display:flex;
+  flex-direction: row;
+}

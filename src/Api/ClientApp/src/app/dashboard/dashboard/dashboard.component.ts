@@ -43,13 +43,29 @@ export class DashboardComponent implements OnInit {
     chart: {
       type: 'pie'
     },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: false,
+        },
+        showInLegend: true
+      }
+    },
     title: {
-      text: 'Product Based'
+      text: 'Top Products in Inquiry'
     },
     credits: {
       enabled: false
     },
-
+    legend: {
+      enabled: true,
+      useHTML: true,
+      labelFormatter: function () {
+        return '<div>' + this.name + ' (' + this.y + ')</div>';
+      }
+    },
   });
   constructor(private inquiryService: InquiryService) { }
 

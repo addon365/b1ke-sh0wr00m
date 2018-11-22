@@ -1,12 +1,21 @@
-<div fxLayout="row wrap"  fxLayoutGap="20px">
-  <div class="item">
+<div fxLayout="column"  fxLayoutGap="20px">
+  <div>
     <mat-card>
-      <div [chart]="chart"></div>
+      <div class="title">
+        Inquired Products Performance Dashboard
+      </div>
     </mat-card>
   </div>
-  <div class="item">
-    <mat-card>
-      <div [chart]="inquiredMonthlyChart"></div>
-    </mat-card>
+  <div class="content">
+    <div class="item">
+      <mat-card>
+        <div [chart]="chart"></div>
+      </mat-card>
+    </div>
+    <div class="item">
+      <mat-card>
+        <div [chart]="inquiredMonthlyChart"></div>
+      </mat-card>
+    </div>
   </div>
 </div>
