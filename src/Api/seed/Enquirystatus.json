@@ -1,10 +1,12 @@
 ﻿[
   {
+    "Id": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
     "name": "Open",
     "Description": "Current or open status",
     "ProgrammerId": 100
   },
   {
+    "Id": "c9f42649-a3cd-47a6-97f8-224b76b0367c",
     "name": "Closed",
     "Description": "No more followup",
     "ProgrammerId": 200

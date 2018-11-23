@@ -12,10 +12,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { LoginComponent } from './user/login/login.component';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +38,13 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSidenavModule,
+    MatListModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

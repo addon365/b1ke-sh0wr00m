@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Database.Entity.Enquiries;
+using Api.Database.Entity.Report;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -45,6 +46,21 @@ namespace swcApi.Controllers
         public IEnumerable<KeyValuePair<string, int>> GetInquiriesBasedOnProduct()
         {
             var result = _inquiryReportService.GetBasedOnProduct(DateTime.Now, DateTime.Now);
+            return result;
+
+        }
+        /// <summary>
+        /// Returns the number of inquiries happened based on product in the given year.
+        /// </summary>
+        /// <returns>Number of Inquries based on product.</returns>
+        [HttpGet("inquiredMonthly")]
+        public IEnumerable<KeyValuePair<string,InquiredMonthly[]>> GetMonthlyInquired()
+        {
+            var temp = _inquiryReportService.GetMonthlyInquired(DateTime.Now, DateTime.Now);
+            var result=temp.GroupBy(keySelector => keySelector.ProductName)
+                .Select(selector =>
+                new KeyValuePair<string, InquiredMonthly[]>(selector.Key, selector.ToArray())
+                );
             return result;
 
         }

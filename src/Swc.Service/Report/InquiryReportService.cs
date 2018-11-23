@@ -1,5 +1,6 @@
 ﻿using Api.Database.Entity.Enquiries;
 using Api.Database.Entity.Products;
+using Api.Database.Entity.Report;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,10 @@ namespace Swc.Service.Report
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate, DateTime toDate)
+        public IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate,
+            DateTime toDate)
         {
             var enquiries = _unitOfWork.GetReadOnlyRepository<Enquiry>().GetList().Items;
-            //var enquiryProducts = _unitOfWork.GetReadOnlyRepository<Enquiry>()
-            //     .GetList(include: source =>
-            //     source.Include(e => e.EnquiryProducts));
 
             IList<EnquiryProduct> listOfEnquiryProduct = new List<EnquiryProduct>();
             foreach (Enquiry enquiry in enquiries)
@@ -45,10 +44,33 @@ namespace Swc.Service.Report
                     listOfProduct.Add(product);
             }
             var result = listOfProduct.GroupBy(product => product.ProductName)
-                .Select(productGroup => new KeyValuePair<string, int>(productGroup.Key, productGroup.Count()));
+                .Select(productGroup =>
+                new KeyValuePair<string, int>(productGroup.Key, productGroup.Count()));
             return result;
         }
-
+        public IEnumerable<InquiredMonthly> GetMonthlyInquired(DateTime fromDate,
+            DateTime toDate)
+        {
+            var result = _unitOfWork.GetReadOnlyRepository<InquiredMonthly>()
+                .Query(ReportQueries.PRODUCTS_BASED_MONTH, new object[] { }).ToList();
+            return result;
+        }
+        private IDictionary<string, Product> GetDictOfProducts()
+        {
+            var productKeyValuePair = _unitOfWork.GetReadOnlyRepository<Product>()
+                    .GetList().Items
+                    .Select(product =>
+                    new KeyValuePair<string, Product>(product.Id.ToString(), product)
+                    );
+            IDictionary<string, Product> dictProducts =
+                new Dictionary<string, Product>(productKeyValuePair.Count());
+            foreach (KeyValuePair<string, Product> productKeyValue in productKeyValuePair)
+            {
+                dictProducts.Add(productKeyValue);
+            }
+            return dictProducts;
+        }
 
     }
+
 }

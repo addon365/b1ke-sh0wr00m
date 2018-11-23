@@ -15,6 +15,7 @@ using Api.Database.Entity;
 using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Crm;
+using System.Diagnostics;
 
 namespace swcApi
 {
@@ -32,7 +33,7 @@ namespace swcApi
                 .Select(m => m.Key);
 
             return !total.Except(applied).Any();
-            
+
         }
 
         public static void EnsureSeeded(this ApiContext context)
@@ -41,7 +42,7 @@ namespace swcApi
             if (!context.Products.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
-                
+
                 context.AddRange(types);
                 context.SaveChanges();
             }
@@ -68,7 +69,7 @@ namespace swcApi
                 var types = JsonConvert.DeserializeObject<List<ProductCompany>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductCompanies.json"));
                 context.AddRange(types);
                 context.SaveChanges();
-                
+
             }
             if (!context.ProductTypes.Any())
             {
@@ -77,7 +78,7 @@ namespace swcApi
                 context.SaveChanges();
 
             }
-            if(!context.LicenseMasters.Any())
+            if (!context.LicenseMasters.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<LicenseMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "LIcense.json"));
                 context.AddRange(types);
@@ -110,6 +111,51 @@ namespace swcApi
                         "seed" + Path.DirectorySeparatorChar + "FollowUpStatuses.json"));
                 context.AddRange(types);
                 context.SaveChanges();
+            }
+            SeedEnquiries(context);
+        }
+        [Conditional("DEBUG")]
+        private static void SeedEnquiries(ApiContext context)
+        {
+            if (!context.Contacts.Any())
+            {
+
+                var file = File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "Contacts.json");
+                var types = JsonConvert.DeserializeObject<List<Contact>>(file);
+                context.AddRange(types);
+                context.SaveChanges();
+
+            }
+            if (!context.Enquiries.Any())
+            {
+                try
+                {
+                    var types = JsonConvert.DeserializeObject<List<Enquiry>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "Enquiries.json"));
+                    context.AddRange(types);
+                    context.SaveChanges();
+                }
+                catch(Exception exception)
+                {
+                    Console.Write(exception.Message);
+                }
+            }
+            if (!context.EnquiryProducts.Any())
+            {
+                try
+                {
+                    var types = JsonConvert.DeserializeObject<List<EnquiryProduct>>(
+                File.ReadAllText(
+                    "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
+                    context.AddRange(types);
+                    context.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+                    Console.Write(exception.Message);
+                }
             }
         }
     }

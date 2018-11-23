@@ -1,15 +1,18 @@
 [
   {
+    "Id": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
     "Identifier": "Ref001",
     "ProductName": "Pulsor",
     "Price": "1000"
   },
   {
+    "Id": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
     "Identifier": "Ref002",
     "ProductName": "CD-100",
     "Price": "2000"
   },
   {
+    "Id": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
     "Identifier": "Ref003",
     "ProductName": "EXCEL",
     "Price": "3000"
