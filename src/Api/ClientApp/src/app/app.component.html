@@ -1,5 +1,5 @@
 <div class="root-container">
-  <header>
+  <div class="header">
     <mat-toolbar>
       <div class="title"> SVB Bike Show Room </div>
       <div class="user">
@@ -16,10 +16,9 @@
           </mat-menu>
         </div>
       </div>
-
     </mat-toolbar>
-  </header>
-  <main class="main-content">
+  </div>
+  <div class="content">
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav #sidenav class="sidenav" mode="side" opened>
         <mat-nav-list>
@@ -30,17 +29,20 @@
             <a matLine routerLink="/dashboard"> Dashboard </a>
           </mat-list-item>
         </mat-nav-list>
-
       </mat-sidenav>
-
       <mat-sidenav-content>
         <div class="content">
           <router-outlet></router-outlet>
         </div>
       </mat-sidenav-content>
     </mat-sidenav-container>
-  </main>
-  <footer>
-    <mat-toolbar>Copyright for good</mat-toolbar>
-  </footer>
+  </div>
+  <div class="footer">
+    <hr>
+    <div class="footer-content">
+      <div class="footer-item">Privacy Policy</div>
+      <div class="footer-item">Sitemap</div>
+      <div class="footer-item">© 2000-2019 Addon Technologies.</div>
+    </div>
+  </div>
 </div>
