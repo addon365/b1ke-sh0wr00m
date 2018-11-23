@@ -53,7 +53,7 @@ namespace swcApi
             services.AddTransient<IFollowUpService, FollowUpService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
             services.AddApiVersioning(o =>
             {
@@ -107,12 +107,20 @@ namespace swcApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
+
             app.UseAuthentication();
             //https://stackoverflow.com/questions/38298312/dynamic-routing-in-asp-net-core
            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseSpaStaticFiles();
+            
 
             app.UseMvc(routes =>
             {

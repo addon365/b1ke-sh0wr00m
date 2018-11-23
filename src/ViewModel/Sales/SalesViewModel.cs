@@ -14,6 +14,9 @@ using Swc.Service.Sales;
 using Api.Domain.Sales;
 using Api.Database.Entity.Sales;
 using Api.Database.Entity.Crm;
+using Api.Database.Entity.Accounts;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace ViewModel.Sales
 {
@@ -23,6 +26,7 @@ namespace ViewModel.Sales
         private MarketingZone _currentMarketingZone;
         private Product _currentVehicle;
         private Customer _currentCustomer;
+        private VoucherInfo _currentAmount;
 
         public InitilizeSales MasterData { get; }
 
@@ -33,10 +37,16 @@ namespace ViewModel.Sales
 
             MasterData = _repository.GetInitilizeSales();
             WireCommands();
+            Init();
+           
+        }
+        void Init()
+        {
             InsertCommand.IsEnabled = true;
             CurrentCustomer = new Customer();
             CurrentCustomer.Profile = new Contact();
-           
+            CurrentAmount = new VoucherInfo();
+            Amounts = new ObservableCollection<VoucherInfo>();
         }
         void LoadData()
         {
@@ -46,6 +56,7 @@ namespace ViewModel.Sales
         private void WireCommands()
         {
             InsertCommand = new RelayCommand(Insert);
+            AddAmountCommand = new RelayCommand(AddAmount);
         }
 
 
@@ -55,6 +66,11 @@ namespace ViewModel.Sales
             private set;
         }
         public RelayCommand InsertCommand
+        {
+            get;
+            private set;
+        }
+        public RelayCommand AddAmountCommand
         {
             get;
             private set;
@@ -87,6 +103,8 @@ namespace ViewModel.Sales
 
             model.Sales = sm;
             model.Inventorys = inventorys;
+
+            model.Amounts = Amounts;
             _repository.Insert(model);
 
         }
@@ -105,6 +123,44 @@ namespace ViewModel.Sales
         }
         #endregion
 
+        public  VoucherInfo CurrentAmount
+        {
+            get
+            {
+                return _currentAmount;
+            }
+            set
+            {
+                if(_currentAmount!=value)
+                {
+
+                    _currentAmount = value;
+
+                    OnPropertyChanged("CurrentAmount");
+                    AddAmountCommand.IsEnabled = true;
+                }
+            }
+        }
+        private ObservableCollection<VoucherInfo> _Amounts;
+        public ObservableCollection<VoucherInfo> Amounts
+        {
+            get
+            {
+                return _Amounts;
+            }
+            set
+            {
+                _Amounts = value;
+                OnPropertyChanged("Amounts");
+            }
+        }
+        public void AddAmount()
+        {
+
+            CurrentAmount.FieldInfo = AccountFields.CashAmount.ToString();
+            string str = AccountFields.CashAmount.DescriptionAttr();
+            Amounts.Add(CurrentAmount);
+        }
         public MarketingZone CurrentMarketingZone
         {
             get
@@ -161,7 +217,10 @@ namespace ViewModel.Sales
             }
 
         }
+      
     }
+    enum AccountFields{None,
+        [Description("Cash")]CashAmount, CardAmount}
 
 
 }
