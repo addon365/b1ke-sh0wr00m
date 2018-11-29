@@ -21,7 +21,7 @@ namespace Api.Database.Entity.Enquiries
         public Guid StatusId { get; set; }
         [ForeignKey("StatusId")] public virtual EnquiryStatus Status { get; set; }
 
-        public List<EnquiryProduct> EnquiryProducts { get; set; }
+        public IList<EnquiryProduct> EnquiryProducts { get; set; }
 
     }
 }
