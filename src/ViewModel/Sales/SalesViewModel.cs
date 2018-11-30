@@ -12,7 +12,7 @@ using Threenine.Data;
 using System.Linq;
 using Swc.Service.Sales;
 using Api.Domain.Sales;
-using Api.Database.Entity.Sales;
+using Api.Database.Entity.Inventory;
 using Api.Database.Entity.Crm;
 using Api.Database.Entity.Accounts;
 using System.ComponentModel;
@@ -91,18 +91,26 @@ namespace ViewModel.Sales
             }
 
             InsertSalesModel model = new InsertSalesModel();
-            SaleMaster sm = new SaleMaster();
+            InventoryMaster sm = new InventoryMaster();
             sm.CustomerId = CurrentCustomer.Id;
             sm.Customer = CurrentCustomer;
-            
-            SalesInventorys salesInventorys = new SalesInventorys();
+
+            InventoryItemMaster itemMaster = new InventoryItemMaster();
+            itemMaster.ChasisNo = "3445";
+            InventoryInfo salesInventorys = new InventoryInfo();
             salesInventorys.ProductId = CurrentVehicle.Id;
             salesInventorys.UnitPrice =45000;
-            List<SalesInventorys> inventorys = new List<SalesInventorys>();
+            salesInventorys.InventoryItemMasterId = itemMaster.Id;
+
+            List<InventoryInfo> inventorys = new List<InventoryInfo>();
             inventorys.Add(salesInventorys);
+
+            List<InventoryItemMaster> lstItemMaster = new List<InventoryItemMaster>();
+            lstItemMaster.Add(itemMaster);
 
             model.Sales = sm;
             model.Inventorys = inventorys;
+            model.itemMasters = lstItemMaster;
 
             model.Amounts = Amounts;
             _repository.Insert(model);

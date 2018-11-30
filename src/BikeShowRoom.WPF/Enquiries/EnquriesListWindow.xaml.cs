@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CrystalDecisions.CrystalReports.Engine;
 using ViewModel;
+using ViewModel.Enquiries;
 
 namespace BikeShowRoom.WPF.Enquiries
 {
@@ -28,8 +29,17 @@ namespace BikeShowRoom.WPF.Enquiries
             viewmodel = new EnquiriesListViewModel();
             base.DataContext = viewmodel;
             viewmodel.ReportObj = new Reports();
+            viewmodel.OpenBooking = OpenBooking;
+            
+        }
+        public void OpenBooking(Api.Domain.Enquiries.Enquiries enquiries)
+        {
+            EnquiryBookingViewModel enquiryBookingViewModel = new EnquiryBookingViewModel(enquiries);
+            EnquiryBooking eb = new EnquiryBooking(enquiryBookingViewModel);
+            eb.ShowDialog();
         }
     }
+
     public class Reports : ICrystalReport
     {
         public void ShowReport(ReportDocument rep)

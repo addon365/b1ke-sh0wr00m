@@ -23,5 +23,6 @@ namespace Api.Database.Entity.Enquiries
 
         public List<EnquiryProduct> EnquiryProducts { get; set; }
 
+        public Guid VoucherId { get; set; }
     }
 }

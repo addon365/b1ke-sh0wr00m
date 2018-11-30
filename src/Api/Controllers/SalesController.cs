@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Swc.Service.Sales;
 using Api.Domain.Sales;
+using System;
+using System.Threading.Tasks;
 
 namespace swcApi.Controllers
 {
@@ -19,18 +21,25 @@ namespace swcApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] InsertSalesModel model)
+        public async Task<IActionResult> Post([FromBody] InsertSalesModel model)
         {
+            try
+            { 
+         
+                if (model == null)
+                {
+                    return BadRequest();
+                }
 
-            if (model == null)
-            {
-                return BadRequest();
+                var identifier =await _SalesService.Insert(model);
+
+
+                return Ok();
             }
-
-            var identifier = _SalesService.Insert(model);
-
-
-            return Ok();
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [AllowAnonymous]

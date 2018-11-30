@@ -1,19 +1,19 @@
 ﻿[
   {
     "name": "Cash",
-    "ProgrammerId": Cash
+    "ProgrammerId": "Cash"
   },
   {
     "name": "Card",
-    "ProgrammerId": Card
+    "ProgrammerId": "Card"
   },
   {
     "name": "Bank Transfer",
-    "ProgrammerId": BankTransfer
+    "ProgrammerId": "BankTransfer"
   },
   {
     "name": "Cheque",
-    "ProgrammerId": Cheque
+    "ProgrammerId": "Cheque"
   }
 
 ]

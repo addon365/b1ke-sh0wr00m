@@ -1,6 +1,4 @@
 ﻿using Api.Database.Entity.Crm;
-using Api.Database.Entity.Enquiries;
-using Api.Domain.Enquiries;
 using CrystalDecisions.CrystalReports.Engine;
 using Swc.Service;
 using System;
@@ -12,11 +10,13 @@ using System.Reflection;
 
 namespace ViewModel
 {
+
+    public delegate void OpenBooking(Api.Domain.Enquiries.Enquiries enquiries);
     public class EnquiriesListViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
-        private IEnumerable<Enquiries> _enquiries;
-        private Enquiries _SelectedEnquiries;
+        private IEnumerable<Api.Domain.Enquiries.Enquiries> _enquiries;
+        private Api.Domain.Enquiries.Enquiries _SelectedEnquiries;
         public EnquiriesListViewModel()
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
@@ -29,16 +29,22 @@ namespace ViewModel
         private void WireCommands()
         {
             PrintCommand = new RelayCommand(PrintEnquiry);
+            OpenBookingCommand = new RelayCommand(OpenBookingMethod);
         }
         public RelayCommand PrintCommand
         {
             get;
             private set;
         }
-        
+        public RelayCommand OpenBookingCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
-        public IEnumerable<Enquiries> Enquiries
+        public IEnumerable<Api.Domain.Enquiries.Enquiries> Enquiries
         {
             get
             {
@@ -56,7 +62,7 @@ namespace ViewModel
                 }
             }
         }
-        public Enquiries SelectedEnquiries
+        public Api.Domain.Enquiries.Enquiries SelectedEnquiries
         { get
             {
                 return _SelectedEnquiries;
@@ -67,10 +73,12 @@ namespace ViewModel
                 {
                     _SelectedEnquiries = value;
                     OnPropertyChanged("SelectedEnquiries");
+                    OpenBookingCommand.IsEnabled = true;
                 }
 
             }
         }
+        public OpenBooking OpenBooking { get; set; }
         public ICrystalReport ReportObj { get; set; }
 
         public void PrintEnquiry()
@@ -80,6 +88,13 @@ namespace ViewModel
 
 
             Helper.PrintEnquiry(ReportObj, SelectedEnquiries.Identifier);
+        }
+        public void OpenBookingMethod()
+        {
+            if (OpenBooking == null)
+                return;
+
+            OpenBooking(SelectedEnquiries);
         }
      
         //public string GetFriendlyTypeName(Type type)

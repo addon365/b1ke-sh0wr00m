@@ -58,8 +58,12 @@ namespace addon.BikeShowRoomService.WebService
             {
 
                 var response = await _httpClient.PostAsync("Sales", new StringContent(JsonConvert.SerializeObject(insertSales), Encoding.UTF8, "application/json"));
-      
+              if(!response.IsSuccessStatusCode)
+               {
+                    string str= await response.Content.ReadAsStringAsync();
+                }
                 return response.Content.ToString();
+                
             }
             catch (Exception ex)
             {

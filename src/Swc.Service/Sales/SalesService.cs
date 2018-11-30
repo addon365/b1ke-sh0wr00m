@@ -13,6 +13,7 @@ using Api.Database.Entity.Crm;
 using Api.Domain.Sales;
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Finance;
+using Api.Database.Entity.Inventory;
 
 namespace Swc.Service.Sales
 {
@@ -40,9 +41,30 @@ namespace Swc.Service.Sales
         }
         public async Task<string> Insert(InsertSalesModel model)
         {
+            try
+            { 
+          
+                _unitOfWork.GetRepository<InventoryMaster>().Add(model.Sales);
+            _unitOfWork.GetRepository<InventoryInfo>().Add(model.Inventorys);
+            _unitOfWork.GetRepository<InventoryItemMaster>().Add(model.itemMasters);
+            
 
-        
-            return   "";
+            Voucher v = new Voucher();
+            foreach(VoucherInfo vi in model.Amounts)
+            {
+                vi.VoucherId = v.Id;
+            }
+            _unitOfWork.GetRepository<Voucher>().Add(v);
+            _unitOfWork.GetRepository<VoucherInfo>().Add(model.Amounts);
+            _unitOfWork.SaveChanges();
+      
+           
+            }
+            catch(Exception ex)
+            {
+                string str = ex.Message;
+            }
+            return "";
 
         }
 

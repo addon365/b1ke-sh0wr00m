@@ -287,6 +287,9 @@
     <Compile Include="CRM\FollowUp.xaml.cs">
       <DependentUpon>FollowUp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enquiries\EnquiryBooking.xaml.cs">
+      <DependentUpon>EnquiryBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportViewer.xaml.cs">
       <DependentUpon>ReportViewer.xaml</DependentUpon>
     </Compile>
@@ -359,6 +362,10 @@
     <Page Include="CRM\FollowUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Enquiries\EnquiryBooking.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ReportViewer.xaml">
       <SubType>Designer</SubType>
