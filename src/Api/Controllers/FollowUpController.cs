@@ -23,7 +23,7 @@ namespace swcApi.Controllers
 
         public FollowUpController(IFollowUpService followUpService,
             IOptions<AppSettings> appSettings,
-            ILogger<UserController> logger)
+            ILogger<FollowUpController> logger)
         {
             this._appSettings = appSettings.Value;
             this._followUpService = followUpService;

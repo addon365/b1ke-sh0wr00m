@@ -15,7 +15,7 @@ namespace Api.Database.Tests
             this.contextFactory = contextFactory;
         }
         [Fact]
-        public void ShouldContainsOneLicense()
+        public void MustAddLicense()
         {
             var context = contextFactory.GetContext();
             var license = Builder<LicenseMaster>.CreateNew().Build();
@@ -23,7 +23,6 @@ namespace Api.Database.Tests
             context.SaveChanges();
 
             Assert.Equal(license.Id, context.LicenseMasters.Find(license.Id).Id);
-
         }
     }
 }

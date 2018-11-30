@@ -127,7 +127,8 @@ namespace ViewModel.Crm
             _campaignInfo.Mode = null;
             _campaignInfo.Status = null;
             _campaignInfo.Contact = null;
-            string message = await _repository.InsertAsync(_campaignInfo);
+            await _repository.InsertAsync(_campaignInfo);
+            string message = "";
             if (!string.IsNullOrEmpty(message.Trim()))
             {
                 Message = message;
