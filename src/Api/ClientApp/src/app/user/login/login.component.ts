@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { User } from '../../models/user';
 import { Login } from '../../models/login';
 
 @Component({
@@ -9,9 +8,10 @@ import { Login } from '../../models/login';
 })
 export class LoginComponent implements OnInit {
   user: Login;
+  showSpinner: boolean;
   @Output() afterLogged = new EventEmitter<Login>();
   constructor() {
-
+    this.showSpinner = false;
   }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    
+
   }
 
 }

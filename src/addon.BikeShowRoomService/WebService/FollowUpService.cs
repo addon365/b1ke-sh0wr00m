@@ -102,7 +102,7 @@ namespace addon.BikeShowRoomService.WebService
             return dictFollowUpMode.Values;
         }
 
-        public async Task<string> InsertAsync(CampaignInfo campaignInfo)
+        public async Task<CampaignInfo> InsertAsync(CampaignInfo campaignInfo)
         {
             try
             {
@@ -111,14 +111,14 @@ namespace addon.BikeShowRoomService.WebService
                     new StringContent(JsonConvert.SerializeObject(campaignInfo),
                     Encoding.UTF8, "application/json"));
 
-
-                return response.Content.ReadAsStringAsync().ConfigureAwait(true)
-                                 .GetAwaiter()
-                                 .GetResult();
+                return null;
+                //return response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                //                 .GetAwaiter()
+                //                 .GetResult();
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return null;
             }
         }
         public FollowUpStatus GetFollowUpStatus(Guid guid)

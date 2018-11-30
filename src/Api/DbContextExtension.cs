@@ -129,33 +129,19 @@ namespace swcApi
             }
             if (!context.Enquiries.Any())
             {
-                try
-                {
-                    var types = JsonConvert.DeserializeObject<List<Enquiry>>(
-                    File.ReadAllText(
-                        "seed" + Path.DirectorySeparatorChar + "Enquiries.json"));
-                    context.AddRange(types);
-                    context.SaveChanges();
-                }
-                catch(Exception exception)
-                {
-                    Console.Write(exception.Message);
-                }
+                var types = JsonConvert.DeserializeObject<List<Enquiry>>(
+                File.ReadAllText(
+                    "seed" + Path.DirectorySeparatorChar + "Enquiries.json"));
+                context.AddRange(types);
+                context.SaveChanges();
             }
             if (!context.EnquiryProducts.Any())
             {
-                try
-                {
-                    var types = JsonConvert.DeserializeObject<List<EnquiryProduct>>(
-                File.ReadAllText(
-                    "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
-                    context.AddRange(types);
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Console.Write(exception.Message);
-                }
+                var types = JsonConvert.DeserializeObject<List<EnquiryProduct>>(
+            File.ReadAllText(
+                "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
+                context.AddRange(types);
+                context.SaveChanges();
             }
         }
     }

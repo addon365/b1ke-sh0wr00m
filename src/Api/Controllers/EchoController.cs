@@ -36,7 +36,7 @@ namespace swcApi.Controllers
 
         [HttpGet("authorized")]
         [Authorize]
-        public IActionResult authorized()
+        public IActionResult Authorized()
         {
             _logger.LogInformation("Invoking Authorized API");
             return Ok("Hello, I am Authorized User");

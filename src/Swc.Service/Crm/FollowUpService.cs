@@ -50,18 +50,11 @@ namespace Swc.Service.Crm
             return _unitOfWork.GetRepository<FollowUpMode>().GetList().Items;
         }
 
-        public Task<string> InsertAsync(CampaignInfo campaignInfo)
+        public Task<CampaignInfo> InsertAsync(CampaignInfo campaignInfo)
         {
-            try
-            {
-                _unitOfWork.GetRepository<CampaignInfo>().Add(campaignInfo);
-                _unitOfWork.SaveChanges();
-            }
-            catch(Exception exception)
-            {
-                return Task.FromResult<string>(exception.Message);
-            }
-            return null;
+            _unitOfWork.GetRepository<CampaignInfo>().Add(campaignInfo);
+            _unitOfWork.SaveChanges();
+            return Task.FromResult(campaignInfo);
         }
 
         public FollowUpStatus GetFollowUpStatus(Guid guid)

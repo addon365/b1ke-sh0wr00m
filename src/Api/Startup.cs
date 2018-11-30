@@ -17,6 +17,7 @@ using Swc.Service.Sales;
 using Swc.Service.Crm;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Swc.Service.Report;
+using swcApi.Utils.Exceptions;
 
 namespace swcApi
 {
@@ -54,7 +55,7 @@ namespace swcApi
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
@@ -115,13 +116,13 @@ namespace swcApi
 
             app.UseAuthentication();
             //https://stackoverflow.com/questions/38298312/dynamic-routing-in-asp-net-core
-           
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSpaStaticFiles();
-            
 
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default",
