@@ -127,21 +127,19 @@ namespace ViewModel.Crm
             _campaignInfo.Mode = null;
             _campaignInfo.Status = null;
             _campaignInfo.Contact = null;
-            await _repository.InsertAsync(_campaignInfo);
-            string message = "";
-            if (!string.IsNullOrEmpty(message.Trim()))
+            try
             {
-                Message = message;
-                IsProgressBarVisible = false;
-            }
-            else
-            {
+                _repository.Insert(_campaignInfo);
                 OnResult(true, "Successfully Updated Follow Up.");
                 this.CurrentInfo = new CampaignInfo
                 {
                     ContactId = contactId
                 };
-
+            }
+            catch(Exception ex)
+            {
+                Message = ex.Message;
+                IsProgressBarVisible = false;
             }
             InsertCampaignInfoCommand.IsEnabled = true;
         }

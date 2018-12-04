@@ -7,22 +7,22 @@ namespace ViewModel.Enquiries
 {
     public class EnquiryBookingViewModel : ViewModelBase
     {
-        
+
         private IEnumerable<FollowUpStatus> _followUpStatuses;
         private IEnumerable<CampaignInfo> _campaignInfos;
         private IEnumerable<FollowUpMode> _followUpModes;
         private CampaignInfo _campaignInfo;
         private readonly IFollowUpService _repository;
-        
+
 
         public EnquiryBookingViewModel(Api.Domain.Enquiries.Enquiries enq)
         {
-            
+
             _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
             _followUpStatuses = _repository.GetFollowUpStatuses();
             _followUpModes = _repository.GetFollowUpModes();
-            
-           
+
+
             string contactId = enq.Contact.Id.ToString();
             Contact contact = _repository.GetContact(contactId);
 
@@ -116,7 +116,7 @@ namespace ViewModel.Enquiries
             return true;
 
         }
-        public async void InsertCampainInfo()
+        public void InsertCampainInfo()
         {
             if (!IsValid()) return;
             InsertCampaignInfoCommand.IsEnabled = false;
@@ -127,21 +127,21 @@ namespace ViewModel.Enquiries
             _campaignInfo.Mode = null;
             _campaignInfo.Status = null;
             _campaignInfo.Contact = null;
-            string message = await _repository.InsertAsync(_campaignInfo);
-            if (!string.IsNullOrEmpty(message.Trim()))
+            try
             {
-                Message = message;
-                IsProgressBarVisible = false;
-            }
-            else
-            {
+                _repository.Insert(_campaignInfo);
                 OnResult(true, "Successfully Updated Follow Up.");
                 this.CurrentInfo = new CampaignInfo
                 {
                     ContactId = contactId
                 };
-
             }
+            catch (Exception exception)
+            {
+                Message = exception.Message;
+                IsProgressBarVisible = false;
+            }
+
             InsertCampaignInfoCommand.IsEnabled = true;
         }
         public Result OnResult

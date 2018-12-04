@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace swcApi.Utils.Exceptions
+namespace Swc.Service
 {
     public class ErrorDetails
     {

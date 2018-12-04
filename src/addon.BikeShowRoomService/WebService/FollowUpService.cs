@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Api.Database.Entity.Crm;
 using Newtonsoft.Json;
+using Swc.Service;
 using Swc.Service.Crm;
 
 namespace addon.BikeShowRoomService.WebService
@@ -62,8 +63,8 @@ namespace addon.BikeShowRoomService.WebService
                                      .GetAwaiter()
                                      .GetResult();
 
-                    IEnumerable<FollowUpStatus> followUpStatuses= JsonConvert.DeserializeObject<IList<FollowUpStatus>>(json);
-                    foreach(FollowUpStatus followUpStatus in followUpStatuses)
+                    IEnumerable<FollowUpStatus> followUpStatuses = JsonConvert.DeserializeObject<IList<FollowUpStatus>>(json);
+                    foreach (FollowUpStatus followUpStatus in followUpStatuses)
                     {
                         dictFollowUpStatus.Add(followUpStatus.Id, followUpStatus);
                     }
@@ -89,8 +90,8 @@ namespace addon.BikeShowRoomService.WebService
                                      .GetAwaiter()
                                      .GetResult();
 
-                    IEnumerable<FollowUpMode> followUpModes= JsonConvert.DeserializeObject<IList<FollowUpMode>>(json);
-                    foreach(FollowUpMode followUpMode in followUpModes)
+                    IEnumerable<FollowUpMode> followUpModes = JsonConvert.DeserializeObject<IList<FollowUpMode>>(json);
+                    foreach (FollowUpMode followUpMode in followUpModes)
                     {
                         dictFollowUpMode.Add(followUpMode.Id, followUpMode);
                     }
@@ -102,24 +103,25 @@ namespace addon.BikeShowRoomService.WebService
             return dictFollowUpMode.Values;
         }
 
-        public async Task<CampaignInfo> InsertAsync(CampaignInfo campaignInfo)
+        public CampaignInfo Insert(CampaignInfo campaignInfo)
         {
-            try
-            {
 
-                var response = await _httpClient.PostAsync("followup",
-                    new StringContent(JsonConvert.SerializeObject(campaignInfo),
-                    Encoding.UTF8, "application/json"));
-
-                return null;
-                //return response.Content.ReadAsStringAsync().ConfigureAwait(true)
-                //                 .GetAwaiter()
-                //                 .GetResult();
-            }
-            catch (Exception ex)
+            var response = _httpClient.PostAsync("followup",
+                new StringContent(JsonConvert.SerializeObject(campaignInfo),
+                Encoding.UTF8, "application/json"))
+                .GetAwaiter()
+                .GetResult();
+            var result = response.Content.ReadAsStringAsync()
+                           .ConfigureAwait(true)
+                           .GetAwaiter()
+                           .GetResult();
+            if (response.IsSuccessStatusCode)
             {
-                return null;
+                return JsonConvert.DeserializeObject<CampaignInfo>(result);
             }
+            ErrorDetails errorDetails = JsonConvert.DeserializeObject<ErrorDetails>(result);
+            throw new Exception(errorDetails.Message);
+
         }
         public FollowUpStatus GetFollowUpStatus(Guid guid)
         {
