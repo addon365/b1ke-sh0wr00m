@@ -1,4 +1,10 @@
-﻿using Api.Database.Entity.Crm;
+﻿
+using Api.Database.Entity.Accounts;
+using Api.Database.Entity.Crm;
+using Api.Domain.Accounts;
+using Api.Domain.Booking;
+using Microsoft.Extensions.DependencyInjection;
+using Swc.Service;
 using Swc.Service.Crm;
 using System;
 using System.Collections.Generic;
@@ -7,142 +13,95 @@ namespace ViewModel.Enquiries
 {
     public class EnquiryBookingViewModel : ViewModelBase
     {
+    
 
-        private IEnumerable<FollowUpStatus> _followUpStatuses;
-        private IEnumerable<CampaignInfo> _campaignInfos;
-        private IEnumerable<FollowUpMode> _followUpModes;
-        private CampaignInfo _campaignInfo;
-        private readonly IFollowUpService _repository;
+        private readonly IBookingService _repository;
+        private DomainVoucherInfo _currentAmount;
+        private Api.Domain.Enquiries.Enquiries _CurrentEnquiry;
 
 
         public EnquiryBookingViewModel(Api.Domain.Enquiries.Enquiries enq)
         {
 
-            _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
-            _followUpStatuses = _repository.GetFollowUpStatuses();
-            _followUpModes = _repository.GetFollowUpModes();
-
-
-            string contactId = enq.Contact.Id.ToString();
-            Contact contact = _repository.GetContact(contactId);
-
+            CurrentEnquiry = enq;
+           
             WireCommands();
 
+            _repository = Startup.Instance.provider.GetService<IBookingService>();
+            _repository = new addon.BikeShowRoomService.WebService.BookingService();
+            CurrentAmount = new DomainVoucherInfo();
 
 
-            IList<CampaignInfo> campaignInfos = new List<CampaignInfo>();
-            foreach (CampaignInfo campaignInfo in _repository.GetCampaingInfos(contactId))
-            {
-                campaignInfo.Status = _repository.GetFollowUpStatus(campaignInfo.StatusId);
-                campaignInfo.Mode = _repository.GetFollowUpMode(campaignInfo.ModeId);
-                campaignInfos.Add(campaignInfo);
-            }
-            CampaignInfos = campaignInfos;
-
-
-            CurrentInfo = new CampaignInfo
-            {
-                ContactId = contact.Id,
-                Contact = contact
-            };
-            foreach (FollowUpMode followUpMode in _followUpModes)
-            {
-                if (followUpMode.Name.Equals("Call"))
-                {
-                    CurrentInfo.Mode = followUpMode;
-                    CurrentInfo.ModeId = followUpMode.Id;
-                }
-            }
         }
         private void WireCommands()
         {
-            InsertCampaignInfoCommand = new RelayCommand(InsertCampainInfo);
+            InsertCommand = new RelayCommand(InsertBooking);
         }
-        public RelayCommand InsertCampaignInfoCommand
+        public RelayCommand InsertCommand
         {
             get;
             private set;
         }
-        public CampaignInfo CurrentInfo
+
+        public DomainVoucherInfo CurrentAmount
         {
             get
             {
-                return _campaignInfo;
+                return _currentAmount;
             }
             set
             {
-                if (CurrentInfo != value)
+                if (_currentAmount != value)
                 {
-                    _campaignInfo = value;
-                    OnPropertyChanged("CurrentInfo");
-                    InsertCampaignInfoCommand.IsEnabled = true;
 
+                    _currentAmount = value;
+                    _currentAmount.book = AccountBook.Booking;
+                    _currentAmount.FieldInfo = FieldInfo.CashAmount.ToString();
+                    _currentAmount.IsCredit = true;
+                    OnPropertyChanged("CurrentAmount");
+                    InsertCommand.IsEnabled = true;
+                }
+            }
+        }
+        public Api.Domain.Enquiries.Enquiries CurrentEnquiry
+        {
+            get
+            {
+                return _CurrentEnquiry;
+            }
+            set
+            {
+                if (_CurrentEnquiry != value)
+                {
+
+                    _CurrentEnquiry = value;
+                  
+                    OnPropertyChanged("CurrentEnquiry");
+                    
                 }
             }
         }
 
-        public IEnumerable<CampaignInfo> CampaignInfos
-        {
-            get { return _campaignInfos; }
-            set { _campaignInfos = value; }
-        }
-        public IEnumerable<FollowUpStatus> FollowUpStatuses
-        {
-            get
-            {
-                return _followUpStatuses;
-            }
-            set
-            {
-                if (FollowUpStatuses != value)
-                {
-                    _followUpStatuses = value;
-                    OnPropertyChanged("FollowUpStatuses");
-                }
-            }
-        }
-        private bool IsValid()
-        {
-            if (CurrentInfo.Status == null)
-            {
-                Message = "Status field is Manditory.";
-                return false;
-            }
-            if (CurrentInfo.Comments.Length <= 3)
-            {
-                Message = "Comments fields must contain meaningfull message.";
-                return false;
-            }
-            return true;
 
-        }
-        public void InsertCampainInfo()
+        public IMsgBox msg { get; set; }
+
+        public async void InsertBooking()
         {
-            if (!IsValid()) return;
-            InsertCampaignInfoCommand.IsEnabled = false;
-            IsProgressBarVisible = true;
-            _campaignInfo.Id = Guid.NewGuid();
-            Guid contactId = this.CurrentInfo.ContactId;
-            _campaignInfo.StatusId = _campaignInfo.Status.Id;
-            _campaignInfo.Mode = null;
-            _campaignInfo.Status = null;
-            _campaignInfo.Contact = null;
             try
-            {
-                _repository.Insert(_campaignInfo);
-                OnResult(true, "Successfully Updated Follow Up.");
-                this.CurrentInfo = new CampaignInfo
-                {
-                    ContactId = contactId
-                };
+            { 
+            InsertBooking ib = new InsertBooking();
+            ib.CashAmount = CurrentAmount;
+            ib.EnquiryId = CurrentEnquiry.EnquiryId;
+            Voucher v = new Voucher();
+            v.VoucherDate = System.DateTime.Now;
+            ib.Voucher = v;
+            await _repository.Insert(ib);
             }
-            catch (Exception exception)
+            catch(Exception ex)
             {
-                Message = exception.Message;
-                IsProgressBarVisible = false;
+                if (msg != null)
+                    msg.ShowUI(ex.Message);
             }
-
-            InsertCampaignInfoCommand.IsEnabled = true;
         }
         public Result OnResult
         {
@@ -150,4 +109,5 @@ namespace ViewModel.Enquiries
             set;
         }
     }
+    enum FieldInfo { CashAmount}
 }

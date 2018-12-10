@@ -31,7 +31,8 @@ namespace swcApi.Controllers
         public IActionResult SayWelcome()
         {
             _logger.LogInformation("Invoking Say Welcome API");
-            return Ok("Hi, Addon Technology Bikeshow showroom service is up and running.");
+            
+            return Ok("Hi, Addon Technology Bikeshow showroom service is up and running:"+ this.RouteData.Values["license"].ToString());
         }
 
         [HttpGet("authorized")]

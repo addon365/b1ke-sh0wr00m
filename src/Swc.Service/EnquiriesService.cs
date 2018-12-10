@@ -35,6 +35,7 @@ namespace Swc.Service
             foreach(Enquiry enquiry in enquiries)
             {
                 Enquiries e = new Enquiries();
+                e.EnquiryId = enquiry.Id;
                 e.Identifier = enquiry.Identifier;
                 e.Created = enquiry.Created;
                 e.Contact = _unitOfWork.GetRepository<Contact>().GetList(predicate: x => x.Id == enquiry.ContactId).Items.FirstOrDefault();

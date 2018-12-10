@@ -280,6 +280,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="CRM\Contact\ContactListWindow.xaml.cs">
       <DependentUpon>ContactListWindow.xaml</DependentUpon>
@@ -341,9 +342,13 @@
     <Compile Include="RibbonTab\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings\AppSettingLocator.cs" />
+    <Compile Include="Settings\IConfigProvider.cs" />
+    <Compile Include="Settings\SettingsConfigProvider.cs" />
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TinyIoC.cs" />
     <Compile Include="Utils\InternetAvailability.cs" />
     <Compile Include="Zonal\ZonalListWindow.xaml.cs">
       <DependentUpon>ZonalListWindow.xaml</DependentUpon>

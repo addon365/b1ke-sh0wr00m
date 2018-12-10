@@ -11,6 +11,7 @@ namespace Api.Domain.Enquiries
     public class Enquiries
     {
        
+            public Guid EnquiryId { get; set; }
             public string Identifier { get; set; }
             public DateTime Created { get; set; }
             public Contact Contact { get; set; }

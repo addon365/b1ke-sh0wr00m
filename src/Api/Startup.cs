@@ -18,6 +18,7 @@ using Swc.Service.Crm;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Swc.Service.Report;
 using swcApi.Utils.Exceptions;
+using Api.Domain;
 
 namespace swcApi
 {
@@ -54,7 +55,9 @@ namespace swcApi
             services.AddTransient<IFollowUpService, FollowUpService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IBookingService, BookingService>();
+            services.AddScoped<RequestInfo>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddApiVersioning(o =>
             {

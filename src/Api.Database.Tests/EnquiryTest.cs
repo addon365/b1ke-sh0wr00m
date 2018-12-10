@@ -27,7 +27,6 @@ namespace Api.Database.Tests
             var branch = Builder<BranchMaster>.CreateNew().Build();
             context.LicenseMasters.Add(license);
             branch.LicenseId = license.Id;
-            branch.BranchMasterId = branch.Id;
             context.BranchMasters.Add(branch);
             context.SaveChanges();
             Assert.Equal(branch.Id, context.BranchMasters.Find(branch.Id).Id);

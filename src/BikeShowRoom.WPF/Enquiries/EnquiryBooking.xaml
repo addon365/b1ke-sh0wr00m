@@ -65,9 +65,9 @@
                             </Grid.RowDefinitions>
                             <Button Content="Search and Select" Grid.ColumnSpan="2"/>
                             <TextBlock Grid.Row="1" Text="Payment Mode" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Column="1" Grid.Row="1" Height="24" ItemsSource="{Binding FollowUpStatuses}" DisplayMemberPath="Name"  SelectedItem="{Binding CurrentInfo.Status}"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Height="24" ItemsSource="{Binding MasterData.PaymentModes}" DisplayMemberPath="Name"/>
                             <TextBlock Grid.Row="2" Text="Amount"/>
-                            <TextBox  Text="{Binding Path=CurrentInfo.Comments,Mode=TwoWay}"  Grid.Column="1" Grid.Row="2" BorderBrush="Gray" Height="24"/>
+                            <TextBox  Text="{Binding CurrentAmount.Amount}"  Grid.Column="1" Grid.Row="2" BorderBrush="Gray" Height="24"/>
                         </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -84,17 +84,17 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Mobile No" VerticalAlignment="Center" Margin="0,7"/>
-                            <TextBox IsEnabled="False"  Text="{Binding Path=CurrentInfo.Contact.MobileNumber,Mode=OneTime}"  Grid.Column="1" Grid.Row="0" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
+                            <TextBox IsEnabled="False"  Text="{Binding Path=CurrentEnquiry.Contact.MobileNumber,Mode=OneTime}"  Grid.Column="1" Grid.Row="0" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
                             <TextBlock Grid.Row="1" Text="Name" VerticalAlignment="Center" Margin="0,7"/>
-                            <TextBox IsEnabled="False" Text="{Binding Path=CurrentInfo.Contact.Name,Mode=OneTime}" Grid.Column="1" Grid.Row="1" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
+                            <TextBox IsEnabled="False" Text="{Binding Path=CurrentEnquiry.Contact.Name,Mode=OneTime}" Grid.Column="1" Grid.Row="1" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
                             <TextBlock Grid.Row="2" Text="Place" VerticalAlignment="Center" Margin="0,7"/>
-                            <TextBox IsEnabled="False" Text="{Binding Path=CurrentInfo.Contact.Place,Mode=OneTime}" Grid.Column="1" Grid.Row="2" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
+                            <TextBox IsEnabled="False" Text="{Binding Path=CurrentEnquiry.Contact.Place,Mode=OneTime}" Grid.Column="1" Grid.Row="2" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
                             <TextBlock Grid.Row="3" Text="Address" VerticalAlignment="Center" Margin="0,7"/>
-                            <TextBox  IsEnabled="False" Text="{Binding Path=CurrentInfo.Contact.Address,Mode=OneTime}" Grid.Column="1" Grid.Row="3" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
+                            <TextBox  IsEnabled="False" Text="{Binding Path=CurrentEnquiry.Contact.Address,Mode=OneTime}" Grid.Column="1" Grid.Row="3" BorderBrush="Gray" Height="24" Grid.ColumnSpan="3" Margin="0,3"/>
                         </Grid>
                         <Grid Grid.Row="2">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Content="Save" Width="100" Height="30" Margin="10" Command="{Binding InsertCampaignInfoCommand}"/>
+                                <Button Content="Save" Width="100" Height="30" Margin="10" Command="{Binding InsertCommand}"/>
                                 <Button Content="Cancel" Width="100" Height="30"/>
                             </StackPanel>
                         </Grid>
