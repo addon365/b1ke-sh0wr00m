@@ -76,7 +76,6 @@ namespace swcApi.Tests
         public void Should_Duplicate_Throw_FollowUp()
         {
             var branch = Builder<BranchMaster>.CreateNew().Build();
-            branch.BranchMasterId = branch.Id;
 
             var mode = Builder<FollowUpMode>.CreateNew().Build();
             mode.BranchMasterId = branch.Id;
