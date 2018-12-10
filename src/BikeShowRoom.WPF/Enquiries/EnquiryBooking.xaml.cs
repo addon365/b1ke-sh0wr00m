@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using BikeShowRoom.WPF.Settings;
+using System.Windows;
+using ViewModel;
 using ViewModel.Enquiries;
 
 namespace BikeShowRoom.WPF.Enquiries
@@ -12,8 +14,12 @@ namespace BikeShowRoom.WPF.Enquiries
         public EnquiryBooking(object viewmodel)
         {
             InitializeComponent();
-            EnquiryBookingViewModel followUpViewModel = (EnquiryBookingViewModel)viewmodel;
-            followUpViewModel.OnResult = CloseMe;
+            var container = TinyIoC.TinyIoCContainer.Current;
+            IConfigProvider service = container.Resolve<IConfigProvider>("App");
+            EnquiryBookingViewModel ViewModel = (EnquiryBookingViewModel)viewmodel;
+            
+            ViewModel.OnResult = CloseMe;
+            ViewModel.msg = new CustomMessageBox();
             base.DataContext = viewmodel;
         }
         public void CloseMe(bool isSuccess, string message, object data)
@@ -22,5 +28,12 @@ namespace BikeShowRoom.WPF.Enquiries
             this.Close();
         }
 
+    }
+    public class CustomMessageBox : IMsgBox
+    {
+        public void ShowUI(string msg)
+        {
+            MessageBox.Show(msg);
+        }
     }
 }

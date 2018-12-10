@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity
 {
-    public class BranchMaster :BaseEntity
+    public class BranchMaster 
     {
+        [Key]
+        public UInt16 Id { get; set; }
         public string BranchName { get; set; }
         public string Location { get; set; }
-        public int ProgrammerID { get; set; }
-        public Guid LicenseId { get; set; }
+        public UInt16 LicenseId { get; set; }
+       
     }
 }

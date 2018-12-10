@@ -1,4 +1,5 @@
 ﻿using Api.Database;
+using BikeShowRoom.WPF.Settings;
 using Swc.Service;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows;
 using Threenine.Data;
+using TinyIoC;
 using Unity;
 using ViewModel;
 
@@ -33,15 +35,25 @@ namespace BikeShowRoom.WPF
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            //IUnityContainer container = new UnityContainer();
-            //container.RegisterType<IRepositoryFactory, UnitOfWork<ApiContext>>();
+
+            var container = TinyIoCContainer.Current;
+            // Register config
+            container.Register<IConfigProvider>((c, n) =>
+            {
+                IConfigProvider config = new SettingsConfigProvider();
+                return config;
+
+            },"App"); // ContainerNSR.APP_SETTINGS = "somevalue"
+
+                                           //IUnityContainer container = new UnityContainer();
+                                           //container.RegisterType<IRepositoryFactory, UnitOfWork<ApiContext>>();
 
             //container.RegisterType<IUnitOfWork, UnitOfWork<ApiContext>>();
 
             //container.RegisterType<IUnitOfWork<ApiContext>, UnitOfWork<ApiContext>>();
             //container.RegisterType<ISampleService, SampleService>();
 
-     
+
             //MainWindow mainWindow = container.Resolve<MainWindow>();
             //mainWindow.Show();
         }

@@ -7,14 +7,10 @@ namespace Api.Database.Entity
     public class LicenseMaster 
     {
         [Key]
-        public Guid Id { get; set; }
+        public UInt16 Id { get; set; }
         public string BusinessName { get; set; }
         public string LicenseId { get; set; }
         public string Location { get; set; }
-        public int ProgrammerID { get; set; }
-        public LicenseMaster()
-        {
-            this.Id = Guid.NewGuid();
-        }
+       
     }
 }

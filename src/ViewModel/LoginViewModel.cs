@@ -78,7 +78,9 @@ namespace ViewModel
             {
                 SessionInfo si = SessionInfo.Instance;
                 si.user = user;
+                
                 WebDataClient.UpdateAuthToken(user.SessionToken);
+                WebDataClient.Client.DefaultRequestHeaders.Add("UserId", SessionInfo.Instance.user.Id.ToString());
 
                 StoreSessionInfoAsync(user);
                 if (LoginSuccess != null)
