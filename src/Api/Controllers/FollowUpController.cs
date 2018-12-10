@@ -61,7 +61,7 @@ namespace swcApi.Controllers
         public IActionResult Insert([FromBody] CampaignInfo campaignInfo)
         {
             _logger.LogInformation("Inserting campaignInfo");
-            return Ok(_followUpService.InsertAsync(campaignInfo));
+            return Ok(_followUpService.Insert(campaignInfo));
         }
     }
 }

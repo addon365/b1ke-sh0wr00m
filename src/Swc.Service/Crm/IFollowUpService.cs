@@ -11,7 +11,7 @@ namespace Swc.Service.Crm
         IEnumerable<FollowUpMode> GetFollowUpModes();
         IEnumerable<CampaignInfo> GetCampaingInfos(string contactId);
         Contact GetContact(string contactId);
-        Task<CampaignInfo> InsertAsync(CampaignInfo campaignInfo);
+        CampaignInfo Insert(CampaignInfo campaignInfo);
         FollowUpStatus GetFollowUpStatus(Guid guid);
         FollowUpMode GetFollowUpMode(Guid guid);
     }

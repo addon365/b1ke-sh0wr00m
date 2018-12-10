@@ -50,11 +50,11 @@ namespace Swc.Service.Crm
             return _unitOfWork.GetRepository<FollowUpMode>().GetList().Items;
         }
 
-        public Task<CampaignInfo> InsertAsync(CampaignInfo campaignInfo)
+        public CampaignInfo Insert(CampaignInfo campaignInfo)
         {
             _unitOfWork.GetRepository<CampaignInfo>().Add(campaignInfo);
             _unitOfWork.SaveChanges();
-            return Task.FromResult(campaignInfo);
+            return campaignInfo;
         }
 
         public FollowUpStatus GetFollowUpStatus(Guid guid)
