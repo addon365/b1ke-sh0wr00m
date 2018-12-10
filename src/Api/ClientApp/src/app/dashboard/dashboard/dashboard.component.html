@@ -1,4 +1,4 @@
-<div fxLayout="column"  fxLayoutGap="20px">
+<div fxLayout="column" fxLayoutGap="20px">
   <div>
     <mat-card>
       <div class="title">
@@ -9,12 +9,31 @@
   <div class="content">
     <div class="item">
       <mat-card>
-        <div [chart]="chart"></div>
+        <google-chart [data]="pieChartData"></google-chart>
       </mat-card>
     </div>
     <div class="item">
       <mat-card>
-        <div [chart]="inquiredMonthlyChart"></div>
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Years" [(ngModel)]="selectedYear" (selectionChange)="onYearChanged($event)">
+              <mat-option *ngFor="let year of years" [value]="year">
+                {{year}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <google-chart #yearChartId  [data]="yearChartData"></google-chart>
+      </mat-card>
+    </div>
+    <div class="item">
+      <mat-card>
+        <google-chart [data]="tableChart"></google-chart>
+      </mat-card>
+    </div>
+    <div class="item">
+      <mat-card>
+        <google-chart [data]="lineChart"></google-chart>
       </mat-card>
     </div>
   </div>

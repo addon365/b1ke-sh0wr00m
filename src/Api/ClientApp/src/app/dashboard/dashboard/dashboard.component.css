@@ -1,9 +1,9 @@
-.item{
-  width: 40%;
-  height: 500px;
+.item {
   margin: 8px;
 }
-.content{
-  display:flex;
+
+.content {
+  display: flex;
   flex-direction: row;
+  flex-flow: wrap;
 }

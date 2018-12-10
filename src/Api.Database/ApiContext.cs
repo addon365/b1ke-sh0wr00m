@@ -79,7 +79,8 @@ namespace Api.Database
 
         #endregion
         #region Report
-        public DbSet<InquiredMonthly> InquiredProducts { get; set; }
+        public DbSet<InquiryReport> InquiryReport { get; set; }
+
         #endregion
 
 

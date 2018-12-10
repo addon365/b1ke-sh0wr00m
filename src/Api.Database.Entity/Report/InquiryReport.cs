@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Api.Database.Entity.Report
 {
-    public class InquiredMonthly
+    public class InquiryReport
     {
         [Key]
         public Int64 Id { get; set; }
-        public int MonthIndex { get; set; }
-        public string ProductName { get; set; }
-        public int ProductCount { get; set; }
+        public DateTime Date { get; set; }
+        public string Name { get; set; }
+        public int Count { get; set; }
     }
 }

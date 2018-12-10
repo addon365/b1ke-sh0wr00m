@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Api.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace Api.Database.Migrations
                 name: "swc");
 
             migrationBuilder.CreateTable(
-                name: "BranchMaster",
+                name: "BranchMasters",
                 schema: "swc",
                 columns: table => new
                 {
@@ -31,30 +31,30 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BranchMaster", x => x.Id);
+                    table.PrimaryKey("PK_BranchMasters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BranchMaster_BranchMaster_BranchMasterId",
+                        name: "FK_BranchMasters_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "InquiredProducts",
+                name: "InquiryReport",
                 schema: "swc",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MonthIndex = table.Column<int>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true),
-                    ProductCount = table.Column<int>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Count = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InquiredProducts", x => x.Id);
+                    table.PrimaryKey("PK_InquiryReport", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,10 +93,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Campaigns", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Campaigns_BranchMaster_BranchMasterId",
+                        name: "FK_Campaigns_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -124,10 +124,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contacts_BranchMaster_BranchMasterId",
+                        name: "FK_Contacts_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -153,10 +153,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_EnquiryStatuses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryStatuses_BranchMaster_BranchMasterId",
+                        name: "FK_EnquiryStatuses_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -181,10 +181,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_EnquriyType", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquriyType_BranchMaster_BranchMasterId",
+                        name: "FK_EnquriyType_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -208,10 +208,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_FinanceCompanies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FinanceCompanies_BranchMaster_BranchMasterId",
+                        name: "FK_FinanceCompanies_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -236,10 +236,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_FollowUpModes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FollowUpModes_BranchMaster_BranchMasterId",
+                        name: "FK_FollowUpModes_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -264,10 +264,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_FollowUpStatuses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FollowUpStatuses_BranchMaster_BranchMasterId",
+                        name: "FK_FollowUpStatuses_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -296,10 +296,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_InventoryInfos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InventoryInfos_BranchMaster_BranchMasterId",
+                        name: "FK_InventoryInfos_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -323,10 +323,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_InventoryItemMasters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InventoryItemMasters_BranchMaster_BranchMasterId",
+                        name: "FK_InventoryItemMasters_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -352,10 +352,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_marketingZones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_marketingZones_BranchMaster_BranchMasterId",
+                        name: "FK_marketingZones_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -380,10 +380,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_PaymentModes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PaymentModes_BranchMaster_BranchMasterId",
+                        name: "FK_PaymentModes_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -409,10 +409,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_ProductCompanies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductCompanies_BranchMaster_BranchMasterId",
+                        name: "FK_ProductCompanies_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -444,10 +444,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_BranchMaster_BranchMasterId",
+                        name: "FK_Products_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -474,10 +474,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_ProductTypes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductTypes_BranchMaster_BranchMasterId",
+                        name: "FK_ProductTypes_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -502,10 +502,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Statuses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Statuses_BranchMaster_BranchMasterId",
+                        name: "FK_Statuses_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -529,10 +529,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Type", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Type_BranchMaster_BranchMasterId",
+                        name: "FK_Type_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -560,10 +560,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_BranchMaster_BranchMasterId",
+                        name: "FK_Users_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -586,10 +586,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Vouchers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vouchers_BranchMaster_BranchMasterId",
+                        name: "FK_Vouchers_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -617,10 +617,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_VouchersInfo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VouchersInfo_BranchMaster_BranchMasterId",
+                        name: "FK_VouchersInfo_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -646,10 +646,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customers_BranchMaster_BranchMasterId",
+                        name: "FK_Customers_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -688,10 +688,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_BranchMaster_BranchMasterId1",
+                        name: "FK_Employees_BranchMasters_BranchMasterId1",
                         column: x => x.BranchMasterId1,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -727,10 +727,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Enquiries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Enquiries_BranchMaster_BranchMasterId",
+                        name: "FK_Enquiries_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -779,10 +779,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_CampaignInfos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CampaignInfos_BranchMaster_BranchMasterId",
+                        name: "FK_CampaignInfos_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -839,10 +839,10 @@ namespace Api.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ExtraFittings_BranchMaster_BranchMasterId",
+                        name: "FK_ExtraFittings_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -882,10 +882,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Threats", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Threats_BranchMaster_BranchMasterId",
+                        name: "FK_Threats_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -924,10 +924,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_InventoryMasters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InventoryMasters_BranchMaster_BranchMasterId",
+                        name: "FK_InventoryMasters_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -960,10 +960,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_EnquiryAccessories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryAccessories_BranchMaster_BranchMasterId",
+                        name: "FK_EnquiryAccessories_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1006,10 +1006,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_EnquiryExchangeQuotations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryExchangeQuotations_BranchMaster_BranchMasterId",
+                        name: "FK_EnquiryExchangeQuotations_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1045,10 +1045,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_EnquiryProducts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryProducts_BranchMaster_BranchMasterId",
+                        name: "FK_EnquiryProducts_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1089,10 +1089,10 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_EnquiryFinanceQuotations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryFinanceQuotations_BranchMaster_BranchMasterId",
+                        name: "FK_EnquiryFinanceQuotations_BranchMasters_BranchMasterId",
                         column: x => x.BranchMasterId,
                         principalSchema: "swc",
-                        principalTable: "BranchMaster",
+                        principalTable: "BranchMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1105,9 +1105,9 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BranchMaster_BranchMasterId",
+                name: "IX_BranchMasters_BranchMasterId",
                 schema: "swc",
-                table: "BranchMaster",
+                table: "BranchMasters",
                 column: "BranchMasterId");
 
             migrationBuilder.CreateIndex(
@@ -1448,7 +1448,7 @@ namespace Api.Database.Migrations
                 schema: "swc");
 
             migrationBuilder.DropTable(
-                name: "InquiredProducts",
+                name: "InquiryReport",
                 schema: "swc");
 
             migrationBuilder.DropTable(
@@ -1544,7 +1544,7 @@ namespace Api.Database.Migrations
                 schema: "swc");
 
             migrationBuilder.DropTable(
-                name: "BranchMaster",
+                name: "BranchMasters",
                 schema: "swc");
         }
     }

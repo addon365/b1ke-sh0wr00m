@@ -1,107 +1,151 @@
-import { Component, OnInit } from '@angular/core';
-import { InquiryService } from '../../inquiry.service';
-import { Chart } from 'angular-highcharts';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from "@angular/core";
+import { InquiryService } from "../../inquiry.service";
 
-import { SeriesOptions } from 'highcharts';
-import { KeyValuePair } from '../../models/keyvaluepair';
-import { KeyValue } from '@angular/common';
-import { User } from '../../models/user';
-import { InquiredModel } from '../../models/inquiredmodel';
+import { InquiryReport } from "src/app/models/inquiry-report";
+import { UniqueSelectionDispatcher } from "@angular/cdk/collections";
+import { Dictionary } from "src/app/utils/dictionary";
+
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  inquiredMonthlyChart = new Chart({
-    chart: {
-      type: 'line'
-    },
-    title: {
-      text: 'Products Inquired Based on Month'
-    },
-    subtitle: {
-      text: 'Year 2018'
-    },
-    credits: {
-      enabled: false
-    },
-    yAxis: {
-      title: {
-        text: 'Number of Inquiries'
-      }
-    },
-    xAxis: {
-      title: {
-        text: 'Month in Index'
-      },
-      
+  constructor(private inquiryService: InquiryService,
+    private cd: ChangeDetectorRef) { }
+  selectedYear: string;
+  years: string[];
+  chartData: Array<Array<any>>;
+  pieChartData = {
+    chartType: "PieChart",
+    dataTable: null,
+    options: {
+      title: "Tasks",
+      legend: { position: 'bottom', alignment: 'start' },
+      width: 420,
+      height: 350
     }
-  });
-  chart = new Chart({
-    chart: {
-      type: 'pie'
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: false,
-        },
-        showInLegend: true
-      }
-    },
-    title: {
-      text: 'Top Products in Inquiry'
-    },
-    credits: {
-      enabled: false
-    },
-    legend: {
-      enabled: true,
-      useHTML: true,
-      labelFormatter: function () {
-        return '<div>' + this.name + ' (' + this.y + ')</div>';
-      }
-    },
-  });
-  constructor(private inquiryService: InquiryService) { }
+  };
+  @ViewChild("yearChartId") yearChartCtl;
+  tableChart = {
+    chartType: "Table",
+    dataTable: null,
+    options: {
+      title: "Top Year",
+      width: 420,
+      height: 350
+    }
+  };
 
 
+  yearChartData = {
+    chartType: "BarChart",
+    dataTable: null,
+    options: {
+      title: "Top Chart",
+      legend: { position: 'bottom', alignment: 'start' },
+      width: 520,
+      height: 350,
+      forceRedrawNow: true
+    }
+  };
+
+
+  lineChart = {
+    chartType: "LineChart",
+    dataTable: null,
+    options: {
+      title: "Line Chart",
+      legend: { position: 'bottom', alignment: 'start' },
+      width: 520,
+      height: 350
+    }
+  };
   ngOnInit() {
-    this.inquiryService.getInquirieReport()
-      .subscribe((keyValues: KeyValuePair<number>[]) => {
-        this.addSeries(keyValues);
+    this.inquiryService
+      .get("name")
+      .subscribe((keyValues: InquiryReport[]) => {
+        this.updateChart(keyValues);
       });
-    this.inquiryService.getInquirieMonthlyReport()
-      .subscribe(
-        (keyValues: KeyValuePair<InquiredModel[]>[]) => {
-          console.log(keyValues);
-          this.addInquiredMonthlySeries(keyValues);
-        },
-        (error: any) => { console.log(error) }
-      );
-  }
-  addInquiredMonthlySeries(keyValues: KeyValuePair<InquiredModel[]>[]) {
-    let lineChat = this.inquiredMonthlyChart;
-    keyValues.forEach(function (keyValue) {
-      let series: SeriesOptions = { name: keyValue.key, data: [] };
 
-      keyValue.value.forEach(function (inquiryModel) {
-        series.data.push(inquiryModel.productCount);
+    this.inquiryService.get("year")
+      .subscribe((keyValues: InquiryReport[]) => {
+        this.updateYearSelector(keyValues);
+        this.updateYear(keyValues);
       });
-      lineChat.addSeries(series);
+  }
+
+  updateYearSelector(arrInquiry: InquiryReport[]) {
+    this.years = Array.from(new Set<string>(arrInquiry.map(x =>
+      new Date(x.date).getFullYear().toString()
+    )));
+  }
+  updateYear(arrInquiryReport: InquiryReport[]) {
+    let dictData = new Dictionary<number[]>();
+    const names: string[] = Array.from(new Set<string>(arrInquiryReport.map(x => x.name)));
+
+    let headers = names;
+    headers.splice(0, 0, "Year");
+    arrInquiryReport.forEach(value => {
+      let year: string = new Date(value.date).getFullYear().toString();
+      let index = names.indexOf(value.name);
+      if (dictData.containsKey(year)) {
+        dictData.get(year).splice(index, 0, value.count);
+      } else {
+        dictData.add(year, [])
+        dictData.get(year).splice(index, 0, value.count);
+      }
+
+    });
+    this.dictToData(dictData, headers);
+  }
+  dictToData(dictData: Dictionary<number[]>, headers: string[]) {
+    this.chartData = new Array<Array<any>>();
+    this.chartData.push(headers);
+    dictData.keys().forEach(key => {
+      let arr = [];
+      arr.push(key);
+      arr = arr.concat(dictData.get(key));
+      this.chartData.push(arr);
+    });
+    this.yearChartData.dataTable = this.chartData;
+    this.tableChart.dataTable = this.chartData;
+    this.lineChart.dataTable = this.chartData;
+  }
+  updateChart(arrInquiryReport: InquiryReport[]) {
+    let chartData = new Array<Array<any>>();
+    let header = ["Name", "Count"];
+    chartData.push(header);
+    arrInquiryReport.forEach(value => {
+      let inquiryReportObj = new InquiryReport();
+      inquiryReportObj.copyFrom(value)
+      chartData.push(inquiryReportObj.toArray());
+    });
+    this.pieChartData.dataTable = chartData;
+  }
+  inquiryReportToArray(inquiryReport: InquiryReport) {
+    let inquiryReportData = new Array<any>();
+    inquiryReportData.push(inquiryReport.name);
+    inquiryReportData.push(inquiryReport.count);
+    return inquiryReportData;
+  }
+  onYearChanged(event: any) {
+    var dataTable = this.chartData.slice();
+    this.chartData.forEach((item, index) => {
+      if (this.selectedYear.localeCompare(item[0]) != 0) {
+        this.chartData = dataTable.splice(0, index);
+        console.log("GOT-" + dataTable);
+        this.yearChartData.dataTable = dataTable.slice();
+        this.tableChart.dataTable = dataTable.slice();
+        this.yearChartData.options.forceRedrawNow = true;
+        console.log(this.yearChartCtl);
+        this.yearChartCtl.redraw();
+        return;
+      }
+
     });
 
-  }
-  addSeries(keyValues: KeyValuePair<number>[]) {
-    let series: SeriesOptions = { name: "Year 2018", data: [] };
 
-    keyValues.forEach(function (keyValue) {
-      series.data.push([keyValue.key, keyValue.value]);
-    });
-    this.chart.addSeries(series);
   }
 }

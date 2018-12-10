@@ -11,7 +11,7 @@ namespace Swc.Service.Report
     /// </summary>
     public interface IInquiryReportService
     {
-        IEnumerable<KeyValuePair<string, int>> GetBasedOnProduct(DateTime fromDate, DateTime toDate);
-        IEnumerable<InquiredMonthly> GetMonthlyInquired(DateTime fromDate, DateTime toDate);
+        IEnumerable<InquiryReport> GetReport(ReportType type);
+
     }
 }

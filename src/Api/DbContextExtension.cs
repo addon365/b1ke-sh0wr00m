@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System.IO;
-using Api.Database.Entity.Threats;
 using Newtonsoft.Json;
 using Api.Database;
 using Api.Database.Entity.Enquiries;
@@ -16,6 +13,8 @@ using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Crm;
 using System.Diagnostics;
+using Api.Database.Entity.Report;
+using System;
 
 namespace swcApi
 {
@@ -38,7 +37,23 @@ namespace swcApi
 
         public static void EnsureSeeded(this ApiContext context)
         {
-
+            if (!context.InquiryReport.Any())
+            {
+                try
+                {
+                    var types = JsonConvert.DeserializeObject<List<InquiryReport>>(
+                        File.ReadAllText(
+                            "seed" + Path.DirectorySeparatorChar + "InquiryReport.json")
+                            );
+                    context.AddRange(types);
+                    context.SaveChanges();
+                }
+                catch(Exception exception)
+                {
+                    Console.Write(exception);
+                }
+               
+            }
             if (!context.Products.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));

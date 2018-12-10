@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20181129051129_init")]
-    partial class init
+    [Migration("20181206110444_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -145,7 +145,7 @@ namespace Api.Database.Migrations
 
                     b.HasIndex("BranchMasterId");
 
-                    b.ToTable("BranchMaster");
+                    b.ToTable("BranchMasters");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Crm.Campaign", b =>
@@ -989,21 +989,21 @@ namespace Api.Database.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Report.InquiredMonthly", b =>
+            modelBuilder.Entity("Api.Database.Entity.Report.InquiryReport", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MonthIndex");
+                    b.Property<int>("Count");
 
-                    b.Property<int>("ProductCount");
+                    b.Property<DateTime>("Date");
 
-                    b.Property<string>("ProductName");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("InquiredProducts");
+                    b.ToTable("InquiryReport");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Threats.Status", b =>
