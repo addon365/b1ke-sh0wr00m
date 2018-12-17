@@ -14,6 +14,7 @@ using Api.Database.Entity.Employee;
 using Api.Database.Entity.Crm;
 using Api.Database.Entity.Report;
 using Api.Database.Entity.Inventory;
+using Api.Database.Entity.Chit;
 
 namespace Api.Database
 {
@@ -35,8 +36,14 @@ namespace Api.Database
         public DbSet<Threat> Threats { get; set; }
         public DbSet<ThreatType> Type { get; set; }
         public DbSet<Status> Statuses { get; set; }
-      
-       
+
+        #region Chit
+        public DbSet<ChitSubriberDue> ChitSubscriberDues { get; set; }
+        public DbSet<ChitSubscriber> ChitSubscribers { get; set; }
+        public DbSet<ChitSchema> ChitSchemas { get; set; }
+        #endregion
+
+
         #region Crm
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Customer> Customers { get; set; }
