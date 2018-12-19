@@ -52,7 +52,7 @@ namespace Swc.Service.Sales
             Voucher v = new Voucher();
             foreach(VoucherInfo vi in model.Amounts)
             {
-                vi.VoucherId = v.Id;
+                vi.Voucher = v;
             }
             _unitOfWork.GetRepository<Voucher>().Add(v);
             _unitOfWork.GetRepository<VoucherInfo>().Add(model.Amounts);

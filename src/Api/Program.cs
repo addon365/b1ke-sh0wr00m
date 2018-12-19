@@ -26,6 +26,7 @@ namespace swcApi
                             fileSizeLimitBytes: 1_000_000,
                             rollOnFileSizeLimit: true,
                             shared: true,
+                            outputTemplate: "{Timestamp:dd-MM-yyyy HH:mm:ss.fff zzz} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}",
                             flushToDiskInterval: TimeSpan.FromSeconds(1))
                     .CreateLogger();
 

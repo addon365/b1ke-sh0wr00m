@@ -27,13 +27,13 @@ namespace Swc.Service
             voucher.VoucherDate = model.Voucher.VoucherDate;
             _r.InitilizeBaseEntityInfo(voucher);
             VoucherInfo Credit = new VoucherInfo();
-            Credit.VoucherId = voucher.Id;
+            Credit.Voucher = voucher;
             Credit.Amount = model.CashAmount.Amount;
             Credit.IsCredit = true;
             _unitOfWork.GetRepository<VoucherInfo>().Add(Credit);
 
             VoucherInfo Debit = new VoucherInfo();
-            Credit.VoucherId = voucher.Id;
+            Credit.Voucher = voucher;
             Debit.Amount = Credit.Amount;
             Debit.IsCredit = false;
             _unitOfWork.GetRepository<VoucherInfo>().Add(Debit);
