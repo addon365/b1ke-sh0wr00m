@@ -27,6 +27,7 @@
             <local:SendRecieve/>
             <local:Folder/>
             <local:View/>
+            <local:ChitTab/>
             <syncfusion:Ribbon.QuickAccessToolBar>
                 <syncfusion:QuickAccessToolBar/>
             </syncfusion:Ribbon.QuickAccessToolBar>

@@ -6,6 +6,7 @@ using Api.Database.Tests.Utils;
 using FizzWare.NBuilder;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -79,7 +80,7 @@ namespace Api.Database.Tests
 
             var chitSubscriber = Builder<ChitSubscriber>.CreateNew()
                 .With(c =>
-                c.ChitSchema = Builder<ChitSchema>.CreateNew().Build())
+                c.ChitSchema = Builder<ChitScheme>.CreateNew().Build())
                 .With(c =>
                 c.Customer = Builder<Customer>.CreateNew().Build())
                 .Build();
@@ -93,11 +94,129 @@ namespace Api.Database.Tests
                 .Build();
 
             context.ChitSubscriberDues.Add(chitSubscriberDue);
-                context.SaveChanges();
+            context.SaveChanges();
             Guid customerId = chitSubscriberDue.ChitSubscriber.Customer.Id;
             Assert.Equal(customerId,
                 context.Customers.Find(customerId).Id
                 );
+        }
+        [Fact]
+        public void Should_Insert_Multiple_Due()
+        {
+            var context = contextFactory.GetContext();
+            #region License and Branch
+            var license = Builder<LicenseMaster>.CreateNew().Build();
+            var branch = Builder<BranchMaster>.CreateNew()
+                .With(b => b.LicenseId = license.Id)
+                .Build();
+
+            context.LicenseMasters.Add(license);
+            branch.LicenseId = license.Id;
+            context.BranchMasters.Add(branch);
+            #endregion
+
+            var chitSubscriber = Builder<ChitSubscriber>.CreateNew()
+                .With(c =>
+                c.ChitSchema = Builder<ChitScheme>.CreateNew().Build())
+                .With(c =>
+                c.Customer = Builder<Customer>.CreateNew().Build())
+                .Build();
+
+            #region Due Payment 1
+            var voucher = Builder<Voucher>.CreateNew().Build();
+            var voucherInfo = Builder<VoucherInfo>.CreateNew()
+                .With(vi =>
+                vi.Voucher = voucher)
+                .Build();
+            var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
+                .With(sub => sub.ChitSubscriber = chitSubscriber)
+                .With(sub => sub.VoucherInfo = voucherInfo)
+                .Build();
+            #endregion
+
+            #region Due Payment 2
+            var voucherInfo2 = Builder<VoucherInfo>.CreateNew()
+                .With(vi =>
+                vi.Voucher = voucher)
+                .Build();
+
+
+            var chitSubscriberDue2 = Builder<ChitSubriberDue>.CreateNew()
+                .With(sub => sub.ChitSubscriber = chitSubscriber)
+                .With(sub => sub.VoucherInfo = voucherInfo2)
+                .Build();
+            #endregion
+
+            context.ChitSubscriberDues.Add(chitSubscriberDue);
+            context.ChitSubscriberDues.Add(chitSubscriberDue2);
+            context.SaveChanges();
+            Guid customerId = chitSubscriberDue.ChitSubscriber.Customer.Id;
+
+            var chitSubriberDues = context.ChitSubscriberDues.Where(sd =>
+              sd.ChitSubscriber.Customer.Id == customerId);
+
+            Assert.Equal(2, chitSubriberDues.Count());
+        }
+
+        [Fact]
+        public void Should_Insert_Due_Existing()
+        {
+            var context = contextFactory.GetContext();
+            #region License and Branch
+            var license = Builder<LicenseMaster>.CreateNew().Build();
+            var branch = Builder<BranchMaster>.CreateNew()
+                .With(b => b.LicenseId = license.Id)
+                .Build();
+
+            context.LicenseMasters.Add(license);
+            branch.LicenseId = license.Id;
+            context.BranchMasters.Add(branch);
+            #endregion
+
+            var chitSubscriber = Builder<ChitSubscriber>.CreateNew()
+                .With(c =>
+                c.ChitSchema = Builder<ChitScheme>.CreateNew().Build())
+                .With(c =>
+                c.Customer = Builder<Customer>.CreateNew().Build())
+                .Build();
+
+            #region Save Due Payment 1
+            var voucher = Builder<Voucher>.CreateNew().Build();
+            var voucherInfo = Builder<VoucherInfo>.CreateNew()
+                .With(vi =>
+                vi.Voucher = voucher)
+                .Build();
+            var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
+                .With(sub => sub.ChitSubscriber = chitSubscriber)
+                .With(sub => sub.VoucherInfo = voucherInfo)
+                .Build();
+
+            context.ChitSubscriberDues.Add(chitSubscriberDue);
+            context.SaveChanges();
+            #endregion
+
+            #region Due Payment 2
+            var voucherInfo2 = Builder<VoucherInfo>.CreateNew()
+                .With(vi =>
+                vi.Voucher = voucher)
+                .Build();
+
+
+            var chitSubscriberDue2 = Builder<ChitSubriberDue>.CreateNew()
+                .With(sub => sub.ChitSubscriber = chitSubscriber)
+                .With(sub => sub.VoucherInfo = voucherInfo2)
+                .Build();
+            context.ChitSubscriberDues.Add(chitSubscriberDue2);
+            #endregion
+
+            context.SaveChanges();
+
+            Guid customerId = chitSubscriberDue.ChitSubscriber.Customer.Id;
+
+            var chitSubriberDues = context.ChitSubscriberDues.Where(sd =>
+              sd.ChitSubscriber.Customer.Id == customerId);
+
+            Assert.Equal(2, chitSubriberDues.Count());
         }
     }
 }

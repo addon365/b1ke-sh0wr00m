@@ -156,26 +156,27 @@
     </Reference>
     <Reference Include="sapbusinessobjects.wpf.viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.Data.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Data.WPF.16.3.0.21\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
+    <Reference Include="Syncfusion.Data.WPF, Version=16.4460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WPF.16.4.0.42\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.16.3.0.21\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="Syncfusion.Licensing, Version=16.4460.0.42, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.16.4.0.42\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.ReportControls.Wpf, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.ReportViewer.WPF, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.ReportWriter.Base, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
-    <Reference Include="Syncfusion.SfGrid.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfGrid.WPF.16.3.0.21\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=16.4460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfGrid.WPF.16.4.0.42\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfSkinManager.WPF, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.SfSkinManager.WPF.16.3.0.21\lib\net46\Syncfusion.SfSkinManager.WPF.dll</HintPath>
+    <Reference Include="Syncfusion.SfSkinManager.WPF, Version=16.4460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfSkinManager.WPF.16.4.0.42\lib\net46\Syncfusion.SfSkinManager.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Wpf, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Shared.WPF.16.3.0.21\lib\net46\Syncfusion.Shared.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.Shared.WPF, Version=16.4460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.16.4.0.42\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Tools.Wpf, Version=16.3460.0.21, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Tools.WPF.16.3.0.21\lib\net46\Syncfusion.Tools.Wpf.dll</HintPath>
+    <Reference Include="Syncfusion.Tools.WPF, Version=16.4460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.WPF.16.4.0.42\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -280,6 +281,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Chit\NewSchemaWindow.xaml.cs">
+      <DependentUpon>NewSchemaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTab\ChitTab.xaml.cs">
+      <DependentUpon>ChitTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="CRM\Contact\ContactListWindow.xaml.cs">
@@ -356,6 +363,10 @@
     <Compile Include="Zonal\ZonalWindow.xaml.cs">
       <DependentUpon>ZonalWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Chit\NewSchemaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ContactWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -375,6 +386,10 @@
     <Page Include="ReportViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTab\ChitTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Sales\VechicleSale.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -550,5 +565,6 @@
   <ItemGroup>
     <Resource Include="Assets\Reload.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

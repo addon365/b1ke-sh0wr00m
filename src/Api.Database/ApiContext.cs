@@ -40,7 +40,7 @@ namespace Api.Database
         #region Chit
         public DbSet<ChitSubriberDue> ChitSubscriberDues { get; set; }
         public DbSet<ChitSubscriber> ChitSubscribers { get; set; }
-        public DbSet<ChitSchema> ChitSchemas { get; set; }
+        public DbSet<ChitScheme> ChitSchemes { get; set; }
         #endregion
 
 
