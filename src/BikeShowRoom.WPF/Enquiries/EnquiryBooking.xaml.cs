@@ -14,8 +14,7 @@ namespace BikeShowRoom.WPF.Enquiries
         public EnquiryBooking(object viewmodel)
         {
             InitializeComponent();
-            var container = TinyIoC.TinyIoCContainer.Current;
-            IConfigProvider service = container.Resolve<IConfigProvider>("App");
+            
             EnquiryBookingViewModel ViewModel = (EnquiryBookingViewModel)viewmodel;
             
             ViewModel.OnResult = CloseMe;

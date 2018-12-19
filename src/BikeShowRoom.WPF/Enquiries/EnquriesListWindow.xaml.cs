@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Api.Database.Entity.Enquiries;
 using CrystalDecisions.CrystalReports.Engine;
 using ViewModel;
 using ViewModel.Enquiries;
@@ -32,7 +33,7 @@ namespace BikeShowRoom.WPF.Enquiries
             viewmodel.OpenBooking = OpenBooking;
             
         }
-        public void OpenBooking(Api.Domain.Enquiries.Enquiries enquiries)
+        public void OpenBooking(Enquiry enquiries)
         {
             EnquiryBookingViewModel enquiryBookingViewModel = new EnquiryBookingViewModel(enquiries);
             EnquiryBooking eb = new EnquiryBooking(enquiryBookingViewModel);

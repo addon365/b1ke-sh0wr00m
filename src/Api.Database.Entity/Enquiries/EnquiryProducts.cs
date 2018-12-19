@@ -14,7 +14,7 @@ namespace Api.Database.Entity.Enquiries
         public double AccessoriesAmount { get; set; }
         public double OtherAmount { get; set; }
         public double TotalAmount { get; set; }
-        [ForeignKey("EnquiryId")] public virtual Enquiry Enquiry { get; set; }
+        //[ForeignKey("EnquiryId")] public virtual Enquiry Enquiry { get; set; }
         [ForeignKey("ProductId")] public virtual Product Product { get; set; }
          
     }

@@ -1,18 +1,7 @@
-﻿using Api.Database;
-using BikeShowRoom.WPF.Settings;
-using Swc.Service;
+﻿using BikeShowRoom.WPF.Settings;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 using System.Runtime.ExceptionServices;
-using System.Threading.Tasks;
 using System.Windows;
-using Threenine.Data;
-using TinyIoC;
-using Unity;
-using ViewModel;
 
 namespace BikeShowRoom.WPF
 {
@@ -36,14 +25,7 @@ namespace BikeShowRoom.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            var container = TinyIoCContainer.Current;
-            // Register config
-            container.Register<IConfigProvider>((c, n) =>
-            {
-                IConfigProvider config = new SettingsConfigProvider();
-                return config;
-
-            },"App"); // ContainerNSR.APP_SETTINGS = "somevalue"
+           // ContainerNSR.APP_SETTINGS = "somevalue"
 
                                            //IUnityContainer container = new UnityContainer();
                                            //container.RegisterType<IRepositoryFactory, UnitOfWork<ApiContext>>();

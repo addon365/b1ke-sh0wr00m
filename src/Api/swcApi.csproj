@@ -11,6 +11,7 @@
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <UserSecretsId>baa2f579-d2a7-4eb4-89fb-1c171b2e2482</UserSecretsId>
+    <Platforms>AnyCPU;x86</Platforms>
    </PropertyGroup>
 
   <ItemGroup>

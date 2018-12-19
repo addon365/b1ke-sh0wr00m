@@ -18,8 +18,8 @@ namespace addon.BikeShowRoomService
         {
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             _client = new HttpClient();
-#if production
-            _client.BaseAddress = new Uri("https://swcapi20181010045554.azurewebsites.net/api/svb/v1.0/");
+#if !DEBUG
+            _client.BaseAddress = new Uri("https://swcapi20181212091502.azurewebsites.net/api/svb/v1.0/");
 #else
             _client.BaseAddress = new Uri("http://localhost:5000/api/svb/v1.0/");
 #endif
@@ -28,8 +28,9 @@ namespace addon.BikeShowRoomService
             _client.DefaultRequestHeaders.Accept.Add(
                  new MediaTypeWithQualityHeaderValue("application/json"));
            
-            _client.DefaultRequestHeaders.Add("DeviceId", getUniqueID("C"));
-            _client.DefaultRequestHeaders.Add("BranchId", "svb");
+            _client.DefaultRequestHeaders.Add("DeviceCode", getUniqueID("C"));
+            _client.DefaultRequestHeaders.Add("BranchId", "1");
+            
 
         }
         
@@ -48,6 +49,8 @@ namespace addon.BikeShowRoomService
         {     
             var header = new AuthenticationHeaderValue("Bearer", tokenAsBase64);
             Client.DefaultRequestHeaders.Authorization = header;
+            Client.DefaultRequestHeaders.Add("DeviceId", SessionInfo.Instance.user.DeviceId.ToString());
+            //Client.DefaultRequestHeaders.Add("LicenseId", SessionInfo.Instance.user.LicenseId.ToString());
             Client.DefaultRequestHeaders.Add("UserId", SessionInfo.Instance.user.Id.ToString());
         }
         public static string getUniqueID(string drive)

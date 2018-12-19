@@ -22,14 +22,16 @@ namespace swcApi.Controllers
         private readonly AppSettings _appSettings;
         private readonly ILogger _logger;
         private readonly IUserService _userService;
+        private RequestInfo _reqinfo;
 
         public UserController(IUserService userService,
             IOptions<AppSettings> appSettings,
-            ILogger<UserController> logger)
+            ILogger<UserController> logger, RequestInfo r)
         {
             this._appSettings = appSettings.Value;
             _userService = userService;
             this._logger = logger;
+            _reqinfo = r;
         }
 
 
@@ -37,13 +39,23 @@ namespace swcApi.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate(string userId, string password)
         {
+ 
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceCode = Request.Headers["DeviceCode"].ToString();
+            _reqinfo.Init();
             _logger.LogInformation("Validating User " + userId);
             User user = _userService.Validate(userId, password);
             if (user == null)
             {
                 _logger.LogError("Given " + userId + " Not found");
-                return NotFound("Incorrect UserId or Password");
+                return NotFound(new Exception("Incorrect UserId or Password"));
             }
+            if (_reqinfo.DeviceId == "")
+            {
+                _logger.LogError("Not Authorized computer");
+                return NotFound(new Exception("Not Authorized computer"));
+            }
+
             _logger.LogInformation("Given User " + userId +" Found");
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(AppSettings.SECRET);
@@ -60,6 +72,7 @@ namespace swcApi.Controllers
             string tokenString = tokenHandler.WriteToken(token);
             _logger.LogInformation(string.Format("Generated Token {0} for User {1}", tokenString, userId));
             user.SessionToken = tokenString;
+            user.DeviceId = _reqinfo.DeviceId;
             return Ok(user);
         }
         [HttpGet("all")]

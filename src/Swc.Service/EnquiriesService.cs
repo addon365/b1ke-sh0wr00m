@@ -10,6 +10,9 @@ using Api.Database.Entity.Products;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
 using Api.Database.Entity.Crm;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Api.Domain.Paging;
 
 namespace Swc.Service
 {
@@ -17,37 +20,59 @@ namespace Swc.Service
     {
       
         private readonly IUnitOfWork _unitOfWork;
-        private const string Enabled = "Enabled";
-        private const string Referer = "Referer";
-        private const string Moderate = "Moderate";
-
-        public EnquiryService(IUnitOfWork unitOfWork)
+       
+        private ILogger<EnquiryService> _looger;
+        private RequestInfo _requestInfo;
+        public EnquiryService(IUnitOfWork unitOfWork,ILogger<EnquiryService> logger,RequestInfo requestInfo)
         {
            _unitOfWork = unitOfWork;
+            this._looger = logger;
+            _requestInfo = requestInfo;
         }
-        public IEnumerable<Enquiries> GetAllActive()
+        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllActive(PagingParams pagingParams)
         {
-            List<Enquiries> lst = new List<Enquiries>();
+            //List<Enquiries> lst = new List<Enquiries>();
 
-            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList().Items;
-        
-       
-            foreach(Enquiry enquiry in enquiries)
-            {
-                Enquiries e = new Enquiries();
-                e.EnquiryId = enquiry.Id;
-                e.Identifier = enquiry.Identifier;
-                e.Created = enquiry.Created;
-                e.Contact = _unitOfWork.GetRepository<Contact>().GetList(predicate: x => x.Id == enquiry.ContactId).Items.FirstOrDefault();
-                e.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList().Items.Where(predicate: x => x.Id == enquiry.StatusId).FirstOrDefault();
-                e.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList().Items.Where(predicate: x => x.Id == enquiry.EnquiryTypeId).FirstOrDefault();
-                e.EnquiryProducts = _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id).FirstOrDefault();
-                if(e.EnquiryProducts!=null)
-                e.EnquiryProducts.Product= _unitOfWork.GetRepository<Product>().GetList().Items.Where(predicate: x => x.Id ==e.EnquiryProducts.ProductId).FirstOrDefault();
-                lst.Add(e);
-            }
-          return lst.OrderBy(s=>s.Created);
-          
+            //try
+            //{
+
+            // _unitOfWork.GetReadOnlyRepository<Enquiry>().GetList(include: x => x.Include(Contact=>Contact.Contact));
+            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList(orderBy: x => x.OrderBy(m => m.Created), include: x => x.Include(Contact => Contact.Contact).Include(Status => Status.Status).Include(m => m.EnquiryType).Include(n => n.EnquiryProducts).ThenInclude(c => c.Product),index: pagingParams.PageNumber, size:pagingParams.PageSize);
+               
+
+                //string enquiriecount = enquiries.Count.ToString();
+            //    _looger.LogError("Count :" + enquiriecount);
+            //    foreach (Enquiry enquiry in enquiries)
+            //    {
+            //        Enquiries e = new Enquiries();
+            //        e.EnquiryId = enquiry.Id;
+            //        e.Identifier = enquiry.Identifier;
+            //        e.EnquiryDate = enquiry.EnquiryDate;
+            //        e.Created = enquiry.Created;
+            //        e.Contact = enquiry.Contact;
+            //        //e.Contact = _unitOfWork.GetRepository<Contact>().GetList(predicate: x => x.Id == enquiry.ContactId).Items.FirstOrDefault();
+            //        e.Status = enquiry.Status;
+            //        //e.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList(predicate: x => x.Id == enquiry.StatusId).Items.FirstOrDefault();
+            //        //e.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList(predicate: x => x.Id == enquiry.EnquiryTypeId).Items.FirstOrDefault();
+            //        e.EnquiryType = enquiry.EnquiryType;
+            //        e.EnquiryProducts = enquiry.EnquiryProducts;
+            //        //e.EnquiryProducts = _unitOfWork.GetRepository<EnquiryProduct>().GetList(predicate: x => x.EnquiryId == enquiry.Id).Items.FirstOrDefault();
+            //        //if (e.EnquiryProducts != null)
+            //        //    e.EnquiryProducts.Product = _unitOfWork.GetRepository<Product>().GetList(predicate: x => x.Id == e.EnquiryProducts.ProductId).Items.FirstOrDefault();
+
+            //        lst.Add(e);
+            //    }
+            //}
+            //catch(Exception ex)
+            //{
+            //    string exg = ex.Message;
+            //    string str = ex.StackTrace;
+            //}
+            //string finalcount = lst.Count.ToString();
+            //_looger.LogInformation("Final Count :" + finalcount);
+
+            return enquiries;
+            
         }
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
@@ -85,24 +110,34 @@ namespace Swc.Service
             //enquirytype.Name = "InHouse";
 
             var enquiry = new Enquiry();
+
+            _requestInfo.InitilizeBaseEntityInfo(enquiry);
             var contact = new Contact();
             contact.Name = InsertEnquiries.Enquiry.Contact.Name;
             contact.MobileNumber = InsertEnquiries.Enquiry.Contact.MobileNumber;
             contact.Place = InsertEnquiries.Enquiry.Contact.Place;
             contact.Address = InsertEnquiries.Enquiry.Contact.Address;
             enquiry.Contact = contact;
-                var lst = _unitOfWork.GetRepository<Enquiry>()
-                         .GetList().Items;
+                var Branch= _unitOfWork.GetRepository<BranchMaster>()
+                         .GetList(predicate: x => x.Id == enquiry.BranchMasterId).Items;
 
-                string identi = "1";
+                String BranchShortCode = "";
+                if (Branch != null)
+                    BranchShortCode = Branch.FirstOrDefault().ShortCode;
+
+                var lst = _unitOfWork.GetRepository<Enquiry>()
+                         .GetList(predicate:x=>x.BranchMasterId== enquiry.BranchMasterId).Items;
+
+                string identi = BranchShortCode+"1";
                 if(lst!=null)
                 {
                     if(lst.Count>0)
-                        identi=(lst.Max(e => Convert.ToInt64(e.Identifier))+1).ToString();
+                        identi= BranchShortCode+(lst.Max(e => Convert.ToInt64(e.Identifier.Remove(0,1)))+1).ToString();
                 }
                     
                 
             enquiry.Identifier =identi ;
+            enquiry.EnquiryDate = InsertEnquiries.Enquiry.EnquiryDate;
 
                 enquiry.ContactId = contact.Id;
             enquiry.StatusId=_unitOfWork.GetRepository<EnquiryStatus>()
@@ -184,7 +219,7 @@ namespace Swc.Service
             ine.EnquiryProducts =lstEnquiryProducts ;
             ine.enquiryAccessories = _unitOfWork.GetRepository<EnquiryAccessories>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
             ine.enquiryExchangeQuotations = _unitOfWork.GetRepository<EnquiryExchangeQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            //ine.enquiryFinanceQuotations = _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
+            ine.enquiryFinanceQuotations = _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryProductId == enquiry.Id);
 
             return ine;
         }

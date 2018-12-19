@@ -27,6 +27,7 @@ namespace BikeShowRoom.WPF
             LoginViewModel lmv= new LoginViewModel();
             lmv.LoginSuccess = new LoginSuccess(this);
             lmv.LoginFailed = new LoginFailed();
+            lmv.msgBox = new MessageB();
             
             this.DataContext = lmv;
             
@@ -58,6 +59,15 @@ namespace BikeShowRoom.WPF
         public void ShowUI()
         {
             MessageBox.Show("Incorrect Information");
+        }
+    }
+    public class MessageB : IMsgBox
+    {
+
+
+        public void ShowUI(string msg)
+        {
+            MessageBox.Show(msg);
         }
     }
 

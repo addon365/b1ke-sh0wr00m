@@ -23,18 +23,18 @@ namespace addon.BikeShowRoomService.WebService
         {
             _httpClient = WebDataClient.Client;
         }
-        public IEnumerable<Enquiries> GetAllActive()
+        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllActive(Api.Domain.Paging.PagingParams pagingParams)
         {
 
-            HttpResponseMessage response = _httpClient.GetAsync("Enquiries").Result;
-            IEnumerable<Enquiries> enquiries = null;
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries?"+ "PageNumber="+pagingParams.PageNumber+ "&PageSize="+pagingParams.PageSize).Result;
+            Threenine.Data.Paging.IPaginate<Enquiry> enquiries = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                enquiries = JsonConvert.DeserializeObject<IEnumerable<Enquiries>>(json);
+                enquiries = JsonConvert.DeserializeObject<Threenine.Data.Paging.Paginate<Enquiry>>(json);
 
                 string j = json;
 
@@ -116,4 +116,5 @@ namespace addon.BikeShowRoomService.WebService
             return enquiries;
         }
     }
+    
 }

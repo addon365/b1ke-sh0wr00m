@@ -66,40 +66,48 @@ namespace ViewModel
         }
         public void ValidateUser()
         {
-
-
-            ValidateUserCommand.IsEnabled = false;
-
-
-
-            User user = _repository.Validate(CurrentUser.UserId, CurrentUser.Password);
-
-            if (user != null)
+            try
             {
-                SessionInfo si = SessionInfo.Instance;
-                si.user = user;
-                
-                WebDataClient.UpdateAuthToken(user.SessionToken);
-                WebDataClient.Client.DefaultRequestHeaders.Add("UserId", SessionInfo.Instance.user.Id.ToString());
-
-                StoreSessionInfoAsync(user);
-                if (LoginSuccess != null)
-                    LoginSuccess.ShowUI();
 
 
+                ValidateUserCommand.IsEnabled = false;
+
+
+
+                User user = _repository.Validate(CurrentUser.UserId, CurrentUser.Password);
+
+                if (user != null)
+                {
+                    SessionInfo si = SessionInfo.Instance;
+                    si.user = user;
+
+                    WebDataClient.UpdateAuthToken(user.SessionToken);
+
+
+                    StoreSessionInfoAsync(user);
+                    if (LoginSuccess != null)
+                        LoginSuccess.ShowUI();
+
+
+                }
+                else
+                {
+                    if (LoginFailed != null)
+                        LoginFailed.ShowUI();
+
+                    ValidateUserCommand.IsEnabled = true;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                if (LoginFailed != null)
-                    LoginFailed.ShowUI();
-
-                ValidateUserCommand.IsEnabled = true;
+                msgBox.ShowUI(ex.Message);
             }
 
 
         }
         public IViewUI LoginSuccess { get; set; }
         public IViewUI LoginFailed { get; set; }
+        public IMsgBox msgBox { get; set; }
 
     }
 }

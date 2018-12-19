@@ -19,7 +19,7 @@ namespace addon.BikeShowRoomService.WebService
         }
         public IEnumerable<ProductCompany> GetAllProductCompanies()
         {
-            HttpResponseMessage response = _httpClient.GetAsync("api/ProductCompany").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("ProductCompany").Result;
             IEnumerable<ProductCompany> companies = null;
             if (response.IsSuccessStatusCode)
             {
@@ -42,7 +42,7 @@ namespace addon.BikeShowRoomService.WebService
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var stringContent = new StringContent(JsonConvert.SerializeObject(productcompany), Encoding.UTF8, "application/json");
-            var httpResponce = _httpClient.PostAsync("api/ProductCompany", byteContent);
+            var httpResponce = _httpClient.PostAsync("ProductCompany", byteContent);
 
 
             Console.WriteLine(httpResponce);
@@ -59,7 +59,7 @@ namespace addon.BikeShowRoomService.WebService
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var stringContent = new StringContent(JsonConvert.SerializeObject(productcompany), Encoding.UTF8, "application/json");
-            var httpResponce = _httpClient.PostAsync("api/ProductCompany/Delete", byteContent);
+            var httpResponce = _httpClient.PostAsync("ProductCompany/Delete", byteContent);
         }
     }
 }

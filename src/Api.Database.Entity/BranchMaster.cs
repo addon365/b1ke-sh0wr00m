@@ -9,6 +9,7 @@ namespace Api.Database.Entity
         [Key]
         public UInt16 Id { get; set; }
         public string BranchName { get; set; }
+        public string ShortCode { get; set; }
         public string Location { get; set; }
         public UInt16 LicenseId { get; set; }
        

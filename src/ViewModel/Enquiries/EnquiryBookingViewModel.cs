@@ -1,6 +1,6 @@
 ﻿
 using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Crm;
+using Api.Database.Entity.Enquiries;
 using Api.Domain.Accounts;
 using Api.Domain.Booking;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +17,10 @@ namespace ViewModel.Enquiries
 
         private readonly IBookingService _repository;
         private DomainVoucherInfo _currentAmount;
-        private Api.Domain.Enquiries.Enquiries _CurrentEnquiry;
+        private Enquiry _CurrentEnquiry;
 
 
-        public EnquiryBookingViewModel(Api.Domain.Enquiries.Enquiries enq)
+        public EnquiryBookingViewModel(Enquiry enq)
         {
 
             CurrentEnquiry = enq;
@@ -63,7 +63,7 @@ namespace ViewModel.Enquiries
                 }
             }
         }
-        public Api.Domain.Enquiries.Enquiries CurrentEnquiry
+        public Enquiry CurrentEnquiry
         {
             get
             {
@@ -91,7 +91,7 @@ namespace ViewModel.Enquiries
             { 
             InsertBooking ib = new InsertBooking();
             ib.CashAmount = CurrentAmount;
-            ib.EnquiryId = CurrentEnquiry.EnquiryId;
+            ib.EnquiryId = CurrentEnquiry.Id;
             Voucher v = new Voucher();
             v.VoucherDate = System.DateTime.Now;
             ib.Voucher = v;

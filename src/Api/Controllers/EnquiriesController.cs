@@ -10,6 +10,7 @@ using Swashbuckle.AspNetCore;
 using Api.Domain.Enquiries;
 using Api.Database.Entity.Enquiries;
 using Microsoft.AspNetCore.Authorization;
+using Api.Domain.Paging;
 
 namespace swcApi.Controllers
 {
@@ -19,11 +20,12 @@ namespace swcApi.Controllers
     public class EnquiriesController : Controller
     {
         private readonly IEnquiriesService _enquiriesService;
-
+        private RequestInfo _reqinfo;
         /// <inheritdoc />
-        public EnquiriesController(IEnquiriesService enquiriesService)
+        public EnquiriesController(IEnquiriesService enquiriesService, RequestInfo r)
         {
             _enquiriesService = enquiriesService;
+            _reqinfo = r;
         }
 
         /// <summary>
@@ -33,9 +35,12 @@ namespace swcApi.Controllers
         ///</remarks>
         [AllowAnonymous]
         [HttpGet]
-        public IEnumerable<Enquiries> Get()
+        public Threenine.Data.Paging.IPaginate<Enquiry> Get(int PageNumber=0,int PageSize=30)
         {
-            return _enquiriesService.GetAllActive();
+            PagingParams pagingParams = new PagingParams();
+            pagingParams.PageNumber = PageNumber;
+            pagingParams.PageSize = PageSize;
+            return _enquiriesService.GetAllActive(pagingParams);
         }
 
         [AllowAnonymous]
@@ -59,8 +64,10 @@ namespace swcApi.Controllers
             {
                 return BadRequest();
             }
-           
-           var identifier = _enquiriesService.Insert(referrer);
+            _reqinfo.UserId = Request.Headers["UserId"].ToString();
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+            var identifier = _enquiriesService.Insert(referrer);
 
 
             return Ok() ;
