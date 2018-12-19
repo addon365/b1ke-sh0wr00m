@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Windows;
 
 namespace ViewModel
 {
@@ -25,7 +26,10 @@ namespace ViewModel
     new System.Uri(Assembly.GetExecutingAssembly().CodeBase)
 ).AbsolutePath;
             string path = Path.GetDirectoryName(assemblyFile);
-            rd.Load(path + @"\..\..\reports\reports\Enquiry.rpt");
+            string g = path + @"\..\..\reports\reports\Enquiry.rpt";
+            MessageBox.Show(g);
+            rd.Load("reports\\Enquiry.rpt");
+         
             DataSet ds = new DataSet();
             DataTable dt = ConvertToDataTable<Contact>(invm.contacts);
             dt.TableName = "Contact";
@@ -64,6 +68,10 @@ namespace ViewModel
             //    dt.Rows.Add(dr);
             //}
             rd.SetDataSource(ds);
+            foreach(ReportDocument sub in rd.Subreports)
+            {
+                sub.SetDataSource(ds);
+            }
 
             ReportObj.ShowReport(rd);
         }

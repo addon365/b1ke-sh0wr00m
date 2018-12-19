@@ -5,6 +5,7 @@ using System.Text;
 using Api.Database.Entity.Enquiries;
 using System.ComponentModel.DataAnnotations;
 using Api.Database.Entity.Crm;
+using System.Linq;
 
 namespace Api.Domain.Enquiries
 {
@@ -13,11 +14,17 @@ namespace Api.Domain.Enquiries
        
             public Guid EnquiryId { get; set; }
             public string Identifier { get; set; }
+            public DateTime EnquiryDate { get; set; }
             public DateTime Created { get; set; }
             public Contact Contact { get; set; }
             public EnquiryType EnquiryType { get; set; }
             public EnquiryStatus Status { get; set; }
-            public EnquiryProduct EnquiryProducts { get; set; }
+            public IList<EnquiryProduct> EnquiryProducts { get; set; }
+            public EnquiryProduct FirstProduct { get
+            {
+                return EnquiryProducts.FirstOrDefault();
+            }
+            }
             public EnquiryFinanceQuotation EnquiryFinanceQuotations { get; set; }
             public EnquiryExchangeQuotation EnquiryExchangeQuotations { get; set; }
 

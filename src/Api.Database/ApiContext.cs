@@ -31,6 +31,7 @@ namespace Api.Database
 
         public DbSet<User> Users { get; set; }
         public DbSet<LicenseMaster> LicenseMasters { get; set; }
+        public DbSet<DeviceMaster> DeviceMasters { get; set; }
         public DbSet<BranchMaster> BranchMasters { get; set; }
         public DbSet<Threat> Threats { get; set; }
         public DbSet<ThreatType> Type { get; set; }

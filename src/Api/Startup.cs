@@ -18,7 +18,9 @@ using Swc.Service.Crm;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Swc.Service.Report;
 using swcApi.Utils.Exceptions;
-using Api.Domain;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Newtonsoft.Json.Serialization;
 
 namespace swcApi
 {
@@ -42,6 +44,20 @@ namespace swcApi
             // Add framework services.
             services.AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration.GetConnectionString(Globals.api_database_connection_string_name)))
                 .AddUnitOfWork<ApiContext>();
+
+            services.AddScoped<IUrlHelper>(factory =>
+
+            {
+
+                var actionContext = factory.GetService<IActionContextAccessor>()
+
+                                           .ActionContext;
+
+                return new UrlHelper(actionContext);
+
+            });
+
+
             services.AddTransient<IReferrerService, ReferrerService>();
             services.AddTransient<IEnquiriesService, EnquiryService>();
             services.AddTransient<IProductService, ProductService>();
@@ -57,7 +73,15 @@ namespace swcApi
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
             services.AddScoped<RequestInfo>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
+
+            {
+
+                options.SerializerSettings.ContractResolver =
+
+                    new CamelCasePropertyNamesContractResolver();
+
+            }); ;
 
             services.AddApiVersioning(o =>
             {

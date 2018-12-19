@@ -35,7 +35,7 @@ namespace addon.BikeShowRoomService.WebService
 
                    
                     User user = null;
-                    if (response.IsSuccessStatusCode)
+                    if (response.StatusCode==System.Net.HttpStatusCode.OK)
                     { 
                         var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                         .GetAwaiter()
@@ -45,8 +45,17 @@ namespace addon.BikeShowRoomService.WebService
 
  
                     }
+                    else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                    var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                      .GetAwaiter()
+                                      .GetResult();
 
-                    return user;
+                    throw JsonConvert.DeserializeObject<Exception>(json);
+                    }
+
+
+                return user;
                 }
             
 

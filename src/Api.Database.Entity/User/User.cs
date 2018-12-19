@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.User
 {
@@ -12,6 +13,14 @@ namespace Api.Database.Entity.User
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public string UserName { get; set; }
+        
         public virtual string SessionToken { get; set; }
+
+        [NotMapped]
+        public string LicenseId { get; set; }
+
+        [NotMapped]
+        public string DeviceId { get; set; }
+
     }
 }

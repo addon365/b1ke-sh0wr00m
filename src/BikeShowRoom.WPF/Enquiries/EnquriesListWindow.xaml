@@ -13,14 +13,20 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid>
-                <Button Content="Print" Height="24" Width="150" Command="{Binding PrintCommand}"/>
-                <Button Content="Booking" Height="24" Width="150" Command="{Binding OpenBookingCommand}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Print" Height="24" Width="150" Command="{Binding PrintCommand}" />
+                <Button Content="Booking" Height="24" Width="150" Command="{Binding OpenBookingCommand}" Grid.Column="1"/>
+                
             </Grid>
-            <syncfusion:SfDataGrid ItemsSource="{Binding Enquiries}" 
+            <syncfusion:SfDataGrid ItemsSource="{Binding Enquiries.Items}" 
                        AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding SelectedEnquiries}" >
             <syncfusion:SfDataGrid.Columns>
                     <syncfusion:GridTextColumn MappingName="Identifier" HeaderText="Id"/>
-                    <syncfusion:GridTextColumn MappingName="EnquiryProducts.Product.ProductName" HeaderText="Vechicle"/>
+                    <syncfusion:GridDateTimeColumn MappingName="EnquiryDate" HeaderText="Date" Pattern="ShortDate"/>
+                    <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].Product.ProductName" HeaderText="Vechicle"/>
                     <syncfusion:GridTextColumn MappingName="Contact.Name" HeaderText="Name"/>
                     <syncfusion:GridTextColumn MappingName="Contact.MobileNumber" HeaderText="Mobile"/>
             </syncfusion:SfDataGrid.Columns>

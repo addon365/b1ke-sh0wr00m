@@ -9,6 +9,7 @@ namespace Swc.Service
     {
         public string UserId { get; set; }
         public string DeviceId { get; set; }
+        public string DeviceCode { get; set; }
         public string BranchId { get; set; }
 
         private UInt16? CreatedUserId { get; set; }
@@ -20,21 +21,38 @@ namespace Swc.Service
         {
             _unitOfWork = unitOfWork;
         }
+        public void Init()
+        {
+            DeviceId = "";
+            DeviceMaster dm = _unitOfWork.GetRepository<DeviceMaster>().GetList(predicate: x => x.DeviceId == DeviceCode).Items.FirstOrDefault();
+
+            if(dm!=null)
+                DeviceId = dm.Id.ToString();
+
+        }
         public void InitilizeBaseEntityInfo(BaseEntity baseEntity)
         {
             if (CreatedUserId == null)
                 CreatedUserId = UInt16.Parse(UserId);
 
             if (CreatedDeviceId == null)
-                CreatedDeviceId = _unitOfWork.GetRepository<DeviceMaster>().GetList(predicate: x => x.DeviceId == DeviceId).Items.FirstOrDefault().Id;
+                CreatedDeviceId = UInt16.Parse(DeviceId);
 
             if (BranchMasterId == null)
-                BranchMasterId = _unitOfWork.GetRepository<LicenseMaster>().GetList(predicate: x => x.LicenseId == BranchId).Items.FirstOrDefault().Id;
+                BranchMasterId = UInt16.Parse(BranchId);
 
             baseEntity.Created = System.DateTime.Now;
             baseEntity.CreatedUserId = CreatedUserId;
             baseEntity.CreatedDeviceId = CreatedDeviceId;
             baseEntity.BranchMasterId = BranchMasterId;
+        }
+        public void ValidateMe()
+        {
+            if (BranchMasterId == null)
+                throw new Exception("No Branch Id");
+
+            if (CreatedDeviceId == null)
+                throw new Exception("No device Id");
         }
     }
 }

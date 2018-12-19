@@ -1,4 +1,6 @@
 ﻿using Api.Database.Entity.Crm;
+using Api.Database.Entity.Enquiries;
+using Api.Domain.Paging;
 using CrystalDecisions.CrystalReports.Engine;
 using Swc.Service;
 using System;
@@ -7,21 +9,25 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 
 namespace ViewModel
 {
 
-    public delegate void OpenBooking(Api.Domain.Enquiries.Enquiries enquiries);
+    public delegate void OpenBooking(Enquiry enquiries);
     public class EnquiriesListViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
-        private IEnumerable<Api.Domain.Enquiries.Enquiries> _enquiries;
-        private Api.Domain.Enquiries.Enquiries _SelectedEnquiries;
+        private Threenine.Data.Paging.IPaginate<Enquiry> _enquiries;
+        private Enquiry _SelectedEnquiries;
+        private PagingParams pagingParams;
         public EnquiriesListViewModel()
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
-
-            _enquiries = _repository.GetAllActive();
+            pagingParams = new PagingParams();
+            pagingParams.PageNumber = 0;
+            pagingParams.PageSize = 10;
+            _enquiries = _repository.GetAllActive(pagingParams);
             WireCommands();
             PrintCommand.IsEnabled = true;
         }
@@ -44,7 +50,7 @@ namespace ViewModel
 
         #endregion
 
-        public IEnumerable<Api.Domain.Enquiries.Enquiries> Enquiries
+        public Threenine.Data.Paging.IPaginate<Enquiry> Enquiries
         {
             get
             {
@@ -62,7 +68,7 @@ namespace ViewModel
                 }
             }
         }
-        public Api.Domain.Enquiries.Enquiries SelectedEnquiries
+        public Enquiry SelectedEnquiries
         { get
             {
                 return _SelectedEnquiries;
@@ -83,11 +89,17 @@ namespace ViewModel
 
         public void PrintEnquiry()
         {
+            try { 
             if (ReportObj == null)
                 return;
 
 
             Helper.PrintEnquiry(ReportObj, SelectedEnquiries.Identifier);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
         }
         public void OpenBookingMethod()
         {

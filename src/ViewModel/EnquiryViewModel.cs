@@ -37,6 +37,7 @@ namespace ViewModel
         {
 
             CurrentEnquiry = new Enquiry();
+            CurrentEnquiry.EnquiryDate = System.DateTime.Now;
 
 
             CurrentContact = new Contact
@@ -353,6 +354,7 @@ namespace ViewModel
         void InitInsert()
         {
             CurrentEnquiry = new Enquiry();
+            CurrentEnquiry.EnquiryDate = System.DateTime.Now;
             CurrentContact = new Contact();
             CurrentEnquiryProduct = new EnquiryProduct();
             CurrentEnquiryProduct.Product = new Product();

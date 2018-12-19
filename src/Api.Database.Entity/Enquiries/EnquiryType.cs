@@ -15,6 +15,6 @@ namespace Api.Database.Entity.Enquiries
         }
         public int ProgrammerId { get; set; }
 
-        public virtual ICollection<Enquiry> Enquiries { get; set; }
+        //public List<Enquiry> Enquiries { get; set; }
     }
 }

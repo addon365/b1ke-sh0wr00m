@@ -14,13 +14,13 @@ namespace swcApi.Controllers
     public class BookingController : Controller
     {
         private readonly IBookingService _BookingService;
-        private RequestInfo _r;
+        private RequestInfo _reqinfo;
 
         /// <inheritdoc />
         public BookingController(IBookingService BookingService, RequestInfo r)
         {
             _BookingService = BookingService;
-            _r = r;
+            _reqinfo = r;
         }
 
         [HttpPost]
@@ -33,9 +33,10 @@ namespace swcApi.Controllers
                 {
                     return BadRequest();
                 }
-                _r.UserId = Request.Headers["UserId"].ToString();
-                _r.BranchId = Request.Headers["BranchId"].ToString();
-                _r.DeviceId= Request.Headers["DeviceId"].ToString();
+                _reqinfo.UserId = Request.Headers["UserId"].ToString();
+                _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+                _reqinfo.DeviceId= Request.Headers["DeviceId"].ToString();
+                
                 await _BookingService.Insert(model);
                 
 

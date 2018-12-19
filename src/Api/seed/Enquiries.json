@@ -1,106 +1,119 @@
 [
   {
     "Id": "4277D783-728E-57E8-2C29-C44A0AAE22C3",
-    "Identifier": "1",
+    "Identifier": "M1",
     "EnquiryDate": "02-16-18",
     "ContactId": "385E2278-3EB7-5E1B-6BEC-3D167B369BF3",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "864DF9AE-63A8-8FA9-87ED-A26DB8099DDD",
-    "Identifier": "2",
+    "Identifier": "M2",
     "EnquiryDate": "10-25-18",
     "ContactId": "C69488F2-3269-1BC1-2D0F-7417D0697B48",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "9D0F1D77-9F6E-7729-80D6-B62CA1256C73",
-    "Identifier": "3",
+    "Identifier": "M3",
     "EnquiryDate": "08-01-18",
     "ContactId": "2A063656-731A-8A0A-9A9B-2C5B619888ED",
     "EnquiryTypeId": "db55bfb6-58f4-4466-9b18-c8496e412b4f",
     "StatusId": "c9f42649-a3cd-47a6-97f8-224b76b0367c",
+    "BranchMasterId": "1"
   },
   {
     "Id": "29DC9C78-9908-455E-248F-D87E64117BAB",
-    "Identifier": "4",
+    "Identifier": "M4",
     "EnquiryDate": "11-17-18",
     "ContactId": "79E5A931-143A-3C65-46ED-3FDA990C3C66",
     "EnquiryTypeId": "db55bfb6-58f4-4466-9b18-c8496e412b4f",
     "StatusId": "c9f42649-a3cd-47a6-97f8-224b76b0367c",
+    "BranchMasterId": "1"
   },
   {
     "Id": "24C087B2-3C6B-17BF-5964-A04FA35E8D09",
-    "Identifier": "5",
+    "Identifier": "M5",
     "EnquiryDate": "11-07-18",
     "ContactId": "51499937-A74B-138B-3F20-04A4C3233385",
     "EnquiryTypeId": "db55bfb6-58f4-4466-9b18-c8496e412b4f",
     "StatusId": "c9f42649-a3cd-47a6-97f8-224b76b0367c",
+    "BranchMasterId": "1"
   },
   {
     "Id": "B72F8901-8FDB-1E7B-82FA-E42CC00D2F0F",
-    "Identifier": "6",
+    "Identifier": "M6",
     "EnquiryDate": "08-06-18",
     "ContactId": "769EFD3B-87ED-3D0B-7BAD-93EE8CB59F21",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "c9f42649-a3cd-47a6-97f8-224b76b0367c",
+    "BranchMasterId": "1"
   },
   {
     "Id": "533D0DE4-3759-4551-981A-E9368B4659A5",
-    "Identifier": "7",
+    "Identifier": "M7",
     "EnquiryDate": "01-08-18",
     "ContactId": "8023C2EE-424B-5C2C-3322-6E7748EB2FEB",
     "EnquiryTypeId": "db55bfb6-58f4-4466-9b18-c8496e412b4f",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "13DA29C4-331E-9E3B-63F0-76FF524A15F2",
-    "Identifier": "8",
+    "Identifier": "M8",
     "EnquiryDate": "12-16-18",
     "ContactId": "2F6C09A1-5960-9C05-6D9C-6EC47B106DE2",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "A52FD4E8-4310-99B7-096C-8702D40F12AF",
-    "Identifier": "9",
+    "Identifier": "M9",
     "EnquiryDate": "09-16-18",
     "ContactId": "81F6FC52-3A12-9E18-5277-CECEAF359B6D",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "435AEAEB-71BB-9135-0C0C-F4E5F4560363",
-    "Identifier": "10",
+    "Identifier": "M10",
     "EnquiryDate": "05-17-18",
     "ContactId": "4CE10F4F-6405-5559-6FCD-4951C41679A6",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "4B3D0269-5836-663C-1CE5-2F4ECB3B26A3",
-    "Identifier": "11",
+    "Identifier": "M11",
     "EnquiryDate": "11-03-18",
     "ContactId": "2F20A211-8146-A4D1-7B0A-C83DD46B326A",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   },
   {
     "Id": "BF8C82E6-9FFC-439D-1CE5-0869AE78890A",
-    "Identifier": "12",
+    "Identifier": "M12",
     "EnquiryDate": "01-22-18",
     "ContactId": "71189553-4721-8555-9EA7-507E1E539500",
     "EnquiryTypeId": "db55bfb6-58f4-4466-9b18-c8496e412b4f",
     "StatusId": "c9f42649-a3cd-47a6-97f8-224b76b0367c",
+    "BranchMasterId": "1"
   },
   {
     "Id": "AD8387CD-22D8-3E3B-6ADB-E6E4E1A48F9A",
-    "Identifier": "13",
+    "Identifier": "M13",
     "EnquiryDate": "12-28-18",
     "ContactId": "07F33D80-65CB-6874-19A0-352C8B674BF8",
     "EnquiryTypeId": "7f7fc82b-9fe9-4b22-b41a-cfc50dec7bc7",
     "StatusId": "d38214ad-2e8e-4a9a-bf94-984c8d8b811d",
+    "BranchMasterId": "1"
   }
 ]

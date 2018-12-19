@@ -54,6 +54,13 @@ namespace swcApi
                 }
                
             }
+            if (!context.BranchMasters.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<BranchMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "BranchMaster.json"));
+
+                context.AddRange(types);
+                context.SaveChanges();
+            }
             if (!context.Products.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
