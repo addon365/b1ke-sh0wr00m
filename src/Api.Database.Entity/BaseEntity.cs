@@ -15,7 +15,6 @@ namespace Api.Database.Entity
         public UInt16? CreatedUserId { get; set; }
         public UInt16? CreatedDeviceId { get; set; }
         public UInt16? BranchMasterId { get; set; }
-        public virtual BranchMaster BranchMaster { get; set; }
 
         public BaseEntity()
         {

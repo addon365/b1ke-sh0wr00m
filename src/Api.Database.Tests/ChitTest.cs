@@ -16,24 +16,36 @@ namespace Api.Database.Tests
     public class ChitTest : IClassFixture<ContextFactory>
     {
         ContextFactory contextFactory;
+
+        LicenseMaster license;
+        BranchMaster branch;
         public ChitTest(ContextFactory contextFactory)
         {
+            RandomGenerator randomGenerator = new RandomGenerator();
             this.contextFactory = contextFactory;
+            var context = contextFactory.GetContext();
+            license = Builder<LicenseMaster>.CreateNew()
+                .With(b => b.Id = (ushort)randomGenerator.Next(100,1000))
+                .Build();
+            branch = Builder<BranchMaster>.CreateNew()
+                .With(b => b.Id = (ushort)randomGenerator.Next(100, 1000))
+                .With(b => b.LicenseId = license.Id)
+                .Build();
+            context.BranchMasters.Add(branch);
+            context.SaveChanges();
         }
         [Fact]
         public void ShouldInsertCustomer()
         {
             var context = contextFactory.GetContext();
-            var license = Builder<LicenseMaster>.CreateNew().Build();
-            var branch = Builder<BranchMaster>.CreateNew().Build();
-            var chitCustomer = Builder<Customer>.CreateNew().Build();
 
-            context.LicenseMasters.Add(license);
-            branch.LicenseId = license.Id;
-            context.BranchMasters.Add(branch);
+            var chitCustomer = Builder<Customer>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
+                .Build();
 
-
-            var contact = Builder<Contact>.CreateNew().Build();
+            var contact = Builder<Contact>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
+                .Build();
             context.Contacts.Add(contact);
 
             chitCustomer.Profile = contact;
@@ -46,16 +58,14 @@ namespace Api.Database.Tests
         public void ShouldInsertVoucherInfo()
         {
             var context = contextFactory.GetContext();
-            var license = Builder<LicenseMaster>.CreateNew().Build();
-            var branch = Builder<BranchMaster>.CreateNew().Build();
-            var voucherInfo = Builder<VoucherInfo>.CreateNew().Build();
 
-            context.LicenseMasters.Add(license);
-            branch.LicenseId = license.Id;
-            context.BranchMasters.Add(branch);
+            var voucherInfo = Builder<VoucherInfo>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
+                .Build();
 
-
-            var voucher = Builder<Voucher>.CreateNew().Build();
+            var voucher = Builder<Voucher>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
+                .Build();
             context.Vouchers.Add(voucher);
 
             voucherInfo.Voucher = voucher;
@@ -68,27 +78,29 @@ namespace Api.Database.Tests
         public void ShouldInsertChit()
         {
             var context = contextFactory.GetContext();
-            var license = Builder<LicenseMaster>.CreateNew().Build();
-            var branch = Builder<BranchMaster>.CreateNew()
-                .With(b => b.LicenseId = license.Id)
-                .Build();
 
-            context.LicenseMasters.Add(license);
-            branch.LicenseId = license.Id;
-            context.BranchMasters.Add(branch);
 
 
             var chitSubscriber = Builder<ChitSubscriber>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
                 .With(c =>
-                c.ChitSchema = Builder<ChitScheme>.CreateNew().Build())
+                c.ChitSchema = Builder<ChitScheme>.CreateNew()
+                 .With(cs => cs.BranchMasterId = null)
+                 .Build())
                 .With(c =>
-                c.Customer = Builder<Customer>.CreateNew().Build())
+                c.Customer = Builder<Customer>.CreateNew()
+                 .With(cs => cs.BranchMasterId = null)
+                 .Build())
                 .Build();
             var voucherInfo = Builder<VoucherInfo>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
                 .With(vi =>
-                vi.Voucher = Builder<Voucher>.CreateNew().Build())
+                vi.Voucher = Builder<Voucher>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
+                .Build())
                 .Build();
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
                 .With(sub => sub.VoucherInfo = voucherInfo)
                 .Build();
@@ -104,22 +116,13 @@ namespace Api.Database.Tests
         public void Should_Insert_Multiple_Due()
         {
             var context = contextFactory.GetContext();
-            #region License and Branch
-            var license = Builder<LicenseMaster>.CreateNew().Build();
-            var branch = Builder<BranchMaster>.CreateNew()
-                .With(b => b.LicenseId = license.Id)
-                .Build();
-
-            context.LicenseMasters.Add(license);
-            branch.LicenseId = license.Id;
-            context.BranchMasters.Add(branch);
-            #endregion
 
             var chitSubscriber = Builder<ChitSubscriber>.CreateNew()
                 .With(c =>
-                c.ChitSchema = Builder<ChitScheme>.CreateNew().Build())
+                        c.ChitSchema = Builder<ChitScheme>.CreateNew()
+                 .Build())
                 .With(c =>
-                c.Customer = Builder<Customer>.CreateNew().Build())
+                        c.Customer = Builder<Customer>.CreateNew().Build())
                 .Build();
 
             #region Due Payment 1
@@ -162,16 +165,6 @@ namespace Api.Database.Tests
         public void Should_Insert_Due_Existing()
         {
             var context = contextFactory.GetContext();
-            #region License and Branch
-            var license = Builder<LicenseMaster>.CreateNew().Build();
-            var branch = Builder<BranchMaster>.CreateNew()
-                .With(b => b.LicenseId = license.Id)
-                .Build();
-
-            context.LicenseMasters.Add(license);
-            branch.LicenseId = license.Id;
-            context.BranchMasters.Add(branch);
-            #endregion
 
             var chitSubscriber = Builder<ChitSubscriber>.CreateNew()
                 .With(c =>
