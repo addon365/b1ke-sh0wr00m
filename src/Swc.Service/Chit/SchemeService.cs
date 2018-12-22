@@ -4,7 +4,7 @@ using Threenine.Data;
 
 namespace Swc.Service.Chit
 {
-    public class SchemeService : BaseService<ChitScheme>
+    public class SchemeService : BaseService<ChitScheme>,ISchemeService
     {
         public SchemeService(IUnitOfWork unitOfWork)
             : base(unitOfWork)

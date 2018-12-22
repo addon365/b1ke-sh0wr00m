@@ -41,19 +41,41 @@
             </Grid.ColumnDefinitions>
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="19.951"/>
-                    <ColumnDefinition Width="100.049"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
 
                 </Grid.RowDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Scheme Name" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <TextBox  Height="23" Text="{Binding Path=Scheme.SchemaName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="2" Margin="0,4"/>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Text="TotalMonths" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                <TextBox  Height="23" Text="{Binding Path=Scheme.TotalMonths,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="2" Grid.Row="1" Margin="0,4"/>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Scheme Name" />
+                <TextBox  Height="23" Text="{Binding Path=Model.SchemaName,Mode=TwoWay}"  Grid.Column="1" Margin="0,4"/>
+
+                <TextBlock HorizontalAlignment="Left" Grid.Column="2" Grid.Row="0" Text="TotalMonths"  Grid.ColumnSpan="2"/>
+                <syncfusion:IntegerTextBox Text="{Binding Path=Model.TotalMonths,Mode=TwoWay}"   Grid.Column="3" Grid.Row="0"/>
+                <!--Start Date-->
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Text="Start Date"  Grid.ColumnSpan="2"/>
+                <syncfusion:DateTimeEdit Grid.Column="1" Grid.Row="1"></syncfusion:DateTimeEdit>
+                <!--Has Fixed Date-->
+                <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+                    <CheckBox />
+                    <TextBlock Text="Has Fixed Date"/>
+                </StackPanel>
+
+                <!--Max Members-->
+                <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal" 
+                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="Max Members"/>
+                    <syncfusion:IntegerTextBox Width="40" Margin="8,0,0,0"/>
+                </StackPanel>
+                <!--Monthly Amount-->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Monthly Amount"/>
+                <syncfusion:IntegerTextBox Grid.Row="2" Grid.Column="1"/>
+
             </Grid>
         </Grid>
     </Grid>

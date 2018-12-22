@@ -9,7 +9,7 @@ namespace Api.Database.Entity.User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 0)]
-        public UInt64 Id { get; set; }
+        public int Id { get; set; }
         public string UserId { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }

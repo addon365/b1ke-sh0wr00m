@@ -21,6 +21,7 @@ using swcApi.Utils.Exceptions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json.Serialization;
+using Swc.Service.Chit;
 
 namespace swcApi
 {
@@ -72,6 +73,7 @@ namespace swcApi
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<ISchemeService, SchemeService>();
             services.AddScoped<RequestInfo>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 

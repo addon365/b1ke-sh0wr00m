@@ -93,12 +93,14 @@ namespace BikeShowRoom.WPF
         private async Task ServerStatusAsync()
         {
             SetText("Checking Internet...");
+#if !DEBUG
             if (!InternetAvailability.IsInternetAvailable())
             {
                 SetText("Internet Not Availlable");
                 SplashModel.ShowRetry = true;
                 return;
             }
+#endif
             SetText("Internet Availlable");
             try
             {

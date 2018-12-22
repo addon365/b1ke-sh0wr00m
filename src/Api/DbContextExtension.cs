@@ -48,11 +48,11 @@ namespace swcApi
                     context.AddRange(types);
                     context.SaveChanges();
                 }
-                catch(Exception exception)
+                catch (Exception exception)
                 {
                     Console.Write(exception);
                 }
-               
+
             }
             if (!context.BranchMasters.Any())
             {
@@ -134,10 +134,10 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
-            SeedEnquiries(context);
+            SeedOnDebug(context);
         }
         [Conditional("DEBUG")]
-        private static void SeedEnquiries(ApiContext context)
+        private static void SeedOnDebug(ApiContext context)
         {
             if (!context.Contacts.Any())
             {
@@ -160,11 +160,21 @@ namespace swcApi
             if (!context.EnquiryProducts.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<EnquiryProduct>>(
-            File.ReadAllText(
+                File.ReadAllText(
                 "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
                 context.AddRange(types);
                 context.SaveChanges();
             }
+            if (!context.DeviceMasters.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<DeviceMaster>>(
+                File.ReadAllText(
+                    "seed" + Path.DirectorySeparatorChar + "Devices.json")
+                    );
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+
         }
     }
 
