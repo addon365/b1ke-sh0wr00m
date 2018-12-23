@@ -25,5 +25,11 @@ namespace BikeShowRoom.WPF
             NewSchemaWindow newSchemaWindow = new NewSchemaWindow();
             newSchemaWindow.ShowDialog();
         }
+
+        private void NewSubscribe_Click(object sender, RoutedEventArgs e)
+        {
+            NewSubscriberWindow newSubscriberWindow = new NewSubscriberWindow();
+            newSubscriberWindow.ShowDialog();
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Api.Database.Entity.Crm
+﻿namespace Api.Database.Entity.Crm
 {
     public class Contact : BaseEntity
     {

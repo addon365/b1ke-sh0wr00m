@@ -29,7 +29,7 @@ namespace Swc.Service.Base
             return _repository.GetList().Items;
         }
 
-        public T Save(T obj)
+        public virtual T Save(T obj)
         {
             _repository.Add(obj);
             UnitOfWork.SaveChanges();

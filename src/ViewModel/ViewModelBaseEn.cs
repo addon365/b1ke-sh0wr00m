@@ -3,6 +3,7 @@ using Swc.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ViewModel
 {
@@ -22,9 +23,13 @@ namespace ViewModel
             this.Service = baseService;
             this.OnResult = onResult;
             WireCommands();
+            InitModel();
         }
+        public virtual void InitModel()
+        {
 
-        private void WireCommands()
+        }
+        public virtual void WireCommands()
         {
             SaveCommand = new RelayCommand(Save);
         }
@@ -46,6 +51,7 @@ namespace ViewModel
                     _model = value;
                     OnPropertyChanged("Model");
                     SaveCommand.IsEnabled = true;
+                    Message = "";
                 }
             }
         }
@@ -58,13 +64,15 @@ namespace ViewModel
         {
             throw new NotImplementedException();
         }
-
+       
         public virtual void Save()
         {
+            if (!Validate()) return;
             IsProgressBarVisible = true;
             try
             {
                 Service.Save(Model);
+                InitModel();
                 SayMessage(true, "Successfully Saved..");
             }
             catch(Exception exception)
@@ -79,6 +87,12 @@ namespace ViewModel
             {
                 OnResult(isSuccess, message);
             }
+            Message = message;
+        }
+
+        public virtual bool Validate()
+        {
+            return true;
         }
     }
 }

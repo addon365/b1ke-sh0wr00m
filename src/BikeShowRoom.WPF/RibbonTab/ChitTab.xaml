@@ -5,10 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BikeShowRoom.WPF"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-             mc:Ignorable="d" x:Name="FolderTab" Caption="Folder">
+             mc:Ignorable="d" x:Name="Chit" Caption="Chit">
 
-    <syncfusion:RibbonBar x:Name="NewFolderBar" Header="New">
-        <syncfusion:RibbonButton Click="NewChitScheme_Click" x:Name="newChitScheme" IconType="VectorImage" SizeForm="Large" Label="New Scheme">
+    <syncfusion:RibbonBar x:Name="ChitBar" Header="New">
+        <syncfusion:RibbonButton Click="NewChitScheme_Click" x:Name="newChitScheme" IconType="VectorImage" SizeForm="Large" Label="Scheme">
+            <syncfusion:RibbonButton.VectorImage>
+                <Path Data="F1M768.5,466.5L781.5,466.5L781.5,464.5C781.5,463.396,780.604,462.5,779.5,462.5L773.328,462.5C772.798,462.5,772.289,462.711,771.914,463.086z" Fill="White" Height="4" Stretch="Fill" Width="13" HorizontalAlignment="Right" Margin="0,0.5,0.5,0" VerticalAlignment="Top"/>
+                <Path Data="F1M769.707,466L772.268,463.439C772.547,463.16,772.934,463,773.328,463L779.5,463C780.327,463,781,463.673,781,464.5L781,466z M779.5,462L773.328,462C772.66,462,772.033,462.26,771.561,462.732L768.293,466L757,466C755.895,466,755,466.896,755,468L755,486L782,486L782,467L782,466L782,464.5C782,463.121,780.879,462,779.5,462" Fill="#FFEDC87E" Stretch="Fill"/>
+            </syncfusion:RibbonButton.VectorImage>
+        </syncfusion:RibbonButton>
+
+        <syncfusion:RibbonButton Click="NewSubscribe_Click" x:Name="newSubscribe" IconType="VectorImage" SizeForm="Large" Label="Subsribe">
             <syncfusion:RibbonButton.VectorImage>
                 <Path Data="F1M768.5,466.5L781.5,466.5L781.5,464.5C781.5,463.396,780.604,462.5,779.5,462.5L773.328,462.5C772.798,462.5,772.289,462.711,771.914,463.086z" Fill="White" Height="4" Stretch="Fill" Width="13" HorizontalAlignment="Right" Margin="0,0.5,0.5,0" VerticalAlignment="Top"/>
                 <Path Data="F1M769.707,466L772.268,463.439C772.547,463.16,772.934,463,773.328,463L779.5,463C780.327,463,781,463.673,781,464.5L781,466z M779.5,462L773.328,462C772.66,462,772.033,462.26,771.561,462.732L768.293,466L757,466C755.895,466,755,466.896,755,468L755,486L782,486L782,467L782,466L782,464.5C782,463.121,780.879,462,779.5,462" Fill="#FFEDC87E" Stretch="Fill"/>
@@ -17,7 +24,7 @@
     </syncfusion:RibbonBar>
 
     <syncfusion:RibbonBar x:Name="actionBar" Header="Actions">
-        <syncfusion:RibbonButton x:Name="renameFolder" IconType="VectorImage" IsEnabled="False" SizeForm="Large" Label="Rename Folder">
+        <syncfusion:RibbonButton x:Name="Copy"  IconType="VectorImage" IsEnabled="False" SizeForm="Large" Label="New Subscribe">
             <syncfusion:RibbonButton.VectorImage>
                 <Path Data="F1M186.5,138.5L199.5,138.5L199.5,136.5C199.5,135.396,198.604,134.5,197.5,134.5L191.329,134.5C190.798,134.5,190.289,134.711,189.914,135.086z" Fill="#FFF7F2F7" Height="4" Stretch="Fill" Margin="13.5,0.499,3.5,0" VerticalAlignment="Top"/>
                 <Path Data="M25,10 L25,10.999 27,10.999 27,10 26,10 z M18.328995,0.99999993 C17.927994,1.0000001 17.552002,1.1559907 17.26799,1.4389957 L14.707001,3.9999999 26,3.9999999 26,2.5000004 C26,1.6719972 25.328003,1.0000001 24.5,0.99999993 z M18.328995,0 L24.5,0 C25.878998,1.1362135E-07 27,1.1210023 27,2.5000004 L27,3.9999999 27,5.0000001 27,9.9989997 28,9.9989997 29,9.9989997 30,9.9989997 30,10.999 29,10.999 29,11.999 28,11.999 27,11.999 27,12.999 27,23.999001 27,24.999001 28,24.999001 29,24.999001 29,25.999001 30,25.999001 30,26.999001 29,26.999001 28,26.999001 27,26.999001 27,25.999001&#xd;&#xa;25,25.999001 25,26.999001 24,26.999001 23,26.999001 22,26.999001 22,25.999001 23,25.999001 23,24.999001 24,24.999001 25,24.999001 25,23.999001 25,11.999 24,11.999 23,11.999 23,10.999 22,10.999 22,9.9989997 23,9.9989997 24,9.9989997 25,9.9989997 25,9.0000001 22,9.0000001 21,9.0000001&#xd;&#xa;21,11 22,11 22,12 23,12 23,13 24,13 24,24 0,24 0,6.0000001 C0,4.8949891 0.89599609,4.0000001 1.9999999,3.9999999 L13.292999,3.9999999 16.560989,0.73199498 C17.03299,0.25999462 17.660995,1.1362135E-07 18.328995,0 z" Fill="#FFE4E1E4" Stretch="Fill"/>

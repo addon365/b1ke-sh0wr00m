@@ -103,8 +103,6 @@ namespace swcApi.Tests
                 .Throws(new System.Exception("Exception on Add"));
 
             Assert.Throws<Exception>(() => { controller.Insert(campaignInfo); });
-
-
         }
     }
 }
