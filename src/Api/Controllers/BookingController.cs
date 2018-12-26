@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Database.Entity.Enquiries;
+using Api.Domain.Paging;
 using Microsoft.AspNetCore.Authorization;
-using Swc.Service.Sales;
-using Api.Domain.Booking;
+using Microsoft.AspNetCore.Mvc;
+using Swc.Service;
 using System;
 using System.Threading.Tasks;
-using Swc.Service;
 
 namespace swcApi.Controllers
 {
@@ -24,7 +24,7 @@ namespace swcApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] InsertBooking model)
+        public async Task<IActionResult> Post([FromBody] Enquiry model)
         {
             try
             { 
@@ -47,14 +47,32 @@ namespace swcApi.Controllers
                 return BadRequest(ex);
             }
         }
+        [AllowAnonymous]
         [HttpGet]
-        public String Get()
+        public Threenine.Data.Paging.IPaginate<Enquiry> Booked(int PageNumber = 0, int PageSize = 30)
         {
-            
-            return "Hellow";
+            PagingParams pagingParams = new PagingParams();
+            pagingParams.PageNumber = PageNumber;
+            pagingParams.PageSize = PageSize;
+            _reqinfo.UserId = Request.Headers["UserId"].ToString();
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+            return _BookingService.GetAllBooked(pagingParams);
+        }
+        [HttpGet]
+        [Route("Booked/Get/{identifier}")]
+        public IActionResult GetBooked(string identifier)
+        {
+            _reqinfo.UserId = Request.Headers["UserId"].ToString();
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+
+            var referer = _BookingService.GetBooked(identifier);
+            if (referer == null) return NotFound();
+
+            return Ok(referer);
         }
 
-       
-      
+
     }
 }

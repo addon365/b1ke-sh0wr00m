@@ -12,7 +12,11 @@ namespace BikeShowRoom.WPF.Enquiries
         {
             InitializeComponent();
             var vm= new EnquiryViewModel();
+            vm.msg = new CustomMessageBox();
             this.DataContext = vm;
+
         }
+       
     }
+   
 }

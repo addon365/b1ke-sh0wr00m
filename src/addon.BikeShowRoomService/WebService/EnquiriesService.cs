@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace addon.BikeShowRoomService.WebService
 {
@@ -42,42 +43,60 @@ namespace addon.BikeShowRoomService.WebService
 
             return enquiries;
         }
-
-
-        public async Task<string> Insert(InsertEnquiryModel insertenquiry)
+      
+        public async Task<Enquiry> Insert(InsertEnquiryModel insertenquiry)
         {
-            try { 
+           
 
             var response = await _httpClient.PostAsync("Enquiries", new StringContent(JsonConvert.SerializeObject(insertenquiry), Encoding.UTF8, "application/json"));
             //await Task.Delay(10000);
             
-            return response.Content.ToString();
-            }
-            catch(Exception ex)
-            {
-                return ex.Message;
+           
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                    .GetAwaiter()
+                                    .GetResult();
+
+                    var enquiries = JsonConvert.DeserializeObject<Enquiry>(json);
+
+                    return enquiries;
+
+                }
+                else
+                {
+                    var web = await response.Content.ReadAsStringAsync();
+                    Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+
+                    if (ex != null)
+                        throw ex;
+                }
+            throw new Exception("Failed");
+
             }
 
-        }
-       
-        public InsertEnquiryModel GetEnquiries(string identifier)
+
+        public Enquiry GetEnquiries(string identifier)
         {
-            HttpResponseMessage response = _httpClient.GetAsync("Enquiries/"+identifier).Result;
-            InsertEnquiryModel enquiries = null;
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries/Get/"+identifier).Result;
+            Enquiry enquiries = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                enquiries = JsonConvert.DeserializeObject<InsertEnquiryModel>(json);
+                enquiries = JsonConvert.DeserializeObject<Enquiry>(json);
 
-
+                return enquiries;
 
             }
 
-            return enquiries;
+            throw new Exception("Request Failed");
+
+            
         }
+      
         public MultiEnquiryModel GetMultiEnquiries(string identifier)
         {
             HttpResponseMessage response = _httpClient.GetAsync("Enquiries/Multi/" + identifier).Result;
@@ -97,11 +116,11 @@ namespace addon.BikeShowRoomService.WebService
             return enquiries;
         }
 
-        public InitilizeEnquiry GetInitilizeEnquiries()
+        public  InitilizeEnquiry GetInitilizeEnquiries()
         {
             HttpResponseMessage response = _httpClient.GetAsync("Enquiries/InitilizeEnquiries").Result;
             InitilizeEnquiry enquiries = null;
-            if (response.IsSuccessStatusCode)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
@@ -109,12 +128,44 @@ namespace addon.BikeShowRoomService.WebService
 
                 enquiries = JsonConvert.DeserializeObject<InitilizeEnquiry>(json);
 
-
+                return enquiries;
 
             }
-
-            return enquiries;
+           
+            throw new Exception("Failed");
+            
         }
+
+        public async Task<Enquiry> Update(Enquiry enquiry)
+        {
+
+
+            var response = await _httpClient.PostAsync("Enquiries/Update", new StringContent(JsonConvert.SerializeObject(enquiry), Encoding.UTF8, "application/json"));
+            //await Task.Delay(10000);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                var enquiries = JsonConvert.DeserializeObject<Enquiry>(json);
+
+                return enquiries;
+
+            }
+            else
+            {
+                var web = await response.Content.ReadAsStringAsync();
+                Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+
+                if (ex != null)
+                    throw ex;
+            }
+            
+            
+            throw new Exception("Failed");
+        }
+            
     }
     
 }

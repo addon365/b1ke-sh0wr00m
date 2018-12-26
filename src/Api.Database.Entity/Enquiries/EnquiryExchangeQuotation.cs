@@ -8,7 +8,7 @@ namespace Api.Database.Entity.Enquiries
     public class EnquiryExchangeQuotation:BaseEntity
     {
         public Guid EnquiryId { get; set; }
-        [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }
+       // [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }
      
         public string Model { get; set; }
         public int Year { get; set; }

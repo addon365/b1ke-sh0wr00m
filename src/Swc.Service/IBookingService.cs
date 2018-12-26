@@ -1,7 +1,5 @@
-﻿using Api.Domain.Booking;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Api.Database.Entity.Enquiries;
+using Api.Domain.Paging;
 using System.Threading.Tasks;
 
 namespace Swc.Service
@@ -9,6 +7,8 @@ namespace Swc.Service
     public interface IBookingService
     {
         
-        Task Insert(InsertBooking model);
+        Task Insert(Enquiry model);
+        Threenine.Data.Paging.IPaginate<Enquiry> GetAllBooked(PagingParams pagingParams);
+        Enquiry GetBooked(string identifier);
     }
 }

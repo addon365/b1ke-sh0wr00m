@@ -1,4 +1,4 @@
-﻿<Window x:Class="BikeShowRoom.WPF.Enquiries.EnquriesListWindow"
+﻿<Window x:Class="BikeShowRoom.WPF.Enquiries.BookingListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -32,6 +32,9 @@
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].OnRoadPrice" HeaderText="On Road" Width="80"/>
                     <syncfusion:GridTextColumn MappingName="Contact.Name" HeaderText="Name" Width="150"/>
                     <syncfusion:GridTextColumn MappingName="Contact.MobileNumber" HeaderText="Mobile" Width="100"/>
+                    <syncfusion:GridDateTimeColumn MappingName="Voucher.VoucherDate" HeaderText="Booked on" Pattern="ShortDate" Width="100"/>
+                    <syncfusion:GridTextColumn MappingName="Voucher.VoucherInfos[0].Amount" HeaderText="Amount" Width="100"/>
+
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].EnquiryFinanceQuotations[0].InitialDownPayment" HeaderText="Initial Amt" Width="100"/>
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].EnquiryFinanceQuotations[0].MonthlyEMIAmount" HeaderText="EMI" Width="60"/>
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].EnquiryFinanceQuotations[0].NumberOfMonths" HeaderText="Tenure" Width="60"/>

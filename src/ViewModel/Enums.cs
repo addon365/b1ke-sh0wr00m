@@ -5,4 +5,5 @@ using System.Text;
 namespace ViewModel
 {
    enum PayMentMode { None,Cash, Card, BankTransfer, Cheque }
+    enum ScreenOpenMode { New,Edit}
 }

@@ -304,6 +304,9 @@
     <Compile Include="Chit\NewSchemaWindow.xaml.cs">
       <DependentUpon>NewSchemaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enquiries\BookingListWindow.xaml.cs">
+      <DependentUpon>BookingListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RibbonTab\ChitTab.xaml.cs">
       <DependentUpon>ChitTab.xaml</DependentUpon>
     </Compile>
@@ -399,6 +402,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Enquiries\EnquiryBooking.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\BookingListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

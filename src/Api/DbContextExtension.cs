@@ -134,6 +134,22 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
+            if (!context.VoucherTypeMasters.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<VoucherTypeMaster>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "VoucherTypeMaster.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.AccountBooks.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<AccountBook>>(
+            File.ReadAllText(
+                "seed" + Path.DirectorySeparatorChar + "AccountBook.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
             SeedEnquiries(context);
         }
         [Conditional("DEBUG")]
@@ -165,6 +181,7 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
+         
         }
     }
 

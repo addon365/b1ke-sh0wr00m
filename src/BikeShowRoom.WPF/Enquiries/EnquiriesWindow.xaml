@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid Background="DodgerBlue">
             <StackPanel Orientation="Horizontal">
-                <syncfusion:RibbonButton x:Name="btnSave" IconType="VectorImage" SizeForm="Large" Label="Save" Foreground="White" HorizontalAlignment="Left"  Command="{Binding InsertEnquiryCommand}" >
+                <syncfusion:RibbonButton x:Name="btnSave" IconType="VectorImage" SizeForm="Large" Label="Save" Foreground="White" HorizontalAlignment="Left"  Command="{Binding SaveEnquiryCommand}" >
                     <syncfusion:RibbonButton.VectorImage>
                         <Path Data="F1M161,211L133,211L133,189L161,189z" Fill="Gray" Stretch="Fill"/>
                         <Path Data="F1M160,210L134,210L134,190L160,190z" Fill="White" Stretch="Fill" Margin="1"/>
@@ -174,7 +174,7 @@
                         <TextBlock Text="Loan Months" VerticalAlignment="Center" Grid.Row="3"/>
                         <TextBox Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.NumberOfMonths}"/>
                         <Button Name="btnAddAnotherFinacePlan" Content="Add One More" Grid.Row="4" Grid.Column="1" Width="150" Height="28" Command="{Binding AddFinanceQuotationCommand}"/>
-                        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top"  ItemsSource="{Binding FinanceQuotations}" AutoGenerateColumns="False">
+                        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top"  ItemsSource="{Binding CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Down Payment" Binding="{Binding InitialDownPayment}" Width="*"/>
                                 <DataGridTextColumn Header="EMI" Binding="{Binding MonthlyEMIAmount}" Width="*"/>

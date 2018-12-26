@@ -1,1 +1,1 @@
-﻿public enum AccountBook { Booking}
+﻿public enum AccountBookEnum { Cash,Booking}

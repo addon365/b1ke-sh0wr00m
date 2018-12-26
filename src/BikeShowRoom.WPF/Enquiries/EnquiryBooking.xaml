@@ -94,7 +94,7 @@
                         </Grid>
                         <Grid Grid.Row="2">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Content="Save" Width="100" Height="30" Margin="10" Command="{Binding InsertCommand}"/>
+                                <Button Content="Save" Width="100" Height="30" Margin="10" Command="{Binding SaveCommand}"/>
                                 <Button Content="Cancel" Width="100" Height="30"/>
                             </StackPanel>
                         </Grid>

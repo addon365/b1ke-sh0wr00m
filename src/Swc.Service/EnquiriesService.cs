@@ -31,49 +31,25 @@ namespace Swc.Service
         }
         public Threenine.Data.Paging.IPaginate<Enquiry> GetAllActive(PagingParams pagingParams)
         {
-            //List<Enquiries> lst = new List<Enquiries>();
-
-            //try
-            //{
-
-            // _unitOfWork.GetReadOnlyRepository<Enquiry>().GetList(include: x => x.Include(Contact=>Contact.Contact));
-            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList(orderBy: x => x.OrderBy(m => m.Created), include: x => x.Include(Contact => Contact.Contact).Include(Status => Status.Status).Include(m => m.EnquiryType).Include(n => n.EnquiryProducts).ThenInclude(c => c.Product),index: pagingParams.PageNumber, size:pagingParams.PageSize);
+           
+            var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList(
+                orderBy: x => x.OrderBy(m => m.Created),
+                predicate:x=>x.BranchMasterId.ToString()==_requestInfo.BranchId && (x.VoucherId==null || x.VoucherId==Guid.Empty),
+                include: x => x.
+                Include(Contact => Contact.Contact).
+                Include(Status => Status.Status).
+                Include(m => m.EnquiryType).
+                Include(n => n.EnquiryProducts).ThenInclude(c => c.Product).
+                Include(n => n.EnquiryProducts).ThenInclude(a=>a.EnquiryFinanceQuotations).
+                Include(n=>n.EnquiryExchangeQuotations), 
+                index: pagingParams.PageNumber, size:pagingParams.PageSize);
                
 
-                //string enquiriecount = enquiries.Count.ToString();
-            //    _looger.LogError("Count :" + enquiriecount);
-            //    foreach (Enquiry enquiry in enquiries)
-            //    {
-            //        Enquiries e = new Enquiries();
-            //        e.EnquiryId = enquiry.Id;
-            //        e.Identifier = enquiry.Identifier;
-            //        e.EnquiryDate = enquiry.EnquiryDate;
-            //        e.Created = enquiry.Created;
-            //        e.Contact = enquiry.Contact;
-            //        //e.Contact = _unitOfWork.GetRepository<Contact>().GetList(predicate: x => x.Id == enquiry.ContactId).Items.FirstOrDefault();
-            //        e.Status = enquiry.Status;
-            //        //e.Status = _unitOfWork.GetRepository<EnquiryStatus>().GetList(predicate: x => x.Id == enquiry.StatusId).Items.FirstOrDefault();
-            //        //e.EnquiryType = _unitOfWork.GetRepository<EnquiryType>().GetList(predicate: x => x.Id == enquiry.EnquiryTypeId).Items.FirstOrDefault();
-            //        e.EnquiryType = enquiry.EnquiryType;
-            //        e.EnquiryProducts = enquiry.EnquiryProducts;
-            //        //e.EnquiryProducts = _unitOfWork.GetRepository<EnquiryProduct>().GetList(predicate: x => x.EnquiryId == enquiry.Id).Items.FirstOrDefault();
-            //        //if (e.EnquiryProducts != null)
-            //        //    e.EnquiryProducts.Product = _unitOfWork.GetRepository<Product>().GetList(predicate: x => x.Id == e.EnquiryProducts.ProductId).Items.FirstOrDefault();
-
-            //        lst.Add(e);
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    string exg = ex.Message;
-            //    string str = ex.StackTrace;
-            //}
-            //string finalcount = lst.Count.ToString();
-            //_looger.LogInformation("Final Count :" + finalcount);
 
             return enquiries;
             
         }
+      
         public InitilizeEnquiry GetInitilizeEnquiries()
         {
             InitilizeEnquiry ie = new InitilizeEnquiry();
@@ -85,7 +61,7 @@ namespace Swc.Service
 
         }
 
-        public async Task<string> Insert(InsertEnquiryModel InsertEnquiries)
+        public async Task<Enquiry> Insert(InsertEnquiryModel InsertEnquiries)
         {
             try
             { 
@@ -150,16 +126,20 @@ namespace Swc.Service
             {
                 ep.Product = null;
                 ep.EnquiryId = enquiry.Id;
-            _unitOfWork.GetRepository<EnquiryProduct>().Add(ep);
+                    if(ep.EnquiryFinanceQuotations!=null)
+                    foreach (EnquiryFinanceQuotation efq in ep.EnquiryFinanceQuotations)
+                    {
+
+                        _unitOfWork.GetRepository<EnquiryFinanceQuotation>().Add(efq);
+                    }
+                    _unitOfWork.GetRepository<EnquiryProduct>().Add(ep);
             }
-            foreach(EnquiryFinanceQuotation efq in InsertEnquiries.enquiryFinanceQuotations)
-            {
-               
-                _unitOfWork.GetRepository<EnquiryFinanceQuotation>().Add(efq);
-            }
+         
+            
             foreach(EnquiryExchangeQuotation eeq in InsertEnquiries.enquiryExchangeQuotations)
             {
                 eeq.EnquiryId = enquiry.Id;
+                if(eeq.Model!="")
                 _unitOfWork.GetRepository<EnquiryExchangeQuotation>().Add(eeq);
             }
 
@@ -171,28 +151,28 @@ namespace Swc.Service
             {
                 string exmsg = ex.Message;
             }
-            return InsertEnquiries.Enquiry.Identifier;
+            return GetEnquiries(InsertEnquiries.Enquiry.Identifier);
 
         }
 
-        public InsertEnquiryModel GetEnquiries(string identifier)
+        public Enquiry GetEnquiries(string identifier)
         {
-           InsertEnquiryModel ine= new InsertEnquiryModel();
-            Enquiry enquiry = new Enquiry();
-            enquiry = _unitOfWork.GetRepository<Enquiry>().GetList().Items.Where(predicate: x => x.Identifier == identifier).FirstOrDefault();
-            if(enquiry==null)
-               return null;
-            
-            enquiry.Contact= _unitOfWork.GetRepository<Contact>().GetList().Items.Where(predicate: x => x.Id == enquiry.ContactId).FirstOrDefault();
-            ine.Enquiry = enquiry;
 
-            ine.EnquiryProducts= _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryAccessories = _unitOfWork.GetRepository<EnquiryAccessories>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryExchangeQuotations= _unitOfWork.GetRepository<EnquiryExchangeQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
-            ine.enquiryFinanceQuotations = null; /*_unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);*/
+            var enq = _unitOfWork.GetRepository<Enquiry>().Single(
+              orderBy: x => x.OrderBy(m => m.Created),
+              predicate: x => x.BranchMasterId.ToString() == _requestInfo.BranchId && x.Identifier.ToLower()==identifier.ToLower(),
+              include: x => x.
+              Include(Contact => Contact.Contact).
+              Include(Status => Status.Status).
+              Include(m => m.EnquiryType).
+              Include(n => n.EnquiryProducts).ThenInclude(c => c.Product).
+              Include(n => n.EnquiryProducts).ThenInclude(a => a.EnquiryFinanceQuotations).
+              Include(n => n.EnquiryExchangeQuotations));
 
-            return ine;
+            return enq;
+
         }
+
         public MultiEnquiryModel GetMultiEnquiries(string identifier)
         {
             MultiEnquiryModel ine = new MultiEnquiryModel();
@@ -222,6 +202,21 @@ namespace Swc.Service
             ine.enquiryFinanceQuotations = _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryProductId == enquiry.Id);
 
             return ine;
+        }
+
+        public async Task<Enquiry> Update(Enquiry enquiry)
+        {
+            foreach(EnquiryProduct ep in enquiry.EnquiryProducts)
+            { 
+                foreach(EnquiryFinanceQuotation efq in ep.EnquiryFinanceQuotations)
+                {
+                    if (_unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList(predicate: x => x.Id == efq.Id).Count == 0)
+                        _unitOfWork.GetRepository<EnquiryFinanceQuotation>().Add(efq);
+                }
+            }
+            _unitOfWork.GetRepository<Enquiry>().Update(enquiry);
+            _unitOfWork.SaveChanges();
+            return enquiry;
         }
     }
 }
