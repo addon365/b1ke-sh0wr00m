@@ -1,4 +1,5 @@
 ﻿using Api.Database.Entity.Products;
+using Api.Domain.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swc.Service;
@@ -29,9 +30,13 @@ namespace swcApi.Controllers
         ///<remarks>
         ///</remarks>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public Threenine.Data.Paging.IPaginate<Product> Get(int PageNumber = 0, int PageSize = 30)
         {
-            return _productService.GetAllActive();
+            PagingParams pagingParams = new PagingParams();
+            pagingParams.PageNumber = PageNumber;
+            pagingParams.PageSize = PageSize;
+        
+            return _productService.GetAllActive(pagingParams);
         }
 
         /// <summary>

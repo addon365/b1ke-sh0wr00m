@@ -6,6 +6,8 @@ using Api.Domain.Enquiries;
 using AutoMapper;
 using Threenine.Data;
 using System.Linq;
+using Api.Domain.Paging;
+
 namespace Swc.Service
 {
     public class ProductService : IProductService
@@ -18,9 +20,9 @@ namespace Swc.Service
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<Product> GetAllActive()
+        public Threenine.Data.Paging.IPaginate<Product> GetAllActive(PagingParams pagingParams)
         {
-            var products = _unitOfWork.GetRepository<Product>().GetList().Items;
+            var products = _unitOfWork.GetRepository<Product>().GetList(orderBy: x => x.OrderBy(m => m.Created),index: pagingParams.PageNumber, size: pagingParams.PageSize);
 
             return products;
         }
@@ -38,6 +40,16 @@ namespace Swc.Service
             //var products = new Product();
             //products.ProductName = product.ProductName;
             //products.Price = product.Price;
+            string identi = "1";
+            var LastProduct = _unitOfWork.GetRepository<Product>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.Identifier)));
+
+
+            if (LastProduct != null)
+            {
+                if (LastProduct.Identifier !="")
+                    identi = (Convert.ToInt64(LastProduct.Identifier)+1).ToString();
+            }
+            product.Identifier = identi;
             _unitOfWork.GetRepository<Product>().Add(product);
             try
             {

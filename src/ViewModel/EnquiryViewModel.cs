@@ -21,7 +21,7 @@ namespace ViewModel
         private Contact _currentContact;
         private MarketingZone _currentMarketingZone;
         private EnquiryProduct _enquiryProduct,_SelectedDataGridProduct, _FinanceEnquiryProduct;
-        private EnquiryFinanceQuotation _financeQuotation;
+        private EnquiryFinanceQuotation _financeQuotation, _SelectedDataGridFinanceQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
         private ScreenOpenMode Mode=ScreenOpenMode.New;
         public EnquiryViewModel()
@@ -104,6 +104,7 @@ namespace ViewModel
             AddEnquiryProductCommand = new RelayCommand(AddEnquiryProduct);
             AddFinanceQuotationCommand = new RelayCommand(AddFinanceQuotation);
             DeleteRowEnquiryProductCommand = new RelayCommand(RemoveEnquiryProduct);
+            DeleteRowFinanceQuotationCommand = new RelayCommand(RemoveFinanceQuotationRow);
 
         }
         public RelayCommand DeleteRowEnquiryProductCommand
@@ -111,7 +112,11 @@ namespace ViewModel
             get;
             private set;
         }
-
+        public RelayCommand DeleteRowFinanceQuotationCommand
+        {
+            get;
+            private set;
+        }
         public RelayCommand UpdateEnquiryCommand
         {
             get;
@@ -276,6 +281,24 @@ namespace ViewModel
                 }
             }
         }
+        public EnquiryFinanceQuotation SelectedDataGridFinanceQuotation
+        {
+            get
+            {
+                return _SelectedDataGridFinanceQuotation;
+            }
+
+            set
+            {
+                if (_SelectedDataGridFinanceQuotation != value)
+                {
+                    _SelectedDataGridFinanceQuotation = value;
+                    OnPropertyChanged("SelectedDataGridFinanceQuotation");
+                    DeleteRowFinanceQuotationCommand.IsEnabled = true;
+
+                }
+            }
+        }
         public EnquiryProduct CurrentFinanceEnquiryProduct
         {
             get
@@ -394,8 +417,7 @@ namespace ViewModel
         }
         void InitInsert()
         {
-            CurrentEnquiry = new Enquiry();
-            CurrentEnquiry.EnquiryDate = System.DateTime.Now;
+            CurrentEnquiry = new Enquiry() { EnquiryDate = CurrentEnquiry==null?System.DateTime.Now:CurrentEnquiry.EnquiryDate };
             CurrentContact = new Contact();
             CurrentEnquiryProduct = new EnquiryProduct();
             CurrentEnquiryProduct.Product = new Product();
@@ -458,6 +480,10 @@ namespace ViewModel
         public void RemoveEnquiryProduct()
         {
             EnquiryProducts.Remove(SelectedDataGridProduct);
+        }
+        public void RemoveFinanceQuotationRow()
+        {
+            CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations.Remove(SelectedDataGridFinanceQuotation);
         }
     }
    

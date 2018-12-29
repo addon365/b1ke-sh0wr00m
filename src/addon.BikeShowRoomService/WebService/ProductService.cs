@@ -54,17 +54,17 @@ namespace addon.BikeShowRoomService.WebService
 
             return types;
         }
-        public IEnumerable<Product> GetAllActive()
+        public Threenine.Data.Paging.IPaginate<Product> GetAllActive(Api.Domain.Paging.PagingParams pagingParams)
         {
-            HttpResponseMessage response = _httpClient.GetAsync("Product").Result;
-            IEnumerable<Product> products = null;
+            HttpResponseMessage response = _httpClient.GetAsync("Product?" + "PageNumber=" + pagingParams.PageNumber + "&PageSize=" + pagingParams.PageSize).Result;
+            Threenine.Data.Paging.IPaginate<Product> products = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                products = JsonConvert.DeserializeObject<IEnumerable<Product>>(json);
+                products = JsonConvert.DeserializeObject<Threenine.Data.Paging.Paginate<Product>>(json);
 
 
 

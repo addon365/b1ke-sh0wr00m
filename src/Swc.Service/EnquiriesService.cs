@@ -54,7 +54,7 @@ namespace Swc.Service
         {
             InitilizeEnquiry ie = new InitilizeEnquiry();
             ie.MarketingZones = _unitOfWork.GetRepository<MarketingZone>().GetList().Items;
-            ie.Products = _unitOfWork.GetRepository<Product>().GetList().Items;
+            ie.Products = _unitOfWork.GetRepository<Product>().GetList(index: 0, size:1000).Items;
             ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().GetList().Items;
 
             return ie;
@@ -101,18 +101,35 @@ namespace Swc.Service
                 if (Branch != null)
                     BranchShortCode = Branch.FirstOrDefault().ShortCode;
 
-                var lst = _unitOfWork.GetRepository<Enquiry>()
-                         .GetList(predicate:x=>x.BranchMasterId== enquiry.BranchMasterId).Items;
+                //var MaxValue=_unitOfWork.GetReadOnlyRepository<Enquiry>().Query("SELECT Max(Cast(Substring([Identifier], 2, len([Identifier])) as int)) FROM[swc].[Enquiries] where BranchMasterId = '"+ enquiry.BranchMasterId.ToString()+"'").ToList();
+               //var lst = _unitOfWork.GetRepository<Enquiry>()
+               //          .GetList( predicate:x=>x.BranchMasterId== enquiry.BranchMasterId).Items;
+
+               // var lst1 = _unitOfWork.GetRepository<Enquiry>().GetList<EnquiryMax>(selector: (p => new EnquiryMax() { Max = Convert.ToInt64(p.Identifier.Remove(0, 1)) }), predicate: x => x.BranchMasterId == enquiry.BranchMasterId,index:0,size:5000).Items;
+
 
                 string identi = BranchShortCode+"1";
-                if(lst!=null)
+                //if(lst!=null)
+                //{
+                //    if(lst.Count>0)
+                //        identi= BranchShortCode+(lst.Max(e => Convert.ToInt64(e.Identifier.Remove(0,1)))+1).ToString();
+                //}
+
+                //if (lst1 != null)
+                //{
+                //    if (lst1.Count > 0)
+                //        identi = BranchShortCode + (lst1.Max(e => e.Max) + 1).ToString();
+                //}
+                var LastEnquiry = _unitOfWork.GetRepository<Enquiry>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.Identifier.Remove(0,1))));
+
+
+                if (LastEnquiry != null)
                 {
-                    if(lst.Count>0)
-                        identi= BranchShortCode+(lst.Max(e => Convert.ToInt64(e.Identifier.Remove(0,1)))+1).ToString();
+                    if (LastEnquiry.Identifier != "")
+                        identi = BranchShortCode + (Convert.ToInt64(LastEnquiry.Identifier.Remove(0, 1)) + 1).ToString();
                 }
-                    
-                
-            enquiry.Identifier =identi ;
+
+                enquiry.Identifier =identi ;
             enquiry.EnquiryDate = InsertEnquiries.Enquiry.EnquiryDate;
 
                 enquiry.ContactId = contact.Id;
@@ -218,5 +235,9 @@ namespace Swc.Service
             _unitOfWork.SaveChanges();
             return enquiry;
         }
+    }
+    public class EnquiryMax
+    {
+        public long Max { get; set; }
     }
 }

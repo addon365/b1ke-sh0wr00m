@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:BikeShowRoom.WPF.Products"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
@@ -12,11 +13,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <Grid>
                 <Button Content="Delete" Height="24" Width="150" Command="{Binding DeleteCommand}"/>
             </Grid>
-            <syncfusion:SfDataGrid ItemsSource="{Binding Products}" 
+            <syncfusion:SfDataGrid ItemsSource="{Binding PagingViewModel.Data}" 
                        AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding CurrentProduct}" >
             <syncfusion:SfDataGrid.Columns>
                 <syncfusion:GridTextColumn MappingName="Identifier"/>
@@ -24,6 +26,50 @@
                 <syncfusion:GridTextColumn MappingName="Price"/>
             </syncfusion:SfDataGrid.Columns>
         </syncfusion:SfDataGrid>
+            <!--<syncfusion:SfDataPager
+                    x:Name="dataPager"
+                    Grid.Row="2" PageSize="20"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="3"
+                    Margin="2"
+                    Source="{Binding Products}"  />-->
+            <StackPanel Width="Auto" Grid.Row="2"
+        Orientation="Horizontal" x:Name="PagingPanel">
+                <Button                
+            Margin="4,0"
+            Content="&lt;&lt;"
+            Command="{Binding PagingViewModel.FirstCommand}"/>
+                <Button
+            Margin="4,0"
+            Content="&lt;"
+            Command="{Binding PagingViewModel.PreviousCommand}"/>
+                <StackPanel
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+                   
+                    <TextBlock
+                Text="{Binding PagingViewModel.Start}"/>
+                    <TextBlock
+                Text=" of "/>
+                    <TextBlock
+                Text="{Binding PagingViewModel.TotalPages}"/>
+                </StackPanel>
+                <Button
+            Margin="4,0"
+            Content="&gt;"
+            Command="{Binding PagingViewModel.NextCommand}"/>
+                <Button
+            Margin="4,0"
+            Content="&gt;&gt;"
+            Command="{Binding PagingViewModel.LastCommand}"/>
+                <ComboBox Width="100" ItemsSource="{Binding PagingViewModel.Count}"  SelectedValue="{Binding PagingViewModel.ItemCount}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding PagingViewModel.CountChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

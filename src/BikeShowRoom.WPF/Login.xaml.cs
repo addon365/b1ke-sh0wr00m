@@ -34,8 +34,11 @@ namespace BikeShowRoom.WPF
             
 
         }
-        
 
+        private void CrossButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
     public class LoginSuccess:IViewUI
     {

@@ -25,10 +25,7 @@ namespace ViewModel
         public EnquiriesListViewModel()
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
-            pagingParams = new PagingParams();
-            pagingParams.PageNumber = 0;
-            pagingParams.PageSize = 50;
-            _enquiries = _repository.GetAllActive(pagingParams);
+            PagingViewModel = new PagingViewModel<Enquiry>(new Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Enquiry>>(RefreshData));
             WireCommands();
            
         }
@@ -56,6 +53,13 @@ namespace ViewModel
         }
         #endregion
 
+        private Threenine.Data.Paging.IPaginate<Enquiry> RefreshData(PagingParams pagingParams)
+        {
+
+            return _repository.GetAllActive(pagingParams);
+
+        }
+        public PagingViewModel<Enquiry> PagingViewModel { get; private set; }
         public Threenine.Data.Paging.IPaginate<Enquiry> Enquiries
         {
             get
