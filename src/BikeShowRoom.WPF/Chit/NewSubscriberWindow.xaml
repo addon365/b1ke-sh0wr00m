@@ -70,6 +70,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
+                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -79,33 +80,41 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
+                    <GridSplitter Grid.Column="2" Grid.RowSpan="6"
+              ResizeDirection="Columns"
+              ResizeBehavior="PreviousAndNext"
+              HorizontalAlignment="Stretch"/>
                     <!--Name-->
                     <TextBlock Text="Customer Name" Grid.Column="0" Grid.Row="0"/>
                     <TextBox Text="{Binding Path=Model.ChitSubscriber.Customer.Profile.Name,Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
 
                     <!--Mobile Number-->
-                    <TextBlock Text="Mobile Number" Grid.Column="2" Grid.Row="0"/>
-                    <TextBox Text="{Binding Path=Model.ChitSubscriber.Customer.Profile.MobileNumber,Mode=TwoWay}" Grid.Column="3" Grid.Row="0"/>
+                    <TextBlock Text="Mobile Number" Grid.Column="3" Grid.Row="0"/>
+                    <TextBox Text="{Binding
+                        Path=MobileNumber,Mode=TwoWay}" 
+                             DataContext="{Binding Model.ChitSubscriber.Customer.Profile}"
+                             Grid.Column="4" Grid.Row="0"/>
 
                     <!--Address-->
                     <TextBlock Text="Address" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" />
-                    <TextBox Height="50" Width="300" TextWrapping="Wrap" Text="{Binding Path=Model.ChitSubscriber.Customer.Profile.Address,Mode=TwoWay}"
-                  AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                    <TextBox Height="50" Width="200" TextWrapping="Wrap" Text="{Binding Path=Model.ChitSubscriber.Customer.Profile.Address,Mode=TwoWay}"
+                  AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" />
 
                     <!--Chit Scheme-->
                     <TextBlock Text="Chit Scheme" Grid.Column="0" Grid.Row="3"/>
                     <ComboBox
+                        
                     ItemsSource="{Binding Path=Schemes}"
                     DisplayMemberPath="SchemaName"
                     SelectedValuePath="SchemaName"
-                    SelectedItem="{Binding Path=Model.ChitSubscriber.ChitSchema}"
+                    SelectedItem="{Binding Path=SelectedScheme}"
                     Grid.Row="3" Grid.Column="1"/>
 
                     <!--Amount-->
-                    <TextBlock Text="Amount" Grid.Column="2" Grid.Row="3"/>
-                    <syncfusion:DoubleTextBox Grid.Column="3"
-                                          Grid.Row="3"
-                Value="{Binding Model.VoucherInfo.Amount}"
+                    <TextBlock Text="Amount" Grid.Column="3" Grid.Row="3"/>
+                    <syncfusion:DoubleTextBox Grid.Column="4"
+                                          Grid.Row="3" IsEnabled="False"
+                Value="{Binding SchemeAmount,Mode=OneWay}"
                                           
                                           />
 

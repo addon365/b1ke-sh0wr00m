@@ -301,6 +301,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Chit\DuePaymentWindow.xaml.cs">
+      <DependentUpon>DuePaymentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Chit\NewSchemaWindow.xaml.cs">
       <DependentUpon>NewSchemaWindow.xaml</DependentUpon>
     </Compile>
@@ -385,6 +388,10 @@
     <Compile Include="Zonal\ZonalWindow.xaml.cs">
       <DependentUpon>ZonalWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Chit\DuePaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Chit\NewSchemaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -591,6 +598,8 @@
   <ItemGroup>
     <Resource Include="Assets\Reload.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\search_ic.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

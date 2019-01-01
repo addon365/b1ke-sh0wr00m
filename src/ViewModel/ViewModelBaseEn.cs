@@ -22,6 +22,7 @@ namespace ViewModel
         {
             this.Service = baseService;
             this.OnResult = onResult;
+            
             WireCommands();
             InitModel();
         }
@@ -51,7 +52,6 @@ namespace ViewModel
                     _model = value;
                     OnPropertyChanged("Model");
                     SaveCommand.IsEnabled = true;
-                    Message = "";
                 }
             }
         }
@@ -71,8 +71,8 @@ namespace ViewModel
             IsProgressBarVisible = true;
             try
             {
-                Service.Save(Model);
-                InitModel();
+                Model=Service.Save(Model);
+                
                 SayMessage(true, "Successfully Saved..");
             }
             catch(Exception exception)
@@ -81,8 +81,9 @@ namespace ViewModel
             }
             IsProgressBarVisible = false;
         }
-        public void SayMessage(bool isSuccess,string message)
+        public virtual void SayMessage(bool isSuccess,string message)
         {
+            if(isSuccess) InitModel();
             if (OnResult != null)
             {
                 OnResult(isSuccess, message);

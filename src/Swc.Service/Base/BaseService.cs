@@ -42,5 +42,12 @@ namespace Swc.Service.Base
             UnitOfWork.SaveChanges();
             return obj;
         }
+        public IRepository<T> Repository
+        {
+            get
+            {
+                return _repository;
+            }
+        }
     }
 }

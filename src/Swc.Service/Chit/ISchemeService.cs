@@ -5,5 +5,6 @@ namespace Swc.Service.Chit
 {
     public interface ISchemeService : IBaseService<ChitScheme>
     {
+        
     }
 }

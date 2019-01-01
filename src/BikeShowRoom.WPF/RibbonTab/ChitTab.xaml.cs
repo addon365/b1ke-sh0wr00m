@@ -31,5 +31,11 @@ namespace BikeShowRoom.WPF
             NewSubscriberWindow newSubscriberWindow = new NewSubscriberWindow();
             newSubscriberWindow.ShowDialog();
         }
+
+        private void DuePayment_Click(object sender, RoutedEventArgs e)
+        {
+            DuePaymentWindow duePaymentWindow = new DuePaymentWindow();
+            duePaymentWindow.ShowDialog();
+        }
     }
 }

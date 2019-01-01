@@ -30,10 +30,23 @@ namespace swcApi.Controllers.Chit
             return _chitDueService.Find(id);
         }
 
+        // GET: api/ChitDue/5
+        [HttpGet("subscriber/{id}")]
+        public List<ChitSubriberDue> GetSubscriberId(Guid id)
+        {
+            return _chitDueService.GetList(id);
+        }
+
         // POST: api/ChitDue
         [HttpPost]
         public IActionResult Post([FromBody] ChitSubriberDue value)
         {
+            value.DueNo = _chitDueService.GenerateDueId();
+            if (value.ChitSubscriber != null)
+            {
+                value.ChitSubscriber.SubscribeId =
+                    _chitDueService.GenerateSubscribeId();
+            }
             return Ok(_chitDueService.Save(value));
         }
 

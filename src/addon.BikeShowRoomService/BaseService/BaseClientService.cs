@@ -11,7 +11,7 @@ namespace addon.BikeShowRoomService.BaseService
 {
     public abstract class BaseClientService<T> : IBaseService<T> where T : BaseEntity
     {
-        private readonly HttpClient _httpClient;
+        protected readonly HttpClient _httpClient;
         public BaseClientService()
         {
             _httpClient = WebDataClient.Client;

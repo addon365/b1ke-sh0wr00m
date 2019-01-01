@@ -12,12 +12,14 @@ namespace ViewModel.Chit
     public class SubscribeViewModel : ViewModelBaseEn<ChitSubriberDue>
     {
         public IList<ChitScheme> _schemes;
+        private ChitScheme _selectedScheme;
+        private double _schemeAmount;
         private Swc.Service.Chit.ISchemeService _schemeService;
         public SubscribeViewModel()
             : base(new ChitDueClientService())
         {
             FetchSchemesAsync();
-            
+
         }
 
         public override void InitModel()
@@ -34,7 +36,36 @@ namespace ViewModel.Chit
             Model.VoucherInfo.Voucher.VoucherDate = new DateTime();
             Model.VoucherInfo.Voucher.VoucherType = "Credit";
         }
-
+        public double SchemeAmount
+        {
+            get { return _schemeAmount; }
+            set
+            {
+                if (_schemeAmount != value)
+                {
+                    _schemeAmount = value;
+                    OnPropertyChanged("SchemeAmount");
+                }
+            }
+        }
+        public ChitScheme SelectedScheme
+        {
+            get
+            {
+                return _selectedScheme;
+            }
+            set
+            {
+                if (_selectedScheme != value)
+                {
+                    _selectedScheme = value;
+                    OnPropertyChanged("SelectedScheme");
+                    Model.ChitSubscriber.ChitSchema = _selectedScheme;
+                    Model.VoucherInfo.Amount = _selectedScheme.MonthlyAmount;
+                    SchemeAmount = _selectedScheme.MonthlyAmount;
+                }
+            }
+        }
         public IList<ChitScheme> Schemes
         {
             get
@@ -85,19 +116,25 @@ namespace ViewModel.Chit
             Model.ChitSubscriber.ChitSchemeId = Model.ChitSubscriber.ChitSchema.Id;
             Model.ChitSubscriber.ChitSchema = null;
             Guid id = Model.ChitSubscriber.ChitSchemeId;
-            if (id == null || id==Guid.Empty)
+            if (id == null || id == Guid.Empty)
             {
                 Message = "Choose a Schema.";
                 return false;
             }
             string name = Model.ChitSubscriber.Customer.Profile.Name;
-            if (name == null || (name != null && name.Length < 10))
+            if (name == null || (name != null && name.Length < 4))
             {
                 Message = "Name must have atleast 5 letters.";
                 return false;
             }
 
             return true;
+        }
+        public override void SayMessage(bool isSuccess, string message)
+        {
+            Message = "Successfully Saved and your Subscription id is " +
+                Model.ChitSubscriber.SubscribeId;
+            if (isSuccess) InitModel();
         }
     }
 }

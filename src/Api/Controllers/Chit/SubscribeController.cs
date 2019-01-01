@@ -21,18 +21,29 @@ namespace swcApi.Controllers.Chit
         {
             _subscribeService = subscribeService;
         }
-        // GET: api/Subscribe
-        [HttpGet]
-        public IEnumerable<ChitSubscriber> Get()
-        {
-            return _subscribeService.FindAll();
-        }
-
+       
         // GET: api/Subscribe/5
         [HttpGet("{id}")]
         public ChitSubscriber Get(Guid id)
         {
             return _subscribeService.Find(id);
+        }
+
+        // GET: api/Subscribe/5
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult Get([FromQuery(Name="subscriptionId")]string id)
+        {
+            if(id==null)
+                return Ok(_subscribeService.FindAll());
+            var result= _subscribeService.findBySubscriptionId(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
         // POST: api/Subscribe
@@ -54,5 +65,6 @@ namespace swcApi.Controllers.Chit
         public void Delete(Guid id)
         {
         }
+
     }
 }
