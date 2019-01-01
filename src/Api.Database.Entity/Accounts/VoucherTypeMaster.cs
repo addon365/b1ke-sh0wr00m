@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace Api.Database.Entity.Accounts
+{
+    public class VoucherTypeMaster
+    {
+        [Key]
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public Guid ParentId { get; set; }
+        public VoucherTypeMaster()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
+    }
+}

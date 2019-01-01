@@ -11,21 +11,23 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace ViewModel
+namespace ViewModel.Enquiries
 {
 
-    public delegate void OpenBooking(Enquiry enquiries);
-    public delegate void Edit(string Identifier);
-    public class EnquiriesListViewModel : ViewModelBase
+    
+    public class EnquiriesBookingListViewModel : ViewModelBase
     {
-        private readonly IEnquiriesService _repository;
+        private readonly IBookingService _repository;
         private Threenine.Data.Paging.IPaginate<Enquiry> _enquiries;
         private Enquiry _SelectedEnquiries;
         private PagingParams pagingParams;
-        public EnquiriesListViewModel()
+        public EnquiriesBookingListViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
-            PagingViewModel = new PagingViewModel<Enquiry>(new Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Enquiry>>(RefreshData));
+            _repository = new addon.BikeShowRoomService.WebService.BookingService();
+            pagingParams = new PagingParams();
+            pagingParams.PageNumber = 0;
+            pagingParams.PageSize = 50;
+            _enquiries = _repository.GetAllBooked(pagingParams);
             WireCommands();
            
         }
@@ -53,13 +55,6 @@ namespace ViewModel
         }
         #endregion
 
-        private Threenine.Data.Paging.IPaginate<Enquiry> RefreshData(PagingParams pagingParams)
-        {
-
-            return _repository.GetAllActive(pagingParams);
-
-        }
-        public PagingViewModel<Enquiry> PagingViewModel { get; private set; }
         public Threenine.Data.Paging.IPaginate<Enquiry> Enquiries
         {
             get

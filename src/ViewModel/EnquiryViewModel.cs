@@ -16,21 +16,43 @@ namespace ViewModel
 {
     public class EnquiryViewModel : ViewModelBase
     {
-        private readonly IEnquiriesService _repository;
+        private IEnquiriesService _repository;
         private Enquiry _currentEnquiry;
         private Contact _currentContact;
         private MarketingZone _currentMarketingZone;
-        private EnquiryProduct _enquiryProduct,_FinanceEnquiryProduct,_SelectedDataGridProduct;
-        private EnquiryFinanceQuotation _financeQuotation;
+        private EnquiryProduct _enquiryProduct,_SelectedDataGridProduct, _FinanceEnquiryProduct;
+        private EnquiryFinanceQuotation _financeQuotation, _SelectedDataGridFinanceQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
+        private ScreenOpenMode Mode=ScreenOpenMode.New;
         public EnquiryViewModel()
+        {
+            GeneralInitilize();
+            InitInsert();
+            InitDefaultValues();
+        }
+        public EnquiryViewModel(string Identifier)
+        {
+            GeneralInitilize();
+            Enquiry eq=_repository.GetEnquiries(Identifier);
+            CurrentEnquiry = eq;
+            CurrentContact = eq.Contact;
+            EnquiryProducts = new ObservableCollection<EnquiryProduct>(eq.EnquiryProducts);
+            CurrentFinanceQuotation = new EnquiryFinanceQuotation();
+            CurrentExchangeQuotation = new EnquiryExchangeQuotation();
+            CurrentFinanceEnquiryProduct =EnquiryProducts.FirstOrDefault();
+            ExchangeQuotations = new ObservableCollection<EnquiryExchangeQuotation>(eq.EnquiryExchangeQuotations);
+            CurrentExchangeQuotation = ExchangeQuotations.FirstOrDefault();
+            Mode = ScreenOpenMode.Edit;
+        }
+        private void GeneralInitilize()
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
             EnquiryMasterData = _repository.GetInitilizeEnquiries();
+
             WireCommands();
-            InitInsert();
-            InitDefaultValues();
+            SaveEnquiryCommand.IsEnabled = true;
+
         }
         [Conditional("DEBUG")]
         private void InitDefaultValues()
@@ -77,11 +99,12 @@ namespace ViewModel
         private void WireCommands()
         {
             UpdateEnquiryCommand = new RelayCommand(UpdateEnquiry);
-            InsertEnquiryCommand = new RelayCommand(InsertEnquiry);
+            SaveEnquiryCommand = new RelayCommand(SaveEnquiry);
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
             AddEnquiryProductCommand = new RelayCommand(AddEnquiryProduct);
             AddFinanceQuotationCommand = new RelayCommand(AddFinanceQuotation);
             DeleteRowEnquiryProductCommand = new RelayCommand(RemoveEnquiryProduct);
+            DeleteRowFinanceQuotationCommand = new RelayCommand(RemoveFinanceQuotationRow);
 
         }
         public RelayCommand DeleteRowEnquiryProductCommand
@@ -89,13 +112,17 @@ namespace ViewModel
             get;
             private set;
         }
-
+        public RelayCommand DeleteRowFinanceQuotationCommand
+        {
+            get;
+            private set;
+        }
         public RelayCommand UpdateEnquiryCommand
         {
             get;
             private set;
         }
-        public RelayCommand InsertEnquiryCommand
+        public RelayCommand SaveEnquiryCommand
         {
             get;
             private set;
@@ -117,7 +144,7 @@ namespace ViewModel
         }
 
         #endregion
-        public InitilizeEnquiry EnquiryMasterData { get; }
+        public InitilizeEnquiry EnquiryMasterData { get; set; }
         public MarketingZone CurrentMarketingZone
         {
             get
@@ -151,19 +178,19 @@ namespace ViewModel
         }
 
 
-        private ObservableCollection<EnquiryFinanceQuotation> _enquiryFinanceQuotations;
-        public ObservableCollection<EnquiryFinanceQuotation> FinanceQuotations
-        {
-            get
-            {
-                return _enquiryFinanceQuotations;
-            }
-            set
-            {
-                _enquiryFinanceQuotations = value;
-                OnPropertyChanged("FinanceQuotations");
-            }
-        }
+        //private ObservableCollection<EnquiryFinanceQuotation> _enquiryFinanceQuotations;
+        //public ObservableCollection<EnquiryFinanceQuotation> FinanceQuotations
+        //{
+        //    get
+        //    {
+        //        return _enquiryFinanceQuotations;
+        //    }
+        //    set
+        //    {
+        //        _enquiryFinanceQuotations = value;
+        //        OnPropertyChanged("FinanceQuotations");
+        //    }
+        //}
 
         private ObservableCollection<EnquiryExchangeQuotation> _enquiryExchangeQuotations;
         public ObservableCollection<EnquiryExchangeQuotation> ExchangeQuotations
@@ -195,7 +222,7 @@ namespace ViewModel
                 {
                     _currentEnquiry = value;
                     OnPropertyChanged("CurrentEnquiry");
-                    InsertEnquiryCommand.IsEnabled = true;
+                  
                     FindEnquiryCommand.IsEnabled = true;
                     UpdateEnquiryCommand.IsEnabled = true;
                 }
@@ -254,6 +281,24 @@ namespace ViewModel
                 }
             }
         }
+        public EnquiryFinanceQuotation SelectedDataGridFinanceQuotation
+        {
+            get
+            {
+                return _SelectedDataGridFinanceQuotation;
+            }
+
+            set
+            {
+                if (_SelectedDataGridFinanceQuotation != value)
+                {
+                    _SelectedDataGridFinanceQuotation = value;
+                    OnPropertyChanged("SelectedDataGridFinanceQuotation");
+                    DeleteRowFinanceQuotationCommand.IsEnabled = true;
+
+                }
+            }
+        }
         public EnquiryProduct CurrentFinanceEnquiryProduct
         {
             get
@@ -266,7 +311,7 @@ namespace ViewModel
                 if (_FinanceEnquiryProduct != value)
                 {
                     _FinanceEnquiryProduct = value;
-                    OnPropertyChanged("CurrentEnquiryProduct");
+                    OnPropertyChanged("CurrentFinanceEnquiryProduct");
 
                     AddFinanceQuotationCommand.IsEnabled = true;
                 }
@@ -308,29 +353,42 @@ namespace ViewModel
                 }
             }
         }
-        public void UpdateEnquiry()
+        public IMsgBox msg { get; set; }
+        public async void SaveEnquiry()
         {
-
+            try
+            { 
+          if(Mode==ScreenOpenMode.New)
+            {
+                AddEnquiry();
+            }
+          else
+            {
+                UpdateEnquiry();
+            }
+            }
+            catch(Exception ex)
+            {
+                if (msg != null)
+                    msg.ShowUI(ex.Message);
+            }
         }
-        public async void InsertEnquiry()
+        private async void AddEnquiry()
         {
-
             if (!InsertValidation())
                 return;
 
-            InsertEnquiryCommand.IsEnabled = false;
+            SaveEnquiryCommand.IsEnabled = false;
 
             if (CurrentExchangeQuotation.Model != "")
             {
                 AddExchangeQuotation();
             }
-            CurrentEnquiry.EnquiryDate = System.DateTime.Now;
+
             InsertEnquiryModel insertEnquiryModel = new InsertEnquiryModel();
             CurrentEnquiry.Contact = CurrentContact;
             insertEnquiryModel.Enquiry = CurrentEnquiry;
-
             insertEnquiryModel.EnquiryProducts = EnquiryProducts;
-            insertEnquiryModel.enquiryFinanceQuotations = FinanceQuotations;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
 
             await _repository.Insert(insertEnquiryModel);
@@ -338,9 +396,15 @@ namespace ViewModel
 
             ClearData();
 
-
         }
 
+        private async void UpdateEnquiry()
+        {
+            
+
+
+            await  _repository.Update(CurrentEnquiry);
+        }
         bool InsertValidation()
         {
             if (_currentEnquiry == null)
@@ -353,8 +417,7 @@ namespace ViewModel
         }
         void InitInsert()
         {
-            CurrentEnquiry = new Enquiry();
-            CurrentEnquiry.EnquiryDate = System.DateTime.Now;
+            CurrentEnquiry = new Enquiry() { EnquiryDate = CurrentEnquiry==null?System.DateTime.Now:CurrentEnquiry.EnquiryDate };
             CurrentContact = new Contact();
             CurrentEnquiryProduct = new EnquiryProduct();
             CurrentEnquiryProduct.Product = new Product();
@@ -362,14 +425,14 @@ namespace ViewModel
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
             EnquiryProducts=new ObservableCollection<EnquiryProduct>();
-            FinanceQuotations = new ObservableCollection<EnquiryFinanceQuotation>();
+            
             ExchangeQuotations = new ObservableCollection<EnquiryExchangeQuotation>();
+            
         }
         void ClearData()
         {
             InitInsert();
             EnquiryProducts.Clear();
-            FinanceQuotations.Clear();
             ExchangeQuotations.Clear();
         }
         public void FindEnquiry()
@@ -397,7 +460,14 @@ namespace ViewModel
         {
 
             CurrentFinanceQuotation.EnquiryProductId=CurrentFinanceEnquiryProduct.Id;
-            FinanceQuotations.Add(CurrentFinanceQuotation);
+            if (CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations == null)
+            { 
+                CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations = new ObservableCollection<EnquiryFinanceQuotation>();
+                OnPropertyChanged("CurrentFinanceEnquiryProduct");
+            }
+
+            CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations.Add(CurrentFinanceQuotation);
+            
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             
         }
@@ -411,7 +481,11 @@ namespace ViewModel
         {
             EnquiryProducts.Remove(SelectedDataGridProduct);
         }
+        public void RemoveFinanceQuotationRow()
+        {
+            CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations.Remove(SelectedDataGridFinanceQuotation);
+        }
     }
-
+   
 
 }

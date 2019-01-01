@@ -135,6 +135,23 @@ namespace swcApi
                 context.SaveChanges();
             }
             SeedOnDebug(context);
+            if (!context.VoucherTypeMasters.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<VoucherTypeMaster>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "VoucherTypeMaster.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.AccountBooks.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<AccountBook>>(
+            File.ReadAllText(
+                "seed" + Path.DirectorySeparatorChar + "AccountBook.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            SeedEnquiries(context);
         }
         [Conditional("DEBUG")]
         private static void SeedOnDebug(ApiContext context)

@@ -1,8 +1,10 @@
-﻿using Api.Database.Entity.Crm;
+﻿using Api.Database.Entity.Accounts;
+using Api.Database.Entity.Crm;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text;
 
 namespace Api.Database.Entity.Enquiries
@@ -21,8 +23,18 @@ namespace Api.Database.Entity.Enquiries
         public Guid StatusId { get; set; }
         [ForeignKey("StatusId")] public virtual EnquiryStatus Status { get; set; }
 
-        public IList<EnquiryProduct> EnquiryProducts { get; set; }
+        public ICollection<EnquiryProduct> EnquiryProducts { get; set; }
+       
+        public ICollection<EnquiryExchangeQuotation> EnquiryExchangeQuotations { get; set; }
 
-        public Guid VoucherId { get; set; }
+        public Guid? VoucherId { get; set; }
+
+        [ForeignKey("VoucherId")]
+        public virtual Voucher Voucher { get; set; }
+
+        public IOrderedQueryable<Enquiry> OrderBy(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace swcApi.Controllers
         {
             _enquiriesService = enquiriesService;
             _reqinfo = r;
+        
         }
 
         /// <summary>
@@ -40,8 +41,12 @@ namespace swcApi.Controllers
             PagingParams pagingParams = new PagingParams();
             pagingParams.PageNumber = PageNumber;
             pagingParams.PageSize = PageSize;
+            _reqinfo.UserId = Request.Headers["UserId"].ToString();
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
             return _enquiriesService.GetAllActive(pagingParams);
         }
+        
 
         [AllowAnonymous]
         [Route("InitilizeEnquiries")]
@@ -72,7 +77,29 @@ namespace swcApi.Controllers
 
             return Ok() ;
         }
+        [HttpPost]
+        [Route("Update")]
+        public async Task<IActionResult> Update([FromBody] Enquiry referrer)
+        {
+            try
+            { 
+            if (referrer == null)
+            {
+                return BadRequest();
+            }
+            _reqinfo.UserId = Request.Headers["UserId"].ToString();
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+            var identifier =await _enquiriesService.Update(referrer);
 
+
+            return Ok();
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
         /// <summary>
         ///  Returns Details of a selected Referrer
         /// </summary>
@@ -89,13 +116,18 @@ namespace swcApi.Controllers
             return Ok(referer);
         }
         [HttpGet]
-        [Route("{identifier}", Name = "EnquiriesDetail")]
+        [Route("Get/{identifier}", Name = "Enquiry")]
         public IActionResult Detail(string identifier)
         {
+            _reqinfo.UserId = Request.Headers["UserId"].ToString();
+            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+
             var referer = _enquiriesService.GetEnquiries(identifier);
             if (referer == null) return NotFound();
 
             return Ok(referer);
         }
+       
     }
 }

@@ -1,13 +1,11 @@
 ﻿
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Enquiries;
-using Api.Domain.Accounts;
-using Api.Domain.Booking;
 using Microsoft.Extensions.DependencyInjection;
 using Swc.Service;
-using Swc.Service.Crm;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ViewModel.Enquiries
 {
@@ -16,9 +14,9 @@ namespace ViewModel.Enquiries
     
 
         private readonly IBookingService _repository;
-        private DomainVoucherInfo _currentAmount;
+        private VoucherInfo _currentAmount;
         private Enquiry _CurrentEnquiry;
-
+        private ScreenOpenMode Mode=ScreenOpenMode.New;
 
         public EnquiryBookingViewModel(Enquiry enq)
         {
@@ -29,21 +27,31 @@ namespace ViewModel.Enquiries
 
             _repository = Startup.Instance.provider.GetService<IBookingService>();
             _repository = new addon.BikeShowRoomService.WebService.BookingService();
-            CurrentAmount = new DomainVoucherInfo();
+            if(enq.Voucher==null)
+            { 
+                CurrentAmount = new VoucherInfo();
+            }
+            else
+
+            {
+                Mode = ScreenOpenMode.Edit;
+                CurrentAmount = enq.Voucher.VoucherInfos.Where(x => x.FieldInfo == FieldInfo.CashAmount.ToString()).Single();
+            }
+
 
 
         }
         private void WireCommands()
         {
-            InsertCommand = new RelayCommand(InsertBooking);
+            SaveCommand = new RelayCommand(SaveBooking);
         }
-        public RelayCommand InsertCommand
+        public RelayCommand SaveCommand
         {
             get;
             private set;
         }
 
-        public DomainVoucherInfo CurrentAmount
+        public VoucherInfo CurrentAmount
         {
             get
             {
@@ -55,11 +63,10 @@ namespace ViewModel.Enquiries
                 {
 
                     _currentAmount = value;
-                    _currentAmount.book = AccountBook.Booking;
                     _currentAmount.FieldInfo = FieldInfo.CashAmount.ToString();
                     _currentAmount.IsCredit = true;
                     OnPropertyChanged("CurrentAmount");
-                    InsertCommand.IsEnabled = true;
+                    SaveCommand.IsEnabled = true;
                 }
             }
         }
@@ -85,23 +92,55 @@ namespace ViewModel.Enquiries
 
         public IMsgBox msg { get; set; }
 
-        public async void InsertBooking()
+        public async void SaveBooking()
         {
             try
-            { 
-            InsertBooking ib = new InsertBooking();
-            ib.CashAmount = CurrentAmount;
-            ib.EnquiryId = CurrentEnquiry.Id;
-            Voucher v = new Voucher();
-            v.VoucherDate = System.DateTime.Now;
-            ib.Voucher = v;
-            await _repository.Insert(ib);
+            {
+                if (Mode == ScreenOpenMode.New)
+                    InsertBooking();
+                else
+                    EditBooking();
+
+                SaveCommand.IsEnabled = false;
+                if (msg != null)
+                    msg.ShowUI("Saved Successfully");
             }
             catch(Exception ex)
             {
                 if (msg != null)
                     msg.ShowUI(ex.Message);
             }
+        }
+        public async void EditBooking()
+        {
+            await _repository.Insert(CurrentEnquiry);
+        }
+        public async void InsertBooking()
+        {
+
+            Voucher voucher = new Voucher();
+            voucher.VoucherDate = System.DateTime.Now;
+            ICollection<VoucherInfo> lstVoucherInfo = new List<VoucherInfo>();
+            CurrentAmount.VoucherId = voucher.Id;
+            lstVoucherInfo.Add(CurrentAmount);
+
+            VoucherInfo voucherInfoCash = new VoucherInfo();
+            voucherInfoCash.VoucherId = voucher.Id;
+            voucherInfoCash.Amount = CurrentAmount.Amount;
+            voucherInfoCash.IsCredit = false;
+
+            lstVoucherInfo.Add(voucherInfoCash);
+            //InsertBooking ib = new InsertBooking();
+            //ib.CashAmount = CurrentAmount;
+            //ib.EnquiryId = CurrentEnquiry.Id;
+            //Voucher v = new Voucher();
+            //v.VoucherDate = System.DateTime.Now;
+            //ib.Voucher = v;
+
+            CurrentEnquiry.Voucher = voucher;
+            CurrentEnquiry.VoucherId = voucher.Id;
+            CurrentEnquiry.Voucher.VoucherInfos = lstVoucherInfo;
+            await _repository.Insert(CurrentEnquiry);
         }
         public Result OnResult
         {

@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Api.Database.Entity.Threats;
-using Api.Domain.Enquiries;
-using Threenine.Data;
-using AutoMapper;
+﻿
 using Api.Database.Entity.Enquiries;
 using Swc.Service;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
-using Swc.Service.Sales;
-using Api.Domain.Sales;
-using Api.Domain.Booking;
 using System.Net;
+using System;
 
 namespace addon.BikeShowRoomService.WebService
 {
@@ -34,7 +25,7 @@ namespace addon.BikeShowRoomService.WebService
       
 
 
-        public async Task Insert(InsertBooking insertBooking)
+        public async Task Insert(Enquiry insertBooking)
         {
 
             
@@ -59,5 +50,45 @@ namespace addon.BikeShowRoomService.WebService
            
 
         }
+        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllBooked(Api.Domain.Paging.PagingParams pagingParams)
+        {
+
+            HttpResponseMessage response = _httpClient.GetAsync("Booking?" + "PageNumber=" + pagingParams.PageNumber + "&PageSize=" + pagingParams.PageSize).Result;
+            Threenine.Data.Paging.IPaginate<Enquiry> enquiries = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                enquiries = JsonConvert.DeserializeObject<Threenine.Data.Paging.Paginate<Enquiry>>(json);
+
+                string j = json;
+
+            }
+
+            return enquiries;
+        }
+        public Enquiry GetBooked(string identifier)
+        {
+            HttpResponseMessage response = _httpClient.GetAsync("Enquiries/Booked/Get/" + identifier).Result;
+            Enquiry enquiries = null;
+            if (response.IsSuccessStatusCode)
+            {
+                var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
+                                .GetAwaiter()
+                                .GetResult();
+
+                enquiries = JsonConvert.DeserializeObject<Enquiry>(json);
+
+                return enquiries;
+
+            }
+
+            throw new Exception("Request Failed");
+
+
+        }
+
     }
 }

@@ -14,7 +14,7 @@ namespace ViewModel
         {
             _handler = handler;
         }
-
+       
         public bool IsEnabled
         {
             get { return _isEnabled; }
@@ -43,4 +43,31 @@ namespace ViewModel
             _handler();
         }
     }
+    
+    public class OtherRelayCommand : ICommand
+    {
+        private readonly Action<object> _handler;
+        private Func<object, bool> _isEnabled;
+
+      
+        public OtherRelayCommand(Action<object> handler, Func<object, bool> canExec)
+        {
+            _handler = handler;
+            _isEnabled = canExec;
+        }
+       
+
+        public bool CanExecute(object parameter)
+        {
+            return _isEnabled(parameter);
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            _handler(parameter);
+        }
+    }
 }
+

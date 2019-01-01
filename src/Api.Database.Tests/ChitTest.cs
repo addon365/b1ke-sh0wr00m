@@ -68,7 +68,7 @@ namespace Api.Database.Tests
                 .Build();
             context.Vouchers.Add(voucher);
 
-            voucherInfo.Voucher = voucher;
+            voucherInfo.VoucherId = voucher.Id;
             context.VouchersInfo.Add(voucherInfo);
             context.SaveChanges();
             Assert.Equal(voucherInfo.Id,
@@ -94,11 +94,12 @@ namespace Api.Database.Tests
                 .Build();
             var voucherInfo = Builder<VoucherInfo>.CreateNew()
                 .With(cs => cs.BranchMasterId = null)
-                .With(vi =>
-                vi.Voucher = Builder<Voucher>.CreateNew()
-                .With(cs => cs.BranchMasterId = null)
-                .Build())
+                
                 .Build();
+            var voucher = Builder<Voucher>.CreateNew()
+                .With(cs => cs.BranchMasterId = null)
+                .Build();
+
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
                 .With(cs => cs.BranchMasterId = null)
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
@@ -129,7 +130,7 @@ namespace Api.Database.Tests
             var voucher = Builder<Voucher>.CreateNew().Build();
             var voucherInfo = Builder<VoucherInfo>.CreateNew()
                 .With(vi =>
-                vi.Voucher = voucher)
+                vi.VoucherId = voucher.Id)
                 .Build();
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
@@ -140,7 +141,7 @@ namespace Api.Database.Tests
             #region Due Payment 2
             var voucherInfo2 = Builder<VoucherInfo>.CreateNew()
                 .With(vi =>
-                vi.Voucher = voucher)
+                vi.VoucherId = voucher.Id)
                 .Build();
 
 
@@ -177,7 +178,7 @@ namespace Api.Database.Tests
             var voucher = Builder<Voucher>.CreateNew().Build();
             var voucherInfo = Builder<VoucherInfo>.CreateNew()
                 .With(vi =>
-                vi.Voucher = voucher)
+                vi.VoucherId = voucher.Id)
                 .Build();
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
@@ -191,7 +192,7 @@ namespace Api.Database.Tests
             #region Due Payment 2
             var voucherInfo2 = Builder<VoucherInfo>.CreateNew()
                 .With(vi =>
-                vi.Voucher = voucher)
+                vi.VoucherId = voucher.Id)
                 .Build();
 
 

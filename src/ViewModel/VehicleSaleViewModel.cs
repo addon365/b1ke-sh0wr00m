@@ -24,7 +24,7 @@ namespace ViewModel
         {
             _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
 
-            EnquiryMasterData = _repository.GetInitilizeEnquiries();
+            EnquiryMasterData =  _repository.GetInitilizeEnquiries();
             WireCommands();
             InitInsert();
         }
@@ -213,7 +213,6 @@ namespace ViewModel
             InsertEnquiryModel insertEnquiryModel = new InsertEnquiryModel();
             insertEnquiryModel.Enquiry = CurrentEnquiry;
             insertEnquiryModel.EnquiryProducts = EnquiryProducts;
-            insertEnquiryModel.enquiryFinanceQuotations = FinanceQuotations;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
 
             await _repository.Insert(insertEnquiryModel);

@@ -71,8 +71,10 @@ namespace Api.Database
         #endregion
         #region Accounts
         public DbSet<PaymentMode> PaymentModes { get; set; }
+        public DbSet<AccountBook> AccountBooks { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
         public DbSet<VoucherInfo> VouchersInfo { get; set; }
+        public DbSet<VoucherTypeMaster> VoucherTypeMasters { get; set; }
         #endregion
         #region Financing
         public DbSet<FinanceCompany> FinanceCompanies { get; set; }

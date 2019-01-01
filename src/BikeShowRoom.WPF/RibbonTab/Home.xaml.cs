@@ -117,5 +117,11 @@ namespace BikeShowRoom.WPF
             ContactListWindow contactListWindow = new ContactListWindow(); ;
             contactListWindow.ShowDialog();
         }
+
+        private void BtnBookingList_Click(object sender, RoutedEventArgs e)
+        {
+            Enquiries.BookingListWindow n = new Enquiries.BookingListWindow();
+            n.ShowDialog();
+        }
     }
 }

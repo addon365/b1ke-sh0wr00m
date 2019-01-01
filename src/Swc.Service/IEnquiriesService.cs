@@ -9,9 +9,11 @@ namespace Swc.Service
     public interface IEnquiriesService
     {
         Threenine.Data.Paging.IPaginate<Enquiry> GetAllActive(PagingParams pagingParams);
+       
         InitilizeEnquiry GetInitilizeEnquiries();
-        Task<string> Insert(InsertEnquiryModel enquiries);
-        InsertEnquiryModel GetEnquiries(string identifier);
+        Task<Enquiry> Insert(InsertEnquiryModel enquiries);
+        Task<Enquiry> Update(Enquiry enquiry);
+        Enquiry GetEnquiries(string identifier);
         MultiEnquiryModel GetMultiEnquiries(string identifier);
 
     }

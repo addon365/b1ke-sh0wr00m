@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid Background="DodgerBlue">
             <StackPanel Orientation="Horizontal">
-                <syncfusion:RibbonButton x:Name="btnSave" IconType="VectorImage" SizeForm="Large" Label="Save" Foreground="White" HorizontalAlignment="Left"  Command="{Binding InsertEnquiryCommand}" >
+                <syncfusion:RibbonButton x:Name="btnSave" IconType="VectorImage" SizeForm="Large" Label="Save" Foreground="White" HorizontalAlignment="Left"  Command="{Binding SaveEnquiryCommand}" >
                     <syncfusion:RibbonButton.VectorImage>
                         <Path Data="F1M161,211L133,211L133,189L161,189z" Fill="Gray" Stretch="Fill"/>
                         <Path Data="F1M160,210L134,210L134,190L160,190z" Fill="White" Stretch="Fill" Margin="1"/>
@@ -145,7 +145,7 @@
             </GroupBox>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="280"/>
+                    <RowDefinition Height="300"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <GroupBox Grid.Column="2">
@@ -174,14 +174,16 @@
                         <TextBlock Text="Loan Months" VerticalAlignment="Center" Grid.Row="3"/>
                         <TextBox Grid.Column="1" Grid.Row="3" Height="24" BorderBrush="Gray" Text="{Binding CurrentFinanceQuotation.NumberOfMonths}"/>
                         <Button Name="btnAddAnotherFinacePlan" Content="Add One More" Grid.Row="4" Grid.Column="1" Width="150" Height="28" Command="{Binding AddFinanceQuotationCommand}"/>
-                        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Height="100" VerticalAlignment="Top"  ItemsSource="{Binding FinanceQuotations}" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Down Payment" Binding="{Binding InitialDownPayment}" Width="*"/>
-                                <DataGridTextColumn Header="EMI" Binding="{Binding MonthlyEMIAmount}" Width="*"/>
-                                <DataGridTextColumn Header="Tenure" Binding="{Binding NumberOfMonths}" Width="*"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-
+                        <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
+                            <DataGrid Height="100"  ItemsSource="{Binding CurrentFinanceEnquiryProduct.EnquiryFinanceQuotations}" SelectedItem="{Binding SelectedDataGridFinanceQuotation}" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Down Payment" Binding="{Binding InitialDownPayment}" Width="*"/>
+                                    <DataGridTextColumn Header="EMI" Binding="{Binding MonthlyEMIAmount}" Width="*"/>
+                                    <DataGridTextColumn Header="Tenure" Binding="{Binding NumberOfMonths}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="Delete Product" Width="100" HorizontalAlignment="Right" Command="{Binding DeleteRowFinanceQuotationCommand}"/>
+                        </StackPanel>
                     </Grid>
                 </GroupBox>
                 <Expander Grid.Row="1" IsExpanded="True">

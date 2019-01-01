@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:crossButton="clr-namespace:CrossButton;assembly=CrossButton"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Login" Height="400" Width="600" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen">
 
     <Grid>
+        
         <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
         <Image Source="Assets/welcome.jpeg" Margin="310,0,0,0" Stretch="UniformToFill"/>
         <Rectangle Margin="310,0,0,0">
@@ -58,5 +60,6 @@
             <TextBlock Text="(c) Addon Technologies" Foreground="White" HorizontalAlignment="Center" Width="280" FontSize="24" FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" TextAlignment="Center" Margin="0,50,0,0"/>
             <TextBlock Text="bike Room" Foreground="White" FontSize="18" FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" TextAlignment="Right" Margin="10"/>
         </StackPanel>
+        <crossButton:CrossButton Margin="4" Width="12" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CrossButton_Click"/>
     </Grid>
 </Window>

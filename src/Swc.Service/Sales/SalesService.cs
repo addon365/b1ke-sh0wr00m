@@ -50,10 +50,10 @@ namespace Swc.Service.Sales
             
 
             Voucher v = new Voucher();
-            foreach(VoucherInfo vi in model.Amounts)
-            {
-                vi.Voucher = v;
-            }
+            //foreach(VoucherInfo vi in model.Amounts)
+            //{
+            //    vi.Voucher = v;
+            //}
             _unitOfWork.GetRepository<Voucher>().Add(v);
             _unitOfWork.GetRepository<VoucherInfo>().Add(model.Amounts);
             _unitOfWork.SaveChanges();

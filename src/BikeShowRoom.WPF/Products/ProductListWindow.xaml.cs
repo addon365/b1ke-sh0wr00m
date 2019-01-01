@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeShowRoom.WPF.Enquiries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,9 @@ namespace BikeShowRoom.WPF.Products
         {
             InitializeComponent();
             viewmodel = new ProductListViewModel();
+            viewmodel.msg = new CustomMessageBox();
             base.DataContext = viewmodel;
+
         }
     }
 }

@@ -21,13 +21,13 @@ namespace BikeShowRoom.WPF.Enquiries
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
-    public partial class EnquriesListWindow : Window
+    public partial class BookingListWindow : Window
     {
-        EnquiriesListViewModel viewmodel;
-        public EnquriesListWindow()
+        EnquiriesBookingListViewModel viewmodel;
+        public BookingListWindow()
         {
             InitializeComponent();
-            viewmodel = new EnquiriesListViewModel();
+            viewmodel = new EnquiriesBookingListViewModel();
             base.DataContext = viewmodel;
             viewmodel.ReportObj = new Reports();
             viewmodel.OpenBooking = OpenBooking;
@@ -49,13 +49,5 @@ namespace BikeShowRoom.WPF.Enquiries
         }
     }
 
-    public class Reports : ICrystalReport
-    {
-        public void ShowReport(ReportDocument rep)
-        {
-            ReportViewer rpt = new ReportViewer(rep);
-            rpt.ShowDialog();
-            
-        }
-    }
+   
 }

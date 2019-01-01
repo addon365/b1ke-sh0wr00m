@@ -20,6 +20,36 @@ namespace Api.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Api.Database.Entity.Accounts.AccountBook", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BookName");
+
+                    b.Property<int?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("ProgrammerId");
+
+                    b.Property<Guid>("UnderGroupId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountBooks");
+                });
+
             modelBuilder.Entity("Api.Database.Entity.Accounts.PaymentMode", b =>
                 {
                     b.Property<Guid>("Id")
@@ -42,8 +72,6 @@ namespace Api.Database.Migrations
                     b.Property<string>("ProgrammerId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("PaymentModes");
                 });
@@ -69,9 +97,11 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime>("VoucherDate");
 
+                    b.Property<Guid>("VoucherTypeId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
+                    b.HasIndex("VoucherTypeId");
 
                     b.ToTable("Vouchers");
                 });
@@ -80,8 +110,6 @@ namespace Api.Database.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("AccountBookId");
 
                     b.Property<double>("Amount");
 
@@ -103,11 +131,29 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid>("VoucherId");
 
+                    b.Property<Guid>("bookId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
+                    b.HasIndex("VoucherId");
+
+                    b.HasIndex("bookId");
 
                     b.ToTable("VouchersInfo");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Accounts.VoucherTypeMaster", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("ParentId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VoucherTypeMasters");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.BranchMaster", b =>
@@ -126,6 +172,114 @@ namespace Api.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BranchMasters");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Chit.ChitScheme", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("BonusAmount");
+
+                    b.Property<int?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<double>("FinalBonus");
+
+                    b.Property<bool>("HasFixedDate");
+
+                    b.Property<int>("MaxMembers");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<double>("MonthlyAmount");
+
+                    b.Property<string>("SchemaName");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("TotalMonths");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChitSchemes");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Chit.ChitSubriberDue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("BranchMasterId");
+
+                    b.Property<Guid?>("ChitSubscriberId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<string>("DueNo");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid?>("VoucherInfoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChitSubscriberId");
+
+                    b.HasIndex("VoucherInfoId");
+
+                    b.ToTable("ChitSubscriberDues");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Chit.ChitSubscriber", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("BranchMasterId");
+
+                    b.Property<Guid?>("ChitSchemaId");
+
+                    b.Property<Guid?>("ClosedVoucherInfoIdId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<Guid?>("CustomerId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("JoinedDate");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("SubscribeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChitSchemaId");
+
+                    b.HasIndex("ClosedVoucherInfoIdId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("ChitSubscribers");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Crm.Campaign", b =>
@@ -150,8 +304,6 @@ namespace Api.Database.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("Campaigns");
                 });
@@ -184,8 +336,6 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("StatusId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.HasIndex("ContactId");
 
@@ -225,8 +375,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("Contacts");
                 });
 
@@ -236,8 +384,6 @@ namespace Api.Database.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BranchMasterId");
-
-                    b.Property<Guid>("ContactId");
 
                     b.Property<DateTime>("Created");
 
@@ -251,13 +397,13 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime>("Modified");
 
+                    b.Property<Guid?>("ProfileId");
+
                     b.Property<Guid?>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
-                    b.HasIndex("ContactId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Customers");
                 });
@@ -285,8 +431,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("FollowUpModes");
                 });
 
@@ -312,8 +456,6 @@ namespace Api.Database.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("FollowUpStatuses");
                 });
@@ -367,8 +509,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.HasIndex("ContactId");
 
                     b.ToTable("Employees");
@@ -401,17 +541,17 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid>("StatusId");
 
-                    b.Property<Guid>("VoucherId");
+                    b.Property<Guid?>("VoucherId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.HasIndex("ContactId");
 
                     b.HasIndex("EnquiryTypeId");
 
                     b.HasIndex("StatusId");
+
+                    b.HasIndex("VoucherId");
 
                     b.ToTable("Enquiries");
                 });
@@ -440,8 +580,6 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("ProductId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.HasIndex("EnquiryId");
 
@@ -481,8 +619,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.HasIndex("EnquiryId");
 
                     b.ToTable("EnquiryExchangeQuotations");
@@ -514,8 +650,6 @@ namespace Api.Database.Migrations
                     b.Property<int>("NumberOfMonths");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.HasIndex("EnquiryProductId");
 
@@ -553,8 +687,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.HasIndex("EnquiryId");
 
                     b.HasIndex("ProductId");
@@ -590,8 +722,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("EnquiryStatuses");
                 });
 
@@ -620,8 +750,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("EnquriyType");
                 });
 
@@ -645,8 +773,6 @@ namespace Api.Database.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("FinanceCompanies");
                 });
@@ -682,8 +808,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("InventoryInfos");
                 });
 
@@ -707,8 +831,6 @@ namespace Api.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("InventoryItemMasters");
                 });
@@ -735,8 +857,6 @@ namespace Api.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.HasIndex("CustomerId");
 
@@ -784,8 +904,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("marketingZones");
                 });
 
@@ -821,8 +939,6 @@ namespace Api.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccessoriesProductItemId");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.HasIndex("ProductId");
 
@@ -866,8 +982,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("Products");
                 });
 
@@ -895,8 +1009,6 @@ namespace Api.Database.Migrations
                     b.Property<int>("ProgrammerID");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("ProductCompanies");
                 });
@@ -927,8 +1039,6 @@ namespace Api.Database.Migrations
                     b.Property<int>("ProgrammerId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchMasterId");
 
                     b.ToTable("ProductTypes");
                 });
@@ -976,8 +1086,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("Statuses");
                 });
 
@@ -1023,8 +1131,6 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.HasIndex("Referer")
                         .IsUnique()
                         .HasFilter("[Referer] IS NOT NULL");
@@ -1059,15 +1165,14 @@ namespace Api.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchMasterId");
-
                     b.ToTable("Type");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.User.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<decimal>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 20, scale: 0)));
 
                     b.Property<string>("ConfirmPassword");
 
@@ -1084,40 +1189,55 @@ namespace Api.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Accounts.PaymentMode", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
             modelBuilder.Entity("Api.Database.Entity.Accounts.Voucher", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
+                    b.HasOne("Api.Database.Entity.Accounts.VoucherTypeMaster", "VoucherTypeMaster")
                         .WithMany()
-                        .HasForeignKey("BranchMasterId");
+                        .HasForeignKey("VoucherTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Accounts.VoucherInfo", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
+                    b.HasOne("Api.Database.Entity.Accounts.Voucher")
+                        .WithMany("VoucherInfos")
+                        .HasForeignKey("VoucherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Accounts.AccountBook", "AccountBook")
                         .WithMany()
-                        .HasForeignKey("BranchMasterId");
+                        .HasForeignKey("bookId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Crm.Campaign", b =>
+            modelBuilder.Entity("Api.Database.Entity.Chit.ChitSubriberDue", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
+                    b.HasOne("Api.Database.Entity.Chit.ChitSubscriber", "ChitSubscriber")
                         .WithMany()
-                        .HasForeignKey("BranchMasterId");
+                        .HasForeignKey("ChitSubscriberId");
+
+                    b.HasOne("Api.Database.Entity.Accounts.VoucherInfo", "VoucherInfo")
+                        .WithMany()
+                        .HasForeignKey("VoucherInfoId");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Chit.ChitSubscriber", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Chit.ChitScheme", "ChitSchema")
+                        .WithMany()
+                        .HasForeignKey("ChitSchemaId");
+
+                    b.HasOne("Api.Database.Entity.Accounts.VoucherInfo", "ClosedVoucherInfoId")
+                        .WithMany()
+                        .HasForeignKey("ClosedVoucherInfoIdId");
+
+                    b.HasOne("Api.Database.Entity.Crm.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Crm.CampaignInfo", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Crm.Contact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId")
@@ -1134,45 +1254,15 @@ namespace Api.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Crm.Contact", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
             modelBuilder.Entity("Api.Database.Entity.Crm.Customer", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Crm.Contact", "Profile")
                         .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Crm.FollowUpMode", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Crm.FollowUpStatus", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
+                        .HasForeignKey("ProfileId");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Employee.Employee", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Crm.Contact", "Profile")
                         .WithMany()
                         .HasForeignKey("ContactId")
@@ -1181,10 +1271,6 @@ namespace Api.Database.Migrations
 
             modelBuilder.Entity("Api.Database.Entity.Enquiries.Enquiry", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Crm.Contact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId")
@@ -1199,14 +1285,14 @@ namespace Api.Database.Migrations
                         .WithMany()
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Accounts.Voucher", "Voucher")
+                        .WithMany()
+                        .HasForeignKey("VoucherId");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryAccessories", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
                         .WithMany()
                         .HasForeignKey("EnquiryId")
@@ -1220,34 +1306,22 @@ namespace Api.Database.Migrations
 
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
-                    b.HasOne("Api.Database.Entity.Enquiries.Enquiry", "enquiry")
-                        .WithMany()
+                    b.HasOne("Api.Database.Entity.Enquiries.Enquiry")
+                        .WithMany("EnquiryExchangeQuotations")
                         .HasForeignKey("EnquiryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryFinanceQuotation", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
-                    b.HasOne("Api.Database.Entity.Enquiries.EnquiryProduct", "enquiryProduct")
-                        .WithMany()
+                    b.HasOne("Api.Database.Entity.Enquiries.EnquiryProduct")
+                        .WithMany("EnquiryFinanceQuotations")
                         .HasForeignKey("EnquiryProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryProduct", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Enquiries.Enquiry")
                         .WithMany("EnquiryProducts")
                         .HasForeignKey("EnquiryId")
@@ -1259,58 +1333,12 @@ namespace Api.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryStatus", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Enquiries.EnquiryType", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Finance.FinanceCompany", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryInfo", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryItemMaster", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
             modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryMaster", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Crm.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.MarketingZone", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Products.ExtraFittingsAccessories", b =>
@@ -1319,50 +1347,14 @@ namespace Api.Database.Migrations
                         .WithMany()
                         .HasForeignKey("AccessoriesProductItemId");
 
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Products.Product", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Products.ProductCompany", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Products.ProductType", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Threats.Status", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-                });
-
             modelBuilder.Entity("Api.Database.Entity.Threats.Threat", b =>
                 {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
-
                     b.HasOne("Api.Database.Entity.Threats.Status", "Status")
                         .WithMany("Threats")
                         .HasForeignKey("StatusId")
@@ -1372,13 +1364,6 @@ namespace Api.Database.Migrations
                         .WithMany("Threats")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Threats.ThreatType", b =>
-                {
-                    b.HasOne("Api.Database.Entity.BranchMaster", "BranchMaster")
-                        .WithMany()
-                        .HasForeignKey("BranchMasterId");
                 });
 #pragma warning restore 612, 618
         }
