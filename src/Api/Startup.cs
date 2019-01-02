@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json.Serialization;
 using Swc.Service.Chit;
+using Swc.Service.Accounts;
 
 namespace swcApi
 {
@@ -76,6 +77,8 @@ namespace swcApi
             services.AddTransient<ISchemeService, SchemeService>();
             services.AddTransient<ISubscribeService, SubscribeService>();
             services.AddTransient<IChitDueService, ChitDueService>();
+            services.AddTransient<IVoucherTypeService, VoucherTypeService>();
+            services.AddTransient<IAccountBookService, AccountBookService>();
             services.AddScoped<RequestInfo>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 

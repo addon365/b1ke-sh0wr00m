@@ -8,7 +8,8 @@ namespace Api.Database.Entity.Accounts
     public class VoucherInfo:BaseEntity
     {
         public Guid VoucherId { get; set; }
-       // public  Voucher Voucher { get; set; }
+        [ForeignKey("VoucherId")]
+        public virtual  Voucher Voucher { get; set; }
 
         public Guid bookId { get; set; }
         [ForeignKey("bookId")]

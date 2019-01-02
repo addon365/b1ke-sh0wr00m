@@ -315,6 +315,7 @@
     </Compile>
     <Compile Include="Chit\NewSubscriberWindow.xaml.cs">
       <DependentUpon>NewSubscriberWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enquiries\BookingListWindow.xaml.cs">
       <DependentUpon>BookingListWindow.xaml</DependentUpon>
     </Compile>

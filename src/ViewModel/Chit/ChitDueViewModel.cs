@@ -37,10 +37,6 @@ namespace ViewModel.Chit
             Model.ChitSubscriber.Customer = new Customer();
             Model.ChitSubscriber.Customer.Profile = new Contact();
             Model.VoucherInfo = new VoucherInfo();
-            Model.VoucherInfo.Voucher = new Voucher();
-
-            Model.VoucherInfo.Voucher.VoucherDate = new DateTime();
-            Model.VoucherInfo.Voucher.VoucherType = "Credit";
         }
         public override void WireCommands()
         {
@@ -49,11 +45,13 @@ namespace ViewModel.Chit
         }
         public override bool Validate()
         {
+            if (BalanceAmount == 0)
+            {
+                Message = "All Dues are paid.";
+            }
             Model.ChitSubscriberId = Model.ChitSubscriber.Id;
             Model.ChitSubscriber.ChitSchema = null;
             Model.ChitSubscriber = null;
-            Model.VoucherInfo.Voucher.VoucherDate = DateTime.Now;
-            Model.DueNo = DateTime.Now.ToBinary().ToString();
             return true;
         }
         
@@ -87,7 +85,8 @@ namespace ViewModel.Chit
             TotalDue = chitScheme.MonthlyAmount * chitScheme.TotalMonths;
             PaidDue = ChitDueList.Sum(s => s.Amount);
             BalanceAmount = TotalDue - PaidDue;
-            Model.VoucherInfo.Amount = chitScheme.MonthlyAmount;
+            if(BalanceAmount!=0)
+                Model.VoucherInfo.Amount = chitScheme.MonthlyAmount;
             IsProgressBarVisible = false;
         }
         public List<ChitDueDomain> ChitDueList
@@ -170,6 +169,22 @@ namespace ViewModel.Chit
                 }
             }
         }
-        
+        public override void SayMessage(bool isSuccess, string message)
+        {
+            if(!isSuccess)
+                base.SayMessage(isSuccess, message);
+            else
+            {
+                InitModel();
+                TotalDue = 0;
+                PaidDue = 0;
+                BalanceAmount = 0;
+                ChitDueList.Clear();
+                SubscriptionId = "";
+                FindSubscriber.IsEnabled = true;
+
+            }
+        }
+
     }
 }

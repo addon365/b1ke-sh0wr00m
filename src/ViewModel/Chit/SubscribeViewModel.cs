@@ -31,10 +31,6 @@ namespace ViewModel.Chit
             Model.ChitSubscriber.Customer = new Customer();
             Model.ChitSubscriber.Customer.Profile = new Contact();
             Model.VoucherInfo = new VoucherInfo();
-            Model.VoucherInfo.Voucher = new Voucher();
-
-            Model.VoucherInfo.Voucher.VoucherDate = new DateTime();
-            Model.VoucherInfo.Voucher.VoucherType = "Credit";
         }
         public double SchemeAmount
         {
@@ -132,9 +128,14 @@ namespace ViewModel.Chit
         }
         public override void SayMessage(bool isSuccess, string message)
         {
-            Message = "Successfully Saved and your Subscription id is " +
-                Model.ChitSubscriber.SubscribeId;
-            if (isSuccess) InitModel();
+            if (!isSuccess)
+                base.SayMessage(isSuccess, message);
+            else
+            {
+                Message = "Successfully Saved and your Subscription id is " +
+                    Model.ChitSubscriber.SubscribeId;
+                InitModel();
+            }
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Threenine.Data;
 using Microsoft.EntityFrameworkCore;
-
 namespace Swc.Service.Chit
 {
     public class ChitDueService : BaseService<ChitSubriberDue>,
@@ -18,13 +17,17 @@ namespace Swc.Service.Chit
 
         public List<ChitSubriberDue> GetList(Guid chitSubriberId)
         {
-            return this.Repository
-                .GetList(predicate:
-                chitDue =>
-                chitDue.ChitSubscriber.Id == chitSubriberId,
-                include: x => x.Include(cd => cd.VoucherInfo)
+            var result= this.Repository
+                .GetList(
+                predicate: chitDue => chitDue.ChitSubscriber.Id == chitSubriberId,
+                include: xt => xt.Include(cdx => cdx.VoucherInfo)
                 .ThenInclude(vi => vi.Voucher))
                 .Items.ToList();
+            foreach(ChitSubriberDue chitSubscriber in result)
+            {
+                chitSubscriber.VoucherInfo.Voucher.VoucherInfos = null;
+            }
+            return result;
         }
         public string GenerateDueId()
         {

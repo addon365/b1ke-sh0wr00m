@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Api.Database.Entity.Accounts
 {
@@ -13,6 +12,6 @@ namespace Api.Database.Entity.Accounts
         [ForeignKey("VoucherTypeId")]
         public virtual VoucherTypeMaster VoucherTypeMaster { get; set; }
 
-        public ICollection<VoucherInfo> VoucherInfos{get;set;}
+        public ICollection<VoucherInfo> VoucherInfos { get; set; }
     }
 }
