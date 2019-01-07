@@ -310,6 +310,9 @@
     <Compile Include="Chit\DuePaymentWindow.xaml.cs">
       <DependentUpon>DuePaymentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Chit\FindSubscriptionsWindow.xaml.cs">
+      <DependentUpon>FindSubscriptionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Chit\NewSchemaWindow.xaml.cs">
       <DependentUpon>NewSchemaWindow.xaml</DependentUpon>
     </Compile>
@@ -398,6 +401,10 @@
       <DependentUpon>ZonalWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Chit\DuePaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\FindSubscriptionsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,6 +10,7 @@ namespace Swc.Service.Chit
         List<ChitSubriberDue> GetList(Guid chitSubriberId);
         string GenerateDueId();
         string GenerateSubscribeId();
+        
 
     }
 }

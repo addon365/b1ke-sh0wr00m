@@ -14,7 +14,7 @@ namespace Swc.Service.Chit
             : base(unitOfWork)
         {
         }
-
+        
         public List<ChitSubriberDue> GetList(Guid chitSubriberId)
         {
             var result= this.Repository
@@ -51,6 +51,17 @@ namespace Swc.Service.Chit
             }
 
             return 1.ToString();
+        }
+        public void FindSubscriptionByMobile(string mobileNumber)
+        {
+            var result = this.Repository
+                 .GetList(
+                 predicate: chitDue => 
+                 chitDue.ChitSubscriber.Customer.Profile.MobileNumber.CompareTo(mobileNumber)==0,
+                 include: xt => xt.Include(cdx => cdx.VoucherInfo)
+                 .ThenInclude(vi => vi.Voucher))
+                 .Items.ToList();
+
         }
     }
 }

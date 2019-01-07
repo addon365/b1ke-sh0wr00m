@@ -8,7 +8,7 @@
         xmlns:utils="clr-namespace:BikeShowRoom.WPF.Converters"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
-        Title="DuePaymentWindow" Height="450" Width="800">
+        Title="Due Payment " Height="450" Width="800">
     <Window.Resources>
         <utils:BoolToVisibilityConverter x:Key="converter"/>
     </Window.Resources>
