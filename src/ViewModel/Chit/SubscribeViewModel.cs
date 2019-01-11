@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Linq;
 using Api.Database.Entity.Accounts;
 using System;
+using Api.Domain.Chit;
 
 namespace ViewModel.Chit
 {
     public class SubscribeViewModel : ViewModelBaseEn<ChitSubriberDue>
     {
+        public ChitSubscribeDomain _chitSubscribeDomain;
         public IList<ChitScheme> _schemes;
         private ChitScheme _selectedScheme;
         private double _schemeAmount;
@@ -19,7 +21,22 @@ namespace ViewModel.Chit
             : base(new ChitDueClientService())
         {
             FetchSchemesAsync();
-
+            ChitSubscribe = new ChitSubscribeDomain();
+        }
+        public ChitSubscribeDomain ChitSubscribe
+        {
+            get
+            {
+                return _chitSubscribeDomain;
+            }
+            set
+            {
+                if (ChitSubscribe != value)
+                {
+                    _chitSubscribeDomain = value;
+                    OnPropertyChanged("ChitSubscribe");
+                }
+            }
         }
 
         public override void InitModel()
@@ -56,8 +73,8 @@ namespace ViewModel.Chit
                 {
                     _selectedScheme = value;
                     OnPropertyChanged("SelectedScheme");
-                    Model.ChitSubscriber.ChitSchema = _selectedScheme;
-                    Model.VoucherInfo.Amount = _selectedScheme.MonthlyAmount;
+                    ChitSubscribe.ChitSchemeId = _selectedScheme.Id;
+                    ChitSubscribe.Amount = _selectedScheme.MonthlyAmount;
                     SchemeAmount = _selectedScheme.MonthlyAmount;
                 }
             }
@@ -91,33 +108,26 @@ namespace ViewModel.Chit
         public override bool Validate()
         {
             Message = "";
-            string mobileNumber = Model.ChitSubscriber.Customer.Profile.MobileNumber;
+            string mobileNumber = ChitSubscribe.MobileNumber;
             if (mobileNumber == null || (mobileNumber != null && mobileNumber.Length < 10))
             {
                 Message = "Mobile Number not valid";
                 return false;
             }
-            double amount = Model.VoucherInfo.Amount;
+            double amount = ChitSubscribe.Amount;
             if (amount == 0 || amount < 0)
             {
                 Message = "Amount should be greater than zero";
                 return false;
             }
-            ChitScheme chitScheme = Model.ChitSubscriber.ChitSchema;
-            if (chitScheme == null)
+            
+            Guid chitSchemeId = ChitSubscribe.ChitSchemeId;
+            if (chitSchemeId == null || chitSchemeId == Guid.Empty)
             {
                 Message = "Choose a Schema.";
                 return false;
             }
-            Model.ChitSubscriber.ChitSchemeId = Model.ChitSubscriber.ChitSchema.Id;
-            Model.ChitSubscriber.ChitSchema = null;
-            Guid id = Model.ChitSubscriber.ChitSchemeId;
-            if (id == null || id == Guid.Empty)
-            {
-                Message = "Choose a Schema.";
-                return false;
-            }
-            string name = Model.ChitSubscriber.Customer.Profile.Name;
+            string name = ChitSubscribe.CustomerName;
             if (name == null || (name != null && name.Length < 4))
             {
                 Message = "Name must have atleast 5 letters.";
