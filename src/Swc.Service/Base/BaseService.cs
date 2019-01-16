@@ -35,6 +35,12 @@ namespace Swc.Service.Base
             UnitOfWork.SaveChanges();
             return obj;
         }
+        public virtual ICollection<T> Save(ICollection<T> collObj)
+        {
+            _repository.Add(collObj);
+            UnitOfWork.SaveChanges();
+            return collObj;
+        }
 
         public T Update(Guid id,T obj)
         {

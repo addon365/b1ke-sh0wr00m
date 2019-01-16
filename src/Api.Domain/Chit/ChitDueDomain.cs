@@ -1,7 +1,7 @@
 ﻿using Api.Database.Entity.Chit;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace Api.Domain.Chit
 {
     public class ChitDueDomain
@@ -16,12 +16,18 @@ namespace Api.Domain.Chit
                 new List<ChitDueDomain>(items.Count);
             foreach(ChitSubriberDue dueItem in items)
             {
-                chitDueDomains.Add(new ChitDueDomain
+                var dueDomain = new ChitDueDomain
                 {
                     DueNo = dueItem.DueNo,
-                    Date = dueItem.VoucherInfo.Voucher.VoucherDate,
-                    Amount = dueItem.VoucherInfo.Amount
-                });
+                    Date = dueItem.Voucher.VoucherDate,
+
+                };
+               
+                if (dueItem.Voucher.VoucherInfos.Count > 0)
+                {
+                    dueDomain.Amount = dueItem.Voucher.VoucherInfos.ToArray()[0].Amount;
+                }
+                chitDueDomains.Add(dueDomain);
             }
             return chitDueDomains;
         }

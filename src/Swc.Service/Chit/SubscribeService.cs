@@ -2,17 +2,23 @@
 using Swc.Service.Base;
 using Threenine.Data;
 using Microsoft.EntityFrameworkCore;
+using Api.Domain.Chit;
+using System;
+
 namespace Swc.Service.Chit
 {
-    public class SubscribeService : BaseService<ChitSubscriber>, ISubscribeService
+    public class SubscribeService : BaseService<ChitSubscriber>,ISubscribeService
     {
+        private IUnitOfWork _unitOfWork;
+
         public SubscribeService(IUnitOfWork unitOfWork)
-            : base(unitOfWork)
+            :base(unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
         public ChitSubscriber findBySubscriptionId(string id)
         {
-            var list = Repository
+            var list = _unitOfWork.GetRepository<ChitSubscriber>()
                 .GetList(predicate:
                 subscriber =>
                 subscriber.SubscribeId.CompareTo(id) == 0,
@@ -23,6 +29,12 @@ namespace Swc.Service.Chit
             if (list.Count == 0)
                 return null;
             return list[0];
+        }
+
+        public ChitSubscriber Save(ChitSubscribeDomain subscriptionDomain)
+        {
+            return null;
+
         }
     }
 }

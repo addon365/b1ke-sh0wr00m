@@ -23,5 +23,13 @@ namespace Swc.Service.Accounts
                 return null;
             return result[0];
         }
+
+        public ICollection<VoucherTypeService> Save(ICollection<VoucherTypeService> typeServices)
+        {
+            _unitOfWork.GetRepository<VoucherTypeService>().Add(typeServices);
+            _unitOfWork.SaveChanges();
+            return typeServices;
+
+        }
     }
 }

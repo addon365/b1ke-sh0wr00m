@@ -86,18 +86,17 @@
               HorizontalAlignment="Stretch"/>
                     <!--Name-->
                     <TextBlock Text="Customer Name" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox Text="{Binding Path=Model.ChitSubscriber.Customer.Profile.Name,Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
+                    <TextBox Text="{Binding Path=ChitSubscribe.CustomerName,Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
 
                     <!--Mobile Number-->
                     <TextBlock Text="Mobile Number" Grid.Column="3" Grid.Row="0"/>
                     <TextBox Text="{Binding
-                        Path=MobileNumber,Mode=TwoWay}" 
-                             DataContext="{Binding Model.ChitSubscriber.Customer.Profile}"
+                        Path=ChitSubscribe.MobileNumber,Mode=TwoWay}" 
                              Grid.Column="4" Grid.Row="0"/>
 
                     <!--Address-->
                     <TextBlock Text="Address" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" />
-                    <TextBox Height="50" Width="200" TextWrapping="Wrap" Text="{Binding Path=Model.ChitSubscriber.Customer.Profile.Address,Mode=TwoWay}"
+                    <TextBox Height="50" Width="200" TextWrapping="Wrap" Text="{Binding Path=ChitSubscribe.Address,Mode=TwoWay}"
                   AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" />
 
                     <!--Chit Scheme-->

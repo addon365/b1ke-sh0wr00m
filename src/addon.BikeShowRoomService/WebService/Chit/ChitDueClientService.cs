@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using addon.BikeShowRoomService.BaseService;
 using Api.Database.Entity.Chit;
+using Api.Domain.Chit;
 using Newtonsoft.Json;
-using Swc.Service.Base;
 using Swc.Service.Chit;
-using Threenine.Data;
 
 namespace addon.BikeShowRoomService.WebService.Chit
 {
@@ -39,24 +40,35 @@ namespace addon.BikeShowRoomService.WebService.Chit
             return null;
         }
 
-        private int List<T>(string result)
-        {
-            throw new NotImplementedException();
-        }
-
         public override string getUrl()
         {
             return "ChitDue";
         }
 
-        public string GenerateDueId()
+        public ChitSubriberDue Save(ChitSubscribeDomain domain)
         {
-            throw new NotImplementedException();
-        }
-
-        public string GenerateSubscribeId()
-        {
-            throw new NotImplementedException();
+            var response = _httpClient.PostAsync(getUrl(),
+                new StringContent(
+                    JsonConvert.SerializeObject(domain), Encoding.UTF8, "application/json"))
+                    .GetAwaiter()
+                    .GetResult();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string result = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                return JsonConvert.DeserializeObject<ChitSubriberDue>(result);
+            }
+            else
+            {
+                var web = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+                if (ex != null)
+                    throw ex;
+            }
+            return null;
         }
     }
 }

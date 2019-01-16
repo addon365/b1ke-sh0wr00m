@@ -1,7 +1,6 @@
 ﻿using Api.Database.Entity.Chit;
+using Api.Domain.Chit;
 using Swc.Service.Base;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Swc.Service.Chit
 {

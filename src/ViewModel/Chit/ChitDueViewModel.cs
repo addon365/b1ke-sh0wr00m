@@ -1,9 +1,6 @@
 ﻿using addon.BikeShowRoomService.WebService.Chit;
-using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Chit;
-using Api.Database.Entity.Crm;
 using Api.Domain.Chit;
-using Swc.Service.Base;
 using System.Linq;
 using Swc.Service.Chit;
 using System;
@@ -12,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ViewModel.Chit
 {
-    public class ChitDueViewModel : ViewModelBaseEn<ChitSubriberDue>
+    public class ChitDueViewModel : ViewModelBase
     {
         private double _totalDue;
         private double _paidDue;
@@ -21,46 +18,61 @@ namespace ViewModel.Chit
         ISubscribeService subscribeService;
         IChitDueService chitDueService;
         private List<ChitDueDomain> listChitDues;
+        public ChitSubscribeDomain _chitSubscribeDomain;
+        private ChitSubscriber selectedChitSubscriber;
         public ChitDueViewModel(Result onResult = null)
-            : base(new ChitDueClientService(), onResult)
         {
             this.subscribeService = new SubsriberService();
-            chitDueService = (IChitDueService)Service;
-            
+            chitDueService = new ChitDueClientService();
+            WireCommands();
         }
-        public override void InitModel()
-        {
-            base.InitModel();
-            Model = new ChitSubriberDue();
-            Model.ChitSubscriber = new ChitSubscriber();
 
-            Model.ChitSubscriber.Customer = new Customer();
-            Model.ChitSubscriber.Customer.Profile = new Contact();
-            Model.VoucherInfo = new VoucherInfo();
-        }
-        public override void WireCommands()
+        public void WireCommands()
         {
-            base.WireCommands();
             FindSubscriber = new RelayCommand(FindSubscriberById);
+            SaveCommand = new RelayCommand(Save);
         }
-        public override bool Validate()
+
+        public void Save()
+        {
+            if (!Validate())
+                return;
+
+            var result=chitDueService.Save(SubscribeDomain);
+            if (result == null)
+            {
+                Message = "Something went wrong";
+            }
+            else
+            {
+                
+                SayMessage(true, "Successfully saved");
+            }
+
+
+
+        }
+        public bool Validate()
         {
             if (BalanceAmount == 0)
             {
-                Message = "All Dues are paid.";
+                Message = "Either All Dues are paid or subscription id not found.";
+                return false;
             }
-            Model.ChitSubscriberId = Model.ChitSubscriber.Id;
-            Model.ChitSubscriber.ChitSchema = null;
-            Model.ChitSubscriber = null;
+
             return true;
         }
-        
+        public RelayCommand SaveCommand
+        {
+            get;
+            private set;
+        }
         public RelayCommand FindSubscriber
         {
             get;
             private set;
         }
-       
+
         private void FindSubscriberById()
         {
             IsProgressBarVisible = true;
@@ -73,21 +85,33 @@ namespace ViewModel.Chit
 
                 return;
             }
-            Model.ChitSubscriber = result;
+            SelectedSubscription = result;
             Task.Run(() => FetchDues());
-            
+
         }
         private void FetchDues()
         {
-            ChitScheme chitScheme = Model.ChitSubscriber.ChitSchema;
-            Guid id = Model.ChitSubscriber.Id;
-            ChitDueList = ChitDueDomain.FromEntityModels(chitDueService.GetList(id));
+
+            ChitScheme chitScheme = selectedChitSubscriber.ChitSchema;
+            Guid id = selectedChitSubscriber.Id;
+            ChitDueList = ChitDueDomain.FromEntityModels(chitDueService.GetList(id)); ;
             TotalDue = chitScheme.MonthlyAmount * chitScheme.TotalMonths;
             PaidDue = ChitDueList.Sum(s => s.Amount);
             BalanceAmount = TotalDue - PaidDue;
-            if(BalanceAmount!=0)
-                Model.VoucherInfo.Amount = chitScheme.MonthlyAmount;
+            SubscribeDomain = new ChitSubscribeDomain()
+            {
+                Address = selectedChitSubscriber.Customer.Profile.Address,
+                CustomerName = selectedChitSubscriber.Customer.Profile.Name,
+                MobileNumber = selectedChitSubscriber.Customer.Profile.MobileNumber,
+                ChitSchemeId = selectedChitSubscriber.ChitSchemeId,
+                SubscribeId=selectedChitSubscriber.Id
+
+            };
+
+            if (BalanceAmount != 0)
+                SubscribeDomain.Amount = chitScheme.MonthlyAmount;
             IsProgressBarVisible = false;
+
         }
         public List<ChitDueDomain> ChitDueList
         {
@@ -101,9 +125,38 @@ namespace ViewModel.Chit
                 {
                     listChitDues = value;
                     OnPropertyChanged("ChitDueList");
-                    OnPropertyChanged("Model");
-                    SaveCommand.IsEnabled = true;
                     Message = "";
+                }
+            }
+        }
+        public ChitSubscriber SelectedSubscription
+        {
+            get
+            {
+                return selectedChitSubscriber;
+            }
+            set
+            {
+                if (selectedChitSubscriber != value)
+                {
+                    selectedChitSubscriber = value;
+                    OnPropertyChanged("SelectedSubscription");
+
+                }
+            }
+        }
+        public ChitSubscribeDomain SubscribeDomain
+        {
+            get
+            {
+                return _chitSubscribeDomain;
+            }
+            set
+            {
+                if (_chitSubscribeDomain != value)
+                {
+                    _chitSubscribeDomain = value;
+                    OnPropertyChanged("SubscribeDomain");
                 }
             }
         }
@@ -120,6 +173,7 @@ namespace ViewModel.Chit
                     _subscriptionId = value;
                     OnPropertyChanged("SubscriptionId");
                     FindSubscriber.IsEnabled = true;
+                    SaveCommand.IsEnabled = true;
                 }
             }
         }
@@ -169,20 +223,21 @@ namespace ViewModel.Chit
                 }
             }
         }
-        public override void SayMessage(bool isSuccess, string message)
+        public void SayMessage(bool isSuccess, string message)
         {
-            if(!isSuccess)
-                base.SayMessage(isSuccess, message);
-            else
+            Message = message;
+            if (isSuccess)
             {
-                InitModel();
+                
+                SubscribeDomain = new ChitSubscribeDomain();
                 TotalDue = 0;
                 PaidDue = 0;
                 BalanceAmount = 0;
-                ChitDueList.Clear();
+                ChitDueList = new List<ChitDueDomain>();
                 SubscriptionId = "";
                 FindSubscriber.IsEnabled = true;
-
+                SubscribeDomain = new ChitSubscribeDomain();
+                SelectedSubscription = new ChitSubscriber();
             }
         }
 

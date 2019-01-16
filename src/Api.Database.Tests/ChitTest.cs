@@ -103,7 +103,7 @@ namespace Api.Database.Tests
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
                 .With(cs => cs.BranchMasterId = null)
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
-                .With(sub => sub.VoucherInfo = voucherInfo)
+                .With(sub => sub.Voucher = voucher)
                 .Build();
 
             context.ChitSubscriberDues.Add(chitSubscriberDue);
@@ -134,7 +134,7 @@ namespace Api.Database.Tests
                 .Build();
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
-                .With(sub => sub.VoucherInfo = voucherInfo)
+                .With(sub => sub.Voucher = voucher)
                 .Build();
             #endregion
 
@@ -147,7 +147,7 @@ namespace Api.Database.Tests
 
             var chitSubscriberDue2 = Builder<ChitSubriberDue>.CreateNew()
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
-                .With(sub => sub.VoucherInfo = voucherInfo2)
+                .With(sub => sub.Voucher = voucher)
                 .Build();
             #endregion
 
@@ -182,7 +182,7 @@ namespace Api.Database.Tests
                 .Build();
             var chitSubscriberDue = Builder<ChitSubriberDue>.CreateNew()
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
-                .With(sub => sub.VoucherInfo = voucherInfo)
+                .With(sub => sub.Voucher = voucher)
                 .Build();
 
             context.ChitSubscriberDues.Add(chitSubscriberDue);
@@ -198,7 +198,7 @@ namespace Api.Database.Tests
 
             var chitSubscriberDue2 = Builder<ChitSubriberDue>.CreateNew()
                 .With(sub => sub.ChitSubscriber = chitSubscriber)
-                .With(sub => sub.VoucherInfo = voucherInfo2)
+                .With(sub => sub.Voucher = voucher)
                 .Build();
             context.ChitSubscriberDues.Add(chitSubscriberDue2);
             #endregion

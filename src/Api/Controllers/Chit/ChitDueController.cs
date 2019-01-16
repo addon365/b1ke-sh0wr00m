@@ -6,6 +6,7 @@ using Swc.Service.Accounts;
 using Swc.Service.Chit;
 using Microsoft.AspNetCore.Http;
 using Api.Database.Entity.Accounts;
+using Api.Domain.Chit;
 
 namespace swcApi.Controllers.Chit
 {
@@ -52,27 +53,9 @@ namespace swcApi.Controllers.Chit
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public IActionResult Post([FromBody] ChitSubriberDue value)
+        public IActionResult Post([FromBody] ChitSubscribeDomain value)
         {
-            value.DueNo = _chitDueService.GenerateDueId();
-            var voucherType = _voucherTypeService.FindByName(VOUCHER_TYPE_NAME);
-            if (voucherType == null)
-                return NotFound("Voucher Type not Found");
-            value.VoucherInfo.Voucher = new Voucher();
-            value.VoucherInfo.Voucher.VoucherTypeId = voucherType.Id;
-            value.VoucherInfo.Voucher.VoucherDate = DateTime.Now;
-
-            var bookService = _accountBookService.FindByName(VOUCHER_TYPE_NAME);
-            if (bookService == null)
-                return NotFound("Chit Book Not Found");
-            value.VoucherInfo.bookId = bookService.Id;
-            if (value.ChitSubscriber != null)
-            {
-                value.ChitSubscriber.SubscribeId =
-                    _chitDueService.GenerateSubscribeId();
-            }
             var resultObj = _chitDueService.Save(value);
-            resultObj.VoucherInfo.Voucher = null;
             return Ok(resultObj);
         }
 

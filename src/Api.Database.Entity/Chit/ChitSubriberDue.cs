@@ -11,6 +11,6 @@ namespace Api.Database.Entity.Chit
         public virtual ChitSubscriber ChitSubscriber { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string DueNo { get; set; }
-        public VoucherInfo VoucherInfo { get; set; }
+        public Voucher Voucher { get; set; }
     }
 }

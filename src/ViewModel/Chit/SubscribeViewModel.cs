@@ -1,27 +1,30 @@
 ﻿using addon.BikeShowRoomService.WebService.Chit;
 using Api.Database.Entity.Chit;
-using Api.Database.Entity.Crm;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using Api.Database.Entity.Accounts;
 using System;
 using Api.Domain.Chit;
+using Swc.Service.Chit;
+using SchemeClientService = addon.BikeShowRoomService.WebService.Chit.SchemeService;
 
 namespace ViewModel.Chit
 {
-    public class SubscribeViewModel : ViewModelBaseEn<ChitSubriberDue>
+    public class SubscribeViewModel : ViewModelBase
     {
         public ChitSubscribeDomain _chitSubscribeDomain;
         public IList<ChitScheme> _schemes;
         private ChitScheme _selectedScheme;
         private double _schemeAmount;
         private Swc.Service.Chit.ISchemeService _schemeService;
+        private IChitDueService _dueService;
         public SubscribeViewModel()
-            : base(new ChitDueClientService())
         {
+            WireCommands();
             FetchSchemesAsync();
             ChitSubscribe = new ChitSubscribeDomain();
+            _dueService = new ChitDueClientService();
+           
         }
         public ChitSubscribeDomain ChitSubscribe
         {
@@ -35,19 +38,35 @@ namespace ViewModel.Chit
                 {
                     _chitSubscribeDomain = value;
                     OnPropertyChanged("ChitSubscribe");
+                    SaveCommand.IsEnabled = true;
                 }
             }
         }
-
-        public override void InitModel()
+        public virtual void WireCommands()
         {
-            base.InitModel();
-            Model = new ChitSubriberDue();
-            Model.ChitSubscriber = new ChitSubscriber();
-
-            Model.ChitSubscriber.Customer = new Customer();
-            Model.ChitSubscriber.Customer.Profile = new Contact();
-            Model.VoucherInfo = new VoucherInfo();
+            SaveCommand = new RelayCommand(Save);
+        }
+        public virtual void Save()
+        {
+            if (!Validate()) return;
+            IsProgressBarVisible = true;
+            try
+            {
+                var result=_dueService.Save(ChitSubscribe);
+                Message = "Saved Successfullly and id is "+result.ChitSubscriber.SubscribeId;
+                ChitSubscribe = new ChitSubscribeDomain();
+                SaveCommand.IsEnabled = false;
+            }
+            catch (Exception exception)
+            {
+                SayMessage(false, exception.Message);
+            }
+            IsProgressBarVisible = false;
+        }
+        public RelayCommand SaveCommand
+        {
+            get;
+            private set;
         }
         public double SchemeAmount
         {
@@ -98,14 +117,14 @@ namespace ViewModel.Chit
         {
             if (_schemeService == null)
             {
-                _schemeService = new SchemeService();
+                _schemeService = new SchemeClientService();
             }
             Task task = new Task(
                 () => Schemes = _schemeService.FindAll().ToList());
             task.Start();
         }
 
-        public override bool Validate()
+        public bool Validate()
         {
             Message = "";
             string mobileNumber = ChitSubscribe.MobileNumber;
@@ -120,7 +139,7 @@ namespace ViewModel.Chit
                 Message = "Amount should be greater than zero";
                 return false;
             }
-            
+
             Guid chitSchemeId = ChitSubscribe.ChitSchemeId;
             if (chitSchemeId == null || chitSchemeId == Guid.Empty)
             {
@@ -136,16 +155,9 @@ namespace ViewModel.Chit
 
             return true;
         }
-        public override void SayMessage(bool isSuccess, string message)
+        public void SayMessage(bool isSuccess, string message)
         {
-            if (!isSuccess)
-                base.SayMessage(isSuccess, message);
-            else
-            {
-                Message = "Successfully Saved and your Subscription id is " +
-                    Model.ChitSubscriber.SubscribeId;
-                InitModel();
-            }
+            Message = message;
         }
     }
 }

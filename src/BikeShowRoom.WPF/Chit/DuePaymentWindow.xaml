@@ -15,7 +15,7 @@
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
+                <ItemsPanelTemplate>    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="500" />
@@ -58,13 +58,13 @@
                                     <TextBlock Text="Search" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button>
-                            <TextBox Text="{Binding Path=SubscriptionId, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Text="{Binding Path=SubscriptionId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </DockPanel>
                         <GroupBox  Margin="3" BorderBrush="Black">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock FontWeight="Bold" Text="Payable Due Amount "/>
                                 <TextBlock FontWeight="Bold"  
-                                           Text="{Binding Model.ChitSubscriber.ChitSchema.MonthlyAmount
+                                           Text="{Binding SubscribeDomain.Amount
                                     ,ConverterCulture=en-IN, StringFormat=\{0:C\}}"/>
                                 <Button Content="Pay Installment" Command="{Binding SaveCommand}"/>
                             </StackPanel>
@@ -104,19 +104,20 @@
                     <!--Name-->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Customer Name"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" 
-                               
-                               Text="{Binding Model.ChitSubscriber.Customer.Profile.Name}"/>
+                               DataContext="{Binding SubscribeDomain}"
+                               Text="{Binding CustomerName,UpdateSourceTrigger=PropertyChanged}"/>
 
                     <!--Mobile Number-->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Mobile Number"/>
                     <TextBlock Grid.Row="1" Grid.Column="1"
-                               Text="{Binding Model.ChitSubscriber.Customer.Profile.MobileNumber}"
+                               Text="{Binding SubscribeDomain.MobileNumber}"
                                />
 
                     <!--Chit Scheme Name-->
                     <TextBlock Grid.Row="2" Grid.Column="0"  Text="Chit Scheme Name"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" 
-                               Text="{Binding Model.ChitSubscriber.ChitSchema.SchemaName}"/>
+                               DataContext="{Binding SelectedSubscription.ChitSchema}"
+                               Text="{Binding SchemaName}"/>
 
                     <!--Total Due-->
                     <TextBlock Grid.Row="3" Grid.Column="0"  Text="Total Due"/>
