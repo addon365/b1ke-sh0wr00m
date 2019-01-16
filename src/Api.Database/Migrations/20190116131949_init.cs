@@ -9,11 +9,11 @@ namespace Api.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "swc");
+                name: "Addon");
 
             migrationBuilder.CreateTable(
                 name: "AccountBooks",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -22,7 +22,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     BookName = table.Column<string>(nullable: true),
                     UnderGroupId = table.Column<Guid>(nullable: false),
@@ -35,14 +35,14 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "BranchMasters",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     BranchName = table.Column<string>(nullable: true),
                     ShortCode = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true),
-                    LicenseId = table.Column<int>(nullable: false)
+                    LicenseId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,8 +50,8 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Campaigns",
-                schema: "swc",
+                name: "BusinessContact",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -60,7 +60,26 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    BusinessName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BusinessContact", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Campaigns",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Filter = table.Column<string>(nullable: true)
                 },
@@ -71,7 +90,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ChitSchemes",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -80,7 +99,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     SchemaName = table.Column<string>(nullable: true),
                     TotalMonths = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
@@ -97,7 +116,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Contacts",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -106,12 +125,14 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
                     Place = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true)
+                    Address = table.Column<string>(nullable: true),
+                    AddressId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,12 +141,15 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "DeviceMasters",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    OtherId = table.Column<int>(nullable: false),
                     DeviceName = table.Column<string>(nullable: true),
-                    DeviceId = table.Column<string>(nullable: true)
+                    DeviceId = table.Column<string>(nullable: true),
+                    RequestedUser = table.Column<string>(nullable: true),
+                    AuthorisedUser = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,7 +158,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EnquiryStatuses",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -143,7 +167,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: true),
                     ProgrammerId = table.Column<int>(nullable: false)
@@ -155,7 +179,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EnquriyType",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -164,7 +188,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     ProgrammerId = table.Column<int>(nullable: false)
                 },
@@ -175,7 +199,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FinanceCompanies",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -184,7 +208,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -194,7 +218,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FollowUpModes",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -203,7 +227,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -214,7 +238,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FollowUpStatuses",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -223,7 +247,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -234,7 +258,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "InquiryReport",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -249,54 +273,11 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InventoryInfos",
-                schema: "swc",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    Deleted = table.Column<DateTime>(nullable: true),
-                    CreatedUserId = table.Column<int>(nullable: true),
-                    CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
-                    InventoryMasterId = table.Column<Guid>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false),
-                    Unit = table.Column<double>(nullable: false),
-                    UnitPrice = table.Column<double>(nullable: false),
-                    Discount = table.Column<double>(nullable: false),
-                    InventoryItemMasterId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InventoryInfos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InventoryItemMasters",
-                schema: "swc",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    Deleted = table.Column<DateTime>(nullable: true),
-                    CreatedUserId = table.Column<int>(nullable: true),
-                    CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
-                    ChasisNo = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InventoryItemMasters", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "LicenseMasters",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     BusinessName = table.Column<string>(nullable: true),
                     LicenseId = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true)
@@ -308,7 +289,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "marketingZones",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -317,7 +298,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     ZonalName = table.Column<string>(nullable: true),
                     ZonalDescription = table.Column<string>(nullable: true)
@@ -329,7 +310,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "PaymentModes",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -338,7 +319,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ProgrammerId = table.Column<string>(nullable: true)
                 },
@@ -349,7 +330,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ProductCompanies",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -358,7 +339,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     CompanyName = table.Column<string>(nullable: true),
                     ProgrammerID = table.Column<int>(nullable: false)
@@ -369,8 +350,22 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                schema: "swc",
+                name: "ProductPropertiesMaps",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    ItemPropertyMasterId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductPropertiesMaps", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductPropertyMasters",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -379,7 +374,27 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    PropertyMasterId = table.Column<string>(nullable: true),
+                    PropertyName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductPropertyMasters", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     ProductName = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
@@ -397,7 +412,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ProductTypes",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -406,7 +421,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ParentId = table.Column<Guid>(nullable: false),
@@ -418,8 +433,24 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PurchaseItemProperties",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    PurchaseItemsId = table.Column<Guid>(nullable: false),
+                    ProductPropertyMasterId = table.Column<Guid>(nullable: false),
+                    Value = table.Column<string>(nullable: true),
+                    GroupId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseItemProperties", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Statuses",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -428,7 +459,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: true)
                 },
@@ -439,7 +470,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Type",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -448,7 +479,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -458,10 +489,11 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    OtherId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     ConfirmPassword = table.Column<string>(nullable: true),
@@ -475,7 +507,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "VoucherTypeMasters",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -488,8 +520,8 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
-                schema: "swc",
+                name: "Buyers",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -498,7 +530,63 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    BuyerId = table.Column<string>(nullable: true),
+                    BusinessContactId = table.Column<Guid>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Buyers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Buyers_BusinessContact_BusinessContactId",
+                        column: x => x.BusinessContactId,
+                        principalSchema: "Addon",
+                        principalTable: "BusinessContact",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sellers",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    SellerId = table.Column<string>(nullable: true),
+                    BusinessContactId = table.Column<Guid>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sellers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sellers_BusinessContact_BusinessContactId",
+                        column: x => x.BusinessContactId,
+                        principalSchema: "Addon",
+                        principalTable: "BusinessContact",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     ProfileId = table.Column<Guid>(nullable: true),
                     UserId = table.Column<Guid>(nullable: true)
@@ -509,7 +597,7 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_Customers_Contacts_ProfileId",
                         column: x => x.ProfileId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Contacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -517,7 +605,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Employees",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -526,7 +614,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     ContactId = table.Column<Guid>(nullable: false),
                     JoiningDate = table.Column<DateTime>(nullable: false),
@@ -542,7 +630,7 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_Employees_Contacts_ContactId",
                         column: x => x.ContactId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Contacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -550,7 +638,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "CampaignInfos",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -559,7 +647,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     CampaignId = table.Column<Guid>(nullable: false),
                     ContactId = table.Column<Guid>(nullable: false),
                     ModeId = table.Column<Guid>(nullable: false),
@@ -572,21 +660,21 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_CampaignInfos_Contacts_ContactId",
                         column: x => x.ContactId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Contacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CampaignInfos_FollowUpModes_ModeId",
                         column: x => x.ModeId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "FollowUpModes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CampaignInfos_FollowUpStatuses_StatusId",
                         column: x => x.StatusId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "FollowUpStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -594,7 +682,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "ExtraFittings",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -603,7 +691,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     ProductId = table.Column<Guid>(nullable: false),
                     AccessoriesProductId = table.Column<Guid>(nullable: false),
                     AccessoriesProductItemId = table.Column<Guid>(nullable: true),
@@ -617,14 +705,14 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_ExtraFittings_Products_AccessoriesProductItemId",
                         column: x => x.AccessoriesProductItemId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ExtraFittings_Products_ProductId",
                         column: x => x.ProductId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -632,7 +720,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Threats",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -641,7 +729,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('swc-',[Id])"),
                     Referer = table.Column<string>(maxLength: 255, nullable: true),
                     Host = table.Column<string>(nullable: true),
@@ -659,14 +747,14 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_Threats_Statuses_StatusId",
                         column: x => x.StatusId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Statuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Threats_Type_TypeId",
                         column: x => x.TypeId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Type",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -674,7 +762,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Vouchers",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -683,7 +771,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     VoucherDate = table.Column<DateTime>(nullable: false),
                     VoucherTypeId = table.Column<Guid>(nullable: false)
@@ -694,15 +782,15 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_Vouchers_VoucherTypeMasters_VoucherTypeId",
                         column: x => x.VoucherTypeId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "VoucherTypeMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "InventoryMasters",
-                schema: "swc",
+                name: "Purchases",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -711,25 +799,26 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
-                    Identifier = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<Guid>(nullable: false)
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    PurchaseInvoiceNo = table.Column<string>(nullable: true),
+                    InvoiceDate = table.Column<DateTime>(nullable: false),
+                    BusinessContactId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InventoryMasters", x => x.Id);
+                    table.PrimaryKey("PK_Purchases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InventoryMasters_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalSchema: "swc",
-                        principalTable: "Customers",
+                        name: "FK_Purchases_Sellers_BusinessContactId",
+                        column: x => x.BusinessContactId,
+                        principalSchema: "Addon",
+                        principalTable: "Sellers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Enquiries",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -738,7 +827,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     Identifier = table.Column<string>(nullable: true),
                     EnquiryDate = table.Column<DateTime>(nullable: false),
                     ContactId = table.Column<Guid>(nullable: false),
@@ -752,36 +841,36 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_Enquiries_Contacts_ContactId",
                         column: x => x.ContactId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Contacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Enquiries_EnquriyType_EnquiryTypeId",
                         column: x => x.EnquiryTypeId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "EnquriyType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Enquiries_EnquiryStatuses_StatusId",
                         column: x => x.StatusId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "EnquiryStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Enquiries_Vouchers_VoucherId",
                         column: x => x.VoucherId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Vouchers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "VouchersInfo",
-                schema: "swc",
+                name: "Sales",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -790,7 +879,53 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    BillNo = table.Column<string>(nullable: true),
+                    BillDate = table.Column<DateTime>(nullable: false),
+                    ShippingAddressId = table.Column<Guid>(nullable: true),
+                    BillingAddressId = table.Column<Guid>(nullable: true),
+                    CustomerId = table.Column<Guid>(nullable: false),
+                    BuyerId = table.Column<Guid>(nullable: false),
+                    VoucherId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sales", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sales_Buyers_BuyerId",
+                        column: x => x.BuyerId,
+                        principalSchema: "Addon",
+                        principalTable: "Buyers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sales_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalSchema: "Addon",
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sales_Vouchers_VoucherId",
+                        column: x => x.VoucherId,
+                        principalSchema: "Addon",
+                        principalTable: "Vouchers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VouchersInfo",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     VoucherId = table.Column<Guid>(nullable: false),
                     bookId = table.Column<Guid>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
@@ -803,22 +938,22 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_VouchersInfo_Vouchers_VoucherId",
                         column: x => x.VoucherId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Vouchers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VouchersInfo_AccountBooks_bookId",
                         column: x => x.bookId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "AccountBooks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EnquiryAccessories",
-                schema: "swc",
+                name: "PurchaseItems",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -827,7 +962,43 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    PurchaseId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    Quantity = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PurchaseItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalSchema: "Addon",
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PurchaseItems_Purchases_PurchaseId",
+                        column: x => x.PurchaseId,
+                        principalSchema: "Addon",
+                        principalTable: "Purchases",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EnquiryAccessories",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
                     AccessoriesId = table.Column<Guid>(nullable: false)
@@ -838,14 +1009,14 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_EnquiryAccessories_Enquiries_EnquiryId",
                         column: x => x.EnquiryId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Enquiries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EnquiryAccessories_Products_ProductId",
                         column: x => x.ProductId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -853,7 +1024,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EnquiryExchangeQuotations",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -862,7 +1033,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     Model = table.Column<string>(nullable: true),
                     Year = table.Column<int>(nullable: false),
@@ -876,7 +1047,7 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_EnquiryExchangeQuotations_Enquiries_EnquiryId",
                         column: x => x.EnquiryId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Enquiries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -884,7 +1055,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EnquiryProducts",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -893,7 +1064,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
                     OnRoadPrice = table.Column<double>(nullable: false),
@@ -907,22 +1078,22 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_EnquiryProducts_Enquiries_EnquiryId",
                         column: x => x.EnquiryId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Enquiries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EnquiryProducts_Products_ProductId",
                         column: x => x.ProductId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChitSubscribers",
-                schema: "swc",
+                name: "SaleItems",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -931,7 +1102,44 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    SalesId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    Quantity = table.Column<double>(nullable: false),
+                    SaleId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SaleItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SaleItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalSchema: "Addon",
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SaleItems_Sales_SaleId",
+                        column: x => x.SaleId,
+                        principalSchema: "Addon",
+                        principalTable: "Sales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChitSubscribers",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     SubscribeId = table.Column<string>(nullable: true),
                     ChitSchemaId = table.Column<Guid>(nullable: true),
                     CustomerId = table.Column<Guid>(nullable: true),
@@ -944,21 +1152,21 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_ChitSubscribers_ChitSchemes_ChitSchemaId",
                         column: x => x.ChitSchemaId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "ChitSchemes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ChitSubscribers_VouchersInfo_ClosedVoucherInfoIdId",
                         column: x => x.ClosedVoucherInfoIdId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "VouchersInfo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ChitSubscribers_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -966,7 +1174,7 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "EnquiryFinanceQuotations",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -975,7 +1183,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     EnquiryProductId = table.Column<Guid>(nullable: false),
                     InitialDownPayment = table.Column<double>(nullable: false),
                     MonthlyEMIAmount = table.Column<double>(nullable: false),
@@ -987,15 +1195,39 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_EnquiryFinanceQuotations_EnquiryProducts_EnquiryProductId",
                         column: x => x.EnquiryProductId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "EnquiryProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
+                name: "SaleItemsProperties",
+                schema: "Addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    SalesItemsId = table.Column<Guid>(nullable: false),
+                    ProductPropertyMasterId = table.Column<Guid>(nullable: false),
+                    Value = table.Column<string>(nullable: true),
+                    GroupId = table.Column<Guid>(nullable: false),
+                    SaleItemId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SaleItemsProperties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SaleItemsProperties_SaleItems_SaleItemId",
+                        column: x => x.SaleItemId,
+                        principalSchema: "Addon",
+                        principalTable: "SaleItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChitSubscriberDues",
-                schema: "swc",
+                schema: "Addon",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -1004,7 +1236,7 @@ namespace Api.Database.Migrations
                     Deleted = table.Column<DateTime>(nullable: true),
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
                     ChitSubscriberId = table.Column<Guid>(nullable: true),
                     DueNo = table.Column<string>(nullable: true),
                     VoucherInfoId = table.Column<Guid>(nullable: true)
@@ -1015,160 +1247,221 @@ namespace Api.Database.Migrations
                     table.ForeignKey(
                         name: "FK_ChitSubscriberDues_ChitSubscribers_ChitSubscriberId",
                         column: x => x.ChitSubscriberId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "ChitSubscribers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ChitSubscriberDues_VouchersInfo_VoucherInfoId",
                         column: x => x.VoucherInfoId,
-                        principalSchema: "swc",
+                        principalSchema: "Addon",
                         principalTable: "VouchersInfo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Buyers_BusinessContactId",
+                schema: "Addon",
+                table: "Buyers",
+                column: "BusinessContactId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CampaignInfos_ContactId",
-                schema: "swc",
+                schema: "Addon",
                 table: "CampaignInfos",
                 column: "ContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CampaignInfos_ModeId",
-                schema: "swc",
+                schema: "Addon",
                 table: "CampaignInfos",
                 column: "ModeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CampaignInfos_StatusId",
-                schema: "swc",
+                schema: "Addon",
                 table: "CampaignInfos",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChitSubscriberDues_ChitSubscriberId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ChitSubscriberDues",
                 column: "ChitSubscriberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChitSubscriberDues_VoucherInfoId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ChitSubscriberDues",
                 column: "VoucherInfoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChitSubscribers_ChitSchemaId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ChitSubscribers",
                 column: "ChitSchemaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChitSubscribers_ClosedVoucherInfoIdId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ChitSubscribers",
                 column: "ClosedVoucherInfoIdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChitSubscribers_CustomerId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ChitSubscribers",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_ProfileId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Customers",
                 column: "ProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_ContactId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Employees",
                 column: "ContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enquiries_ContactId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Enquiries",
                 column: "ContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enquiries_EnquiryTypeId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Enquiries",
                 column: "EnquiryTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enquiries_StatusId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Enquiries",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enquiries_VoucherId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Enquiries",
                 column: "VoucherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryAccessories_EnquiryId",
-                schema: "swc",
+                schema: "Addon",
                 table: "EnquiryAccessories",
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryAccessories_ProductId",
-                schema: "swc",
+                schema: "Addon",
                 table: "EnquiryAccessories",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryExchangeQuotations_EnquiryId",
-                schema: "swc",
+                schema: "Addon",
                 table: "EnquiryExchangeQuotations",
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryFinanceQuotations_EnquiryProductId",
-                schema: "swc",
+                schema: "Addon",
                 table: "EnquiryFinanceQuotations",
                 column: "EnquiryProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryProducts_EnquiryId",
-                schema: "swc",
+                schema: "Addon",
                 table: "EnquiryProducts",
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EnquiryProducts_ProductId",
-                schema: "swc",
+                schema: "Addon",
                 table: "EnquiryProducts",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExtraFittings_AccessoriesProductItemId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ExtraFittings",
                 column: "AccessoriesProductItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExtraFittings_ProductId",
-                schema: "swc",
+                schema: "Addon",
                 table: "ExtraFittings",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryMasters_CustomerId",
-                schema: "swc",
-                table: "InventoryMasters",
+                name: "IX_PurchaseItems_ProductId",
+                schema: "Addon",
+                table: "PurchaseItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseItems_PurchaseId",
+                schema: "Addon",
+                table: "PurchaseItems",
+                column: "PurchaseId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Purchases_BusinessContactId",
+                schema: "Addon",
+                table: "Purchases",
+                column: "BusinessContactId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SaleItems_ProductId",
+                schema: "Addon",
+                table: "SaleItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SaleItems_SaleId",
+                schema: "Addon",
+                table: "SaleItems",
+                column: "SaleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SaleItemsProperties_SaleItemId",
+                schema: "Addon",
+                table: "SaleItemsProperties",
+                column: "SaleItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_BuyerId",
+                schema: "Addon",
+                table: "Sales",
+                column: "BuyerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_CustomerId",
+                schema: "Addon",
+                table: "Sales",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sales_VoucherId",
+                schema: "Addon",
+                table: "Sales",
+                column: "VoucherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sellers_BusinessContactId",
+                schema: "Addon",
+                table: "Sellers",
+                column: "BusinessContactId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Threats_Referer",
-                schema: "swc",
+                schema: "Addon",
                 table: "Threats",
                 column: "Referer",
                 unique: true,
@@ -1176,31 +1469,31 @@ namespace Api.Database.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Threats_StatusId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Threats",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Threats_TypeId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Threats",
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vouchers_VoucherTypeId",
-                schema: "swc",
+                schema: "Addon",
                 table: "Vouchers",
                 column: "VoucherTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VouchersInfo_VoucherId",
-                schema: "swc",
+                schema: "Addon",
                 table: "VouchersInfo",
                 column: "VoucherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VouchersInfo_bookId",
-                schema: "swc",
+                schema: "Addon",
                 table: "VouchersInfo",
                 column: "bookId");
         }
@@ -1209,159 +1502,191 @@ namespace Api.Database.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BranchMasters",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "CampaignInfos",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Campaigns",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "ChitSubscriberDues",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "DeviceMasters",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Employees",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "EnquiryAccessories",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "EnquiryExchangeQuotations",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "EnquiryFinanceQuotations",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "ExtraFittings",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "FinanceCompanies",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "InquiryReport",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
-                name: "InventoryInfos",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
-                name: "InventoryItemMasters",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
-                name: "InventoryMasters",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "LicenseMasters",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "marketingZones",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "PaymentModes",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "ProductCompanies",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "ProductPropertiesMaps",
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "ProductPropertyMasters",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "ProductTypes",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "PurchaseItemProperties",
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "PurchaseItems",
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "SaleItemsProperties",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Threats",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Users",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "FollowUpModes",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "FollowUpStatuses",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "ChitSubscribers",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "EnquiryProducts",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "Purchases",
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "SaleItems",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Statuses",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Type",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "ChitSchemes",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "VouchersInfo",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
-                name: "Customers",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Enquiries",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "Sellers",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Products",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "Sales",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "AccountBooks",
-                schema: "swc");
-
-            migrationBuilder.DropTable(
-                name: "Contacts",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "EnquriyType",
-                schema: "swc");
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "EnquiryStatuses",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "Buyers",
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "Customers",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "Vouchers",
-                schema: "swc");
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "BusinessContact",
+                schema: "Addon");
+
+            migrationBuilder.DropTable(
+                name: "Contacts",
+                schema: "Addon");
 
             migrationBuilder.DropTable(
                 name: "VoucherTypeMasters",
-                schema: "swc");
+                schema: "Addon");
         }
     }
 }

@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Api.Database.Entity.Threats;
-using Api.Domain.Enquiries;
 using Threenine.Data;
-using Api.Database.Entity.Enquiries;
 using Api.Database.Entity;
-using Api.Database.Entity.Products;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
-using Api.Database.Entity.Crm;
 using Api.Domain.Sales;
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Finance;
-using Api.Database.Entity.Inventory;
+using Api.Database.Entity.Inventory.Sales;
+using Api.Database.Entity.Inventory.Products;
 
 namespace Swc.Service.Sales
 {
@@ -39,23 +32,15 @@ namespace Swc.Service.Sales
             return ie;
 
         }
-        public async Task<string> Insert(InsertSalesModel model)
+        public async Task<string> Insert(Sale model)
         {
             try
             { 
           
-                _unitOfWork.GetRepository<InventoryMaster>().Add(model.Sales);
-            _unitOfWork.GetRepository<InventoryInfo>().Add(model.Inventorys);
-            _unitOfWork.GetRepository<InventoryItemMaster>().Add(model.itemMasters);
+            _unitOfWork.GetRepository<Sale>().Add(model);
             
 
-            Voucher v = new Voucher();
-            //foreach(VoucherInfo vi in model.Amounts)
-            //{
-            //    vi.Voucher = v;
-            //}
-            _unitOfWork.GetRepository<Voucher>().Add(v);
-            _unitOfWork.GetRepository<VoucherInfo>().Add(model.Amounts);
+         
             _unitOfWork.SaveChanges();
       
            

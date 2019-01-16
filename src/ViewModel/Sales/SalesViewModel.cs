@@ -1,22 +1,13 @@
 ﻿
 using Api.Database.Entity;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
-using Api.Domain.Enquiries;
-using Swc.Service;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using Threenine.Data;
-using System.Linq;
 using Swc.Service.Sales;
 using Api.Domain.Sales;
-using Api.Database.Entity.Inventory;
 using Api.Database.Entity.Crm;
 using Api.Database.Entity.Accounts;
 using System.ComponentModel;
-using System.Reflection;
+using Api.Database.Entity.Inventory.Products;
 
 namespace ViewModel.Sales
 {
@@ -50,7 +41,7 @@ namespace ViewModel.Sales
         }
         void LoadData()
         {
-            CurrentCustomer.Profile.Name = "Ram";
+            CurrentCustomer.Profile.FirstName = "Ram";
         }
         #region Commands
         private void WireCommands()
@@ -90,30 +81,30 @@ namespace ViewModel.Sales
                 return;
             }
 
-            InsertSalesModel model = new InsertSalesModel();
-            InventoryMaster sm = new InventoryMaster();
-            sm.CustomerId = CurrentCustomer.Id;
-            sm.Customer = CurrentCustomer;
+            //InsertSalesModel model = new InsertSalesModel();
+            //InventoryMaster sm = new InventoryMaster();
+            //sm.CustomerId = CurrentCustomer.Id;
+            //sm.Customer = CurrentCustomer;
 
-            InventoryItemMaster itemMaster = new InventoryItemMaster();
-            itemMaster.ChasisNo = "3445";
-            InventoryInfo salesInventorys = new InventoryInfo();
-            salesInventorys.ProductId = CurrentVehicle.Id;
-            salesInventorys.UnitPrice =45000;
-            salesInventorys.InventoryItemMasterId = itemMaster.Id;
+            //InventoryItemMaster itemMaster = new InventoryItemMaster();
+            //itemMaster.ChasisNo = "3445";
+            //InventoryInfo salesInventorys = new InventoryInfo();
+            //salesInventorys.ProductId = CurrentVehicle.Id;
+            //salesInventorys.UnitPrice =45000;
+            //salesInventorys.InventoryItemMasterId = itemMaster.Id;
 
-            List<InventoryInfo> inventorys = new List<InventoryInfo>();
-            inventorys.Add(salesInventorys);
+            //List<InventoryInfo> inventorys = new List<InventoryInfo>();
+            //inventorys.Add(salesInventorys);
 
-            List<InventoryItemMaster> lstItemMaster = new List<InventoryItemMaster>();
-            lstItemMaster.Add(itemMaster);
+            //List<InventoryItemMaster> lstItemMaster = new List<InventoryItemMaster>();
+            //lstItemMaster.Add(itemMaster);
 
-            model.Sales = sm;
-            model.Inventorys = inventorys;
-            model.itemMasters = lstItemMaster;
+            //model.Sales = sm;
+            //model.Inventorys = inventorys;
+            //model.itemMasters = lstItemMaster;
 
-            model.Amounts = Amounts;
-            _repository.Insert(model);
+            //model.Amounts = Amounts;
+            //_repository.Insert(model);
 
         }
         bool Validate()

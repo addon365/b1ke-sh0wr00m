@@ -1,15 +1,11 @@
 ﻿
 using Api.Database.Entity;
 using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
+using Api.Database.Entity.Inventory.Products;
 using Api.Domain.Enquiries;
 using Swc.Service;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using Threenine.Data;
-using System.Linq;
 namespace ViewModel
 {
     public class VehicleSaleViewModel : ViewModelBase

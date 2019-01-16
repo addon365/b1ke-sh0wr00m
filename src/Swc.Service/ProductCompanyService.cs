@@ -1,14 +1,13 @@
-﻿using Api.Database.Entity.Products;
+﻿using Api.Database.Entity.Inventory.Products;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Threenine.Data;
 
 namespace Swc.Service
 {
-   public class ProductCompanyService:IProductCompanyService
+    public class ProductCompanyService:IProductCompanyService
     {
         private readonly IUnitOfWork _unitOfWork;
         private const string Enabled = "Enabled";

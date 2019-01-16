@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Crm
 {
-    public class Campaign:BaseEntity
+    public class Campaign:BaseEntityWithLogFields
     {
         public string Name { get; set; }
         public string Filter { get; set; }

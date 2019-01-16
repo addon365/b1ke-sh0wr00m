@@ -313,6 +313,9 @@
     <Compile Include="Enquiries\BookingListWindow.xaml.cs">
       <DependentUpon>BookingListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\ucPurchase.xaml.cs">
+      <DependentUpon>ucPurchase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RibbonTab\ChitTab.xaml.cs">
       <DependentUpon>ChitTab.xaml</DependentUpon>
     </Compile>
@@ -414,6 +417,10 @@
     <Page Include="Enquiries\BookingListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\ucPurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReportViewer.xaml">
       <SubType>Designer</SubType>

@@ -25,10 +25,8 @@ namespace Api.Database.Tests
             this.contextFactory = contextFactory;
             var context = contextFactory.GetContext();
             license = Builder<LicenseMaster>.CreateNew()
-                .With(b => b.Id = (ushort)randomGenerator.Next(100,1000))
                 .Build();
             branch = Builder<BranchMaster>.CreateNew()
-                .With(b => b.Id = (ushort)randomGenerator.Next(100, 1000))
                 .With(b => b.LicenseId = license.Id)
                 .Build();
             context.BranchMasters.Add(branch);

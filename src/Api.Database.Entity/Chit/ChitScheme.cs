@@ -2,7 +2,7 @@
 
 namespace Api.Database.Entity.Chit
 {
-    public class ChitScheme : BaseEntity
+    public class ChitScheme : BaseEntityWithLogFields
     {
         public string SchemaName { get; set; }
         public int TotalMonths { get; set; }

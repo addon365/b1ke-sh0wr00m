@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Accounts
 {
-    public class VoucherInfo:BaseEntity
+    public class VoucherInfo:BaseEntityWithLogFields
     {
         public Guid VoucherId { get; set; }
        // public  Voucher Voucher { get; set; }

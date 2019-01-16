@@ -1,12 +1,8 @@
-﻿using Api.Database.Entity.Products;
-using Microsoft.AspNetCore.Authorization;
+﻿using Api.Database.Entity.Inventory.Products;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using Swc.Service;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace swcApi.Controllers
 {

@@ -7,7 +7,6 @@ using System.IO;
 using Newtonsoft.Json;
 using Api.Database;
 using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
 using Api.Database.Entity;
 using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
@@ -15,7 +14,9 @@ using Api.Database.Entity.Crm;
 using System.Diagnostics;
 using Api.Database.Entity.Report;
 using System;
-
+using Api.Database.Entity.Inventory.Products;
+using Microsoft.Extensions.DependencyInjection;
+using Swc.Service;
 namespace swcApi
 {
     public static class DbContextExtension
@@ -37,6 +38,7 @@ namespace swcApi
 
         public static void EnsureSeeded(this ApiContext context)
         {
+            
             if (!context.InquiryReport.Any())
             {
                 try

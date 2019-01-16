@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Api.Database.Entity.Products;
+using Api.Database.Entity.Inventory.Products;
 using Api.Database.Entity.User;
 using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
@@ -15,6 +15,8 @@ using Api.Database.Entity.Crm;
 using Api.Database.Entity.Report;
 using Api.Database.Entity.Inventory;
 using Api.Database.Entity.Chit;
+using Api.Database.Entity.Inventory.Sales;
+using Api.Database.Entity.Inventory.Purchase;
 
 namespace Api.Database
 {
@@ -63,12 +65,7 @@ namespace Api.Database
         public DbSet<EnquiryFinanceQuotation> EnquiryFinanceQuotations { get; set; }
         public DbSet<EnquiryAccessories> EnquiryAccessories { get; set; }
         #endregion
-        #region Product
-        public DbSet<ProductCompany> ProductCompanies { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ExtraFittingsAccessories> ExtraFittings { get; set; }
-        #endregion
+       
         #region Accounts
         public DbSet<PaymentMode> PaymentModes { get; set; }
         public DbSet<AccountBook> AccountBooks { get; set; }
@@ -83,10 +80,28 @@ namespace Api.Database
         public DbSet<Employee> Employees { get; set; }
         #endregion
         #region Inventory
-        public DbSet<InventoryMaster> InventoryMasters { get; set; }
-        public DbSet<InventoryInfo> InventoryInfos { get; set; }
-        public DbSet<InventoryItemMaster> InventoryItemMasters { get; set; }
 
+        public DbSet<Buyer> Buyers { get; set; }
+
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<SaleItem> SaleItems { get; set; }
+        public DbSet<SaleItemProperty> SaleItemsProperties { get; set; }
+
+        public DbSet<Seller> Sellers { get; set; }
+
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseItem> PurchaseItems { get; set; }
+        public DbSet<PurchaseItemProperty> PurchaseItemProperties { get; set; }
+        
+        #region Product
+        public DbSet<ProductCompany> ProductCompanies { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductPropertyMaster> ProductPropertyMasters { get; set; }
+        public DbSet<ProductPropertiesMap> ProductPropertiesMaps { get; set; }
+        public DbSet<ExtraFittingsAccessories> ExtraFittings { get; set; }
+        #endregion
+        
         #endregion
         #region Report
         public DbSet<InquiryReport> InquiryReport { get; set; }
@@ -121,14 +136,14 @@ namespace Api.Database
 
         private void Audit()
         {
-            var entries = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+            var entries = ChangeTracker.Entries().Where(x => x.Entity is BaseEntityWithLogFields && (x.State == EntityState.Added || x.State == EntityState.Modified));
             foreach (var entry in entries)
             {
                 if (entry.State == EntityState.Added)
                 {
-                    ((BaseEntity)entry.Entity).Created = DateTime.UtcNow;
+                    ((BaseEntityWithLogFields)entry.Entity).Created = DateTime.UtcNow;
                 }
-            ((BaseEntity)entry.Entity).Modified = DateTime.UtcNow;
+            ((BaseEntityWithLogFields)entry.Entity).Modified = DateTime.UtcNow;
             }
         }
     }

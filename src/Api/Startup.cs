@@ -21,6 +21,8 @@ using swcApi.Utils.Exceptions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json.Serialization;
+using Swc.Service.Inventory;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace swcApi
 {
@@ -72,6 +74,7 @@ namespace swcApi
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<IPurchaseService, PurchaseService>();
             services.AddScoped<RequestInfo>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 
@@ -174,10 +177,18 @@ namespace swcApi
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                if (!serviceScope.ServiceProvider.GetService<ApiContext>().AllMigrationsApplied())
+                var apicon = serviceScope.ServiceProvider.GetService<ApiContext>();
+                if (!apicon.AllMigrationsApplied())
                 {
-                    serviceScope.ServiceProvider.GetService<ApiContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<ApiContext>().EnsureSeeded();
+                   
+
+                    apicon.Database.Migrate();
+                    var UserService = serviceScope.ServiceProvider.GetService<IUserService>();
+                    if (!apicon.Users.Any())
+                    {
+                        UserService.InsertUser(new Api.Database.Entity.User.User() { UserId = "user1", Password = "pass1", UserName = "user1" });
+                    }
+                    apicon.EnsureSeeded();
                 }
 
             }

@@ -1,13 +1,10 @@
-﻿using Api.Database.Entity.Products;
-using Api.Domain.Enquiries;
+﻿using Api.Database.Entity.Inventory.Products;
 using Api.Domain.Paging;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Swc.Service
 {
-  public interface IProductService
+    public interface IProductService
     {
         Threenine.Data.Paging.IPaginate<Product> GetAllActive(PagingParams pagingParams);
         string Insert(Product product);

@@ -1,7 +1,7 @@
 ﻿using Api.Database.Entity;
 using Api.Database.Entity.Crm;
 using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
+using Api.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;

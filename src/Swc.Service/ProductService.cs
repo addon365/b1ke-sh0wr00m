@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Api.Database.Entity.Products;
-using Api.Domain.Enquiries;
 using AutoMapper;
 using Threenine.Data;
 using System.Linq;
 using Api.Domain.Paging;
+using Api.Database.Entity.Inventory.Products;
 
 namespace Swc.Service
 {

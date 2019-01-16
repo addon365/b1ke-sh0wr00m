@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Crm
 {
-    public class Customer : BaseEntity
+    public class Customer : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
         public Contact Profile { get; set; }

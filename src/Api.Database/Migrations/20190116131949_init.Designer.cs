@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20181226070630_init")]
+    [Migration("20190116131949_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("swc")
+                .HasDefaultSchema("Addon")
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -29,7 +29,7 @@ namespace Api.Database.Migrations
 
                     b.Property<string>("BookName");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -57,7 +57,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -83,7 +83,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -115,7 +115,7 @@ namespace Api.Database.Migrations
 
                     b.Property<double>("Amount");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -160,12 +160,12 @@ namespace Api.Database.Migrations
 
             modelBuilder.Entity("Api.Database.Entity.BranchMaster", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("BranchName");
 
-                    b.Property<int>("LicenseId");
+                    b.Property<Guid>("LicenseId");
 
                     b.Property<string>("Location");
 
@@ -183,7 +183,7 @@ namespace Api.Database.Migrations
 
                     b.Property<double>("BonusAmount");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -219,7 +219,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<Guid?>("ChitSubscriberId");
 
@@ -251,7 +251,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<Guid?>("ChitSchemaId");
 
@@ -284,12 +284,36 @@ namespace Api.Database.Migrations
                     b.ToTable("ChitSubscribers");
                 });
 
+            modelBuilder.Entity("Api.Database.Entity.Crm.BusinessContact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<string>("BusinessName");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BusinessContact");
+                });
+
             modelBuilder.Entity("Api.Database.Entity.Crm.Campaign", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -315,7 +339,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<Guid>("CampaignId");
 
@@ -355,7 +379,9 @@ namespace Api.Database.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("AddressId");
+
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -365,13 +391,15 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime?>("Deleted");
 
+                    b.Property<string>("FirstName");
+
                     b.Property<string>("Identifier");
+
+                    b.Property<string>("LastName");
 
                     b.Property<string>("MobileNumber");
 
                     b.Property<DateTime>("Modified");
-
-                    b.Property<string>("Name");
 
                     b.Property<string>("Place");
 
@@ -385,7 +413,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -415,7 +443,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -441,7 +469,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -464,12 +492,18 @@ namespace Api.Database.Migrations
 
             modelBuilder.Entity("Api.Database.Entity.DeviceMaster", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AuthorisedUser");
 
                     b.Property<string>("DeviceId");
 
                     b.Property<string>("DeviceName");
+
+                    b.Property<int>("OtherId");
+
+                    b.Property<string>("RequestedUser");
 
                     b.HasKey("Id");
 
@@ -481,7 +515,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<Guid>("ContactId");
 
@@ -521,7 +555,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<Guid>("ContactId");
 
@@ -565,7 +599,7 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid>("AccessoriesId");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -595,7 +629,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -631,7 +665,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -665,7 +699,7 @@ namespace Api.Database.Migrations
 
                     b.Property<double>("AccessoriesAmount");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -701,7 +735,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -732,7 +766,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -760,7 +794,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -779,48 +813,16 @@ namespace Api.Database.Migrations
                     b.ToTable("FinanceCompanies");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryInfo", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Buyer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
-                    b.Property<DateTime>("Created");
+                    b.Property<Guid?>("BusinessContactId");
 
-                    b.Property<int?>("CreatedDeviceId");
-
-                    b.Property<int?>("CreatedUserId");
-
-                    b.Property<DateTime?>("Deleted");
-
-                    b.Property<double>("Discount");
-
-                    b.Property<Guid>("InventoryItemMasterId");
-
-                    b.Property<Guid>("InventoryMasterId");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<Guid>("ProductId");
-
-                    b.Property<double>("Unit");
-
-                    b.Property<double>("UnitPrice");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InventoryInfos");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryItemMaster", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BranchMasterId");
-
-                    b.Property<string>("ChasisNo");
+                    b.Property<string>("BuyerId");
 
                     b.Property<DateTime>("Created");
 
@@ -832,84 +834,16 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime>("Modified");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("InventoryItemMasters");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryMaster", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BranchMasterId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<int?>("CreatedDeviceId");
-
-                    b.Property<int?>("CreatedUserId");
-
-                    b.Property<Guid>("CustomerId");
-
-                    b.Property<DateTime?>("Deleted");
-
-                    b.Property<string>("Identifier");
-
-                    b.Property<DateTime>("Modified");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("BusinessContactId");
 
-                    b.ToTable("InventoryMasters");
+                    b.ToTable("Buyers");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.LicenseMaster", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("BusinessName");
-
-                    b.Property<string>("LicenseId");
-
-                    b.Property<string>("Location");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LicenseMasters");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.MarketingZone", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BranchMasterId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<int?>("CreatedDeviceId");
-
-                    b.Property<int?>("CreatedUserId");
-
-                    b.Property<DateTime?>("Deleted");
-
-                    b.Property<string>("Identifier");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<string>("ZonalDescription");
-
-                    b.Property<string>("ZonalName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("marketingZones");
-                });
-
-            modelBuilder.Entity("Api.Database.Entity.Products.ExtraFittingsAccessories", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.ExtraFittingsAccessories", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -920,7 +854,7 @@ namespace Api.Database.Migrations
 
                     b.Property<double>("Amount");
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -947,12 +881,12 @@ namespace Api.Database.Migrations
                     b.ToTable("ExtraFittings");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Products.Product", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<Guid>("CompanyId");
 
@@ -987,12 +921,12 @@ namespace Api.Database.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Products.ProductCompany", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.ProductCompany", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<string>("CompanyName");
 
@@ -1015,12 +949,52 @@ namespace Api.Database.Migrations
                     b.ToTable("ProductCompanies");
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Products.ProductType", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.ProductPropertiesMap", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid>("ItemPropertyMasterId");
+
+                    b.Property<Guid>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductPropertiesMaps");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.ProductPropertyMaster", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("PropertyMasterId");
+
+                    b.Property<string>("PropertyName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductPropertyMasters");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.ProductType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -1045,6 +1019,263 @@ namespace Api.Database.Migrations
                     b.ToTable("ProductTypes");
                 });
 
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Purchase.Purchase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<Guid>("BusinessContactId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("InvoiceDate");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("PurchaseInvoiceNo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessContactId");
+
+                    b.ToTable("Purchases");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Purchase.PurchaseItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<Guid>("ProductId");
+
+                    b.Property<Guid>("PurchaseId");
+
+                    b.Property<double>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PurchaseId")
+                        .IsUnique();
+
+                    b.ToTable("PurchaseItems");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Purchase.PurchaseItemProperty", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("GroupId");
+
+                    b.Property<Guid>("ProductPropertyMasterId");
+
+                    b.Property<Guid>("PurchaseItemsId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchaseItemProperties");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Sales.Sale", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("BillDate");
+
+                    b.Property<string>("BillNo");
+
+                    b.Property<Guid?>("BillingAddressId");
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<Guid>("BuyerId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<Guid>("CustomerId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid?>("ShippingAddressId");
+
+                    b.Property<Guid>("VoucherId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuyerId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("VoucherId");
+
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Sales.SaleItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<Guid>("ProductId");
+
+                    b.Property<double>("Quantity");
+
+                    b.Property<Guid?>("SaleId");
+
+                    b.Property<Guid>("SalesId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SaleId");
+
+                    b.ToTable("SaleItems");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Sales.SaleItemProperty", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("GroupId");
+
+                    b.Property<Guid>("ProductPropertyMasterId");
+
+                    b.Property<Guid?>("SaleItemId");
+
+                    b.Property<Guid>("SalesItemsId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SaleItemId");
+
+                    b.ToTable("SaleItemsProperties");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Seller", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<Guid?>("BusinessContactId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("SellerId");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessContactId");
+
+                    b.ToTable("Sellers");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.LicenseMaster", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BusinessName");
+
+                    b.Property<string>("LicenseId");
+
+                    b.Property<string>("Location");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LicenseMasters");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.MarketingZone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("ZonalDescription");
+
+                    b.Property<string>("ZonalName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("marketingZones");
+                });
+
             modelBuilder.Entity("Api.Database.Entity.Report.InquiryReport", b =>
                 {
                     b.Property<long>("Id")
@@ -1067,7 +1298,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -1096,7 +1327,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -1149,7 +1380,7 @@ namespace Api.Database.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BranchMasterId");
+                    b.Property<Guid?>("BranchMasterId");
 
                     b.Property<DateTime>("Created");
 
@@ -1172,11 +1403,12 @@ namespace Api.Database.Migrations
 
             modelBuilder.Entity("Api.Database.Entity.User.User", b =>
                 {
-                    b.Property<decimal>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 20, scale: 0)));
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConfirmPassword");
+
+                    b.Property<int>("OtherId");
 
                     b.Property<string>("Password");
 
@@ -1300,7 +1532,7 @@ namespace Api.Database.Migrations
                         .HasForeignKey("EnquiryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Api.Database.Entity.Products.Product", "product")
+                    b.HasOne("Api.Database.Entity.Inventory.Products.Product", "product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1329,30 +1561,94 @@ namespace Api.Database.Migrations
                         .HasForeignKey("EnquiryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Api.Database.Entity.Products.Product", "Product")
+                    b.HasOne("Api.Database.Entity.Inventory.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Inventory.InventoryMaster", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Buyer", b =>
                 {
+                    b.HasOne("Api.Database.Entity.Crm.BusinessContact", "BusinessContact")
+                        .WithMany()
+                        .HasForeignKey("BusinessContactId");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Products.ExtraFittingsAccessories", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Inventory.Products.Product", "AccessoriesProductItem")
+                        .WithMany()
+                        .HasForeignKey("AccessoriesProductItemId");
+
+                    b.HasOne("Api.Database.Entity.Inventory.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Purchase.Purchase", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Inventory.Seller", "Seller")
+                        .WithMany()
+                        .HasForeignKey("BusinessContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Purchase.PurchaseItem", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Inventory.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Inventory.Purchase.Purchase")
+                        .WithOne("Items")
+                        .HasForeignKey("Api.Database.Entity.Inventory.Purchase.PurchaseItem", "PurchaseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Sales.Sale", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Inventory.Buyer", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Api.Database.Entity.Crm.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Accounts.Voucher", "Voucher")
+                        .WithMany()
+                        .HasForeignKey("VoucherId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Api.Database.Entity.Products.ExtraFittingsAccessories", b =>
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Sales.SaleItem", b =>
                 {
-                    b.HasOne("Api.Database.Entity.Products.Product", "AccessoriesProductItem")
-                        .WithMany()
-                        .HasForeignKey("AccessoriesProductItemId");
-
-                    b.HasOne("Api.Database.Entity.Products.Product", "Product")
+                    b.HasOne("Api.Database.Entity.Inventory.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Inventory.Sales.Sale")
+                        .WithMany("Items")
+                        .HasForeignKey("SaleId");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Sales.SaleItemProperty", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Inventory.Sales.SaleItem")
+                        .WithMany("Properties")
+                        .HasForeignKey("SaleItemId");
+                });
+
+            modelBuilder.Entity("Api.Database.Entity.Inventory.Seller", b =>
+                {
+                    b.HasOne("Api.Database.Entity.Crm.BusinessContact", "BusinessContact")
+                        .WithMany()
+                        .HasForeignKey("BusinessContactId");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Threats.Threat", b =>

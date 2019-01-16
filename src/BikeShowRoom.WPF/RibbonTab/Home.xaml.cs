@@ -123,5 +123,11 @@ namespace BikeShowRoom.WPF
             Enquiries.BookingListWindow n = new Enquiries.BookingListWindow();
             n.ShowDialog();
         }
+
+        private void BtnPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            Inventory.ucPurchase n = new Inventory.ucPurchase();
+            n.ShowDialog();
+        }
     }
 }

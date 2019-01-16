@@ -1,8 +1,6 @@
 ﻿using addon.BikeShowRoomService.WebService;
-using Api.Database.Entity.Products;
-using System;
+using Api.Database.Entity.Inventory.Products;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ViewModel
 {

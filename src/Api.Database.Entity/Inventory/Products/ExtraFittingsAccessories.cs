@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Api.Database.Entity.Products
+namespace Api.Database.Entity.Inventory.Products
 {
-    public class ExtraFittingsAccessories:BaseEntity
+    public class ExtraFittingsAccessories:BaseEntityWithLogFields
     {
         public Guid ProductId{ get; set; }
         [ForeignKey("ProductId")] public virtual Product Product { get; set; }

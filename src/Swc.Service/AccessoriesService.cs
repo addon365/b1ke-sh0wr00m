@@ -1,14 +1,12 @@
-﻿using Api.Database.Entity.Products;
-using Api.Domain.Enquiries;
+﻿using Api.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Threenine.Data;
 
 namespace Swc.Service
 {
-  public class AccessoriesService:IAccessoriesService
+    public class AccessoriesService:IAccessoriesService
     {
         private readonly IUnitOfWork _unitOfWork;
        

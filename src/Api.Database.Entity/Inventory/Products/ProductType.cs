@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity.Products
+namespace Api.Database.Entity.Inventory.Products
 {
-    public class ProductType : BaseEntity
+    public class ProductType : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
         public string Name { get; set; }

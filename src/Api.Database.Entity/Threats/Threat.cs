@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Threats
 {
-    public class Threat : BaseEntity
+    public class Threat : BaseEntityWithLogFields
     {
       
         public string Identifier { get; set; }

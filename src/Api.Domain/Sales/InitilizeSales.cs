@@ -2,7 +2,7 @@
 using Api.Database.Entity.Accounts;
 using Api.Database.Entity.Enquiries;
 using Api.Database.Entity.Finance;
-using Api.Database.Entity.Products;
+using Api.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;

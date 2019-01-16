@@ -1,12 +1,10 @@
-﻿using Api.Database.Entity.Products;
+﻿using Api.Database.Entity.Inventory.Products;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Api.Database.Entity.Enquiries
 {
-    public class EnquiryAccessories:BaseEntity
+    public class EnquiryAccessories:BaseEntityWithLogFields
     {
         public Guid EnquiryId { get; set; }
         [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }

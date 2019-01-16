@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Finance
 {
-    public class FinanceCompany:BaseEntity
+    public class FinanceCompany:BaseEntityWithLogFields
     {
         public string Name { get; set; }
     }

@@ -1,8 +1,13 @@
 [
   {
-    "Id": "1",
+    "Id": "150e0313-cf22-491c-93c4-4925b4d9e969",
     "BranchName": "Manali",
     "ShortCode": "M"
+  },
+  {
+    "Id": "3db63565-a6dc-4fc0-b6cf-62e7a100a91d",
+    "BranchName": "GA Road",
+    "ShortCode": "G"
   }
 
 ]

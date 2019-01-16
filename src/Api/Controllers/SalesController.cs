@@ -4,6 +4,7 @@ using Swc.Service.Sales;
 using Api.Domain.Sales;
 using System;
 using System.Threading.Tasks;
+using Api.Database.Entity.Inventory.Sales;
 
 namespace swcApi.Controllers
 {
@@ -21,17 +22,17 @@ namespace swcApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] InsertSalesModel model)
+        public async Task<IActionResult> Post([FromBody] Sale Model)
         {
             try
             { 
          
-                if (model == null)
+                if (Model == null)
                 {
                     return BadRequest();
                 }
 
-                var identifier =await _SalesService.Insert(model);
+                var identifier =await _SalesService.Insert(Model);
 
 
                 return Ok();

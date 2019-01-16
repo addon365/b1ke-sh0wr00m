@@ -12,25 +12,39 @@ namespace Swc.Service
         public string DeviceCode { get; set; }
         public string BranchId { get; set; }
 
-        private UInt16? CreatedUserId { get; set; }
-        private UInt16? CreatedDeviceId { get; set; }
-        private UInt16? BranchMasterId { get; set; }
+        private int? CreatedUserId { get; set; }
+        private int? CreatedDeviceId { get; set; }
+        private Guid? BranchMasterId { get; set; }
         private IUnitOfWork _unitOfWork;
 
         public RequestInfo(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public void Init()
+        public void Init(string UserId)
         {
             DeviceId = "";
-            DeviceMaster dm = _unitOfWork.GetRepository<DeviceMaster>().GetList(predicate: x => x.DeviceId == DeviceCode).Items.FirstOrDefault();
+            var obj = _unitOfWork.GetRepository<DeviceMaster>().GetList(predicate: x => x.DeviceId == DeviceCode);
+            DeviceMaster dm = null;
+            if(obj!=null)
+                dm=obj.Items.FirstOrDefault();
 
-            if(dm!=null)
-                DeviceId = dm.Id.ToString();
+            if(dm==null)
+            {
+                var RequestToAuthorise=new DeviceMaster() { DeviceName = "UnKnown", DeviceId = DeviceCode,RequestedUser=UserId };
+
+                _unitOfWork.GetRepository<DeviceMaster>().Add(RequestToAuthorise);
+                _unitOfWork.SaveChanges();
+                return;
+            }
+
+            if (dm.AuthorisedUser == null || dm.AuthorisedUser == "")
+                return;
+
+            DeviceId = dm.OtherId.ToString();
 
         }
-        public void InitilizeBaseEntityInfo(BaseEntity baseEntity)
+        public void InitilizeBaseEntityInfo(BaseEntityWithLogFields baseEntity)
         {
             if (CreatedUserId == null)
                 CreatedUserId = UInt16.Parse(UserId);
@@ -39,7 +53,7 @@ namespace Swc.Service
                 CreatedDeviceId = UInt16.Parse(DeviceId);
 
             if (BranchMasterId == null)
-                BranchMasterId = UInt16.Parse(BranchId);
+                BranchMasterId = Guid.Parse(BranchId);
 
             baseEntity.Created = System.DateTime.Now;
             baseEntity.CreatedUserId = CreatedUserId;

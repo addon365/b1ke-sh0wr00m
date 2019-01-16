@@ -1,8 +1,6 @@
-﻿using Api.Database.Entity.Products;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 
 namespace ViewModel
@@ -116,7 +114,7 @@ namespace ViewModel
                     (
                         param =>
                         {
-                            if(start<TotalPages)
+                            if(Start<TotalPages)
                             { 
                                 start += 1;
                                 RefreshData();
@@ -143,7 +141,8 @@ namespace ViewModel
                     (
                         param =>
                         {
-                            start =TotalPages;
+                            if(TotalPages>0)
+                            start =TotalPages-1;
                             RefreshData();
                         },
                         param =>
@@ -181,9 +180,12 @@ namespace ViewModel
             }
         }
 
+        Api.Domain.Paging.PagingParams param = new Api.Domain.Paging.PagingParams();
         public void RefreshData()
         {
-            Api.Domain.Paging.PagingParams param = new Api.Domain.Paging.PagingParams();
+            if (param.PageNumber == start && param.PageSize == itemCount)
+                return;
+
             param.PageNumber = start;
             param.PageSize = itemCount;
             Threenine.Data.Paging.IPaginate<T> paginate = _RequestMethod(param);

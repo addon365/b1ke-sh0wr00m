@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Database.Entity.Threats
 {
-    public class ThreatType : BaseEntity
+    public class ThreatType : BaseEntityWithLogFields
     {
         public ThreatType()
         {

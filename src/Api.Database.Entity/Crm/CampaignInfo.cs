@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Crm
 {
-    public class CampaignInfo : BaseEntity
+    public class CampaignInfo : BaseEntityWithLogFields
     {
         public Guid CampaignId { get; set; }
         public Guid ContactId { get; set; }
