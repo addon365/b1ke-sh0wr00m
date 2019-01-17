@@ -6,6 +6,6 @@ namespace Swc.Service.Chit
 {
     public interface ISubscribeService:IBaseService<ChitSubscriber>
     {
-        ChitSubscriber findBySubscriptionId(string id);
+        ChitSubscriber FindBySubscriptionId(string id);
     }
 }

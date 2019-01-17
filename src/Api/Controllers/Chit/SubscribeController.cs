@@ -38,7 +38,7 @@ namespace swcApi.Controllers.Chit
         {
             if(id==null)
                 return Ok(_subscribeService.FindAll());
-            var result= _subscribeService.findBySubscriptionId(id);
+            var result= _subscribeService.FindBySubscriptionId(id);
             if (result == null)
             {
                 return NotFound();

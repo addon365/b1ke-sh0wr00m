@@ -48,6 +48,19 @@ namespace swcApi.Controllers.Chit
             return _chitDueService.GetList(id);
         }
 
+        // GET: api/ChitDue/5
+        [HttpGet("subscriber/mobile/{number}")]
+        public IList<CustomerDueDomain> GetSubscriptions(string number)
+        {
+            return _chitDueService.FindByMobile(number);
+        }
+
+        [HttpGet("subscriber/customerName/{name}")]
+        public IList<CustomerDueDomain> GetSubscriptionsByName(string name)
+        {
+            return _chitDueService.FindByCustomerName(name);
+        }
+
         // POST: api/ChitDue
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]

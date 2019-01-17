@@ -10,6 +10,8 @@ namespace Swc.Service.Chit
     {
         List<ChitSubriberDue> GetList(Guid chitSubriberId);
         ChitSubriberDue Save(ChitSubscribeDomain domain);
+        IList<CustomerDueDomain> FindByMobile(string mobileNumber);
+        IList<CustomerDueDomain> FindByCustomerName(string customerName);
 
     }
 }

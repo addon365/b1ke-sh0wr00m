@@ -14,6 +14,58 @@ namespace addon.BikeShowRoomService.WebService.Chit
     public class ChitDueClientService : BaseClientService<ChitSubriberDue>
          , IChitDueService
     {
+        public IList<CustomerDueDomain> FindByCustomerName(string customerName)
+        {
+            string url = getUrl() + "/subscriber/customerName/" + customerName;
+            var response = _httpClient.GetAsync(url)
+                    .GetAwaiter()
+                    .GetResult();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string result = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                return JsonConvert
+                .DeserializeObject<List<CustomerDueDomain>>(result);
+            }
+            else
+            {
+                var web = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+                if (ex != null)
+                    throw ex;
+            }
+            return null;
+        }
+
+        public IList<CustomerDueDomain> FindByMobile(string mobileNumber)
+        {
+            string url = getUrl() + "/subscriber/mobile/" + mobileNumber;
+            var response = _httpClient.GetAsync(url)
+                    .GetAwaiter()
+                    .GetResult();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string result = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                return JsonConvert
+                .DeserializeObject<List<CustomerDueDomain>>(result);
+            }
+            else
+            {
+                var web = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+                if (ex != null)
+                    throw ex;
+            }
+            return null;
+        }
+
         public List<ChitSubriberDue> GetList(Guid chitSubriberId)
         {
             string url = getUrl() + "/subscriber/" + chitSubriberId.ToString();

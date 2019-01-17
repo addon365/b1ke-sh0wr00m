@@ -16,7 +16,7 @@ namespace Swc.Service.Chit
         {
             _unitOfWork = unitOfWork;
         }
-        public ChitSubscriber findBySubscriptionId(string id)
+        public ChitSubscriber FindBySubscriptionId(string id)
         {
             var list = _unitOfWork.GetRepository<ChitSubscriber>()
                 .GetList(predicate:

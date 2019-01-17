@@ -37,12 +37,19 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="Mobile Number" Margin="10"/>
-                <TextBox Height="30"  Width="400"/>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" 
+                        VerticalAlignment="Center"
+                        >
+                <TextBlock Height="30" Text="Customer Name"></TextBlock>
+                <TextBox Text="{Binding NameSearchText}" Height="30"  Width="400"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                <TextBlock Height="30" Text="Mobile Number"></TextBlock>
+                <TextBox Text="{Binding MobileSearchText}" Height="30"  Width="400"/>
                 <Button  Width="120" Margin="10"  Height="30"  DockPanel.Dock="Right" 
                                      Command="{Binding FindSubscriber}" >
                     <StackPanel Orientation="Horizontal">
@@ -53,15 +60,15 @@
 
             </StackPanel>
             <syncfusion:SfDataGrid AutoGenerateColumns="False"
-                                           Grid.Row="1"
+                                           Grid.Row="2"
                         ItemsSource="{Binding ChitDueList}"
                         >
                 <syncfusion:SfDataGrid.Columns>
-                    <syncfusion:GridTextColumn HeaderText="Subscription Id" MappingName="DueNo" />
-                    <syncfusion:GridTextColumn HeaderText="Scheme Name" MappingName="Date" />
+                    <syncfusion:GridTextColumn HeaderText="Subscription Id" MappingName="SubscriptionId" />
+                    <syncfusion:GridTextColumn HeaderText="Customer Name" MappingName="Name" />
                     <syncfusion:GridTextColumn HeaderText="Amount" MappingName="Amount" />
-                    <syncfusion:GridTextColumn HeaderText="Paid Amount" MappingName="Amount" />
-                    <syncfusion:GridTextColumn HeaderText="Balance Amount" MappingName="Amount" />
+                    <syncfusion:GridTextColumn HeaderText="Paid Amount" MappingName="PaidAmount" />
+                    <syncfusion:GridTextColumn HeaderText="Balance Amount" MappingName="BalanceAmount" />
                 </syncfusion:SfDataGrid.Columns>
             </syncfusion:SfDataGrid>
         </Grid>

@@ -58,17 +58,6 @@ namespace Swc.Service.Chit
 
             return 1.ToString();
         }
-        public void FindSubscriptionByMobile(string mobileNumber)
-        {
-            var result = this.Repository
-                 .GetList(
-                 predicate: chitDue =>
-                 chitDue.ChitSubscriber.Customer.Profile.MobileNumber.CompareTo(mobileNumber) == 0,
-                 include: xt => xt.Include(cdx => cdx.Voucher)
-                 .ThenInclude(vi => vi.VoucherInfos))
-                 .Items.ToList();
-
-        }
 
         public ChitSubriberDue Save(ChitSubscribeDomain domain)
         {
@@ -83,7 +72,8 @@ namespace Swc.Service.Chit
                 }
 
             };
-            if (domain.SubscribeId == null)
+            if (domain.SubscribeId == null ||
+                domain.SubscribeId.CompareTo(Guid.Empty) == 0)
             {
                 chitSubscriber = new ChitSubscriber()
                 {
@@ -106,7 +96,7 @@ namespace Swc.Service.Chit
             {
                 chitSubriberDue.ChitSubscriberId = domain.SubscribeId;
             }
-            
+
             VoucherInfo[] voucherInfos = new VoucherInfo[2];
             voucherInfos[0] = new VoucherInfo()
             {
@@ -129,6 +119,59 @@ namespace Swc.Service.Chit
             UnitOfWork.GetRepository<VoucherInfo>().Add(voucherInfos);
             UnitOfWork.SaveChanges();
             return chitSubriberDue;
+        }
+        public IList<CustomerDueDomain> FindByCustomerName(string customerName)
+        {
+            return FindByParam(customerName, false);
+        }
+        public IList<CustomerDueDomain> FindByMobile(string mobileNumber)
+        {
+            return FindByParam(mobileNumber, true);
+        }
+        private IList<CustomerDueDomain> FindByParam(string text,bool isMobile)
+        {
+           
+            CustomerDueDomain dueDomain = new CustomerDueDomain();
+            IList<ChitSubscriber> subscriptions = null;
+            if (isMobile)
+            {
+                subscriptions = this.UnitOfWork.GetRepository<ChitSubscriber>()
+                    .GetList(
+                     predicate: subs =>
+                     subs.Customer.Profile.MobileNumber.CompareTo(text) == 0,
+                     include: s => s.Include(t => t.Customer.Profile).Include(t => t.ChitSchema)
+                     )
+                     .Items;
+            }
+            else
+            {
+                subscriptions = this.UnitOfWork.GetRepository<ChitSubscriber>()
+                    .GetList(
+                     predicate: subs =>
+                     subs.Customer.Profile.Name.Contains(text),
+                     include: s => s.Include(t => t.Customer.Profile).Include(t => t.ChitSchema)
+                     )
+                     .Items;
+            }
+            IList<CustomerDueDomain> dueDomains = new List<CustomerDueDomain>();
+            foreach (var subscription in subscriptions)
+            {
+                var dues = this.Repository.GetList(predicate:
+                    chitDue =>
+                    chitDue.ChitSubscriberId.CompareTo(subscriptions[0].Id) == 0
+                    ).Items;
+                dueDomain.SubscriptionId = subscription.SubscribeId;
+                dueDomain.Name = subscription.Customer.Profile.Name;
+                dueDomain.Amount = subscription.ChitSchema.MonthlyAmount;
+                dueDomain.PaidAmount = dues.Count * subscription.ChitSchema.MonthlyAmount;
+                var totalAmount = subscription.ChitSchema.MonthlyAmount *
+                    subscription.ChitSchema.TotalMonths;
+                dueDomain.BalanceAmount = totalAmount - dueDomain.PaidAmount;
+                dueDomains.Add(dueDomain);
+            }
+
+
+            return dueDomains;
         }
     }
 }

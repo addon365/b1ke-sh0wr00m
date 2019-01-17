@@ -11,7 +11,7 @@ namespace addon.BikeShowRoomService.WebService.Chit
 {
     public class SubsriberService : BaseClientService<ChitSubscriber>, ISubscribeService
     {
-        public ChitSubscriber findBySubscriptionId(string id)
+        public ChitSubscriber FindBySubscriptionId(string id)
         {
             string url = getUrl() + "?subscriptionId=" + id;
             var response = _httpClient.GetAsync(url)

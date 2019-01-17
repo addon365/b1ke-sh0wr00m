@@ -1,4 +1,7 @@
-﻿namespace Api.Domain.Chit
+﻿using Api.Database.Entity.Chit;
+using System.Collections.Generic;
+
+namespace Api.Domain.Chit
 {
     public class CustomerDueDomain
     {
@@ -7,5 +10,24 @@
         public double Amount { get; set; }
         public double PaidAmount { get; set; }
         public double BalanceAmount { get; set; }
+        public static IList<CustomerDueDomain> FromList(IList<ChitSubriberDue> dues)
+        {
+            IList<CustomerDueDomain> customerDues = new List<CustomerDueDomain>();
+            foreach(var due in dues)
+            {
+                customerDues.Add(FromSingle(due));
+            }
+            return customerDues;
+        }
+        public static CustomerDueDomain FromSingle(ChitSubriberDue due)
+        {
+            CustomerDueDomain dueDomain = new CustomerDueDomain()
+            {
+                SubscriptionId = due.ChitSubscriber.SubscribeId,
+                Amount = due.ChitSubscriber.ChitSchema.MonthlyAmount,
+                Name = due.ChitSubscriber.Customer.Profile.Name
+            };
+            return dueDomain;
+        }
     }
 }

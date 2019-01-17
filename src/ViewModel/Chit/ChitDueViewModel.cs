@@ -77,7 +77,7 @@ namespace ViewModel.Chit
         {
             IsProgressBarVisible = true;
             FindSubscriber.IsEnabled = false;
-            var result = subscribeService.findBySubscriptionId(
+            var result = subscribeService.FindBySubscriptionId(
                 SubscriptionId);
             if (result == null)
             {

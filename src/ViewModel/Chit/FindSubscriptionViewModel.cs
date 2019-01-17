@@ -1,22 +1,25 @@
 ﻿using addon.BikeShowRoomService.WebService.Chit;
-using Api.Database.Entity.Chit;
+using Api.Domain.Chit;
 using Swc.Service.Chit;
+using System.Collections.Generic;
 
 namespace ViewModel.Chit
 {
-    public class FindSubscriptionViewModel : ViewModelBaseEn<ChitSubriberDue>
+    public class FindSubscriptionViewModel : ViewModelBase
     {
         IChitDueService chitDueService;
-        private string _searchText;
+        private string _mobileSearchText;
+        private string _nameSearchText;
+        
+        private IList<CustomerDueDomain> _dueDomains;
         public FindSubscriptionViewModel(Result onResult = null)
-            : base(new ChitDueClientService(), onResult)
         {
-            chitDueService = (IChitDueService)Service;
+            chitDueService = new ChitDueClientService();
+            WireCommands();
         }
 
-        public override void WireCommands()
+        public void WireCommands()
         {
-            base.WireCommands();
             FindSubscriber = new RelayCommand(FindSubscriptions);
         }
         public RelayCommand FindSubscriber
@@ -26,19 +29,61 @@ namespace ViewModel.Chit
         }
         private void FindSubscriptions()
         {
+            if (!string.IsNullOrEmpty(MobileSearchText))
+                ChitDueList = chitDueService.FindByMobile(MobileSearchText);
+            else if (!string.IsNullOrEmpty(NameSearchText))
+                ChitDueList = chitDueService.FindByCustomerName(NameSearchText);
+            else
+                Message = "Enter mobile Number or messsage";
+
+            if (ChitDueList.Count == 0)
+                Message = "Cannot find given text";
+
         }
-        public string SearchText
+        public IList<CustomerDueDomain> ChitDueList
         {
             get
             {
-                return _searchText;
+                return _dueDomains;
             }
             set
             {
-                if (SearchText != value)
+                if (ChitDueList != value)
                 {
-                    _searchText = value;
-                    OnPropertyChanged("SearchText");
+                    _dueDomains = value;
+                    OnPropertyChanged("ChitDueList");
+                }
+            }
+        }
+        public string MobileSearchText
+        {
+            get
+            {
+                return _mobileSearchText;
+            }
+            set
+            {
+                if (MobileSearchText != value)
+                {
+                    _mobileSearchText = value;
+                    OnPropertyChanged("MobileSearchText");
+
+                    FindSubscriber.IsEnabled = !string.IsNullOrEmpty(value);
+                }
+            }
+        }
+        public string NameSearchText
+        {
+            get
+            {
+                return _nameSearchText;
+            }
+            set
+            {
+                if (NameSearchText != value)
+                {
+                    _nameSearchText = value;
+                    OnPropertyChanged("NameSearchText");
 
                     FindSubscriber.IsEnabled = !string.IsNullOrEmpty(value);
                 }
