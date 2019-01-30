@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Products
 {
+    [Table("Inventory.Products.Product")]
     public class Product:BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
@@ -16,5 +16,6 @@ namespace Api.Database.Entity.Inventory.Products
         public double GST { get; set; }
         public Guid CompanyId { get; set; }
         public Guid TypeId { get; set; }
+        public ICollection<ProductPropertiesMap> Properties { get; set; }
     }
 }

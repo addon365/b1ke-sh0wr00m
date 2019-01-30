@@ -6,7 +6,7 @@ namespace Api.Database
 {
  public static  class DBGlobals
  {
-    public const string SchemaName = "Addon";
-     public const string IdentifierFormat = "swc-";
+    public const string SchemaName = "addon";
+     public const string IdentifierFormat = "SVB-";
  }
 }

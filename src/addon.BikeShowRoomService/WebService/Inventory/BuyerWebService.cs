@@ -1,4 +1,5 @@
-﻿using Api.Database.Entity.Inventory.Purchases;
+﻿using Api.Database.Entity.Inventory;
+using Api.Database.Entity.Inventory.Purchases;
 using Api.Domain.Inventory;
 using Api.Domain.Paging;
 using Newtonsoft.Json;
@@ -11,13 +12,13 @@ using Threenine.Data.Paging;
 
 namespace addon.BikeShowRoomService.WebService.Inventory
 {
-    public class PurchaseWebService : IPurchaseService
+    public class BuyerWebService : IBuyerService
     {
 
         private readonly HttpClient _httpClient;
 
 
-        public PurchaseWebService()
+        public BuyerWebService()
         {
             _httpClient = WebDataClient.Client;
         }
@@ -27,12 +28,12 @@ namespace addon.BikeShowRoomService.WebService.Inventory
             throw new NotImplementedException();
         }
 
-        public Purchase Get(string identifier)
+        public Buyer Get(string identifier)
         {
             throw new NotImplementedException();
         }
 
-        public IPaginate<Purchase> GetAll(PagingParams pagingParams)
+        public IPaginate<Buyer> GetAll(PagingParams pagingParams)
         {
             throw new NotImplementedException();
         }
@@ -57,12 +58,12 @@ namespace addon.BikeShowRoomService.WebService.Inventory
 
         }
 
-        public Task<Purchase> Insert(Purchase model)
+        public Task<Buyer> Insert(Buyer model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Purchase> Update(Purchase model)
+        public Task<Buyer> Update(Buyer model)
         {
             throw new NotImplementedException();
         }

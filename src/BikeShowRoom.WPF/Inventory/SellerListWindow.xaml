@@ -1,0 +1,76 @@
+﻿<Window x:Class="BikeShowRoom.WPF.Inventory.SellerListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="Enquiries List" Height="450" Width="1200">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Print" Height="24" Width="150" Command="{Binding PrintCommand}" />
+                <Button Content="Open" Height="24" Width="150" Command="{Binding EditCommand}" Grid.Column="1"/>
+               
+                
+            </Grid>
+            <syncfusion:SfDataGrid ItemsSource="{Binding PagingViewModel.Data}" 
+                       AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding Selected}" >
+            <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn MappingName="SellerId" HeaderText="Id"  Width="60"/>
+                    <syncfusion:GridDateTimeColumn MappingName="EnquiryDate" HeaderText="Date" Pattern="ShortDate" Width="100"/>
+                    <syncfusion:GridTextColumn MappingName="BusinessContact.BusinessName" HeaderText="Business" Width="150"/>
+                  
+                </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+            <StackPanel Width="Auto" Grid.Row="2"
+        Orientation="Horizontal" x:Name="PagingPanel">
+                <Button                
+            Margin="4,0"
+            Content="&lt;&lt;"
+            Command="{Binding PagingViewModel.FirstCommand}"/>
+                <Button
+            Margin="4,0"
+            Content="&lt;"
+            Command="{Binding PagingViewModel.PreviousCommand}"/>
+                <StackPanel
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+
+                    <TextBlock
+                Text="{Binding PagingViewModel.Start}"/>
+                    <TextBlock
+                Text=" of "/>
+                    <TextBlock
+                Text="{Binding PagingViewModel.TotalPages}"/>
+                </StackPanel>
+                <Button
+            Margin="4,0"
+            Content="&gt;"
+            Command="{Binding PagingViewModel.NextCommand}"/>
+                <Button
+            Margin="4,0"
+            Content="&gt;&gt;"
+            Command="{Binding PagingViewModel.LastCommand}"/>
+                <ComboBox Width="100" ItemsSource="{Binding PagingViewModel.Count}"  SelectedValue="{Binding PagingViewModel.ItemCount}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding PagingViewModel.CountChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

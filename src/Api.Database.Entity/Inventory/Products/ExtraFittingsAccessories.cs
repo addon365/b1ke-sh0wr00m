@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Inventory.Products
 {
+    [Table("Inventory.Products.ExtraFittingsAccessories")]
     public class ExtraFittingsAccessories:BaseEntityWithLogFields
     {
         public Guid ProductId{ get; set; }

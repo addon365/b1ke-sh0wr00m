@@ -313,6 +313,15 @@
     <Compile Include="Enquiries\BookingListWindow.xaml.cs">
       <DependentUpon>BookingListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\SellerListWindow.xaml.cs">
+      <DependentUpon>SellerListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\PropertyValue.xaml.cs">
+      <DependentUpon>PropertyValue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\Seller.xaml.cs">
+      <DependentUpon>Seller.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\ucPurchase.xaml.cs">
       <DependentUpon>ucPurchase.xaml</DependentUpon>
     </Compile>
@@ -415,6 +424,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Enquiries\BookingListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\SellerListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\PropertyValue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inventory\Seller.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

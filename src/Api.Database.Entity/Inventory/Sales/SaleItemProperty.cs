@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Sales
 {
+
+    [Table("Inventory.Sales.SaleItemProperty")]
     public class SaleItemProperty:BaseEntity
     {
         public Guid SalesItemsId { get; set; }

@@ -1,14 +1,15 @@
 ﻿using Api.Database.Entity.Crm;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory
 {
+    [Table("Inventory.Seller")]
     public class Seller:BaseEntityWithLogFields
     {
         public string SellerId { get; set; }
-        public BusinessContact BusinessContact { get; set; }
+        public Guid BusinessContactId { get; set; }
+        [ForeignKey("BusinessContactId")] public virtual BusinessContact BusinessContact { get; set; }
         public Guid? UserId { get; set; }
     }
 }

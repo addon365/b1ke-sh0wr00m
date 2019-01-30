@@ -5,6 +5,11 @@ namespace ViewModel
     public interface IViewUI
     {
         void ShowUI();
+        
+    }
+    public interface IViewUI<T>
+    {
+        void ShowUI(T Model);
 
     }
     public interface IMsgBox

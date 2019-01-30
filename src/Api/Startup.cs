@@ -75,6 +75,8 @@ namespace swcApi
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
             services.AddTransient<IPurchaseService, PurchaseService>();
+            services.AddTransient<ISellerService, SellerService>();
+            services.AddTransient<IBuyerService, BuyerService>();
             services.AddScoped<RequestInfo>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 

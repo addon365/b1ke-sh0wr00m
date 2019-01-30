@@ -16,7 +16,7 @@ using Api.Database.Entity.Report;
 using Api.Database.Entity.Inventory;
 using Api.Database.Entity.Chit;
 using Api.Database.Entity.Inventory.Sales;
-using Api.Database.Entity.Inventory.Purchase;
+using Api.Database.Entity.Inventory.Purchases;
 
 namespace Api.Database
 {
@@ -91,7 +91,7 @@ namespace Api.Database
 
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseItem> PurchaseItems { get; set; }
-        public DbSet<PurchaseItemProperty> PurchaseItemProperties { get; set; }
+        public DbSet<PurchaseItemPropertyValue> PurchaseItemProperties { get; set; }
         
         #region Product
         public DbSet<ProductCompany> ProductCompanies { get; set; }

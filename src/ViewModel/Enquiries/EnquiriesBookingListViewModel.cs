@@ -106,7 +106,7 @@ namespace ViewModel.Enquiries
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.StackTrace);
+                MessageBox.ShowUI(ex.StackTrace);
             }
         }
         public void OpenBookingMethod()

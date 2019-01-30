@@ -8,21 +8,22 @@ using Api.Domain.Paging;
 using Swc.Service.Inventory;
 using Api.Domain.Inventory;
 using Api.Database.Entity.Inventory.Purchases;
+using Api.Database.Entity.Inventory;
 
 namespace swcApi.Controllers.Inventory
 {
     /// <inheritdoc />
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
-    public class PurchaseController : Controller
+    public class BuyerController : Controller
     {
-        private readonly IPurchaseService _PurchaseService;
+        private readonly IBuyerService _Service;
         private RequestInfo _reqinfo;
         private readonly ILogger _logger;
         /// <inheritdoc />
-        public PurchaseController(IPurchaseService PurchaseService, RequestInfo r, ILogger<EnquiriesController> logger)
+        public BuyerController(IBuyerService Service, RequestInfo r, ILogger<EnquiriesController> logger)
         {
-            _PurchaseService = PurchaseService;
+            _Service = Service;
             _reqinfo = r;
             this._logger = logger;
         }
@@ -34,7 +35,7 @@ namespace swcApi.Controllers.Inventory
         ///</remarks>
         [AllowAnonymous]
         [HttpGet]
-        public Threenine.Data.Paging.IPaginate<Purchase> Get(int PageNumber=0,int PageSize=30)
+        public Threenine.Data.Paging.IPaginate<Buyer> Get(int PageNumber=0,int PageSize=30)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             
@@ -44,21 +45,14 @@ namespace swcApi.Controllers.Inventory
             _reqinfo.UserId = Request.Headers["UserId"].ToString();
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var PurchaseList= _PurchaseService.GetAll(pagingParams);
+            var List= _Service.GetAll(pagingParams);
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             _logger.LogInformation("Fetching Follow up Modes");
-            return PurchaseList;
+            return List;
         }
         
 
-        [AllowAnonymous]
-        [Route("Init")]
-        [HttpGet]
-        public PurchaseMasterData GetInitilize()
-        {
-            return _PurchaseService.GetInitilize();
-        }
         /// <summary>
         ///  Returns a collection of values
         /// </summary>
@@ -66,7 +60,7 @@ namespace swcApi.Controllers.Inventory
         /// This is a remark to add additional information about this method
         ///</remarks>
         [HttpPost]
-        public IActionResult Post([FromBody] Purchase model)
+        public IActionResult Post([FromBody] Buyer model)
         {
             
                 if (model == null)
@@ -76,14 +70,14 @@ namespace swcApi.Controllers.Inventory
             _reqinfo.UserId = Request.Headers["UserId"].ToString();
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var identifier = _PurchaseService.Insert(model);
+            var identifier = _Service.Insert(model);
 
 
             return Ok() ;
         }
         [HttpPost]
         [Route("Update")]
-        public async Task<IActionResult> Update([FromBody] Purchase referrer)
+        public async Task<IActionResult> Update([FromBody] Buyer referrer)
         {
             try
             { 
@@ -94,7 +88,7 @@ namespace swcApi.Controllers.Inventory
             _reqinfo.UserId = Request.Headers["UserId"].ToString();
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var identifier =await _PurchaseService.Update(referrer);
+            var identifier =await _Service.Update(referrer);
 
 
             return Ok();
@@ -113,7 +107,7 @@ namespace swcApi.Controllers.Inventory
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
 
-            var referer = _PurchaseService.Get(identifier);
+            var referer = _Service.Get(identifier);
             if (referer == null) return NotFound();
 
             return Ok(referer);

@@ -129,5 +129,17 @@ namespace BikeShowRoom.WPF
             Inventory.ucPurchase n = new Inventory.ucPurchase();
             n.ShowDialog();
         }
+
+        private void BtnSeller_Click(object sender, RoutedEventArgs e)
+        {
+            Inventory.SellerWindow n = new Inventory.SellerWindow();
+            n.ShowDialog();
+        }
+
+        private void BtnSellerList_Click(object sender, RoutedEventArgs e)
+        {
+            Inventory.SellerListWindow n = new Inventory.SellerListWindow();
+            n.ShowDialog();
+        }
     }
 }

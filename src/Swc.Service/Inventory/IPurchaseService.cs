@@ -1,4 +1,4 @@
-﻿using Api.Database.Entity.Inventory.Purchase;
+﻿using Api.Database.Entity.Inventory.Purchases;
 using Api.Domain.Inventory;
 using Api.Domain.Paging;
 using System.Threading.Tasks;

@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Inventory.Sales
 {
+    [Table("Inventory.Sales.Sale")]
     public class Sale:BaseEntityWithLogFields
     {
         public string BillNo { get; set; }

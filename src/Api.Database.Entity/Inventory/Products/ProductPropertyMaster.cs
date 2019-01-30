@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Products
 {
+    [Table("Inventory.Products.ProductPropertyMaster")]
     public class ProductPropertyMaster:BaseEntityWithLogFields
     {
-        public string PropertyMasterId { get; set; }
         public string PropertyName { get; set; }
     }
 }

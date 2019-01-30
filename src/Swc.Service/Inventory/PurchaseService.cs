@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Api.Database.Entity.Inventory.Purchase;
+using Api.Database.Entity.Inventory.Purchases;
 using Api.Database.Entity.Inventory.Products;
 using Api.Domain.Inventory;
 using Api.Domain.Paging;
 using Microsoft.Extensions.Logging;
 using Threenine.Data;
 using Threenine.Data.Paging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Swc.Service.Inventory
 {
@@ -41,7 +42,7 @@ namespace Swc.Service.Inventory
         public PurchaseMasterData GetInitilize()
         {
             PurchaseMasterData masterData = new PurchaseMasterData();
-            masterData.Products= _unitOfWork.GetRepository<Product>().GetList(index: 0, size: 1000).Items;
+            masterData.Products= _unitOfWork.GetRepository<Product>().GetList(index: 0, size: 1000, include: x => x.Include(n => n.Properties).ThenInclude(m=>m.PropertyMaster)).Items;
 
             return masterData;
         }

@@ -65,9 +65,22 @@ namespace swcApi
             }
             if (!context.Products.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
+                var products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
+                context.AddRange(products);
 
-                context.AddRange(types);
+                var ProductPropertyMasters = JsonConvert.DeserializeObject<List<ProductPropertyMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductPropertyMasters.json"));
+                context.AddRange(ProductPropertyMasters);
+                
+                foreach(Product p in products)
+                {
+                    foreach(ProductPropertyMaster pm in ProductPropertyMasters)
+                    {
+                        ProductPropertiesMap mp = new ProductPropertiesMap();
+                        mp.ProductId = p.Id;
+                        mp.ProductPropertyMasterId = pm.Id;
+                        context.Add(mp);
+                    }
+                }
                 context.SaveChanges();
             }
             if (!context.marketingZones.Any())

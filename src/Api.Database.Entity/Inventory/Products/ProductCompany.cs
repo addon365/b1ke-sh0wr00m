@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Products
 {
+    [Table("Inventory.Products.ProductCompany")]
     public class ProductCompany:BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
