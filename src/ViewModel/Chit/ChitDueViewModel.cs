@@ -101,7 +101,7 @@ namespace ViewModel.Chit
             SubscribeDomain = new ChitSubscribeDomain()
             {
                 Address = selectedChitSubscriber.Customer.Profile.Address,
-                CustomerName = selectedChitSubscriber.Customer.Profile.Name,
+                CustomerName = selectedChitSubscriber.Customer.Profile.FirstName,
                 MobileNumber = selectedChitSubscriber.Customer.Profile.MobileNumber,
                 ChitSchemeId = selectedChitSubscriber.ChitSchemeId,
                 SubscribeId=selectedChitSubscriber.Id

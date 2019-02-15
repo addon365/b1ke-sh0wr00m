@@ -82,7 +82,7 @@ namespace Swc.Service.Chit
                     {
                         Profile = new Api.Database.Entity.Crm.Contact()
                         {
-                            Name = domain.CustomerName,
+                            FirstName = domain.CustomerName,
                             Address = domain.Address,
                             MobileNumber = domain.MobileNumber
                         }
@@ -131,7 +131,7 @@ namespace Swc.Service.Chit
         private IList<CustomerDueDomain> FindByParam(string text,bool isMobile)
         {
            
-            CustomerDueDomain dueDomain = new CustomerDueDomain();
+           
             IList<ChitSubscriber> subscriptions = null;
             if (isMobile)
             {
@@ -148,7 +148,7 @@ namespace Swc.Service.Chit
                 subscriptions = this.UnitOfWork.GetRepository<ChitSubscriber>()
                     .GetList(
                      predicate: subs =>
-                     subs.Customer.Profile.Name.Contains(text),
+                     subs.Customer.Profile.FirstName.Contains(text),
                      include: s => s.Include(t => t.Customer.Profile).Include(t => t.ChitSchema)
                      )
                      .Items;
@@ -156,12 +156,13 @@ namespace Swc.Service.Chit
             IList<CustomerDueDomain> dueDomains = new List<CustomerDueDomain>();
             foreach (var subscription in subscriptions)
             {
+                CustomerDueDomain dueDomain = new CustomerDueDomain();
                 var dues = this.Repository.GetList(predicate:
                     chitDue =>
                     chitDue.ChitSubscriberId.CompareTo(subscriptions[0].Id) == 0
                     ).Items;
                 dueDomain.SubscriptionId = subscription.SubscribeId;
-                dueDomain.Name = subscription.Customer.Profile.Name;
+                dueDomain.Name = subscription.Customer.Profile.FirstName;
                 dueDomain.Amount = subscription.ChitSchema.MonthlyAmount;
                 dueDomain.PaidAmount = dues.Count * subscription.ChitSchema.MonthlyAmount;
                 var totalAmount = subscription.ChitSchema.MonthlyAmount *

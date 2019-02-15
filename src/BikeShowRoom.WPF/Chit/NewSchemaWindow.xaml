@@ -70,11 +70,11 @@
                 <StackPanel Grid.Column="3" Grid.Row="1" Orientation="Horizontal" 
                             HorizontalAlignment="Left" VerticalAlignment="Center">
                     <TextBlock Text="Max Members"/>
-                    <syncfusion:IntegerTextBox Width="40" Margin="8,0,0,0"/>
+                    <syncfusion:IntegerTextBox Text="{Binding Path=Model.MaxMembers,Mode=TwoWay}" Width="40" Margin="8,0,0,0"/>
                 </StackPanel>
                 <!--Monthly Amount-->
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Monthly Amount"/>
-                <syncfusion:IntegerTextBox Grid.Row="2" Grid.Column="1"/>
+                <syncfusion:IntegerTextBox Text="{Binding Path=Model.MonthlyAmount,Mode=TwoWay}" Grid.Row="2" Grid.Column="1"/>
 
             </Grid>
         </Grid>

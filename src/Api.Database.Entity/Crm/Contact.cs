@@ -1,4 +1,6 @@
-﻿namespace Api.Database.Entity.Crm
+﻿using System;
+
+namespace Api.Database.Entity.Crm
 {
     public class Contact : BaseEntityWithLogFields
     {

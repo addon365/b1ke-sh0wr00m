@@ -25,7 +25,7 @@ namespace Api.Domain.Chit
             {
                 SubscriptionId = due.ChitSubscriber.SubscribeId,
                 Amount = due.ChitSubscriber.ChitSchema.MonthlyAmount,
-                Name = due.ChitSubscriber.Customer.Profile.Name
+                Name = due.ChitSubscriber.Customer.Profile.FirstName
             };
             return dueDomain;
         }

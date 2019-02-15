@@ -166,7 +166,6 @@ namespace swcApi
                 context.AddRange(types);
                 context.SaveChanges();
             }
-            SeedOnDebug(context);
         }
         [Conditional("DEBUG")]
         private static void SeedOnDebug(ApiContext context)
