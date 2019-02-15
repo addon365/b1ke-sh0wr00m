@@ -1,5 +1,5 @@
 ﻿
-using Api.Domain.Enquiries;
+using Api.Database.Entity.Inventory.Sales;
 using Api.Domain.Sales;
 using System.Threading.Tasks;
 
@@ -9,6 +9,6 @@ namespace Swc.Service.Sales
     {
 
         InitilizeSales GetInitilizeSales();
-        Task<string> Insert(InsertSalesModel model);
+        Task<string> Insert(Sale model);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Api.Database.Entity.Products;
+﻿using Api.Database.Entity.Inventory.Products;
 using Newtonsoft.Json;
 using Swc.Service;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 
 namespace addon.BikeShowRoomService.WebService
 {
-   public class ProductCompanyService:IProductCompanyService
+    public class ProductCompanyService:IProductCompanyService
     {
         private static HttpClient _httpClient;
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Enquiries
 {
-    public class EnquiryExchangeQuotation:BaseEntity
+    public class EnquiryExchangeQuotation:BaseEntityWithLogFields
     {
         public Guid EnquiryId { get; set; }
        // [ForeignKey("EnquiryId")] public virtual Enquiry enquiry { get; set; }

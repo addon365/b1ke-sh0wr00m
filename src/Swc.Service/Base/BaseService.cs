@@ -5,7 +5,7 @@ using Threenine.Data;
 
 namespace Swc.Service.Base
 {
-    public class BaseService<T> : IBaseService<T> where T : BaseEntity
+    public class BaseService<T> : IBaseService<T> where T : BaseEntityWithLogFields
     {
         IRepository<T> _repository;
         public BaseService(IUnitOfWork unitOfWork)

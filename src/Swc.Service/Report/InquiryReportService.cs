@@ -1,10 +1,6 @@
-﻿using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
-using Api.Database.Entity.Report;
-using Microsoft.EntityFrameworkCore;
+﻿using Api.Database.Entity.Report;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Threenine.Data;
 
 namespace Swc.Service.Report

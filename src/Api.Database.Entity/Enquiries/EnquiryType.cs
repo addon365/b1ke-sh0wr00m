@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Database.Entity.Enquiries
 {
-    public class EnquiryType : BaseEntity
+    public class EnquiryType : BaseEntityWithLogFields
     {
         
         [Required]

@@ -15,7 +15,7 @@ namespace ViewModel
 {
 
     public delegate void OpenBooking(Enquiry enquiries);
-    public delegate void Edit(string Identifier);
+    public delegate void Edit<T>(T ViewModel);
     public class EnquiriesListViewModel : ViewModelBase
     {
         private readonly IEnquiriesService _repository;
@@ -97,7 +97,7 @@ namespace ViewModel
             }
         }
         public OpenBooking OpenBooking { get; set; }
-        public Edit Edit { get; set; }
+        public Edit<string> Edit { get; set; }
         public ICrystalReport ReportObj { get; set; }
 
         public void PrintEnquiry()
@@ -111,7 +111,7 @@ namespace ViewModel
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.StackTrace);
+                MessageBox.ShowUI(ex.StackTrace);
             }
         }
         public void OpenBookingMethod()

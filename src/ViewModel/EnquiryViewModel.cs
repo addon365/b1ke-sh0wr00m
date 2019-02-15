@@ -1,16 +1,15 @@
 ﻿
 using Api.Database.Entity;
 using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
 using Api.Domain.Enquiries;
 using Swc.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Threenine.Data;
 using System.Linq;
 using Api.Database.Entity.Crm;
+using Api.Database.Entity.Inventory.Products;
 
 namespace ViewModel
 {
@@ -64,7 +63,7 @@ namespace ViewModel
 
             CurrentContact = new Contact
             {
-                Name = "User",
+                FirstName = "User",
                 Address = "14,street, Choolaimedu ",
                 MobileNumber = "9645645666",
                 Identifier = "Identifier1",

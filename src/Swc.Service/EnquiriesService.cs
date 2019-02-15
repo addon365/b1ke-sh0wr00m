@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api.Database.Entity.Threats;
 using Api.Domain.Enquiries;
 using Threenine.Data;
 using Api.Database.Entity.Enquiries;
 using Api.Database.Entity;
-using Api.Database.Entity.Products;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Query;
 using Api.Database.Entity.Crm;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Api.Domain.Paging;
+using Api.Database.Entity.Inventory.Products;
 
 namespace Swc.Service
 {
@@ -89,7 +87,7 @@ namespace Swc.Service
 
             _requestInfo.InitilizeBaseEntityInfo(enquiry);
             var contact = new Contact();
-            contact.Name = InsertEnquiries.Enquiry.Contact.Name;
+            contact.FirstName = InsertEnquiries.Enquiry.Contact.FirstName;
             contact.MobileNumber = InsertEnquiries.Enquiry.Contact.MobileNumber;
             contact.Place = InsertEnquiries.Enquiry.Contact.Place;
             contact.Address = InsertEnquiries.Enquiry.Contact.Address;

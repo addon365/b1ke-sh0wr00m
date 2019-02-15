@@ -92,7 +92,7 @@ namespace ViewModel.Enquiries
             }
         }
         public OpenBooking OpenBooking { get; set; }
-        public Edit Edit { get; set; }
+        public Edit<string> Edit { get; set; }
         public ICrystalReport ReportObj { get; set; }
 
         public void PrintEnquiry()
@@ -106,7 +106,7 @@ namespace ViewModel.Enquiries
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.StackTrace);
+                MessageBox.ShowUI(ex.StackTrace);
             }
         }
         public void OpenBookingMethod()

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Api.Database.Entity.Products;
-
+using Api.Database.Entity.Inventory.Products;
 namespace Api.Database.Entity.Enquiries
 {
-    public class EnquiryProduct:BaseEntity
+    public class EnquiryProduct:BaseEntityWithLogFields
     {
         public Guid EnquiryId { get; set; }
         public Guid ProductId { get; set; }

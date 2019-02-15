@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Employee
 {
-    public class Employee:BaseEntity
+    public class Employee:BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
         public Guid ContactId { get; set; }

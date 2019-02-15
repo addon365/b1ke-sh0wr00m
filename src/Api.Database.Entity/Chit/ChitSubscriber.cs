@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Chit
 {
-    public class ChitSubscriber : BaseEntity
+    public class ChitSubscriber : BaseEntityWithLogFields
     {
         public string SubscribeId { get; set; }
         public Guid ChitSchemeId { get; set; }

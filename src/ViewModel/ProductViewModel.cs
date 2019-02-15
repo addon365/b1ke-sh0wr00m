@@ -1,12 +1,11 @@
 ﻿using addon.BikeShowRoomService.WebService;
-using Api.Database.Entity.Products;
+using Api.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ViewModel
 {
-  public class ProductViewModel:ViewModelBase
+    public class ProductViewModel:ViewModelBase
     {
         private readonly ProductService _repositoryProduct;
         private Product currentProduct;

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Enquiries
 {
-    public class Enquiry:BaseEntity
+    public class Enquiry:BaseEntityWithLogFields
     {
 
         public string Identifier { get; set; }

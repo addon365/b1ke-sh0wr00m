@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Products
+namespace Api.Database.Entity.Inventory.Products
 {
-    public class ProductType : BaseEntity
+    [Table("Inventory.Products.ProductTypes")]
+    public class ProductType : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
         public string Name { get; set; }

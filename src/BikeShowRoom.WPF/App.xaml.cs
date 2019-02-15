@@ -1,7 +1,12 @@
-﻿using BikeShowRoom.WPF.Settings;
+﻿using Api.Database;
+using BikeShowRoom.WPF.Settings;
+using Swc.Service.Inventory;
 using System;
 using System.Runtime.ExceptionServices;
 using System.Windows;
+using Threenine.Data;
+using Unity;
+using ViewModel.Inventory;
 
 namespace BikeShowRoom.WPF
 {
@@ -39,6 +44,33 @@ namespace BikeShowRoom.WPF
             //MainWindow mainWindow = container.Resolve<MainWindow>();
             //mainWindow.Show();
         }
+
+    }
+    public class ServiceCollections
+    {
+        public ServiceCollections()
+        {
+            container = new UnityContainer();
+            container.RegisterType<IRepositoryFactory, UnitOfWork<ApiContext>>();
+            container.RegisterType<IUnitOfWork, UnitOfWork<ApiContext>>();
+            container.RegisterType<IUnitOfWork<ApiContext>, UnitOfWork<ApiContext>>();
+            container.RegisterType<PurchaseListViewModel>();
+            container.RegisterType<IPurchaseService, addon.BikeShowRoomService.WebService.Inventory.PurchaseWebService>();
+        }
+        private static ServiceCollections _objSelf;
+        public static ServiceCollections Instance
+        {
+            get
+            {
+                if (_objSelf == null)
+                {
+                    _objSelf = new ServiceCollections();
+                }
+
+                return _objSelf;
+            }
+        }
+        public IUnityContainer container;
 
     }
 }

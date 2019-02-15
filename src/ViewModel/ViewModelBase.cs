@@ -48,5 +48,6 @@ namespace ViewModel
                 }
             }
         }
+        public IMsgBox MessageBox { get; set; }
     }
 }

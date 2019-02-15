@@ -41,7 +41,7 @@ namespace swcApi.Controllers
  
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceCode = Request.Headers["DeviceCode"].ToString();
-            _reqinfo.Init();
+            
             _logger.LogInformation("Validating User " + userId);
             User user = _userService.Validate(userId, password);
             if (user == null)
@@ -49,6 +49,7 @@ namespace swcApi.Controllers
                 _logger.LogError("Given " + userId + " Not found");
                 return NotFound(new Exception("Incorrect UserId or Password"));
             }
+            _reqinfo.Init(userId);
             if (_reqinfo.DeviceId == "")
             {
                 _logger.LogError("Not Authorized computer");

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace addon.BikeShowRoomService.BaseService
 {
-    public abstract class BaseClientService<T> : IBaseService<T> where T : BaseEntity
+    public abstract class BaseClientService<T> : IBaseService<T> where T : BaseEntityWithLogFields
     {
         protected readonly HttpClient _httpClient;
         public BaseClientService()

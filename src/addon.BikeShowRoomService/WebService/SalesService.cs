@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Swc.Service.Sales;
 using Api.Domain.Sales;
+using Api.Database.Entity.Inventory.Sales;
 
 namespace addon.BikeShowRoomService.WebService
 {
@@ -51,13 +52,13 @@ namespace addon.BikeShowRoomService.WebService
 
             return enquiries;
         }
-        public async Task<string> Insert(InsertSalesModel insertSales)
+        public async Task<string> Insert(Sale Model)
         {
 
             try
             {
 
-                var response = await _httpClient.PostAsync("Sales", new StringContent(JsonConvert.SerializeObject(insertSales), Encoding.UTF8, "application/json"));
+                var response = await _httpClient.PostAsync("Sales", new StringContent(JsonConvert.SerializeObject(Model), Encoding.UTF8, "application/json"));
               if(!response.IsSuccessStatusCode)
                {
                     string str= await response.Content.ReadAsStringAsync();

@@ -7,7 +7,6 @@ using System.IO;
 using Newtonsoft.Json;
 using Api.Database;
 using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Products;
 using Api.Database.Entity;
 using Api.Database.Entity.Finance;
 using Api.Database.Entity.Accounts;
@@ -15,7 +14,9 @@ using Api.Database.Entity.Crm;
 using System.Diagnostics;
 using Api.Database.Entity.Report;
 using System;
-
+using Api.Database.Entity.Inventory.Products;
+using Microsoft.Extensions.DependencyInjection;
+using Swc.Service;
 namespace swcApi
 {
     public static class DbContextExtension
@@ -37,6 +38,7 @@ namespace swcApi
 
         public static void EnsureSeeded(this ApiContext context)
         {
+            
             if (!context.InquiryReport.Any())
             {
                 try
@@ -63,9 +65,22 @@ namespace swcApi
             }
             if (!context.Products.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
+                var products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
+                context.AddRange(products);
 
-                context.AddRange(types);
+                var ProductPropertyMasters = JsonConvert.DeserializeObject<List<ProductPropertyMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductPropertyMasters.json"));
+                context.AddRange(ProductPropertyMasters);
+                
+                foreach(Product p in products)
+                {
+                    foreach(ProductPropertyMaster pm in ProductPropertyMasters)
+                    {
+                        ProductPropertiesMap mp = new ProductPropertiesMap();
+                        mp.ProductId = p.Id;
+                        mp.ProductPropertyMasterId = pm.Id;
+                        context.Add(mp);
+                    }
+                }
                 context.SaveChanges();
             }
             if (!context.marketingZones.Any())

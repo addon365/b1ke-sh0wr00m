@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ViewModel
 {
     public abstract class ViewModelBaseEn<T> : ViewModelBase
-        where T : BaseEntity
+        where T : BaseEntityWithLogFields
     {
         public IBaseService<T> Service { get; set; }
         private T _model;

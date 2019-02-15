@@ -1,12 +1,10 @@
-﻿using Api.Database.Entity.Products;
-using Api.Domain.Enquiries;
+﻿using Api.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Swc.Service
 {
-  public interface IAccessoriesService
+    public interface IAccessoriesService
     {
         
         string InsertAccessories(IEnumerable<ExtraFittingsAccessories> extrafittings);

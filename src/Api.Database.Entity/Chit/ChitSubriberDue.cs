@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Chit
 {
-    public class ChitSubriberDue : BaseEntity
+    public class ChitSubriberDue : BaseEntityWithLogFields
     {
         public Guid ChitSubscriberId { get; set; }
         [ForeignKey("ChitSubscriberId")]

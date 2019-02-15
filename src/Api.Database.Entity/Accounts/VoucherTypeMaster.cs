@@ -11,10 +11,12 @@ namespace Api.Database.Entity.Accounts
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid ParentId { get; set; }
+        public string ProgrammerId { get; set; }
         public VoucherTypeMaster()
         {
             this.Id = Guid.NewGuid();
         }
 
     }
+    public enum VoucherTypeMasterEnum { Receipt,Payment,Contra,Purchase,Sales}
 }

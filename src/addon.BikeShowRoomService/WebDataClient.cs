@@ -29,7 +29,7 @@ namespace addon.BikeShowRoomService
                  new MediaTypeWithQualityHeaderValue("application/json"));
            
             _client.DefaultRequestHeaders.Add("DeviceCode", getUniqueID("C"));
-            _client.DefaultRequestHeaders.Add("BranchId", "1");
+            _client.DefaultRequestHeaders.Add("BranchId", "150e0313-cf22-491c-93c4-4925b4d9e969");
             
 
         }
