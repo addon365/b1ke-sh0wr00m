@@ -20,9 +20,9 @@ namespace BikeShowRoom.WPF.Inventory
     /// <summary>
     /// Interaction logic for ucPurchase.xaml
     /// </summary>
-    public partial class ucPurchase : Window,IViewUI<PropertyValueViewModel>
+    public partial class Purchase : Window,IViewUI<PropertyValueViewModel>
     {
-        public ucPurchase()
+        public Purchase()
         {
             InitializeComponent();
             var vm = new PurchaseViewModel();

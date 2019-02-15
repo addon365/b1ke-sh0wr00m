@@ -1,7 +1,28 @@
 [
   {
 
-    "Name": "Receipt"
+    "Name": "Receipt",
+    "ProgrammerId": "Receipt"
+  },
+  {
+
+    "Name": "Payment",
+    "ProgrammerId": "Payment"
+  },
+  {
+
+    "Name": "Contra",
+    "ProgrammerId": "Contra"
+  },
+  {
+
+    "Name": "Purchase",
+    "ProgrammerId": "Purchase"
+  },
+  {
+
+    "Name": "Sales",
+    "ProgrammerId": "Sales"
   }
 
 ]

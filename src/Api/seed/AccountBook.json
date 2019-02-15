@@ -8,6 +8,21 @@
 
     "BooKName": "Booking",
     "ProgrammerId": "Booking"
+  },
+  {
+
+    "BooKName": "Purchase",
+    "ProgrammerId": "Purchase"
+  },
+  {
+
+    "BooKName": "PurchaseBalance",
+    "ProgrammerId": "PurchaseBalance"
+  },
+  {
+
+    "BooKName": "GstBook",
+    "ProgrammerId": "GstBook"
   }
 
 ]

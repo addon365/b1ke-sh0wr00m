@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Products
 {
-    [Table("Inventory.Products.Product")]
+    [Table("Inventory.Products.Products")]
     public class Product:BaseEntityWithLogFields
     {
         public string Identifier { get; set; }

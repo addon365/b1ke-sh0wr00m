@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using Api.Database.Entity.Inventory.Products;
 using System.Data;
+using Api.Database.Entity.Accounts;
 
 namespace ViewModel.Inventory
 {
@@ -21,9 +22,13 @@ namespace ViewModel.Inventory
             InitilizeForNew();
             TestData();
         }
-        public PurchaseViewModel(string Identifier)
+        public PurchaseViewModel(Purchase purchase)
         {
             GeneralInitilize();
+            CurrentPurchase = purchase;
+            Items = new ObservableCollection<PurchaseItem>(purchase.Items);
+
+
             
             Mode = ScreenOpenMode.Edit;
         }
@@ -42,6 +47,19 @@ namespace ViewModel.Inventory
             CurrentPurchase = new Purchase();
             CurrentItem = new PurchaseItem();
             _Items = new ObservableCollection<PurchaseItem>();
+
+            InvoiceAmount = new VoucherInfo();
+            InvoiceAmount.FieldInfo = FieldInfo.InvoiceAmount.ToString();
+            InvoiceAmount.bookId = MasterData.PurchaseBook.Id;
+
+            CashAmount = new VoucherInfo();
+            CashAmount.FieldInfo = FieldInfo.CashAmount.ToString();
+            CashAmount.bookId = MasterData.CashBook.Id;
+
+            GstAmount = new VoucherInfo();
+            GstAmount.FieldInfo = FieldInfo.GstAmount.ToString();
+            GstAmount.bookId = MasterData.GstBook.Id;
+
             AddPropertyCommand.IsEnabled = true;
         }
         [Conditional("DEBUG")]
@@ -71,7 +89,7 @@ namespace ViewModel.Inventory
             {
                 if (Mode == ScreenOpenMode.New)
                 {
-                    AddPurchase();
+                    InsertPurchase();
                 }
                 else
                 {
@@ -231,7 +249,9 @@ namespace ViewModel.Inventory
                 OnPropertyChanged("Items");
             }
         }
-
+        public VoucherInfo InvoiceAmount{ get;set; }
+        public VoucherInfo GstAmount { get; set; }
+        public VoucherInfo CashAmount { get; set; }
         private Purchase _CurrentPurchase;
         public Purchase CurrentPurchase
         {
@@ -252,15 +272,33 @@ namespace ViewModel.Inventory
                 }
             }
         }
-        private async void AddPurchase()
+        private async void InsertPurchase()
         {
             if (!InsertValidation())
                 return;
 
             SaveCommand.IsEnabled = false;
 
-           
+            Voucher voucher = new Voucher();
+            voucher.VoucherDate = System.DateTime.Now;
+            voucher.VoucherTypeId = MasterData.VoucherTypeMaster.Id;
 
+            ICollection<VoucherInfo> lstVoucherInfo = new List<VoucherInfo>();
+
+            InvoiceAmount.VoucherId = voucher.Id;
+            lstVoucherInfo.Add(InvoiceAmount);
+
+            CashAmount.VoucherId = voucher.Id;
+            lstVoucherInfo.Add(CashAmount);
+
+            GstAmount.VoucherId = voucher.Id;
+            lstVoucherInfo.Add(GstAmount);
+
+            voucher.VoucherInfos = lstVoucherInfo;
+            CurrentPurchase.Voucher = voucher;
+            CurrentPurchase.VoucherId = voucher.Id;
+            CurrentPurchase.Items = Items;
+            await _repository.Insert(CurrentPurchase);
 
             ClearData();
 
@@ -285,6 +323,6 @@ namespace ViewModel.Inventory
         }  
        
     }
-   
+    enum FieldInfo { CashAmount,InvoiceAmount,GstAmount }
 
 }

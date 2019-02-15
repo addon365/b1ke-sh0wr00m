@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Api.Database.Entity.Inventory.Sales
 {
 
-    [Table("Inventory.Sales.SaleItemProperty")]
+    [Table("Inventory.Sales.SalesItemsProperties")]
     public class SaleItemProperty:BaseEntity
     {
         public Guid SalesItemsId { get; set; }

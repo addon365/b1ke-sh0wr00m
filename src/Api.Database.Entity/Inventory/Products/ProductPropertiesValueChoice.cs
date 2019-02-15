@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Products
 {
-    [Table("Inventory.Products.ProductPropertiesValueChoice")]
+    [Table("Inventory.Products.ProductsPropertiesValueChoices")]
     public class ProductPropertiesValueChoice:BaseEntity
     {
         public Guid ProductId { get; set; }

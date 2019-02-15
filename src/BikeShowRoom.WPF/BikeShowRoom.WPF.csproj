@@ -313,6 +313,9 @@
     <Compile Include="Enquiries\BookingListWindow.xaml.cs">
       <DependentUpon>BookingListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inventory\PurchaseList.xaml.cs">
+      <DependentUpon>PurchaseList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inventory\SellerListWindow.xaml.cs">
       <DependentUpon>SellerListWindow.xaml</DependentUpon>
     </Compile>
@@ -322,8 +325,8 @@
     <Compile Include="Inventory\Seller.xaml.cs">
       <DependentUpon>Seller.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Inventory\ucPurchase.xaml.cs">
-      <DependentUpon>ucPurchase.xaml</DependentUpon>
+    <Compile Include="Inventory\Purchase.xaml.cs">
+      <DependentUpon>Purchase.xaml</DependentUpon>
     </Compile>
     <Compile Include="RibbonTab\ChitTab.xaml.cs">
       <DependentUpon>ChitTab.xaml</DependentUpon>
@@ -427,6 +430,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Inventory\PurchaseList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Inventory\SellerListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -439,7 +446,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Inventory\ucPurchase.xaml">
+    <Page Include="Inventory\Purchase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -580,6 +587,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\addon.BikeShowRoomService\addon.BikeShowRoomService.csproj">
+      <Project>{b4493fd9-c5a3-42a3-8b48-3287216dd7d4}</Project>
+      <Name>addon.BikeShowRoomService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj">
       <Project>{afec9b2a-36c6-4917-9142-453928de1f35}</Project>
       <Name>Api.Database.Entity</Name>

@@ -151,6 +151,8 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid>("ParentId");
 
+                    b.Property<string>("ProgrammerId");
+
                     b.HasKey("Id");
 
                     b.ToTable("VoucherTypeMasters");
@@ -1086,8 +1088,6 @@ namespace Api.Database.Migrations
 
                     b.Property<Guid?>("BranchMasterId");
 
-                    b.Property<Guid>("BusinessContactId");
-
                     b.Property<DateTime>("Created");
 
                     b.Property<int?>("CreatedDeviceId");
@@ -1096,15 +1096,23 @@ namespace Api.Database.Migrations
 
                     b.Property<DateTime?>("Deleted");
 
+                    b.Property<DateTime>("DeliveryDate");
+
                     b.Property<DateTime>("InvoiceDate");
 
                     b.Property<DateTime>("Modified");
 
                     b.Property<string>("PurchaseInvoiceNo");
 
+                    b.Property<Guid>("SellerId");
+
+                    b.Property<Guid?>("VoucherId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BusinessContactId");
+                    b.HasIndex("SellerId");
+
+                    b.HasIndex("VoucherId");
 
                     b.ToTable("Inventory.Purchases.Purchase");
                 });
@@ -1695,8 +1703,12 @@ namespace Api.Database.Migrations
                 {
                     b.HasOne("Api.Database.Entity.Inventory.Seller", "Seller")
                         .WithMany()
-                        .HasForeignKey("BusinessContactId")
+                        .HasForeignKey("SellerId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Api.Database.Entity.Accounts.Voucher", "Voucher")
+                        .WithMany()
+                        .HasForeignKey("VoucherId");
                 });
 
             modelBuilder.Entity("Api.Database.Entity.Inventory.Purchases.PurchaseItem", b =>

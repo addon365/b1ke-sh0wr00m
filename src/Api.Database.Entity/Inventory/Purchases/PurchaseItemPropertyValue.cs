@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Api.Database.Entity.Inventory.Purchases
 {
-    [Table("Inventory.Purchases.PurchaseItemPropertyValue")]
+    [Table("Inventory.Purchases.PurchasesItemsPropertiesValues")]
     public class PurchaseItemPropertyValue:BaseEntity
     {
       

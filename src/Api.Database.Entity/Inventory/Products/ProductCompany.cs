@@ -2,7 +2,7 @@
 
 namespace Api.Database.Entity.Inventory.Products
 {
-    [Table("Inventory.Products.ProductCompany")]
+    [Table("Inventory.Products.ProductsCompanies")]
     public class ProductCompany:BaseEntityWithLogFields
     {
         public string Identifier { get; set; }

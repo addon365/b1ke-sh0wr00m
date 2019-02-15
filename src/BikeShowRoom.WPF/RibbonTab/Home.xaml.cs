@@ -7,20 +7,8 @@
 #endregion
 using BikeShowRoom.WPF.CRM.Contact;
 using Syncfusion.Windows.Tools.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Unity;
 
 namespace BikeShowRoom.WPF
 {
@@ -126,7 +114,7 @@ namespace BikeShowRoom.WPF
 
         private void BtnPurchase_Click(object sender, RoutedEventArgs e)
         {
-            Inventory.ucPurchase n = new Inventory.ucPurchase();
+            Inventory.Purchase n = new Inventory.Purchase();
             n.ShowDialog();
         }
 
@@ -139,6 +127,13 @@ namespace BikeShowRoom.WPF
         private void BtnSellerList_Click(object sender, RoutedEventArgs e)
         {
             Inventory.SellerListWindow n = new Inventory.SellerListWindow();
+            n.ShowDialog();
+        }
+
+        private void BtnPurchaseList_Click(object sender, RoutedEventArgs e)
+        {
+     
+            Inventory.PurchaseList n = ServiceCollections.Instance.container.Resolve<Inventory.PurchaseList>();
             n.ShowDialog();
         }
     }

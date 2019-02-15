@@ -465,7 +465,8 @@ namespace Api.Database.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    ParentId = table.Column<Guid>(nullable: false)
+                    ParentId = table.Column<Guid>(nullable: false),
+                    ProgrammerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -937,18 +938,27 @@ namespace Api.Database.Migrations
                     BranchMasterId = table.Column<Guid>(nullable: true),
                     PurchaseInvoiceNo = table.Column<string>(nullable: true),
                     InvoiceDate = table.Column<DateTime>(nullable: false),
-                    BusinessContactId = table.Column<Guid>(nullable: false)
+                    DeliveryDate = table.Column<DateTime>(nullable: false),
+                    SellerId = table.Column<Guid>(nullable: false),
+                    VoucherId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Inventory.Purchases.Purchase", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.Purchase_Inventory.Seller_BusinessContactId",
-                        column: x => x.BusinessContactId,
+                        name: "FK_Inventory.Purchases.Purchase_Inventory.Seller_SellerId",
+                        column: x => x.SellerId,
                         principalSchema: "addon",
                         principalTable: "Inventory.Seller",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventory.Purchases.Purchase_Vouchers_VoucherId",
+                        column: x => x.VoucherId,
+                        principalSchema: "addon",
+                        principalTable: "Vouchers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1519,10 +1529,16 @@ namespace Api.Database.Migrations
                 column: "ProductPropertyMasterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.Purchase_BusinessContactId",
+                name: "IX_Inventory.Purchases.Purchase_SellerId",
                 schema: "addon",
                 table: "Inventory.Purchases.Purchase",
-                column: "BusinessContactId");
+                column: "SellerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory.Purchases.Purchase_VoucherId",
+                schema: "addon",
+                table: "Inventory.Purchases.Purchase",
+                column: "VoucherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inventory.Purchases.PurchaseItem_ProductId",
@@ -1810,11 +1826,11 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Vouchers",
+                name: "Inventory.Seller",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Seller",
+                name: "Vouchers",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1822,11 +1838,11 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "VoucherTypeMasters",
+                name: "BusinessContact",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "BusinessContact",
+                name: "VoucherTypeMasters",
                 schema: "addon");
 
             migrationBuilder.DropTable(

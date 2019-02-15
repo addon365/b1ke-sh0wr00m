@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Database.Entity.Inventory.Purchases;
 using Api.Database.Entity.Inventory.Products;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Threenine.Data;
 using Threenine.Data.Paging;
 using Microsoft.EntityFrameworkCore;
+using Api.Database.Entity.Inventory;
+using Api.Database.Entity.Accounts;
 
 namespace Swc.Service.Inventory
 {
@@ -31,30 +34,78 @@ namespace Swc.Service.Inventory
 
         public Purchase Get(string identifier)
         {
-            throw new NotImplementedException();
+            var Data = _unitOfWork.GetRepository<Purchase>().Single(
+                        orderBy: x => x.OrderBy(m => m.Created),
+                        predicate: x => x.BranchMasterId.ToString() == _requestInfo.BranchId && x.PurchaseInvoiceNo.ToLower() == identifier.ToLower(),
+                        include: x => x.
+                        Include(a => a.Seller).ThenInclude(a => a.BusinessContact).
+                        Include(a => a.Items).ThenInclude(a => a.Product));
+
+            return Data;
         }
 
         public IPaginate<Purchase> GetAll(PagingParams pagingParams)
         {
-            throw new NotImplementedException();
-        }
+            var data = _unitOfWork.GetRepository<Purchase>().GetList(
+                 orderBy: x => x.OrderBy(m => m.Created),
+                 include: x => x.
+                 Include(a => a.Seller).ThenInclude(a=>a.BusinessContact).
+                 Include(a => a.Items).ThenInclude(a => a.Product));
+
+            return data;
+
+         }
 
         public PurchaseMasterData GetInitilize()
         {
             PurchaseMasterData masterData = new PurchaseMasterData();
             masterData.Products= _unitOfWork.GetRepository<Product>().GetList(index: 0, size: 1000, include: x => x.Include(n => n.Properties).ThenInclude(m=>m.PropertyMaster)).Items;
-
+            masterData.Sellers= _unitOfWork.GetRepository<Seller>().GetList(
+               orderBy: x => x.OrderBy(m => m.Created),
+               include: x => x.Include(a => a.BusinessContact).ThenInclude(a => a.ContactAddress),
+               index: 0, size:1000).Items;
+            masterData.PurchaseBook = _unitOfWork.GetRepository<AccountBook>().Single(predicate: x => x.ProgrammerId == AccountBookEnum.Purchase.ToString());
+            masterData.GstBook = _unitOfWork.GetRepository<AccountBook>().Single(predicate: x => x.ProgrammerId == AccountBookEnum.GstBook.ToString());
+            masterData.CashBook = _unitOfWork.GetRepository<AccountBook>().Single(predicate: x => x.ProgrammerId == AccountBookEnum.Cash.ToString());
+            masterData.VoucherTypeMaster= _unitOfWork.GetRepository<VoucherTypeMaster>().Single(predicate: x => x.ProgrammerId == VoucherTypeMasterEnum.Purchase.ToString());
             return masterData;
         }
 
-        public Task<Purchase> Insert(Purchase model)
+        public async Task<Purchase> Insert(Purchase model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                model.SellerId = model.Seller.Id;
+                model.Seller = null;
+               foreach(PurchaseItem p in model.Items)
+                {
+                    p.Product = null;
+                    foreach(PurchaseItemPropertyMap ipm in p.ItemPropertyMaps)
+                    {
+                        foreach(PurchaseItemPropertyValue ipv in  ipm.PropertyValues)
+                        {
+                            ipv.ProductPropertyMaster = null;
+                        }
+                    }
+                }
+
+                _unitOfWork.GetRepository<Purchase>().Add(model);
+                
+            _unitOfWork.SaveChanges();
+            return  _unitOfWork.GetRepository<Purchase>().Single(predicate: x => x.Id == model.Id);
+            }
+            catch(Exception ex)
+            {
+                string msg = ex.Message;
+                return null;
+            }
         }
 
-        public Task<Purchase> Update(Purchase model)
+        public async Task<Purchase> Update(Purchase model)
         {
-            throw new NotImplementedException();
+            _unitOfWork.GetRepository<Purchase>().Update(model);
+            _unitOfWork.SaveChanges();
+            return _unitOfWork.GetRepository<Purchase>().Single(predicate: x => x.Id == model.Id);
         }
     }
 }

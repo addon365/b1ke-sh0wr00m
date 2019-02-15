@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Api.Database.Entity.Inventory.Purchases
 {
-    [Table("Inventory.Purchases.PurchaseItemPropertyMap")]
+    [Table("Inventory.Purchases.PurchasesItemsPropertiesMaps")]
     public class PurchaseItemPropertyMap:BaseEntity
     {
         public Guid PurchaseItemId { get; set; }

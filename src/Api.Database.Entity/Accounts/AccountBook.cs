@@ -11,5 +11,7 @@ namespace Api.Database.Entity.Accounts
         public Guid UnderGroupId { get; set; }
         public string ProgrammerId { get; set; }
 
+
     }
+    public enum AccountBookEnum { Cash, Booking, Purchase, PurchaseBalance,GstBook }
 }

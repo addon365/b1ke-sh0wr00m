@@ -27,4 +27,5 @@ namespace addon.BikeShowRoomService
         public DateTime SessionStartDateTime { get;  }
 
     }
+   
 }

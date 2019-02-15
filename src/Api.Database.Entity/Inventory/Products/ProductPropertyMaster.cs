@@ -2,7 +2,7 @@
 
 namespace Api.Database.Entity.Inventory.Products
 {
-    [Table("Inventory.Products.ProductPropertyMaster")]
+    [Table("Inventory.Products.ProductsPropertiesMasters")]
     public class ProductPropertyMaster:BaseEntityWithLogFields
     {
         public string PropertyName { get; set; }

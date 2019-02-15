@@ -68,18 +68,25 @@ namespace swcApi.Controllers.Inventory
         [HttpPost]
         public IActionResult Post([FromBody] Purchase model)
         {
-            
-                if (model == null)
+            try
             {
-                return BadRequest();
+
+                if (model == null)
+                {
+                    return BadRequest();
+                }
+                _reqinfo.UserId = Request.Headers["UserId"].ToString();
+                _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+                _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+                var identifier = _PurchaseService.Insert(model);
+
+
+                return Ok();
             }
-            _reqinfo.UserId = Request.Headers["UserId"].ToString();
-            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
-            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var identifier = _PurchaseService.Insert(model);
-
-
-            return Ok() ;
+            catch(Exception ex)
+            {
+                return NotFound(ex);
+            }
         }
         [HttpPost]
         [Route("Update")]
@@ -106,7 +113,7 @@ namespace swcApi.Controllers.Inventory
         }
        
         [HttpGet]
-        [Route("{identifier}")]
+        [Route("Get/{identifier}")]
         public IActionResult Detail(string identifier)
         {
             _reqinfo.UserId = Request.Headers["UserId"].ToString();
