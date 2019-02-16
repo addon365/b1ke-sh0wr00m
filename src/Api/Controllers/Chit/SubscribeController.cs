@@ -21,7 +21,7 @@ namespace swcApi.Controllers.Chit
         {
             _subscribeService = subscribeService;
         }
-       
+
         // GET: api/Subscribe/5
         [HttpGet("{id}")]
         public ChitSubscriber Get(Guid id)
@@ -34,11 +34,11 @@ namespace swcApi.Controllers.Chit
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Get([FromQuery(Name="subscriptionId")]string id)
+        public IActionResult Get([FromQuery(Name = "subscriptionId")]string id)
         {
-            if(id==null)
+            if (id == null)
                 return Ok(_subscribeService.FindAll());
-            var result= _subscribeService.FindBySubscriptionId(id);
+            var result = _subscribeService.FindBySubscriptionId(id);
             if (result == null)
             {
                 return NotFound();
@@ -56,8 +56,21 @@ namespace swcApi.Controllers.Chit
 
         // PUT: api/Subscribe/5
         [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] ChitSubscriber value)
+        public void Put(Guid id, [FromBody] ChitSubscriber chitSubscriber)
         {
+
+        }
+
+        [HttpPut("close/{subscriptionId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified)]
+        [ProducesDefaultResponseType]
+        public ActionResult<string> CloseSubscription(string subscriptionId, [FromForm]double amount)
+        {
+            string result = _subscribeService.CloseSubscription(subscriptionId, amount);
+            if (result == null)
+                return Ok("Successfully closed subscription.");
+            return StatusCode(StatusCodes.Status304NotModified, result);
         }
 
         // DELETE: api/ApiWithActions/5
@@ -65,6 +78,7 @@ namespace swcApi.Controllers.Chit
         public void Delete(Guid id)
         {
         }
+
 
     }
 }

@@ -43,5 +43,10 @@ namespace BikeShowRoom.WPF
             FindSubscriptionsWindow findSubscriptin = new FindSubscriptionsWindow();
             findSubscriptin.ShowDialog();
         }
+        private void CloseSubscription_Click(object sender, RoutedEventArgs e)
+        {
+            CloseSubscription findSubscriptin = new CloseSubscription();
+            findSubscriptin.ShowDialog();
+        }
     }
 }

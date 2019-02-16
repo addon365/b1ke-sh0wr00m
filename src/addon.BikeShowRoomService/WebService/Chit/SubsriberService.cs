@@ -5,12 +5,30 @@ using Swc.Service.Chit;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace addon.BikeShowRoomService.WebService.Chit
 {
     public class SubsriberService : BaseClientService<ChitSubscriber>, ISubscribeService
     {
+        public string CloseSubscription(string id, double amount)
+        {
+            string url = getUrl() + "/close/" + id;
+
+            MultipartFormDataContent content = new MultipartFormDataContent();
+            content.Add(new StringContent("amount"), amount + "");
+            var response = _httpClient.PutAsync(url, content)
+                    .GetAwaiter()
+                    .GetResult();
+            if (response.IsSuccessStatusCode)
+                return null;
+            else
+                return response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+        }
+
         public ChitSubscriber FindBySubscriptionId(string id)
         {
             string url = getUrl() + "?subscriptionId=" + id;

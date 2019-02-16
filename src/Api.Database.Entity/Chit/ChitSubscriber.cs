@@ -13,6 +13,6 @@ namespace Api.Database.Entity.Chit
         public virtual ChitScheme ChitSchema { get; set; }
         public Customer Customer { get; set; }
         public DateTime JoinedDate { get; set; }
-        public VoucherInfo ClosedVoucherInfoId { get; set; }
+        public Guid ClosedVoucherId { get; set; }
     }
 }
