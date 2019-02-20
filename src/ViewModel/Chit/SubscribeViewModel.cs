@@ -7,6 +7,7 @@ using System;
 using Api.Domain.Chit;
 using Swc.Service.Chit;
 using SchemeClientService = addon.BikeShowRoomService.WebService.Chit.SchemeService;
+using Api.Database.Entity.Crm;
 
 namespace ViewModel.Chit
 {
@@ -18,12 +19,22 @@ namespace ViewModel.Chit
         private double _schemeAmount;
         private ISchemeService _schemeService;
         private IChitDueService _dueService;
+        private ISubscribeService _subscribeService;
+        private IList<Customer> _customers;
+        private Customer _selectedCustomer;
+        private string _customerName;
+        private string _mobileNumber;
+        private string _address;
+
         public SubscribeViewModel()
         {
             WireCommands();
-            FetchSchemesAsync();
+
             ChitSubscribe = new ChitSubscribeDomain();
             _dueService = new ChitDueClientService();
+            _subscribeService = new SubsriberService();
+            FetchSchemesAsync();
+            FindAllCustomersAsync();
         }
         public ChitSubscribeDomain ChitSubscribe
         {
@@ -47,12 +58,17 @@ namespace ViewModel.Chit
         }
         public virtual void Save()
         {
+            ChitSubscribe.CustomerName = CustomerName;
+            ChitSubscribe.MobileNumber = MobileNumber;
+            ChitSubscribe.Address = Address;
+            if(SelectedCustomer!=null)
+                ChitSubscribe.CustomerId = SelectedCustomer.Id;
             if (!Validate()) return;
             IsProgressBarVisible = true;
             try
             {
-                var result=_dueService.Save(ChitSubscribe);
-                Message = "Saved Successfullly and id is "+result.ChitSubscriber.SubscribeId;
+                var result = _dueService.Save(ChitSubscribe);
+                Message = "Saved Successfullly and id is " + result.ChitSubscriber.SubscribeId;
                 ChitSubscribe = new ChitSubscribeDomain();
                 SaveCommand.IsEnabled = false;
             }
@@ -76,6 +92,40 @@ namespace ViewModel.Chit
                 {
                     _schemeAmount = value;
                     OnPropertyChanged("SchemeAmount");
+                }
+            }
+        }
+        public IList<Customer> Customers
+        {
+            get
+            {
+                return _customers;
+            }
+            set
+            {
+                if (Customers != value)
+                {
+                    _customers = value;
+                    OnPropertyChanged("Customers");
+                }
+            }
+        }
+        public Customer SelectedCustomer
+        {
+            get
+            {
+                return _selectedCustomer;
+            }
+            set
+            {
+                if (SelectedCustomer != value)
+                {
+                    _selectedCustomer = value;
+                    OnPropertyChanged("SelectedCustomer");
+                    CustomerName = SelectedCustomer.Profile.FirstName;
+                    MobileNumber = SelectedCustomer.Profile.MobileNumber;
+                    Address = SelectedCustomer.Profile.Address;
+                    ChitSubscribe.CustomerId = SelectedCustomer.Id;
                 }
             }
         }
@@ -122,7 +172,28 @@ namespace ViewModel.Chit
                 () => Schemes = _schemeService.FindAll().ToList());
             task.Start();
         }
+        private async void FindAllCustomersAsync()
+        {
+            IsProgressBarVisible = true;
+            Message = "Loading Customer names...";
 
+            var customers = await Task.Run(
+                () =>
+            _subscribeService.FindAllCustomers()
+            );
+
+            customers.Insert(0, new Customer()
+            {
+                Id = Guid.Empty,
+                Profile = new Contact()
+                {
+                    FirstName = "Existing Customers"
+                }
+            });
+            Customers = customers;
+            Message = "Done Loading Customer names...";
+            IsProgressBarVisible = false;
+        }
         public bool Validate()
         {
             Message = "";
@@ -157,6 +228,52 @@ namespace ViewModel.Chit
         public void SayMessage(bool isSuccess, string message)
         {
             Message = message;
+        }
+
+        public string CustomerName
+        {
+            get
+            {
+                return _customerName;
+            }
+            set
+            {
+                if (CustomerName != value)
+                {
+                    _customerName = value;
+                    OnPropertyChanged("CustomerName");
+                }
+            }
+        }
+        public string MobileNumber
+        {
+            get
+            {
+                return _mobileNumber;
+            }
+            set
+            {
+                if (MobileNumber != value)
+                {
+                    _mobileNumber = value;
+                    OnPropertyChanged("MobileNumber");
+                }
+            }
+        }
+        public string Address
+        {
+            get
+            {
+                return _address;
+            }
+            set
+            {
+                if (Address != value)
+                {
+                    _address = value;
+                    OnPropertyChanged("Address");
+                }
+            }
         }
     }
 }

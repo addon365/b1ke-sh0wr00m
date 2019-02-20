@@ -8,7 +8,7 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="NewSubscriberWindow" Height="450" Width="800">
-    <Window.Resources>
+    <Window.Resources>  
         <utils:BoolToVisibilityConverter x:Key="converter"/>
     </Window.Resources>
     <DockPanel >
@@ -51,15 +51,15 @@
                             <Path Data="M3.0770112,7 L5.0000001,10.570999 6.9230042,7 C8.6230012,7 10,8.5350037 10,10.429001 10,11.848999 8.1970063,13 6.9230042,13 L3.0770112,13 C1.8030091,13 8.9406967E-08,11.848999 0,10.429001 8.9406967E-08,8.5350037 1.3780061,7 3.0770112,7 z M5.0000001,0 C6.6570002,0 8.0000001,1.3429999 8.0000001,3 8.0000001,4.6570001 6.6570002,6 5.0000001,6 3.343,6 2.0000001,4.6570001 2.0000001,3 2.0000001,1.3429999 3.343,0 5.0000001,0 z" Fill="#FF4A7DB1" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="10" />
                         </syncfusion:RibbonButton.VectorImage>
                     </syncfusion:RibbonButton>
-                    <syncfusion:RibbonButton  IconType="VectorImage" SizeForm="Large" Label="Find" Foreground="White" HorizontalAlignment="Left"  Command="{Binding FindCommand}" >
-                        <syncfusion:RibbonButton.VectorImage>
-                            <Path Data="F1M161,211L133,211L133,189L161,189z" Fill="Gray" Stretch="Fill"/>
-                            <Path Data="F1M160,210L134,210L134,190L160,190z" Fill="White" Stretch="Fill" Margin="1"/>
-                            <Path Data="F1M148,202L158,202L158,201L148,201z" Fill="#FFB3B3B3" Height="1" Stretch="Fill" Width="10" HorizontalAlignment="Right" Margin="0,0,3,9" VerticalAlignment="Bottom"/>
-                            <Path Data="M0,10 L10,10 10,11 0,11 z M0,8.0000001 L10,8.0000001 10,9 0,9 z M0,4 L10,4 10,5 0,5 z M0,0 L10,0 10,1 0,1 z" Fill="#FFB3B3B3" HorizontalAlignment="Right" Margin="0,6,3,5" Stretch="Fill" Width="10" />
-                            <Path Data="M3.0770112,7 L5.0000001,10.570999 6.9230042,7 C8.6230012,7 10,8.5350037 10,10.429001 10,11.848999 8.1970063,13 6.9230042,13 L3.0770112,13 C1.8030091,13 8.9406967E-08,11.848999 0,10.429001 8.9406967E-08,8.5350037 1.3780061,7 3.0770112,7 z M5.0000001,0 C6.6570002,0 8.0000001,1.3429999 8.0000001,3 8.0000001,4.6570001 6.6570002,6 5.0000001,6 3.343,6 2.0000001,4.6570001 2.0000001,3 2.0000001,1.3429999 3.343,0 5.0000001,0 z" Fill="#FF4A7DB1" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="10" />
-                        </syncfusion:RibbonButton.VectorImage>
-                    </syncfusion:RibbonButton>
+                    <syncfusion:ComboBoxAdv
+                        Margin="20,0,0,0"
+                        Height="25"
+                        DefaultText="Existing Customer"
+                        ItemsSource="{Binding Customers}"
+                    DisplayMemberPath="Profile.FirstName"
+                    SelectedValue="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            />
+                   
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">
@@ -68,11 +68,12 @@
                 </Grid.ColumnDefinitions>
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="45*" />
+                        <ColumnDefinition Width="146*"/>
+                        <ColumnDefinition Width="192*" />
                         <ColumnDefinition Width="30"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="191*"/>
+                        <ColumnDefinition Width="192*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -80,40 +81,43 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
-                    <GridSplitter Grid.Column="2" Grid.RowSpan="6"
+                    <GridSplitter Grid.Column="3" Grid.RowSpan="4"
               ResizeDirection="Columns"
               ResizeBehavior="PreviousAndNext"
               HorizontalAlignment="Stretch"/>
                     <!--Name-->
-                    <TextBlock Text="Customer Name" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox Text="{Binding Path=ChitSubscribe.CustomerName,Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
+                    <TextBlock Text="Customer Name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,191,0"/>
+                    <TextBox
+                        
+                        Text="{Binding Path=CustomerName,
+                        Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="145.667,0,0,0"/>
 
                     <!--Mobile Number-->
-                    <TextBlock Text="Mobile Number" Grid.Column="3" Grid.Row="0"/>
+                    <TextBlock Text="Mobile Number" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,191,0"/>
                     <TextBox Text="{Binding
-                        Path=ChitSubscribe.MobileNumber,Mode=TwoWay}" 
-                             Grid.Column="4" Grid.Row="0"/>
+                        Path=MobileNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                             Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" Margin="191,0,0,0"/>
 
                     <!--Address-->
-                    <TextBlock Text="Address" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" />
-                    <TextBox Height="50" Width="200" TextWrapping="Wrap" Text="{Binding Path=ChitSubscribe.Address,Mode=TwoWay}"
-                  AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" />
+                    <TextBlock Text="Address" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="0,0,191,0" />
+                    <TextBox Height="50" Width="200" TextWrapping="Wrap" Text="{Binding Path=Address,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                  AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="145.667,6,22,6" />
 
                     <!--Chit Scheme-->
-                    <TextBlock Text="Chit Scheme" Grid.Column="0" Grid.Row="3"/>
+                    <TextBlock Text="Chit Scheme" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,0,191,0"/>
                     <ComboBox
                         
                     ItemsSource="{Binding Path=Schemes}"
                     DisplayMemberPath="SchemaName"
                     SelectedValuePath="SchemaName"
                     SelectedItem="{Binding Path=SelectedScheme}"
-                    Grid.Row="3" Grid.Column="1"/>
+                    Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="145.667,0,0,0"/>
 
                     <!--Amount-->
-                    <TextBlock Text="Amount" Grid.Column="3" Grid.Row="3"/>
+                    <TextBlock Text="Amount" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,191,0"/>
                     <syncfusion:DoubleTextBox Grid.Column="4"
                                           Grid.Row="3" IsEnabled="False"
-                Value="{Binding SchemeAmount,Mode=OneWay}"
+                Value="{Binding SchemeAmount,Mode=OneWay}" Grid.ColumnSpan="2" Margin="191,6,0,5"
                                           
                                           />
 

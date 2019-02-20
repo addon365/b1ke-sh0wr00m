@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Api.Domain.Chit;
 using Api.Database.Entity.Accounts;
 using Swc.Service.Accounts;
+using Api.Database.Entity.Crm;
 
 namespace Swc.Service.Chit
 {
@@ -72,24 +73,36 @@ namespace Swc.Service.Chit
                 }
 
             };
-            if (domain.SubscribeId == null ||
-                domain.SubscribeId.CompareTo(Guid.Empty) == 0)
+            if (domain.SubscribeId==Guid.Empty)
             {
-                chitSubscriber = new ChitSubscriber()
+                Guid customerId = Guid.Empty;
+                if (domain.CustomerId == Guid.Empty)
                 {
-                    ChitSchemeId = domain.ChitSchemeId,
-                    Customer = new Api.Database.Entity.Crm.Customer()
+                    var customer = new Customer()
                     {
-                        Profile = new Api.Database.Entity.Crm.Contact()
+                        Profile = new Contact()
                         {
                             FirstName = domain.CustomerName,
                             Address = domain.Address,
                             MobileNumber = domain.MobileNumber
                         }
-                    },
+                    };
+                    UnitOfWork.GetRepository<Customer>().Add(customer);
+                    customerId = customer.Id;
+                }
+                else
+                {
+                    customerId = domain.CustomerId;
+                }
+                chitSubscriber = new ChitSubscriber()
+                {
+                    ChitSchemeId = domain.ChitSchemeId,
+                    CustomerId = customerId,
                     JoinedDate = DateTime.Now,
                     SubscribeId = GenerateSubscribeId()
                 };
+               
+
                 chitSubriberDue.ChitSubscriber = chitSubscriber;
             }
             else

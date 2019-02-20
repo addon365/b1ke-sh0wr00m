@@ -11,7 +11,9 @@ namespace Api.Database.Entity.Chit
         public Guid ChitSchemeId { get; set; }
         [ForeignKey("ChitSchemeId")]
         public virtual ChitScheme ChitSchema { get; set; }
-        public Customer Customer { get; set; }
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
+        public Guid CustomerId { get; set; }
         public DateTime JoinedDate { get; set; }
         public Guid ClosedVoucherId { get; set; }
     }

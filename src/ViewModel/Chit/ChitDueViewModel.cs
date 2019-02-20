@@ -82,7 +82,7 @@ namespace ViewModel.Chit
             if (result == null)
             {
                 Message = "Subscription Id Not Found";
-
+                SubscribeDomain.Amount = 0;
                 return;
             }
             SelectedSubscription = result;
