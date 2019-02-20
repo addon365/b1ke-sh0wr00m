@@ -6,6 +6,7 @@
 // applicable laws. 
 #endregion
 using BikeShowRoom.WPF.Chit;
+using BikeShowRoom.WPF.Chit.Reports;
 using Syncfusion.Windows.Tools.Controls;
 using System.Windows;
 namespace BikeShowRoom.WPF
@@ -47,6 +48,12 @@ namespace BikeShowRoom.WPF
         {
             CloseSubscription findSubscriptin = new CloseSubscription();
             findSubscriptin.ShowDialog();
+        }
+
+        private void SubscriptionReport_Click(object sender, RoutedEventArgs e)
+        {
+            SubscriberReportWindow subWindow = new SubscriberReportWindow();
+            subWindow.ShowDialog();
         }
     }
 }

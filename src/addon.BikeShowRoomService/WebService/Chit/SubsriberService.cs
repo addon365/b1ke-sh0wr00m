@@ -1,5 +1,7 @@
 ﻿using addon.BikeShowRoomService.BaseService;
 using Api.Database.Entity.Chit;
+using Api.Database.Entity.Crm;
+using Api.Domain.Chit.Reports;
 using Newtonsoft.Json;
 using Swc.Service.Chit;
 using System;
@@ -27,6 +29,31 @@ namespace addon.BikeShowRoomService.WebService.Chit
                 return response.Content.ReadAsStringAsync()
                     .GetAwaiter()
                     .GetResult();
+        }
+
+        public IList<SubscriberReportDomain> FetchReport(Guid schemeId, Guid customerId)
+        {
+            string url = getUrl() + "/fetchReport/"+ schemeId + "/"+ customerId;
+            var response = _httpClient.GetAsync(url)
+                    .GetAwaiter()
+                    .GetResult();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string result = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                return JsonConvert.DeserializeObject<List<SubscriberReportDomain>>(result);
+            }
+            else
+            {
+                var web = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+                if (ex != null)
+                    throw ex;
+            }
+            return new List<SubscriberReportDomain>();
         }
 
         public ChitSubscriber FindBySubscriptionId(string id)
@@ -61,6 +88,31 @@ namespace addon.BikeShowRoomService.WebService.Chit
         public override string getUrl()
         {
             return "Subscribe";
+        }
+
+        public IList<Customer> FindAllCustomers()
+        {
+            string url = getUrl() + "/customers";
+            var response = _httpClient.GetAsync(url)
+                    .GetAwaiter()
+                    .GetResult();
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                string result = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                return JsonConvert.DeserializeObject<List<Customer>>(result);
+            }
+            else
+            {
+                var web = response.Content.ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+                Exception ex = JsonConvert.DeserializeObject<Exception>(web);
+                if (ex != null)
+                    throw ex;
+            }
+            return new List<Customer>();
         }
     }
 }

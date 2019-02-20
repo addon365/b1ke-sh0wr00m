@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Database.Entity.Chit;
+using Api.Database.Entity.Crm;
+using Api.Domain.Chit.Reports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swc.Service.Chit;
@@ -77,6 +79,16 @@ namespace swcApi.Controllers.Chit
         [HttpDelete("{id}")]
         public void Delete(Guid id)
         {
+        }
+        [HttpGet("fetchReport/{schemeId}/{customerId}")]
+        public IList<SubscriberReportDomain> FetchReport(Guid schemeId,Guid customerId)
+        {
+            return _subscribeService.FetchReport(schemeId,customerId);
+        }
+        [HttpGet("customers")]
+        public IList<Customer> FindAllCustomers()
+        {
+            return _subscribeService.FindAllCustomers();
         }
 
 

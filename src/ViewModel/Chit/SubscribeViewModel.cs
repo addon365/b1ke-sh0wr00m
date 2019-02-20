@@ -16,7 +16,7 @@ namespace ViewModel.Chit
         public IList<ChitScheme> _schemes;
         private ChitScheme _selectedScheme;
         private double _schemeAmount;
-        private Swc.Service.Chit.ISchemeService _schemeService;
+        private ISchemeService _schemeService;
         private IChitDueService _dueService;
         public SubscribeViewModel()
         {
@@ -24,7 +24,6 @@ namespace ViewModel.Chit
             FetchSchemesAsync();
             ChitSubscribe = new ChitSubscribeDomain();
             _dueService = new ChitDueClientService();
-           
         }
         public ChitSubscribeDomain ChitSubscribe
         {

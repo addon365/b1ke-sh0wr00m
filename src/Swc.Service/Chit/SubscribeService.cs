@@ -8,6 +8,9 @@ using Api.Database.Entity.Accounts;
 using Swc.Service.Accounts;
 using System.Linq;
 using Api.Database;
+using Api.Domain.Chit.Reports;
+using System.Collections.Generic;
+using Api.Database.Entity.Crm;
 
 namespace Swc.Service.Chit
 {
@@ -88,6 +91,89 @@ namespace Swc.Service.Chit
             }
             return null;
         }
+        IList<ChitSubscriber> FetchByCondition(Guid schemeId, Guid customerId)
+        {
+            if (schemeId != Guid.Empty && customerId != Guid.Empty)
+            {
+                return _unitOfWork.GetRepository<ChitSubscriber>()
+                .GetList(
+                include: s => s.Include(x => x.Customer)
+                .ThenInclude(c => c.Profile)
+                .Include(sc => sc.ChitSchema),
+                predicate: s => s.Customer.Id == customerId
+                && s.ChitSchema.Id == schemeId
+                ).Items;
+            }
+            else if (schemeId != Guid.Empty)
+            {
+                return _unitOfWork.GetRepository<ChitSubscriber>()
+                .GetList(
+                include: s => s.Include(x => x.Customer)
+                .ThenInclude(c => c.Profile)
+                .Include(sc => sc.ChitSchema),
+                predicate: s => s.ChitSchema.Id == schemeId
+                ).Items;
+            }
+            else if (customerId != Guid.Empty)
+            {
+                return _unitOfWork.GetRepository<ChitSubscriber>()
+                .GetList(
+                include: s => s.Include(x => x.Customer)
+                .ThenInclude(c => c.Profile)
+                .Include(sc => sc.ChitSchema),
+                predicate: s => s.Customer.Id == customerId
+                ).Items;
+            }
+            return _unitOfWork.GetRepository<ChitSubscriber>()
+                .GetList(
+                include: s => s.Include(x => x.Customer)
+                .ThenInclude(c => c.Profile)
+                .Include(sc => sc.ChitSchema)
 
+                ).Items; ;
+        }
+        public IList<SubscriberReportDomain> FetchReport(Guid schemeId,
+            Guid customerId)
+        {
+            IList<ChitSubscriber> list = FetchByCondition(schemeId, customerId);
+            
+            var groupedResult = list.GroupBy(s => s.SubscribeId);
+
+
+            var subscriptionReport = new List<SubscriberReportDomain>();
+            foreach (var item in groupedResult.ToArray())
+            {
+                string key = item.Key;
+                var totalPaidAmount = item.Sum(s => s.ChitSchema.MonthlyAmount);
+                var totalPaidMonths = item.Count();
+                var firstChitSub = item.First();
+                var monthlyAmount = firstChitSub.ChitSchema.MonthlyAmount;
+                var totalMonths = firstChitSub.ChitSchema.TotalMonths;
+                
+                var pendingAmount = (totalPaidMonths * monthlyAmount) - totalPaidAmount;
+                var domainObject = new SubscriberReportDomain
+                {
+                    CustomerName = firstChitSub.Customer.Profile.FirstName,
+                    IsClosed = firstChitSub.ClosedVoucherId != Guid.Empty,
+                    MonthlyAmount = monthlyAmount,
+                    PaidMonth = totalPaidMonths,
+                    PendingAmount = pendingAmount,
+                    SchemeName = firstChitSub.ChitSchema.SchemaName,
+                    SubscriptionDate = firstChitSub.JoinedDate,
+                    SubscriptionId = firstChitSub.SubscribeId
+
+                };
+                subscriptionReport.Add(domainObject);
+            }
+            return subscriptionReport;
+        }
+
+        public IList<Customer> FindAllCustomers()
+        {
+            return UnitOfWork.GetRepository<Customer>()
+                .GetList(
+                include: c => c.Include(x => x.Profile))
+                .Items;
+        }
     }
 }
