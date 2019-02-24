@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.UI.ViewModel", "ad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.WebClient.Service", "addon365.WebClient.Service\addon365.WebClient.Service.csproj", "{B4493FD9-C5A3-42A3-8B48-3287216DD7D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.UI.WPF.Controls", "CrossButton\addon365.UI.WPF.Controls.csproj", "{341CE028-D1FF-4694-B510-153EE19B813A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.UI.WPF.Controls", "addon365.UI.WPF.Controls\addon365.UI.WPF.Controls.csproj", "{341CE028-D1FF-4694-B510-153EE19B813A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -619,7 +619,7 @@
       <Project>{7418c14c-bd1d-4a81-9317-b5cedb714ddf}</Project>
       <Name>addon365.Domain.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CrossButton\addon365.UI.WPF.Controls.csproj">
+    <ProjectReference Include="..\addon365.UI.WPF.Controls\addon365.UI.WPF.Controls.csproj">
       <Project>{341ce028-d1ff-4694-b510-153ee19b813a}</Project>
       <Name>addon365.UI.WPF.Controls</Name>
     </ProjectReference>
