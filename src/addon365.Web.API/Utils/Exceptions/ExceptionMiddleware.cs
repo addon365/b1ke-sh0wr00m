@@ -5,7 +5,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace addon365.Web.Api.Utils.Exceptions
+namespace addon365.Web.API.Utils.Exceptions
 {
     public class ExceptionMiddleware
     {

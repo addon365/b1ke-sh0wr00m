@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using addon365.Database.Service.Crm;
-using addon365.Web.Api.Controllers;
-using addon365.Web.Api.Utils;
+using addon365.Web.API.Controllers;
+using addon365.Web.API.Utils;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace addon365.Web.Api.Tests
+namespace addon365.Web.API.Tests
 {
     public class FollowUpTests
     {

@@ -9,7 +9,7 @@ using addon365.Database.Service.Inventory;
 using addon365.Domain.Entity.Inventory;
 using addon365.Database.Entity.Inventory.Purchases;
 
-namespace addon365.Web.Api.Controllers.Inventory
+namespace addon365.Web.API.Controllers.Inventory
 {
     /// <inheritdoc />
     [Produces("application/json")]

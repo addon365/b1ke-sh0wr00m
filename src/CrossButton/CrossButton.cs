@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CrossButton
+namespace addon365.UI.WPF.Controls
 {
     /// <summary>
     /// The Cross Button is a very simple version of the button that displays as a discrete cross,

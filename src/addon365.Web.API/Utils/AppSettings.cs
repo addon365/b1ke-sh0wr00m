@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace addon365.Web.Api.Utils
+namespace addon365.Web.API.Utils
 {
     public class AppSettings
     {

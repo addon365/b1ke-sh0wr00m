@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Routing;
 using addon365.Database.Service;
 using System;
 
-namespace addon365.Web.Api
+namespace addon365.Web.API
 {
     public class LicenseRouteConstraint : IRouteConstraint
     {

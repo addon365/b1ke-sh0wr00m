@@ -6,7 +6,7 @@ using System;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Inventory.Sales;
 
-namespace addon365.Web.Api.Controllers
+namespace addon365.Web.API.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

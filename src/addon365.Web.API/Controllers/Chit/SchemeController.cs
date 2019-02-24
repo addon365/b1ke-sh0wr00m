@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using addon365.Database.Service.Chit;
 
-namespace addon365.Web.Api.Controllers.Chit
+namespace addon365.Web.API.Controllers.Chit
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]

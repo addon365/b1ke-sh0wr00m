@@ -13,6 +13,6 @@
     <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Api.Database.Entity\addon365.Database.Entity.csproj" />
+    <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj" />
   </ItemGroup>
 </Project>

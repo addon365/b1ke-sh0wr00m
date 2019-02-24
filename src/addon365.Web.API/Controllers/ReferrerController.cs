@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using addon365.Database.Service;
 using Swashbuckle.AspNetCore;
 
-namespace addon365.Web.Api.Controllers
+namespace addon365.Web.API.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

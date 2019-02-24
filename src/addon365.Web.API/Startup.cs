@@ -7,7 +7,7 @@ using Threenine.Map;
 using addon365.Database;
 using addon365.Database.Service;
 using Threenine.Data.DependencyInjection;
-using addon365.Web.Api.Utils;
+using addon365.Web.API.Utils;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +17,7 @@ using addon365.Database.Service.Sales;
 using addon365.Database.Service.Crm;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using addon365.Database.Service.Report;
-using addon365.Web.Api.Utils.Exceptions;
+using addon365.Web.API.Utils.Exceptions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json.Serialization;
@@ -26,7 +26,7 @@ using addon365.Database.Service.Accounts;
 using addon365.Database.Service.Inventory;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace addon365.Web.Api
+namespace addon365.Web.API
 {
     public class Startup
     {

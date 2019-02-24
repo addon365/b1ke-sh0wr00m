@@ -6,14 +6,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using addon365.Database.Service;
-using addon365.Web.Api.Utils;
+using addon365.Web.API.Utils;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace addon365.Web.Api.Controllers
+namespace addon365.Web.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]

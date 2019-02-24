@@ -8,8 +8,8 @@
     <ProjectGuid>{341CE028-D1FF-4694-B510-153EE19B813A}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CrossButton</RootNamespace>
-    <AssemblyName>CrossButton</AssemblyName>
+    <RootNamespace>addon365.UI.WPF.Controls</RootNamespace>
+    <AssemblyName>addon365.UI.WPF.Controls</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

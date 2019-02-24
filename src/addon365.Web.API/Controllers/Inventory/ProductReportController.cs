@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using addon365.Database.Service;
 using addon365.Database.Service.Inventory;
 
-namespace addon365.Web.Api.Controllers.Inventory
+namespace addon365.Web.API.Controllers.Inventory
 {
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     [ApiController]

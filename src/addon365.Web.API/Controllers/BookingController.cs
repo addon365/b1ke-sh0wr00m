@@ -6,7 +6,7 @@ using addon365.Database.Service;
 using System;
 using System.Threading.Tasks;
 
-namespace addon365.Web.Api.Controllers
+namespace addon365.Web.API.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

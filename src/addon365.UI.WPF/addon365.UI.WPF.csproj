@@ -603,31 +603,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\addon.BikeShowRoomService\addon365.WebClient.Service.csproj">
+    <ProjectReference Include="..\addon365.WebClient.Service\addon365.WebClient.Service.csproj">
       <Project>{b4493fd9-c5a3-42a3-8b48-3287216dd7d4}</Project>
       <Name>addon365.WebClient.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Api.Database.Entity\addon365.Database.Entity.csproj">
+    <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj">
       <Project>{afec9b2a-36c6-4917-9142-453928de1f35}</Project>
       <Name>addon365.Database.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Api.Database\addon365.Database.csproj">
+    <ProjectReference Include="..\addon365.Database\addon365.Database.csproj">
       <Project>{c60b5fd6-d850-474d-8b59-9a312f7381ac}</Project>
       <Name>addon365.Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Api.Domain\addon365.Domain.Entity.csproj">
+    <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj">
       <Project>{7418c14c-bd1d-4a81-9317-b5cedb714ddf}</Project>
       <Name>addon365.Domain.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CrossButton\CrossButton.csproj">
+    <ProjectReference Include="..\CrossButton\addon365.UI.WPF.Controls.csproj">
       <Project>{341ce028-d1ff-4694-b510-153ee19b813a}</Project>
-      <Name>CrossButton</Name>
+      <Name>addon365.UI.WPF.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Swc.Service\addon365.Database.Service.csproj">
+    <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj">
       <Project>{8e477d58-8c3f-4189-aebd-b991c77c033d}</Project>
       <Name>addon365.Database.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ViewModel\addon365.UI.ViewModel.csproj">
+    <ProjectReference Include="..\addon365.UI.ViewModel\addon365.UI.ViewModel.csproj">
       <Project>{dcb74093-cd12-478b-be5a-7886295e1a2c}</Project>
       <Name>addon365.UI.ViewModel</Name>
     </ProjectReference>

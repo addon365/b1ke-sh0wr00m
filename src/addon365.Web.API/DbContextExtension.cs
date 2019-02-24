@@ -17,7 +17,7 @@ using System;
 using addon365.Database.Entity.Inventory.Products;
 using Microsoft.Extensions.DependencyInjection;
 using addon365.Database.Service;
-namespace addon365.Web.Api
+namespace addon365.Web.API
 {
     public static class DbContextExtension
     {

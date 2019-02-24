@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:CrossButton">
+    xmlns:local="clr-namespace:addon365.UI.WPF.Controls">
     <Style TargetType="{x:Type local:CrossButton}">
         
         <!-- Brushes we use for the control. -->
