@@ -1,4 +1,5 @@
 ﻿using Api.Database.Entity;
+using Api.Database.Entity.Accounts;
 using System;
 using System.Collections.Generic;
 

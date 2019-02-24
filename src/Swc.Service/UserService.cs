@@ -54,7 +54,7 @@ namespace Swc.Service
         private User FindUser(string userId)
         {
             IRepository<User> repository = _unitOfWork.GetRepository<User>();
-            var user = repository.GetList().Items.Where(predicate: x => x.UserId.CompareTo(userId) == 0).FirstOrDefault();
+            var user = repository.Single(predicate: x => x.UserId.CompareTo(userId) == 0);
             if (user == null)
                 return null;
          

@@ -288,8 +288,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Chit\CloseSubscription.xaml.cs">
+      <DependentUpon>CloseSubscription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\DuePaymentWindow.xaml.cs">
+      <DependentUpon>DuePaymentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\FindSubscriptionsWindow.xaml.cs">
+      <DependentUpon>FindSubscriptionsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Chit\NewSchemaWindow.xaml.cs">
       <DependentUpon>NewSchemaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\NewSubscriberWindow.xaml.cs">
+      <DependentUpon>NewSubscriberWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\Reports\SubscriberReportWindow.xaml.cs">
+      <DependentUpon>SubscriberReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enquiries\BookingListWindow.xaml.cs">
       <DependentUpon>BookingListWindow.xaml</DependentUpon>
@@ -387,7 +402,27 @@
     <Compile Include="Zonal\ZonalWindow.xaml.cs">
       <DependentUpon>ZonalWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Chit\CloseSubscription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\DuePaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\FindSubscriptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Chit\NewSchemaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\NewSubscriberWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\Reports\SubscriberReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -621,6 +656,8 @@
   <ItemGroup>
     <Resource Include="Assets\Reload.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\search_ic.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

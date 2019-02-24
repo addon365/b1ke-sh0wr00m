@@ -33,8 +33,7 @@ namespace swcApi.Controllers
             this._logger = logger;
             _reqinfo = r;
         }
-
-
+        
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate(string userId, string password)
@@ -76,6 +75,7 @@ namespace swcApi.Controllers
             user.DeviceId = _reqinfo.DeviceId;
             return Ok(user);
         }
+        [AllowAnonymous]
         [HttpGet("all")]
         public IActionResult GetUsers()
         {

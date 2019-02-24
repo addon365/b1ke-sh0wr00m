@@ -7,6 +7,9 @@ namespace Api.Database.Entity.User
     [Serializable]
     public class User:BaseEntity 
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 0)]
+        public int Id { get; set; }
 
         public int OtherId { get; set; }
         public string UserId { get; set; }

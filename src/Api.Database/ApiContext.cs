@@ -119,6 +119,7 @@ namespace Api.Database
               .Property(p => p.Identifier).HasComputedColumnSql("CONCAT('" + DBGlobals.IdentifierFormat + "',[Id])");
             modelBuilder.Entity<ThreatType>();
             modelBuilder.Entity<Status>();
+
             base.OnModelCreating(modelBuilder);
         }
 

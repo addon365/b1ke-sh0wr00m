@@ -1,26 +1,31 @@
 [
   {
-
+    "Id": "315514be-07fe-4f67-b407-a2f302e35b68",
+    "Name": "Chit",
+    "ProgrammerId": "Chit"
+  },
+  {
+    "Id": "4343c427-c442-4821-8391-d9a81613e883",
     "Name": "Receipt",
     "ProgrammerId": "Receipt"
   },
   {
-
+    "Id": "446c1bff-4087-491a-bf0d-1b83893d9a34",
     "Name": "Payment",
     "ProgrammerId": "Payment"
   },
   {
-
+    "Id": "57fd2a52-1379-4e51-94e0-f444d7d50f8c",
     "Name": "Contra",
     "ProgrammerId": "Contra"
   },
   {
-
+    "Id": "11a1dcc1-e840-4903-afe8-7831c08bde42",
     "Name": "Purchase",
     "ProgrammerId": "Purchase"
   },
   {
-
+    "Id": "1649ca97-b55f-4d83-beeb-e2e283c3d216",
     "Name": "Sales",
     "ProgrammerId": "Sales"
   }

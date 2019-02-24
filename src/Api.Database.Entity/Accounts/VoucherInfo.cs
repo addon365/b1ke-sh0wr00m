@@ -8,7 +8,6 @@ namespace Api.Database.Entity.Accounts
     public class VoucherInfo:BaseEntityWithLogFields
     {
         public Guid VoucherId { get; set; }
-       // public  Voucher Voucher { get; set; }
 
         public Guid bookId { get; set; }
         [ForeignKey("bookId")]

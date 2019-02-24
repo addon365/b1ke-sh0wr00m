@@ -29,7 +29,7 @@ namespace swcApi.Controllers.Chit
         }
 
         // GET: api/Scheme/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public ChitScheme Get(Guid id)
         {
             return _schemeService.Find(id);
@@ -39,7 +39,7 @@ namespace swcApi.Controllers.Chit
         [HttpPost]
         public IActionResult Post([FromBody] ChitScheme value)
         {
-            var result=_schemeService.Save(value);
+            var result = _schemeService.Save(value);
             return Ok(result);
         }
 

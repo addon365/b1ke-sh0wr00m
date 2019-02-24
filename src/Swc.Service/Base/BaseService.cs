@@ -29,11 +29,17 @@ namespace Swc.Service.Base
             return _repository.GetList().Items;
         }
 
-        public T Save(T obj)
+        public virtual T Save(T obj)
         {
             _repository.Add(obj);
             UnitOfWork.SaveChanges();
             return obj;
+        }
+        public virtual ICollection<T> Save(ICollection<T> collObj)
+        {
+            _repository.Add(collObj);
+            UnitOfWork.SaveChanges();
+            return collObj;
         }
 
         public T Update(Guid id,T obj)
@@ -41,6 +47,13 @@ namespace Swc.Service.Base
             _repository.Update(obj);
             UnitOfWork.SaveChanges();
             return obj;
+        }
+        public IRepository<T> Repository
+        {
+            get
+            {
+                return _repository;
+            }
         }
     }
 }

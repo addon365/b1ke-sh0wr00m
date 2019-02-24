@@ -21,6 +21,8 @@ using swcApi.Utils.Exceptions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json.Serialization;
+using Swc.Service.Chit;
+using Swc.Service.Accounts;
 using Swc.Service.Inventory;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -74,6 +76,11 @@ namespace swcApi
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<ISchemeService, SchemeService>();
+            services.AddTransient<ISubscribeService, SubscribeService>();
+            services.AddTransient<IChitDueService, ChitDueService>();
+            services.AddTransient<IVoucherTypeService, VoucherTypeService>();
+            services.AddTransient<IAccountBookService, AccountBookService>();
             services.AddTransient<IPurchaseService, PurchaseService>();
             services.AddTransient<ISellerService, SellerService>();
             services.AddTransient<IBuyerService, BuyerService>();
