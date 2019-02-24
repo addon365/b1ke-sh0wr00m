@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 
-namespace swcApi
+namespace addon365.Web.Api
 {
     public class LicenseRouteConstraint : IRouteConstraint
     {

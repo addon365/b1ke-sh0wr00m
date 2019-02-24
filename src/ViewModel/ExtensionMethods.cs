@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
   
         public static class MyExtensions

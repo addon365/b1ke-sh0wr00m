@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Threenine.Data;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class AccessoriesService:IAccessoriesService
     {

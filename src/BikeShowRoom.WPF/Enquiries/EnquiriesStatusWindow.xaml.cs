@@ -11,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Enquiries
+namespace addon365.UI.WPF.Enquiries
 {
     /// <summary>
     /// Interaction logic for ProductInsertWindow.xaml
     /// </summary>
     public partial class EnquiriesStatusWindow : Window
     {
-        ProductViewModel viewmodel;
+        ProductViewModel ViewModel;
         public EnquiriesStatusWindow()
         {
             InitializeComponent();
-            viewmodel = new ProductViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
-            base.DataContext = viewmodel;
+            ViewModel = new ProductViewModel();
+            ViewModel.InsertCommand.IsEnabled = true;
+            base.DataContext = ViewModel;
         }
 
         private void insertBtn_Click(object sender, RoutedEventArgs e)

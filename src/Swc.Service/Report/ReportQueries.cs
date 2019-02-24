@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Swc.Service.Report
+namespace addon365.Database.Service.Report
 {
     public enum ReportType
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database
+namespace addon365.Database
 {
  public static  class DBGlobals
  {

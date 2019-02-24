@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for View.xaml

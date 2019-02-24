@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Domain.Chit.Reports
+namespace addon365.Domain.Entity.Chit.Reports
 {
     public class SubscriberReportDomain
     {

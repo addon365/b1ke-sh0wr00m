@@ -1,13 +1,13 @@
-﻿using addon.BikeShowRoomService.WebService.Chit;
-using Api.Database.Entity.Chit;
-using Api.Domain.Chit;
+﻿using addon365.WebClient.Service.WebService.Chit;
+using addon365.Database.Entity.Chit;
+using addon365.Domain.Entity.Chit;
 using System.Linq;
-using Swc.Service.Chit;
+using addon365.Database.Service.Chit;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ViewModel.Chit
+namespace addon365.UI.ViewModel.Chit
 {
     public class ChitDueViewModel : ViewModelBase
     {

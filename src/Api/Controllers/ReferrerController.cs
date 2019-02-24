@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Domain.Bots;
+using addon365.Domain.Entity.Bots;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service;
+using addon365.Database.Service;
 using Swashbuckle.AspNetCore;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

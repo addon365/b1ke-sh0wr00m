@@ -1,17 +1,17 @@
 ﻿
-using Api.Database.Entity;
-using Api.Database.Entity.Enquiries;
-using Api.Domain.Enquiries;
-using Swc.Service;
+using addon365.Database.Entity;
+using addon365.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Enquiries;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using Api.Database.Entity.Crm;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Inventory.Products;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class EnquiryViewModel : ViewModelBase
     {
@@ -45,7 +45,7 @@ namespace ViewModel
         }
         private void GeneralInitilize()
         {
-            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
+            _repository = new addon365.WebClient.Service.WebService.EnquiriesService();
 
             EnquiryMasterData = _repository.GetInitilizeEnquiries();
 

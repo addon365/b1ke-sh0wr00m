@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity.Finance
+namespace addon365.Database.Entity.Finance
 {
     public class FinanceCompany:BaseEntityWithLogFields
     {

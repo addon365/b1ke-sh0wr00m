@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class RelayCommand : ICommand
     {

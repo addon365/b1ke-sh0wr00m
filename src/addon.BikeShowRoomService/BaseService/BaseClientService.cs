@@ -1,13 +1,13 @@
-﻿using Api.Database.Entity;
+﻿using addon365.Database.Entity;
 using Newtonsoft.Json;
-using Swc.Service.Base;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace addon.BikeShowRoomService.BaseService
+namespace addon365.WebClient.Service.BaseService
 {
     public abstract class BaseClientService<T> : IBaseService<T> where T : BaseEntityWithLogFields
     {

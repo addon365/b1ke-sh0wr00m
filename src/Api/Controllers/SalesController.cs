@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Swc.Service.Sales;
-using Api.Domain.Sales;
+using addon365.Database.Service.Sales;
+using addon365.Domain.Entity.Sales;
 using System;
 using System.Threading.Tasks;
-using Api.Database.Entity.Inventory.Sales;
+using addon365.Database.Entity.Inventory.Sales;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

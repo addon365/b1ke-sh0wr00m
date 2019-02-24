@@ -11,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel.Chit;
+using addon365.UI.ViewModel.Chit;
 
-namespace BikeShowRoom.WPF.Chit
+namespace addon365.UI.WPF.Chit
 {
     /// <summary>
     /// Interaction logic for NewSubscriberWindow.xaml
     /// </summary>
     public partial class NewSubscriberWindow : Window
     {
-        private readonly SubscribeViewModel viewmodel;
+        private readonly SubscribeViewModel ViewModel;
 
         public NewSubscriberWindow()
         {
             InitializeComponent();
-            viewmodel = new SubscribeViewModel();
-            base.DataContext = viewmodel;
+            ViewModel = new SubscribeViewModel();
+            base.DataContext = ViewModel;
         }
     }
 }

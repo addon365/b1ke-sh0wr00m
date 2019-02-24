@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 
-namespace swcApi
+namespace addon365.Web.Api
 {
     public class Program
     {

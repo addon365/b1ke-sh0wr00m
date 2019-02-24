@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
-using Swc.Service.Inventory;
-using Api.Domain.Inventory;
-using Api.Database.Entity.Inventory.Purchases;
+using addon365.Database.Service.Inventory;
+using addon365.Domain.Entity.Inventory;
+using addon365.Database.Entity.Inventory.Purchases;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Products;
 using System.Data;
-using Api.Database.Entity.Accounts;
+using addon365.Database.Entity.Accounts;
 
-namespace ViewModel.Inventory
+namespace addon365.UI.ViewModel.Inventory
 {
     public class PurchaseViewModel : ViewModelBase
     {
@@ -34,7 +34,7 @@ namespace ViewModel.Inventory
         }
         private void GeneralInitilize()
         {
-            _repository = new addon.BikeShowRoomService.WebService.Inventory.PurchaseWebService();
+            _repository = new addon365.WebClient.Service.WebService.Inventory.PurchaseWebService();
 
             _MasterData = _repository.GetInitilize();
 

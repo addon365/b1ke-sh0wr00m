@@ -1,9 +1,9 @@
-﻿using addon.BikeShowRoomService.WebService;
-using Api.Database.Entity.Inventory.Products;
-using Api.Domain.Paging;
+﻿using addon365.WebClient.Service.WebService;
+using addon365.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Paging;
 using System;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class ProductListViewModel: ViewModelBase
     {
@@ -14,7 +14,7 @@ namespace ViewModel
         public ProductListViewModel()
         {
             _repositoryProduct = new ProductService();
-            PagingViewModel = new PagingViewModel<Product>(new Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Product>>(RefreshData));
+            PagingViewModel = new PagingViewModel<Product>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Product>>(RefreshData));
             
             
             WireCommands();

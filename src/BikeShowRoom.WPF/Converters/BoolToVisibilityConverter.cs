@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace BikeShowRoom.WPF.Converters
+namespace addon365.UI.WPF.Converters
 {
     public class BoolToVisibilityConverter : IValueConverter
     {

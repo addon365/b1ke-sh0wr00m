@@ -1,13 +1,13 @@
-﻿using Api.Database.Entity;
+﻿using addon365.Database.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]

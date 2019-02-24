@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Domain.Inventory;
-using Api.Domain.Paging;
+using addon365.Domain.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Swc.Service;
-using Swc.Service.Inventory;
+using addon365.Database.Service;
+using addon365.Database.Service.Inventory;
 
-namespace swcApi.Controllers.Inventory
+namespace addon365.Web.Api.Controllers.Inventory
 {
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
     [ApiController]

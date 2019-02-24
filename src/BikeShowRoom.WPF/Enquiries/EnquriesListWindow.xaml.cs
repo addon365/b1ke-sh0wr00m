@@ -11,27 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Api.Database.Entity.Enquiries;
+using addon365.Database.Entity.Enquiries;
 using CrystalDecisions.CrystalReports.Engine;
-using ViewModel;
-using ViewModel.Enquiries;
+using addon365.UI.ViewModel;
+using addon365.UI.ViewModel.Enquiries;
 
-namespace BikeShowRoom.WPF.Enquiries
+namespace addon365.UI.WPF.Enquiries
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
     public partial class EnquriesListWindow : Window
     {
-        EnquiriesListViewModel viewmodel;
+        EnquiriesListViewModel ViewModel;
         public EnquriesListWindow()
         {
             InitializeComponent();
-            viewmodel = new EnquiriesListViewModel();
-            base.DataContext = viewmodel;
-            viewmodel.ReportObj = new Reports();
-            viewmodel.OpenBooking = OpenBooking;
-            viewmodel.Edit = Edit;
+            ViewModel = new EnquiriesListViewModel();
+            base.DataContext = ViewModel;
+            ViewModel.ReportObj = new Reports();
+            ViewModel.OpenBooking = OpenBooking;
+            ViewModel.Edit = Edit;
 
         }
         public void OpenBooking(Enquiry enquiries)

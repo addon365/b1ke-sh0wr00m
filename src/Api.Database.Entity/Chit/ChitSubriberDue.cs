@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Accounts;
+﻿using addon365.Database.Entity.Accounts;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Chit
+namespace addon365.Database.Entity.Chit
 {
     public class ChitSubriberDue : BaseEntityWithLogFields
     {

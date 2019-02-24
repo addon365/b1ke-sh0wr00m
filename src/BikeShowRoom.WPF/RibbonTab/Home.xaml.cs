@@ -5,12 +5,12 @@
 // licensing@syncfusion.com. Any infringement will be prosecuted under
 // applicable laws. 
 #endregion
-using BikeShowRoom.WPF.CRM.Contact;
+using addon365.UI.WPF.CRM.Contact;
 using Syncfusion.Windows.Tools.Controls;
 using System.Windows;
 using Unity;
 
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for Home.xaml

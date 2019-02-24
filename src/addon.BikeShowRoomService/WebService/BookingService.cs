@@ -1,6 +1,6 @@
 ﻿
-using Api.Database.Entity.Enquiries;
-using Swc.Service;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Service;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class BookingService : IBookingService
     {
@@ -50,7 +50,7 @@ namespace addon.BikeShowRoomService.WebService
            
 
         }
-        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllBooked(Api.Domain.Paging.PagingParams pagingParams)
+        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllBooked(addon365.Domain.Entity.Paging.PagingParams pagingParams)
         {
 
             HttpResponseMessage response = _httpClient.GetAsync("Booking?" + "PageNumber=" + pagingParams.PageNumber + "&PageSize=" + pagingParams.PageSize).Result;

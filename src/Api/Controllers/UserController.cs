@@ -1,19 +1,19 @@
-﻿using Api.Database.Entity.User;
+﻿using addon365.Database.Entity.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Swc.Service;
-using swcApi.Utils;
+using addon365.Database.Service;
+using addon365.Web.Api.Utils;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]

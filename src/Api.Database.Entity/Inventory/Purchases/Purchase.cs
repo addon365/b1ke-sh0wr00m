@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Accounts;
+﻿using addon365.Database.Entity.Accounts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Api.Database.Entity.Inventory.Purchases
+namespace addon365.Database.Entity.Inventory.Purchases
 {
     [Table("Inventory.Purchases.Purchases")]
     public class Purchase : BaseEntityWithLogFields

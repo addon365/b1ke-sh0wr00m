@@ -1,4 +1,4 @@
-﻿using Api.Database.Entity.User;
+﻿using addon365.Database.Entity.User;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,9 +16,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for SplashScreen.xaml

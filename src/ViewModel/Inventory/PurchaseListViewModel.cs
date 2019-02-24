@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.Inventory.Purchases;
-using Api.Domain.Paging;
-using Swc.Service.Inventory;
+﻿using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Domain.Entity.Paging;
+using addon365.Database.Service.Inventory;
 using System;
 
-namespace ViewModel.Inventory
+namespace addon365.UI.ViewModel.Inventory
 {
 
 
@@ -16,7 +16,7 @@ namespace ViewModel.Inventory
         public PurchaseListViewModel(IPurchaseService purchaseService)
         {
             _repository = purchaseService;
-            PagingViewModel = new PagingViewModel<Purchase>(new Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Purchase>>(RefreshData));
+            PagingViewModel = new PagingViewModel<Purchase>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Purchase>>(RefreshData));
             WireCommands();
            
         }

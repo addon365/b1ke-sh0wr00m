@@ -1,14 +1,14 @@
 ﻿using System;
 using Threenine.Data;
-using Api.Database.Entity;
+using addon365.Database.Entity;
 using System.Threading.Tasks;
-using Api.Domain.Sales;
-using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Finance;
-using Api.Database.Entity.Inventory.Sales;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Sales;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Finance;
+using addon365.Database.Entity.Inventory.Sales;
+using addon365.Database.Entity.Inventory.Products;
 
-namespace Swc.Service.Sales
+namespace addon365.Database.Service.Sales
 {
     public class SalesService : ISalesService
     {

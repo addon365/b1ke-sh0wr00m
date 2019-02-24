@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Chit;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Chit;
+using addon365.Database.Service.Base;
 using Threenine.Data;
 
-namespace Swc.Service.Chit
+namespace addon365.Database.Service.Chit
 {
     public class SchemeService : BaseService<ChitScheme>,ISchemeService
     {

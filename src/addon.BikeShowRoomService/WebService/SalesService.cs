@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api.Database.Entity.Threats;
-using Api.Domain.Enquiries;
+using addon365.Database.Entity.Threats;
+using addon365.Domain.Entity.Enquiries;
 using Threenine.Data;
 using AutoMapper;
-using Api.Database.Entity.Enquiries;
-using Swc.Service;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Service;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
-using Swc.Service.Sales;
-using Api.Domain.Sales;
-using Api.Database.Entity.Inventory.Sales;
+using addon365.Database.Service.Sales;
+using addon365.Domain.Entity.Sales;
+using addon365.Database.Entity.Inventory.Sales;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class SalesService : ISalesService
     {

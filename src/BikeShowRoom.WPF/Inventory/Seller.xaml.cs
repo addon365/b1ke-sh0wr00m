@@ -1,4 +1,4 @@
-﻿using BikeShowRoom.WPF.Enquiries;
+﻿using addon365.UI.WPF.Enquiries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
-using ViewModel.Inventory;
+using addon365.UI.ViewModel;
+using addon365.UI.ViewModel.Inventory;
 
-namespace BikeShowRoom.WPF.Inventory
+namespace addon365.UI.WPF.Inventory
 {
     /// <summary>
     /// Interaction logic for ucPurchase.xaml

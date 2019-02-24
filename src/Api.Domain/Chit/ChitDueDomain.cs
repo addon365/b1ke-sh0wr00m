@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Chit;
+﻿using addon365.Database.Entity.Chit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace Api.Domain.Chit
+namespace addon365.Domain.Entity.Chit
 {
     public class ChitDueDomain
     {

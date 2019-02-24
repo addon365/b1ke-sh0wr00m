@@ -1,10 +1,10 @@
-﻿using Api.Database.Tests.Utils;
+﻿using addon365.Database.Tests.Utils;
 using System.Linq;
 using Xunit;
 using FizzWare.NBuilder;
-using Api.Database.Entity;
+using addon365.Database.Entity;
 
-namespace Api.Database.Tests
+namespace addon365.Database.Tests
 {
     [Collection("Database collection")]
     public class LicenseTest : IClassFixture<ContextFactory>

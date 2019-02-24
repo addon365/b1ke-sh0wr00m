@@ -12,6 +12,8 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <UserSecretsId>baa2f579-d2a7-4eb4-89fb-1c171b2e2482</UserSecretsId>
     <Platforms>AnyCPU;x86</Platforms>
+    <AssemblyName>addon365.Web.Api</AssemblyName>
+    <RootNamespace>addon365.Api</RootNamespace>
    </PropertyGroup>
 
   <ItemGroup>
@@ -40,9 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Database\Api.Database.csproj" />
-    <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />
-    <ProjectReference Include="..\Swc.Service\Swc.Service.csproj" />
+    <ProjectReference Include="..\Api.Database\addon365.Database.csproj" />
+    <ProjectReference Include="..\Api.Domain\addon365.Domain.Entity.csproj" />
+    <ProjectReference Include="..\Swc.Service\addon365.Database.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

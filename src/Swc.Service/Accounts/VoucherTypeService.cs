@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Api.Database.Entity.Accounts;
+using addon365.Database.Entity.Accounts;
 using Threenine.Data;
 
-namespace Swc.Service.Accounts
+namespace addon365.Database.Service.Accounts
 {
     public class VoucherTypeService : IVoucherTypeService
     {

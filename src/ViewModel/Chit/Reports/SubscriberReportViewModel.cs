@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Database.Entity.Chit;
-using Api.Database.Entity.Crm;
-using Api.Domain.Chit.Reports;
-using Swc.Service.Chit;
+using addon365.Database.Entity.Chit;
+using addon365.Database.Entity.Crm;
+using addon365.Domain.Entity.Chit.Reports;
+using addon365.Database.Service.Chit;
 
-namespace ViewModel.Chit.Reports
+namespace addon365.UI.ViewModel.Chit.Reports
 {
     public class SubscriberReportViewModel : ViewModelBase
     {
@@ -21,8 +21,8 @@ namespace ViewModel.Chit.Reports
 
         public SubscriberReportViewModel(Result onResult = null)
         {
-            this._subscribeService = new addon.BikeShowRoomService.WebService.Chit.SubsriberService();
-            this._schemService = new addon.BikeShowRoomService.WebService.Chit.SchemeService();
+            this._subscribeService = new addon365.WebClient.Service.WebService.Chit.SubsriberService();
+            this._schemService = new addon365.WebClient.Service.WebService.Chit.SchemeService();
             WireCommands();
             FetchAllAsync();
 

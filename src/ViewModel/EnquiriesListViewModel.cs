@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Crm;
-using Api.Database.Entity.Enquiries;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Paging;
 using CrystalDecisions.CrystalReports.Engine;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
 
     public delegate void OpenBooking(Enquiry enquiries);
@@ -24,8 +24,8 @@ namespace ViewModel
         private PagingParams pagingParams;
         public EnquiriesListViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
-            PagingViewModel = new PagingViewModel<Enquiry>(new Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Enquiry>>(RefreshData));
+            _repository = new addon365.WebClient.Service.WebService.EnquiriesService();
+            PagingViewModel = new PagingViewModel<Enquiry>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Enquiry>>(RefreshData));
             WireCommands();
            
         }

@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public abstract class ViewModelBaseEn<T> : ViewModelBase
         where T : BaseEntityWithLogFields

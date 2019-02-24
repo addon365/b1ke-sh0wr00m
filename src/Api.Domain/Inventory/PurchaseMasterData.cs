@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Inventory;
-using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Inventory;
+using addon365.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Domain.Inventory
+namespace addon365.Domain.Entity.Inventory
 {
     public class PurchaseMasterData
     {

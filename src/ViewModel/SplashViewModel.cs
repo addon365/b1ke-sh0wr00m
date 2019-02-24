@@ -1,14 +1,14 @@
-﻿using addon.BikeShowRoomService;
-using Api.Database.Entity.User;
+﻿using addon365.WebClient.Service;
+using addon365.Database.Entity.User;
 using Newtonsoft.Json;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class SplashViewModel : ViewModelBase
     {
@@ -18,7 +18,7 @@ namespace ViewModel
         public DoSomething InvokeCaller { get; set; }
         public SplashViewModel(DoSomething doSomething)
         {
-            _validationService = new addon.BikeShowRoomService.WebService.ValidationService();
+            _validationService = new addon365.WebClient.Service.WebService.ValidationService();
             InvokeCaller = doSomething;
             RetryCommand = new RelayCommand(()=>InvokeCaller());
 

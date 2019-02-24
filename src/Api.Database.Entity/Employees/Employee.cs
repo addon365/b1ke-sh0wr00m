@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Crm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Api.Database.Entity.Employee
+namespace addon365.Database.Entity.Employee
 {
     public class Employee:BaseEntityWithLogFields
     {

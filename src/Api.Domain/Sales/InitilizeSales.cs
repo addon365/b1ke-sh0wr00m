@@ -1,13 +1,13 @@
-﻿using Api.Database.Entity;
-using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Finance;
-using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Finance;
+using addon365.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Domain.Sales
+namespace addon365.Domain.Entity.Sales
 {
     public class InitilizeSales
     {

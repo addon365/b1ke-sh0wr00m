@@ -1,12 +1,12 @@
-﻿using Api.Database.Entity.Enquiries;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Threading.Tasks;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

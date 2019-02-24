@@ -1,13 +1,13 @@
-﻿using addon.BikeShowRoomService;
-using Api.Database.Entity.User;
+﻿using addon365.WebClient.Service;
+using addon365.Database.Entity.User;
 using Newtonsoft.Json;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
@@ -15,7 +15,7 @@ namespace ViewModel
         private User _currentUser;
         public LoginViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.UserService();
+            _repository = new addon365.WebClient.Service.WebService.UserService();
 
             WireCommands();
             initInsert();

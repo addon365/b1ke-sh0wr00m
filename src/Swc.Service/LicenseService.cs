@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity;
+﻿using addon365.Database.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Threenine.Data;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public interface ILicenseService
     {

@@ -1,20 +1,20 @@
 ﻿using System.Windows;
-using ViewModel.Crm;
+using addon365.UI.ViewModel.Crm;
 
-namespace BikeShowRoom.WPF.CRM
+namespace addon365.UI.WPF.CRM
 {
     /// <summary>
     /// Interaction logic for FollowUp.xaml
     /// </summary>
     public partial class FollowUp : Window
     {
-        FollowUpViewModel viewmodel;
-        public FollowUp(object viewmodel)
+        FollowUpViewModel ViewModel;
+        public FollowUp(object ViewModel)
         {
             InitializeComponent();
-            FollowUpViewModel followUpViewModel = (FollowUpViewModel)viewmodel;
+            FollowUpViewModel followUpViewModel = (FollowUpViewModel)ViewModel;
             followUpViewModel.OnResult = CloseMe;
-            base.DataContext = viewmodel;
+            base.DataContext = ViewModel;
         }
         public void CloseMe(bool isSuccess, string message, object data)
         {

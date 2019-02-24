@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.Crm;
-using Swc.Service.Crm;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Service.Crm;
 using System;
 using System.Collections.Generic;
 
-namespace ViewModel.Crm
+namespace addon365.UI.ViewModel.Crm
 {
     public class ContactViewModel : ViewModelBase
     {
@@ -15,7 +15,7 @@ namespace ViewModel.Crm
         public ContactViewModel(Result onResult = null)
         {
             this.onResult = onResult;
-            _repository = new addon.BikeShowRoomService.WebService.ContactService();
+            _repository = new addon365.WebClient.Service.WebService.ContactService();
             Contacts = _repository.GetContacts();
             WireCommands();
         }

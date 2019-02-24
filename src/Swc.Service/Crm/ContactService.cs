@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 using Threenine.Data;
 
-namespace Swc.Service.Crm
+namespace addon365.Database.Service.Crm
 {
     public class ContactService : IContactService
     {

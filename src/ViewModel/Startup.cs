@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class Startup
     {
@@ -15,8 +15,8 @@ namespace ViewModel
         {
 
            ServiceCollection services = new ServiceCollection();
-            provider = services.AddSingleton<IBookingService,addon.BikeShowRoomService.WebService.BookingService>()
-                                              .AddTransient<IEnquiriesService, addon.BikeShowRoomService.WebService.EnquiriesService>()
+            provider = services.AddSingleton<IBookingService,addon365.WebClient.Service.WebService.BookingService>()
+                                              .AddTransient<IEnquiriesService, addon365.WebClient.Service.WebService.EnquiriesService>()
                                               .BuildServiceProvider();
             
         }

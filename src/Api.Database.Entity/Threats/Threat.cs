@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Threats
+namespace addon365.Database.Entity.Threats
 {
     public class Threat : BaseEntityWithLogFields
     {

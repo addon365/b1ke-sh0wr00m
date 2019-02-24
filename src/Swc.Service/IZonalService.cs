@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity;
+﻿using addon365.Database.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public interface IZonalService
     {

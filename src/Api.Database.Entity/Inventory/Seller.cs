@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Crm;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Inventory
+namespace addon365.Database.Entity.Inventory
 {
     [Table("Inventory.Sellers")]
     public class Seller:BaseEntityWithLogFields

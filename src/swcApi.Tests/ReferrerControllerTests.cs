@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Api.Domain.Bots;
+using addon365.Domain.Entity.Bots;
 using FizzWare.NBuilder;
 using Moq;
 using Newtonsoft.Json.Linq;
-using swcApi.Controllers;
-using Swc.Service;
+using addon365.Web.Api.Controllers;
+using addon365.Database.Service;
 using Threenine.Data;
 using Xunit;
 
-namespace swcApi.Tests
+namespace addon365.Web.Api.Tests
 {
     public class ReferrerControllerTests
     {

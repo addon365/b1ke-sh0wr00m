@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Inventory.Products;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Paging;
 using System.Collections.Generic;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public interface IProductService
     {

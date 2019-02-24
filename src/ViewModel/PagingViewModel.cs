@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class PagingViewModel<T> : ViewModelBase
     {
         private ObservableCollection<T> _data;
-        private Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<T>>  _RequestMethod;
+        private Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<T>>  _RequestMethod;
 
         private int start = 0;
         private int itemCount = 30;
@@ -35,7 +35,7 @@ namespace ViewModel
             }
         }
 
-        public PagingViewModel(Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<T>> RequestMethod)
+        public PagingViewModel(Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<T>> RequestMethod)
         {
             count = new List<int> { 30,40,50,60 };
             this._RequestMethod = RequestMethod;
@@ -180,7 +180,7 @@ namespace ViewModel
             }
         }
 
-        Api.Domain.Paging.PagingParams param = new Api.Domain.Paging.PagingParams();
+        addon365.Domain.Entity.Paging.PagingParams param = new addon365.Domain.Entity.Paging.PagingParams();
         public void RefreshData()
         {
             if (param.PageNumber == start && param.PageSize == itemCount)

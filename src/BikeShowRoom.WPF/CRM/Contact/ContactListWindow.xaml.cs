@@ -12,22 +12,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
-using ViewModel.Crm;
+using addon365.UI.ViewModel;
+using addon365.UI.ViewModel.Crm;
 
-namespace BikeShowRoom.WPF.CRM.Contact
+namespace addon365.UI.WPF.CRM.Contact
 {
     /// <summary>
     /// Interaction logic for ContactListWindow.xaml
     /// </summary>
     public partial class ContactListWindow : Window
     {
-        ContactViewModel viewModel;
+        ContactViewModel ViewModel;
         public ContactListWindow()
         {
             InitializeComponent();
-            viewModel = new ContactViewModel(ShowUI);
-            base.DataContext = viewModel;
+            ViewModel = new ContactViewModel(ShowUI);
+            base.DataContext = ViewModel;
         }
 
         public void ShowUI(bool success,string message,object data)

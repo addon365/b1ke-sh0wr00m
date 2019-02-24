@@ -1,7 +1,7 @@
-﻿using Api.Database;
-using Api.Domain.Enquiries;
+﻿using addon365.Database;
+using addon365.Domain.Entity.Enquiries;
 using Microsoft.EntityFrameworkCore;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +19,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Threenine.Data;
 using Unity;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -38,10 +38,10 @@ namespace BikeShowRoom.WPF
 
             //var enquir = new EnquiriesService(u);
 
-            //var viewmodel= new EnquiryViewModel();
-            //viewmodel.CurrentEnquiry = new Enquiries();
-            //viewmodel.CurrentEnquiry.Name = "Tamilselvan";
-            //this.DataContext = viewmodel;
+            //var addon365.UI.ViewModel= new EnquiryViewModel();
+            //addon365.UI.ViewModel.CurrentEnquiry = new Enquiries();
+            //addon365.UI.ViewModel.CurrentEnquiry.Name = "Tamilselvan";
+            //this.DataContext = addon365.UI.ViewModel;
         }
 
         

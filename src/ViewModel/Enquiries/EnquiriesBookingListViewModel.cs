@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Crm;
-using Api.Database.Entity.Enquiries;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Paging;
 using CrystalDecisions.CrystalReports.Engine;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace ViewModel.Enquiries
+namespace addon365.UI.ViewModel.Enquiries
 {
 
     
@@ -23,7 +23,7 @@ namespace ViewModel.Enquiries
         private PagingParams pagingParams;
         public EnquiriesBookingListViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.BookingService();
+            _repository = new addon365.WebClient.Service.WebService.BookingService();
             pagingParams = new PagingParams();
             pagingParams.PageNumber = 0;
             pagingParams.PageSize = 50;

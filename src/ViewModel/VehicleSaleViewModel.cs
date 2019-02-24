@@ -1,12 +1,12 @@
 ﻿
-using Api.Database.Entity;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Inventory.Products;
-using Api.Domain.Enquiries;
-using Swc.Service;
+using addon365.Database.Entity;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Enquiries;
+using addon365.Database.Service;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class VehicleSaleViewModel : ViewModelBase
     {
@@ -18,7 +18,7 @@ namespace ViewModel
         private EnquiryExchangeQuotation _exchangeQuotation;
         public VehicleSaleViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.EnquiriesService();
+            _repository = new addon365.WebClient.Service.WebService.EnquiriesService();
 
             EnquiryMasterData =  _repository.GetInitilizeEnquiries();
             WireCommands();

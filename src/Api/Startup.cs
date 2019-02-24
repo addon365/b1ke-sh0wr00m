@@ -4,29 +4,29 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Threenine.Map;
-using Api.Database;
-using Swc.Service;
+using addon365.Database;
+using addon365.Database.Service;
 using Threenine.Data.DependencyInjection;
-using swcApi.Utils;
+using addon365.Web.Api.Utils;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Swc.Service.Sales;
-using Swc.Service.Crm;
+using addon365.Database.Service.Sales;
+using addon365.Database.Service.Crm;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Swc.Service.Report;
-using swcApi.Utils.Exceptions;
+using addon365.Database.Service.Report;
+using addon365.Web.Api.Utils.Exceptions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Newtonsoft.Json.Serialization;
-using Swc.Service.Chit;
-using Swc.Service.Accounts;
-using Swc.Service.Inventory;
+using addon365.Database.Service.Chit;
+using addon365.Database.Service.Accounts;
+using addon365.Database.Service.Inventory;
 using Microsoft.EntityFrameworkCore.Internal;
 
-namespace swcApi
+namespace addon365.Web.Api
 {
     public class Startup
     {
@@ -199,7 +199,7 @@ namespace swcApi
                     var UserService = serviceScope.ServiceProvider.GetService<IUserService>();
                     if (!apicon.Users.Any())
                     {
-                        UserService.InsertUser(new Api.Database.Entity.User.User() { UserId = "user1", Password = "pass1", UserName = "user1" });
+                        UserService.InsertUser(new addon365.Database.Entity.User.User() { UserId = "user1", Password = "pass1", UserName = "user1" });
                     }
                     apicon.EnsureSeeded();
                 }

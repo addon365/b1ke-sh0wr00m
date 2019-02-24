@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.Crm;
-using Swc.Service.Crm;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Service.Crm;
 using System;
 using System.Collections.Generic;
 
-namespace ViewModel.Crm
+namespace addon365.UI.ViewModel.Crm
 {
     public class FollowUpViewModel : ViewModelBase
     {
@@ -18,7 +18,7 @@ namespace ViewModel.Crm
         public FollowUpViewModel(object contactObj = null, Result onResult = null)
         {
             this.OnResult = onResult;
-            _repository = new addon.BikeShowRoomService.WebService.FollowUpService();
+            _repository = new addon365.WebClient.Service.WebService.FollowUpService();
             _followUpStatuses = _repository.GetFollowUpStatuses();
             _followUpModes = _repository.GetFollowUpModes();
             

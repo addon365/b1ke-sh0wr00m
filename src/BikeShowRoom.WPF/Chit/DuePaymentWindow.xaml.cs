@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ViewModel.Chit;
+using addon365.UI.ViewModel.Chit;
 
-namespace BikeShowRoom.WPF.Chit
+namespace addon365.UI.WPF.Chit
 {
     /// <summary>
     /// Interaction logic for DuePaymentWindow.xaml

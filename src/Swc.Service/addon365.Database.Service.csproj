@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Database\Api.Database.csproj" />
-    <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />
+    <ProjectReference Include="..\Api.Database\addon365.Database.csproj" />
+    <ProjectReference Include="..\Api.Domain\addon365.Domain.Entity.csproj" />
   </ItemGroup>
 
 </Project>

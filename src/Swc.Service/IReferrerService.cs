@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Api.Domain.Bots;
+using addon365.Domain.Entity.Bots;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public interface IReferrerService
     {

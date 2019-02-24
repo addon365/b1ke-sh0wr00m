@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity
+namespace addon365.Database.Entity
 {
     public class LicenseMaster:BaseEntity
     {

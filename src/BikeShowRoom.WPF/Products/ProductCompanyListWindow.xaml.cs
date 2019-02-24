@@ -11,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Products
+namespace addon365.UI.WPF.Products
 {
     /// <summary>
     /// Interaction logic for ProductCompanyListWindow.xaml
     /// </summary>
     public partial class ProductCompanyListWindow : Window
     {
-        ProductCompanyViewModel viewmodel;
+        ProductCompanyViewModel ViewModel;
         public ProductCompanyListWindow()
         {
             InitializeComponent();
-            viewmodel = new ProductCompanyViewModel();
-            base.DataContext = viewmodel;
-            viewmodel.DeleteCommand.IsEnabled = true;
+            ViewModel = new ProductCompanyViewModel();
+            base.DataContext = ViewModel;
+            ViewModel.DeleteCommand.IsEnabled = true;
         }
 
         public void Deletebtn_Click(object sender, RoutedEventArgs e)

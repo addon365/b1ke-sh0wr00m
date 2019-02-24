@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Products;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Enquiries
+namespace addon365.Database.Entity.Enquiries
 {
     public class EnquiryAccessories:BaseEntityWithLogFields
     {

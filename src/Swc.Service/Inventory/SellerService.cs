@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Database.Entity.Inventory;
-using Api.Domain.Paging;
+using addon365.Database.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using Microsoft.Extensions.Logging;
 using Threenine.Data;
 using Threenine.Data.Paging;
 using Microsoft.EntityFrameworkCore;
 
-namespace Swc.Service.Inventory
+namespace addon365.Database.Service.Inventory
 {
     public class SellerService : ISellerService
     {

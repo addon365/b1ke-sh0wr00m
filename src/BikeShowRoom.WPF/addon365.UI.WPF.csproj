@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B239AB87-442B-4C26-AC4E-203FA16CD40F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>BikeShowRoom.WPF</RootNamespace>
-    <AssemblyName>BikeShowRoom.WPF</AssemblyName>
+    <RootNamespace>addon365.UI.WPF</RootNamespace>
+    <AssemblyName>addon365.UI.WPF</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -603,33 +603,33 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\addon.BikeShowRoomService\addon.BikeShowRoomService.csproj">
+    <ProjectReference Include="..\addon.BikeShowRoomService\addon365.WebClient.Service.csproj">
       <Project>{b4493fd9-c5a3-42a3-8b48-3287216dd7d4}</Project>
-      <Name>addon.BikeShowRoomService</Name>
+      <Name>addon365.WebClient.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj">
+    <ProjectReference Include="..\Api.Database.Entity\addon365.Database.Entity.csproj">
       <Project>{afec9b2a-36c6-4917-9142-453928de1f35}</Project>
-      <Name>Api.Database.Entity</Name>
+      <Name>addon365.Database.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Api.Database\Api.Database.csproj">
+    <ProjectReference Include="..\Api.Database\addon365.Database.csproj">
       <Project>{c60b5fd6-d850-474d-8b59-9a312f7381ac}</Project>
-      <Name>Api.Database</Name>
+      <Name>addon365.Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Api.Domain\Api.Domain.csproj">
+    <ProjectReference Include="..\Api.Domain\addon365.Domain.Entity.csproj">
       <Project>{7418c14c-bd1d-4a81-9317-b5cedb714ddf}</Project>
-      <Name>Api.Domain</Name>
+      <Name>addon365.Domain.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\CrossButton\CrossButton.csproj">
       <Project>{341ce028-d1ff-4694-b510-153ee19b813a}</Project>
       <Name>CrossButton</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Swc.Service\Swc.Service.csproj">
+    <ProjectReference Include="..\Swc.Service\addon365.Database.Service.csproj">
       <Project>{8e477d58-8c3f-4189-aebd-b991c77c033d}</Project>
-      <Name>Swc.Service</Name>
+      <Name>addon365.Database.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{29d95a34-521e-4058-8ee1-17b88f8dae7c}</Project>
-      <Name>ViewModel</Name>
+    <ProjectReference Include="..\ViewModel\addon365.UI.ViewModel.csproj">
+      <Project>{dcb74093-cd12-478b-be5a-7886295e1a2c}</Project>
+      <Name>addon365.UI.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service;
+using addon365.Database.Service;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-using Api.Domain.Paging;
-using Swc.Service.Inventory;
-using Api.Domain.Inventory;
-using Api.Database.Entity.Inventory.Purchases;
+using addon365.Domain.Entity.Paging;
+using addon365.Database.Service.Inventory;
+using addon365.Domain.Entity.Inventory;
+using addon365.Database.Entity.Inventory.Purchases;
 
-namespace swcApi.Controllers.Inventory
+namespace addon365.Web.Api.Controllers.Inventory
 {
     /// <inheritdoc />
     [Produces("application/json")]

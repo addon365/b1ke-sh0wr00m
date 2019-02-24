@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity.Accounts;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Threenine.Data;
 
-namespace Swc.Service.Accounts
+namespace addon365.Database.Service.Accounts
 {
     public class AccountBookService : BaseService<AccountBook>,IAccountBookService
     {

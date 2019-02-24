@@ -1,4 +1,4 @@
-﻿using Api.Database.Entity.Enquiries;
+﻿using addon365.Database.Entity.Enquiries;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Threenine.Data;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class EnquiryTypeService:IEnquiryTypeService
     {

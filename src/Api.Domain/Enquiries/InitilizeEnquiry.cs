@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Inventory.Products;
 using System.Collections.Generic;
 
-namespace Api.Domain.Enquiries
+namespace addon365.Domain.Entity.Enquiries
 {
     public class InitilizeEnquiry
     {

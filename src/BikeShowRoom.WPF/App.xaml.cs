@@ -1,14 +1,14 @@
-﻿using Api.Database;
-using BikeShowRoom.WPF.Settings;
-using Swc.Service.Inventory;
+﻿using addon365.Database;
+using addon365.UI.WPF.Settings;
+using addon365.Database.Service.Inventory;
 using System;
 using System.Runtime.ExceptionServices;
 using System.Windows;
 using Threenine.Data;
 using Unity;
-using ViewModel.Inventory;
+using addon365.UI.ViewModel.Inventory;
 
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -55,7 +55,7 @@ namespace BikeShowRoom.WPF
             container.RegisterType<IUnitOfWork, UnitOfWork<ApiContext>>();
             container.RegisterType<IUnitOfWork<ApiContext>, UnitOfWork<ApiContext>>();
             container.RegisterType<PurchaseListViewModel>();
-            container.RegisterType<IPurchaseService, addon.BikeShowRoomService.WebService.Inventory.PurchaseWebService>();
+            container.RegisterType<IPurchaseService, addon365.WebClient.Service.WebService.Inventory.PurchaseWebService>();
         }
         private static ServiceCollections _objSelf;
         public static ServiceCollections Instance

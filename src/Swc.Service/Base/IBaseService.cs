@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity;
-using Api.Database.Entity.Accounts;
+﻿using addon365.Database.Entity;
+using addon365.Database.Entity.Accounts;
 using System;
 using System.Collections.Generic;
 
-namespace Swc.Service.Base
+namespace addon365.Database.Service.Base
 {
     public interface IBaseService<T> where T : BaseEntityWithLogFields
     {

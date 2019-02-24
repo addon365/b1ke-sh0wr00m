@@ -1,15 +1,15 @@
-﻿using addon.BikeShowRoomService.WebService.Chit;
-using Api.Database.Entity.Chit;
+﻿using addon365.WebClient.Service.WebService.Chit;
+using addon365.Database.Entity.Chit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
-using Api.Domain.Chit;
-using Swc.Service.Chit;
-using SchemeClientService = addon.BikeShowRoomService.WebService.Chit.SchemeService;
-using Api.Database.Entity.Crm;
+using addon365.Domain.Entity.Chit;
+using addon365.Database.Service.Chit;
+using SchemeClientService = addon365.WebClient.Service.WebService.Chit.SchemeService;
+using addon365.Database.Entity.Crm;
 
-namespace ViewModel.Chit
+namespace addon365.UI.ViewModel.Chit
 {
     public class SubscribeViewModel : ViewModelBase
     {

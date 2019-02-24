@@ -1,19 +1,19 @@
 ﻿using System.Windows;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Products
+namespace addon365.UI.WPF.Products
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
     public partial class VehicleAccessories : Window
     {
-        VehicleAccessoriesViewModel viewmodel;
+        VehicleAccessoriesViewModel ViewModel;
         public VehicleAccessories()
         {
             InitializeComponent();
-            viewmodel = new VehicleAccessoriesViewModel();
-            base.DataContext = viewmodel;
+            ViewModel = new VehicleAccessoriesViewModel();
+            base.DataContext = ViewModel;
         }
     }
 }

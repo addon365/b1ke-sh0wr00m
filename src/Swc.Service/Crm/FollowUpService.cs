@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 using Threenine.Data;
 
-namespace Swc.Service.Crm
+namespace addon365.Database.Service.Crm
 {
     public class FollowUpService : IFollowUpService
     {

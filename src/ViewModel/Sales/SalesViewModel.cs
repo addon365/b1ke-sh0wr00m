@@ -1,15 +1,15 @@
 ﻿
-using Api.Database.Entity;
+using addon365.Database.Entity;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Swc.Service.Sales;
-using Api.Domain.Sales;
-using Api.Database.Entity.Crm;
-using Api.Database.Entity.Accounts;
+using addon365.Database.Service.Sales;
+using addon365.Domain.Entity.Sales;
+using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Accounts;
 using System.ComponentModel;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Products;
 
-namespace ViewModel.Sales
+namespace addon365.UI.ViewModel.Sales
 {
     public class SalesViewModel : ViewModelBase
     {
@@ -24,7 +24,7 @@ namespace ViewModel.Sales
 
         public SalesViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.SalesService();
+            _repository = new addon365.WebClient.Service.WebService.SalesService();
 
             MasterData = _repository.GetInitilizeSales();
             WireCommands();

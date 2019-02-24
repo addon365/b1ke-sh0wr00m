@@ -1,18 +1,18 @@
-﻿using Api.Database.Entity.Chit;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Chit;
+using addon365.Database.Service.Base;
 using Threenine.Data;
 using Microsoft.EntityFrameworkCore;
-using Api.Domain.Chit;
+using addon365.Domain.Entity.Chit;
 using System;
-using Api.Database.Entity.Accounts;
-using Swc.Service.Accounts;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Service.Accounts;
 using System.Linq;
-using Api.Database;
-using Api.Domain.Chit.Reports;
+using addon365.Database;
+using addon365.Domain.Entity.Chit.Reports;
 using System.Collections.Generic;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 
-namespace Swc.Service.Chit
+namespace addon365.Database.Service.Chit
 {
     public class SubscribeService : BaseService<ChitSubscriber>, ISubscribeService
     {

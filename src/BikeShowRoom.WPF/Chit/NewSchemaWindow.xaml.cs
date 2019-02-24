@@ -11,21 +11,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel.Chit;
+using addon365.UI.ViewModel.Chit;
 
-namespace BikeShowRoom.WPF.Chit
+namespace addon365.UI.WPF.Chit
 {
     /// <summary>
     /// Interaction logic for NewSchemaWindow.xaml
     /// </summary>
     public partial class NewSchemaWindow : Window
     {
-        SchemeViewModel viewmodel;
+        SchemeViewModel ViewModel;
         public NewSchemaWindow()
         {
             InitializeComponent();
-            viewmodel = new SchemeViewModel();
-            base.DataContext = viewmodel;
+            ViewModel = new SchemeViewModel();
+            base.DataContext = ViewModel;
         }
     }
 }

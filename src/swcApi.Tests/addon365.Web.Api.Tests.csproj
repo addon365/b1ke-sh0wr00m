@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
-    <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />
-    <ProjectReference Include="..\Api\swcApi.csproj" />
-    <ProjectReference Include="..\Swc.Service\Swc.Service.csproj" />
+    <ProjectReference Include="..\Api.Database.Entity\addon365.Database.Entity.csproj" />
+    <ProjectReference Include="..\Api.Domain\addon365.Domain.Entity.csproj" />
+    <ProjectReference Include="..\Api\addon365.Web.Api.csproj" />
+    <ProjectReference Include="..\Swc.Service\addon365.Database.Service.csproj" />
   </ItemGroup>
 
 </Project>

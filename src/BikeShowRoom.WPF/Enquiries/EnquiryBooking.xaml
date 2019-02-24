@@ -1,9 +1,9 @@
-﻿<Window x:Class="BikeShowRoom.WPF.Enquiries.EnquiryBooking"
+﻿<Window x:Class="addon365.UI.WPF.Enquiries.EnquiryBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BikeShowRoom.WPF.Converters"
+        xmlns:local="clr-namespace:addon365.UI.WPF.Converters"
         
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"

@@ -1,15 +1,15 @@
-﻿using Api.Database.Entity.User;
+﻿using addon365.Database.Entity.User;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Threenine.Data;
 using System.Linq;
-using Swc.Service;
+using addon365.Database.Service;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class UserService : IUserService
     {

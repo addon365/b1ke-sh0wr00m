@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Database.Entity.Inventory.Purchases;
-using Api.Database.Entity.Inventory.Products;
-using Api.Domain.Inventory;
-using Api.Domain.Paging;
+using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using Microsoft.Extensions.Logging;
 using Threenine.Data;
 using Threenine.Data.Paging;
 using Microsoft.EntityFrameworkCore;
-using Api.Database.Entity.Inventory;
-using Api.Database.Entity.Accounts;
-using Api.Database;
+using addon365.Database.Entity.Inventory;
+using addon365.Database.Entity.Accounts;
+using addon365.Database;
 
-namespace Swc.Service.Inventory
+namespace addon365.Database.Service.Inventory
 {
     public class PurchaseService : IPurchaseService
     {

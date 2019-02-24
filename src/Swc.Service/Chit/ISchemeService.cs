@@ -1,7 +1,7 @@
-﻿using Api.Database.Entity.Chit;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Chit;
+using addon365.Database.Service.Base;
 
-namespace Swc.Service.Chit
+namespace addon365.Database.Service.Chit
 {
     public interface ISchemeService : IBaseService<ChitScheme>
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Api.Database.Migrations
+namespace addon365.Database.Migrations
 {
     public partial class init : Migration
     {
@@ -257,7 +257,7 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Products.Product",
+                name: "Inventory.Products.Products",
                 schema: "addon",
                 columns: table => new
                 {
@@ -280,11 +280,11 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Products.Product", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Products.Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Products.ProductCompany",
+                name: "Inventory.Products.ProductsCompanies",
                 schema: "addon",
                 columns: table => new
                 {
@@ -301,11 +301,11 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Products.ProductCompany", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Products.ProductsCompanies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Products.ProductPropertyMaster",
+                name: "Inventory.Products.ProductsPropertiesMasters",
                 schema: "addon",
                 columns: table => new
                 {
@@ -320,11 +320,11 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Products.ProductPropertyMaster", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Products.ProductsPropertiesMasters", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Products.ProductType",
+                name: "Inventory.Products.ProductTypes",
                 schema: "addon",
                 columns: table => new
                 {
@@ -342,7 +342,7 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Products.ProductType", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Products.ProductTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -445,7 +445,8 @@ namespace Api.Database.Migrations
                 schema: "addon",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OtherId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
@@ -560,23 +561,23 @@ namespace Api.Database.Migrations
                 {
                     table.PrimaryKey("PK_Inventory.Products.ExtraFittingsAccessories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Products.ExtraFittingsAccessories_Inventory.Products.Product_AccessoriesProductItemId",
+                        name: "FK_Inventory.Products.ExtraFittingsAccessories_Inventory.Products.Products_AccessoriesProductItemId",
                         column: x => x.AccessoriesProductItemId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Inventory.Products.ExtraFittingsAccessories_Inventory.Products.Product_ProductId",
+                        name: "FK_Inventory.Products.ExtraFittingsAccessories_Inventory.Products.Products_ProductId",
                         column: x => x.ProductId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Products.ProductPropertiesMap",
+                name: "Inventory.Products.ProductsPropertiesMaps",
                 schema: "addon",
                 columns: table => new
                 {
@@ -587,19 +588,19 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Products.ProductPropertiesMap", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Products.ProductsPropertiesMaps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Products.ProductPropertiesMap_Inventory.Products.Product_ProductId",
+                        name: "FK_Inventory.Products.ProductsPropertiesMaps_Inventory.Products.Products_ProductId",
                         column: x => x.ProductId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Products.ProductPropertiesMap_Inventory.Products.ProductPropertyMaster_ProductPropertyMasterId",
+                        name: "FK_Inventory.Products.ProductsPropertiesMaps_Inventory.Products.ProductsPropertiesMasters_ProductPropertyMasterId",
                         column: x => x.ProductPropertyMasterId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.ProductPropertyMaster",
+                        principalTable: "Inventory.Products.ProductsPropertiesMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -675,7 +676,7 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Buyer",
+                name: "Inventory.Buyers",
                 schema: "addon",
                 columns: table => new
                 {
@@ -692,9 +693,9 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Buyer", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Buyers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Buyer_BusinessContact_BusinessContactId",
+                        name: "FK_Inventory.Buyers_BusinessContact_BusinessContactId",
                         column: x => x.BusinessContactId,
                         principalSchema: "addon",
                         principalTable: "BusinessContact",
@@ -703,7 +704,7 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Seller",
+                name: "Inventory.Sellers",
                 schema: "addon",
                 columns: table => new
                 {
@@ -720,9 +721,9 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Seller", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Seller_BusinessContact_BusinessContactId",
+                        name: "FK_Inventory.Sellers_BusinessContact_BusinessContactId",
                         column: x => x.BusinessContactId,
                         principalSchema: "addon",
                         principalTable: "BusinessContact",
@@ -925,7 +926,7 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Purchases.Purchase",
+                name: "Inventory.Purchases.Purchases",
                 schema: "addon",
                 columns: table => new
                 {
@@ -944,16 +945,16 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Purchases.Purchase", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Purchases.Purchases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.Purchase_Inventory.Seller_SellerId",
+                        name: "FK_Inventory.Purchases.Purchases_Inventory.Sellers_SellerId",
                         column: x => x.SellerId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Seller",
+                        principalTable: "Inventory.Sellers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.Purchase_Vouchers_VoucherId",
+                        name: "FK_Inventory.Purchases.Purchases_Vouchers_VoucherId",
                         column: x => x.VoucherId,
                         principalSchema: "addon",
                         principalTable: "Vouchers",
@@ -962,7 +963,44 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Sales.Sale",
+                name: "ChitSubscribers",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    SubscribeId = table.Column<string>(nullable: true),
+                    ChitSchemeId = table.Column<Guid>(nullable: false),
+                    CustomerId = table.Column<Guid>(nullable: false),
+                    JoinedDate = table.Column<DateTime>(nullable: false),
+                    ClosedVoucherId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChitSubscribers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChitSubscribers_ChitSchemes_ChitSchemeId",
+                        column: x => x.ChitSchemeId,
+                        principalSchema: "addon",
+                        principalTable: "ChitSchemes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChitSubscribers_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalSchema: "addon",
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Inventory.Sales.Sales",
                 schema: "addon",
                 columns: table => new
                 {
@@ -983,23 +1021,23 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Sales.Sale", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Sales.Sales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sales.Sale_Inventory.Buyer_BuyerId",
+                        name: "FK_Inventory.Sales.Sales_Inventory.Buyers_BuyerId",
                         column: x => x.BuyerId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Buyer",
+                        principalTable: "Inventory.Buyers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sales.Sale_Customers_CustomerId",
+                        name: "FK_Inventory.Sales.Sales_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalSchema: "addon",
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sales.Sale_Vouchers_VoucherId",
+                        name: "FK_Inventory.Sales.Sales_Vouchers_VoucherId",
                         column: x => x.VoucherId,
                         principalSchema: "addon",
                         principalTable: "Vouchers",
@@ -1034,10 +1072,10 @@ namespace Api.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EnquiryAccessories_Inventory.Products.Product_ProductId",
+                        name: "FK_EnquiryAccessories_Inventory.Products.Products_ProductId",
                         column: x => x.ProductId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1103,60 +1141,16 @@ namespace Api.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EnquiryProducts_Inventory.Products.Product_ProductId",
+                        name: "FK_EnquiryProducts_Inventory.Products.Products_ProductId",
                         column: x => x.ProductId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChitSubscribers",
-                schema: "addon",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    Deleted = table.Column<DateTime>(nullable: true),
-                    CreatedUserId = table.Column<int>(nullable: true),
-                    CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<Guid>(nullable: true),
-                    SubscribeId = table.Column<string>(nullable: true),
-                    ChitSchemaId = table.Column<Guid>(nullable: true),
-                    CustomerId = table.Column<Guid>(nullable: true),
-                    JoinedDate = table.Column<DateTime>(nullable: false),
-                    ClosedVoucherInfoIdId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChitSubscribers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ChitSubscribers_ChitSchemes_ChitSchemaId",
-                        column: x => x.ChitSchemaId,
-                        principalSchema: "addon",
-                        principalTable: "ChitSchemes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChitSubscribers_VouchersInfo_ClosedVoucherInfoIdId",
-                        column: x => x.ClosedVoucherInfoIdId,
-                        principalSchema: "addon",
-                        principalTable: "VouchersInfo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChitSubscribers_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalSchema: "addon",
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inventory.Purchases.PurchaseItem",
+                name: "Inventory.Purchases.PurchasesItems",
                 schema: "addon",
                 columns: table => new
                 {
@@ -1174,25 +1168,60 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Purchases.PurchaseItem", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Purchases.PurchasesItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.PurchaseItem_Inventory.Products.Product_ProductId",
+                        name: "FK_Inventory.Purchases.PurchasesItems_Inventory.Products.Products_ProductId",
                         column: x => x.ProductId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.PurchaseItem_Inventory.Purchases.Purchase_PurchaseId",
+                        name: "FK_Inventory.Purchases.PurchasesItems_Inventory.Purchases.Purchases_PurchaseId",
                         column: x => x.PurchaseId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Purchases.Purchase",
+                        principalTable: "Inventory.Purchases.Purchases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Sales.SaleItem",
+                name: "ChitSubscriberDues",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    ChitSubscriberId = table.Column<Guid>(nullable: false),
+                    DueNo = table.Column<string>(nullable: true),
+                    VoucherId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChitSubscriberDues", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChitSubscriberDues_ChitSubscribers_ChitSubscriberId",
+                        column: x => x.ChitSubscriberId,
+                        principalSchema: "addon",
+                        principalTable: "ChitSubscribers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChitSubscriberDues_Vouchers_VoucherId",
+                        column: x => x.VoucherId,
+                        principalSchema: "addon",
+                        principalTable: "Vouchers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Inventory.Sales.SalesItems",
                 schema: "addon",
                 columns: table => new
                 {
@@ -1211,19 +1240,19 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Sales.SaleItem", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Sales.SalesItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sales.SaleItem_Inventory.Products.Product_ProductId",
+                        name: "FK_Inventory.Sales.SalesItems_Inventory.Products.Products_ProductId",
                         column: x => x.ProductId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.Product",
+                        principalTable: "Inventory.Products.Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sales.SaleItem_Inventory.Sales.Sale_SaleId",
+                        name: "FK_Inventory.Sales.SalesItems_Inventory.Sales.Sales_SaleId",
                         column: x => x.SaleId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Sales.Sale",
+                        principalTable: "Inventory.Sales.Sales",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1258,42 +1287,7 @@ namespace Api.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChitSubscriberDues",
-                schema: "addon",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Modified = table.Column<DateTime>(nullable: false),
-                    Deleted = table.Column<DateTime>(nullable: true),
-                    CreatedUserId = table.Column<int>(nullable: true),
-                    CreatedDeviceId = table.Column<int>(nullable: true),
-                    BranchMasterId = table.Column<Guid>(nullable: true),
-                    ChitSubscriberId = table.Column<Guid>(nullable: true),
-                    DueNo = table.Column<string>(nullable: true),
-                    VoucherInfoId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChitSubscriberDues", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ChitSubscriberDues_ChitSubscribers_ChitSubscriberId",
-                        column: x => x.ChitSubscriberId,
-                        principalSchema: "addon",
-                        principalTable: "ChitSubscribers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChitSubscriberDues_VouchersInfo_VoucherInfoId",
-                        column: x => x.VoucherInfoId,
-                        principalSchema: "addon",
-                        principalTable: "VouchersInfo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inventory.Purchases.PurchaseItemPropertyMap",
+                name: "Inventory.Purchases.PurchasesItemsPropertiesMaps",
                 schema: "addon",
                 columns: table => new
                 {
@@ -1303,18 +1297,18 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Purchases.PurchaseItemPropertyMap", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Purchases.PurchasesItemsPropertiesMaps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.PurchaseItemPropertyMap_Inventory.Purchases.PurchaseItem_PurchaseItemId",
+                        name: "FK_Inventory.Purchases.PurchasesItemsPropertiesMaps_Inventory.Purchases.PurchasesItems_PurchaseItemId",
                         column: x => x.PurchaseItemId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Purchases.PurchaseItem",
+                        principalTable: "Inventory.Purchases.PurchasesItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Sales.SaleItemProperty",
+                name: "Inventory.Sales.SalesItemsProperties",
                 schema: "addon",
                 columns: table => new
                 {
@@ -1327,18 +1321,18 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Sales.SaleItemProperty", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Sales.SalesItemsProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sales.SaleItemProperty_Inventory.Sales.SaleItem_SaleItemId",
+                        name: "FK_Inventory.Sales.SalesItemsProperties_Inventory.Sales.SalesItems_SaleItemId",
                         column: x => x.SaleItemId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Sales.SaleItem",
+                        principalTable: "Inventory.Sales.SalesItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory.Purchases.PurchaseItemPropertyValue",
+                name: "Inventory.Purchases.PurchasesItemsPropertiesValues",
                 schema: "addon",
                 columns: table => new
                 {
@@ -1349,19 +1343,19 @@ namespace Api.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventory.Purchases.PurchaseItemPropertyValue", x => x.Id);
+                    table.PrimaryKey("PK_Inventory.Purchases.PurchasesItemsPropertiesValues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.PurchaseItemPropertyValue_Inventory.Products.ProductPropertyMaster_ProductPropertyMasterId",
+                        name: "FK_Inventory.Purchases.PurchasesItemsPropertiesValues_Inventory.Products.ProductsPropertiesMasters_ProductPropertyMasterId",
                         column: x => x.ProductPropertyMasterId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Products.ProductPropertyMaster",
+                        principalTable: "Inventory.Products.ProductsPropertiesMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory.Purchases.PurchaseItemPropertyValue_Inventory.Purchases.PurchaseItemPropertyMap_PurchaseItemPropertyMapId",
+                        name: "FK_Inventory.Purchases.PurchasesItemsPropertiesValues_Inventory.Purchases.PurchasesItemsPropertiesMaps_PurchaseItemPropertyMapId",
                         column: x => x.PurchaseItemPropertyMapId,
                         principalSchema: "addon",
-                        principalTable: "Inventory.Purchases.PurchaseItemPropertyMap",
+                        principalTable: "Inventory.Purchases.PurchasesItemsPropertiesMaps",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1397,22 +1391,16 @@ namespace Api.Database.Migrations
                 column: "ChitSubscriberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChitSubscriberDues_VoucherInfoId",
+                name: "IX_ChitSubscriberDues_VoucherId",
                 schema: "addon",
                 table: "ChitSubscriberDues",
-                column: "VoucherInfoId");
+                column: "VoucherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChitSubscribers_ChitSchemaId",
+                name: "IX_ChitSubscribers_ChitSchemeId",
                 schema: "addon",
                 table: "ChitSubscribers",
-                column: "ChitSchemaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ChitSubscribers_ClosedVoucherInfoIdId",
-                schema: "addon",
-                table: "ChitSubscribers",
-                column: "ClosedVoucherInfoIdId");
+                column: "ChitSchemeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChitSubscribers_CustomerId",
@@ -1499,9 +1487,9 @@ namespace Api.Database.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Buyer_BusinessContactId",
+                name: "IX_Inventory.Buyers_BusinessContactId",
                 schema: "addon",
-                table: "Inventory.Buyer",
+                table: "Inventory.Buyers",
                 column: "BusinessContactId");
 
             migrationBuilder.CreateIndex(
@@ -1517,99 +1505,99 @@ namespace Api.Database.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Products.ProductPropertiesMap_ProductId",
+                name: "IX_Inventory.Products.ProductsPropertiesMaps_ProductId",
                 schema: "addon",
-                table: "Inventory.Products.ProductPropertiesMap",
+                table: "Inventory.Products.ProductsPropertiesMaps",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Products.ProductPropertiesMap_ProductPropertyMasterId",
+                name: "IX_Inventory.Products.ProductsPropertiesMaps_ProductPropertyMasterId",
                 schema: "addon",
-                table: "Inventory.Products.ProductPropertiesMap",
+                table: "Inventory.Products.ProductsPropertiesMaps",
                 column: "ProductPropertyMasterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.Purchase_SellerId",
+                name: "IX_Inventory.Purchases.Purchases_SellerId",
                 schema: "addon",
-                table: "Inventory.Purchases.Purchase",
+                table: "Inventory.Purchases.Purchases",
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.Purchase_VoucherId",
+                name: "IX_Inventory.Purchases.Purchases_VoucherId",
                 schema: "addon",
-                table: "Inventory.Purchases.Purchase",
+                table: "Inventory.Purchases.Purchases",
                 column: "VoucherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.PurchaseItem_ProductId",
+                name: "IX_Inventory.Purchases.PurchasesItems_ProductId",
                 schema: "addon",
-                table: "Inventory.Purchases.PurchaseItem",
+                table: "Inventory.Purchases.PurchasesItems",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.PurchaseItem_PurchaseId",
+                name: "IX_Inventory.Purchases.PurchasesItems_PurchaseId",
                 schema: "addon",
-                table: "Inventory.Purchases.PurchaseItem",
+                table: "Inventory.Purchases.PurchasesItems",
                 column: "PurchaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.PurchaseItemPropertyMap_PurchaseItemId",
+                name: "IX_Inventory.Purchases.PurchasesItemsPropertiesMaps_PurchaseItemId",
                 schema: "addon",
-                table: "Inventory.Purchases.PurchaseItemPropertyMap",
+                table: "Inventory.Purchases.PurchasesItemsPropertiesMaps",
                 column: "PurchaseItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.PurchaseItemPropertyValue_ProductPropertyMasterId",
+                name: "IX_Inventory.Purchases.PurchasesItemsPropertiesValues_ProductPropertyMasterId",
                 schema: "addon",
-                table: "Inventory.Purchases.PurchaseItemPropertyValue",
+                table: "Inventory.Purchases.PurchasesItemsPropertiesValues",
                 column: "ProductPropertyMasterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Purchases.PurchaseItemPropertyValue_PurchaseItemPropertyMapId",
+                name: "IX_Inventory.Purchases.PurchasesItemsPropertiesValues_PurchaseItemPropertyMapId",
                 schema: "addon",
-                table: "Inventory.Purchases.PurchaseItemPropertyValue",
+                table: "Inventory.Purchases.PurchasesItemsPropertiesValues",
                 column: "PurchaseItemPropertyMapId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Sales.Sale_BuyerId",
+                name: "IX_Inventory.Sales.Sales_BuyerId",
                 schema: "addon",
-                table: "Inventory.Sales.Sale",
+                table: "Inventory.Sales.Sales",
                 column: "BuyerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Sales.Sale_CustomerId",
+                name: "IX_Inventory.Sales.Sales_CustomerId",
                 schema: "addon",
-                table: "Inventory.Sales.Sale",
+                table: "Inventory.Sales.Sales",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Sales.Sale_VoucherId",
+                name: "IX_Inventory.Sales.Sales_VoucherId",
                 schema: "addon",
-                table: "Inventory.Sales.Sale",
+                table: "Inventory.Sales.Sales",
                 column: "VoucherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Sales.SaleItem_ProductId",
+                name: "IX_Inventory.Sales.SalesItems_ProductId",
                 schema: "addon",
-                table: "Inventory.Sales.SaleItem",
+                table: "Inventory.Sales.SalesItems",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Sales.SaleItem_SaleId",
+                name: "IX_Inventory.Sales.SalesItems_SaleId",
                 schema: "addon",
-                table: "Inventory.Sales.SaleItem",
+                table: "Inventory.Sales.SalesItems",
                 column: "SaleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Sales.SaleItemProperty_SaleItemId",
+                name: "IX_Inventory.Sales.SalesItemsProperties_SaleItemId",
                 schema: "addon",
-                table: "Inventory.Sales.SaleItemProperty",
+                table: "Inventory.Sales.SalesItemsProperties",
                 column: "SaleItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory.Seller_BusinessContactId",
+                name: "IX_Inventory.Sellers_BusinessContactId",
                 schema: "addon",
-                table: "Inventory.Seller",
+                table: "Inventory.Sellers",
                 column: "BusinessContactId");
 
             migrationBuilder.CreateIndex(
@@ -1702,23 +1690,23 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Products.ProductCompany",
+                name: "Inventory.Products.ProductsCompanies",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Products.ProductPropertiesMap",
+                name: "Inventory.Products.ProductsPropertiesMaps",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Products.ProductType",
+                name: "Inventory.Products.ProductTypes",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Purchases.PurchaseItemPropertyValue",
+                name: "Inventory.Purchases.PurchasesItemsPropertiesValues",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Sales.SaleItemProperty",
+                name: "Inventory.Sales.SalesItemsProperties",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1742,6 +1730,10 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
+                name: "VouchersInfo",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
                 name: "FollowUpModes",
                 schema: "addon");
 
@@ -1758,15 +1750,15 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Products.ProductPropertyMaster",
+                name: "Inventory.Products.ProductsPropertiesMasters",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Purchases.PurchaseItemPropertyMap",
+                name: "Inventory.Purchases.PurchasesItemsPropertiesMaps",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Sales.SaleItem",
+                name: "Inventory.Sales.SalesItems",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1778,11 +1770,11 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "ChitSchemes",
+                name: "AccountBooks",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "VouchersInfo",
+                name: "ChitSchemes",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1790,15 +1782,11 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Purchases.PurchaseItem",
+                name: "Inventory.Purchases.PurchasesItems",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Sales.Sale",
-                schema: "addon");
-
-            migrationBuilder.DropTable(
-                name: "AccountBooks",
+                name: "Inventory.Sales.Sales",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1810,15 +1798,15 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Products.Product",
+                name: "Inventory.Products.Products",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Purchases.Purchase",
+                name: "Inventory.Purchases.Purchases",
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Buyer",
+                name: "Inventory.Buyers",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1826,7 +1814,7 @@ namespace Api.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "Inventory.Seller",
+                name: "Inventory.Sellers",
                 schema: "addon");
 
             migrationBuilder.DropTable(

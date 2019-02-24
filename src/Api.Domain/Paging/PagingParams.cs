@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Domain.Paging
+namespace addon365.Domain.Entity.Paging
 {
     public class PagingParams
 

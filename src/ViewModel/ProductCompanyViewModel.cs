@@ -1,8 +1,8 @@
-﻿using addon.BikeShowRoomService.WebService;
-using Api.Database.Entity.Inventory.Products;
+﻿using addon365.WebClient.Service.WebService;
+using addon365.Database.Entity.Inventory.Products;
 using System.Collections.Generic;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public class ProductCompanyViewModel:ViewModelBase
     {

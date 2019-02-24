@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.Inventory;
-using Api.Database.Entity.Inventory.Purchases;
-using Api.Domain.Inventory;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Inventory;
+using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Domain.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using Newtonsoft.Json;
-using Swc.Service.Inventory;
+using addon365.Database.Service.Inventory;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Threenine.Data.Paging;
 
-namespace addon.BikeShowRoomService.WebService.Inventory
+namespace addon365.WebClient.Service.WebService.Inventory
 {
     public class SellerWebService : ISellerService
     {

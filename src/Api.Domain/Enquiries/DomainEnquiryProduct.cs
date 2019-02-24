@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Domain.Enquiries
+namespace addon365.Domain.Entity.Enquiries
 {
     public class DomainEnquiryProduct
     {

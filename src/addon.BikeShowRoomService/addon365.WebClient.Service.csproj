@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Swc.Service\Swc.Service.csproj" />
+    <ProjectReference Include="..\Swc.Service\addon365.Database.Service.csproj" />
   </ItemGroup>
 
 </Project>

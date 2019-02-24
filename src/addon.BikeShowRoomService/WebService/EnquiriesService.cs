@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Api.Domain.Enquiries;
+using addon365.Domain.Entity.Enquiries;
 using Threenine.Data;
 using AutoMapper;
-using Api.Database.Entity.Enquiries;
-using Swc.Service;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Service;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class EnquiriesService : IEnquiriesService
     {
@@ -24,7 +24,7 @@ namespace addon.BikeShowRoomService.WebService
         {
             _httpClient = WebDataClient.Client;
         }
-        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllActive(Api.Domain.Paging.PagingParams pagingParams)
+        public Threenine.Data.Paging.IPaginate<Enquiry> GetAllActive(addon365.Domain.Entity.Paging.PagingParams pagingParams)
         {
 
             HttpResponseMessage response = _httpClient.GetAsync("Enquiries?"+ "PageNumber="+pagingParams.PageNumber+ "&PageSize="+pagingParams.PageSize).Result;

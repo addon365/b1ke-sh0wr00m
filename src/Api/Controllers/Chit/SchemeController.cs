@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Database.Entity.Chit;
+using addon365.Database.Entity.Chit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service.Chit;
+using addon365.Database.Service.Chit;
 
-namespace swcApi.Controllers.Chit
+namespace addon365.Web.Api.Controllers.Chit
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]

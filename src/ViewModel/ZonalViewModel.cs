@@ -1,10 +1,10 @@
-﻿using addon.BikeShowRoomService.WebService;
-using Api.Database.Entity;
+﻿using addon365.WebClient.Service.WebService;
+using addon365.Database.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
    public class ZonalViewModel:ViewModelBase
     {

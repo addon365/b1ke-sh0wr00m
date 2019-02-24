@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Database.Entity.Crm
+namespace addon365.Database.Entity.Crm
 {
     public class Contact : BaseEntityWithLogFields
     {

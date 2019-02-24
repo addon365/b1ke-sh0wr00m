@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Domain.Bots;
+using addon365.Domain.Entity.Bots;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service;
+using addon365.Database.Service;
 using Swashbuckle.AspNetCore;
-using Api.Domain.Enquiries;
-using Api.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Enquiries;
+using addon365.Database.Entity.Enquiries;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-using Api.Domain.Paging;
+using addon365.Domain.Entity.Paging;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

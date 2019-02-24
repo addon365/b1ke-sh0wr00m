@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Api.Database.Entity.Enquiries;
-using Api.Domain.Enquiries;
-using Api.Domain.Paging;
+using addon365.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Enquiries;
+using addon365.Domain.Entity.Paging;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public interface IEnquiriesService
     {

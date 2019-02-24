@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Domain.Inventory
+namespace addon365.Domain.Entity.Inventory
 {
     public class ProductWise
     {

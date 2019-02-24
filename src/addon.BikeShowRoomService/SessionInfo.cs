@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.User;
+﻿using addon365.Database.Entity.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace addon.BikeShowRoomService
+namespace addon365.WebClient.Service
 {
     public class SessionInfo
     {

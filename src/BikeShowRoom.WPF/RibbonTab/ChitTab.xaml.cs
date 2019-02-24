@@ -5,11 +5,11 @@
 // licensing@syncfusion.com. Any infringement will be prosecuted under
 // applicable laws. 
 #endregion
-using BikeShowRoom.WPF.Chit;
-using BikeShowRoom.WPF.Chit.Reports;
+using addon365.UI.WPF.Chit;
+using addon365.UI.WPF.Chit.Reports;
 using Syncfusion.Windows.Tools.Controls;
 using System.Windows;
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for Folder.xaml

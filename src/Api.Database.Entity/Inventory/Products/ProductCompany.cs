@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Inventory.Products
+namespace addon365.Database.Entity.Inventory.Products
 {
     [Table("Inventory.Products.ProductsCompanies")]
     public class ProductCompany:BaseEntityWithLogFields

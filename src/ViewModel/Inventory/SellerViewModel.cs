@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using Swc.Service.Inventory;
-using Api.Database.Entity.Inventory;
+using addon365.Database.Service.Inventory;
+using addon365.Database.Entity.Inventory;
 
-namespace ViewModel.Inventory
+namespace addon365.UI.ViewModel.Inventory
 {
     public class SellerViewModel : ViewModelBase
     {
@@ -24,7 +24,7 @@ namespace ViewModel.Inventory
         }
         private void GeneralInitilize()
         {
-            _repository = new addon.BikeShowRoomService.WebService.Inventory.SellerWebService();
+            _repository = new addon365.WebClient.Service.WebService.Inventory.SellerWebService();
 
            
 
@@ -36,8 +36,8 @@ namespace ViewModel.Inventory
         {
             Mode = ScreenOpenMode.New;
             CurrentSeller=new Seller();
-            _CurrentSeller.BusinessContact = new Api.Database.Entity.Crm.BusinessContact();
-            _CurrentSeller.BusinessContact.ContactAddress = new Api.Database.Entity.Crm.AddressMaster();
+            _CurrentSeller.BusinessContact = new addon365.Database.Entity.Crm.BusinessContact();
+            _CurrentSeller.BusinessContact.ContactAddress = new addon365.Database.Entity.Crm.AddressMaster();
         }
         [Conditional("DEBUG")]
         private void TestData()

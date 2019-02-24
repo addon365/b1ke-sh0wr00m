@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Accounts;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Swc.Service.Accounts
+namespace addon365.Database.Service.Accounts
 {
     public interface IAccountBookService:IBaseService<AccountBook>
     {

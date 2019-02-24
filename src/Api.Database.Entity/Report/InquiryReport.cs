@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Api.Database.Entity.Report
+namespace addon365.Database.Entity.Report
 {
     public class InquiryReport
     {

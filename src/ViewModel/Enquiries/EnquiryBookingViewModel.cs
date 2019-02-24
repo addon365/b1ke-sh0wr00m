@@ -1,13 +1,13 @@
 ﻿
-using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Enquiries;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Enquiries;
 using Microsoft.Extensions.DependencyInjection;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ViewModel.Enquiries
+namespace addon365.UI.ViewModel.Enquiries
 {
     public class EnquiryBookingViewModel : ViewModelBase
     {
@@ -26,7 +26,7 @@ namespace ViewModel.Enquiries
             WireCommands();
 
             _repository = Startup.Instance.provider.GetService<IBookingService>();
-            _repository = new addon.BikeShowRoomService.WebService.BookingService();
+            _repository = new addon365.WebClient.Service.WebService.BookingService();
             if(enq.Voucher==null)
             { 
                 CurrentAmount = new VoucherInfo();

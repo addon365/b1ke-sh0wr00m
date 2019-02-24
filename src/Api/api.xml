@@ -1,41 +1,41 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>swcApi</name>
+        <name>addon365.Web.Api</name>
     </assembly>
     <members>
-        <member name="T:swcApi.Controllers.AccessoriesController">
+        <member name="T:addon365.Web.Api.Controllers.AccessoriesController">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.AccessoriesController.#ctor(Swc.Service.IAccessoriesService)">
+        <member name="M:addon365.Web.Api.Controllers.AccessoriesController.#ctor(addon365.Database.Service.IAccessoriesService)">
             <inheritdoc />
             
         </member>
-        <member name="T:swcApi.Controllers.EchoController">
+        <member name="T:addon365.Web.Api.Controllers.EchoController">
             <summary>
             Echo Contollers is to test the server running status.
             </summary>
         </member>
-        <member name="M:swcApi.Controllers.EchoController.SayWelcome">
+        <member name="M:addon365.Web.Api.Controllers.EchoController.SayWelcome">
             <summary>
             Just return welcome message without any authentication.
             </summary>
             <returns></returns>
         </member>
-        <member name="T:swcApi.Controllers.EnquiriesController">
+        <member name="T:addon365.Web.Api.Controllers.EnquiriesController">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.EnquiriesController.#ctor(Swc.Service.IEnquiriesService)">
+        <member name="M:addon365.Web.Api.Controllers.EnquiriesController.#ctor(addon365.Database.Service.IEnquiriesService)">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.EnquiriesController.Get">
+        <member name="M:addon365.Web.Api.Controllers.EnquiriesController.Get">
              <summary>
               Returns a list of all active referrer spammers
              </summary>
             <remarks>
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.EnquiriesController.Post(Api.Domain.Enquiries.InsertEnquiryModel)">
+        <member name="M:addon365.Web.Api.Controllers.EnquiriesController.Post(addon365.Domain.Entity.Enquiries.InsertEnquiryModel)">
              <summary>
               Returns a collection of values
              </summary>
@@ -43,7 +43,7 @@
              This is a remark to add additional information about this method
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.EnquiriesController.MultiDetail(System.String)">
+        <member name="M:addon365.Web.Api.Controllers.EnquiriesController.MultiDetail(System.String)">
              <summary>
               Returns Details of a selected Referrer
              </summary>
@@ -51,12 +51,12 @@
             
             </remarks>
         </member>
-        <member name="T:swcApi.Controllers.InquiryReportController">
+        <member name="T:addon365.Web.Api.Controllers.InquiryReportController">
             <summary>
             Provides REST API for dashboard for Angular Client App.
             </summary>
         </member>
-        <member name="M:swcApi.Controllers.InquiryReportController.#ctor(Swc.Service.Report.IInquiryReportService,Microsoft.Extensions.Options.IOptions{swcApi.Utils.AppSettings},Microsoft.Extensions.Logging.ILogger{swcApi.Controllers.UserController})">
+        <member name="M:addon365.Web.Api.Controllers.InquiryReportController.#ctor(addon365.Database.Service.Report.IInquiryReportService,Microsoft.Extensions.Options.IOptions{addon365.Web.Api.Utils.AppSettings},Microsoft.Extensions.Logging.ILogger{addon365.Web.Api.Controllers.UserController})">
             <summary>
             Injecting required instances
             </summary>
@@ -64,27 +64,27 @@
             <param name="appSettings"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:swcApi.Controllers.InquiryReportController.GetInquiriesBasedOnProduct">
+        <member name="M:addon365.Web.Api.Controllers.InquiryReportController.GetInquiriesBasedOnProduct">
             <summary>
             Returns the number of inquiries happened based on product in the given year.
             </summary>
             <returns>Number of Inquries based on product.</returns>
         </member>
-        <member name="T:swcApi.Controllers.ProductController">
+        <member name="T:addon365.Web.Api.Controllers.ProductController">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.ProductController.#ctor(Swc.Service.IProductService)">
+        <member name="M:addon365.Web.Api.Controllers.ProductController.#ctor(addon365.Database.Service.IProductService)">
             <inheritdoc />
             
         </member>
-        <member name="M:swcApi.Controllers.ProductController.Get">
+        <member name="M:addon365.Web.Api.Controllers.ProductController.Get">
              <summary>
               Returns a list of all active referrer spammers
              </summary>
             <remarks>
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.ProductController.Get(System.Int32)">
+        <member name="M:addon365.Web.Api.Controllers.ProductController.Get(System.Int32)">
              <summary>
               Returns Details of a selected Referrer
              </summary>
@@ -92,7 +92,7 @@
             
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.ProductController.ProductPost(Api.Database.Entity.Products.Product)">
+        <member name="M:addon365.Web.Api.Controllers.ProductController.ProductPost(addon365.Database.Entity.Products.Product)">
              <summary>
               Returns a collection of values
              </summary>
@@ -100,7 +100,7 @@
              This is a remark to add additional information about this method
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.ProductController.Detail(System.String)">
+        <member name="M:addon365.Web.Api.Controllers.ProductController.Detail(System.String)">
              <summary>
               Returns Details of a selected Referrer
              </summary>
@@ -108,20 +108,20 @@
             
             </remarks>
         </member>
-        <member name="T:swcApi.Controllers.ReferrerController">
+        <member name="T:addon365.Web.Api.Controllers.ReferrerController">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.ReferrerController.#ctor(Swc.Service.IReferrerService)">
+        <member name="M:addon365.Web.Api.Controllers.ReferrerController.#ctor(addon365.Database.Service.IReferrerService)">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.ReferrerController.Get">
+        <member name="M:addon365.Web.Api.Controllers.ReferrerController.Get">
              <summary>
               Returns a list of all active referrer spammers
              </summary>
             <remarks>
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.ReferrerController.Post(Api.Domain.Bots.Referrer)">
+        <member name="M:addon365.Web.Api.Controllers.ReferrerController.Post(addon365.Domain.Entity.Bots.Referrer)">
              <summary>
               Returns a collection of values
              </summary>
@@ -129,7 +129,7 @@
              This is a remark to add additional information about this method
             </remarks>
         </member>
-        <member name="M:swcApi.Controllers.ReferrerController.Detail(System.String)">
+        <member name="M:addon365.Web.Api.Controllers.ReferrerController.Detail(System.String)">
              <summary>
               Returns Details of a selected Referrer
              </summary>
@@ -137,10 +137,10 @@
             
             </remarks>
         </member>
-        <member name="T:swcApi.Controllers.SalesController">
+        <member name="T:addon365.Web.Api.Controllers.SalesController">
             <inheritdoc />
         </member>
-        <member name="M:swcApi.Controllers.SalesController.#ctor(Swc.Service.Sales.ISalesService)">
+        <member name="M:addon365.Web.Api.Controllers.SalesController.#ctor(addon365.Database.Service.Sales.ISalesService)">
             <inheritdoc />
         </member>
     </members>

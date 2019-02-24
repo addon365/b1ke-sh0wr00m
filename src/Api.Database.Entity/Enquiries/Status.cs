@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Api.Database.Entity.Enquiries
+namespace addon365.Database.Entity.Enquiries
 {
     public class EnquiryStatus : BaseEntityWithLogFields
     {

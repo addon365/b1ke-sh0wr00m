@@ -1,7 +1,7 @@
-﻿using Api.Database.Entity.Inventory.Purchases;
+﻿using addon365.Database.Entity.Inventory.Purchases;
 using System.Collections.Generic;
 
-namespace ViewModel.Inventory
+namespace addon365.UI.ViewModel.Inventory
 {
     public class PropertyValueViewModel : ViewModelBase
     {

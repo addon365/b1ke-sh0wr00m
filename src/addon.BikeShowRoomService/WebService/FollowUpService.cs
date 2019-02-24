@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 using Newtonsoft.Json;
-using Swc.Service;
-using Swc.Service.Crm;
+using addon365.Database.Service;
+using addon365.Database.Service.Crm;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class FollowUpService : IFollowUpService
     {

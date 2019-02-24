@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <summary>
     /// Echo Contollers is to test the server running status.

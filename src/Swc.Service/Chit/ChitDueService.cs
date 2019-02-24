@@ -1,16 +1,16 @@
-﻿using Api.Database.Entity.Chit;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Chit;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Threenine.Data;
 using Microsoft.EntityFrameworkCore;
-using Api.Domain.Chit;
-using Api.Database.Entity.Accounts;
-using Swc.Service.Accounts;
-using Api.Database.Entity.Crm;
+using addon365.Domain.Entity.Chit;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Service.Accounts;
+using addon365.Database.Entity.Crm;
 
-namespace Swc.Service.Chit
+namespace addon365.Database.Service.Chit
 {
     public class ChitDueService : BaseService<ChitSubriberDue>, IChitDueService
     {

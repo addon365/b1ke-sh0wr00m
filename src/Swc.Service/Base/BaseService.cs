@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity;
+﻿using addon365.Database.Entity;
 using System;
 using System.Collections.Generic;
 using Threenine.Data;
 
-namespace Swc.Service.Base
+namespace addon365.Database.Service.Base
 {
     public class BaseService<T> : IBaseService<T> where T : BaseEntityWithLogFields
     {

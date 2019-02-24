@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Domain
+namespace addon365.Domain.Entity
 {
     public class Marker
     {

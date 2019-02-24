@@ -1,12 +1,12 @@
-﻿<Window x:Class="BikeShowRoom.WPF.Chit.Reports.SubscriberReportWindow"
+﻿<Window x:Class="addon365.UI.WPF.Chit.Reports.SubscriberReportWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BikeShowRoom.WPF.Chit.Reports"
+        xmlns:local="clr-namespace:addon365.UI.WPF.Chit.Reports"
         xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
-        xmlns:utils="clr-namespace:BikeShowRoom.WPF.Converters"
+        xmlns:utils="clr-namespace:addon365.UI.WPF.Converters"
         Title="SubscriberReportWindow" Height="450" Width="800">
     <Window.Resources>
         <utils:BoolToVisibilityConverter x:Key="converter"/>

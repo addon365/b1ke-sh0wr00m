@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

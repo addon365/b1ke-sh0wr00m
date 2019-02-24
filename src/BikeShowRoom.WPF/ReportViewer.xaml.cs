@@ -2,7 +2,7 @@
 using System.Windows;
 
 
-namespace BikeShowRoom.WPF
+namespace addon365.UI.WPF
 {
     /// <summary>
     /// Interaction logic for ReportViewer.xaml

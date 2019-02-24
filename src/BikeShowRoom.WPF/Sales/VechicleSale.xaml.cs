@@ -1,8 +1,8 @@
 ﻿using System.Windows;
-using ViewModel;
-using ViewModel.Sales;
+using addon365.UI.ViewModel;
+using addon365.UI.ViewModel.Sales;
 
-namespace BikeShowRoom.WPF.Sales
+namespace addon365.UI.WPF.Sales
 {
     /// <summary>
     /// Interaction logic for Enquiries.xaml

@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity.Inventory.Products;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Swc.Service;
+using addon365.Database.Service;
 using System.Collections.Generic;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]

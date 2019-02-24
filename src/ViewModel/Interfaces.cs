@@ -1,6 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     public interface IViewUI
     {

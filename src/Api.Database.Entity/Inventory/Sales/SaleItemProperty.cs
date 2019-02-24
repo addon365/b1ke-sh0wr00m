@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Inventory.Sales
+namespace addon365.Database.Entity.Inventory.Sales
 {
 
     [Table("Inventory.Sales.SalesItemsProperties")]

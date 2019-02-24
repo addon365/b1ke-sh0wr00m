@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Products;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Database.Entity.Inventory.Sales
+namespace addon365.Database.Entity.Inventory.Sales
 {
     [Table("Inventory.Sales.SalesItems")]
     public class SaleItem:BaseEntityWithLogFields

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api.Database.Entity.Threats;
-using Api.Domain.Bots;
+using addon365.Database.Entity.Threats;
+using addon365.Domain.Entity.Bots;
 using Threenine.Data;
 using AutoMapper;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class ReferrerService : IReferrerService
     {

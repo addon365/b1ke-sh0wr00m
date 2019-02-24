@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\addon.BikeShowRoomService\addon.BikeShowRoomService.csproj" />
-    <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
-    <ProjectReference Include="..\Api.Domain\Api.Domain.csproj" />
-    <ProjectReference Include="..\Swc.Service\Swc.Service.csproj" />
+    <ProjectReference Include="..\addon.BikeShowRoomService\addon365.WebClient.Service.csproj" />
+    <ProjectReference Include="..\Api.Database.Entity\addon365.Database.Entity.csproj" />
+    <ProjectReference Include="..\Api.Domain\addon365.Domain.Entity.csproj" />
+    <ProjectReference Include="..\Swc.Service\addon365.Database.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

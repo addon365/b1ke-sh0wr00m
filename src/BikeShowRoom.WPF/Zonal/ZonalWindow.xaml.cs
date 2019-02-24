@@ -11,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Zonal
+namespace addon365.UI.WPF.Zonal
 {
     /// <summary>
     /// Interaction logic for ZonalWindow.xaml
     /// </summary>
     public partial class ZonalWindow : Window
     {
-        ZonalViewModel viewmodel;
+        ZonalViewModel ViewModel;
         public ZonalWindow()
         {
             InitializeComponent();
-            viewmodel = new ZonalViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
-            base.DataContext = viewmodel;
+            ViewModel = new ZonalViewModel();
+            ViewModel.InsertCommand.IsEnabled = true;
+            base.DataContext = ViewModel;
         }
 
         private void insertButton_Click(object sender, RoutedEventArgs e)

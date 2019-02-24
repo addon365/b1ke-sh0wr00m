@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity;
-using Api.Database.Tests.Utils;
+﻿using addon365.Database.Entity;
+using addon365.Database.Tests.Utils;
 using FizzWare.NBuilder;
 using Xunit;
 
-namespace Api.Database.Tests
+namespace addon365.Database.Tests
 {
     [Collection("Database collection")]
     public class EnquiryTest : IClassFixture<ContextFactory>

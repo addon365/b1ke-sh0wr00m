@@ -1,7 +1,7 @@
-﻿using Api.Database.Entity.Enquiries;
+﻿using addon365.Database.Entity.Enquiries;
 using AutoMapper;
 
-namespace Api.Domain.Enquiries
+namespace addon365.Domain.Entity.Enquiries
 {
 
     //public class StatusResolver : IValueResolver<Enquiry, Enquiries, string>

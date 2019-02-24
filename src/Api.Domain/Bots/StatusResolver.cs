@@ -1,7 +1,7 @@
-﻿using Api.Database.Entity.Threats;
+﻿using addon365.Database.Entity.Threats;
 using AutoMapper;
 
-namespace Api.Domain.Bots
+namespace addon365.Domain.Entity.Bots
 {
 
     public class StatusResolver : IValueResolver<Threat, Referrer, string>

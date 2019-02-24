@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace swcApi.Utils.Exceptions
+namespace addon365.Web.Api.Utils.Exceptions
 {
     public class ExceptionMiddleware
     {

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Api.Database
+namespace addon365.Database
 {
     public static class DbContextExtension
     {

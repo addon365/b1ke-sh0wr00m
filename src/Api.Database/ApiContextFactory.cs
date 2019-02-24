@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 
-namespace Api.Database
+namespace addon365.Database
 {
 public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
     {

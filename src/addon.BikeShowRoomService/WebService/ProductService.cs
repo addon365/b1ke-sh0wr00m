@@ -1,13 +1,13 @@
-﻿using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Products;
 using Newtonsoft.Json;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class ProductService : IProductService
     {
@@ -53,7 +53,7 @@ namespace addon.BikeShowRoomService.WebService
 
             return types;
         }
-        public Threenine.Data.Paging.IPaginate<Product> GetAllActive(Api.Domain.Paging.PagingParams pagingParams)
+        public Threenine.Data.Paging.IPaginate<Product> GetAllActive(addon365.Domain.Entity.Paging.PagingParams pagingParams)
         {
             HttpResponseMessage response = _httpClient.GetAsync("Product?" + "PageNumber=" + pagingParams.PageNumber + "&PageSize=" + pagingParams.PageSize).Result;
             Threenine.Data.Paging.IPaginate<Product> products = null;

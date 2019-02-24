@@ -1,12 +1,12 @@
-﻿using Api.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Products;
 using Newtonsoft.Json;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class AccessoriesService : IAccessoriesService
     {

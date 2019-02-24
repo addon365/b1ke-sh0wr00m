@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Inventory.Purchases;
-using Api.Domain.Inventory;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Domain.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using System.Threading.Tasks;
 using Threenine.Data.Paging;
 
-namespace Swc.Service.Inventory
+namespace addon365.Database.Service.Inventory
 {
     public interface IPurchaseService
     {

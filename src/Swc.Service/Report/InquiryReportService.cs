@@ -1,9 +1,9 @@
-﻿using Api.Database.Entity.Report;
+﻿using addon365.Database.Entity.Report;
 using System;
 using System.Collections.Generic;
 using Threenine.Data;
 
-namespace Swc.Service.Report
+namespace addon365.Database.Service.Report
 {
     /// <summary>
     /// Implementation to serve Inquiry reports in different formats.

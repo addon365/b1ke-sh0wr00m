@@ -1,16 +1,16 @@
-﻿using addon.BikeShowRoomService.BaseService;
-using Api.Database.Entity.Chit;
-using Api.Database.Entity.Crm;
-using Api.Domain.Chit.Reports;
+﻿using addon365.WebClient.Service.BaseService;
+using addon365.Database.Entity.Chit;
+using addon365.Database.Entity.Crm;
+using addon365.Domain.Entity.Chit.Reports;
 using Newtonsoft.Json;
-using Swc.Service.Chit;
+using addon365.Database.Service.Chit;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace addon.BikeShowRoomService.WebService.Chit
+namespace addon365.WebClient.Service.WebService.Chit
 {
     public class SubsriberService : BaseClientService<ChitSubscriber>, ISubscribeService
     {

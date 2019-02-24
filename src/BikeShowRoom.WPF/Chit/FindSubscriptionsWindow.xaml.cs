@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel.Chit;
+using addon365.UI.ViewModel.Chit;
 
-namespace BikeShowRoom.WPF.Chit
+namespace addon365.UI.WPF.Chit
 {
     /// <summary>
     /// Interaction logic for FindSubscriptionsWindow.xaml
@@ -23,8 +23,8 @@ namespace BikeShowRoom.WPF.Chit
         public FindSubscriptionsWindow()
         {
             InitializeComponent();
-            var viewModel = new FindSubscriptionViewModel();
-            base.DataContext = viewModel;
+            var ViewModel = new FindSubscriptionViewModel();
+            base.DataContext = ViewModel;
         }
     }
 }

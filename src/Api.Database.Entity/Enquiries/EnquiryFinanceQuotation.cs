@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Database.Entity.Enquiries
+namespace addon365.Database.Entity.Enquiries
 {
     public class EnquiryFinanceQuotation:BaseEntityWithLogFields
     {

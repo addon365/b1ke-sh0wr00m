@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using CrystalDecisions.CrystalReports.Engine;
-using ViewModel;
-using ViewModel.Inventory;
+using addon365.UI.ViewModel;
+using addon365.UI.ViewModel.Inventory;
 
-namespace BikeShowRoom.WPF.Inventory
+namespace addon365.UI.WPF.Inventory
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
@@ -11,18 +11,18 @@ namespace BikeShowRoom.WPF.Inventory
     public partial class PurchaseList : Window
     {
         //[Dependency]
-        //public PurchaseListViewModel viewmodel { set { _ViewModel = value; } }
+        //public PurchaseListViewModel addon365.UI.ViewModel { set { _ViewModel = value; } }
         PurchaseListViewModel _ViewModel;
-        public PurchaseList(PurchaseListViewModel viewmodel)
+        public PurchaseList(PurchaseListViewModel ViewModel)
         {
             InitializeComponent();
-            _ViewModel = viewmodel;
-            DataContext = viewmodel;
+            _ViewModel = ViewModel;
+            DataContext = ViewModel;
             _ViewModel.Edit = Edit;
 
         }
       
-        public void Edit(Api.Database.Entity.Inventory.Purchases.Purchase identifier)
+        public void Edit(addon365.Database.Entity.Inventory.Purchases.Purchase identifier)
         {
             PurchaseViewModel ViewModel = new PurchaseViewModel(identifier);
             Purchase en = new Purchase();

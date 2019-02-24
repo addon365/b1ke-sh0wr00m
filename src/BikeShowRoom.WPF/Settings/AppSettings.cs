@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BikeShowRoom.WPF.Settings
+namespace addon365.UI.WPF.Settings
 {
     sealed class AppSettings : ApplicationSettingsBase
     {

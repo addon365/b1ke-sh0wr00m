@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Api.Database.Entity.Accounts;
+using addon365.Database.Entity.Accounts;
 using Threenine.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity;
-using Api.Domain.Paging;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity;
+using addon365.Domain.Entity.Paging;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class BookingService : IBookingService
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Api.Database.Entity.Report;
+using addon365.Database.Entity.Report;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Swc.Service.Report;
-using swcApi.Utils;
+using addon365.Database.Service.Report;
+using addon365.Web.Api.Utils;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
     /// <summary>
     /// Provides REST API for dashboard for Angular Client App.

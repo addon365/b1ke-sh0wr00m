@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Api.Database.Entity.Threats;
+using addon365.Database.Entity.Threats;
 using AutoMapper;
 using Threenine.Map;
 
-namespace Api.Domain.Bots
+namespace addon365.Domain.Entity.Bots
 {
   public  class AddRefererer : ICustomMap
     {

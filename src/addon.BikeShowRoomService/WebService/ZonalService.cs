@@ -1,13 +1,13 @@
-﻿using Api.Database.Entity;
+﻿using addon365.Database.Entity;
 using Newtonsoft.Json;
-using Swc.Service;
+using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
    public class ZonalService:IZonalService
     {

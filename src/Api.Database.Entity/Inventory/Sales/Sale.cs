@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Crm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Api.Database.Entity.Inventory.Sales
+namespace addon365.Database.Entity.Inventory.Sales
 {
     [Table("Inventory.Sales.Sales")]
     public class Sale:BaseEntityWithLogFields

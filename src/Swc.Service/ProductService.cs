@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using AutoMapper;
 using Threenine.Data;
 using System.Linq;
-using Api.Domain.Paging;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Paging;
+using addon365.Database.Entity.Inventory.Products;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class ProductService : IProductService
     {

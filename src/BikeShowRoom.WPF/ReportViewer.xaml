@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
-        x:Class="BikeShowRoom.WPF.ReportViewer"
+        x:Class="addon365.UI.WPF.ReportViewer"
         mc:Ignorable="d"
         Title="ReportViewer" Height="450" Width="800">
     <Grid>

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Api.Database.Entity.Threats
+namespace addon365.Database.Entity.Threats
 {
     public class Status : BaseEntityWithLogFields
     {

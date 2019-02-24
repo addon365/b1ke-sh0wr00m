@@ -1,20 +1,20 @@
 ﻿using System.Windows;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Products
+namespace addon365.UI.WPF.Products
 {
     /// <summary>
     /// Interaction logic for ProductInsertWindow.xaml
     /// </summary>
     public partial class ProductCompanyWindow : Window
     {
-        ProductCompanyViewModel viewmodel;
+        ProductCompanyViewModel ViewModel;
         public ProductCompanyWindow()
         {
             InitializeComponent();
-            viewmodel = new ProductCompanyViewModel();
-            viewmodel.InsertCommand.IsEnabled = true;
-            base.DataContext = viewmodel;
+            ViewModel = new ProductCompanyViewModel();
+            ViewModel.InsertCommand.IsEnabled = true;
+            base.DataContext = ViewModel;
         }
 
         private void insertBtn_Click(object sender, RoutedEventArgs e)

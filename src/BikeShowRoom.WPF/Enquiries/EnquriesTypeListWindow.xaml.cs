@@ -11,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Enquiries
+namespace addon365.UI.WPF.Enquiries
 {
     /// <summary>
     /// Interaction logic for EnquriesTypeListWindow.xaml
     /// </summary>
     public partial class EnquriesTypeListWindow : Window
     {
-        EnquiryTypeViewModel viewmodel;
+        EnquiryTypeViewModel ViewModel;
         public EnquriesTypeListWindow()
         {
             InitializeComponent();
-            viewmodel = new EnquiryTypeViewModel();
-            base.DataContext = viewmodel;
-            viewmodel.DeleteCommand.IsEnabled = true;
+            ViewModel = new EnquiryTypeViewModel();
+            base.DataContext = ViewModel;
+            ViewModel.DeleteCommand.IsEnabled = true;
         }
 
         private void deletebtn_Click(object sender, RoutedEventArgs e)

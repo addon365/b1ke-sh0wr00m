@@ -1,4 +1,4 @@
-﻿using BikeShowRoom.WPF.Enquiries;
+﻿using addon365.UI.WPF.Enquiries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +12,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Products
+namespace addon365.UI.WPF.Products
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
     public partial class ProductListWindow : Window
     {
-        ProductListViewModel viewmodel;
+        ProductListViewModel ViewModel;
         public ProductListWindow()
         {
             InitializeComponent();
-            viewmodel = new ProductListViewModel();
-            viewmodel.msg = new CustomMessageBox();
-            base.DataContext = viewmodel;
+            ViewModel = new ProductListViewModel();
+            ViewModel.msg = new CustomMessageBox();
+            base.DataContext = ViewModel;
 
         }
     }

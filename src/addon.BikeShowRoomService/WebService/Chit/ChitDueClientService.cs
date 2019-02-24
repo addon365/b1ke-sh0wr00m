@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using addon.BikeShowRoomService.BaseService;
-using Api.Database.Entity.Chit;
-using Api.Domain.Chit;
+using addon365.WebClient.Service.BaseService;
+using addon365.Database.Entity.Chit;
+using addon365.Domain.Entity.Chit;
 using Newtonsoft.Json;
-using Swc.Service.Chit;
+using addon365.Database.Service.Chit;
 
-namespace addon.BikeShowRoomService.WebService.Chit
+namespace addon365.WebClient.Service.WebService.Chit
 {
     public class ChitDueClientService : BaseClientService<ChitSubriberDue>
          , IChitDueService

@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace addon.BikeShowRoomService
+namespace addon365.WebClient.Service
 {
     public class WebDataClient
     {
@@ -19,7 +19,7 @@ namespace addon.BikeShowRoomService
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             _client = new HttpClient();
 #if !DEBUG
-            _client.BaseAddress = new Uri("https://swcapi20181212091502.azurewebsites.net/api/svb/v1.0/");
+            _client.BaseAddress = new Uri("https://addon365.Web.Api20181212091502.azurewebsites.net/api/svb/v1.0/");
 #else
             _client.BaseAddress = new Uri("http://localhost:5000/api/svb/v1.0/");
 #endif

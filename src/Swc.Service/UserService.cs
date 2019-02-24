@@ -1,4 +1,4 @@
-﻿using Api.Database.Entity.User;
+﻿using addon365.Database.Entity.User;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using Threenine.Data;
 using System.Linq;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class UserService : IUserService
     {

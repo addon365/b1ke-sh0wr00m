@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api.Database.Entity.Threats;
-using Api.Domain.Enquiries;
+using addon365.Database.Entity.Threats;
+using addon365.Domain.Entity.Enquiries;
 using Threenine.Data;
 using AutoMapper;
-using Api.Database.Entity.Enquiries;
+using addon365.Database.Entity.Enquiries;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class SampleService : ISampleService
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Api.Database.Entity.Accounts
+namespace addon365.Database.Entity.Accounts
 {
     public class VoucherInfo:BaseEntityWithLogFields
     {

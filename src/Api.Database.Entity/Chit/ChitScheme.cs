@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Database.Entity.Chit
+namespace addon365.Database.Entity.Chit
 {
     public class ChitScheme : BaseEntityWithLogFields
     {

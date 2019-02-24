@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Api.Database.Entity.Inventory.Products;
-namespace Api.Database.Entity.Enquiries
+using addon365.Database.Entity.Inventory.Products;
+namespace addon365.Database.Entity.Enquiries
 {
     public class EnquiryProduct:BaseEntityWithLogFields
     {

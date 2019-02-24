@@ -1,28 +1,28 @@
 ﻿using System.Windows;
-using BikeShowRoom.WPF.Enquiries;
+using addon365.UI.WPF.Enquiries;
 
 
-namespace BikeShowRoom.WPF.Inventory
+namespace addon365.UI.WPF.Inventory
 {
     /// <summary>
     /// Interaction logic for ProductListWindow.xaml
     /// </summary>
     public partial class SellerListWindow : Window
     {
-        ViewModel.Inventory.SellerListViewModel viewmodel;
+        addon365.UI.ViewModel.Inventory.SellerListViewModel ViewModel;
         public SellerListWindow()
         {
             InitializeComponent();
-            viewmodel = new ViewModel.Inventory.SellerListViewModel();
-            base.DataContext = viewmodel;
-            viewmodel.ReportObj = new Reports();
-            viewmodel.Edit = Edit;
+           ViewModel = new addon365.UI.ViewModel.Inventory.SellerListViewModel();
+            base.DataContext = ViewModel;
+            ViewModel.ReportObj = new Reports();
+            ViewModel.Edit = Edit;
 
         }
        
         public void Edit(string id)
         {
-            ViewModel.Inventory.SellerViewModel ViewModel = new ViewModel.Inventory.SellerViewModel(id);
+            addon365.UI.ViewModel.Inventory.SellerViewModel ViewModel = new addon365.UI.ViewModel.Inventory.SellerViewModel(id);
             SellerWindow en = new SellerWindow();
             en.DataContext = ViewModel;
             en.ShowDialog();

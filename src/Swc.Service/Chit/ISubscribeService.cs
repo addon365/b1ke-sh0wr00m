@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity.Chit;
-using Api.Database.Entity.Crm;
-using Api.Domain.Chit.Reports;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Chit;
+using addon365.Database.Entity.Crm;
+using addon365.Domain.Entity.Chit.Reports;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 
-namespace Swc.Service.Chit
+namespace addon365.Database.Service.Chit
 {
     public interface ISubscribeService:IBaseService<ChitSubscriber>
     {

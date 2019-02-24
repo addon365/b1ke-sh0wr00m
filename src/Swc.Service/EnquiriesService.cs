@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Api.Domain.Enquiries;
+using addon365.Domain.Entity.Enquiries;
 using Threenine.Data;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity;
 using System.Threading.Tasks;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Api.Domain.Paging;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Domain.Entity.Paging;
+using addon365.Database.Entity.Inventory.Products;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public class EnquiryService : IEnquiriesService
     {

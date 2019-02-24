@@ -1,6 +1,6 @@
-﻿using Api.Database.Entity.Crm;
-using Api.Database.Entity.Enquiries;
-using Api.Domain.Enquiries;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Enquiries;
+using addon365.Domain.Entity.Enquiries;
 using CrystalDecisions.CrystalReports.Engine;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 
-namespace ViewModel
+namespace addon365.UI.ViewModel
 {
     class Helper
     {
@@ -20,7 +20,7 @@ namespace ViewModel
             if (ReportObj == null)
                 return;
           
-            MultiEnquiryModel invm = new addon.BikeShowRoomService.WebService.EnquiriesService().GetMultiEnquiries(Identifier);
+            MultiEnquiryModel invm = new addon365.WebClient.Service.WebService.EnquiriesService().GetMultiEnquiries(Identifier);
             ReportDocument rd = new ReportDocument();
             string assemblyFile = (
     new System.Uri(Assembly.GetExecutingAssembly().CodeBase)

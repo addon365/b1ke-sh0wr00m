@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Api.Database.Entity
+namespace addon365.Database.Entity
 {
     public class MarketingZone : BaseEntityWithLogFields
     {

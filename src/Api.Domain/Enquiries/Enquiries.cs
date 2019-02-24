@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Api.Database.Entity.Enquiries;
+using addon365.Database.Entity.Enquiries;
 using System.ComponentModel.DataAnnotations;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 using System.Linq;
 
-namespace Api.Domain.Enquiries
+namespace addon365.Domain.Entity.Enquiries
 {
     public class Enquiries
     {

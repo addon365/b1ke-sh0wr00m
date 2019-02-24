@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Database.Entity.Crm;
+using addon365.Database.Entity.Crm;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Swc.Service.Crm;
-using swcApi.Utils;
+using addon365.Database.Service.Crm;
+using addon365.Web.Api.Utils;
 
-namespace swcApi.Controllers
+namespace addon365.Web.Api.Controllers
 {
 
     [Produces("application/json")]

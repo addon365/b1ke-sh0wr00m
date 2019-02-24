@@ -1,8 +1,8 @@
-﻿using Api.Database.Entity;
-using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Chit;
-using Api.Database.Entity.Crm;
-using Api.Database.Tests.Utils;
+﻿using addon365.Database.Entity;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Chit;
+using addon365.Database.Entity.Crm;
+using addon365.Database.Tests.Utils;
 using FizzWare.NBuilder;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace Api.Database.Tests
+namespace addon365.Database.Tests
 {
     [Collection("Database collection")]
     public class ChitTest : IClassFixture<ContextFactory>

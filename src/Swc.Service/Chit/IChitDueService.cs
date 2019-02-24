@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Chit;
-using Api.Domain.Chit;
-using Swc.Service.Base;
+﻿using addon365.Database.Entity.Chit;
+using addon365.Domain.Entity.Chit;
+using addon365.Database.Service.Base;
 using System;
 using System.Collections.Generic;
 
-namespace Swc.Service.Chit
+namespace addon365.Database.Service.Chit
 {
     public interface IChitDueService : IBaseService<ChitSubriberDue>
     {

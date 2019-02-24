@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Report;
+﻿using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Report;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Swc.Service.Report
+namespace addon365.Database.Service.Report
 {
     /// <summary>
     /// Service to serve Inquiry reports in different formats.

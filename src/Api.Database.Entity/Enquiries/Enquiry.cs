@@ -1,5 +1,5 @@
-﻿using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Crm;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
-namespace Api.Database.Entity.Enquiries
+namespace addon365.Database.Entity.Enquiries
 {
     public class Enquiry:BaseEntityWithLogFields
     {

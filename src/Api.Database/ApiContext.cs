@@ -1,24 +1,24 @@
 ﻿using System;
-using Api.Database.Entity.Threats;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity;
+using addon365.Database.Entity.Threats;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Api.Database.Entity.Inventory.Products;
-using Api.Database.Entity.User;
-using Api.Database.Entity.Finance;
-using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Employee;
-using Api.Database.Entity.Crm;
-using Api.Database.Entity.Report;
-using Api.Database.Entity.Inventory;
-using Api.Database.Entity.Chit;
-using Api.Database.Entity.Inventory.Sales;
-using Api.Database.Entity.Inventory.Purchases;
+using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.User;
+using addon365.Database.Entity.Finance;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Employee;
+using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Report;
+using addon365.Database.Entity.Inventory;
+using addon365.Database.Entity.Chit;
+using addon365.Database.Entity.Inventory.Sales;
+using addon365.Database.Entity.Inventory.Purchases;
 
-namespace Api.Database
+namespace addon365.Database
 {
     public class ApiContext : DbContext
     {

@@ -1,11 +1,11 @@
-﻿using Api.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Crm;
 using Newtonsoft.Json;
-using Swc.Service.Crm;
+using addon365.Database.Service.Crm;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace addon.BikeShowRoomService.WebService
+namespace addon365.WebClient.Service.WebService
 {
     public class ContactService : IContactService
     {

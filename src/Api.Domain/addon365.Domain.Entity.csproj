@@ -9,10 +9,10 @@
     <PackageReference Include="Threenine.Map" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Api.Database.Entity\Api.Database.Entity.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Accounts\" />
     <Folder Include="Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Database.Entity\addon365.Database.Entity.csproj" />
   </ItemGroup>
 </Project>

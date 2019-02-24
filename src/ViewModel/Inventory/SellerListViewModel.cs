@@ -1,10 +1,10 @@
-﻿using Api.Database.Entity.Crm;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity.Inventory;
-using Api.Domain.Paging;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using CrystalDecisions.CrystalReports.Engine;
-using Swc.Service;
-using Swc.Service.Inventory;
+using addon365.Database.Service;
+using addon365.Database.Service.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace ViewModel.Inventory
+namespace addon365.UI.ViewModel.Inventory
 {
 
     
@@ -24,8 +24,8 @@ namespace ViewModel.Inventory
    
         public SellerListViewModel()
         {
-            _repository = new addon.BikeShowRoomService.WebService.Inventory.SellerWebService();
-            PagingViewModel = new PagingViewModel<Seller>(new Func<Api.Domain.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Seller>>(RefreshData));
+            _repository = new addon365.WebClient.Service.WebService.Inventory.SellerWebService();
+            PagingViewModel = new PagingViewModel<Seller>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Seller>>(RefreshData));
             WireCommands();
            
         }

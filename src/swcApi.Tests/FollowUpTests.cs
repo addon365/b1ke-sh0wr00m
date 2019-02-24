@@ -1,18 +1,18 @@
-﻿using Api.Database.Entity;
-using Api.Database.Entity.Crm;
+﻿using addon365.Database.Entity;
+using addon365.Database.Entity.Crm;
 using FizzWare.NBuilder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using Swc.Service.Crm;
-using swcApi.Controllers;
-using swcApi.Utils;
+using addon365.Database.Service.Crm;
+using addon365.Web.Api.Controllers;
+using addon365.Web.Api.Utils;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace swcApi.Tests
+namespace addon365.Web.Api.Tests
 {
     public class FollowUpTests
     {

@@ -5,19 +5,19 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System.IO;
 using Newtonsoft.Json;
-using Api.Database;
-using Api.Database.Entity.Enquiries;
-using Api.Database.Entity;
-using Api.Database.Entity.Finance;
-using Api.Database.Entity.Accounts;
-using Api.Database.Entity.Crm;
+using addon365.Database;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity;
+using addon365.Database.Entity.Finance;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Crm;
 using System.Diagnostics;
-using Api.Database.Entity.Report;
+using addon365.Database.Entity.Report;
 using System;
-using Api.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Products;
 using Microsoft.Extensions.DependencyInjection;
-using Swc.Service;
-namespace swcApi
+using addon365.Database.Service;
+namespace addon365.Web.Api
 {
     public static class DbContextExtension
     {

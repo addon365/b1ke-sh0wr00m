@@ -11,22 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel;
+using addon365.UI.ViewModel;
 
-namespace BikeShowRoom.WPF.Zonal
+namespace addon365.UI.WPF.Zonal
 {
     /// <summary>
     /// Interaction logic for ZonalListWindow.xaml
     /// </summary>
     public partial class ZonalListWindow : Window
     {
-        ZonalViewModel viewmodel;
+        ZonalViewModel ViewModel;
         public ZonalListWindow()
         {
             InitializeComponent();
-            viewmodel = new ZonalViewModel();
-            base.DataContext = viewmodel;
-            viewmodel.DeleteCommand.IsEnabled = true;
+            ViewModel = new ZonalViewModel();
+            base.DataContext = ViewModel;
+            ViewModel.DeleteCommand.IsEnabled = true;
         }
         public void Deletebtn_Click(object sender, RoutedEventArgs e)
         {

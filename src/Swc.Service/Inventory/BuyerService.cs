@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Api.Database.Entity.Inventory;
-using Api.Domain.Paging;
+using addon365.Database.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
 using Threenine.Data.Paging;
 
-namespace Swc.Service.Inventory
+namespace addon365.Database.Service.Inventory
 {
     public class BuyerService : IBuyerService
     {

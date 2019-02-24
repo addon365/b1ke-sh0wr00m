@@ -11,21 +11,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ViewModel.Chit.Reports;
+using addon365.UI.ViewModel.Chit.Reports;
 
-namespace BikeShowRoom.WPF.Chit.Reports
+namespace addon365.UI.WPF.Chit.Reports
 {
     /// <summary>
     /// Interaction logic for SubscriberReportWindow.xaml
     /// </summary>
     public partial class SubscriberReportWindow : Window
     {
-        private SubscriberReportViewModel viewModel;
+        private SubscriberReportViewModel ViewModel;
         public SubscriberReportWindow()
         {
             InitializeComponent();
-            viewModel = new SubscriberReportViewModel();
-            this.DataContext = viewModel;
+            ViewModel = new SubscriberReportViewModel();
+            this.DataContext = ViewModel;
         }
     }
 }

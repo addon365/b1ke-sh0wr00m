@@ -1,7 +1,7 @@
-﻿using Api.Database.Entity.User;
+﻿using addon365.Database.Entity.User;
 using System.Collections.Generic;
 
-namespace Swc.Service
+namespace addon365.Database.Service
 {
     public interface IUserService
     {
