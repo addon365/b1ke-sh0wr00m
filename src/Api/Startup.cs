@@ -40,7 +40,7 @@ namespace swcApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors();
             Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
 
             // Add framework services.
@@ -155,6 +155,10 @@ namespace swcApi
             app.UseSpaStaticFiles();
 
             app.UseMiddleware<ExceptionMiddleware>();
+            app.UseCors(
+                    options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+                    );
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default",

@@ -1,7 +1,5 @@
 ﻿using System.Windows;
-using Api.Database.Entity.Enquiries;
 using CrystalDecisions.CrystalReports.Engine;
-using Unity.Attributes;
 using ViewModel;
 using ViewModel.Inventory;
 

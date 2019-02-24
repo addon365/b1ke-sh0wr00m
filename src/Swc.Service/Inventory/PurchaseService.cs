@@ -11,18 +11,21 @@ using Threenine.Data.Paging;
 using Microsoft.EntityFrameworkCore;
 using Api.Database.Entity.Inventory;
 using Api.Database.Entity.Accounts;
+using Api.Database;
 
 namespace Swc.Service.Inventory
 {
     public class PurchaseService : IPurchaseService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork<ApiContext> _unitOfTest;
 
         private ILogger<PurchaseService> _Log;
         private RequestInfo _requestInfo;
 
-        public PurchaseService(IUnitOfWork unitOfWork, ILogger<PurchaseService> logger, RequestInfo requestInfo)
+        public PurchaseService(IUnitOfWork unitOfWork,IUnitOfWork<ApiContext> unitOfTest, ILogger<PurchaseService> logger, RequestInfo requestInfo)
         {
+            _unitOfTest = unitOfTest;
             _unitOfWork = unitOfWork;
             this._Log = logger;
             _requestInfo = requestInfo;
@@ -51,10 +54,11 @@ namespace Swc.Service.Inventory
                  include: x => x.
                  Include(a => a.Seller).ThenInclude(a=>a.BusinessContact).
                  Include(a => a.Items).ThenInclude(a => a.Product));
-
+            
             return data;
 
          }
+       
 
         public PurchaseMasterData GetInitilize()
         {
