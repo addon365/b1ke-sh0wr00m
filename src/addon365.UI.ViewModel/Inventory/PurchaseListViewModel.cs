@@ -13,9 +13,10 @@ namespace addon365.UI.ViewModel.Inventory
         private Threenine.Data.Paging.IPaginate<Purchase> _Data;
         private Purchase _Selected;
         private PagingParams pagingParams;
-        public PurchaseListViewModel(IPurchaseService purchaseService)
+        public PurchaseListViewModel()
         {
-            _repository = purchaseService;
+            _repository =(IPurchaseService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(IPurchaseService));
+            //_repository = purchaseService;
             PagingViewModel = new PagingViewModel<Purchase>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Purchase>>(RefreshData));
             WireCommands();
            

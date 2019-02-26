@@ -22,8 +22,8 @@ namespace addon365.UI.ViewModel.Chit
         private ChitSubscriber selectedChitSubscriber;
         public ChitDueViewModel(Result onResult = null)
         {
-            this.subscribeService = new SubsriberService();
-            chitDueService = new ChitDueClientService();
+            subscribeService = (ISubscribeService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(ISubscribeService));
+            chitDueService = (IChitDueService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(IChitDueService));
             WireCommands();
         }
 
@@ -38,14 +38,14 @@ namespace addon365.UI.ViewModel.Chit
             if (!Validate())
                 return;
 
-            var result=chitDueService.Save(SubscribeDomain);
+            var result = chitDueService.Save(SubscribeDomain);
             if (result == null)
             {
                 Message = "Something went wrong";
             }
             else
             {
-                
+
                 SayMessage(true, "Successfully saved");
             }
 
@@ -104,7 +104,7 @@ namespace addon365.UI.ViewModel.Chit
                 CustomerName = selectedChitSubscriber.Customer.Profile.FirstName,
                 MobileNumber = selectedChitSubscriber.Customer.Profile.MobileNumber,
                 ChitSchemeId = selectedChitSubscriber.ChitSchemeId,
-                SubscribeId=selectedChitSubscriber.Id
+                SubscribeId = selectedChitSubscriber.Id
 
             };
 
@@ -228,7 +228,7 @@ namespace addon365.UI.ViewModel.Chit
             Message = message;
             if (isSuccess)
             {
-                
+
                 SubscribeDomain = new ChitSubscribeDomain();
                 TotalDue = 0;
                 PaidDue = 0;

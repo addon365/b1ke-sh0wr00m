@@ -13,11 +13,12 @@ namespace addon365.UI.WPF.Inventory
         //[Dependency]
         //public PurchaseListViewModel addon365.UI.ViewModel { set { _ViewModel = value; } }
         PurchaseListViewModel _ViewModel;
-        public PurchaseList(PurchaseListViewModel ViewModel)
+        public PurchaseList()
         {
+            //PurchaseListViewModel ViewModel
             InitializeComponent();
-            _ViewModel = ViewModel;
-            DataContext = ViewModel;
+            _ViewModel = new PurchaseListViewModel(); 
+            DataContext = _ViewModel;
             _ViewModel.Edit = Edit;
 
         }

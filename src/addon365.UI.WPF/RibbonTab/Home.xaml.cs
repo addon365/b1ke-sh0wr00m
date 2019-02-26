@@ -132,8 +132,9 @@ namespace addon365.UI.WPF
 
         private void BtnPurchaseList_Click(object sender, RoutedEventArgs e)
         {
-     
-            Inventory.PurchaseList n = ServiceCollections.Instance.container.Resolve<Inventory.PurchaseList>();
+
+            //Inventory.PurchaseList n = ServiceCollections.Instance.container.Resolve<Inventory.PurchaseList>();
+            Inventory.PurchaseList n = new Inventory.PurchaseList();
             n.ShowDialog();
         }
     }
