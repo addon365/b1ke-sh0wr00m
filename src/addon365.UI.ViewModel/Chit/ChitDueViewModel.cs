@@ -6,6 +6,7 @@ using addon365.Database.Service.Chit;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace addon365.UI.ViewModel.Chit
 {
@@ -22,9 +23,17 @@ namespace addon365.UI.ViewModel.Chit
         private ChitSubscriber selectedChitSubscriber;
         public ChitDueViewModel(Result onResult = null)
         {
-            subscribeService = (ISubscribeService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(ISubscribeService));
-            chitDueService = (IChitDueService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(IChitDueService));
-            WireCommands();
+            try
+            {
+
+                subscribeService = (ISubscribeService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(ISubscribeService));
+                chitDueService = (IChitDueService)addon365.UI.ViewModel.Startup.Instance.provider.GetService(typeof(IChitDueService));
+                WireCommands();
+            }
+            catch(Exception ex)
+            {
+                string msg = ex.Message;
+            }
         }
 
         public void WireCommands()

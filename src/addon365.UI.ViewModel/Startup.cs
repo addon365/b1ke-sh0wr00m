@@ -5,9 +5,11 @@ using addon365.Database.Service.Chit;
 using addon365.Database.Service.Accounts;
 using addon365.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Threenine.Data.DependencyInjection;
 using addon365.UI.ViewModel.Inventory;
 using addon365.Database.Service.Inventory;
+using addon365.WebClient.Service.WebService.Chit;
 
 namespace addon365.UI.ViewModel
 {
@@ -21,15 +23,11 @@ namespace addon365.UI.ViewModel
 #if Desktop
 
 
-            services.AddDbContext<ApiContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=config69;Trusted_Connection=True;MultipleActiveResultSets=true"))
-               .AddUnitOfWork<ApiContext>();
-            services.AddSingleton<IBookingService, BookingService>(); //1
-            services.AddTransient<IEnquiriesService, EnquiryService>(); //2
-            services.AddTransient<IChitDueService, ChitDueService>(); //
-            services.AddTransient<IVoucherTypeService, VoucherTypeService>();
-            services.AddTransient<IAccountBookService, AccountBookService>();
-
-            provider = services.BuildServiceProvider();
+            provider=services.AddDbContext<ApiContext>(options => options.UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=config69;Trusted_Connection=True;MultipleActiveResultSets=true"))
+               .AddUnitOfWork<ApiContext>().AddTransient<IVoucherTypeService, VoucherTypeService>()
+                .AddTransient<IAccountBookService, AccountBookService>()
+            .AddTransient<ISubscribeService, SubscribeService>()
+            .AddTransient<IChitDueService, ChitDueService>().BuildServiceProvider();
 
 #else
            
