@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using Newtonsoft.Json;
 using addon365.Database.Service;
 using System;
@@ -17,17 +17,17 @@ namespace addon365.WebClient.Service.WebService
         {
             _httpClient = WebDataClient.Client;
         }
-        public IEnumerable<ProductCompany> GetAllProductCompanies()
+        public IEnumerable<CatalogBrand> GetAllProductCompanies()
         {
             HttpResponseMessage response = _httpClient.GetAsync("ProductCompany").Result;
-            IEnumerable<ProductCompany> companies = null;
+            IEnumerable<CatalogBrand> companies = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                companies = JsonConvert.DeserializeObject<IEnumerable<ProductCompany>>(json);
+                companies = JsonConvert.DeserializeObject<IEnumerable<CatalogBrand>>(json);
 
 
 
@@ -35,7 +35,7 @@ namespace addon365.WebClient.Service.WebService
 
             return companies;
         }
-        public string Insert(ProductCompany productcompany)
+        public string Insert(CatalogBrand productcompany)
         {
             string json = JsonConvert.SerializeObject(productcompany, Formatting.Indented);
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);
@@ -48,11 +48,11 @@ namespace addon365.WebClient.Service.WebService
             Console.WriteLine(httpResponce);
             return null;
         }
-        public ProductCompany GetProductCompany(string identifier)
+        public CatalogBrand GetProductCompany(string identifier)
         {
             throw new NotImplementedException();
         }
-        public void Delete(ProductCompany productcompany)
+        public void Delete(CatalogBrand productcompany)
         {
             string json = JsonConvert.SerializeObject(productcompany, Formatting.Indented);
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);

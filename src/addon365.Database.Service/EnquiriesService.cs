@@ -10,7 +10,7 @@ using addon365.Database.Entity.Crm;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using addon365.Domain.Entity.Paging;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 
 namespace addon365.Database.Service
 {
@@ -52,7 +52,7 @@ namespace addon365.Database.Service
         {
             InitilizeEnquiry ie = new InitilizeEnquiry();
             ie.MarketingZones = _unitOfWork.GetRepository<MarketingZone>().GetList().Items;
-            ie.Products = _unitOfWork.GetRepository<Product>().GetList(index: 0, size:1000).Items;
+            ie.CatalogItems = _unitOfWork.GetRepository<CatalogItem>().GetList(index: 0, size:1000).Items;
             ie.enquiryTypes = _unitOfWork.GetRepository<EnquiryType>().GetList().Items;
 
             return ie;
@@ -207,8 +207,8 @@ namespace addon365.Database.Service
             List<DomainEnquiryProduct> lstEnquiryProducts = new List<DomainEnquiryProduct>();
             foreach(EnquiryProduct ep in _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id))
             {
-                DomainEnquiryProduct dp = new DomainEnquiryProduct { Id = ep.Id,EnquiryId=ep.EnquiryId, ProductId = ep.ProductId,OnRoadPrice=ep.OnRoadPrice,TotalAmount=ep.TotalAmount };
-                dp.ProductName = _unitOfWork.GetRepository<Product>().GetList().Items.Where(predicate: x => x.Id == dp.ProductId).FirstOrDefault().ProductName;
+                DomainEnquiryProduct dp = new DomainEnquiryProduct { Id = ep.Id,EnquiryId=ep.EnquiryId, ProductId = ep.CatalogItemId,OnRoadPrice=ep.OnRoadPrice,TotalAmount=ep.TotalAmount };
+                dp.ProductName = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(predicate: x => x.Id == dp.ProductId).FirstOrDefault().ItemName;
                 lstEnquiryProducts.Add(dp);
             }
             ine.EnquiryProducts =lstEnquiryProducts ;

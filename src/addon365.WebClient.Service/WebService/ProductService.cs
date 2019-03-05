@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using Newtonsoft.Json;
 using addon365.Database.Service;
 using System;
@@ -17,17 +17,17 @@ namespace addon365.WebClient.Service.WebService
         {
             _httpClient = WebDataClient.Client;
         }
-        public IEnumerable<ProductCompany> GetCompanies()
+        public IEnumerable<CatalogBrand> GetCompanies()
         {
             HttpResponseMessage response = _httpClient.GetAsync("Product/Companies").Result;
-            IEnumerable<ProductCompany> companies = null;
+            IEnumerable<CatalogBrand> companies = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                companies = JsonConvert.DeserializeObject<IEnumerable<ProductCompany>>(json);
+                companies = JsonConvert.DeserializeObject<IEnumerable<CatalogBrand>>(json);
 
 
                 
@@ -35,17 +35,17 @@ namespace addon365.WebClient.Service.WebService
 
             return companies;
         }
-        public IEnumerable<ProductType> GetTypes()
+        public IEnumerable<CatalogType> GetTypes()
         {
             HttpResponseMessage response = _httpClient.GetAsync("Product/Types").Result;
-            IEnumerable<ProductType> types = null;
+            IEnumerable<CatalogType> types = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                types = JsonConvert.DeserializeObject<IEnumerable<ProductType>>(json);
+                types = JsonConvert.DeserializeObject<IEnumerable<CatalogType>>(json);
 
 
 
@@ -53,17 +53,17 @@ namespace addon365.WebClient.Service.WebService
 
             return types;
         }
-        public Threenine.Data.Paging.IPaginate<Product> GetAllActive(addon365.Domain.Entity.Paging.PagingParams pagingParams)
+        public Threenine.Data.Paging.IPaginate<CatalogItem> GetAllActive(addon365.Domain.Entity.Paging.PagingParams pagingParams)
         {
             HttpResponseMessage response = _httpClient.GetAsync("Product?" + "PageNumber=" + pagingParams.PageNumber + "&PageSize=" + pagingParams.PageSize).Result;
-            Threenine.Data.Paging.IPaginate<Product> products = null;
+            Threenine.Data.Paging.IPaginate<CatalogItem> products = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                products = JsonConvert.DeserializeObject<Threenine.Data.Paging.Paginate<Product>>(json);
+                products = JsonConvert.DeserializeObject<Threenine.Data.Paging.Paginate<CatalogItem>>(json);
 
 
 
@@ -71,17 +71,17 @@ namespace addon365.WebClient.Service.WebService
 
             return products;
         }
-        public IEnumerable<Product> GetProductByType(int ProgrammerId)
+        public IEnumerable<CatalogItem> GetProductByType(int ProgrammerId)
         {
             HttpResponseMessage response = _httpClient.GetAsync("Product/"+ ProgrammerId).Result;
-            IEnumerable<Product> products = null;
+            IEnumerable<CatalogItem> products = null;
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().ConfigureAwait(true)
                                 .GetAwaiter()
                                 .GetResult();
 
-                products = JsonConvert.DeserializeObject<IEnumerable<Product>>(json);
+                products = JsonConvert.DeserializeObject<IEnumerable<CatalogItem>>(json);
 
 
 
@@ -89,7 +89,7 @@ namespace addon365.WebClient.Service.WebService
 
             return products;
         }
-        public string Insert(Product product)
+        public string Insert(CatalogItem product)
         {
             string json = JsonConvert.SerializeObject(product, Formatting.Indented);
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);
@@ -102,7 +102,7 @@ namespace addon365.WebClient.Service.WebService
             //Console.WriteLine(httpResponce);
             return null;
         }
-        public string InsertProductType(ProductType producttype)
+        public string InsertProductType(CatalogType producttype)
         {
             string json = JsonConvert.SerializeObject(producttype, Formatting.Indented);
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);
@@ -115,11 +115,11 @@ namespace addon365.WebClient.Service.WebService
             //Console.WriteLine(httpResponce);
             return null;
         }
-        public Product GetProduct(string identifier)
+        public CatalogItem GetProduct(string identifier)
         {
             throw new NotImplementedException();
         }
-        public void Delete(Product product)
+        public void Delete(CatalogItem product)
         {
             string json = JsonConvert.SerializeObject(product, Formatting.Indented);
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);

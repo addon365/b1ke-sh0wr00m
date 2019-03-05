@@ -1,5 +1,5 @@
 ﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,9 +12,9 @@ namespace addon365.UI.ViewModel
         private readonly ProductService _repositoryProduct;
         private bool EditMode = false;
         private readonly AccessoriesService _accessoriesService;
-        private Product _currentSelectedVehicle, _currentSelectedAccessories;
+        private CatalogItem _currentSelectedVehicle, _currentSelectedAccessories;
         private ExtraFittingsAccessories _currentFitting, _currentSelectedGridFitting;
-        private ProductCompany _productCompany;
+        private CatalogBrand _productCompany;
         private bool _isProductSelected;
         public VehicleAccessoriesViewModel()
         {
@@ -50,9 +50,9 @@ namespace addon365.UI.ViewModel
             get;
             private set;
         }
-        public IEnumerable<Product> Bikes { get; set; }
+        public IEnumerable<CatalogItem> Bikes { get; set; }
 
-        public IEnumerable<Product> Accessories { get; set; }
+        public IEnumerable<CatalogItem> Accessories { get; set; }
 
         private ObservableCollection<ExtraFittingsAccessories> _extraFittings;
         public ObservableCollection<ExtraFittingsAccessories> ExtraFittings
@@ -80,7 +80,7 @@ namespace addon365.UI.ViewModel
                 OnPropertyChanged("IsProductSelected");
             }
         }
-        public Product CurrentSelectedVehicle
+        public CatalogItem CurrentSelectedVehicle
         {
             get
             {
@@ -99,7 +99,7 @@ namespace addon365.UI.ViewModel
 
             }
         }
-        public Product CurrentSelectedAccessories
+        public CatalogItem CurrentSelectedAccessories
         {
             get
             {
@@ -185,8 +185,8 @@ namespace addon365.UI.ViewModel
             SaveCommand.IsEnabled = true;
             CurrentFitting.AccessoriesProductId = CurrentSelectedAccessories.Id;
             CurrentFitting.AccessoriesProductItem = CurrentSelectedAccessories;
-            CurrentFitting.ProductId = CurrentSelectedVehicle.Id;
-            CurrentFitting.Product = CurrentSelectedVehicle;
+            CurrentFitting.CatalogItemId = CurrentSelectedVehicle.Id;
+            CurrentFitting.CatalogItem = CurrentSelectedVehicle;
 
             ExtraFittings.Add(CurrentFitting);
             CurrentSelectedAccessories = null;

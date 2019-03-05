@@ -1,5 +1,5 @@
 ﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using System;
 using System.Collections.Generic;
 
@@ -8,15 +8,15 @@ namespace addon365.UI.ViewModel
     public class ProductViewModel:ViewModelBase
     {
         private readonly ProductService _repositoryProduct;
-        private Product currentProduct;
-        private ProductCompany _productCompany;
-        private ProductType _productType;
+        private CatalogItem currentProduct;
+        private CatalogBrand _productCompany;
+        private CatalogType _productType;
         public ProductViewModel()
         {
             try
             {
                 _repositoryProduct = new ProductService();
-                currentProduct = new Product();
+                currentProduct = new CatalogItem();
                 InitInsert();
 
                 WireCommands();
@@ -45,10 +45,10 @@ namespace addon365.UI.ViewModel
             private set;
         }
 
-        public IEnumerable<ProductCompany> ProductCompanies { get; set; }
-        public IEnumerable<ProductType> ProductTypes { get; set; }
+        public IEnumerable<CatalogBrand> ProductCompanies { get; set; }
+        public IEnumerable<CatalogType> ProductTypes { get; set; }
 
-        public ProductCompany CurrentProductCompany
+        public CatalogBrand CurrentProductCompany
         {
             get
             {
@@ -60,7 +60,7 @@ namespace addon365.UI.ViewModel
                 OnPropertyChanged("CurrentProductCompany");
             }
         }
-        public ProductType CurrentProductType
+        public CatalogType CurrentProductType
         {
             get
             {
@@ -73,7 +73,7 @@ namespace addon365.UI.ViewModel
                 InsertTypeCommand.IsEnabled =true ;
             }
         }
-        public Product CurrentProduct
+        public CatalogItem CurrentProduct
         {
             get
             {
@@ -104,7 +104,7 @@ namespace addon365.UI.ViewModel
             CurrentProduct.TypeId = CurrentProductType.Id;
             _repositoryProduct.Insert(CurrentProduct);
 
-            CurrentProduct = new Product();
+            CurrentProduct = new CatalogItem();
             InitInsert();
 
         }
@@ -124,8 +124,8 @@ namespace addon365.UI.ViewModel
         }
         private void LoadData()
         {
-            Product p = new Product();
-            p.ProductName = "Pulsor";
+            CatalogItem p = new CatalogItem();
+            p.ItemName = "Pulsor";
             p.Identifier = "00184";
             CurrentProduct = p;
         }

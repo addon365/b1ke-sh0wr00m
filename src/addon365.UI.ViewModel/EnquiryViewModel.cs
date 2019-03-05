@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using addon365.Database.Entity.Crm;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 
 namespace addon365.UI.ViewModel
 {
@@ -69,7 +69,7 @@ namespace addon365.UI.ViewModel
                 Identifier = "Identifier1",
                 Place = "Choolaimedu"
             };
-            CurrentEnquiryProduct.Product = EnquiryMasterData.Products.FirstOrDefault();
+            CurrentEnquiryProduct.Product = EnquiryMasterData.CatalogItems.FirstOrDefault();
 
             CurrentFinanceQuotation = new EnquiryFinanceQuotation
             {
@@ -419,7 +419,7 @@ namespace addon365.UI.ViewModel
             CurrentEnquiry = new Enquiry() { EnquiryDate = CurrentEnquiry==null?System.DateTime.Now:CurrentEnquiry.EnquiryDate };
             CurrentContact = new Contact();
             CurrentEnquiryProduct = new EnquiryProduct();
-            CurrentEnquiryProduct.Product = new Product();
+            CurrentEnquiryProduct.Product = new CatalogItem();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
@@ -445,7 +445,7 @@ namespace addon365.UI.ViewModel
 
             EnquiryProduct enquiryProduct = new EnquiryProduct();
             enquiryProduct.Product = _enquiryProduct.Product;
-            enquiryProduct.ProductId = _enquiryProduct.Product.Id;
+            enquiryProduct.CatalogItemId = _enquiryProduct.Product.Id;
 
             enquiryProduct.OnRoadPrice = _enquiryProduct.Product.Price;
             enquiryProduct.AccessoriesAmount = _enquiryProduct.AccessoriesAmount;

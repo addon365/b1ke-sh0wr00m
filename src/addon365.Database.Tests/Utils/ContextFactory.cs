@@ -3,7 +3,7 @@ using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Enquiries;
 using addon365.Database.Entity.Finance;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -45,9 +45,9 @@ namespace addon365.Database.Tests.Utils
         public static void Seed(ApiContext context)
         {
 
-            if (!context.Products.Any())
+            if (!context.CatalogItems.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(SeedPath + Path.DirectorySeparatorChar + "products.json"));
+                var types = JsonConvert.DeserializeObject<List<CatalogItem>>(File.ReadAllText(SeedPath + Path.DirectorySeparatorChar + "products.json"));
 
                 context.AddRange(types);
                 context.SaveChanges();
@@ -70,16 +70,16 @@ namespace addon365.Database.Tests.Utils
                 context.AddRange(types);
                 context.SaveChanges();
             }
-            if (!context.ProductCompanies.Any())
+            if (!context.CatalogBrands.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<ProductCompany>>(File.ReadAllText(SeedPath + Path.DirectorySeparatorChar + "ProductCompanies.json"));
+                var types = JsonConvert.DeserializeObject<List<CatalogBrand>>(File.ReadAllText(SeedPath + Path.DirectorySeparatorChar + "ProductCompanies.json"));
                 context.AddRange(types);
                 context.SaveChanges();
 
             }
-            if (!context.ProductTypes.Any())
+            if (!context.CatalogTypes.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<ProductType>>(File.ReadAllText(SeedPath + Path.DirectorySeparatorChar + "ProductTypes.json"));
+                var types = JsonConvert.DeserializeObject<List<CatalogType>>(File.ReadAllText(SeedPath + Path.DirectorySeparatorChar + "ProductTypes.json"));
                 context.AddRange(types);
                 context.SaveChanges();
 

@@ -31,16 +31,14 @@ namespace addon365.Database.Service
 
             if(dm==null)
             {
-                var RequestToAuthorise=new DeviceMaster() { DeviceName = "UnKnown", DeviceId = DeviceCode,RequestedUser=UserId };
+                var RequestToAuthorise=new DeviceMaster() { DeviceName = "UnKnown", DeviceId = DeviceCode};
 
                 _unitOfWork.GetRepository<DeviceMaster>().Add(RequestToAuthorise);
                 _unitOfWork.SaveChanges();
                 return;
             }
 
-            if (dm.AuthorisedUser == null || dm.AuthorisedUser == "")
-                return;
-
+           
             DeviceId = dm.OtherId.ToString();
 
         }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace addon365.Database.Entity.Inventory.Products
+namespace addon365.Database.Entity.Inventory.Catalog
 {
-    [Table("Inventory.Products.Products")]
-    public class Product:BaseEntityWithLogFields
+    [Table("Inventory.Catalog.CatalogItems")]
+    public class CatalogItem:BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
-        public string ProductName { get; set; }
+        public string ItemName { get; set; }
         public double Price { get; set; }
         public double InsuranceAmount { get; set; }
         public double RoadTax { get; set; }
@@ -16,6 +16,6 @@ namespace addon365.Database.Entity.Inventory.Products
         public double GST { get; set; }
         public Guid CompanyId { get; set; }
         public Guid TypeId { get; set; }
-        public ICollection<ProductPropertiesMap> Properties { get; set; }
+        public ICollection<CatalogItemPropertiesMap> Properties { get; set; }
     }
 }

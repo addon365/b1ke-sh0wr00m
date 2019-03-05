@@ -35,7 +35,7 @@ namespace addon365.UI.WPF.Inventory
                 ParentGrid.RowDefinitions.Add(rd);
 
                 TextBlock textLabel = new TextBlock();
-                textLabel.Text = pipv.ProductPropertyMaster.PropertyName;
+                textLabel.Text = pipv.CatalogItemPropertyMaster.PropertyName;
                 Grid.SetRow(textLabel, ParentGrid.RowDefinitions.Count-1);
                 ParentGrid.Children.Add(textLabel);
 

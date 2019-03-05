@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using System;
 using System.Collections.Generic;
 
@@ -9,9 +9,9 @@ namespace addon365.Database.Service
         
         string InsertAccessories(IEnumerable<ExtraFittingsAccessories> extrafittings);
         IEnumerable<ExtraFittingsAccessories> GetAccessories();
-        IEnumerable<ExtraFittingsAccessories> GetAccessories(Guid ProductId);
+        IEnumerable<ExtraFittingsAccessories> GetAccessories(Guid CatalogItemId);
         string UpdateAccessories(IEnumerable<ExtraFittingsAccessories> extrafittings);
-        void DeleteAccessories(Guid ProductId);
+        void DeleteAccessories(Guid CatalogItemId);
 
      }
 }

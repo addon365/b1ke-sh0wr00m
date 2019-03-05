@@ -1,5 +1,5 @@
 ﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using System.Collections.Generic;
 
 namespace addon365.UI.ViewModel
@@ -7,11 +7,11 @@ namespace addon365.UI.ViewModel
     public class ProductCompanyViewModel:ViewModelBase
     {
         private readonly ProductCompanyService _repositoryProductCompany;
-        private ProductCompany _productCompany;
+        private CatalogBrand _productCompany;
 
         public ProductCompanyViewModel()
         {
-            _productCompany = new ProductCompany();
+            _productCompany = new CatalogBrand();
             _repositoryProductCompany = new ProductCompanyService();
             ProductCompanies = _repositoryProductCompany.GetAllProductCompanies();
             WireCommands();
@@ -32,8 +32,8 @@ namespace addon365.UI.ViewModel
             get;
             private set;
         }
-        public IEnumerable<ProductCompany> ProductCompanies { get; set; }
-        public ProductCompany CurrentProductCompany
+        public IEnumerable<CatalogBrand> ProductCompanies { get; set; }
+        public CatalogBrand CurrentProductCompany
         {
             get
             {
@@ -57,7 +57,7 @@ namespace addon365.UI.ViewModel
         }
         public void DeleteProductCompany()
         {
-            ProductCompany p = CurrentProductCompany;
+            CatalogBrand p = CurrentProductCompany;
             _repositoryProductCompany.Delete(p);
 
         }

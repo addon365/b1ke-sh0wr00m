@@ -1,7 +1,7 @@
 ﻿
 using addon365.Database.Entity;
 using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Domain.Entity.Enquiries;
 using addon365.Database.Service;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace addon365.UI.ViewModel
         private readonly IEnquiriesService _repository;
         private Enquiry _currentEnquiry;
         private MarketingZone _currentMarketingZone;
-        private Product _enquiryProduct;
+        private CatalogItem _enquiryProduct;
         private EnquiryFinanceQuotation _financeQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
         public VehicleSaleViewModel()
@@ -136,7 +136,7 @@ namespace addon365.UI.ViewModel
                 }
             }
         }
-        public Product CurrentEnquiryProduct
+        public CatalogItem CurrentEnquiryProduct
         {
             get
             {
@@ -232,7 +232,7 @@ namespace addon365.UI.ViewModel
         void InitInsert()
         {
             CurrentEnquiry = new Enquiry();
-            CurrentEnquiryProduct = new Product();
+            CurrentEnquiryProduct = new CatalogItem();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
@@ -255,7 +255,7 @@ namespace addon365.UI.ViewModel
 
             EnquiryProduct enquiryProduct = new EnquiryProduct();
             enquiryProduct.Product = _enquiryProduct;
-            enquiryProduct.ProductId = _enquiryProduct.Id;
+            enquiryProduct.CatalogItemId = _enquiryProduct.Id;
 
             enquiryProduct.OnRoadPrice = _enquiryProduct.Price;
             enquiryProduct.AccessoriesAmount = 0;

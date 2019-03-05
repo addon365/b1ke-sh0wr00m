@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using Newtonsoft.Json;
 using addon365.Database.Service;
 using System;

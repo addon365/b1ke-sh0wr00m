@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using addon365.Database.Service;
@@ -16,13 +16,13 @@ namespace addon365.Web.API.Controllers
             _productcompanyService = productcompanyService;
         }
         [HttpGet]
-        public IEnumerable<ProductCompany> Get()
+        public IEnumerable<CatalogBrand> Get()
         {
             return _productcompanyService.GetAllProductCompanies();
         }
 
         [HttpPost]
-        public IActionResult ProductCompanyPost([FromBody] ProductCompany referrer)
+        public IActionResult ProductCompanyPost([FromBody] CatalogBrand referrer)
         {
             if (referrer == null)
             {
@@ -48,7 +48,7 @@ namespace addon365.Web.API.Controllers
         [AllowAnonymous]
         [Route("Delete")]
         [HttpPost]
-        public IActionResult Delete([FromBody] ProductCompany productcompany)
+        public IActionResult Delete([FromBody] CatalogBrand productcompany)
         {
             if (productcompany == null)
             {

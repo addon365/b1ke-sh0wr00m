@@ -4,7 +4,7 @@ using AutoMapper;
 using Threenine.Data;
 using System.Linq;
 using addon365.Domain.Entity.Paging;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 
 namespace addon365.Database.Service
 {
@@ -18,28 +18,28 @@ namespace addon365.Database.Service
         {
             _unitOfWork = unitOfWork;
         }
-        public Threenine.Data.Paging.IPaginate<Product> GetAllActive(PagingParams pagingParams)
+        public Threenine.Data.Paging.IPaginate<CatalogItem> GetAllActive(PagingParams pagingParams)
         {
-            var products = _unitOfWork.GetRepository<Product>().GetList(orderBy: x => x.OrderBy(m => m.Created),index: pagingParams.PageNumber, size: pagingParams.PageSize);
+            var products = _unitOfWork.GetRepository<CatalogItem>().GetList(orderBy: x => x.OrderBy(m => m.Created),index: pagingParams.PageNumber, size: pagingParams.PageSize);
 
             return products;
         }
-        public IEnumerable<Product> GetProductByType(int ProgrammerId)
+        public IEnumerable<CatalogItem> GetProductByType(int ProgrammerId)
         {
-            var typeid = _unitOfWork.GetRepository<ProductType>().GetList().Items.Where(y => y.ProgrammerId == ProgrammerId).First<ProductType>().Id;
+            var typeid = _unitOfWork.GetRepository<CatalogType>().GetList().Items.Where(y => y.ProgrammerId == ProgrammerId).First<CatalogType>().Id;
 
          
-            var products = _unitOfWork.GetRepository<Product>().GetList().Items.Where(x=>x.TypeId==typeid);
+            var products = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(x=>x.TypeId==typeid);
 
             return products;
         }
-        public string Insert(Product product)
+        public string Insert(CatalogItem product)
         {
             //var products = new Product();
             //products.ProductName = product.ProductName;
             //products.Price = product.Price;
             string identi = "1";
-            var LastProduct = _unitOfWork.GetRepository<Product>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.Identifier)));
+            var LastProduct = _unitOfWork.GetRepository<CatalogItem>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.Identifier)));
 
 
             if (LastProduct != null)
@@ -48,7 +48,7 @@ namespace addon365.Database.Service
                     identi = (Convert.ToInt64(LastProduct.Identifier)+1).ToString();
             }
             product.Identifier = identi;
-            _unitOfWork.GetRepository<Product>().Add(product);
+            _unitOfWork.GetRepository<CatalogItem>().Add(product);
             try
             {
                 _unitOfWork.SaveChanges();
@@ -59,12 +59,12 @@ namespace addon365.Database.Service
             }
             return product.Identifier;
         }
-        public string InsertProductType(ProductType producttype)
+        public string InsertProductType(CatalogType producttype)
         {
             //var products = new Product();
             //products.ProductName = product.ProductName;
             //products.Price = product.Price;
-            _unitOfWork.GetRepository<ProductType>().Add(producttype);
+            _unitOfWork.GetRepository<CatalogType>().Add(producttype);
             try
             {
                 _unitOfWork.SaveChanges();
@@ -75,11 +75,11 @@ namespace addon365.Database.Service
             }
             return producttype.Identifier;
         }
-        public void Delete(Product product)
+        public void Delete(CatalogItem product)
         {
             try { 
                 
-            _unitOfWork.GetRepository<Product>().Delete(product.Id);
+            _unitOfWork.GetRepository<CatalogItem>().Delete(product.Id);
                 
               
             _unitOfWork.SaveChanges();
@@ -90,19 +90,19 @@ namespace addon365.Database.Service
                 string msg = ex.Message;
             }
         }
-        public Product GetProduct(string identifier)
+        public CatalogItem GetProduct(string identifier)
         {
-            var product = _unitOfWork.GetRepository<Product>().GetList().Items.Where(x => x.Identifier == identifier);
-            return Mapper.Map<Product>(product);
+            var product = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(x => x.Identifier == identifier);
+            return Mapper.Map<CatalogItem>(product);
         }
-        public IEnumerable<ProductCompany> GetCompanies()
+        public IEnumerable<CatalogBrand> GetCompanies()
             {
-            var Companies = _unitOfWork.GetRepository<ProductCompany>().GetList().Items;
+            var Companies = _unitOfWork.GetRepository<CatalogBrand>().GetList().Items;
             return Companies;
             }
-        public IEnumerable<ProductType> GetTypes()
+        public IEnumerable<CatalogType> GetTypes()
         {
-            var Types = _unitOfWork.GetRepository<ProductType>().GetList().Items;
+            var Types = _unitOfWork.GetRepository<CatalogType>().GetList().Items;
             return Types;
         }
     }

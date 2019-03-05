@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity
 {
-    public class LicenseMaster:BaseEntity
+    public class BranchMaster:BaseEntityWithLogFields
     {
        
-        public string BusinessName { get; set; }
-        public string LicenseId { get; set; }
+        public string BranchName { get; set; }
+        public string ShortCode { get; set; }
         public string Location { get; set; }
+        public Guid LicenseMasterId { get; set; }
        
     }
 }

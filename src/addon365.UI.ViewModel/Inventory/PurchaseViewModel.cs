@@ -5,7 +5,7 @@ using addon365.Domain.Entity.Inventory;
 using addon365.Database.Entity.Inventory.Purchases;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using System.Data;
 using addon365.Database.Entity.Accounts;
 
@@ -128,7 +128,7 @@ namespace addon365.UI.ViewModel.Inventory
 
 
              
-                CurrentItem.ProductId = CurrentItem.Product.Id;
+                CurrentItem.CatalogItemId = CurrentItem.Product.Id;
                 
 
                 Items.Add(CurrentItem); 
@@ -159,11 +159,11 @@ namespace addon365.UI.ViewModel.Inventory
             PItemPropertyMap.PurchaseItemId = CurrentItem.Id;
 
             PItemPropertyMap.PropertyValues = new List<PurchaseItemPropertyValue>();
-            foreach(ProductPropertiesMap ProMap in CurrentItem.Product.Properties)
+            foreach(CatalogItemPropertiesMap ProMap in CurrentItem.Product.Properties)
             {
                 PurchaseItemPropertyValue PropertyValue = new PurchaseItemPropertyValue();
-                PropertyValue.ProductPropertyMasterId = ProMap.ProductPropertyMasterId;
-                PropertyValue.ProductPropertyMaster = ProMap.PropertyMaster;
+                PropertyValue.CatalogPropertyMasterId = ProMap.CatalogPropertyMasterId;
+                PropertyValue.CatalogItemPropertyMaster = ProMap.PropertyMaster;
                 PropertyValue.PurchaseItemPropertyMapId = PItemPropertyMap.Id;
                 PItemPropertyMap.PropertyValues.Add(PropertyValue);
 
@@ -196,7 +196,7 @@ namespace addon365.UI.ViewModel.Inventory
                     return null;
 
                 DataTable dt = new DataTable();
-                foreach (ProductPropertiesMap ProMap in CurrentItem.Product.Properties)
+                foreach (CatalogItemPropertiesMap ProMap in CurrentItem.Product.Properties)
                 {
                     dt.Columns.Add(new DataColumn(ProMap.PropertyMaster.PropertyName));
                 }
@@ -206,9 +206,9 @@ namespace addon365.UI.ViewModel.Inventory
                   
                     foreach (PurchaseItemPropertyValue val in ItemMap.PropertyValues)
                     {
-                        if(dt.Columns.Contains(val.ProductPropertyMaster.PropertyName))
+                        if(dt.Columns.Contains(val.CatalogItemPropertyMaster.PropertyName))
                         {
-                            row[val.ProductPropertyMaster.PropertyName] = val.Value;
+                            row[val.CatalogItemPropertyMaster.PropertyName] = val.Value;
                         }
                     }
                     dt.Rows.Add(row);

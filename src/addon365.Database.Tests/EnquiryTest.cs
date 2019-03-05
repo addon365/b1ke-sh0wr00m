@@ -20,7 +20,7 @@ namespace addon365.Database.Tests
             var license = Builder<LicenseMaster>.CreateNew().Build();
             var branch = Builder<BranchMaster>.CreateNew().Build();
             context.LicenseMasters.Add(license);
-            branch.LicenseId = license.Id;
+            branch.LicenseMasterId = license.Id;
             context.BranchMasters.Add(branch);
             context.SaveChanges();
             Assert.Equal(branch.Id, context.BranchMasters.Find(branch.Id).Id);

@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +21,10 @@ namespace addon365.Database.Service
             return access;
         }
 
-        public IEnumerable<ExtraFittingsAccessories> GetAccessories(Guid ProductId)
+        public IEnumerable<ExtraFittingsAccessories> GetAccessories(Guid CatalogItemId)
         {
-            var AllProducts = _unitOfWork.GetRepository<Product>().GetList().Items;
-            var access = _unitOfWork.GetRepository<ExtraFittingsAccessories>().GetList().Items.Where(x => x.ProductId == ProductId);
+            var AllProducts = _unitOfWork.GetRepository<CatalogItem>().GetList().Items;
+            var access = _unitOfWork.GetRepository<ExtraFittingsAccessories>().GetList().Items.Where(x => x.CatalogItemId == CatalogItemId);
             foreach (ExtraFittingsAccessories efc in access)
             {
                 efc.AccessoriesProductItem = AllProducts.Where(y => y.Id == efc.AccessoriesProductId).First();
@@ -38,7 +38,7 @@ namespace addon365.Database.Service
             {
                 foreach(ExtraFittingsAccessories ef in extrafittings)
                 {
-                    ef.Product = null;
+                    ef.CatalogItem = null;
                     ef.AccessoriesProductItem = null;
                 }
                 _unitOfWork.GetRepository<ExtraFittingsAccessories>().Add(extrafittings);
@@ -57,7 +57,7 @@ namespace addon365.Database.Service
             {
                 foreach (ExtraFittingsAccessories ef in extrafittings)
                 {
-                    ef.Product = null;
+                    ef.CatalogItem = null;
                     ef.AccessoriesProductItem = null;
                     
                 }

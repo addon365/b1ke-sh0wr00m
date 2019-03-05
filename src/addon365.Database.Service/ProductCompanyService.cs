@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -17,16 +17,16 @@ namespace addon365.Database.Service
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<ProductCompany> GetAllProductCompanies()
+        public IEnumerable<CatalogBrand> GetAllProductCompanies()
         {
-            var productcompanies = _unitOfWork.GetRepository<ProductCompany>().GetList().Items;
+            var productcompanies = _unitOfWork.GetRepository<CatalogBrand>().GetList().Items;
 
             return productcompanies;
         }
-        public string Insert(ProductCompany productcompany)
+        public string Insert(CatalogBrand productcompany)
         {
            
-            _unitOfWork.GetRepository<ProductCompany>().Add(productcompany);
+            _unitOfWork.GetRepository<CatalogBrand>().Add(productcompany);
             try
             {
                 _unitOfWork.SaveChanges();
@@ -37,17 +37,17 @@ namespace addon365.Database.Service
             }
             return productcompany.Identifier;
         }
-        public ProductCompany GetProductCompany(string identifier)
+        public CatalogBrand GetProductCompany(string identifier)
         {
-            var productcompany = _unitOfWork.GetRepository<ProductCompany>().GetList().Items.Where(x => x.Identifier == identifier);
-            return Mapper.Map<ProductCompany>(productcompany);
+            var productcompany = _unitOfWork.GetRepository<CatalogBrand>().GetList().Items.Where(x => x.Identifier == identifier);
+            return Mapper.Map<CatalogBrand>(productcompany);
         }
-        public void Delete(ProductCompany productcompany)
+        public void Delete(CatalogBrand productcompany)
         {
             try
             {
 
-                _unitOfWork.GetRepository<ProductCompany>().Delete(productcompany.Id);
+                _unitOfWork.GetRepository<CatalogBrand>().Delete(productcompany.Id);
 
 
                 _unitOfWork.SaveChanges();

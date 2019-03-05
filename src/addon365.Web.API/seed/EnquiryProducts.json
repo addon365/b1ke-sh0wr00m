@@ -2,118 +2,118 @@
   {
     "Id": "10B8204E-4768-9D01-3929-B97F862F9184",
     "EnquiryId": "4277D783-728E-57E8-2C29-C44A0AAE22C3",
-    "ProductId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
+    "CatalogItemId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
     "OnRoadPrice": "60000",
     "AccessoriesAmount": "2500",
     "OtherAmount": "1200",
     "TotalAmount": "63700"
   },
-	{
-		"Id": "AB1E638B-8E5D-8F3F-619A-02EC9B7927A1",
-		"EnquiryId": "864DF9AE-63A8-8FA9-87ED-A26DB8099DDD",
-		"ProductId": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
-		"OnRoadPrice": "63000",
-		"AccessoriesAmount": "3000",
-		"OtherAmount": "1425",
-		"TotalAmount": "67425"
-	},
+  {
+    "Id": "AB1E638B-8E5D-8F3F-619A-02EC9B7927A1",
+    "EnquiryId": "864DF9AE-63A8-8FA9-87ED-A26DB8099DDD",
+    "CatalogItemId": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
+    "OnRoadPrice": "63000",
+    "AccessoriesAmount": "3000",
+    "OtherAmount": "1425",
+    "TotalAmount": "67425"
+  },
 	{
 		"Id": "11D51360-2E15-2E7E-448E-2D29D80D61DB",
 		"EnquiryId": "9D0F1D77-9F6E-7729-80D6-B62CA1256C73",
-		"ProductId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
+		"CatalogItemId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
 		"OnRoadPrice": "66000",
 		"AccessoriesAmount": "3500",
 		"OtherAmount": "1650",
 		"TotalAmount": "71150"
 	},
-	{
-		"Id": "3D8198BC-939C-313B-2AAD-305A8B602E48",
-		"EnquiryId": "29DC9C78-9908-455E-248F-D87E64117BAB",
-		"ProductId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
-		"OnRoadPrice": "69000",
-		"AccessoriesAmount": "4000",
-		"OtherAmount": "1875",
-		"TotalAmount": "74875"
-	},
-	{
-		"Id": "B66A4D83-7286-106F-08FF-E16579B46FF6",
-		"EnquiryId": "24C087B2-3C6B-17BF-5964-A04FA35E8D09",
-		"ProductId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
-		"OnRoadPrice": "72000",
-		"AccessoriesAmount": "4500",
-		"OtherAmount": "2100",
-		"TotalAmount": "78600"
-	},
-	{
-		"Id": "8B046D9F-9FA5-39C2-2E0C-2572DEB92B8B",
-		"EnquiryId": "B72F8901-8FDB-1E7B-82FA-E42CC00D2F0F",
-		"ProductId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
-		"OnRoadPrice": "75000",
-		"AccessoriesAmount": "5000",
-		"OtherAmount": "2325",
-		"TotalAmount": "82325"
-	},
-	{
-		"Id": "1626CAB2-3C93-A781-8DD6-BFC99FBB8D6C",
-		"EnquiryId": "533D0DE4-3759-4551-981A-E9368B4659A5",
-		"ProductId": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
-		"OnRoadPrice": "78000",
-		"AccessoriesAmount": "5500",
-		"OtherAmount": "2550",
-		"TotalAmount": "86050"
-	},
-	{
-		"Id": "58399501-9B1E-4BA2-24DA-8B3996B71AD4",
-		"EnquiryId": "13DA29C4-331E-9E3B-63F0-76FF524A15F2",
-		"ProductId": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
-		"OnRoadPrice": "81000",
-		"AccessoriesAmount": "6000",
-		"OtherAmount": "2775",
-		"TotalAmount": "89775"
-	},
-	{
-		"Id": "CF19B6EE-43B8-1197-4EBF-FFD07C713F4B",
-		"EnquiryId": "A52FD4E8-4310-99B7-096C-8702D40F12AF",
-		"ProductId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
-		"OnRoadPrice": "84000",
-		"AccessoriesAmount": "6500",
-		"OtherAmount": "3000",
-		"TotalAmount": "93500"
-	},
-	{
-		"Id": "ABFF3ABC-5068-07BA-2FC5-47684ECB44F9",
-		"EnquiryId": "435AEAEB-71BB-9135-0C0C-F4E5F4560363",
-		"ProductId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
-		"OnRoadPrice": "87000",
-		"AccessoriesAmount": "7000",
-		"OtherAmount": "3225",
-		"TotalAmount": "97225"
-	},
-	{
-		"Id": "9DF47C91-7437-5184-0446-6B5B5889371D",
-		"EnquiryId": "4B3D0269-5836-663C-1CE5-2F4ECB3B26A3",
-		"ProductId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
-		"OnRoadPrice": "90000",
-		"AccessoriesAmount": "7500",
-		"OtherAmount": "3450",
-		"TotalAmount": "100950"
-	},
-	{
-		"Id": "1A5AF650-2C12-717C-7330-6E7BD2409FB2",
-		"EnquiryId": "BF8C82E6-9FFC-439D-1CE5-0869AE78890A",
-		"ProductId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
-		"OnRoadPrice": "93000",
-		"AccessoriesAmount": "8000",
-		"OtherAmount": "3675",
-		"TotalAmount": "104675"
-	},
-	{
-		"Id": "B64BF205-123F-A74D-13F3-0C3D6F869691",
-		"EnquiryId": "AD8387CD-22D8-3E3B-6ADB-E6E4E1A48F9A",
-		"ProductId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
-		"OnRoadPrice": "96000",
-		"AccessoriesAmount": "8500",
-		"OtherAmount": "3900",
-		"TotalAmount": "108400"
-	}
+  {
+    "Id": "3D8198BC-939C-313B-2AAD-305A8B602E48",
+    "EnquiryId": "29DC9C78-9908-455E-248F-D87E64117BAB",
+    "CatalogItemId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
+    "OnRoadPrice": "69000",
+    "AccessoriesAmount": "4000",
+    "OtherAmount": "1875",
+    "TotalAmount": "74875"
+  },
+  {
+    "Id": "B66A4D83-7286-106F-08FF-E16579B46FF6",
+    "EnquiryId": "24C087B2-3C6B-17BF-5964-A04FA35E8D09",
+    "CatalogItemId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
+    "OnRoadPrice": "72000",
+    "AccessoriesAmount": "4500",
+    "OtherAmount": "2100",
+    "TotalAmount": "78600"
+  },
+  {
+    "Id": "8B046D9F-9FA5-39C2-2E0C-2572DEB92B8B",
+    "EnquiryId": "B72F8901-8FDB-1E7B-82FA-E42CC00D2F0F",
+    "CatalogItemId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
+    "OnRoadPrice": "75000",
+    "AccessoriesAmount": "5000",
+    "OtherAmount": "2325",
+    "TotalAmount": "82325"
+  },
+  {
+    "Id": "1626CAB2-3C93-A781-8DD6-BFC99FBB8D6C",
+    "EnquiryId": "533D0DE4-3759-4551-981A-E9368B4659A5",
+    "CatalogItemId": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
+    "OnRoadPrice": "78000",
+    "AccessoriesAmount": "5500",
+    "OtherAmount": "2550",
+    "TotalAmount": "86050"
+  },
+  {
+    "Id": "58399501-9B1E-4BA2-24DA-8B3996B71AD4",
+    "EnquiryId": "13DA29C4-331E-9E3B-63F0-76FF524A15F2",
+    "CatalogItemId": "d005c875-df5c-4dfc-a3e8-24ca233f1682",
+    "OnRoadPrice": "81000",
+    "AccessoriesAmount": "6000",
+    "OtherAmount": "2775",
+    "TotalAmount": "89775"
+  },
+  {
+    "Id": "CF19B6EE-43B8-1197-4EBF-FFD07C713F4B",
+    "EnquiryId": "A52FD4E8-4310-99B7-096C-8702D40F12AF",
+    "CatalogItemId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
+    "OnRoadPrice": "84000",
+    "AccessoriesAmount": "6500",
+    "OtherAmount": "3000",
+    "TotalAmount": "93500"
+  },
+  {
+    "Id": "ABFF3ABC-5068-07BA-2FC5-47684ECB44F9",
+    "EnquiryId": "435AEAEB-71BB-9135-0C0C-F4E5F4560363",
+    "CatalogItemId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
+    "OnRoadPrice": "87000",
+    "AccessoriesAmount": "7000",
+    "OtherAmount": "3225",
+    "TotalAmount": "97225"
+  },
+  {
+    "Id": "9DF47C91-7437-5184-0446-6B5B5889371D",
+    "EnquiryId": "4B3D0269-5836-663C-1CE5-2F4ECB3B26A3",
+    "CatalogItemId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
+    "OnRoadPrice": "90000",
+    "AccessoriesAmount": "7500",
+    "OtherAmount": "3450",
+    "TotalAmount": "100950"
+  },
+  {
+    "Id": "1A5AF650-2C12-717C-7330-6E7BD2409FB2",
+    "EnquiryId": "BF8C82E6-9FFC-439D-1CE5-0869AE78890A",
+    "CatalogItemId": "675c1051-65ac-4aab-8b77-50f2a9dc3f8f",
+    "OnRoadPrice": "93000",
+    "AccessoriesAmount": "8000",
+    "OtherAmount": "3675",
+    "TotalAmount": "104675"
+  },
+  {
+    "Id": "B64BF205-123F-A74D-13F3-0C3D6F869691",
+    "EnquiryId": "AD8387CD-22D8-3E3B-6ADB-E6E4E1A48F9A",
+    "CatalogItemId": "cf661473-c31e-44f7-8dd6-b1db4fb7bb3d",
+    "OnRoadPrice": "96000",
+    "AccessoriesAmount": "8500",
+    "OtherAmount": "3900",
+    "TotalAmount": "108400"
+  }
 ]

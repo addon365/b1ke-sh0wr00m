@@ -1,7 +1,7 @@
 ﻿using addon365.Database.Entity;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using System;
 using System.Collections.Generic;
 using System.Text;

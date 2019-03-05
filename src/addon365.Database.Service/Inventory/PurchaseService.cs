@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Inventory.Purchases;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Domain.Entity.Inventory;
 using addon365.Domain.Entity.Paging;
 using Microsoft.Extensions.Logging;
@@ -63,7 +63,7 @@ namespace addon365.Database.Service.Inventory
         public PurchaseMasterData GetInitilize()
         {
             PurchaseMasterData masterData = new PurchaseMasterData();
-            masterData.Products= _unitOfWork.GetRepository<Product>().GetList(index: 0, size: 1000, include: x => x.Include(n => n.Properties).ThenInclude(m=>m.PropertyMaster)).Items;
+            masterData.CatalogItems= _unitOfWork.GetRepository<CatalogItem>().GetList(index: 0, size: 1000, include: x => x.Include(n => n.Properties).ThenInclude(m=>m.PropertyMaster)).Items;
             masterData.Sellers= _unitOfWork.GetRepository<Seller>().GetList(
                orderBy: x => x.OrderBy(m => m.Created),
                include: x => x.Include(a => a.BusinessContact).ThenInclude(a => a.ContactAddress),
@@ -88,7 +88,7 @@ namespace addon365.Database.Service.Inventory
                     {
                         foreach(PurchaseItemPropertyValue ipv in  ipm.PropertyValues)
                         {
-                            ipv.ProductPropertyMaster = null;
+                            ipv.CatalogItemPropertyMaster = null;
                         }
                     }
                 }

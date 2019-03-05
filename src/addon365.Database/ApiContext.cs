@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Database.Entity.User;
 using addon365.Database.Entity.Finance;
 using addon365.Database.Entity.Accounts;
@@ -94,12 +94,12 @@ namespace addon365.Database
         public DbSet<PurchaseItemPropertyValue> PurchaseItemProperties { get; set; }
         
         #region Product
-        public DbSet<ProductCompany> ProductCompanies { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductPropertyMaster> ProductPropertyMasters { get; set; }
-        public DbSet<ProductPropertiesMap> ProductPropertiesMaps { get; set; }
-        public DbSet<ExtraFittingsAccessories> ExtraFittings { get; set; }
+        public DbSet<CatalogBrand> CatalogBrands { get; set; }
+        public DbSet<CatalogType> CatalogTypes { get; set; }
+        public DbSet<CatalogItem> CatalogItems { get; set; }
+        public DbSet<CatalogItemPropertyMaster> CatalogItemPropertyMasters { get; set; }
+        public DbSet<CatalogItemPropertiesMap> CatalogItemPropertiesMaps { get; set; }
+        
         #endregion
         
         #endregion

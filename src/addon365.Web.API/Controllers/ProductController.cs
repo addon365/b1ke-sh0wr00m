@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.Inventory.Products;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Domain.Entity.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ namespace addon365.Web.API.Controllers
         ///<remarks>
         ///</remarks>
         [HttpGet]
-        public Threenine.Data.Paging.IPaginate<Product> Get(int PageNumber = 0, int PageSize = 30)
+        public Threenine.Data.Paging.IPaginate<CatalogItem> Get(int PageNumber = 0, int PageSize = 30)
         {
             PagingParams pagingParams = new PagingParams();
             pagingParams.PageNumber = PageNumber;
@@ -43,7 +43,7 @@ namespace addon365.Web.API.Controllers
         ///
         ///</remarks>
         [HttpGet("{Id}")]
-        public IEnumerable<Product> Get(int Id)
+        public IEnumerable<CatalogItem> Get(int Id)
         {
             return _productService.GetProductByType(Id);
 
@@ -52,7 +52,7 @@ namespace addon365.Web.API.Controllers
         [AllowAnonymous]
         [Route("Companies")]
         [HttpGet]
-        public IEnumerable<ProductCompany> GetCompanies()
+        public IEnumerable<CatalogBrand> GetCompanies()
         {
             return _productService.GetCompanies();
         }
@@ -60,7 +60,7 @@ namespace addon365.Web.API.Controllers
         [AllowAnonymous]
         [Route("Types")]
         [HttpGet]
-        public IEnumerable<ProductType> GetTypes()
+        public IEnumerable<CatalogType> GetTypes()
         {
             return _productService.GetTypes();
         }
@@ -73,7 +73,7 @@ namespace addon365.Web.API.Controllers
         ///</remarks>
 
         [HttpPost]
-        public IActionResult ProductPost([FromBody] Product referrer)
+        public IActionResult ProductPost([FromBody] CatalogItem referrer)
         {
             if (referrer == null)
             {
@@ -87,7 +87,7 @@ namespace addon365.Web.API.Controllers
         }
 
         [HttpPost("accessories")]
-        public IActionResult AccessoriesPost([FromBody] Product referrer)
+        public IActionResult AccessoriesPost([FromBody] CatalogItem referrer)
         {
             if (referrer == null)
             {
@@ -102,7 +102,7 @@ namespace addon365.Web.API.Controllers
         [AllowAnonymous]
         [Route("Delete")]
         [HttpPost]
-        public IActionResult Delete([FromBody] Product product)
+        public IActionResult Delete([FromBody] CatalogItem product)
         {
             if (product == null)
             {

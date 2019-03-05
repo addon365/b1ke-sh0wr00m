@@ -27,7 +27,7 @@ namespace addon365.Database.Tests
             license = Builder<LicenseMaster>.CreateNew()
                 .Build();
             branch = Builder<BranchMaster>.CreateNew()
-                .With(b => b.LicenseId = license.Id)
+                .With(b => b.LicenseMasterId = license.Id)
                 .Build();
             context.BranchMasters.Add(branch);
             context.SaveChanges();

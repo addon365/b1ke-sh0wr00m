@@ -9,6 +9,7 @@ using Syncfusion.Windows.Shared;
 using Syncfusion.Windows.Tools.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace addon365.UI.WPF
     /// <summary>
     /// Interaction logic for ContactWindow.xaml
     /// </summary>
+    //[LicenseProvider(typeof(RegistryLicenseProvider))]
     public partial class ContactWindow : RibbonWindow
     {
         private static ContactWindow _contactWindow;

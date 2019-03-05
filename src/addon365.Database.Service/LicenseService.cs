@@ -23,7 +23,7 @@ namespace addon365.Database.Service
         public bool IsExists(string value)
         {
             var lst = _unitOfWork.GetRepository<LicenseMaster>()
-                 .GetList().Items.Where(predicate: x => x.LicenseId.ToLower() == value.ToLower());
+                 .GetList().Items.Where(predicate: x => x.URL.ToLower() == value.ToLower());
             return lst.Count()>0 ;
             // your implementation
         }

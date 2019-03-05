@@ -7,7 +7,7 @@ using addon365.Domain.Entity.Sales;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Accounts;
 using System.ComponentModel;
-using addon365.Database.Entity.Inventory.Products;
+using addon365.Database.Entity.Inventory.Catalog;
 
 namespace addon365.UI.ViewModel.Sales
 {
@@ -15,7 +15,7 @@ namespace addon365.UI.ViewModel.Sales
     {
         private readonly ISalesService _repository;
         private MarketingZone _currentMarketingZone;
-        private Product _currentVehicle;
+        private CatalogItem _currentVehicle;
         private Customer _currentCustomer;
         private VoucherInfo _currentAmount;
 
@@ -177,7 +177,7 @@ namespace addon365.UI.ViewModel.Sales
                 }
             }
         }
-        public Product CurrentVehicle
+        public CatalogItem CurrentVehicle
         {
             get
             {
