@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using addon365.Database.Entity.Accounts;
+using addon365.IService.Accounts;
 using Threenine.Data;
 
 namespace addon365.Database.Service.Accounts
@@ -24,9 +25,9 @@ namespace addon365.Database.Service.Accounts
             return result[0];
         }
 
-        public ICollection<VoucherTypeService> Save(ICollection<VoucherTypeService> typeServices)
+        public ICollection<VoucherTypeMaster> Save(ICollection<VoucherTypeMaster> typeServices)
         {
-            _unitOfWork.GetRepository<VoucherTypeService>().Add(typeServices);
+            _unitOfWork.GetRepository<VoucherTypeMaster>().Add(typeServices);
             _unitOfWork.SaveChanges();
             return typeServices;
 

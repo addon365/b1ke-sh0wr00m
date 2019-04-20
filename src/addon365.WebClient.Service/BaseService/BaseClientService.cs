@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using addon365.IService.Base;
 
 namespace addon365.WebClient.Service.BaseService
 {

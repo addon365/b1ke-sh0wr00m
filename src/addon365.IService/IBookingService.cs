@@ -2,7 +2,7 @@
 using addon365.Domain.Entity.Paging;
 using System.Threading.Tasks;
 
-namespace addon365.Database.Service
+namespace addon365.IService
 {
     public interface IBookingService
     {

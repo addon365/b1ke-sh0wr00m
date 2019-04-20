@@ -6,6 +6,7 @@ using addon365.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using addon365.IService;
 
 namespace addon365.UI.ViewModel.Enquiries
 {

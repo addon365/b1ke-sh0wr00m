@@ -3,7 +3,7 @@ using addon365.Database.Entity.Accounts;
 using System;
 using System.Collections.Generic;
 
-namespace addon365.Database.Service.Base
+namespace addon365.IService.Base
 {
     public interface IBaseService<T> where T : BaseEntityWithLogFields
     {

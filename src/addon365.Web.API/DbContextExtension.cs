@@ -188,9 +188,9 @@ namespace addon365.Web.API
                 context.AddRange(types);
                 context.SaveChanges();
             }
-            if (!context.EnquiryProducts.Any())
+            if (!context.EnquiryItems.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<EnquiryProduct>>(
+                var types = JsonConvert.DeserializeObject<List<EnquiryCatalogItem>>(
                 File.ReadAllText(
                 "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
                 context.AddRange(types);

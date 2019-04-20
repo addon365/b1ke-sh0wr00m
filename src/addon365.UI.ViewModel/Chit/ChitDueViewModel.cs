@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using addon365.IService.Chit;
 
 namespace addon365.UI.ViewModel.Chit
 {

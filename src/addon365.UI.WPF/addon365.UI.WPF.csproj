@@ -609,6 +609,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\addon365.IService\addon365.IService.csproj">
+      <Project>{8767e7b1-1143-4a00-8da0-3e8bacea0f97}</Project>
+      <Name>addon365.IService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\addon365.WebClient.Service\addon365.WebClient.Service.csproj">
       <Project>{b4493fd9-c5a3-42a3-8b48-3287216dd7d4}</Project>
       <Name>addon365.WebClient.Service</Name>

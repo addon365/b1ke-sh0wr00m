@@ -10,7 +10,7 @@ using addon365.Database;
 namespace addon365.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20190304093413_init")]
+    [Migration("20190403042850_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid>("UnderGroupId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("AccountBooks");
@@ -72,6 +74,8 @@ namespace addon365.Database.Migrations
                     b.Property<string>("Name");
 
                     b.Property<string>("ProgrammerId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -100,6 +104,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("VoucherDate");
 
                     b.Property<Guid>("VoucherTypeId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -132,6 +138,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<Guid>("VoucherId");
+
+                    b.Property<Guid>("YearId");
 
                     b.Property<Guid>("bookId");
 
@@ -185,6 +193,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<string>("ShortCode");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("BranchMasters");
@@ -223,6 +233,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<int>("TotalMonths");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("ChitSchemes");
@@ -251,6 +263,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<Guid?>("VoucherId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -287,6 +301,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<string>("SubscribeId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -334,6 +350,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid?>("SubDistrictId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("AddressMaster");
@@ -366,6 +384,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<string>("SecondaryMobileNo");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContactAddressId");
@@ -393,6 +413,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<string>("Name");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -425,6 +447,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<Guid>("StatusId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -472,6 +496,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<string>("SecondaryMobileNo");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContactAddressId");
@@ -502,6 +528,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid?>("UserId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
@@ -530,6 +558,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("FollowUpModes");
@@ -555,6 +585,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<string>("Name");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -587,6 +619,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<int>("OtherId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -626,6 +660,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid?>("UserId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContactId");
@@ -661,6 +697,8 @@ namespace addon365.Database.Migrations
                     b.Property<Guid>("StatusId");
 
                     b.Property<Guid?>("VoucherId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -698,6 +736,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<DateTime>("Modified");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CatalogItemId");
@@ -705,6 +745,46 @@ namespace addon365.Database.Migrations
                     b.HasIndex("EnquiryId");
 
                     b.ToTable("EnquiryAccessories");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryCatalogItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("AccessoriesAmount");
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<Guid>("CatalogItemId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<Guid>("EnquiryId");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<double>("OnRoadPrice");
+
+                    b.Property<double>("OtherAmount");
+
+                    b.Property<double>("TotalAmount");
+
+                    b.Property<Guid>("YearId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CatalogItemId");
+
+                    b.HasIndex("EnquiryId");
+
+                    b.ToTable("EnquiryItems");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
@@ -736,6 +816,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<int>("Year");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("EnquiryId");
@@ -758,6 +840,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<DateTime?>("Deleted");
 
+                    b.Property<Guid?>("EnquiryCatalogItemId");
+
                     b.Property<Guid>("EnquiryProductId");
 
                     b.Property<double>("InitialDownPayment");
@@ -768,49 +852,13 @@ namespace addon365.Database.Migrations
 
                     b.Property<int>("NumberOfMonths");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("EnquiryProductId");
+                    b.HasIndex("EnquiryCatalogItemId");
 
                     b.ToTable("EnquiryFinanceQuotations");
-                });
-
-            modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AccessoriesAmount");
-
-                    b.Property<Guid?>("BranchMasterId");
-
-                    b.Property<Guid>("CatalogItemId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<int?>("CreatedDeviceId");
-
-                    b.Property<int?>("CreatedUserId");
-
-                    b.Property<DateTime?>("Deleted");
-
-                    b.Property<Guid>("EnquiryId");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<double>("OnRoadPrice");
-
-                    b.Property<double>("OtherAmount");
-
-                    b.Property<double>("TotalAmount");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CatalogItemId");
-
-                    b.HasIndex("EnquiryId");
-
-                    b.ToTable("EnquiryProducts");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryStatus", b =>
@@ -838,6 +886,8 @@ namespace addon365.Database.Migrations
                         .HasMaxLength(25);
 
                     b.Property<int>("ProgrammerId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -867,6 +917,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<int>("ProgrammerId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("EnquriyType");
@@ -890,6 +942,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<string>("Name");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -918,6 +972,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<Guid?>("UserId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -948,6 +1004,8 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified");
 
                     b.Property<int>("ProgrammerID");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -988,6 +1046,8 @@ namespace addon365.Database.Migrations
                     b.Property<double>("RoadTax");
 
                     b.Property<Guid>("TypeId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -1033,6 +1093,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<string>("PropertyName");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Inventory.Catalog.CatalogItemPropertyMasters");
@@ -1062,6 +1124,8 @@ namespace addon365.Database.Migrations
                     b.Property<Guid>("ParentId");
 
                     b.Property<int>("ProgrammerId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -1094,6 +1158,8 @@ namespace addon365.Database.Migrations
                     b.Property<Guid>("SellerId");
 
                     b.Property<Guid?>("VoucherId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -1128,6 +1194,8 @@ namespace addon365.Database.Migrations
                     b.Property<Guid>("PurchaseId");
 
                     b.Property<decimal>("Unit");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -1205,6 +1273,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid>("VoucherId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BuyerId");
@@ -1242,6 +1312,8 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("SaleId");
 
                     b.Property<Guid>("SalesId");
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -1297,6 +1369,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid?>("UserId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessContactId");
@@ -1335,6 +1409,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<Guid>("VoucherId");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("LicenseMasters");
@@ -1358,6 +1434,8 @@ namespace addon365.Database.Migrations
                     b.Property<string>("Identifier");
 
                     b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("YearId");
 
                     b.Property<string>("ZonalDescription");
 
@@ -1409,6 +1487,8 @@ namespace addon365.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(25);
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
@@ -1454,6 +1534,8 @@ namespace addon365.Database.Migrations
 
                     b.Property<string>("XForwardProto");
 
+                    b.Property<Guid>("YearId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Referer")
@@ -1487,6 +1569,8 @@ namespace addon365.Database.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<Guid>("YearId");
 
                     b.HasKey("Id");
 
@@ -1644,6 +1728,19 @@ namespace addon365.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryCatalogItem", b =>
+                {
+                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CatalogItem", "Item")
+                        .WithMany()
+                        .HasForeignKey("CatalogItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("addon365.Database.Entity.Enquiries.Enquiry")
+                        .WithMany("EnquiryItems")
+                        .HasForeignKey("EnquiryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryExchangeQuotation", b =>
                 {
                     b.HasOne("addon365.Database.Entity.Enquiries.Enquiry")
@@ -1654,23 +1751,9 @@ namespace addon365.Database.Migrations
 
             modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryFinanceQuotation", b =>
                 {
-                    b.HasOne("addon365.Database.Entity.Enquiries.EnquiryProduct")
+                    b.HasOne("addon365.Database.Entity.Enquiries.EnquiryCatalogItem")
                         .WithMany("EnquiryFinanceQuotations")
-                        .HasForeignKey("EnquiryProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("addon365.Database.Entity.Enquiries.EnquiryProduct", b =>
-                {
-                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CatalogItem", "Product")
-                        .WithMany()
-                        .HasForeignKey("CatalogItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("addon365.Database.Entity.Enquiries.Enquiry")
-                        .WithMany("EnquiryProducts")
-                        .HasForeignKey("EnquiryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("EnquiryCatalogItemId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Inventory.Buyer", b =>

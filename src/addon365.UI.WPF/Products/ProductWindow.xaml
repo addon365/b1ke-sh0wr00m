@@ -30,7 +30,7 @@
             <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Product ID" VerticalAlignment="Top"/>
             <TextBox  Height="23" Text="{Binding Path=CurrentProduct.Identifier,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left"   Text="Product Name" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1"/>
-            <TextBox  Height="23" Text="{Binding Path=CurrentProduct.ProductName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
+            <TextBox  Height="23" Text="{Binding Path=CurrentProduct.ItemName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
             <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Price" VerticalAlignment="Top" Grid.Row="2"/>
             <TextBox   Height="23"   Text="{Binding Path=CurrentProduct.Price,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Row="2" Grid.Column="1"/>
             <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="HSN Code" VerticalAlignment="Top" Grid.Row="3"/>

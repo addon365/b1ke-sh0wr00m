@@ -22,7 +22,7 @@
                        AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding CurrentProduct}" >
             <syncfusion:SfDataGrid.Columns>
                 <syncfusion:GridTextColumn MappingName="Identifier"/>
-                <syncfusion:GridTextColumn MappingName="ProductName"/>
+                <syncfusion:GridTextColumn MappingName="ItemName"/>
                 <syncfusion:GridTextColumn MappingName="Price"/>
             </syncfusion:SfDataGrid.Columns>
         </syncfusion:SfDataGrid>

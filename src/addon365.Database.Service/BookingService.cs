@@ -8,6 +8,8 @@ using addon365.Database.Entity;
 using addon365.Domain.Entity.Paging;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using addon365.IService;
+
 namespace addon365.Database.Service
 {
     public class BookingService : IBookingService
@@ -89,8 +91,8 @@ namespace addon365.Database.Service
                 Include(Contact => Contact.Contact).
                 Include(Status => Status.Status).
                 Include(m => m.EnquiryType).
-                Include(n => n.EnquiryProducts).ThenInclude(c => c.Product).
-                Include(n => n.EnquiryProducts).ThenInclude(a => a.EnquiryFinanceQuotations).
+                Include(n => n.EnquiryItems).ThenInclude(c => c.Item).
+                Include(n => n.EnquiryItems).ThenInclude(a => a.EnquiryFinanceQuotations).
                 Include(n => n.EnquiryExchangeQuotations).Include(n=>n.Voucher).ThenInclude(a=>a.VoucherInfos),
                 index: pagingParams.PageNumber, size: pagingParams.PageSize);
 
@@ -110,8 +112,8 @@ namespace addon365.Database.Service
               Include(Contact => Contact.Contact).
               Include(Status => Status.Status).
               Include(m => m.EnquiryType).
-              Include(n => n.EnquiryProducts).ThenInclude(c => c.Product).
-              Include(n => n.EnquiryProducts).ThenInclude(a => a.EnquiryFinanceQuotations).
+              Include(n => n.EnquiryItems).ThenInclude(c => c.Item).
+              Include(n => n.EnquiryItems).ThenInclude(a => a.EnquiryFinanceQuotations).
               Include(n => n.EnquiryExchangeQuotations));
 
             return enq;

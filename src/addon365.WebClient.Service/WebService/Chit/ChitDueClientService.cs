@@ -8,6 +8,7 @@ using addon365.Database.Entity.Chit;
 using addon365.Domain.Entity.Chit;
 using Newtonsoft.Json;
 using addon365.Database.Service.Chit;
+using addon365.IService.Chit;
 
 namespace addon365.WebClient.Service.WebService.Chit
 {

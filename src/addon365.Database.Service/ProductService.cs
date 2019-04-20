@@ -5,6 +5,7 @@ using Threenine.Data;
 using System.Linq;
 using addon365.Domain.Entity.Paging;
 using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService;
 
 namespace addon365.Database.Service
 {
@@ -36,7 +37,7 @@ namespace addon365.Database.Service
         public string Insert(CatalogItem product)
         {
             //var products = new Product();
-            //products.ProductName = product.ProductName;
+            //products.ItemName = product.ItemName;
             //products.Price = product.Price;
             string identi = "1";
             var LastProduct = _unitOfWork.GetRepository<CatalogItem>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.Identifier)));
@@ -62,7 +63,7 @@ namespace addon365.Database.Service
         public string InsertProductType(CatalogType producttype)
         {
             //var products = new Product();
-            //products.ProductName = product.ProductName;
+            //products.ItemName = product.ItemName;
             //products.Price = product.Price;
             _unitOfWork.GetRepository<CatalogType>().Add(producttype);
             try

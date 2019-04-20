@@ -10,7 +10,7 @@ namespace addon365.Domain.Entity.Enquiries
             public Guid Id { get; set; }
             public Guid EnquiryId { get; set; }
             public Guid ProductId { get; set; }
-            public string ProductName { get; set; }
+            public string ItemName { get; set; }
             public double OnRoadPrice { get; set; }
             public double AccessoriesAmount { get; set; }
             public double OtherAmount { get; set; }

@@ -19,10 +19,10 @@ namespace addon365.Domain.Entity.Enquiries
             public Contact Contact { get; set; }
             public EnquiryType EnquiryType { get; set; }
             public EnquiryStatus Status { get; set; }
-            public IList<EnquiryProduct> EnquiryProducts { get; set; }
-            public EnquiryProduct FirstProduct { get
+            public IList<EnquiryCatalogItem> EnquiryItems { get; set; }
+            public EnquiryCatalogItem FirstItem { get
             {
-                return EnquiryProducts.FirstOrDefault();
+                return EnquiryItems.FirstOrDefault();
             }
             }
             public EnquiryFinanceQuotation EnquiryFinanceQuotations { get; set; }

@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:addon365.UI.WPF"
+        xmlns:local="clr-namespace:addon365.UI.ViewModel;assembly=addon365.UI.ViewModel"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance local:EnquiryViewModel,IsDesignTimeCreatable=True}"
         Title="Enquiries" Height="550" Width="900">
     <Grid>
         <Grid.RowDefinitions>
@@ -17,11 +18,17 @@
             <StackPanel Orientation="Horizontal">
                 <syncfusion:RibbonButton x:Name="btnSave" IconType="VectorImage" SizeForm="Large" Label="Save" Foreground="White" HorizontalAlignment="Left"  Command="{Binding SaveEnquiryCommand}" >
                     <syncfusion:RibbonButton.VectorImage>
-                        <Path Data="F1M161,211L133,211L133,189L161,189z" Fill="Gray" Stretch="Fill"/>
-                        <Path Data="F1M160,210L134,210L134,190L160,190z" Fill="White" Stretch="Fill" Margin="1"/>
-                        <Path Data="F1M148,202L158,202L158,201L148,201z" Fill="#FFB3B3B3" Height="1" Stretch="Fill" Width="10" HorizontalAlignment="Right" Margin="0,0,3,9" VerticalAlignment="Bottom"/>
-                        <Path Data="M0,10 L10,10 10,11 0,11 z M0,8.0000001 L10,8.0000001 10,9 0,9 z M0,4 L10,4 10,5 0,5 z M0,0 L10,0 10,1 0,1 z" Fill="#FFB3B3B3" HorizontalAlignment="Right" Margin="0,6,3,5" Stretch="Fill" Width="10" />
-                        <Path Data="M3.0770112,7 L5.0000001,10.570999 6.9230042,7 C8.6230012,7 10,8.5350037 10,10.429001 10,11.848999 8.1970063,13 6.9230042,13 L3.0770112,13 C1.8030091,13 8.9406967E-08,11.848999 0,10.429001 8.9406967E-08,8.5350037 1.3780061,7 3.0770112,7 z M5.0000001,0 C6.6570002,0 8.0000001,1.3429999 8.0000001,3 8.0000001,4.6570001 6.6570002,6 5.0000001,6 3.343,6 2.0000001,4.6570001 2.0000001,3 2.0000001,1.3429999 3.343,0 5.0000001,0 z" Fill="#FF4A7DB1" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="10" />
+
+                        <Path Data="M5.4189969,24.678986L5.4189969,27.915009 26.188982,27.915009 26.188982,24.678986z M8.2970601,0.038998604L12.289056,0.038998604 12.289056,8.1850023 8.2970601,8.1850023z M0,0L5.2730013,0 5.2730013,9.7799988 26.188982,9.7799988 26.188982,0 31.653999,0 31.653999,32 0,32z"  Fill="#FFFFFFFF" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="30" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <TransformGroup.Children>
+                                        <RotateTransform Angle="0" />
+                                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                                    </TransformGroup.Children>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
                     </syncfusion:RibbonButton.VectorImage>
                 </syncfusion:RibbonButton>
                 <syncfusion:RibbonButton  IconType="VectorImage" SizeForm="Large" Label="Find" Foreground="White" HorizontalAlignment="Left"  Command="{Binding FindEnquiryCommand}" >
@@ -31,6 +38,7 @@
                         <Path Data="F1M148,202L158,202L158,201L148,201z" Fill="#FFB3B3B3" Height="1" Stretch="Fill" Width="10" HorizontalAlignment="Right" Margin="0,0,3,9" VerticalAlignment="Bottom"/>
                         <Path Data="M0,10 L10,10 10,11 0,11 z M0,8.0000001 L10,8.0000001 10,9 0,9 z M0,4 L10,4 10,5 0,5 z M0,0 L10,0 10,1 0,1 z" Fill="#FFB3B3B3" HorizontalAlignment="Right" Margin="0,6,3,5" Stretch="Fill" Width="10" />
                         <Path Data="M3.0770112,7 L5.0000001,10.570999 6.9230042,7 C8.6230012,7 10,8.5350037 10,10.429001 10,11.848999 8.1970063,13 6.9230042,13 L3.0770112,13 C1.8030091,13 8.9406967E-08,11.848999 0,10.429001 8.9406967E-08,8.5350037 1.3780061,7 3.0770112,7 z M5.0000001,0 C6.6570002,0 8.0000001,1.3429999 8.0000001,3 8.0000001,4.6570001 6.6570002,6 5.0000001,6 3.343,6 2.0000001,4.6570001 2.0000001,3 2.0000001,1.3429999 3.343,0 5.0000001,0 z" Fill="#FF4A7DB1" HorizontalAlignment="Left" Margin="3,5,0,4" Stretch="Fill" Width="10" />
+                      
                     </syncfusion:RibbonButton.VectorImage>
                 </syncfusion:RibbonButton>
             </StackPanel>
@@ -51,7 +59,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Enquiry Date"/>
@@ -108,9 +116,9 @@
 
                     </Grid.RowDefinitions>
                     <TextBlock Text="Vehicle" VerticalAlignment="Center"/>
-                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentEnquiryProduct.Product}"/>
+                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding EnquiryMasterData.CatalogItems}" DisplayMemberPath="ItemName" SelectedItem="{Binding CurrentEnquiryItem.Item}"/>
                     <TextBlock Text="On Road Amount" VerticalAlignment="Center" Grid.Row="1"/>
-                    <TextBlock Name="txtVechicleOnRoad" Grid.Column="1" Height="24" Grid.Row="1" Text="{Binding CurrentEnquiryProduct.Product.Price}"/>
+                    <TextBlock Name="txtVechicleOnRoad" Grid.Column="1" Height="24" Grid.Row="1" Text="{Binding CurrentEnquiryItem.Item.Price}"/>
                     <Grid Grid.Row="2" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
@@ -132,7 +140,7 @@
                     <StackPanel Grid.Row="5" Grid.ColumnSpan="2">
                         <DataGrid  Height="100" VerticalAlignment="Top" ItemsSource="{Binding EnquiryProducts}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedDataGridProduct}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Vechicle" Binding="{Binding Product.ProductName}" Width="*"/>
+                                <DataGridTextColumn Header="Vechicle" Binding="{Binding Product.ItemName}" Width="*"/>
                                 <DataGridTextColumn Header="On Road" Binding="{Binding OnRoadPrice}" Width="60"/>
                                 <DataGridTextColumn Header="Access" Binding="{Binding AccessoriesAmount}" Width="60"/>
                                 <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount}" Width="60"/>
@@ -166,7 +174,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Select Product" VerticalAlignment="Center" />
-                        <ComboBox Grid.Column="1" Height="24" ItemsSource="{Binding EnquiryProducts}" DisplayMemberPath="Product.ProductName" SelectedItem="{Binding CurrentFinanceEnquiryProduct}"/>
+                        <ComboBox Grid.Column="1" Height="24" ItemsSource="{Binding EnquiryProducts}" DisplayMemberPath="Product.ItemName" SelectedItem="{Binding CurrentFinanceEnquiryProduct}"/>
                         <TextBlock Text="First/Initial Payment" VerticalAlignment="Center" Grid.Row="1"/>
                         <TextBox  Grid.Column="1" Height="24" BorderBrush="Gray" Grid.Row="1"  Text="{Binding CurrentFinanceQuotation.InitialDownPayment}"/>
                         <TextBlock Text="Monthly EMI Amount" VerticalAlignment="Center" Grid.Row="2"/>

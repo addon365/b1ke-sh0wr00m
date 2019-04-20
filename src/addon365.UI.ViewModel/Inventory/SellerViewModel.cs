@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using addon365.Database.Service.Inventory;
 using addon365.Database.Entity.Inventory;
+using addon365.IService.Inventory;
 
 namespace addon365.UI.ViewModel.Inventory
 {

@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using addon365.IService;
 
 namespace addon365.Web.API.Controllers
 {

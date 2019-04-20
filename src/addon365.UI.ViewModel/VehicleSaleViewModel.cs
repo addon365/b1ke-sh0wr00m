@@ -6,6 +6,8 @@ using addon365.Domain.Entity.Enquiries;
 using addon365.Database.Service;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using addon365.IService;
+
 namespace addon365.UI.ViewModel
 {
     public class VehicleSaleViewModel : ViewModelBase
@@ -84,16 +86,16 @@ namespace addon365.UI.ViewModel
             }
         }
 
-        private ObservableCollection<EnquiryProduct> _enquiryProducts;
-        public ObservableCollection<EnquiryProduct> EnquiryProducts
+        private ObservableCollection<EnquiryCatalogItem> _enquiryItems;
+        public ObservableCollection<EnquiryCatalogItem> EnquiryItems
         {
             get
             {
-                return _enquiryProducts;
+                return _enquiryItems;
             }
             set
             {
-                _enquiryProducts = value;
+                _enquiryItems = value;
             }
         }
    
@@ -208,7 +210,7 @@ namespace addon365.UI.ViewModel
             }
             InsertEnquiryModel insertEnquiryModel = new InsertEnquiryModel();
             insertEnquiryModel.Enquiry = CurrentEnquiry;
-            insertEnquiryModel.EnquiryProducts = EnquiryProducts;
+            insertEnquiryModel.EnquiryItems = EnquiryItems;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
 
             await _repository.Insert(insertEnquiryModel);
@@ -236,12 +238,12 @@ namespace addon365.UI.ViewModel
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
-            _enquiryProducts=new ObservableCollection<EnquiryProduct>();
+            _enquiryItems=new ObservableCollection<EnquiryCatalogItem>();
         }
         void ClearData()
         {
             InitInsert();
-            EnquiryProducts.Clear();
+            EnquiryItems.Clear();
         }
         public void FindEnquiry()
         {
@@ -253,15 +255,15 @@ namespace addon365.UI.ViewModel
             if (!InsertValidation())
                 return;
 
-            EnquiryProduct enquiryProduct = new EnquiryProduct();
-            enquiryProduct.Product = _enquiryProduct;
+            EnquiryCatalogItem enquiryProduct = new EnquiryCatalogItem();
+            enquiryProduct.Item = _enquiryProduct;
             enquiryProduct.CatalogItemId = _enquiryProduct.Id;
 
             enquiryProduct.OnRoadPrice = _enquiryProduct.Price;
             enquiryProduct.AccessoriesAmount = 0;
             enquiryProduct.TotalAmount = enquiryProduct.OnRoadPrice + enquiryProduct.AccessoriesAmount;
 
-            EnquiryProducts.Add(enquiryProduct);
+            EnquiryItems.Add(enquiryProduct);
         }
         public void AddFinanceQuotation()
         {

@@ -6,6 +6,7 @@ using addon365.Domain.Entity.Enquiries;
 using Threenine.Data;
 using AutoMapper;
 using addon365.Database.Entity.Enquiries;
+using addon365.IService;
 
 namespace addon365.Database.Service
 {

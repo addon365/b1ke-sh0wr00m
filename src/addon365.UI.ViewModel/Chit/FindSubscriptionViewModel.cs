@@ -2,6 +2,7 @@
 using addon365.Domain.Entity.Chit;
 using addon365.Database.Service.Chit;
 using System.Collections.Generic;
+using addon365.IService.Chit;
 
 namespace addon365.UI.ViewModel.Chit
 {

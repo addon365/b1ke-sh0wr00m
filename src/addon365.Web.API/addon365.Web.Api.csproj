@@ -46,6 +46,7 @@
     <ProjectReference Include="..\addon365.Database\addon365.Database.csproj" />
     <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
     <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj" />
+    <ProjectReference Include="..\addon365.IService\addon365.IService.csproj" />
   </ItemGroup>
 
   <ItemGroup>

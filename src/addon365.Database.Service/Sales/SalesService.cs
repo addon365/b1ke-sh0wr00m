@@ -7,7 +7,7 @@ using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Finance;
 using addon365.Database.Entity.Inventory.Sales;
 using addon365.Database.Entity.Inventory.Catalog;
-
+using addon365.IService.Sales;
 namespace addon365.Database.Service.Sales
 {
     public class SalesService : ISalesService

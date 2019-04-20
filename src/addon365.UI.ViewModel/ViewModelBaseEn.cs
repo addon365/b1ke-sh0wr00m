@@ -1,5 +1,6 @@
 ﻿using addon365.Database.Entity;
 using addon365.Database.Service.Base;
+using addon365.IService.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;

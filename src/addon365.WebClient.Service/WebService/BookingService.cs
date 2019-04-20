@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System;
+using addon365.IService;
 
 namespace addon365.WebClient.Service.WebService
 {

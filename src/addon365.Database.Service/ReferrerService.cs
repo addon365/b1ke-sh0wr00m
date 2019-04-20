@@ -5,6 +5,7 @@ using addon365.Database.Entity.Threats;
 using addon365.Domain.Entity.Bots;
 using Threenine.Data;
 using AutoMapper;
+using addon365.IService;
 
 namespace addon365.Database.Service
 {

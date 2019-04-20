@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using addon365.Domain.Entity.Inventory;
 using addon365.Domain.Entity.Paging;
+using addon365.IService.Inventory;
 using Threenine.Data.Paging;
 
 namespace addon365.Database.Service.Inventory

@@ -8,6 +8,7 @@ using System.Linq;
 using addon365.Database.Service;
 using System.Net.Http;
 using Newtonsoft.Json;
+using addon365.IService;
 
 namespace addon365.WebClient.Service.WebService
 {

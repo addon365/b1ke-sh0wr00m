@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using addon365.IService;
 
 namespace addon365.WebClient.Service.WebService
 {

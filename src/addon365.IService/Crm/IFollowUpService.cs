@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace addon365.Database.Service.Crm
+namespace addon365.IService.Crm
 {
     public interface IFollowUpService
     {

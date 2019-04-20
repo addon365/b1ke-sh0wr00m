@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace addon365.Database.Service
+namespace addon365.IService
 {
     public interface IAccessoriesService
     {

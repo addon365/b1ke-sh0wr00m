@@ -8,6 +8,7 @@ using addon365.Domain.Entity.Chit.Reports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using addon365.Database.Service.Chit;
+using addon365.IService.Chit;
 
 namespace addon365.Web.API.Controllers.Chit
 {

@@ -11,6 +11,8 @@ using addon365.Database;
 using addon365.Domain.Entity.Chit.Reports;
 using System.Collections.Generic;
 using addon365.Database.Entity.Crm;
+using addon365.IService.Chit;
+using addon365.IService.Accounts;
 
 namespace addon365.Database.Service.Chit
 {

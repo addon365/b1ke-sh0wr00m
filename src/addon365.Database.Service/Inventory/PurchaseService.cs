@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using addon365.Database.Entity.Inventory;
 using addon365.Database.Entity.Accounts;
 using addon365.Database;
+using addon365.IService.Inventory;
 
 namespace addon365.Database.Service.Inventory
 {

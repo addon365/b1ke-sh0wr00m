@@ -10,6 +10,7 @@ using addon365.Web.API.Controllers;
 using addon365.Database.Service;
 using Threenine.Data;
 using Xunit;
+using addon365.IService;
 
 namespace addon365.Web.API.Tests
 {

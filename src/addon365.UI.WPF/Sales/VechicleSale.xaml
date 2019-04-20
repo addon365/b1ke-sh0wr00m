@@ -126,7 +126,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Vehicle" VerticalAlignment="Center"/>
-                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding MasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentVehicle}"/>
+                    <ComboBox Name="cmbVehicle" Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding MasterData.Products}" DisplayMemberPath="ItemName" SelectedItem="{Binding CurrentVehicle}"/>
                     <GroupBox Grid.Row="1" Grid.ColumnSpan="2">
                         <GroupBox.Header>
                             Amount Detail

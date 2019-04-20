@@ -13,6 +13,7 @@ namespace addon365.Database.Entity
         public int? CreatedUserId { get; set; }
         public int? CreatedDeviceId { get; set; }
         public Guid? BranchMasterId { get; set; }
+        public Guid YearId { get; set; }
     }
        
   

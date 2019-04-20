@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService;
 
 namespace addon365.UI.ViewModel
 {
@@ -19,7 +20,7 @@ namespace addon365.UI.ViewModel
         private Enquiry _currentEnquiry;
         private Contact _currentContact;
         private MarketingZone _currentMarketingZone;
-        private EnquiryProduct _enquiryProduct,_SelectedDataGridProduct, _FinanceEnquiryProduct;
+        private EnquiryCatalogItem _enquiryItem,_SelectedDataGridProduct, _FinanceEnquiryProduct;
         private EnquiryFinanceQuotation _financeQuotation, _SelectedDataGridFinanceQuotation;
         private EnquiryExchangeQuotation _exchangeQuotation;
         private ScreenOpenMode Mode=ScreenOpenMode.New;
@@ -35,10 +36,10 @@ namespace addon365.UI.ViewModel
             Enquiry eq=_repository.GetEnquiries(Identifier);
             CurrentEnquiry = eq;
             CurrentContact = eq.Contact;
-            EnquiryProducts = new ObservableCollection<EnquiryProduct>(eq.EnquiryProducts);
+            EnquiryItems = new ObservableCollection<EnquiryCatalogItem>(eq.EnquiryItems);
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
-            CurrentFinanceEnquiryProduct =EnquiryProducts.FirstOrDefault();
+            CurrentFinanceEnquiryProduct =EnquiryItems.FirstOrDefault();
             ExchangeQuotations = new ObservableCollection<EnquiryExchangeQuotation>(eq.EnquiryExchangeQuotations);
             CurrentExchangeQuotation = ExchangeQuotations.FirstOrDefault();
             Mode = ScreenOpenMode.Edit;
@@ -69,7 +70,7 @@ namespace addon365.UI.ViewModel
                 Identifier = "Identifier1",
                 Place = "Choolaimedu"
             };
-            CurrentEnquiryProduct.Product = EnquiryMasterData.CatalogItems.FirstOrDefault();
+            CurrentEnquiryItem.Item = EnquiryMasterData.CatalogItems.FirstOrDefault();
 
             CurrentFinanceQuotation = new EnquiryFinanceQuotation
             {
@@ -90,8 +91,8 @@ namespace addon365.UI.ViewModel
             };
             CurrentMarketingZone = EnquiryMasterData.MarketingZones.FirstOrDefault();
 
-            AddEnquiryProduct();
-            CurrentFinanceEnquiryProduct = EnquiryProducts.FirstOrDefault();
+            AddEnquiryItem();
+            CurrentFinanceEnquiryProduct = EnquiryItems.FirstOrDefault();
 
         }
         #region Commands
@@ -100,7 +101,7 @@ namespace addon365.UI.ViewModel
             UpdateEnquiryCommand = new RelayCommand(UpdateEnquiry);
             SaveEnquiryCommand = new RelayCommand(SaveEnquiry);
             FindEnquiryCommand = new RelayCommand(FindEnquiry);
-            AddEnquiryProductCommand = new RelayCommand(AddEnquiryProduct);
+            AddEnquiryItemCommand = new RelayCommand(AddEnquiryItem);
             AddFinanceQuotationCommand = new RelayCommand(AddFinanceQuotation);
             DeleteRowEnquiryProductCommand = new RelayCommand(RemoveEnquiryProduct);
             DeleteRowFinanceQuotationCommand = new RelayCommand(RemoveFinanceQuotationRow);
@@ -131,7 +132,7 @@ namespace addon365.UI.ViewModel
             get;
             private set;
         }
-        public RelayCommand AddEnquiryProductCommand
+        public RelayCommand AddEnquiryItemCommand
         {
             get;
             private set;
@@ -162,17 +163,17 @@ namespace addon365.UI.ViewModel
             }
         }
 
-        private ObservableCollection<EnquiryProduct> _enquiryProducts;
-        public ObservableCollection<EnquiryProduct> EnquiryProducts
+        private ObservableCollection<EnquiryCatalogItem> _enquiryItems;
+        public ObservableCollection<EnquiryCatalogItem> EnquiryItems
         {
             get
             {
-                return _enquiryProducts;
+                return _enquiryItems;
             }
             set
             {
-                _enquiryProducts = value;
-                OnPropertyChanged("EnquiryProducts");
+                _enquiryItems = value;
+                OnPropertyChanged("EnquiryItems");
             }
         }
 
@@ -244,25 +245,25 @@ namespace addon365.UI.ViewModel
                 }
             }
         }
-        public EnquiryProduct CurrentEnquiryProduct
+        public EnquiryCatalogItem CurrentEnquiryItem
         {
             get
             {
-                return _enquiryProduct;
+                return _enquiryItem;
             }
 
             set
             {
-                if (_enquiryProduct != value)
+                if (_enquiryItem != value)
                 {
-                    _enquiryProduct = value;
-                    OnPropertyChanged("CurrentEnquiryProduct");
+                    _enquiryItem = value;
+                    OnPropertyChanged("CurrentEnquiryItem");
 
-                    AddEnquiryProductCommand.IsEnabled = true;
+                    AddEnquiryItemCommand.IsEnabled = true;
                 }
             }
         }
-        public EnquiryProduct SelectedDataGridProduct
+        public EnquiryCatalogItem SelectedDataGridProduct
         {
             get
             {
@@ -298,7 +299,7 @@ namespace addon365.UI.ViewModel
                 }
             }
         }
-        public EnquiryProduct CurrentFinanceEnquiryProduct
+        public EnquiryCatalogItem CurrentFinanceEnquiryProduct
         {
             get
             {
@@ -387,7 +388,7 @@ namespace addon365.UI.ViewModel
             InsertEnquiryModel insertEnquiryModel = new InsertEnquiryModel();
             CurrentEnquiry.Contact = CurrentContact;
             insertEnquiryModel.Enquiry = CurrentEnquiry;
-            insertEnquiryModel.EnquiryProducts = EnquiryProducts;
+            insertEnquiryModel.EnquiryItems = EnquiryItems;
             insertEnquiryModel.enquiryExchangeQuotations = ExchangeQuotations;
 
             await _repository.Insert(insertEnquiryModel);
@@ -409,7 +410,7 @@ namespace addon365.UI.ViewModel
             if (_currentEnquiry == null)
                 return false;
 
-            if (_enquiryProduct == null)
+            if (_enquiryItem == null)
                 return false;
 
             return true;
@@ -418,12 +419,12 @@ namespace addon365.UI.ViewModel
         {
             CurrentEnquiry = new Enquiry() { EnquiryDate = CurrentEnquiry==null?System.DateTime.Now:CurrentEnquiry.EnquiryDate };
             CurrentContact = new Contact();
-            CurrentEnquiryProduct = new EnquiryProduct();
-            CurrentEnquiryProduct.Product = new CatalogItem();
+            CurrentEnquiryItem = new EnquiryCatalogItem();
+            CurrentEnquiryItem.Item = new CatalogItem();
             CurrentFinanceQuotation = new EnquiryFinanceQuotation();
             CurrentExchangeQuotation = new EnquiryExchangeQuotation();
 
-            EnquiryProducts=new ObservableCollection<EnquiryProduct>();
+            EnquiryItems=new ObservableCollection<EnquiryCatalogItem>();
             
             ExchangeQuotations = new ObservableCollection<EnquiryExchangeQuotation>();
             
@@ -431,29 +432,29 @@ namespace addon365.UI.ViewModel
         void ClearData()
         {
             InitInsert();
-            EnquiryProducts.Clear();
+            EnquiryItems.Clear();
             ExchangeQuotations.Clear();
         }
         public void FindEnquiry()
         {
         }
        
-        public void AddEnquiryProduct()
+        public void AddEnquiryItem()
         {
             if (!InsertValidation())
                 return;
 
-            EnquiryProduct enquiryProduct = new EnquiryProduct();
-            enquiryProduct.Product = _enquiryProduct.Product;
-            enquiryProduct.CatalogItemId = _enquiryProduct.Product.Id;
+            EnquiryCatalogItem enquiryItem = new EnquiryCatalogItem();
+            enquiryItem.Item = _enquiryItem.Item;
+            enquiryItem.CatalogItemId = _enquiryItem.Item.Id;
 
-            enquiryProduct.OnRoadPrice = _enquiryProduct.Product.Price;
-            enquiryProduct.AccessoriesAmount = _enquiryProduct.AccessoriesAmount;
-            enquiryProduct.OtherAmount = _enquiryProduct.OtherAmount;
-            enquiryProduct.TotalAmount = enquiryProduct.OnRoadPrice + enquiryProduct.AccessoriesAmount+enquiryProduct.OtherAmount;
+            enquiryItem.OnRoadPrice = _enquiryItem.Item.Price;
+            enquiryItem.AccessoriesAmount = _enquiryItem.AccessoriesAmount;
+            enquiryItem.OtherAmount = _enquiryItem.OtherAmount;
+            enquiryItem.TotalAmount = enquiryItem.OnRoadPrice + enquiryItem.AccessoriesAmount+enquiryItem.OtherAmount;
 
-            EnquiryProducts.Add(enquiryProduct);
-            CurrentEnquiryProduct = new EnquiryProduct();
+            EnquiryItems.Add(enquiryItem);
+            CurrentEnquiryItem = new EnquiryCatalogItem();
         }
         public void AddFinanceQuotation()
         {
@@ -478,7 +479,7 @@ namespace addon365.UI.ViewModel
         }
         public void RemoveEnquiryProduct()
         {
-            EnquiryProducts.Remove(SelectedDataGridProduct);
+            EnquiryItems.Remove(SelectedDataGridProduct);
         }
         public void RemoveFinanceQuotationRow()
         {

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using addon365.IService;
 
 namespace addon365.UI.ViewModel
 {

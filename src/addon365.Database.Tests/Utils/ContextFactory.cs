@@ -141,9 +141,9 @@ namespace addon365.Database.Tests.Utils
                 context.AddRange(types);
                 context.SaveChanges();
             }
-            if (!context.EnquiryProducts.Any())
+            if (!context.EnquiryItems.Any())
             {
-                var types = JsonConvert.DeserializeObject<List<EnquiryProduct>>(
+                var types = JsonConvert.DeserializeObject<List<EnquiryCatalogItem>>(
                 File.ReadAllText(
                 SeedPath + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
                 context.AddRange(types);

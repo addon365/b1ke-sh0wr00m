@@ -5,14 +5,14 @@ using addon365.Domain.Entity.Paging;
 using System.Threading.Tasks;
 using Threenine.Data.Paging;
 
-namespace addon365.Database.Service.Inventory
+namespace addon365.IService.Inventory
 {
-    public interface ISellerService
+    public interface IBuyerService
     {
-        IPaginate<Seller> GetAll(PagingParams pagingParams);
-        Task<Seller> Insert(Seller model);
-        Task<Seller> Update(Seller model);
-        Seller Get(string id);
+        IPaginate<Buyer> GetAll(PagingParams pagingParams);
+        Task<Buyer> Insert(Buyer model);
+        Task<Buyer> Update(Buyer model);
+        Buyer Get(string id);
         Task Delete(string id);
     }
 }

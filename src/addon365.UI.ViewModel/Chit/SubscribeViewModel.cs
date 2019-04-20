@@ -8,6 +8,7 @@ using addon365.Domain.Entity.Chit;
 using addon365.Database.Service.Chit;
 using SchemeClientService = addon365.WebClient.Service.WebService.Chit.SchemeService;
 using addon365.Database.Entity.Crm;
+using addon365.IService.Chit;
 
 namespace addon365.UI.ViewModel.Chit
 {

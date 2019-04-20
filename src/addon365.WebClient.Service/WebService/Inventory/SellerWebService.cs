@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Threenine.Data.Paging;
+using addon365.IService.Inventory;
 
 namespace addon365.WebClient.Service.WebService.Inventory
 {

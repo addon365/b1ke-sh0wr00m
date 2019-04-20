@@ -11,6 +11,7 @@ using addon365.Web.API.Utils;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using addon365.IService.Crm;
 
 namespace addon365.Web.API.Tests
 {

@@ -28,7 +28,7 @@
             <syncfusion:SfDataGrid.Columns>
                     <syncfusion:GridTextColumn MappingName="Identifier" HeaderText="Id"  Width="60"/>
                     <syncfusion:GridDateTimeColumn MappingName="EnquiryDate" HeaderText="Date" Pattern="ShortDate" Width="100"/>
-                    <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].Product.ProductName" HeaderText="Vechicle" Width="150"/>
+                    <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].Product.ItemName" HeaderText="Vechicle" Width="150"/>
                     <syncfusion:GridTextColumn MappingName="EnquiryProducts[0].OnRoadPrice" HeaderText="On Road" Width="80"/>
                     <syncfusion:GridTextColumn MappingName="Contact.Name" HeaderText="Name" Width="150"/>
                     <syncfusion:GridTextColumn MappingName="Contact.MobileNumber" HeaderText="Mobile" Width="100"/>

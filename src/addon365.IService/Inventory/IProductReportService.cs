@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Threenine.Data.Paging;
 
-namespace addon365.Database.Service.Inventory
+namespace addon365.IService.Inventory
 {
     public interface IProductReportService
     {

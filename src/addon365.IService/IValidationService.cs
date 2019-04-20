@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addon365.Database.Service
+namespace addon365.IService
 {
     public interface IValidationService
     {

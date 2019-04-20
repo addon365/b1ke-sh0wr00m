@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Crm;
+using addon365.IService.Crm;
 using Threenine.Data;
 
 namespace addon365.Database.Service.Crm

@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Inventory;
 using addon365.Domain.Entity.Paging;
+using addon365.IService.Inventory;
 using Threenine.Data.Paging;
 
 namespace addon365.Database.Service.Inventory

@@ -86,7 +86,7 @@
                 </Grid>
                 <syncfusion:SfDataGrid Grid.Row="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" AllowFiltering="True"   >
                     <syncfusion:SfDataGrid.Columns>
-                        <syncfusion:GridTextColumn MappingName="Product.ProductName" HeaderText="Product"  Width="150"/>
+                        <syncfusion:GridTextColumn MappingName="Product.ItemName" HeaderText="Product"  Width="150"/>
                         <syncfusion:GridTextColumn MappingName="Price" HeaderText="Price"  Width="60"/>
                         <syncfusion:GridTextColumn MappingName="Quantity" HeaderText="Qty"  Width="60"/>
                         <syncfusion:GridTextColumn MappingName="Amount" HeaderText="Amount"  Width="100"/>
@@ -108,7 +108,7 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Item" VerticalAlignment="Center"/>
-                <ComboBox  Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding MasterData.Products}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentItem.Product}" />
+                <ComboBox  Grid.Column="1" Height="24" BorderBrush="Gray" ItemsSource="{Binding MasterData.Products}" DisplayMemberPath="ItemName" SelectedItem="{Binding CurrentItem.Product}" />
                 <TextBlock Text="Price" VerticalAlignment="Center" Grid.Row="1" />
                 <TextBox  Grid.Column="1" Height="24" Grid.Row="1" Text="{Binding CurrentItem.Price}" />
                 <TextBlock Text="Quantity" VerticalAlignment="Center" Grid.Row="2"/>

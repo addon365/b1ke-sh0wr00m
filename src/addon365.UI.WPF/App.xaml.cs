@@ -55,7 +55,7 @@ namespace addon365.UI.WPF
             container.RegisterType<IUnitOfWork, UnitOfWork<ApiContext>>();
             container.RegisterType<IUnitOfWork<ApiContext>, UnitOfWork<ApiContext>>();
             container.RegisterType<PurchaseListViewModel>();
-            container.RegisterType<IPurchaseService, addon365.WebClient.Service.WebService.Inventory.PurchaseWebService>();
+            //container.RegisterType<IPurchaseService, addon365.WebClient.Service.WebService.Inventory.PurchaseWebService>();
         }
         private static ServiceCollections _objSelf;
         public static ServiceCollections Instance

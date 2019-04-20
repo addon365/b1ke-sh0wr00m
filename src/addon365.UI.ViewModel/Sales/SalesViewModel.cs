@@ -8,6 +8,7 @@ using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Accounts;
 using System.ComponentModel;
 using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService.Sales;
 
 namespace addon365.UI.ViewModel.Sales
 {

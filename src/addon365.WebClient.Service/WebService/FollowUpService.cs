@@ -7,6 +7,7 @@ using addon365.Database.Entity.Crm;
 using Newtonsoft.Json;
 using addon365.Database.Service;
 using addon365.Database.Service.Crm;
+using addon365.IService.Crm;
 
 namespace addon365.WebClient.Service.WebService
 {

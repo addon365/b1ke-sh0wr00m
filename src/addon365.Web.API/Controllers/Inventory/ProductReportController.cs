@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using addon365.Database.Service;
 using addon365.Database.Service.Inventory;
+using addon365.IService.Inventory;
 
 namespace addon365.Web.API.Controllers.Inventory
 {

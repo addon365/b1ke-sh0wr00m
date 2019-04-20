@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using addon365.Database.Service.Sales;
 using addon365.Domain.Entity.Sales;
 using addon365.Database.Entity.Inventory.Sales;
+using addon365.IService.Sales;
 
 namespace addon365.WebClient.Service.WebService
 {

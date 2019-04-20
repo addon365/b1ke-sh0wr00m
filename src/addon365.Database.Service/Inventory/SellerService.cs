@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Threenine.Data;
 using Threenine.Data.Paging;
 using Microsoft.EntityFrameworkCore;
+using addon365.IService.Inventory;
 
 namespace addon365.Database.Service.Inventory
 {

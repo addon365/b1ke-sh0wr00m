@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using addon365.Database.Service.Crm;
 using addon365.Web.API.Utils;
+using addon365.IService.Crm;
 
 namespace addon365.Web.API.Controllers
 {

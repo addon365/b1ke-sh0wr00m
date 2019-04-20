@@ -18,7 +18,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
                 
-            <ComboBox Height="24" ItemsSource="{Binding Bikes}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentSelectedVehicle}" />
+            <ComboBox Height="24" ItemsSource="{Binding Bikes}" DisplayMemberPath="ItemName" SelectedItem="{Binding CurrentSelectedVehicle}" />
             <Button Command="{Binding SaveCommand}" Content="Save" Grid.Column="1" Height="25" Width="100"/>
         </Grid>
         <Grid Grid.Row="1">
@@ -40,7 +40,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Accessories"/>
-                <ComboBox  Grid.Row="1" Height="24" ItemsSource="{Binding Accessories}" DisplayMemberPath="ProductName" SelectedItem="{Binding CurrentSelectedAccessories}" IsEnabled="{Binding IsProductSelected}"/>
+                <ComboBox  Grid.Row="1" Height="24" ItemsSource="{Binding Accessories}" DisplayMemberPath="ItemName" SelectedItem="{Binding CurrentSelectedAccessories}" IsEnabled="{Binding IsProductSelected}"/>
                 <TextBlock Text="Quantity" Grid.Column="1"/>
                 <TextBox Height="24" Grid.Row="1" Grid.Column="1" BorderBrush="Gray" Text="{Binding CurrentFitting.Unit}" IsEnabled="{Binding IsProductSelected}"  />
                 <TextBlock Text="Unit Price" Grid.Column="2"/>
@@ -61,7 +61,7 @@
                        AutoGenerateColumns="False" AllowFiltering="True" Grid.Row="1" SelectedItem="{Binding CurrentSelectedGridFitting}" >
             <syncfusion:SfDataGrid.Columns>
                     <syncfusion:GridTextColumn MappingName="AccessoriesProduct.Identifier" HeaderText="Code"/>
-                    <syncfusion:GridTextColumn MappingName="AccessoriesProduct.ProductName" HeaderText="Accessories"/>
+                    <syncfusion:GridTextColumn MappingName="AccessoriesProduct.ItemName" HeaderText="Accessories"/>
                     <syncfusion:GridTextColumn MappingName="Unit" HeaderText="Nos"/>
                     <syncfusion:GridTextColumn MappingName="UnitPrice" HeaderText="Price"/>
                     <syncfusion:GridTextColumn MappingName="Amount" HeaderText="Amount"/>

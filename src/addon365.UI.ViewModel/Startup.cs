@@ -10,6 +10,9 @@ using Threenine.Data.DependencyInjection;
 using addon365.UI.ViewModel.Inventory;
 using addon365.Database.Service.Inventory;
 using addon365.WebClient.Service.WebService.Chit;
+using addon365.IService.Accounts;
+using addon365.IService.Chit;
+using addon365.IService;
 
 namespace addon365.UI.ViewModel
 {
@@ -24,10 +27,11 @@ namespace addon365.UI.ViewModel
 
 
             provider=services.AddDbContext<ApiContext>(options => options.UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=config69;Trusted_Connection=True;MultipleActiveResultSets=true"))
-               .AddUnitOfWork<ApiContext>().AddTransient<IVoucherTypeService, VoucherTypeService>()
-                .AddTransient<IAccountBookService, AccountBookService>()
-            .AddTransient<ISubscribeService, SubscribeService>()
-            .AddTransient<IChitDueService, ChitDueService>().BuildServiceProvider();
+               .AddUnitOfWork<ApiContext>()
+               .AddTransient<IVoucherTypeService, addon365.Database.Service.Accounts.VoucherTypeService>()
+                .AddTransient<IAccountBookService, addon365.Database.Service.Accounts.AccountBookService>()
+            .AddTransient<ISubscribeService, addon365.Database.Service.Chit.SubscribeService>()
+            .AddTransient<IChitDueService, addon365.Database.Service.Chit.ChitDueService>().BuildServiceProvider();
 
 #else
            

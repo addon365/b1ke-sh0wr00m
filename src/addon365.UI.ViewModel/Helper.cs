@@ -37,9 +37,9 @@ namespace addon365.UI.ViewModel
             DataTable dtEnquiries = ConvertToDataTable<Enquiry>(invm.enquiries);
             dtEnquiries.TableName = "Enquiry";
             ds.Tables.Add(dtEnquiries);
-            if (invm.EnquiryProducts != null)
+            if (invm.EnquiryItems != null)
             {
-                DataTable dtProducts = ConvertToDataTable<DomainEnquiryProduct>(invm.EnquiryProducts);
+                DataTable dtProducts = ConvertToDataTable<DomainEnquiryProduct>(invm.EnquiryItems);
                 dtProducts.TableName = "EnquiryProducts";
                 ds.Tables.Add(dtProducts);
             }

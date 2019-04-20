@@ -4,7 +4,7 @@ using addon365.Domain.Entity.Paging;
 using System.Threading.Tasks;
 using Threenine.Data.Paging;
 
-namespace addon365.Database.Service.Inventory
+namespace addon365.IService.Inventory
 {
     public interface IPurchaseService
     {

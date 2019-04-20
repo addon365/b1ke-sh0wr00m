@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using addon365.Database.Entity.Inventory.Catalog;
 using System.Data;
 using addon365.Database.Entity.Accounts;
+using addon365.IService.Inventory;
 
 namespace addon365.UI.ViewModel.Inventory
 {

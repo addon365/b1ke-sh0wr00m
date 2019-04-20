@@ -9,6 +9,8 @@ using addon365.Domain.Entity.Chit;
 using addon365.Database.Entity.Accounts;
 using addon365.Database.Service.Accounts;
 using addon365.Database.Entity.Crm;
+using addon365.IService.Chit;
+using addon365.IService.Accounts;
 
 namespace addon365.Database.Service.Chit
 {

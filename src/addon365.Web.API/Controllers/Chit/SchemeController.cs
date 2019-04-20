@@ -6,6 +6,7 @@ using addon365.Database.Entity.Chit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using addon365.Database.Service.Chit;
+using addon365.IService.Chit;
 
 namespace addon365.Web.API.Controllers.Chit
 {

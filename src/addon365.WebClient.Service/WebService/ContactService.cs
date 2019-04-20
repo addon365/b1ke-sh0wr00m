@@ -4,6 +4,7 @@ using addon365.Database.Service.Crm;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using addon365.IService.Crm;
 
 namespace addon365.WebClient.Service.WebService
 {

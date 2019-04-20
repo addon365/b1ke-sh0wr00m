@@ -4,7 +4,7 @@ using addon365.Database.Entity.Enquiries;
 using addon365.Domain.Entity.Enquiries;
 using addon365.Domain.Entity.Paging;
 
-namespace addon365.Database.Service
+namespace addon365.IService
 {
     public interface IEnquiriesService
     {

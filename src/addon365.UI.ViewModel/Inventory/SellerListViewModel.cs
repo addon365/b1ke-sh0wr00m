@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using addon365.IService.Inventory;
 
 namespace addon365.UI.ViewModel.Inventory
 {

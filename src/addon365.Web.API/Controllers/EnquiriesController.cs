@@ -12,6 +12,7 @@ using addon365.Database.Entity.Enquiries;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using addon365.Domain.Entity.Paging;
+using addon365.IService;
 
 namespace addon365.Web.API.Controllers
 {

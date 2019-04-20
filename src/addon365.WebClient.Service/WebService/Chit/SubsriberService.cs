@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using addon365.IService.Chit;
 
 namespace addon365.WebClient.Service.WebService.Chit
 {

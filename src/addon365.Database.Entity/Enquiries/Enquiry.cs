@@ -23,7 +23,7 @@ namespace addon365.Database.Entity.Enquiries
         public Guid StatusId { get; set; }
         [ForeignKey("StatusId")] public virtual EnquiryStatus Status { get; set; }
 
-        public ICollection<EnquiryProduct> EnquiryProducts { get; set; }
+        public ICollection<EnquiryCatalogItem> EnquiryItems { get; set; }
        
         public ICollection<EnquiryExchangeQuotation> EnquiryExchangeQuotations { get; set; }
 

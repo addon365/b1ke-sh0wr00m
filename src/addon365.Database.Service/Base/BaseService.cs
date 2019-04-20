@@ -1,4 +1,5 @@
 ﻿using addon365.Database.Entity;
+using addon365.IService.Base;
 using System;
 using System.Collections.Generic;
 using Threenine.Data;

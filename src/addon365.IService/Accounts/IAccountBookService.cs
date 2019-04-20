@@ -1,10 +1,10 @@
 ﻿using addon365.Database.Entity.Accounts;
-using addon365.Database.Service.Base;
+using addon365.IService.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace addon365.Database.Service.Accounts
+namespace addon365.IService.Accounts
 {
     public interface IAccountBookService:IBaseService<AccountBook>
     {

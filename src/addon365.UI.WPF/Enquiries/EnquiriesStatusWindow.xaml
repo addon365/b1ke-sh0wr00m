@@ -23,7 +23,7 @@
 
                 </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Company Name" VerticalAlignment="Top"/>
-        <TextBox  Height="23" Text="{Binding Path=CurrentProduct.ProductName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
+        <TextBox  Height="23" Text="{Binding Path=CurrentProduct.ItemName,Mode=TwoWay}" VerticalAlignment="Center"  Grid.Column="1"/>
        
             </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">

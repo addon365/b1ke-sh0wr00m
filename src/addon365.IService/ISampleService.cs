@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using addon365.Domain.Entity.Enquiries;
 
-namespace addon365.Database.Service
+namespace addon365.IService
 {
     public interface ISampleService
     {

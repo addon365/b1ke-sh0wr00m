@@ -6,6 +6,7 @@ using addon365.Database.Entity.Chit;
 using addon365.Database.Entity.Crm;
 using addon365.Domain.Entity.Chit.Reports;
 using addon365.Database.Service.Chit;
+using addon365.IService.Chit;
 
 namespace addon365.UI.ViewModel.Chit.Reports
 {

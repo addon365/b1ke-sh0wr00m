@@ -1,11 +1,11 @@
 ﻿using addon365.Database.Entity.Accounts;
 using System.Collections.Generic;
 
-namespace addon365.Database.Service.Accounts
+namespace addon365.IService.Accounts
 {
     public interface IVoucherTypeService
     {
         VoucherTypeMaster FindByName(string name);
-        ICollection<VoucherTypeService> Save(ICollection<VoucherTypeService> typeServices);
+        ICollection<VoucherTypeMaster> Save(ICollection<VoucherTypeMaster> typeServices);
     }
 }

@@ -2,6 +2,7 @@
 using addon365.Domain.Entity.Paging;
 using addon365.Database.Service.Inventory;
 using System;
+using addon365.IService.Inventory;
 
 namespace addon365.UI.ViewModel.Inventory
 {

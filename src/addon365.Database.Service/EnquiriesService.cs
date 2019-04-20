@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using addon365.Domain.Entity.Paging;
 using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService;
 
 namespace addon365.Database.Service
 {
@@ -37,8 +38,8 @@ namespace addon365.Database.Service
                 Include(Contact => Contact.Contact).
                 Include(Status => Status.Status).
                 Include(m => m.EnquiryType).
-                Include(n => n.EnquiryProducts).ThenInclude(c => c.Product).
-                Include(n => n.EnquiryProducts).ThenInclude(a=>a.EnquiryFinanceQuotations).
+                Include(n => n.EnquiryItems).ThenInclude(c => c.Item).
+                Include(n => n.EnquiryItems).ThenInclude(a=>a.EnquiryFinanceQuotations).
                 Include(n=>n.EnquiryExchangeQuotations), 
                 index: pagingParams.PageNumber, size:pagingParams.PageSize);
                
@@ -137,9 +138,9 @@ namespace addon365.Database.Service
            .GetList().Items.Where(predicate: x => x.ProgrammerId == 100).First().Id;
             _unitOfWork.GetRepository<Contact>().Add(contact);
             _unitOfWork.GetRepository<Enquiry>().Add(enquiry);
-            foreach(EnquiryProduct ep in InsertEnquiries.EnquiryProducts)
+            foreach(EnquiryCatalogItem ep in InsertEnquiries.EnquiryItems)
             {
-                ep.Product = null;
+                ep.Item = null;
                 ep.EnquiryId = enquiry.Id;
                     if(ep.EnquiryFinanceQuotations!=null)
                     foreach (EnquiryFinanceQuotation efq in ep.EnquiryFinanceQuotations)
@@ -147,7 +148,7 @@ namespace addon365.Database.Service
 
                         _unitOfWork.GetRepository<EnquiryFinanceQuotation>().Add(efq);
                     }
-                    _unitOfWork.GetRepository<EnquiryProduct>().Add(ep);
+                    _unitOfWork.GetRepository<EnquiryCatalogItem>().Add(ep);
             }
          
             
@@ -180,8 +181,8 @@ namespace addon365.Database.Service
               Include(Contact => Contact.Contact).
               Include(Status => Status.Status).
               Include(m => m.EnquiryType).
-              Include(n => n.EnquiryProducts).ThenInclude(c => c.Product).
-              Include(n => n.EnquiryProducts).ThenInclude(a => a.EnquiryFinanceQuotations).
+              Include(n => n.EnquiryItems).ThenInclude(c => c.Item).
+              Include(n => n.EnquiryItems).ThenInclude(a => a.EnquiryFinanceQuotations).
               Include(n => n.EnquiryExchangeQuotations));
 
             return enq;
@@ -205,13 +206,13 @@ namespace addon365.Database.Service
             ine.contacts = lstContacts;
 
             List<DomainEnquiryProduct> lstEnquiryProducts = new List<DomainEnquiryProduct>();
-            foreach(EnquiryProduct ep in _unitOfWork.GetRepository<EnquiryProduct>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id))
+            foreach(EnquiryCatalogItem ep in _unitOfWork.GetRepository<EnquiryCatalogItem>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id))
             {
                 DomainEnquiryProduct dp = new DomainEnquiryProduct { Id = ep.Id,EnquiryId=ep.EnquiryId, ProductId = ep.CatalogItemId,OnRoadPrice=ep.OnRoadPrice,TotalAmount=ep.TotalAmount };
-                dp.ProductName = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(predicate: x => x.Id == dp.ProductId).FirstOrDefault().ItemName;
+                dp.ItemName = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(predicate: x => x.Id == dp.ProductId).FirstOrDefault().ItemName;
                 lstEnquiryProducts.Add(dp);
             }
-            ine.EnquiryProducts =lstEnquiryProducts ;
+            ine.EnquiryItems =lstEnquiryProducts ;
             ine.enquiryAccessories = _unitOfWork.GetRepository<EnquiryAccessories>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
             ine.enquiryExchangeQuotations = _unitOfWork.GetRepository<EnquiryExchangeQuotation>().GetList().Items.Where(predicate: x => x.EnquiryId == enquiry.Id);
             ine.enquiryFinanceQuotations = _unitOfWork.GetRepository<EnquiryFinanceQuotation>().GetList().Items.Where(predicate: x => x.EnquiryProductId == enquiry.Id);
@@ -221,7 +222,7 @@ namespace addon365.Database.Service
 
         public async Task<Enquiry> Update(Enquiry enquiry)
         {
-            foreach(EnquiryProduct ep in enquiry.EnquiryProducts)
+            foreach(EnquiryCatalogItem ep in enquiry.EnquiryItems)
             { 
                 foreach(EnquiryFinanceQuotation efq in ep.EnquiryFinanceQuotations)
                 {

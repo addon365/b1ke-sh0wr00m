@@ -23,6 +23,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     BookName = table.Column<string>(nullable: true),
                     UnderGroupId = table.Column<Guid>(nullable: false),
@@ -45,6 +46,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     AddressLine1 = table.Column<string>(nullable: true),
                     AddressLine2 = table.Column<string>(nullable: true),
                     PinOrZip = table.Column<long>(nullable: false),
@@ -73,6 +75,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     BranchName = table.Column<string>(nullable: true),
                     ShortCode = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true),
@@ -95,6 +98,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Filter = table.Column<string>(nullable: true)
                 },
@@ -115,6 +119,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     SchemaName = table.Column<string>(nullable: true),
                     TotalMonths = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
@@ -141,6 +146,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     OtherId = table.Column<int>(nullable: false),
                     DeviceName = table.Column<string>(nullable: true),
                     DeviceId = table.Column<string>(nullable: true),
@@ -164,6 +170,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: true),
                     ProgrammerId = table.Column<int>(nullable: false)
@@ -185,6 +192,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     ProgrammerId = table.Column<int>(nullable: false)
                 },
@@ -205,6 +213,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -224,6 +233,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -244,6 +254,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -280,6 +291,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     CompanyName = table.Column<string>(nullable: true),
                     ProgrammerID = table.Column<int>(nullable: false)
@@ -301,6 +313,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     PropertyName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -320,6 +333,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     ItemName = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
@@ -347,6 +361,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ParentId = table.Column<Guid>(nullable: false),
@@ -369,6 +384,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     BusinessName = table.Column<string>(nullable: true),
                     LicenseId = table.Column<Guid>(nullable: false),
                     URL = table.Column<string>(nullable: true),
@@ -394,6 +410,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     ZonalName = table.Column<string>(nullable: true),
                     ZonalDescription = table.Column<string>(nullable: true)
@@ -415,6 +432,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     ProgrammerId = table.Column<string>(nullable: true)
                 },
@@ -435,6 +453,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: true)
                 },
@@ -455,6 +474,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -508,6 +528,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     BusinessName = table.Column<string>(nullable: true),
                     ContactAddressId = table.Column<Guid>(nullable: true),
                     Landline = table.Column<string>(nullable: true),
@@ -538,6 +559,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -601,6 +623,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true, computedColumnSql: "CONCAT('SVB-',[Id])"),
                     Referer = table.Column<string>(maxLength: 255, nullable: true),
                     Host = table.Column<string>(nullable: true),
@@ -643,6 +666,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     VoucherDate = table.Column<DateTime>(nullable: false),
                     VoucherTypeId = table.Column<Guid>(nullable: false)
@@ -671,6 +695,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     BuyerId = table.Column<string>(nullable: true),
                     BusinessContactId = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: true)
@@ -699,6 +724,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     SellerId = table.Column<string>(nullable: true),
                     BusinessContactId = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: true)
@@ -727,6 +753,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     CampaignId = table.Column<Guid>(nullable: false),
                     ContactId = table.Column<Guid>(nullable: false),
                     ModeId = table.Column<Guid>(nullable: false),
@@ -771,6 +798,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     ProfileId = table.Column<Guid>(nullable: true),
                     UserId = table.Column<Guid>(nullable: true)
@@ -799,6 +827,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     ContactId = table.Column<Guid>(nullable: false),
                     JoiningDate = table.Column<DateTime>(nullable: false),
@@ -832,6 +861,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     Identifier = table.Column<string>(nullable: true),
                     EnquiryDate = table.Column<DateTime>(nullable: false),
                     ContactId = table.Column<Guid>(nullable: false),
@@ -884,6 +914,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     VoucherId = table.Column<Guid>(nullable: false),
                     bookId = table.Column<Guid>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
@@ -921,6 +952,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     PurchaseInvoiceNo = table.Column<string>(nullable: true),
                     InvoiceDate = table.Column<DateTime>(nullable: false),
                     DeliveryDate = table.Column<DateTime>(nullable: false),
@@ -958,6 +990,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     SubscribeId = table.Column<string>(nullable: true),
                     ChitSchemeId = table.Column<Guid>(nullable: false),
                     CustomerId = table.Column<Guid>(nullable: false),
@@ -995,6 +1028,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     BillNo = table.Column<string>(nullable: true),
                     BillDate = table.Column<DateTime>(nullable: false),
                     ShippingAddressId = table.Column<Guid>(nullable: true),
@@ -1041,6 +1075,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     CatalogItemId = table.Column<Guid>(nullable: false),
                     AccessoriesId = table.Column<Guid>(nullable: false)
@@ -1076,6 +1111,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     Model = table.Column<string>(nullable: true),
                     Year = table.Column<int>(nullable: false),
@@ -1096,7 +1132,7 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EnquiryProducts",
+                name: "EnquiryItems",
                 schema: "addon",
                 columns: table => new
                 {
@@ -1107,6 +1143,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     EnquiryId = table.Column<Guid>(nullable: false),
                     CatalogItemId = table.Column<Guid>(nullable: false),
                     OnRoadPrice = table.Column<double>(nullable: false),
@@ -1116,16 +1153,16 @@ namespace addon365.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EnquiryProducts", x => x.Id);
+                    table.PrimaryKey("PK_EnquiryItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryProducts_Inventory.Catalog.CatalogItems_CatalogItemId",
+                        name: "FK_EnquiryItems_Inventory.Catalog.CatalogItems_CatalogItemId",
                         column: x => x.CatalogItemId,
                         principalSchema: "addon",
                         principalTable: "Inventory.Catalog.CatalogItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EnquiryProducts_Enquiries_EnquiryId",
+                        name: "FK_EnquiryItems_Enquiries_EnquiryId",
                         column: x => x.EnquiryId,
                         principalSchema: "addon",
                         principalTable: "Enquiries",
@@ -1145,6 +1182,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     PurchaseId = table.Column<Guid>(nullable: false),
                     CatalogItemId = table.Column<Guid>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
@@ -1181,6 +1219,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     ChitSubscriberId = table.Column<Guid>(nullable: false),
                     DueNo = table.Column<string>(nullable: true),
                     VoucherId = table.Column<Guid>(nullable: true)
@@ -1216,6 +1255,7 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     SalesId = table.Column<Guid>(nullable: false),
                     CatalogItemId = table.Column<Guid>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
@@ -1253,21 +1293,23 @@ namespace addon365.Database.Migrations
                     CreatedUserId = table.Column<int>(nullable: true),
                     CreatedDeviceId = table.Column<int>(nullable: true),
                     BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
                     EnquiryProductId = table.Column<Guid>(nullable: false),
                     InitialDownPayment = table.Column<double>(nullable: false),
                     MonthlyEMIAmount = table.Column<double>(nullable: false),
-                    NumberOfMonths = table.Column<int>(nullable: false)
+                    NumberOfMonths = table.Column<int>(nullable: false),
+                    EnquiryCatalogItemId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EnquiryFinanceQuotations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EnquiryFinanceQuotations_EnquiryProducts_EnquiryProductId",
-                        column: x => x.EnquiryProductId,
+                        name: "FK_EnquiryFinanceQuotations_EnquiryItems_EnquiryCatalogItemId",
+                        column: x => x.EnquiryCatalogItemId,
                         principalSchema: "addon",
-                        principalTable: "EnquiryProducts",
+                        principalTable: "EnquiryItems",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1453,21 +1495,21 @@ namespace addon365.Database.Migrations
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EnquiryFinanceQuotations_EnquiryProductId",
+                name: "IX_EnquiryFinanceQuotations_EnquiryCatalogItemId",
                 schema: "addon",
                 table: "EnquiryFinanceQuotations",
-                column: "EnquiryProductId");
+                column: "EnquiryCatalogItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EnquiryProducts_CatalogItemId",
+                name: "IX_EnquiryItems_CatalogItemId",
                 schema: "addon",
-                table: "EnquiryProducts",
+                table: "EnquiryItems",
                 column: "CatalogItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EnquiryProducts_EnquiryId",
+                name: "IX_EnquiryItems_EnquiryId",
                 schema: "addon",
-                table: "EnquiryProducts",
+                table: "EnquiryItems",
                 column: "EnquiryId");
 
             migrationBuilder.CreateIndex(
@@ -1714,7 +1756,7 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "EnquiryProducts",
+                name: "EnquiryItems",
                 schema: "addon");
 
             migrationBuilder.DropTable(
