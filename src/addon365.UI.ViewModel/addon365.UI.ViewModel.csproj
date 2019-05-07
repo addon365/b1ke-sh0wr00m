@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\addon365.IService\addon365.IService.csproj" />
-    <ProjectReference Include="..\addon365.WebClient.Service\addon365.WebClient.Service.csproj" />
     <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj" />
     <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
     <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj" />

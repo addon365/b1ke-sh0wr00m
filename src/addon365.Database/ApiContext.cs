@@ -10,7 +10,7 @@ using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Database.Entity.User;
 using addon365.Database.Entity.Finance;
 using addon365.Database.Entity.Accounts;
-using addon365.Database.Entity.Employee;
+using addon365.Database.Entity.Employees;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Report;
 using addon365.Database.Entity.Inventory;

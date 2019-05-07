@@ -613,10 +613,6 @@
       <Project>{8767e7b1-1143-4a00-8da0-3e8bacea0f97}</Project>
       <Name>addon365.IService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\addon365.WebClient.Service\addon365.WebClient.Service.csproj">
-      <Project>{b4493fd9-c5a3-42a3-8b48-3287216dd7d4}</Project>
-      <Name>addon365.WebClient.Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj">
       <Project>{afec9b2a-36c6-4917-9142-453928de1f35}</Project>
       <Name>addon365.Database.Entity</Name>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace addon365.Database.Entity.Employee
+namespace addon365.Database.Entity.Employees
 {
     public class Employee:BaseEntityWithLogFields
     {

@@ -32,6 +32,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="17.1.0.43" />
     <PackageReference Include="Threenine.Data" Version="1.1.5" />
     <PackageReference Include="Threenine.Map" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -60,6 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\CRM\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
