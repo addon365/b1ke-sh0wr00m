@@ -10,8 +10,8 @@ using addon365.Database;
 namespace addon365.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20190403042850_init")]
-    partial class init
+    [Migration("20190508162327_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -354,7 +354,83 @@ namespace addon365.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AddressMaster");
+                    b.ToTable("AddressMasters");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Crm.Appointment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AppiontmentDate");
+
+                    b.Property<Guid>("AssignedToId");
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<Guid>("CurrentStatusId");
+
+                    b.Property<Guid>("CustomerId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("YearId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Crm.AppointmentStatus", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("AppointmentId");
+
+                    b.Property<Guid>("AssignedToId");
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<string>("Comments");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("StatusId");
+
+                    b.Property<Guid>("UpdatedById");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<Guid>("YearId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("UpdatedById");
+
+                    b.ToTable("AppointmentStatuses");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Crm.BusinessContact", b =>
@@ -390,7 +466,39 @@ namespace addon365.Database.Migrations
 
                     b.HasIndex("ContactAddressId");
 
-                    b.ToTable("BusinessContact");
+                    b.ToTable("BusinessContacts");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Crm.BusinessCustomer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<Guid?>("ContactId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<string>("Identifier");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<Guid>("YearId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContactId");
+
+                    b.ToTable("BusinessCustomers");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Crm.Campaign", b =>
@@ -593,6 +701,36 @@ namespace addon365.Database.Migrations
                     b.ToTable("FollowUpStatuses");
                 });
 
+            modelBuilder.Entity("addon365.Database.Entity.Crm.StatusMaster", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BranchMasterId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int?>("CreatedDeviceId");
+
+                    b.Property<int?>("CreatedUserId");
+
+                    b.Property<DateTime?>("Deleted");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("ProgrammerId");
+
+                    b.Property<string>("StatusName");
+
+                    b.Property<Guid>("YearId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StatusMasters");
+                });
+
             modelBuilder.Entity("addon365.Database.Entity.DeviceMaster", b =>
                 {
                     b.Property<Guid>("Id")
@@ -627,7 +765,7 @@ namespace addon365.Database.Migrations
                     b.ToTable("DeviceMasters");
                 });
 
-            modelBuilder.Entity("addon365.Database.Entity.Employee.Employee", b =>
+            modelBuilder.Entity("addon365.Database.Entity.Employees.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -1646,11 +1784,39 @@ namespace addon365.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("addon365.Database.Entity.Crm.Appointment", b =>
+                {
+                    b.HasOne("addon365.Database.Entity.Crm.BusinessCustomer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Crm.AppointmentStatus", b =>
+                {
+                    b.HasOne("addon365.Database.Entity.Crm.Appointment", "CurrentAppointment")
+                        .WithMany("AppointmentStatuses")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("addon365.Database.Entity.Employees.Employee", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("addon365.Database.Entity.Crm.BusinessContact", b =>
                 {
                     b.HasOne("addon365.Database.Entity.Crm.AddressMaster", "ContactAddress")
                         .WithMany()
                         .HasForeignKey("ContactAddressId");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Crm.BusinessCustomer", b =>
+                {
+                    b.HasOne("addon365.Database.Entity.Crm.BusinessContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Crm.CampaignInfo", b =>
@@ -1685,7 +1851,7 @@ namespace addon365.Database.Migrations
                         .HasForeignKey("ProfileId");
                 });
 
-            modelBuilder.Entity("addon365.Database.Entity.Employee.Employee", b =>
+            modelBuilder.Entity("addon365.Database.Entity.Employees.Employee", b =>
                 {
                     b.HasOne("addon365.Database.Entity.Crm.Contact", "Profile")
                         .WithMany()

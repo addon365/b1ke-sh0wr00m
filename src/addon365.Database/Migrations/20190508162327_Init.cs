@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace addon365.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,7 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AddressMaster",
+                name: "AddressMasters",
                 schema: "addon",
                 columns: table => new
                 {
@@ -60,7 +60,7 @@ namespace addon365.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AddressMaster", x => x.Id);
+                    table.PrimaryKey("PK_AddressMasters", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -463,6 +463,28 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StatusMasters",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    StatusName = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    ProgrammerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StatusMasters", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Type",
                 schema: "addon",
                 columns: table => new
@@ -517,7 +539,7 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BusinessContact",
+                name: "BusinessContacts",
                 schema: "addon",
                 columns: table => new
                 {
@@ -537,12 +559,12 @@ namespace addon365.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BusinessContact", x => x.Id);
+                    table.PrimaryKey("PK_BusinessContacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BusinessContact_AddressMaster_ContactAddressId",
+                        name: "FK_BusinessContacts_AddressMasters_ContactAddressId",
                         column: x => x.ContactAddressId,
                         principalSchema: "addon",
-                        principalTable: "AddressMaster",
+                        principalTable: "AddressMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -574,10 +596,10 @@ namespace addon365.Database.Migrations
                 {
                     table.PrimaryKey("PK_Contacts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contacts_AddressMaster_ContactAddressId",
+                        name: "FK_Contacts_AddressMasters_ContactAddressId",
                         column: x => x.ContactAddressId,
                         principalSchema: "addon",
-                        principalTable: "AddressMaster",
+                        principalTable: "AddressMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -684,6 +706,35 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BusinessCustomers",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    Identifier = table.Column<string>(nullable: true),
+                    ContactId = table.Column<Guid>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BusinessCustomers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BusinessCustomers_BusinessContacts_ContactId",
+                        column: x => x.ContactId,
+                        principalSchema: "addon",
+                        principalTable: "BusinessContacts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Inventory.Buyers",
                 schema: "addon",
                 columns: table => new
@@ -704,10 +755,10 @@ namespace addon365.Database.Migrations
                 {
                     table.PrimaryKey("PK_Inventory.Buyers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Buyers_BusinessContact_BusinessContactId",
+                        name: "FK_Inventory.Buyers_BusinessContacts_BusinessContactId",
                         column: x => x.BusinessContactId,
                         principalSchema: "addon",
-                        principalTable: "BusinessContact",
+                        principalTable: "BusinessContacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -733,10 +784,10 @@ namespace addon365.Database.Migrations
                 {
                     table.PrimaryKey("PK_Inventory.Sellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Inventory.Sellers_BusinessContact_BusinessContactId",
+                        name: "FK_Inventory.Sellers_BusinessContacts_BusinessContactId",
                         column: x => x.BusinessContactId,
                         principalSchema: "addon",
-                        principalTable: "BusinessContact",
+                        principalTable: "BusinessContacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -936,6 +987,37 @@ namespace addon365.Database.Migrations
                         column: x => x.bookId,
                         principalSchema: "addon",
                         principalTable: "AccountBooks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Appointments",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    CustomerId = table.Column<Guid>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    AppiontmentDate = table.Column<DateTime>(nullable: false),
+                    AssignedToId = table.Column<Guid>(nullable: false),
+                    CurrentStatusId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_BusinessCustomers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalSchema: "addon",
+                        principalTable: "BusinessCustomers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1171,6 +1253,45 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppointmentStatuses",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    StatusId = table.Column<Guid>(nullable: false),
+                    Comments = table.Column<string>(nullable: true),
+                    UpdatedDate = table.Column<DateTime>(nullable: false),
+                    AppointmentId = table.Column<Guid>(nullable: false),
+                    AssignedToId = table.Column<Guid>(nullable: false),
+                    UpdatedById = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmentStatuses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppointmentStatuses_Appointments_AppointmentId",
+                        column: x => x.AppointmentId,
+                        principalSchema: "addon",
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppointmentStatuses_Employees_UpdatedById",
+                        column: x => x.UpdatedById,
+                        principalSchema: "addon",
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Inventory.Purchases.PurchasesItems",
                 schema: "addon",
                 columns: table => new
@@ -1387,10 +1508,34 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BusinessContact_ContactAddressId",
+                name: "IX_Appointments_CustomerId",
                 schema: "addon",
-                table: "BusinessContact",
+                table: "Appointments",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppointmentStatuses_AppointmentId",
+                schema: "addon",
+                table: "AppointmentStatuses",
+                column: "AppointmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppointmentStatuses_UpdatedById",
+                schema: "addon",
+                table: "AppointmentStatuses",
+                column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BusinessContacts_ContactAddressId",
+                schema: "addon",
+                table: "BusinessContacts",
                 column: "ContactAddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BusinessCustomers_ContactId",
+                schema: "addon",
+                table: "BusinessCustomers",
+                column: "ContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CampaignInfos_ContactId",
@@ -1656,6 +1801,10 @@ namespace addon365.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AppointmentStatuses",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
                 name: "BranchMasters",
                 schema: "addon");
 
@@ -1673,10 +1822,6 @@ namespace addon365.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "DeviceMasters",
-                schema: "addon");
-
-            migrationBuilder.DropTable(
-                name: "Employees",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1732,6 +1877,10 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
+                name: "StatusMasters",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
                 name: "Threats",
                 schema: "addon");
 
@@ -1741,6 +1890,14 @@ namespace addon365.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "VouchersInfo",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
+                name: "Appointments",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
+                name: "Employees",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1781,6 +1938,10 @@ namespace addon365.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "AccountBooks",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
+                name: "BusinessCustomers",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1836,7 +1997,7 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "BusinessContact",
+                name: "BusinessContacts",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -1844,7 +2005,7 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "AddressMaster",
+                name: "AddressMasters",
                 schema: "addon");
         }
     }

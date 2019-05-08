@@ -55,6 +55,13 @@ namespace addon365.Database
         public DbSet<FollowUpStatus> FollowUpStatuses { get; set; }
         public DbSet<CampaignInfo> CampaignInfos { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
+
+        public DbSet<BusinessCustomer> BusinessCustomers { get; set; }
+        public DbSet<BusinessContact> BusinessContacts { get; set; }
+        public DbSet<AddressMaster> AddressMasters { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
+        public DbSet<StatusMaster> StatusMasters { get; set; }
         #endregion
         #region Enquiry
         public DbSet<Enquiry> Enquiries { get; set; }

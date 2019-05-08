@@ -19,15 +19,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { MatSelectModule } from '@angular/material/select';
+import { CreateAppointmentComponent } from './appointment/create-appointment/create-appointment.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    CreateAppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressSpinnerModule,
     MatInputModule,
     Ng2GoogleChartsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

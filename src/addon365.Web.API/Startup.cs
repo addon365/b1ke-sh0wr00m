@@ -31,6 +31,7 @@ using addon365.IService.Crm;
 using addon365.IService.Chit;
 using addon365.IService.Accounts;
 using addon365.IService.Inventory;
+using addon365.Database.Entity.Crm;
 
 namespace addon365.Web.API
 {
@@ -90,6 +91,10 @@ namespace addon365.Web.API
             services.AddTransient<IPurchaseService, PurchaseService>();
             services.AddTransient<ISellerService, SellerService>();
             services.AddTransient<IBuyerService, BuyerService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<IStatusMasterService, StatusMasterService>();
+            services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
             services.AddScoped<RequestInfo>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 
@@ -199,7 +204,7 @@ namespace addon365.Web.API
                 var apicon = serviceScope.ServiceProvider.GetService<ApiContext>();
                 if (!apicon.AllMigrationsApplied())
                 {
-                   
+
 
                     apicon.Database.Migrate();
                     var UserService = serviceScope.ServiceProvider.GetService<IUserService>();

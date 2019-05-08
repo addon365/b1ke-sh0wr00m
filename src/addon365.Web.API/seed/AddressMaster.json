@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "90b11618-e9e2-4147-87f9-6845906a2498",
+    "AddressLine1": "1st Street",
+    "AddressLine2": "2ndStreet",
+    "PinOrZip": 608102,
+    "LocalityOrVillage": "Cook Grammam",
+    "SubDistrict": "Cook District"
+  },
+  {
+    "Id": "b38a6cb8-d3ba-484b-88fa-b512b8a6e877",
+    "AddressLine1": "4st Street",
+    "AddressLine2": "6ndStreet",
+    "PinOrZip": 5555555,
+    "LocalityOrVillage": "Dim Grammam",
+    "SubDistrict": "Dim District"
+  }
+]
