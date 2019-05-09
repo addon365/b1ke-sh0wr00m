@@ -1,33 +1,40 @@
-<p>
-  create-appointment works!
-</p>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input type="text" placeholder="Pick one" aria-label="Number" matInput  [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of options" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
+<h3>Create Appointment</h3>
+<div fxLayout="column" fxLayoutGap="20px">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Choose a Customer"
+        aria-label="Number"
+        matInput
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let customer of customers" [value]="appointment.id">
+          {{ customer.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{ food.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Favorite food" value="Sushi">
-  </mat-form-field>
-  <button mat-raised-button>Click me!</button>
-</form>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Favorite food" value="Sushi" />
+    </mat-form-field>
+    <div>
+      <button mat-raised-button>Click me!</button>
+    </div>
+  </form>
+</div>

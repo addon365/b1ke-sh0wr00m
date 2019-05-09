@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,14 +25,25 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { MatSelectModule } from '@angular/material/select';
 import { CreateAppointmentComponent } from './appointment/create-appointment/create-appointment.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { ListAppointmentComponent } from './appointment/list-appointment/list-appointment.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { Routes, RouterModule } from '@angular/router';
+const routes: Routes = [
+  { path: "", redirectTo: "list-appointment", pathMatch: "full" },
+  { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
+  { path: "change-password", component: ChangePasswordComponent },
+  { path: "login", component: LoginComponent },
+  { path: "list-appointment", component: ListAppointmentComponent, pathMatch: "full" },
+  { path: "create-appointment", component: CreateAppointmentComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
     ChangePasswordComponent,
-    CreateAppointmentComponent
+    CreateAppointmentComponent,
+    ListAppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +55,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    AppRoutingModule,
+    RouterModule.forRoot(
+      routes,
+    ),
     MatSidenavModule,
     MatListModule,
     FormsModule,
@@ -54,8 +68,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatSelectModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
