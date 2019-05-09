@@ -8,6 +8,6 @@ namespace addon365.IService.Crm
     public interface IAppointmentService : IBaseService<Appointment>
     {
         ICollection<Appointment> FindByStatus(Guid statusId,bool except=false);
-        void UpdateStatus(AppointmentStatus appointmentStatus);
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.User;
+﻿using addon365.Database.Entity.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

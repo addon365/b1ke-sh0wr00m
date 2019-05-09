@@ -210,7 +210,7 @@ namespace addon365.Web.API
                     var UserService = serviceScope.ServiceProvider.GetService<IUserService>();
                     if (!apicon.Users.Any())
                     {
-                        UserService.InsertUser(new addon365.Database.Entity.User.User() { UserId = "user1", Password = "pass1", UserName = "user1" });
+                        UserService.InsertUser(new addon365.Database.Entity.Users.User() { UserId = "user1", Password = "pass1", UserName = "user1" });
                     }
                     apicon.EnsureSeeded();
                 }

@@ -25,6 +25,8 @@ namespace addon365.Web.API.Controllers.CRM
         {
             try
             {
+                appointment.CurrentStatusId = appointment.AppointmentStatuses[0].Id;
+                appointment.AppointmentStatuses[0].AppointmentId = appointment.Id;
                 _appointmentService.Save(appointment);
                 return Ok();
             }
@@ -44,13 +46,6 @@ namespace addon365.Web.API.Controllers.CRM
                 return Ok(_appointmentService.FindByStatus(statusId, except));
             }
             return Ok(_appointmentService.FindAll());
-        }
-
-        [HttpPost("/addStatus")]
-        public IActionResult PostApointmentStatus(AppointmentStatus appointmentStatus)
-        {
-            _appointmentService.UpdateStatus(appointmentStatus);
-            return Ok();
         }
 
     }

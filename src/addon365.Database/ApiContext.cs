@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using addon365.Database.Entity.Inventory.Catalog;
-using addon365.Database.Entity.User;
+using addon365.Database.Entity.Users;
 using addon365.Database.Entity.Finance;
 using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Employees;

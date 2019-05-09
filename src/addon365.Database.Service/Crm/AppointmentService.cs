@@ -24,18 +24,5 @@ namespace addon365.Database.Service.Crm
                     predicate: appointment => appointment.CurrentStatusId == statusId).Items;
         }
 
-        public void UpdateStatus(AppointmentStatus appointmentStatus)
-        {
-            UnitOfWork.GetRepository<AppointmentStatus>().Add(appointmentStatus);
-            var appList=UnitOfWork.GetRepository<Appointment>().GetList(
-                predicate: appointment => appointment.Id == appointmentStatus.AppointmentId).Items;
-            if (appList.Count == 0)
-            {
-                throw new ArgumentException("Given Appointment not found");
-            }
-            appList[0].CurrentStatusId = appointmentStatus.Id;
-            appList[0].AssignedToId = appointmentStatus.AssignedToId;
-            UnitOfWork.GetRepository<Appointment>().Update(appList[0]);
-        }
     }
 }
