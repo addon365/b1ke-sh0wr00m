@@ -1,8 +1,9 @@
 import { AppointmentStatus } from "./appointment-status";
+import { Customer } from "./customer";
 
 export class Appointment {
   id: string;
-  customerId: string;
+  customer: Customer;
   appointmentDate: Date;
-  appointmentStatuses: Array<AppointmentStatus>;
+  currentStatus: AppointmentStatus;
 }

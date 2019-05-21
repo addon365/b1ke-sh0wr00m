@@ -1,5 +1,7 @@
-﻿using System;
-
+﻿using addon365.Database.Entity.Users;
+using Microsoft.EntityFrameworkCore.Query;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity.Crm
 {
@@ -7,6 +9,9 @@ namespace addon365.Database.Entity.Crm
     {
         public string Identifier { get; set; }
         public BusinessContact Contact{ get; set; }
-        public Guid? UserId { get; set; }
+        public Guid UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

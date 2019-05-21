@@ -1,4 +1,5 @@
 ﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,9 @@ namespace addon365.Database.Entity.Employees
         public Double Salary { get; set; }
         public Guid? DesignationId { get; set; }
         public Guid? DepartmentId { get; set; }
-        public Guid? UserId { get; set; }
+        public Guid UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
     }
 }

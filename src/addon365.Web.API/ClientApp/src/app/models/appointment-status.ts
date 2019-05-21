@@ -1,7 +1,9 @@
+import { Employee } from "./employee";
+
 export class AppointmentStatus{
-    statusId: string;
+    status: StatusMaster;
     comments: string;
     updateDate: Date;
-    assignedTo:string;
+    assignedTo:Employee;
     updatedById:string;
 }

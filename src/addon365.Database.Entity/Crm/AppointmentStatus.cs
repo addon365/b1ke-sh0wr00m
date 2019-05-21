@@ -9,14 +9,12 @@ namespace addon365.Database.Entity.Crm
     {
         public Guid StatusId { get; set; }
         [ForeignKey("StatusId")]
+        public StatusMaster Status { get; set; }
         public string Comments { get; set; }
         public DateTime UpdatedDate { get; set; }
 
 
         public Guid AppointmentId { get; set; }
-
-        [ForeignKey("AppointmentId")]
-        public Appointment CurrentAppointment { get; set; }
 
         public Guid? AssignedToId { get; set; }
 

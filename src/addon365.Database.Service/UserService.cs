@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using Threenine.Data;
 using System.Linq;
 using addon365.IService;
+using addon365.Database.Entity.Employees;
 
 namespace addon365.Database.Service
 {

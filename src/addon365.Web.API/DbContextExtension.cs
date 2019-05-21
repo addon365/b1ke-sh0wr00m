@@ -177,13 +177,7 @@ namespace addon365.Web.API
                 var types = JsonConvert.DeserializeObject<List<StatusMaster>>(file);
                 context.AddRange(types);
             }
-            if (!context.BusinessCustomers.Any())
-            {
-                var file = File.ReadAllText(
-                       "seed" + Path.DirectorySeparatorChar + "BusinessCustomer.json");
-                var types = JsonConvert.DeserializeObject<List<BusinessCustomer>>(file);
-                context.AddRange(types);
-            }
+                
             if (!context.Contacts.Any())
             {
 
@@ -191,7 +185,7 @@ namespace addon365.Web.API
                         "seed" + Path.DirectorySeparatorChar + "Contacts.json");
                 var types = JsonConvert.DeserializeObject<List<Contact>>(file);
                 context.AddRange(types);
-                context.SaveChanges();
+                
 
             }
             if (!context.Enquiries.Any())
@@ -200,7 +194,6 @@ namespace addon365.Web.API
                 File.ReadAllText(
                     "seed" + Path.DirectorySeparatorChar + "Enquiries.json"));
                 context.AddRange(types);
-                context.SaveChanges();
             }
             if (!context.EnquiryItems.Any())
             {
@@ -208,7 +201,6 @@ namespace addon365.Web.API
                 File.ReadAllText(
                 "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
                 context.AddRange(types);
-                context.SaveChanges();
             }
             if (!context.DeviceMasters.Any())
             {
@@ -217,9 +209,8 @@ namespace addon365.Web.API
                     "seed" + Path.DirectorySeparatorChar + "Devices.json")
                     );
                 context.AddRange(types);
-                context.SaveChanges();
             }
-
+            context.SaveChanges();
         }
     }
 

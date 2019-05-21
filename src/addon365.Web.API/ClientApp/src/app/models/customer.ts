@@ -1,5 +1,8 @@
+import { User } from "./user";
+
 export class Customer{
     id: string;
-    name: string;
+    user: User;
+    
 
 }

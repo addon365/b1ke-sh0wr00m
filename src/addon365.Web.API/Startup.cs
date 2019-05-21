@@ -93,6 +93,7 @@ namespace addon365.Web.API
             services.AddTransient<IBuyerService, BuyerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<IAppointmentStatusService, AppointmentStatusService>();
             services.AddTransient<IStatusMasterService, StatusMasterService>();
             services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
             services.AddScoped<RequestInfo>();
@@ -103,6 +104,7 @@ namespace addon365.Web.API
                 options.SerializerSettings.ContractResolver =
 
                     new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.DateFormatString = "dd-MM-yyyy";
 
             }); ;
 

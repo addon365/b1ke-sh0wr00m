@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using addon365.Database.Entity.Employees;
-using addon365.Database.Entity.Users;
+using addon365.Database.Entity.Utils;
+using Newtonsoft.Json;
 
 namespace addon365.Database.Entity.Crm
 {
@@ -13,12 +13,13 @@ namespace addon365.Database.Entity.Crm
         [ForeignKey("CustomerId")]
         public BusinessCustomer Customer { get; set; }
 
-        public DateTime AppiontmentDate { get; set; }
+
+        public DateTime AppointmentDate { get; set; }
 
         public Guid CurrentStatusId { get; set; }
 
-        public IList<AppointmentStatus> AppointmentStatuses { get; set; }
+        [ForeignKey("CurrentStatusId")]
+        public AppointmentStatus CurrentStatus { get; set; }
 
-        
     }
 }

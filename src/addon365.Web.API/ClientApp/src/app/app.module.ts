@@ -11,11 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { AppRoutingModule } from './app-routing.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './user/login/login.component';
 import { MatListModule } from '@angular/material/list';
-import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -47,6 +46,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -60,7 +61,7 @@ const routes: Routes = [
     ),
     MatSidenavModule,
     MatListModule,
-    FormsModule,
+    
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,

@@ -12,9 +12,12 @@ namespace addon365.Web.API.Controllers.CRM
     public class AppointmentsController : Controller
     {
         private IAppointmentService _appointmentService;
-        public AppointmentsController(IAppointmentService _appointmentService)
+        private IAppointmentStatusService _statusService;
+        public AppointmentsController(IAppointmentService _appointmentService,
+            IAppointmentStatusService statusService)
         {
             this._appointmentService = _appointmentService;
+            this._statusService = statusService;
         }
 
         [HttpPost]
@@ -23,10 +26,10 @@ namespace addon365.Web.API.Controllers.CRM
         [ProducesDefaultResponseType]
         public IActionResult Post(Appointment appointment)
         {
+            Console.WriteLine(appointment.AppointmentDate);
             try
             {
-                appointment.CurrentStatusId = appointment.AppointmentStatuses[0].Id;
-                appointment.AppointmentStatuses[0].AppointmentId = appointment.Id;
+                appointment.CurrentStatus.AppointmentId = appointment.Id;
                 _appointmentService.Save(appointment);
                 return Ok();
             }
@@ -39,13 +42,18 @@ namespace addon365.Web.API.Controllers.CRM
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public IActionResult Get(Guid statusId, bool except = false)
+        public IActionResult Get(Guid userId)
         {
-            if (statusId != null && statusId != Guid.Empty)
+            if (userId != null && userId != Guid.Empty)
             {
-                return Ok(_appointmentService.FindByStatus(statusId, except));
+                return Ok(_appointmentService.FindByUser(userId));
             }
             return Ok(_appointmentService.FindAll());
+        }
+        [HttpPut]
+        public IActionResult Put(Appointment appointment)
+        {
+            return Ok(_appointmentService.Update(appointment.Id, appointment));
         }
 
     }

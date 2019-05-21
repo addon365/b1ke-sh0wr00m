@@ -1,6 +1,8 @@
 ﻿using addon365.Database.Entity;
 using addon365.IService.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Collections.Generic;
 using Threenine.Data;
 
@@ -24,12 +26,12 @@ namespace addon365.Database.Service.Base
                 return null;
             return items[0];
         }
-        public IEnumerable<T> FindByPredicate(Func<T, bool> predicate)
+        public virtual IEnumerable<T> FindByPredicate(Func<T, bool> predicate)
         {
             return _repository.GetList(predicate: item => predicate(item)).Items;
         }
 
-        public IEnumerable<T> FindAll()
+        public virtual IEnumerable<T> FindAll()
         {
             return _repository.GetList().Items;
         }
@@ -47,7 +49,7 @@ namespace addon365.Database.Service.Base
             return collObj;
         }
 
-        public T Update(Guid id, T obj)
+        public virtual T Update(Guid id, T obj)
         {
             _repository.Update(obj);
             UnitOfWork.SaveChanges();

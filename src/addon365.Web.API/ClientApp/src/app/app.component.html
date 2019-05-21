@@ -1,7 +1,7 @@
 <div class="root-container">
   <div class="header">
     <mat-toolbar>
-      <div class="title">SVB Bike Show Room</div>
+      <div class="title">Addon Technolgoies</div>
       <div class="user">
         <div>
           Hi {{ user.userName }},
@@ -31,10 +31,12 @@
             <a matLine [routerLink]="['/dashboard']"> Dashboard </a>
           </mat-list-item>
           <mat-list-item>
-              <button mat-icon-button routerLink="/list-appointment">
-                <mat-icon>calendar_today</mat-icon>
-              </button>
-              <a matLine [routerLink]="['/list-appointment']"> List Appointment </a>
+            <button mat-icon-button routerLink="/list-appointment">
+              <mat-icon>calendar_today</mat-icon>
+            </button>
+            <a matLine [routerLink]="['/list-appointment']">
+              List Appointment
+            </a>
           </mat-list-item>
         </mat-nav-list>
       </mat-sidenav>
