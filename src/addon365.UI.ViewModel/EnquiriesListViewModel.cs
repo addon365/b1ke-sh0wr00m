@@ -1,16 +1,8 @@
-﻿using addon365.Database.Entity.Crm;
-using addon365.Database.Entity.Enquiries;
+﻿using addon365.Database.Entity.Enquiries;
 using addon365.Domain.Entity.Paging;
-using CrystalDecisions.CrystalReports.Engine;
-using addon365.Database.Service;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
 using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel
 {
@@ -25,7 +17,9 @@ namespace addon365.UI.ViewModel
         private PagingParams pagingParams;
         public EnquiriesListViewModel()
         {
-            _repository = new addon365.WebClient.Service.WebService.EnquiriesService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            _repository = Scope.ServiceProvider.GetRequiredService<IEnquiriesService>();
             PagingViewModel = new PagingViewModel<Enquiry>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Enquiry>>(RefreshData));
             WireCommands();
            

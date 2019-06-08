@@ -92,6 +92,7 @@ namespace addon365.UI.WPF
         }
         private async Task ServerStatusAsync()
         {
+
             SetText("Checking Internet...");
 #if !DEBUG
             if (!InternetAvailability.IsInternetAvailable())
@@ -105,20 +106,21 @@ namespace addon365.UI.WPF
             try
             {
                 SetText("Checking Server Status...");
-                HttpResponseMessage message = await SplashModel.GetServiceStatus();
-                if (message.IsSuccessStatusCode)
-                {
-                    SetText("REST API up & good.");
+                //HttpResponseMessage message = await SplashModel.GetServiceStatus();
+                //if (message.IsSuccessStatusCode)
+                //{
+                //    SetText("REST API up & good.");
                     UpdateSessionStorageInfo();
-                }
-                else
-                    SetText("Server  " + message.ReasonPhrase);
+                //}
+                //else
+                //    SetText("Server  " + message.ReasonPhrase);
 
             }
             catch (Exception exception)
             {
                 SetText(exception.Message);
             }
+
         }
-    }
+    } 
 }

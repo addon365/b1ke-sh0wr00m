@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using addon365.Database.Service.Inventory;
 using addon365.Database.Entity.Inventory;
 using addon365.IService.Inventory;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Inventory
 {
@@ -25,9 +25,11 @@ namespace addon365.UI.ViewModel.Inventory
         }
         private void GeneralInitilize()
         {
-            _repository = new addon365.WebClient.Service.WebService.Inventory.SellerWebService();
+            var Scope = Startup.Instance.provider.CreateScope();
+            _repository = Scope.ServiceProvider.GetRequiredService<ISellerService>();
 
-           
+
+
 
             WireCommands();
            

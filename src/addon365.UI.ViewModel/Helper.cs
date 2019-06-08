@@ -1,14 +1,15 @@
 ﻿using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Enquiries;
 using addon365.Domain.Entity.Enquiries;
+using addon365.IService;
 using CrystalDecisions.CrystalReports.Engine;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 
 namespace addon365.UI.ViewModel
@@ -19,8 +20,10 @@ namespace addon365.UI.ViewModel
         {
             if (ReportObj == null)
                 return;
-          
-            MultiEnquiryModel invm = new addon365.WebClient.Service.WebService.EnquiriesService().GetMultiEnquiries(Identifier);
+
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            MultiEnquiryModel invm = Scope.ServiceProvider.GetRequiredService<IEnquiriesService>().GetMultiEnquiries(Identifier);
             ReportDocument rd = new ReportDocument();
             string assemblyFile = (
     new System.Uri(Assembly.GetExecutingAssembly().CodeBase)

@@ -1,18 +1,22 @@
-﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Inventory.Catalog;
+﻿using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 
 namespace addon365.UI.ViewModel
 {
     public class ProductCompanyViewModel:ViewModelBase
     {
-        private readonly ProductCompanyService _repositoryProductCompany;
+        private readonly IProductCompanyService _repositoryProductCompany;
         private CatalogBrand _productCompany;
 
         public ProductCompanyViewModel()
         {
+            var Scope = Startup.Instance.provider.CreateScope();
+
+       
             _productCompany = new CatalogBrand();
-            _repositoryProductCompany = new ProductCompanyService();
+            _repositoryProductCompany = Scope.ServiceProvider.GetRequiredService<IProductCompanyService>();
             ProductCompanies = _repositoryProductCompany.GetAllProductCompanies();
             WireCommands();
         }

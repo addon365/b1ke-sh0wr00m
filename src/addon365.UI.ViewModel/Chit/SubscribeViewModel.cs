@@ -1,14 +1,13 @@
-﻿using addon365.WebClient.Service.WebService.Chit;
-using addon365.Database.Entity.Chit;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using System;
-using addon365.Domain.Entity.Chit;
-using addon365.Database.Service.Chit;
-using SchemeClientService = addon365.WebClient.Service.WebService.Chit.SchemeService;
+﻿using addon365.Database.Entity.Chit;
 using addon365.Database.Entity.Crm;
+using addon365.Domain.Entity.Chit;
 using addon365.IService.Chit;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using addon365.IService;
 
 namespace addon365.UI.ViewModel.Chit
 {
@@ -30,10 +29,13 @@ namespace addon365.UI.ViewModel.Chit
         public SubscribeViewModel()
         {
             WireCommands();
+            var Scope = Startup.Instance.provider.CreateScope();
 
+            
             ChitSubscribe = new ChitSubscribeDomain();
-            _dueService = new ChitDueClientService();
-            _subscribeService = new SubsriberService();
+            _dueService = Scope.ServiceProvider.GetRequiredService<IChitDueService>(); ;
+           // _subscribeService = new SubsriberService();
+            _subscribeService = Scope.ServiceProvider.GetRequiredService<ISubscribeService>(); ;
             FetchSchemesAsync();
             FindAllCustomersAsync();
         }
@@ -167,7 +169,10 @@ namespace addon365.UI.ViewModel.Chit
         {
             if (_schemeService == null)
             {
-                _schemeService = new SchemeClientService();
+                var Scope = Startup.Instance.provider.CreateScope();
+
+               
+                _schemeService = Scope.ServiceProvider.GetRequiredService<ISchemeService>();
             }
             Task task = new Task(
                 () => Schemes = _schemeService.FindAll().ToList());

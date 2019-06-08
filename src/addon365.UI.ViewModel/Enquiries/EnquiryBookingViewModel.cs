@@ -27,7 +27,7 @@ namespace addon365.UI.ViewModel.Enquiries
             WireCommands();
 
             _repository = Startup.Instance.provider.GetService<IBookingService>();
-            _repository = new addon365.WebClient.Service.WebService.BookingService();
+            //_repository = new addon365.WebClient.Service.WebService.BookingService();
             if(enq.Voucher==null)
             { 
                 CurrentAmount = new VoucherInfo();

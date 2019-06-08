@@ -1,23 +1,13 @@
-﻿using addon365.Database.Entity.Crm;
-using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity.Inventory;
+﻿using addon365.Database.Entity.Inventory;
 using addon365.Domain.Entity.Paging;
-using CrystalDecisions.CrystalReports.Engine;
-using addon365.Database.Service;
-using addon365.Database.Service.Inventory;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
 using addon365.IService.Inventory;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Inventory
 {
 
-    
+
     public class SellerListViewModel : ViewModelBase
     {
         private readonly ISellerService _repository;
@@ -25,7 +15,8 @@ namespace addon365.UI.ViewModel.Inventory
    
         public SellerListViewModel()
         {
-            _repository = new addon365.WebClient.Service.WebService.Inventory.SellerWebService();
+            var Scope = Startup.Instance.provider.CreateScope();
+            _repository = Scope.ServiceProvider.GetRequiredService<ISellerService>();
             PagingViewModel = new PagingViewModel<Seller>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<Seller>>(RefreshData));
             WireCommands();
            

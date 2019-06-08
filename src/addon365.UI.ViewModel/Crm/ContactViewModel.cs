@@ -3,6 +3,7 @@ using addon365.Database.Service.Crm;
 using addon365.IService.Crm;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Crm
 {
@@ -16,7 +17,9 @@ namespace addon365.UI.ViewModel.Crm
         public ContactViewModel(Result onResult = null)
         {
             this.onResult = onResult;
-            _repository = new addon365.WebClient.Service.WebService.ContactService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            _repository = Scope.ServiceProvider.GetRequiredService<IContactService>(); 
             Contacts = _repository.GetContacts();
             WireCommands();
         }

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="CrystalReports.Engine" Version="13.0.3501" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.2.2" />
@@ -25,11 +26,11 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="System.ComponentModel.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Management" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\addon365.IService\addon365.IService.csproj" />
-    <ProjectReference Include="..\addon365.WebClient.Service\addon365.WebClient.Service.csproj" />
     <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj" />
     <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
     <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj" />

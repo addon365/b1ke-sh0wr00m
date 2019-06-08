@@ -1,12 +1,10 @@
-﻿using addon365.WebClient.Service.WebService.Chit;
+﻿
 using addon365.Database.Entity.Chit;
 using addon365.Domain.Entity.Chit;
 using System.Linq;
-using addon365.Database.Service.Chit;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using addon365.IService.Chit;
 
 namespace addon365.UI.ViewModel.Chit

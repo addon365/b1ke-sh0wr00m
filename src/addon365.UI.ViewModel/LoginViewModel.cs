@@ -1,12 +1,9 @@
-﻿using addon365.WebClient.Service;
-using addon365.Database.Entity.User;
-using Newtonsoft.Json;
-using addon365.Database.Service;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using addon365.Database.Entity.User;
 using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using System;
+using System.Diagnostics;
 
 namespace addon365.UI.ViewModel
 {
@@ -16,8 +13,10 @@ namespace addon365.UI.ViewModel
         private User _currentUser;
         public LoginViewModel()
         {
-            _repository = new addon365.WebClient.Service.WebService.UserService();
+            //_repository = new addon365.WebClient.Service.WebService.UserService();
+            var Scope = Startup.Instance.provider.CreateScope();
 
+            _repository = Scope.ServiceProvider.GetRequiredService<IUserService>();
             WireCommands();
             initInsert();
         }
@@ -81,8 +80,9 @@ namespace addon365.UI.ViewModel
                 {
                     SessionInfo si = SessionInfo.Instance;
                     si.user = user;
-
+#if !Desktop
                     WebDataClient.UpdateAuthToken(user.SessionToken);
+#endif
 
 
                     StoreSessionInfoAsync(user);

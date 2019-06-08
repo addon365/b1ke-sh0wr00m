@@ -1,6 +1,5 @@
-﻿using addon365.WebClient.Service.WebService.Chit;
-using addon365.Database.Service.Chit;
-using addon365.IService.Chit;
+﻿using addon365.IService.Chit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Chit
 {
@@ -11,7 +10,10 @@ namespace addon365.UI.ViewModel.Chit
         private double _amount;
         public CloseSubscriptionViewModel(Result onResult = null)
         {
-            this.subscribeService = new SubsriberService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            this.subscribeService = Scope.ServiceProvider.GetRequiredService<ISubscribeService>();
+            
             WireCommands();
             IsProgressBarVisible = false;
         }

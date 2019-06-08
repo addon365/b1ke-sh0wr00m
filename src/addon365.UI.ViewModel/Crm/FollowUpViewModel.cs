@@ -3,6 +3,8 @@ using addon365.Database.Service.Crm;
 using addon365.IService.Crm;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace addon365.UI.ViewModel.Crm
 {
@@ -19,7 +21,9 @@ namespace addon365.UI.ViewModel.Crm
         public FollowUpViewModel(object contactObj = null, Result onResult = null)
         {
             this.OnResult = onResult;
-            _repository = new addon365.WebClient.Service.WebService.FollowUpService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            _repository = Scope.ServiceProvider.GetRequiredService<IFollowUpService>();
             _followUpStatuses = _repository.GetFollowUpStatuses();
             _followUpModes = _repository.GetFollowUpModes();
             

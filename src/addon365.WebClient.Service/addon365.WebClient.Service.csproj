@@ -22,6 +22,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SessionInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="WebService\Inventory\BuyerWebService.cs~RFa35ae7a.TMP" />
   </ItemGroup>
 

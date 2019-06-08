@@ -1,21 +1,13 @@
-﻿using addon365.Database.Entity.Crm;
-using addon365.Database.Entity.Enquiries;
+﻿using addon365.Database.Entity.Enquiries;
 using addon365.Domain.Entity.Paging;
-using CrystalDecisions.CrystalReports.Engine;
-using addon365.Database.Service;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
 using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Enquiries
 {
 
-    
+
     public class EnquiriesBookingListViewModel : ViewModelBase
     {
         private readonly IBookingService _repository;
@@ -24,7 +16,9 @@ namespace addon365.UI.ViewModel.Enquiries
         private PagingParams pagingParams;
         public EnquiriesBookingListViewModel()
         {
-            _repository = new addon365.WebClient.Service.WebService.BookingService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            _repository = Scope.ServiceProvider.GetRequiredService<IBookingService>();
             pagingParams = new PagingParams();
             pagingParams.PageNumber = 0;
             pagingParams.PageSize = 50;
