@@ -9,4 +9,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Address\" />
+  </ItemGroup>
 </Project>

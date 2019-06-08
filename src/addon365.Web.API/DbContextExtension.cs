@@ -38,7 +38,7 @@ namespace addon365.Web.API
 
         public static void EnsureSeeded(this ApiContext context)
         {
-            
+
             if (!context.InquiryReport.Any())
             {
                 try
@@ -70,10 +70,10 @@ namespace addon365.Web.API
 
                 var ProductPropertyMasters = JsonConvert.DeserializeObject<List<CatalogItemPropertyMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductPropertyMasters.json"));
                 context.AddRange(ProductPropertyMasters);
-                
-                foreach(CatalogItem p in products)
+
+                foreach (CatalogItem p in products)
                 {
-                    foreach(CatalogItemPropertyMaster pm in ProductPropertyMasters)
+                    foreach (CatalogItemPropertyMaster pm in ProductPropertyMasters)
                     {
                         CatalogItemPropertiesMap mp = new CatalogItemPropertiesMap();
                         mp.CatalogItemId = p.Id;
@@ -170,6 +170,14 @@ namespace addon365.Web.API
         [Conditional("DEBUG")]
         private static void SeedOnDebug(ApiContext context)
         {
+            if (!context.StatusMasters.Any())
+            {
+                var file = File.ReadAllText(
+                       "seed" + Path.DirectorySeparatorChar + "StatusMasters.json");
+                var types = JsonConvert.DeserializeObject<List<StatusMaster>>(file);
+                context.AddRange(types);
+            }
+                
             if (!context.Contacts.Any())
             {
 
@@ -177,7 +185,7 @@ namespace addon365.Web.API
                         "seed" + Path.DirectorySeparatorChar + "Contacts.json");
                 var types = JsonConvert.DeserializeObject<List<Contact>>(file);
                 context.AddRange(types);
-                context.SaveChanges();
+                
 
             }
             if (!context.Enquiries.Any())
@@ -186,7 +194,6 @@ namespace addon365.Web.API
                 File.ReadAllText(
                     "seed" + Path.DirectorySeparatorChar + "Enquiries.json"));
                 context.AddRange(types);
-                context.SaveChanges();
             }
             if (!context.EnquiryItems.Any())
             {
@@ -194,7 +201,6 @@ namespace addon365.Web.API
                 File.ReadAllText(
                 "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
                 context.AddRange(types);
-                context.SaveChanges();
             }
             if (!context.DeviceMasters.Any())
             {
@@ -203,9 +209,8 @@ namespace addon365.Web.API
                     "seed" + Path.DirectorySeparatorChar + "Devices.json")
                     );
                 context.AddRange(types);
-                context.SaveChanges();
             }
-
+            context.SaveChanges();
         }
     }
 

@@ -14,7 +14,7 @@ export class AppComponent {
 
   AppComponent() { }
   ngOnInit(): void {
-    this.user.userName = "Tamil";
+    this.user.userName="Tamil";
     this.isActiveSession = this.user != null;
   }
   loggedIn(currentUser: Login) {

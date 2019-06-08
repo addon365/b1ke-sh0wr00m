@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.User;
+﻿using addon365.Database.Entity.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ using addon365.IService;
 namespace addon365.Web.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     public class UserController : Controller
     {
         private readonly AppSettings _appSettings;
@@ -37,9 +37,10 @@ namespace addon365.Web.API.Controllers
         
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(string userId, string password)
+        public IActionResult Authenticate(string userId,string password)
         {
- 
+            //String userId = paramUser.UserId;
+            //String password = paramUser.Password;
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceCode = Request.Headers["DeviceCode"].ToString();
             
@@ -50,12 +51,12 @@ namespace addon365.Web.API.Controllers
                 _logger.LogError("Given " + userId + " Not found");
                 return NotFound(new Exception("Incorrect UserId or Password"));
             }
-            _reqinfo.Init(userId);
-            if (_reqinfo.DeviceId == "")
-            {
-                _logger.LogError("Not Authorized computer");
-                return NotFound(new Exception("Not Authorized computer"));
-            }
+            //_reqinfo.Init(userId);
+            //if (_reqinfo.DeviceId == "")
+            //{
+            //    _logger.LogError("Not Authorized computer");
+            //    return NotFound(new Exception("Not Authorized computer"));
+            //}
 
             _logger.LogInformation("Given User " + userId +" Found");
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -77,15 +78,15 @@ namespace addon365.Web.API.Controllers
             return Ok(user);
         }
         [AllowAnonymous]
-        [HttpGet("all")]
+        [HttpGet]
         public IActionResult GetUsers()
         {
             if (!_userService.GetUsers().Any())
                 _logger.LogWarning("No users found");
             return Ok(_userService.GetUsers());
         }
-        [HttpPost("add")]
-        public IActionResult addUser([FromBody] User user)
+        [HttpPost]
+        public IActionResult AddUser([FromBody] User user)
         {
             User createdUser = _userService.InsertUser(user);
             if (createdUser == null)

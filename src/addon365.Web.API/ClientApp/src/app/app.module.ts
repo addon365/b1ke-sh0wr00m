@@ -8,29 +8,46 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { AppRoutingModule } from './app-routing.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './user/login/login.component';
 import { MatListModule } from '@angular/material/list';
-import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { MatSelectModule } from '@angular/material/select';
-
+import { CreateAppointmentComponent } from './appointment/create-appointment/create-appointment.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ListAppointmentComponent } from './appointment/list-appointment/list-appointment.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { Routes, RouterModule } from '@angular/router';
+const routes: Routes = [
+  { path: "", redirectTo: "list-appointment", pathMatch: "full" },
+  { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
+  { path: "change-password", component: ChangePasswordComponent },
+  { path: "login", component: LoginComponent },
+  { path: "list-appointment", component: ListAppointmentComponent, pathMatch: "full" },
+  { path: "create-appointment", component: CreateAppointmentComponent }
+];
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    CreateAppointmentComponent,
+    ListAppointmentComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -39,17 +56,25 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    AppRoutingModule,
+    RouterModule.forRoot(
+      routes,
+    ),
     MatSidenavModule,
     MatListModule,
-    FormsModule,
+    
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
     Ng2GoogleChartsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

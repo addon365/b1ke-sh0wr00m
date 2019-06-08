@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url: "http://localhost:5000/api/svb/v1.0/"
+  base_url: "http://localhost:5000/api/"
 };
 
 /*

@@ -1,16 +1,18 @@
 <div class="root-container">
   <div class="header">
     <mat-toolbar>
-      <div class="title"> SVB Bike Show Room </div>
+      <div class="title">Addon Technolgoies</div>
       <div class="user">
         <div>
-          Hi {{user.userName}},
+          Hi {{ user.userName }},
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="logout()">Logout</button>
-            <button mat-menu-item [routerLink]="['/change-password']">Change Password</button>
+            <button mat-menu-item [routerLink]="['/change-password']">
+              Change Password
+            </button>
             <button mat-menu-item>Settings</button>
             <button mat-menu-item>Help</button>
           </mat-menu>
@@ -26,7 +28,15 @@
             <button mat-icon-button routerLink="/dashboard">
               <mat-icon>dashboard</mat-icon>
             </button>
-            <a matLine routerLink="/dashboard"> Dashboard </a>
+            <a matLine [routerLink]="['/dashboard']"> Dashboard </a>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-icon-button routerLink="/list-appointment">
+              <mat-icon>calendar_today</mat-icon>
+            </button>
+            <a matLine [routerLink]="['/list-appointment']">
+              List Appointment
+            </a>
           </mat-list-item>
         </mat-nav-list>
       </mat-sidenav>
@@ -38,7 +48,7 @@
     </mat-sidenav-container>
   </div>
   <div class="footer">
-    <hr>
+    <hr />
     <div class="footer-content">
       <div class="footer-item">Privacy Policy</div>
       <div class="footer-item">Sitemap</div>

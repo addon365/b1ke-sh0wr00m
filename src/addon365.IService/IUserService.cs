@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.User;
+﻿using addon365.Database.Entity.Users;
 using System.Collections.Generic;
 
 namespace addon365.IService

@@ -1,0 +1,32 @@
+[
+  {
+    "Id": "878926a5-fef0-4656-b6b9-da3e1b6b093a",
+    "BusinessName": "BusinessName1",
+    "ContactAddress": {
+      "Id": "90b11618-e9e2-4147-87f9-6845906a2498",
+      "AddressLine1": "1st Street",
+      "AddressLine2": "2ndStreet",
+      "PinOrZip": 608102,
+      "LocalityOrVillage": "Cook Grammam",
+      "SubDistrict": "Cook District"
+    },
+    "Landline": "9939939399",
+    "MobileNumber": "55566666",
+    "SecondaryMobileNo": 56666666
+  },
+  {
+    "Id": "8dfde9b1-9fcd-4b0f-bcb7-60aef1a76e99",
+    "BusinessName": "BusinessName2",
+    "ContactAddress": {
+      "Id": "90b11618-e9e2-4147-87f9-6845906a2498",
+      "AddressLine1": "1st Street",
+      "AddressLine2": "2ndStreet",
+      "PinOrZip": 608102,
+      "LocalityOrVillage": "Cook Grammam",
+      "SubDistrict": "Cook District"
+    },
+    "Landline": "9939939399",
+    "MobileNumber": "55566666",
+    "SecondaryMobileNo": 56666666
+  }
+]

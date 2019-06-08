@@ -7,10 +7,10 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using addon365.Database.Entity.Inventory.Catalog;
-using addon365.Database.Entity.User;
+using addon365.Database.Entity.Users;
 using addon365.Database.Entity.Finance;
 using addon365.Database.Entity.Accounts;
-using addon365.Database.Entity.Employee;
+using addon365.Database.Entity.Employees;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Report;
 using addon365.Database.Entity.Inventory;
@@ -55,6 +55,13 @@ namespace addon365.Database
         public DbSet<FollowUpStatus> FollowUpStatuses { get; set; }
         public DbSet<CampaignInfo> CampaignInfos { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
+
+        public DbSet<BusinessCustomer> BusinessCustomers { get; set; }
+        public DbSet<BusinessContact> BusinessContacts { get; set; }
+        public DbSet<AddressMaster> AddressMasters { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
+        public DbSet<StatusMaster> StatusMasters { get; set; }
         #endregion
         #region Enquiry
         public DbSet<Enquiry> Enquiries { get; set; }

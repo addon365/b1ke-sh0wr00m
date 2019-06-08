@@ -2,15 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace addon365.Database.Entity.User
+namespace addon365.Database.Entity.Users
 {
     [Serializable]
     public class User:BaseEntity 
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
-        public int Id { get; set; }
-
         public int OtherId { get; set; }
         public string UserId { get; set; }
         public string Password { get; set; }
