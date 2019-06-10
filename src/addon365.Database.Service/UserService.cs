@@ -53,7 +53,7 @@ namespace addon365.Database.Service
             return _unitOfWork.GetRepository<User>().GetList().Items;
         }
 
-        private User FindUser(string userId)
+        public User FindUser(string userId)
         {
             IRepository<User> repository = _unitOfWork.GetRepository<User>();
             var user = repository.Single(predicate: x => x.UserId.CompareTo(userId) == 0);

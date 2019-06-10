@@ -67,7 +67,6 @@ export class CreateAppointmentComponent implements OnInit {
     );
   }
   onSave() {
-    console.log(this.appointment);
     this.appointmentService
       .postAppointment(this.appointment)
       .subscribe(message => {

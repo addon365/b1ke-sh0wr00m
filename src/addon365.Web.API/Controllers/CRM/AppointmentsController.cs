@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using addon365.Database.Entity.Crm;
 using addon365.IService.Crm;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace addon365.Web.API.Controllers.CRM
 {
@@ -26,7 +28,6 @@ namespace addon365.Web.API.Controllers.CRM
         [ProducesDefaultResponseType]
         public IActionResult Post(Appointment appointment)
         {
-            Console.WriteLine(appointment.AppointmentDate);
             try
             {
                 appointment.CurrentStatus.AppointmentId = appointment.Id;
@@ -55,6 +56,7 @@ namespace addon365.Web.API.Controllers.CRM
         {
             return Ok(_appointmentService.Update(appointment.Id, appointment));
         }
+
 
     }
 }

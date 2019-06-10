@@ -97,6 +97,7 @@ namespace addon365.Web.API
             services.AddTransient<IStatusMasterService, StatusMasterService>();
             services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
             services.AddScoped<RequestInfo>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 
             {
@@ -104,7 +105,8 @@ namespace addon365.Web.API
                 options.SerializerSettings.ContractResolver =
 
                     new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.DateFormatString = "dd-MM-yyyy";
+                options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Local;
+                options.SerializerSettings.DateFormatString = "mm/dd/yyyy";
 
             }); ;
 
@@ -176,7 +178,11 @@ namespace addon365.Web.API
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseCors(
-                    options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+                    options => options
+                    .WithOrigins("http://localhost:4200",
+                    "https://addon365crm.azurewebsites.net")
+                    .AllowAnyMethod().AllowAnyHeader()
+
                     );
 
             app.UseMvc(routes =>
