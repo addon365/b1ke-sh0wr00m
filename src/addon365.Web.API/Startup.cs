@@ -32,6 +32,9 @@ using addon365.IService.Chit;
 using addon365.IService.Accounts;
 using addon365.IService.Inventory;
 using addon365.Database.Entity.Crm;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
 
 namespace addon365.Web.API
 {
@@ -97,17 +100,12 @@ namespace addon365.Web.API
             services.AddTransient<IStatusMasterService, StatusMasterService>();
             services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
             services.AddScoped<RequestInfo>();
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
             {
-
                 options.SerializerSettings.ContractResolver =
-
                     new CamelCasePropertyNamesContractResolver();
-                options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Local;
-                options.SerializerSettings.DateFormatString = "mm/dd/yyyy";
-
             }); ;
 
             services.AddApiVersioning(o =>
