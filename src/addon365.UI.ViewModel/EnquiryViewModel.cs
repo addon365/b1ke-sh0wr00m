@@ -11,6 +11,7 @@ using System.Linq;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Inventory.Catalog;
 using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel
 {
@@ -46,7 +47,9 @@ namespace addon365.UI.ViewModel
         }
         private void GeneralInitilize()
         {
-            _repository = new addon365.WebClient.Service.WebService.EnquiriesService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            _repository = Scope.ServiceProvider.GetRequiredService<IEnquiriesService>();
 
             EnquiryMasterData = _repository.GetInitilizeEnquiries();
 

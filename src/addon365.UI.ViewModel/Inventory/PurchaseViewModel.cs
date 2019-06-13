@@ -9,6 +9,7 @@ using addon365.Database.Entity.Inventory.Catalog;
 using System.Data;
 using addon365.Database.Entity.Accounts;
 using addon365.IService.Inventory;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Inventory
 {
@@ -35,7 +36,8 @@ namespace addon365.UI.ViewModel.Inventory
         }
         private void GeneralInitilize()
         {
-            _repository = new addon365.WebClient.Service.WebService.Inventory.PurchaseWebService();
+            var Scope = Startup.Instance.provider.CreateScope();
+            _repository = Scope.ServiceProvider.GetRequiredService<IPurchaseService>();
 
             _MasterData = _repository.GetInitilize();
 

@@ -1,20 +1,21 @@
-﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Enquiries;
-using System;
+﻿using addon365.Database.Entity.Enquiries;
 using System.Collections.Generic;
-using System.Text;
+using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel
 {
-   public class EnquiryTypeViewModel: ViewModelBase
+    public class EnquiryTypeViewModel: ViewModelBase
     {
-        private readonly EnquiryTypeService _repositoryEnquiryType;
+        private readonly IEnquiryTypeService  _repositoryEnquiryType;
         private EnquiryType _currentEnquiryType;
 
         public EnquiryTypeViewModel()
         {
+            var Scope = Startup.Instance.provider.CreateScope();
+
             _currentEnquiryType = new EnquiryType();
-            _repositoryEnquiryType = new EnquiryTypeService();
+            _repositoryEnquiryType = Scope.ServiceProvider.GetRequiredService<IEnquiryTypeService>();
             EnquiryTypes = _repositoryEnquiryType.GetAllEnquiryType();
             WireCommands();
         }

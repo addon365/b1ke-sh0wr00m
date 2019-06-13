@@ -1,19 +1,23 @@
-﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Inventory.Catalog;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Domain.Entity.Paging;
+using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace addon365.UI.ViewModel
 {
     public class ProductListViewModel: ViewModelBase
     {
-        private readonly ProductService _repositoryProduct;
+        private readonly IProductService _repositoryProduct;
         private CatalogItem _currentProduct;
         private CatalogBrand _productCompany;
         
         public ProductListViewModel()
         {
-            _repositoryProduct = new ProductService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+           
+            _repositoryProduct = Scope.ServiceProvider.GetRequiredService<IProductService>();
             PagingViewModel = new PagingViewModel<CatalogItem>(new Func<addon365.Domain.Entity.Paging.PagingParams, Threenine.Data.Paging.IPaginate<CatalogItem>>(RefreshData));
             
             

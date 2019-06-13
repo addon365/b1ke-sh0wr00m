@@ -49,9 +49,9 @@ namespace addon365.WebClient.Service
         {     
             var header = new AuthenticationHeaderValue("Bearer", tokenAsBase64);
             Client.DefaultRequestHeaders.Authorization = header;
-            Client.DefaultRequestHeaders.Add("DeviceId", SessionInfo.Instance.user.DeviceId.ToString());
+            //Client.DefaultRequestHeaders.Add("DeviceId", SessionInfo.Instance.user.DeviceId.ToString());
             //Client.DefaultRequestHeaders.Add("LicenseId", SessionInfo.Instance.user.LicenseId.ToString());
-            Client.DefaultRequestHeaders.Add("UserId", SessionInfo.Instance.user.Id.ToString());
+            //Client.DefaultRequestHeaders.Add("UserId", SessionInfo.Instance.user.Id.ToString());
         }
         public static string getUniqueID(string drive)
         {

@@ -1,8 +1,7 @@
-﻿using addon365.WebClient.Service.WebService.Chit;
-using addon365.Domain.Entity.Chit;
-using addon365.Database.Service.Chit;
-using System.Collections.Generic;
+﻿using addon365.Domain.Entity.Chit;
 using addon365.IService.Chit;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace addon365.UI.ViewModel.Chit
 {
@@ -15,7 +14,10 @@ namespace addon365.UI.ViewModel.Chit
         private IList<CustomerDueDomain> _dueDomains;
         public FindSubscriptionViewModel(Result onResult = null)
         {
-            chitDueService = new ChitDueClientService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            chitDueService = Scope.ServiceProvider.GetRequiredService<IChitDueService>();
+            //chitDueService = new ChitDueClientService();
             WireCommands();
         }
 

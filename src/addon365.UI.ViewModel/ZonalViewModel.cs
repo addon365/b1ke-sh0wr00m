@@ -1,20 +1,20 @@
-﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity;
-using System;
+﻿using addon365.Database.Entity;
 using System.Collections.Generic;
-using System.Text;
+using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel
 {
-   public class ZonalViewModel:ViewModelBase
+    public class ZonalViewModel:ViewModelBase
     {
-        private readonly ZonalService _repositoryZonal;
+        private readonly IZonalService _repositoryZonal;
         private MarketingZone _marketingZone;
 
         public ZonalViewModel()
         {
+            var Scope = Startup.Instance.provider.CreateScope();
             _marketingZone = new MarketingZone();
-            _repositoryZonal = new ZonalService();
+            _repositoryZonal = Scope.ServiceProvider.GetRequiredService<IZonalService>();
             marketingZones = _repositoryZonal.GetAllActive();
             WireCommands();
         }

@@ -7,6 +7,7 @@ using addon365.Database.Service;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel
 {
@@ -20,7 +21,9 @@ namespace addon365.UI.ViewModel
         private EnquiryExchangeQuotation _exchangeQuotation;
         public VehicleSaleViewModel()
         {
-            _repository = new addon365.WebClient.Service.WebService.EnquiriesService();
+            var Scope = Startup.Instance.provider.CreateScope();
+            _repository = Scope.ServiceProvider.GetRequiredService<IEnquiriesService>();
+
 
             EnquiryMasterData =  _repository.GetInitilizeEnquiries();
             WireCommands();

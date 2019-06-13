@@ -9,6 +9,7 @@ using addon365.Database.Entity.Accounts;
 using System.ComponentModel;
 using addon365.Database.Entity.Inventory.Catalog;
 using addon365.IService.Sales;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Sales
 {
@@ -25,7 +26,9 @@ namespace addon365.UI.ViewModel.Sales
 
         public SalesViewModel()
         {
-            _repository = new addon365.WebClient.Service.WebService.SalesService();
+            var Scope = Startup.Instance.provider.CreateScope();
+            _repository = Scope.ServiceProvider.GetRequiredService<ISalesService>();
+
 
             MasterData = _repository.GetInitilizeSales();
             WireCommands();

@@ -1,5 +1,6 @@
-﻿using addon365.WebClient.Service.WebService;
-using addon365.Database.Entity.Inventory.Catalog;
+﻿using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,17 +10,18 @@ namespace addon365.UI.ViewModel
 {
     public class VehicleAccessoriesViewModel : ViewModelBase
     {
-        private readonly ProductService _repositoryProduct;
+        private readonly IProductService _repositoryProduct;
         private bool EditMode = false;
-        private readonly AccessoriesService _accessoriesService;
+        private readonly IAccessoriesService _accessoriesService;
         private CatalogItem _currentSelectedVehicle, _currentSelectedAccessories;
         private ExtraFittingsAccessories _currentFitting, _currentSelectedGridFitting;
         private CatalogBrand _productCompany;
         private bool _isProductSelected;
         public VehicleAccessoriesViewModel()
         {
-            _repositoryProduct = new ProductService();
-            _accessoriesService = new AccessoriesService();
+            var Scope = Startup.Instance.provider.CreateScope();
+            _repositoryProduct = Scope.ServiceProvider.GetRequiredService<IProductService>();
+            _accessoriesService = Scope.ServiceProvider.GetRequiredService<IAccessoriesService>();
             Bikes = _repositoryProduct.GetProductByType(100);
             Accessories = _repositoryProduct.GetProductByType(200);
            

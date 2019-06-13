@@ -7,6 +7,7 @@ using addon365.Database.Entity.Crm;
 using addon365.Domain.Entity.Chit.Reports;
 using addon365.Database.Service.Chit;
 using addon365.IService.Chit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace addon365.UI.ViewModel.Chit.Reports
 {
@@ -14,7 +15,7 @@ namespace addon365.UI.ViewModel.Chit.Reports
     {
         private ISubscribeService _subscribeService;
         private IList<SubscriberReportDomain> _reports;
-        private ISchemeService _schemService;
+        private ISchemeService _schemeService;
         private IEnumerable<ChitScheme> _chitSchemes;
         private ChitScheme _selectedScheme;
         private IList<Customer> _customers;
@@ -22,8 +23,13 @@ namespace addon365.UI.ViewModel.Chit.Reports
 
         public SubscriberReportViewModel(Result onResult = null)
         {
-            this._subscribeService = new addon365.WebClient.Service.WebService.Chit.SubsriberService();
-            this._schemService = new addon365.WebClient.Service.WebService.Chit.SchemeService();
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            this._subscribeService = Scope.ServiceProvider.GetRequiredService<ISubscribeService>();
+            //this._subscribeService = new addon365.WebClient.Service.WebService.Chit.SubsriberService();
+           
+            //this._schemService = new addon365.WebClient.Service.WebService.Chit.SchemeService();
+            this._schemeService = Scope.ServiceProvider.GetRequiredService<ISchemeService>();
             WireCommands();
             FetchAllAsync();
 
@@ -49,6 +55,9 @@ namespace addon365.UI.ViewModel.Chit.Reports
         }
         private async void FetchReportAsync()
         {
+            var Scope = Startup.Instance.provider.CreateScope();
+           
+            var TempService = Scope.ServiceProvider.GetRequiredService<ISubscribeService>();
             Guid customerId = Guid.Empty;
             Guid schemeId = Guid.Empty;
             if (SelectedCustomer != null)
@@ -58,7 +67,7 @@ namespace addon365.UI.ViewModel.Chit.Reports
             IsProgressBarVisible = true;
             Message = "Loading subscriptions...";
             Reports = await Task.Run(
-                () => _subscribeService.FetchReport(
+                () => TempService.FetchReport(
                 schemeId, customerId
                 ));
             Message = "Done Loading subscriptions...";
@@ -66,9 +75,12 @@ namespace addon365.UI.ViewModel.Chit.Reports
         }
         private async void FindAllSchemesAsync()
         {
+
+           var Scope= Startup.Instance.provider.CreateScope();
+           var TempService = Scope.ServiceProvider.GetRequiredService<ISchemeService>();
             IsProgressBarVisible = true;
             Message = "Loading scheme names...";
-            var schemes = await Task.Run(() => this._schemService.FindAll());
+            var schemes = await Task.Run(() => TempService.FindAll());
             var defaultText = new ChitScheme()
             {
                 Id = Guid.Empty,
@@ -83,12 +95,15 @@ namespace addon365.UI.ViewModel.Chit.Reports
         }
         private async void FindAllCustomersAsync()
         {
+            var Scope = Startup.Instance.provider.CreateScope();
+
+            var TempService = Scope.ServiceProvider.GetRequiredService<ISubscribeService>();
             IsProgressBarVisible = true;
             Message = "Loading Customer names...";
 
             var customers = await Task.Run(
                 () =>
-            _subscribeService.FindAllCustomers()
+            TempService.FindAllCustomers()
             );
 
             customers.Insert(0, new Customer()
