@@ -16,22 +16,30 @@ export class AppointmentService {
     return this.httpClient.get<StatusMaster[]>(this.URL + "StatusesMaster");
   }
 
+  getAspDate(date:Date):string{
+    var dateAsString =
+    date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+    return dateAsString;
+  }
   postAppointment(appointment: Appointment): Observable<Object> {
     var date = appointment.appointmentDate;
-    var dateAsString =
-      date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
+    var dateAsString=this.getAspDate(date);
+    
+    var dueDateAsString =this.getAspDate(appointment.currentStatus.dueDate)
+  
     var appointmentJson = {
-      CustomerId: appointment.customer.id,
-      AppiontmentDate: dateAsString,
+      LeadId: appointment.lead.id,
+      AppointmentDate: dateAsString,
       CurrentStatus: {
         StatusId: appointment.currentStatus.status.id,
         Comments: appointment.currentStatus.comments,
-        UpdatedDate: new Date(),
+        UpdatedDate: dateAsString,
         UpdatedById: appointment.currentStatus.updatedById,
-        AssignedToId: appointment.currentStatus.assignedTo.user.id
+        AssignedToId: appointment.currentStatus.assignedTo.user.id,
+        DueDate: dueDateAsString
       } 
     };
-    console.log("JSON:" + appointmentJson.AppiontmentDate);
+    
     return this.httpClient.post(this.URL + "Appointments", appointmentJson);
   }
   getAllAppointments() {

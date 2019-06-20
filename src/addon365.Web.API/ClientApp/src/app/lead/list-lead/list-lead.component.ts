@@ -1,17 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { Customer } from "src/app/models/customer";
-import { CustomerService } from "src/app/services/customer.service";
-import { AppContants } from "src/app/utils/AppContants";
-import { MatDialogConfig, MatDialog } from "@angular/material/dialog";
-import { UploadDialogComponent } from "src/app/dialogs/upload-dialog/upload-dialog.component";
+import { LeadService } from "src/app/services/lead.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { Lead } from "src/app/models/lead";
 import { ToastrService } from "ngx-toastr";
-import { HttpResponse, HttpErrorResponse } from "@angular/common/http";
+import { AppContants } from "src/app/utils/AppContants";
+import { UploadDialogComponent } from "src/app/dialogs/upload-dialog/upload-dialog.component";
+import { HttpErrorResponse } from "@angular/common/http";
+
 @Component({
-  selector: "app-list-customer",
-  templateUrl: "./list-customer.component.html",
-  styleUrls: ["./list-customer.component.css"]
+  selector: "app-list-lead",
+  templateUrl: "./list-lead.component.html",
+  styleUrls: ["./list-lead.component.css"]
 })
-export class ListCustomerComponent implements OnInit {
+export class ListLeadComponent implements OnInit {
   displcayedColumns: string[] = [
     "customerName",
     "businessName",
@@ -19,21 +20,21 @@ export class ListCustomerComponent implements OnInit {
     "localityOrVillage",
     "subDistrict"
   ];
-  dataSource: Array<Customer>;
+  dataSource: Array<Lead>;
   constructor(
-    private customerService: CustomerService,
+    private leadService: LeadService,
     private dialog: MatDialog,
     private toastr: ToastrService
   ) {}
   ngOnInit() {
-    this.customerService.getCustomers().subscribe(customers => {
-      this.dataSource = customers;
+    this.leadService.getLeads().subscribe(leads => {
+      this.dataSource = leads;
     });
   }
   downloadTemplate() {
-    var t = AppContants.BASE_URL + "BusinessCustomers/template";
-
-    window.location.href = t;
+    var location = this.leadService.getTemplateUrl();
+    console.log(location);
+    window.location.href = location;
   }
 
   openDialog() {
@@ -41,13 +42,17 @@ export class ListCustomerComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = { serviceName: "customer" };
+    dialogConfig.data = { serviceName: "Lead" };
+
     this.dialog
       .open(UploadDialogComponent, dialogConfig)
       .afterClosed()
       .subscribe(
         (data: string) => {
-          if (data != null) this.toastr.success(data);
+          if(data!=null){
+            this.toastr.success(data);
+          }
+          
         },
         (error: HttpErrorResponse) => {
           this.toastr.error(error.message);

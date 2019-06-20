@@ -12,6 +12,7 @@ export class ListAppointmentComponent implements OnInit {
     "customerName",
     "appointmentDate",
     "status",
+    "dueDate",
     "assignedTo",
     "comments"
   ];
@@ -20,6 +21,8 @@ export class ListAppointmentComponent implements OnInit {
   ngOnInit() {
     this.appointmentService.getAllAppointments().subscribe(appointments => {
       this.dataSource = appointments;
+      console.log(appointments[0]);
+      console.log(appointments[0].appointmentDate);
     });
   }
 }

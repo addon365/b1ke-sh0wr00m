@@ -10,6 +10,8 @@ import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { AppointmentService } from "src/app/services/appointment.service";
 import { Router } from "@angular/router";
+import { Lead } from "src/app/models/lead";
+import { LeadService } from "src/app/services/lead.service";
 @Component({
   selector: "app-create-appointment",
   templateUrl: "./create-appointment.component.html",
@@ -17,17 +19,18 @@ import { Router } from "@angular/router";
 })
 export class CreateAppointmentComponent implements OnInit {
   customerControl = new FormControl();
-  filteredCustomers: Observable<Customer[]>;
+  filteredLeads: Observable<Lead[]>;
   employees: Employee[];
-  customers: Customer[];
+  leads: Lead[];
   appointment: Appointment;
 
   constructor(
     private userService: UserService,
     private appointmentService: AppointmentService,
+    private leadService: LeadService,
     private router: Router
   ) {}
-  
+
   /**
    * Update Open status for new appointment
    */
@@ -48,25 +51,25 @@ export class CreateAppointmentComponent implements OnInit {
     this.userService.getEmployees().subscribe(employees => {
       this.employees = employees;
     });
-    this.userService.getCustomers().subscribe(custs => {
-      this.customers = custs;
+    this.leadService.getLeads().subscribe(leads => {
+      this.leads = leads;
     });
-    this.filteredCustomers = this.customerControl.valueChanges.pipe(
+    this.filteredLeads = this.customerControl.valueChanges.pipe(
       startWith(""),
       map(customer =>
-        customer ? this._filterCustomer(customer) : this.customers.slice(0)
+        customer ? this._filterCustomer(customer) : this.leads.slice(0)
       )
     );
   }
   private _filterCustomer(value: Customer): Customer[] {
     const filterValue = value.user.userName.toLowerCase();
 
-    return this.customers.filter(
-      customer =>
-        customer.user.userName.toLowerCase().indexOf(filterValue) === 0
+    return this.leads.filter(
+      lead => lead.user.userName.toLowerCase().indexOf(filterValue) === 0
     );
   }
   onSave() {
+    console.log(this.appointment);
     this.appointmentService
       .postAppointment(this.appointment)
       .subscribe(message => {

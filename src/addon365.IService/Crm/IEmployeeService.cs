@@ -7,5 +7,6 @@ namespace addon365.IService.Crm
 {
     public interface IEmployeeService : IBaseService<Employee>
     {
+        Employee FindByMobile(string mobileNumber);
     }
 }

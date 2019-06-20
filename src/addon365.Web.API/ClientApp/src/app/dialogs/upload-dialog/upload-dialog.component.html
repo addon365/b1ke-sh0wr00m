@@ -1,5 +1,17 @@
-<p>
-  upload-dialog works!
-</p>
+<div class="dialog" fxLayout="column">
+  <div class="title" fxLayout="row">
+    <div fxFill>{{ serviceName }}</div>
+    <div>
+      <button mat-icon-button aria-label="Close" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
 
-<input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".xlsx">
+  <input
+    type="file"
+    (change)="fileChange($event)"
+    placeholder="Upload file"
+    accept=".xlsx"
+  />
+</div>

@@ -8,10 +8,10 @@ namespace addon365.Database.Entity.Crm
 {
     public class Appointment : BaseEntityWithLogFields
     {
-        public Guid CustomerId { get; set; }
+        public Guid LeadId{ get; set; }
 
-        [ForeignKey("CustomerId")]
-        public BusinessCustomer Customer { get; set; }
+        [ForeignKey("LeadId")]
+        public Lead Lead { get; set; }
 
 
         public DateTime AppointmentDate { get; set; }
@@ -19,7 +19,7 @@ namespace addon365.Database.Entity.Crm
         public Guid CurrentStatusId { get; set; }
 
         [ForeignKey("CurrentStatusId")]
-        public AppointmentStatus CurrentStatus { get; set; }
+        public virtual AppointmentStatus CurrentStatus { get; set; }
 
     }
 }

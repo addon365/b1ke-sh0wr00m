@@ -25,25 +25,34 @@
       <mat-sidenav #sidenav class="sidenav" mode="side" opened>
         <mat-nav-list>
           <mat-list-item>
-            <button mat-icon-button routerLink="/dashboard">
-              <mat-icon>dashboard</mat-icon>
-            </button>
+            <mat-icon>dashboard</mat-icon>
+
             <a matLine [routerLink]="['/dashboard']"> Dashboard </a>
           </mat-list-item>
           <mat-list-item>
-            <button mat-icon-button routerLink="/list-appointment">
-              <mat-icon>calendar_today</mat-icon>
-            </button>
+            <mat-icon>calendar_today</mat-icon>
+
             <a matLine [routerLink]="['/list-appointment']">
-              List Appointment
+              Appointment
             </a>
           </mat-list-item>
           <mat-list-item>
-            <button mat-icon-button routerLink="/list-customer">
-              <mat-icon>&#xE87C;</mat-icon>
-            </button>
+            <mat-icon>&#xE87C;</mat-icon>
+
             <a matLine [routerLink]="['/list-customer']">
-              List Customer
+              Customer
+            </a>
+          </mat-list-item>
+          <mat-list-item>
+            <fa name="thumbs-up" size="lg"></fa>
+            <a matLine [routerLink]="['/list-lead']">
+              Leads
+            </a>
+          </mat-list-item>
+          <mat-list-item>
+            <fa name="user" size="lg"></fa>
+            <a matLine [routerLink]="['/list-employee']">
+              Employee
             </a>
           </mat-list-item>
         </mat-nav-list>

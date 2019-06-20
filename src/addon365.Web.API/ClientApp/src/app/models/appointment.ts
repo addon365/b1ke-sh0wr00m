@@ -1,9 +1,10 @@
 import { AppointmentStatus } from "./appointment-status";
-import { Customer } from "./customer";
+import { Lead } from "./lead";
+
 
 export class Appointment {
   id: string;
-  customer: Customer;
+  lead: Lead;
   appointmentDate: Date;
   currentStatus: AppointmentStatus;
 }

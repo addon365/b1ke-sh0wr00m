@@ -59,6 +59,8 @@ namespace addon365.Database
         public DbSet<BusinessCustomer> BusinessCustomers { get; set; }
         public DbSet<BusinessContact> BusinessContacts { get; set; }
         public DbSet<AddressMaster> AddressMasters { get; set; }
+
+        public DbSet<Lead> Leads { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
         public DbSet<StatusMaster> StatusMasters { get; set; }

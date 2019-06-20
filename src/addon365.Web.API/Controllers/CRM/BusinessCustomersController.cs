@@ -82,13 +82,14 @@ namespace addon365.Web.API.Controllers.CRM
                     user.UserName = userName;
                     user.Password = password;
 
-                    user = userService.FindUser(userId);
-                    if (user == null)
+                    User foundUser = userService.FindUser(userId);
+                    if (foundUser != null)
                     {
                         continue;
                     }
-                    user=userService.InsertUser(user);
+                    user = userService.InsertUser(user);
                     BusinessCustomer customer = new BusinessCustomer();
+
                     customer.UserId = user.Id;
                     customer.Contact = new BusinessContact
                     {

@@ -1,15 +1,23 @@
 [
   {
     "StatusName": "Open",
-    "Description": "Follow up not yet started."
+    "Description": "Follow up not yet started.",
+    "Priority":  "Major"
   },
   {
     "StatusName": "InProgress",
-    "Description": "Follow up in progress."
+    "Description": "Follow up in progress.",
+    "Priority": "Major"
   },
   {
     "StatusName": "Closed",
-    "Description": "Follow up closed if product purchase or not intrested."
+    "Description": "Follow up closed if product purchase or not intrested.",
+    "Priority": "Major"
+  },
+  {
+    "StatusName": "FollowUp",
+    "Description": "Follow up closed if product purchase or not intrested.",
+    "Priority": "Minor"
   }
 
 ]

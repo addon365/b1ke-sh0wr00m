@@ -99,6 +99,7 @@ namespace addon365.Web.API
             services.AddTransient<IAppointmentStatusService, AppointmentStatusService>();
             services.AddTransient<IStatusMasterService, StatusMasterService>();
             services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
+            services.AddTransient<ILeadService, LeadService>();
             services.AddScoped<RequestInfo>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -182,7 +183,13 @@ namespace addon365.Web.API
                     .AllowAnyMethod().AllowAnyHeader()
 
                     );
-
+            var defaultCulture = new CultureInfo("en-IN");
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(defaultCulture),
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default",

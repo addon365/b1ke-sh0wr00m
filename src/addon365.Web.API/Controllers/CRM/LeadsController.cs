@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Crm;
-using addon365.Database.Entity.Employees;
 using addon365.Database.Entity.Users;
 using addon365.IService;
 using addon365.IService.Crm;
@@ -15,25 +14,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace addon365.Web.API.Controllers.CRM
 {
-    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : BaseController<Employee>
+    public class LeadsController : BaseController<Lead>
     {
-        private IEmployeeService _employeeService;
-        private IUserService _userService;
-        private IHostingEnvironment hostingEnvironment;
-        public EmployeesController(IEmployeeService employeeService,
-            IUserService userService,
-            IHostingEnvironment hostingEnvironment
-            )
-            : base(employeeService)
+        ILeadService service;
+        IUserService userService;
+        IHostingEnvironment hostingEnvironment;
+        public LeadsController(ILeadService baseService,
+            IUserService userService, IHostingEnvironment hostingEnvironment)
+            : base(baseService)
         {
-            this._employeeService = employeeService;
-            this._userService = userService;
+            this.service = baseService;
+            this.userService = userService;
             this.hostingEnvironment = hostingEnvironment;
         }
-
         [HttpPost("excel")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -75,34 +70,36 @@ namespace addon365.Web.API.Controllers.CRM
                     string userId = reader.GetString(0);
                     string password = reader.GetString(1);
                     string userName = reader.GetString(2);
-                    
-                    string address1 = reader.GetString(3);
-                    string address2 = reader.GetString(4);
-                    long pinOrZip = (long)reader.GetDouble(5);
-                    string village = reader.GetString(6);
-                    string subDistrict = reader.GetString(7);
-                    string mobileNumber = reader.GetDouble(8).ToString();
-                    
+                    string businessName = reader.GetString(3);
+                    string address1 = reader.GetString(4);
+                    string address2 = reader.GetString(5);
+                    long pinOrZip = (long)reader.GetDouble(6);
+                    string village = reader.GetString(7);
+                    string subDistrict = reader.GetString(8);
+                    string mobileNumber = reader.GetDouble(9).ToString();
+                    string landLine = reader.GetDouble(10).ToString();
                     User user = new User();
                     user.UserId = userId;
                     user.UserName = userName;
                     user.Password = password;
 
-                    User foundUser = _userService.FindUser(userId);
+                    User foundUser = userService.FindUser(userId);
                     if (foundUser != null)
                     {
                         continue;
                     }
-                    Employee foundEmployee = _employeeService.FindByMobile(mobileNumber);
-                    if (foundEmployee != null)
-                        continue;
-                    user = _userService.InsertUser(user);
-                    Employee employee = new Employee();
-
-                    employee.UserId = user.Id;
-                    employee.Profile = new Database.Entity.Crm.Contact
+                    Lead foundLead = this.service
+                        .FindByMobile(mobileNumber, landLine);
+                    if (foundLead != null)
                     {
-
+                        continue;
+                    }
+                    user = userService.InsertUser(user);
+                    Lead lead = new Lead();
+                    lead.UserId = user.Id;
+                    lead.Contact = new BusinessContact
+                    {
+                        BusinessName = businessName,
                         ContactAddress = new AddressMaster
                         {
                             AddressLine1 = address1,
@@ -112,10 +109,12 @@ namespace addon365.Web.API.Controllers.CRM
                             SubDistrict = subDistrict,
 
                         },
-                        MobileNumber = mobileNumber
+                        MobileNumber = mobileNumber,
+                        Landline = landLine
+
                     };
-                    employee = baseService.Save(employee);
-                    if (employee == null)
+                    lead = baseService.Save(lead);
+                    if (lead == null)
                         continue;
 
                     count++;
@@ -129,13 +128,12 @@ namespace addon365.Web.API.Controllers.CRM
         public IActionResult GetTemplate()
         {
             String path = Path.Combine(hostingEnvironment.ContentRootPath
-                , "Resources\\EmployeeTemplate.xlsx");
+                , "Resources\\CustomerTemplate.xlsx");
             byte[] bytes = System.IO.File.ReadAllBytes(path);
             return File(bytes,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "EmployeeEntryTemplate.xlsx");
+        "LeadsEntryTemplate.xlsx");
 
         }
-
     }
 }

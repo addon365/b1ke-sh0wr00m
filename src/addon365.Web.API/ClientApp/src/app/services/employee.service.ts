@@ -1,24 +1,24 @@
 import { Injectable } from "@angular/core";
-import { Customer } from "../models/customer";
 import { AppContants } from "../utils/AppContants";
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Employee } from "../models/employee";
 import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
-export class CustomerService {
+export class EmployeeService {
   URL: string = AppContants.BASE_URL;
-  CONTROLLER: string = "BusinessCustomers";
+  CONTROLLER: string = "Employees";
 
   constructor(private httpClient: HttpClient) {}
 
-  getCustomers(): Observable<Customer[]> {
-    return this.httpClient.get<Customer[]>(this.URL + this.CONTROLLER);
+  getEmployees(): Observable<Employee[]> {
+    return this.httpClient.get<Employee[]>(this.URL + this.CONTROLLER);
   }
-  postCustomers(file) {
+  postEmployees(file) {
     var url = this.URL + this.CONTROLLER + "/excel";
+    console.log(url);
     let formData: FormData = new FormData();
     formData.append("file", file, file.name);
 
@@ -27,8 +27,10 @@ export class CustomerService {
       "multipart/form-data"
     );
 
-
     return this.httpClient.post(`${url}`, formData, { headers });
   }
-  
+
+  getTemplateUrl() {
+    return this.URL + this.CONTROLLER + "/template";
+  }
 }

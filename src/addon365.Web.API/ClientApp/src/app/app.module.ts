@@ -30,8 +30,10 @@ import { Routes, RouterModule } from "@angular/router";
 import { ListCustomerComponent } from "./customer/list-customer/list-customer.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { UploadDialogComponent } from './dialogs/upload-dialog/upload-dialog.component';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ToastrModule } from 'ngx-toastr';
+import { ListLeadComponent } from './lead/list-lead/list-lead.component';
+import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
@@ -43,7 +45,9 @@ const routes: Routes = [
     pathMatch: "full"
   },
   { path: "create-appointment", component: CreateAppointmentComponent },
-  { path: "list-customer", component: ListCustomerComponent }
+  { path: "list-customer", component: ListCustomerComponent },
+  { path: "list-lead", component: ListLeadComponent },
+  { path: "list-employee", component: ListEmployeeComponent },
 ];
 @NgModule({
   declarations: [
@@ -54,7 +58,9 @@ const routes: Routes = [
     CreateAppointmentComponent,
     ListAppointmentComponent,
     ListCustomerComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    ListLeadComponent,
+    ListEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +69,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    
+    AngularFontAwesomeModule,
     MatToolbarModule,
     HttpClientModule,
     MatCardModule,
