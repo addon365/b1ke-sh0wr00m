@@ -74,7 +74,7 @@ namespace addon365.Database
         public DbSet<EnquiryFinanceQuotation> EnquiryFinanceQuotations { get; set; }
         public DbSet<EnquiryAccessories> EnquiryAccessories { get; set; }
         #endregion
-       
+
         #region Accounts
         public DbSet<PaymentMode> PaymentModes { get; set; }
         public DbSet<AccountBook> AccountBooks { get; set; }
@@ -101,26 +101,25 @@ namespace addon365.Database
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<PurchaseItem> PurchaseItems { get; set; }
         public DbSet<PurchaseItemPropertyValue> PurchaseItemProperties { get; set; }
-        
+
         #region Product
         public DbSet<CatalogBrand> CatalogBrands { get; set; }
         public DbSet<CatalogType> CatalogTypes { get; set; }
         public DbSet<CatalogItem> CatalogItems { get; set; }
         public DbSet<CatalogItemPropertyMaster> CatalogItemPropertyMasters { get; set; }
         public DbSet<CatalogItemPropertiesMap> CatalogItemPropertiesMaps { get; set; }
-        
+
         #endregion
-        
+
         #endregion
         #region Report
         public DbSet<InquiryReport> InquiryReport { get; set; }
-
         #endregion
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-          
+
 
             modelBuilder.HasDefaultSchema(schema: DBGlobals.SchemaName);
             modelBuilder.Entity<Threat>().HasIndex(i => i.Referer).IsUnique();
@@ -140,7 +139,7 @@ namespace addon365.Database
 
         public async Task<int> SaveChangesAsync()
         {
-         Audit();
+            Audit();
             return await base.SaveChangesAsync();
         }
 

@@ -5,3 +5,8 @@ table {
 .box {
   display: flex;
 }
+.filter{
+  display: flex;
+  flex-direction: row;
+  
+}

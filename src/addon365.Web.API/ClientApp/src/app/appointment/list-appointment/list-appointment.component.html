@@ -1,7 +1,19 @@
 <div class="box" fxLayout="column">
   <h3>List Appointment</h3>
-  <div fxLayout="row" fxLayoutAlign="end end" >
-
+  <div class="filter" fxLayoutAlign="end end">
+    <mat-form-field>
+      <mat-select placeholder="Select Status" [(ngModel)]="filterStatus">
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{ status.statusName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button aria-label="Filter" (click)="filter()">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Clear Filter" (click)="clearFilter()">
+        <mat-icon>clear_all</mat-icon>
+      </button>
     <button
       mat-raised-button
       color="accent"
@@ -42,7 +54,7 @@
     <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef>Due Date</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.currentStatus.dueDate  | date: "shortDate" }}
+        {{ element.currentStatus.dueDate | date: "shortDate" }}
       </td>
     </ng-container>
 

@@ -52,9 +52,9 @@ namespace addon365.Web.API.Controllers.CRM
             return Ok(_appointmentService.FindAll());
         }
         [HttpGet("status")]
-        public IActionResult FindByStatus([FromQuery] string status)
+        public IActionResult FindByStatus([FromQuery] Guid statusId)
         {
-            return Ok(_appointmentService.FindByStatus(status));
+            return Ok(_appointmentService.FindByStatus(statusId));
         }
         [HttpPut]
         public IActionResult Put(Appointment appointment)

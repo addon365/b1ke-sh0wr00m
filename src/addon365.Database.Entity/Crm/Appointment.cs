@@ -13,9 +13,8 @@ namespace addon365.Database.Entity.Crm
         [ForeignKey("LeadId")]
         public Lead Lead { get; set; }
 
-
         public DateTime AppointmentDate { get; set; }
-
+        
         public Guid CurrentStatusId { get; set; }
 
         [ForeignKey("CurrentStatusId")]

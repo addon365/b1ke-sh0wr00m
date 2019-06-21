@@ -16,13 +16,44 @@ export class ListAppointmentComponent implements OnInit {
     "assignedTo",
     "comments"
   ];
+  filterStatus: StatusMaster;
+  statuses: Array<StatusMaster>;
   dataSource: Array<Appointment>;
+
   constructor(private appointmentService: AppointmentService) {}
-  ngOnInit() {
+
+  /**
+   * Update Open status for new appointment
+   */
+  updateStatus() {
+    this.appointmentService.getStatuses().subscribe(statuses => {
+      this.statuses = statuses;
+      
+    });
+  }
+  updateAllAppointment(){
     this.appointmentService.getAllAppointments().subscribe(appointments => {
       this.dataSource = appointments;
-      console.log(appointments[0]);
-      console.log(appointments[0].appointmentDate);
     });
+  }
+  ngOnInit() {
+    this.updateStatus();
+    this.updateAllAppointment();
+  }
+  filter() {
+    
+    if (this.filterStatus == null) return;
+    this.appointmentService
+      .findByStatus(this.filterStatus.id)
+      .subscribe(appointments => {
+        this.dataSource = appointments;
+        console.log(appointments);
+      });
+  }
+  clearFilter(){
+this.filterStatus=null;
+this.appointmentService.getAllAppointments().subscribe(appointments => {
+  this.dataSource = appointments;
+});
   }
 }
