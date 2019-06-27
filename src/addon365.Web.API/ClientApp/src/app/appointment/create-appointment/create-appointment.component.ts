@@ -12,6 +12,7 @@ import { AppointmentService } from "src/app/services/appointment.service";
 import { Router } from "@angular/router";
 import { Lead } from "src/app/models/lead";
 import { LeadService } from "src/app/services/lead.service";
+import { AppointmentViewModel } from "src/app/models/view-model/appointment-view-model";
 @Component({
   selector: "app-create-appointment",
   templateUrl: "./create-appointment.component.html",
@@ -22,7 +23,8 @@ export class CreateAppointmentComponent implements OnInit {
   filteredLeads: Observable<Lead[]>;
   employees: Employee[];
   leads: Lead[];
-  appointment: Appointment;
+  appointment: AppointmentViewModel;
+  selectedLead: Lead;
 
   constructor(
     private userService: UserService,
@@ -38,15 +40,15 @@ export class CreateAppointmentComponent implements OnInit {
     this.appointmentService.getStatuses().subscribe(statuses => {
       statuses.forEach(status => {
         if (status.statusName == "Open") {
-          this.appointment.currentStatus.status = status;
+          this.appointment.statusId = status.id;
           return;
         }
       });
     });
   }
   ngOnInit() {
-    this.appointment = new Appointment();
-    this.appointment.currentStatus = new AppointmentStatus();
+    this.appointment = new AppointmentViewModel();
+    
     this.updateStatus();
     this.userService.getEmployees().subscribe(employees => {
       this.employees = employees;
@@ -70,6 +72,7 @@ export class CreateAppointmentComponent implements OnInit {
   }
   onSave() {
     console.log(this.appointment);
+    this.appointment.leadId=this.selectedLead.id;
     this.appointmentService
       .postAppointment(this.appointment)
       .subscribe(message => {

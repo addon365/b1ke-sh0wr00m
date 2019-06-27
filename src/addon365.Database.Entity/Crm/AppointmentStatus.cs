@@ -15,8 +15,6 @@ namespace addon365.Database.Entity.Crm
 
         public DateTime DueDate { get; set; }
 
-        public Guid AppointmentId { get; set; }
-
         public Guid? AssignedToId { get; set; }
 
         [ForeignKey("AssignedToId")]
@@ -26,7 +24,10 @@ namespace addon365.Database.Entity.Crm
 
         [ForeignKey("UpdatedById")]
         public User UpdatedBy { get; set; }
+        
+        public int Order { get; set; }
 
+        public Guid AppointmentId { get; set; }
 
     }
 }

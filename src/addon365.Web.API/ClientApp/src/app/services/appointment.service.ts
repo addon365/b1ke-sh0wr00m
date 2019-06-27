@@ -4,6 +4,7 @@ import { AppContants } from "../utils/AppContants";
 import { Observable } from "rxjs";
 import { AppointmentStatus } from "../models/appointment-status";
 import { Appointment } from "../models/appointment";
+import { AppointmentViewModel } from "../models/view-model/appointment-view-model";
 @Injectable({
   providedIn: "root"
 })
@@ -21,35 +22,35 @@ export class AppointmentService {
       date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
     return dateAsString;
   }
-  postAppointment(appointment: Appointment): Observable<Object> {
+  postAppointment(appointment: AppointmentViewModel): Observable<Object> {
     var date = appointment.appointmentDate;
     var dateAsString = this.getAspDate(date);
 
-    var dueDateAsString = this.getAspDate(appointment.currentStatus.dueDate);
+    var dueDateAsString = this.getAspDate(appointment.dueDate);
 
     var appointmentJson = {
-      LeadId: appointment.lead.id,
+      LeadId: appointment.leadId,
       AppointmentDate: dateAsString,
       CurrentStatus: {
-        StatusId: appointment.currentStatus.status.id,
-        Comments: appointment.currentStatus.comments,
+        StatusId: appointment.statusId,
+        Comments: appointment.comments,
         UpdatedDate: dateAsString,
-        UpdatedById: appointment.currentStatus.updatedById,
-        AssignedToId: appointment.currentStatus.assignedTo.user.id,
+        UpdatedById: appointment.updatedById,
+        AssignedToId: appointment.assignedToId,
         DueDate: dueDateAsString
       }
     };
 
-    return this.httpClient.post(this.URL + "Appointments", appointmentJson);
+    return this.httpClient.post(this.URL + "Appointments", appointment);
   }
   getAllAppointments() {
-    return this.httpClient.get<Array<Appointment>>(this.URL + "Appointments");
+    return this.httpClient.get<Array<AppointmentViewModel>>(this.URL + "Appointments");
   }
 
   findByStatus(statusId: string) {
     if (statusId == null) return this.getAllAppointments();
   
-    return this.httpClient.get<Array<Appointment>>(
+    return this.httpClient.get<Array<AppointmentViewModel>>(
       this.URL + "Appointments/status",
       {
         params: {

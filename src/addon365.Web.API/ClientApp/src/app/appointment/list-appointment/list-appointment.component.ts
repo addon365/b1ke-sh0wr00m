@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AppointmentService } from "src/app/services/appointment.service";
 import { Appointment } from "src/app/models/appointment";
+import { AppointmentViewModel } from "src/app/models/view-model/appointment-view-model";
 
 @Component({
   selector: "app-list-appointment",
@@ -18,7 +19,7 @@ export class ListAppointmentComponent implements OnInit {
   ];
   filterStatus: StatusMaster;
   statuses: Array<StatusMaster>;
-  dataSource: Array<Appointment>;
+  dataSource: Array<AppointmentViewModel>;
 
   constructor(private appointmentService: AppointmentService) {}
 
@@ -28,10 +29,9 @@ export class ListAppointmentComponent implements OnInit {
   updateStatus() {
     this.appointmentService.getStatuses().subscribe(statuses => {
       this.statuses = statuses;
-      
     });
   }
-  updateAllAppointment(){
+  updateAllAppointment() {
     this.appointmentService.getAllAppointments().subscribe(appointments => {
       this.dataSource = appointments;
     });
@@ -41,7 +41,6 @@ export class ListAppointmentComponent implements OnInit {
     this.updateAllAppointment();
   }
   filter() {
-    
     if (this.filterStatus == null) return;
     this.appointmentService
       .findByStatus(this.filterStatus.id)
@@ -50,10 +49,10 @@ export class ListAppointmentComponent implements OnInit {
         console.log(appointments);
       });
   }
-  clearFilter(){
-this.filterStatus=null;
-this.appointmentService.getAllAppointments().subscribe(appointments => {
-  this.dataSource = appointments;
-});
+  clearFilter() {
+    this.filterStatus = null;
+    this.appointmentService.getAllAppointments().subscribe(appointments => {
+      this.dataSource = appointments;
+    });
   }
 }

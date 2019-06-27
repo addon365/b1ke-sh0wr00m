@@ -30,7 +30,7 @@
     <ng-container matColumnDef="customerName">
       <th mat-header-cell *matHeaderCellDef>Lead Person Name</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.lead.user.userName }}
+        {{ element.leadName }}
       </td>
     </ng-container>
 
@@ -46,7 +46,7 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.currentStatus.status.statusName }}
+        {{ element.status }}
       </td>
     </ng-container>
 
@@ -54,7 +54,7 @@
     <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef>Due Date</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.currentStatus.dueDate | date: "shortDate" }}
+        {{ element.dueDate | date: "shortDate" }}
       </td>
     </ng-container>
 
@@ -62,7 +62,7 @@
     <ng-container matColumnDef="assignedTo">
       <th mat-header-cell *matHeaderCellDef>Assigned To</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.currentStatus.assignedTo.userName }}
+        {{ element.assignedTo }}
       </td>
     </ng-container>
 
@@ -70,7 +70,7 @@
     <ng-container matColumnDef="comments">
       <th mat-header-cell *matHeaderCellDef>Comments</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.currentStatus.comments }}
+        {{ element.comments }}
       </td>
     </ng-container>
 

@@ -5,6 +5,7 @@ using addon365.Database.Entity.Crm;
 using addon365.IService.Crm;
 using Newtonsoft.Json;
 using System.IO;
+using addon365.Domain.Entity.Crm;
 
 namespace addon365.Web.API.Controllers.CRM
 {
@@ -26,13 +27,11 @@ namespace addon365.Web.API.Controllers.CRM
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public IActionResult Post(Appointment appointment)
+        public IActionResult Post(AppointmentViewModel appointmentModel)
         {
             try
             {
-                appointment.CurrentStatus.AppointmentId = appointment.Id;
-                _appointmentService.Save(appointment);
-                return Ok();
+                return Ok(_appointmentService.Save(appointmentModel));
             }
             catch (Exception exception)
             {
@@ -49,19 +48,25 @@ namespace addon365.Web.API.Controllers.CRM
             {
                 return Ok(_appointmentService.FindByUser(userId));
             }
-            return Ok(_appointmentService.FindAll());
+            return Ok(_appointmentService.FindAllVM());
         }
         [HttpGet("status")]
-        public IActionResult FindByStatus([FromQuery] Guid statusId)
+        public IActionResult FindByStatus([FromQuery] Guid userId,
+            [FromQuery] Guid statusId)
         {
-            return Ok(_appointmentService.FindByStatus(statusId));
+            return Ok(_appointmentService.FindByStatus(userId, statusId));
         }
         [HttpPut]
-        public IActionResult Put(Appointment appointment)
+        public IActionResult Put(AppointmentViewModel appointment)
         {
             return Ok(_appointmentService.Update(appointment.Id, appointment));
         }
 
-
+        [HttpGet("actual")]
+        public IActionResult GetAllActual()
+        {
+            return Ok(_appointmentService.FindAll());
+        }
+            
     }
 }

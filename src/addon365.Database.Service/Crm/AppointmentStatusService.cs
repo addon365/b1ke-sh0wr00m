@@ -16,19 +16,7 @@ namespace addon365.Database.Service.Crm
 
         public override AppointmentStatus Save(AppointmentStatus appointmentStatus)
         {
-            var reuslt= base.Save(appointmentStatus);
-            UnitOfWork.GetRepository<AppointmentStatus>().Add(appointmentStatus);
-            var appList = UnitOfWork.GetRepository<Appointment>().GetList(
-                predicate: aAppointment => aAppointment.Id == appointmentStatus.AppointmentId).Items;
-            if (appList.Count == 0)
-            {
-                throw new ArgumentException("Given Appointment not found");
-            }
-            Appointment appointment = appList[0];
-            appointment.CurrentStatusId = appointmentStatus.Id;
-            UnitOfWork.GetRepository<Appointment>().Update(appointment);
-            UnitOfWork.SaveChanges();
-            return appointmentStatus;
+            return null;
         }
 
     }
