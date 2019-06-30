@@ -1,0 +1,138 @@
+<h3>Create Lead</h3>
+<div fxLayout="column" fxLayoutGap="20px" class="example-form">
+  <form name="createAppointment">
+    <div fxLayout="column">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Busineess Name"
+          value=""
+          name="businessName"
+          [(ngModel)]="lead.contact.businessName"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Lead Source</mat-label>
+        <mat-select name="leadSource" [(ngModel)]="lead.source">
+          <mat-option *ngFor="let source of leadSource" [value]="source">
+            {{ source.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Propreitor Name"
+          value=""
+          name="propreitor"
+          [(ngModel)]="lead.contact.propreitor.firstName"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Propreitor Mobile Number"
+          value=""
+          type="number"
+          name="propreitorMobile"
+          [(ngModel)]="lead.contact.propreitor.mobileNumber"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Contact Person Name"
+          value=""
+          name="contactPerson"
+          [(ngModel)]="lead.contact.contactPerson.firstName"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Contact Person Mobile Number"
+          value=""
+          type="text"
+          name="contactPersonMobile"
+          [(ngModel)]="lead.contact.contactPerson.mobileNumber"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Address Line 1"
+          value=""
+          type="text"
+          name="address1"
+          [(ngModel)]="lead.contact.contactAddress.address1"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Address Line 2"
+          value=""
+          type="text"
+          name="address2"
+          [(ngModel)]="lead.contact.contactAddress.address2"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="pincode"
+          value=""
+          type="number"
+          name="pincode"
+          [(ngModel)]="lead.contact.contactAddress.pinOrZip"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Locality/Village"
+          value=""
+          type="text"
+          name="locality"
+          [(ngModel)]="lead.contact.contactAddress.localityOrVillage"
+        />
+      </mat-form-field>
+      <mat-form-field>
+          <input
+            matInput
+            placeholder="Sub District"
+            value=""
+            type="text"
+            name="district"
+            [(ngModel)]="lead.contact.contactAddress.subDistrict"
+          />
+        </mat-form-field>
+        <mat-form-field>
+            <input
+              matInput
+              placeholder="Mobile Number"
+              value=""
+              type="number"
+              name="mobileNumber"
+              [(ngModel)]="lead.contact.mobileNumber"
+            />
+          </mat-form-field>
+          <mat-form-field>
+              <input
+                matInput
+                placeholder="Land Line"
+                value=""
+                type="number"
+                name="landline"
+                [(ngModel)]="lead.contact.landline"
+              />
+            </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="onSave()">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

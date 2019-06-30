@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 
 namespace addon365.Database
 {
-public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
+    public class ApiContextFactory : IDesignTimeDbContextFactory<ApiContext>
     {
         public ApiContextFactory()
         {

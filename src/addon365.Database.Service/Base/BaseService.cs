@@ -35,8 +35,13 @@ namespace addon365.Database.Service.Base
         {
             return _repository.GetList().Items;
         }
-
         public virtual T Save(T obj)
+        {
+            _repository.Add(obj);
+            UnitOfWork.SaveChanges();
+            return obj;
+        }
+        public virtual IList<T> Save(IList<T> obj)
         {
             _repository.Add(obj);
             UnitOfWork.SaveChanges();

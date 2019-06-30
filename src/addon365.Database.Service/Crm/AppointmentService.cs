@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using addon365.Domain.Entity.Crm;
 using System.Linq;
 using addon365.Database.Entity.Report;
+using System.Threading.Tasks;
+using FirebaseAdmin.Messaging;
+using addon365.Database.Service.Util;
 
 namespace addon365.Database.Service.Crm
 {
@@ -34,16 +37,16 @@ namespace addon365.Database.Service.Crm
             DbSet<AppointmentStatus> appStatusDb = CrmContext.AppointmentStatuses;
             var result = appDb
                 .Include(x => x.Lead)
-                .ThenInclude(x => x.User)
+                .ThenInclude(l => l.Contact)
                 .Include(x => x.AppointmentStatuses)
                 .ThenInclude(x => x.Status)
                 .Include(x => x.AppointmentStatuses)
-                .ThenInclude(x=>x.AssignedTo)
+                .ThenInclude(x => x.AssignedTo)
                 .Where(x => x.AppointmentStatuses.OrderByDescending(xl => xl.Order)
                 .First().AssignedToId == userId).ToList();
-            
+
             return this.ToViewModel(result);
-                
+
 
 
 
@@ -54,7 +57,7 @@ namespace addon365.Database.Service.Crm
                 include:
                  x =>
                  x.Include(t => t.Lead)
-                 .ThenInclude(t => t.User)
+                 .ThenInclude(l => l.Contact)
                  .Include(t => t.AppointmentStatuses)
 
                  .ThenInclude(t => t.AssignedTo)
@@ -81,7 +84,7 @@ namespace addon365.Database.Service.Crm
                 include:
                  x =>
                  x.Include(t => t.Lead)
-                 .ThenInclude(t => t.User)
+                 .ThenInclude(l => l.Contact)
                  .Include(t => t.AppointmentStatuses)
 
                  .ThenInclude(t => t.AssignedTo)
@@ -101,6 +104,12 @@ namespace addon365.Database.Service.Crm
              x.Id == model.Id,
              include: x => x.Include(t => t.AppointmentStatuses)
             ).Items[0];
+
+            var appStatus = outAppointment.AppointmentStatuses
+                .OrderByDescending(x => x.Order).FirstOrDefault();
+
+            bool sendNotification = model.AssignedToId != null &&
+                appStatus.AssignedToId != model.AssignedToId;
 
             AppointmentStatus appointmentStatus = new AppointmentStatus
             {
@@ -122,12 +131,19 @@ namespace addon365.Database.Service.Crm
                 .SingleOrDefault(x => x.Id == model.Id);
             CrmContext.Attach(result);
             result.AppointmentStatuses.Add(appointmentStatus);
-            //UnitOfWork.GetRepository<AppointmentStatus>()
-            //    .Add(appointmentStatus);
 
-            //Repository.Update(outAppointment);
-            //UnitOfWork.SaveChanges();
             CrmContext.SaveChanges();
+
+            if (sendNotification)
+            {
+                UserService service = new UserService(UnitOfWork);
+                string token = service.GetToken((Guid)model.AssignedToId);
+                NotificationService.SendNotification(token, "Appointment Assigned",
+                    "Appointment reassigned to  you", data: new Dictionary<string, string>(){
+                        {"type","Appointment" },
+                        {"id",id.ToString() }
+                });
+            }
 
             return Find(outAppointment.Id);
         }
@@ -181,7 +197,7 @@ namespace addon365.Database.Service.Crm
                     AppointmentDate = x.AppointmentDate,
                     Id = x.Id,
                     LeadId = x.LeadId,
-                    LeadName = x.Lead.User.UserName,
+                    LeadName = x.Lead.Contact.BusinessName,
                     Comments = orderStatues[0].Comments,
                     DueDate = orderStatues[0].DueDate,
                     StatusId = orderStatues[0].StatusId,
@@ -205,5 +221,33 @@ namespace addon365.Database.Service.Crm
             return bUser && bStatus;
         }
         #endregion
+
+
+        private Task<string> SendNotification(string token,
+          string title, string messageBody, IReadOnlyDictionary<string, string> data)
+        {
+            // This registration token comes from the client FCM SDKs.
+            var registrationToken = token;
+
+            // See documentation on defining a message payload.
+            var message = new Message()
+            {
+                Notification = new Notification()
+                {
+                    Title = title,
+                    Body = messageBody
+                },
+                Data = data,
+                Token = registrationToken,
+            };
+
+            // Send a message to the device corresponding to the provided
+            // registration token.
+
+
+            // Response is a message ID string.
+            return
+            FirebaseMessaging.DefaultInstance.SendAsync(message);
+        }
     }
 }

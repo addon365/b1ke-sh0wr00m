@@ -35,6 +35,8 @@ using addon365.Database.Entity.Crm;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using System.Collections.Generic;
+using addon365.IService.Permission;
+using addon365.Database.Service.Permission;
 
 namespace addon365.Web.API
 {
@@ -100,6 +102,12 @@ namespace addon365.Web.API
             services.AddTransient<IStatusMasterService, StatusMasterService>();
             services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
             services.AddTransient<ILeadService, LeadService>();
+            services.AddTransient<ILeadSourceService, LeadSourceService>();
+
+
+            services.AddTransient<IRoleGroupService, RoleGroupService>();
+
+
             services.AddScoped<RequestInfo>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

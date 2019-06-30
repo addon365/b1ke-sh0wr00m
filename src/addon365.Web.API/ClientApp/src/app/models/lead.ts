@@ -1,8 +1,11 @@
 import { User } from "./user";
-import { Contact } from "./contact";
+import { BusinessContact } from "./business-contact";
+import { LeadSource } from "./lead-source";
+
 
 export class Lead{
     id: string;
-    user: User;
-    contact: Contact;
+    sourceId:string;
+    contact: BusinessContact;
+    source:LeadSource;
 }

@@ -14,10 +14,5 @@ namespace addon365.Database.Service.Crm
         {
         }
 
-        public override AppointmentStatus Save(AppointmentStatus appointmentStatus)
-        {
-            return null;
-        }
-
     }
 }

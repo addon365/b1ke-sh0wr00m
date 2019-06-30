@@ -6,6 +6,12 @@ using addon365.IService.Crm;
 using Newtonsoft.Json;
 using System.IO;
 using addon365.Domain.Entity.Crm;
+using addon365.IService;
+using System.Collections.Generic;
+using FirebaseAdmin.Messaging;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using addon365.Database.Service.Util;
 
 namespace addon365.Web.API.Controllers.CRM
 {
@@ -16,8 +22,11 @@ namespace addon365.Web.API.Controllers.CRM
     {
         private IAppointmentService _appointmentService;
         private IAppointmentStatusService _statusService;
-        public AppointmentsController(IAppointmentService _appointmentService,
-            IAppointmentStatusService statusService)
+        private IUserService _userService;
+        public AppointmentsController(
+            IAppointmentService _appointmentService,
+            IAppointmentStatusService statusService,
+            IUserService userService)
         {
             this._appointmentService = _appointmentService;
             this._statusService = statusService;
@@ -31,7 +40,26 @@ namespace addon365.Web.API.Controllers.CRM
         {
             try
             {
-                return Ok(_appointmentService.Save(appointmentModel));
+                Appointment appointment = _appointmentService.Save(appointmentModel);
+                if (appointmentModel.AssignedToId != null)
+                {
+                    Guid id = (Guid)appointmentModel.AssignedToId;
+                    string token = _userService.GetToken(id);
+                    string message = "New appointment has been assigned to you.";
+
+                    NotificationService.SendNotification(token, "Appointment Assigned",
+                          message,
+                          data: new Dictionary<string, string>()
+                          {
+                            { "type","appointment" },
+                            {"id",$"{appointment.Id}" }
+
+                          }
+                          );
+                }
+
+
+                return Ok(appointment);
             }
             catch (Exception exception)
             {
@@ -67,6 +95,6 @@ namespace addon365.Web.API.Controllers.CRM
         {
             return Ok(_appointmentService.FindAll());
         }
-            
+
     }
 }

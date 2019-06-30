@@ -40,7 +40,8 @@ namespace addon365.Web.API.Controllers.Chit
         [HttpPost]
         public IActionResult Post([FromBody] ChitScheme value)
         {
-            var result = _schemeService.Save(value);
+            var result = _schemeService
+                .Save(new ChitScheme[] { value });
             return Ok(result);
         }
 

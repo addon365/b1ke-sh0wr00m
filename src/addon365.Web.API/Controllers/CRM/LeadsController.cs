@@ -20,13 +20,17 @@ namespace addon365.Web.API.Controllers.CRM
     {
         ILeadService service;
         IUserService userService;
+        ILeadSourceService sourceService;
         IHostingEnvironment hostingEnvironment;
         public LeadsController(ILeadService baseService,
-            IUserService userService, IHostingEnvironment hostingEnvironment)
+            IUserService userService,
+            ILeadSourceService sourceService,
+            IHostingEnvironment hostingEnvironment)
             : base(baseService)
         {
             this.service = baseService;
             this.userService = userService;
+            this.sourceService = sourceService;
             this.hostingEnvironment = hostingEnvironment;
         }
         [HttpPost("excel")]
@@ -56,47 +60,88 @@ namespace addon365.Web.API.Controllers.CRM
 
             return Json(string.Format("{0} Items inserted out of {1}", count, totalRows));
         }
-
+        private IDictionary<string, LeadSource> GetLeadSourceDict()
+        {
+            IDictionary<string, LeadSource> keyValues =
+                new Dictionary<string, LeadSource>();
+            foreach (LeadSource source in sourceService.FindAll())
+            {
+                keyValues.Add(source.Name, source);
+            }
+            return keyValues;
+        }
         private bool BulkSave(MemoryStream stream, out int count, out int total)
         {
             count = 0;
-
+            var leadSourcesDict = GetLeadSourceDict();
             using (var reader = ExcelReaderFactory.CreateReader(stream))
             {
                 total = reader.RowCount - 1;
                 reader.Read();
+                int index = 0;
                 while (reader.Read())
                 {
-                    string userId = reader.GetString(0);
-                    string password = reader.GetString(1);
-                    string userName = reader.GetString(2);
-                    string businessName = reader.GetString(3);
-                    string address1 = reader.GetString(4);
-                    string address2 = reader.GetString(5);
-                    long pinOrZip = (long)reader.GetDouble(6);
-                    string village = reader.GetString(7);
-                    string subDistrict = reader.GetString(8);
-                    string mobileNumber = reader.GetDouble(9).ToString();
-                    string landLine = reader.GetDouble(10).ToString();
-                    User user = new User();
-                    user.UserId = userId;
-                    user.UserName = userName;
-                    user.Password = password;
+                    string businessName = reader.GetString(index++);
 
-                    User foundUser = userService.FindUser(userId);
-                    if (foundUser != null)
+                    string proprietorName = reader.GetString(index++);
+                    string proprietorMobile = reader.GetDouble(index++).ToString();
+
+                    string communicatorName = reader.GetString(index++);
+                    string communicatorMobile = reader.GetDouble(index++).ToString();
+
+                    string address1 = reader.GetString(index++);
+                    string address2 = reader.GetString(index++);
+                    long pinOrZip = (long)reader.GetDouble(index++);
+                    string village = reader.GetString(index++);
+                    string subDistrict = reader.GetString(index++);
+                    string mobileNumber = reader.GetDouble(index++).ToString();
+                    string landLine = reader.GetDouble(index++).ToString();
+                    string leadSourceName = reader.GetString(index++);
+
+                    /**
+                     * Need to reset the column index to zero
+                     */
+                    index = 0;
+
+                    LeadSource leadSource = null;
+                    if (leadSourcesDict.ContainsKey(leadSourceName))
                     {
-                        continue;
+                        leadSource = leadSourcesDict[leadSourceName];
                     }
+
                     Lead foundLead = this.service
                         .FindByMobile(mobileNumber, landLine);
                     if (foundLead != null)
                     {
                         continue;
                     }
-                    user = userService.InsertUser(user);
+
+
+                    Contact proprietorcontact = null;
+                    if (proprietorName != null && proprietorMobile != null
+                        && proprietorMobile.Length >= 10)
+                    {
+                        proprietorcontact = new Contact
+                        {
+                            Id = Guid.NewGuid(),
+                            FirstName = proprietorName,
+                            MobileNumber = proprietorMobile
+                        };
+                    }
+                    Contact communicatorContact = null;
+                    if (communicatorName != null && communicatorMobile != null
+                        && communicatorMobile.Length >= 10)
+                    {
+                        communicatorContact = new Contact
+                        {
+                            Id = Guid.NewGuid(),
+                            FirstName = communicatorName,
+                            MobileNumber = communicatorMobile
+                        };
+                    }
                     Lead lead = new Lead();
-                    lead.UserId = user.Id;
+
+                    lead.Source = leadSource;
                     lead.Contact = new BusinessContact
                     {
                         BusinessName = businessName,
@@ -109,8 +154,11 @@ namespace addon365.Web.API.Controllers.CRM
                             SubDistrict = subDistrict,
 
                         },
+                        Propreitor = proprietorcontact,
+                        ContactPerson = communicatorContact,
                         MobileNumber = mobileNumber,
-                        Landline = landLine
+                        Landline = landLine,
+
 
                     };
                     lead = baseService.Save(lead);
@@ -128,7 +176,7 @@ namespace addon365.Web.API.Controllers.CRM
         public IActionResult GetTemplate()
         {
             String path = Path.Combine(hostingEnvironment.ContentRootPath
-                , "Resources\\CustomerTemplate.xlsx");
+                , "Resources\\LeadTemplate.xlsx");
             byte[] bytes = System.IO.File.ReadAllBytes(path);
             return File(bytes,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

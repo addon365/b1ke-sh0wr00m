@@ -14,7 +14,6 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 export class ListLeadComponent implements OnInit {
   displcayedColumns: string[] = [
-    "customerName",
     "businessName",
     "mobileNumber",
     "localityOrVillage",

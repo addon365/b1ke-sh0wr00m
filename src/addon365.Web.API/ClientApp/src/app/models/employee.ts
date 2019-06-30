@@ -1,8 +1,9 @@
 import { User } from "./user";
-import { Contact } from "./contact";
+
+import { BusinessContact } from "./business-contact";
 
 export class Employee {
   id: string;
   user: User;
-  profile: Contact;
+  profile: BusinessContact;
 }

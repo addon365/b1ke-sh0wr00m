@@ -35,6 +35,16 @@ namespace addon365.Web.API.Controllers
             _reqinfo = r;
         }
         
+        
+        [HttpPut("token")]
+        public IActionResult UpdateToken([FromForm] Guid id, [FromForm] string token)
+        {
+            User user=_userService.UpdateToken(id, token);
+            if (user == null)
+                return BadRequest("Cannot find user");
+            return Ok(user);
+        }
+        
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate(string userId,string password)
@@ -96,5 +106,6 @@ namespace addon365.Web.API.Controllers
             }
             return Ok(createdUser);
         }
+        
     }
 }

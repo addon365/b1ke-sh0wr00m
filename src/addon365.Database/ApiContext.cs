@@ -17,6 +17,7 @@ using addon365.Database.Entity.Inventory;
 using addon365.Database.Entity.Chit;
 using addon365.Database.Entity.Inventory.Sales;
 using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Database.Entity.Permission;
 
 namespace addon365.Database
 {
@@ -64,6 +65,8 @@ namespace addon365.Database
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
         public DbSet<StatusMaster> StatusMasters { get; set; }
+
+        public DbSet<LeadSource> LeadSources { get; set; }
         #endregion
         #region Enquiry
         public DbSet<Enquiry> Enquiries { get; set; }
@@ -116,6 +119,9 @@ namespace addon365.Database
         public DbSet<InquiryReport> InquiryReport { get; set; }
         #endregion
 
+        #region Permission
+        public DbSet<RoleGroupMaster> RoleGroup { get; set; }
+        #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

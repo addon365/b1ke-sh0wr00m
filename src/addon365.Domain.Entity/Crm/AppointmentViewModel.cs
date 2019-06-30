@@ -20,5 +20,7 @@ namespace addon365.Domain.Entity.Crm
 
         public Guid? UpdatedById { get; set; }
 
+        public string UpdatedBy { get; set; }
+
     }
 }

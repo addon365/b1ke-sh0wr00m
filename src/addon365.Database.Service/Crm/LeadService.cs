@@ -28,8 +28,7 @@ namespace addon365.Database.Service.Crm
         public override IEnumerable<Lead> FindAll()
         {
             return Repository.GetList(
-                include: item => item.Include(x => x.User)
-                .Include(c => c.Contact)
+                include: item => item.Include(c => c.Contact)
                 .ThenInclude(ct => ct.ContactAddress)
                 ).Items;
         }

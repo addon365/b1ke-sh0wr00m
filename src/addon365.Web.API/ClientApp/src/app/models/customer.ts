@@ -1,9 +1,10 @@
 import { User } from "./user";
-import { Contact } from "./contact";
+import { BusinessContact } from "./business-contact";
+
 
 export class Customer{
     id: string;
     user: User;
-    contact: Contact;
+    contact: BusinessContact;
 
 }

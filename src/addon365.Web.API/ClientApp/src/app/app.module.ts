@@ -34,6 +34,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ToastrModule } from 'ngx-toastr';
 import { ListLeadComponent } from './lead/list-lead/list-lead.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
+import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: "create-appointment", component: CreateAppointmentComponent },
   { path: "list-customer", component: ListCustomerComponent },
   { path: "list-lead", component: ListLeadComponent },
+  { path: "create-lead", component: CreateLeadComponent },
   { path: "list-employee", component: ListEmployeeComponent },
 ];
 @NgModule({
@@ -60,7 +62,8 @@ const routes: Routes = [
     ListCustomerComponent,
     UploadDialogComponent,
     ListLeadComponent,
-    ListEmployeeComponent
+    ListEmployeeComponent,
+    CreateLeadComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { AppContants } from "../utils/AppContants";
 import { Lead } from "../models/lead";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { LeadSource } from "../models/lead-source";
 
 @Injectable({
   providedIn: "root"
@@ -32,5 +33,17 @@ export class LeadService {
 
   getTemplateUrl() {
     return this.URL + this.CONTROLLER + "/template";
+  }
+
+  getLeadSources(): Observable<Array<LeadSource>> {
+    var url = this.URL + "LeadSource";
+    return this.httpClient.get<Array<LeadSource>>(`${url}`);
+  }
+
+  postLead(lead: Lead) {
+    lead.sourceId=lead.source.id;
+    lead.source=null;
+    var url = this.URL + this.CONTROLLER;
+    return this.httpClient.post(url,lead);
   }
 }

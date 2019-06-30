@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Employee",
+    "Description": "Lead given by Employee"
+
+  },
+  {
+    "Name": "JustDial",
+    "Description": "Lead provided by Just Dial "
+
+  },
+  {
+    "Name": "IndiaMart",
+    "Description": "Lead provided by India Mark"
+
+  }
+]

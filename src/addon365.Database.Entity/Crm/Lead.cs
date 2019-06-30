@@ -11,9 +11,8 @@ namespace addon365.Database.Entity.Crm
     {
         public string Identifier { get; set; }
         public BusinessContact Contact { get; set; }
-        public Guid UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public User User { get; set; }
+        public Guid SourceId { get; set; }
+        [ForeignKey("SourceId")]
+        public LeadSource Source { get; set; }
     }
 }

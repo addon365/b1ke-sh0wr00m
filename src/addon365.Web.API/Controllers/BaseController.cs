@@ -27,7 +27,7 @@ namespace addon365.Web.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public IActionResult Post(T tObj)
+        public IActionResult Post(IList<T> tObj)
         {
             try
             {

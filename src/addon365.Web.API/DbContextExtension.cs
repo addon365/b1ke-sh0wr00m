@@ -17,6 +17,8 @@ using System;
 using addon365.Database.Entity.Inventory.Catalog;
 using Microsoft.Extensions.DependencyInjection;
 using addon365.Database.Service;
+using addon365.Database.Entity.Permission;
+
 namespace addon365.Web.API
 {
     public static class DbContextExtension
@@ -38,23 +40,14 @@ namespace addon365.Web.API
 
         public static void EnsureSeeded(this ApiContext context)
         {
-
             if (!context.InquiryReport.Any())
             {
-                try
-                {
-                    var types = JsonConvert.DeserializeObject<List<InquiryReport>>(
-                        File.ReadAllText(
-                            "seed" + Path.DirectorySeparatorChar + "InquiryReport.json")
-                            );
-                    context.AddRange(types);
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Console.Write(exception);
-                }
-
+                var types = JsonConvert.DeserializeObject<List<InquiryReport>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "InquiryReport.json")
+                        );
+                context.AddRange(types);
+                context.SaveChanges();
             }
             if (!context.BranchMasters.Any())
             {
@@ -63,6 +56,7 @@ namespace addon365.Web.API
                 context.AddRange(types);
                 context.SaveChanges();
             }
+
             if (!context.CatalogItems.Any())
             {
                 var products = JsonConvert.DeserializeObject<List<CatalogItem>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
@@ -149,6 +143,28 @@ namespace addon365.Web.API
                 context.AddRange(types);
                 context.SaveChanges();
             }
+            if (!context.LeadSources.Any())
+            {
+                var file = File.ReadAllText(
+                       "seed" + Path.DirectorySeparatorChar + "LeadSource.json");
+                var types = JsonConvert.DeserializeObject<List<LeadSource>>(file);
+                context.AddRange(types);
+            }
+            if (!context.StatusMasters.Any())
+            {
+                var file = File.ReadAllText(
+                       "seed" + Path.DirectorySeparatorChar + "StatusMasters.json");
+                var types = JsonConvert.DeserializeObject<List<StatusMaster>>(file);
+                context.AddRange(types);
+            }
+            if (!context.RoleGroup.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<RoleGroupMaster>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "RoleGroupMaster.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
             SeedOnDebug(context);
             if (!context.VoucherTypeMasters.Any())
             {
@@ -170,14 +186,7 @@ namespace addon365.Web.API
         [Conditional("DEBUG")]
         private static void SeedOnDebug(ApiContext context)
         {
-            if (!context.StatusMasters.Any())
-            {
-                var file = File.ReadAllText(
-                       "seed" + Path.DirectorySeparatorChar + "StatusMasters.json");
-                var types = JsonConvert.DeserializeObject<List<StatusMaster>>(file);
-                context.AddRange(types);
-            }
-                
+
             if (!context.Contacts.Any())
             {
 
@@ -185,7 +194,7 @@ namespace addon365.Web.API
                         "seed" + Path.DirectorySeparatorChar + "Contacts.json");
                 var types = JsonConvert.DeserializeObject<List<Contact>>(file);
                 context.AddRange(types);
-                
+
 
             }
             if (!context.Enquiries.Any())

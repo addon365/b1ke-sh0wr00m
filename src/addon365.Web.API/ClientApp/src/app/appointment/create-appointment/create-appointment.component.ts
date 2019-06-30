@@ -48,12 +48,13 @@ export class CreateAppointmentComponent implements OnInit {
   }
   ngOnInit() {
     this.appointment = new AppointmentViewModel();
-    
+
     this.updateStatus();
     this.userService.getEmployees().subscribe(employees => {
       this.employees = employees;
     });
     this.leadService.getLeads().subscribe(leads => {
+      
       this.leads = leads;
     });
     this.filteredLeads = this.customerControl.valueChanges.pipe(
@@ -63,16 +64,16 @@ export class CreateAppointmentComponent implements OnInit {
       )
     );
   }
-  private _filterCustomer(value: Customer): Customer[] {
-    const filterValue = value.user.userName.toLowerCase();
+  private _filterCustomer(value: Lead): Lead[] {
+    const filterValue = value.contact.businessName.toLowerCase();
 
     return this.leads.filter(
-      lead => lead.user.userName.toLowerCase().indexOf(filterValue) === 0
+      lead => lead.contact.businessName.toLowerCase().indexOf(filterValue) === 0
     );
   }
   onSave() {
-    console.log(this.appointment);
-    this.appointment.leadId=this.selectedLead.id;
+    
+    this.appointment.leadId = this.selectedLead.id;
     this.appointmentService
       .postAppointment(this.appointment)
       .subscribe(message => {

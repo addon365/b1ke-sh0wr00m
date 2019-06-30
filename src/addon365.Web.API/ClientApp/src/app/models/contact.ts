@@ -1,9 +1,10 @@
-import { AddressMaster } from "./address-master";
+export class Contact{
+    firstName:string;
+    lastName: string;
+    mobileNumber: string;
+    secondaryMobileNo:string;
+    place:string;
+    address:string;
+    addressId:string;
 
-export class Contact {
-  businessName: string;
-  contactAddress: AddressMaster;
-  landline: string;
-  mobileNumber: string;
-  secondaryMobileNumber: string;
 }

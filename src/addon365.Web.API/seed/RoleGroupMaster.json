@@ -1,0 +1,14 @@
+[
+  {
+    "Name": "admin",
+    "Description": "Have all permission"
+  },
+  {
+    "Name": "employee",
+    "Description": "Emplyee can permission all now."
+  },
+  {
+    "Name": "user",
+    "Description": "User does not have any permission."
+  }
+]

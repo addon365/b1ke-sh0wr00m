@@ -6,7 +6,7 @@
         <mat-label>Lead Name</mat-label>
         <mat-select name="leadSelect" [(ngModel)]="selectedLead">
           <mat-option *ngFor="let lead of leads" [value]="lead">
-            {{ lead.user.userName }}
+            {{ lead.contact.businessName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
