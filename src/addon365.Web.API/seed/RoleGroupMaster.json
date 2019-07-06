@@ -4,8 +4,16 @@
     "Description": "Have all permission"
   },
   {
+    "Name": "marketing",
+    "Description": "Marketing Emplyee can permission to view/edit appointment."
+  },
+  {
+    "Name": "tele",
+    "Description": "Tele caller Emplyee view/edit lead."
+  },
+  {
     "Name": "employee",
-    "Description": "Emplyee can permission all now."
+    "Description": "Employee has all permission as off now."
   },
   {
     "Name": "user",

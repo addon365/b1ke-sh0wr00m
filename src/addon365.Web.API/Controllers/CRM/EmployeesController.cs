@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Employees;
+using addon365.Database.Entity.Permission;
 using addon365.Database.Entity.Users;
 using addon365.IService;
 using addon365.IService.Crm;
+using addon365.IService.Permission;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,12 +25,15 @@ namespace addon365.Web.API.Controllers.CRM
         private IEmployeeService _employeeService;
         private IUserService _userService;
         private IHostingEnvironment hostingEnvironment;
+        private IRoleGroupService _roleService;
         public EmployeesController(IEmployeeService employeeService,
             IUserService userService,
+            IRoleGroupService roleService,
             IHostingEnvironment hostingEnvironment
             )
             : base(employeeService)
         {
+            this._roleService = roleService;
             this._employeeService = employeeService;
             this._userService = userService;
             this.hostingEnvironment = hostingEnvironment;
@@ -65,11 +70,17 @@ namespace addon365.Web.API.Controllers.CRM
         private bool BulkSave(MemoryStream stream, out int count, out int total)
         {
             count = 0;
-
+            var roles = _roleService.FindAll();
+            var rolDict = new Dictionary<string, RoleGroupMaster>();
+            foreach(RoleGroupMaster role in roles)
+            {
+                rolDict.Add(role.Name, role);
+            }
             using (var reader = ExcelReaderFactory.CreateReader(stream))
             {
                 total = reader.RowCount - 1;
                 reader.Read();
+                
                 while (reader.Read())
                 {
                     string userId = reader.GetString(0);
@@ -82,7 +93,7 @@ namespace addon365.Web.API.Controllers.CRM
                     string village = reader.GetString(6);
                     string subDistrict = reader.GetString(7);
                     string mobileNumber = reader.GetDouble(8).ToString();
-                    
+                    string roleGroup = reader.GetString(9);
                     User user = new User();
                     user.UserId = userId;
                     user.UserName = userName;
@@ -96,6 +107,14 @@ namespace addon365.Web.API.Controllers.CRM
                     Employee foundEmployee = _employeeService.FindByMobile(mobileNumber);
                     if (foundEmployee != null)
                         continue;
+
+                    if (string.IsNullOrEmpty(roleGroup) 
+                        || !rolDict.ContainsKey(roleGroup))
+                        continue;
+
+                    user.RoleGroup = null;
+                    user.RoleGroupId = rolDict[roleGroup].Id;
+
                     user = _userService.InsertUser(user);
                     Employee employee = new Employee();
 

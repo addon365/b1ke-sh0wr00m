@@ -115,12 +115,14 @@ namespace addon365.Database.Service
                 numBytesRequested: 256 / 8));
             return hashed;
         }
-        private User Find(Guid id)
+        public User Find(Guid id)
         {
             IRepository<User> repository = _unitOfWork
                .GetRepository<User>();
             IList<User> users = repository
-                .GetList(predicate: u => u.Id == id).Items;
+                .GetList(predicate: u => u.Id == id,
+                include: x => x.Include(r => r.RoleGroup)
+                ).Items;
             if (users.Count == 0)
                 return null;
             return users[0];

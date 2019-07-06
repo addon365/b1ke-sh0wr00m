@@ -54,7 +54,6 @@ export class CreateAppointmentComponent implements OnInit {
       this.employees = employees;
     });
     this.leadService.getLeads().subscribe(leads => {
-      
       this.leads = leads;
     });
     this.filteredLeads = this.customerControl.valueChanges.pipe(
@@ -72,7 +71,7 @@ export class CreateAppointmentComponent implements OnInit {
     );
   }
   onSave() {
-    
+    this.appointment.updatedById = UserService.CurrentUser.id;
     this.appointment.leadId = this.selectedLead.id;
     this.appointmentService
       .postAppointment(this.appointment)

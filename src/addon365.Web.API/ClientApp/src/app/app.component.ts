@@ -1,24 +1,34 @@
-import { Component } from '@angular/core';
-import { User } from './models/user';
-import { Login } from './models/login';
+import { Component } from "@angular/core";
+import { User } from "./models/user";
+import { Login } from "./models/login";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  user: Login = new Login();
+  user: User;
   title = "Bike Show Room";
   isActiveSession: boolean;
 
-  AppComponent() { }
+  AppComponent() {}
   ngOnInit(): void {
-    this.user.userName="Tamil";
-    this.isActiveSession = this.user != null;
+    var userJson = localStorage.getItem("user");
+    if (userJson == null) this.isActiveSession = false;
+    else {
+      this.user = JSON.parse(userJson);
+      this.isActiveSession = true;
+    }
+    console.log(this.isActiveSession);
   }
-  loggedIn(currentUser: Login) {
+  loggedIn(currentUser: User) {
+    this.user = currentUser;
+    this.isActiveSession = true;
   }
   logout() {
+    localStorage.removeItem("user");
+    this.user = null;
+    this.isActiveSession = false;
   }
 }

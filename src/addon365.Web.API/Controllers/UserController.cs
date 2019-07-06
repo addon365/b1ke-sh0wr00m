@@ -34,26 +34,26 @@ namespace addon365.Web.API.Controllers
             this._logger = logger;
             _reqinfo = r;
         }
-        
-        
+
+
         [HttpPut("token")]
         public IActionResult UpdateToken([FromForm] Guid id, [FromForm] string token)
         {
-            User user=_userService.UpdateToken(id, token);
+            User user = _userService.UpdateToken(id, token);
             if (user == null)
                 return BadRequest("Cannot find user");
             return Ok(user);
         }
-        
+
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(string userId,string password)
+        public IActionResult Authenticate(string userId, string password)
         {
             //String userId = paramUser.UserId;
             //String password = paramUser.Password;
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceCode = Request.Headers["DeviceCode"].ToString();
-            
+
             _logger.LogInformation("Validating User " + userId);
             User user = _userService.Validate(userId, password);
             if (user == null)
@@ -68,7 +68,7 @@ namespace addon365.Web.API.Controllers
             //    return NotFound(new Exception("Not Authorized computer"));
             //}
 
-            _logger.LogInformation("Given User " + userId +" Found");
+            _logger.LogInformation("Given User " + userId + " Found");
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(AppSettings.SECRET);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -85,7 +85,8 @@ namespace addon365.Web.API.Controllers
             _logger.LogInformation(string.Format("Generated Token {0} for User {1}", tokenString, userId));
             user.SessionToken = tokenString;
             user.DeviceId = _reqinfo.DeviceId;
-            return Ok(user);
+
+            return Ok(_userService.Find(user.Id));
         }
         [AllowAnonymous]
         [HttpGet]
@@ -106,6 +107,6 @@ namespace addon365.Web.API.Controllers
             }
             return Ok(createdUser);
         }
-        
+
     }
 }

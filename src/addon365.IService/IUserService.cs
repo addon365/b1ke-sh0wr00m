@@ -16,7 +16,11 @@ namespace addon365.IService
 
         string GetToken(Guid userId);
 
-        
+
+        User Find(Guid id);
+
+
+
 
     }
 }

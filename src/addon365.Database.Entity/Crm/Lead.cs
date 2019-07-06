@@ -12,7 +12,10 @@ namespace addon365.Database.Entity.Crm
         public string Identifier { get; set; }
         public BusinessContact Contact { get; set; }
         public Guid SourceId { get; set; }
+
         [ForeignKey("SourceId")]
         public LeadSource Source { get; set; }
+
+        IList<AppointmentStatus> AppointmentStatuses { get; set; }
     }
 }
