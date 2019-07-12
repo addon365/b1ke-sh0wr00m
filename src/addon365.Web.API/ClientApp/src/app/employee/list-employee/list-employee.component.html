@@ -29,10 +29,10 @@
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="department">
-      <th mat-header-cell *matHeaderCellDef>Department</th>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
       <td mat-cell *matCellDef="let element">
-        Soon...
+        {{element.user.roleGroup.name}}
       </td>
     </ng-container>
 

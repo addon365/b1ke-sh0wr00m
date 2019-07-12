@@ -40,6 +40,19 @@ namespace addon365.Web.API
 
         public static void EnsureSeeded(this ApiContext context)
         {
+
+            #region CRM Seeds
+            //TODO: Need to move CRM Seeds inside this region.
+            if (!context.LeadStatusMasters.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<LeadStatusMaster>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "LeadStatusMaster.json")
+                        );
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            #endregion
             if (!context.InquiryReport.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<InquiryReport>>(

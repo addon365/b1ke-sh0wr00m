@@ -18,21 +18,32 @@ namespace addon365.Web.API.Controllers.CRM
     [ApiController]
     public class LeadsController : BaseController<Lead>
     {
-        ILeadService service;
-        IUserService userService;
-        ILeadSourceService sourceService;
-        IHostingEnvironment hostingEnvironment;
+        readonly ILeadService service;
+        readonly IUserService userService;
+        readonly ILeadSourceService sourceService;
+        readonly ILeadStatusService leadStatusService;
+        readonly IHostingEnvironment hostingEnvironment;
         public LeadsController(ILeadService baseService,
             IUserService userService,
             ILeadSourceService sourceService,
+            ILeadStatusService leadStatusService,
             IHostingEnvironment hostingEnvironment)
             : base(baseService)
         {
             this.service = baseService;
             this.userService = userService;
             this.sourceService = sourceService;
+            this.leadStatusService = leadStatusService;
             this.hostingEnvironment = hostingEnvironment;
         }
+
+        [HttpGet("followup")]
+        public IActionResult GetNecessaryLeads()
+        {
+            return Ok(service.FindLeads());
+        }
+
+
         [HttpPost("excel")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -116,6 +127,7 @@ namespace addon365.Web.API.Controllers.CRM
                         continue;
                     }
 
+                    var leadOpenStatus = leadStatusService.FindByName("Open");
 
                     Contact proprietorcontact = null;
                     if (proprietorName != null && proprietorMobile != null
@@ -139,9 +151,25 @@ namespace addon365.Web.API.Controllers.CRM
                             MobileNumber = communicatorMobile
                         };
                     }
-                    Lead lead = new Lead();
+                    var history = new LeadStatusHistory
+                    {
+                        StatusDate = DateTime.Now,
+                        Status = null,
+                        StatusId = leadOpenStatus.Id,
+                        Created = DateTime.Now,
+                        Order = 0,
+                    };
+                    Lead lead = new Lead
+                    {
+                        SourceId = leadSource.Id,
+                        Source = null,
+                        History = new List<LeadStatusHistory>()
+                            {
+                                history
+                            },
+                        CurrentLeadStatusId = history.Id
+                    };
 
-                    lead.Source = leadSource;
                     lead.Contact = new BusinessContact
                     {
                         BusinessName = businessName,
@@ -154,11 +182,10 @@ namespace addon365.Web.API.Controllers.CRM
                             SubDistrict = subDistrict,
 
                         },
-                        Propreitor = proprietorcontact,
+                        Proprietor = proprietorcontact,
                         ContactPerson = communicatorContact,
                         MobileNumber = mobileNumber,
                         Landline = landLine,
-
 
                     };
                     lead = baseService.Save(lead);
@@ -182,6 +209,12 @@ namespace addon365.Web.API.Controllers.CRM
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "LeadsEntryTemplate.xlsx");
 
+        }
+
+        [HttpPut("status")]
+        public IActionResult UpdateStatus([FromBody] Lead lead)
+        {
+            return Ok(service.Update(lead.Id, lead));
         }
     }
 }

@@ -27,6 +27,7 @@ namespace addon365.Database.Service.Crm
         {
             return Repository.GetList(
                 include: item => item.Include(x => x.User)
+                .ThenInclude(u=>u.RoleGroup)
                 .Include(c => c.Profile)
                 .ThenInclude(ct => ct.ContactAddress)
                 ).Items;

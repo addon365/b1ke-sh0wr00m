@@ -18,7 +18,7 @@ namespace addon365.Database.Service.Base
         }
         public IUnitOfWork UnitOfWork { get; private set; }
 
-        public T Find(Guid id)
+        public virtual T Find(Guid id)
         {
             IList<T> items = _repository.GetList(
                 predicate: i => i.Id == id).Items;

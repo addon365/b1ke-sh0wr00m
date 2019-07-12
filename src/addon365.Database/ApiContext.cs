@@ -61,11 +61,12 @@ namespace addon365.Database
         public DbSet<BusinessContact> BusinessContacts { get; set; }
         public DbSet<AddressMaster> AddressMasters { get; set; }
 
+        public DbSet<LeadStatusHistory> LeadHistory { get; set; }
         public DbSet<Lead> Leads { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
         public DbSet<StatusMaster> StatusMasters { get; set; }
-
+        public DbSet<LeadStatusMaster> LeadStatusMasters { get; set; }
         public DbSet<LeadSource> LeadSources { get; set; }
         #endregion
         #region Enquiry

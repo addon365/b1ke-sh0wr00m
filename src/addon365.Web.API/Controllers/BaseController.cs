@@ -18,9 +18,12 @@ namespace addon365.Web.API.Controllers
             this.baseService = baseService;
         }
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery]Guid id)
         {
-            return Ok(baseService.FindAll());
+            if (id == null || Guid.Empty == id)
+                return Ok(baseService.FindAll());
+            else
+                return Ok(baseService.Find(id));
         }
 
         [HttpPost]
@@ -41,11 +44,11 @@ namespace addon365.Web.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put(Guid id,T tObj)
+        public IActionResult Put(Guid id, T tObj)
         {
             try
             {
-                baseService.Update(id,tObj);
+                baseService.Update(id, tObj);
                 return Ok();
             }
             catch (Exception exception)

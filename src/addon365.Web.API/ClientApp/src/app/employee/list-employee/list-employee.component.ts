@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ListEmployeeComponent implements OnInit {
   displcayedColumns: string[] = [
     "employeeName",
-    "department",
+    "role",
     "mobileNumber",
     "localityOrVillage",
     "subDistrict"

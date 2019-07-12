@@ -28,8 +28,10 @@ export class UploadDialogComponent implements OnInit {
 
   fileChange(event) {
     let fileList: FileList = event.target.files;
+    console.log(this.serviceName+"  "+fileList.length);
     if (fileList.length > 0) {
       let file: File = fileList[0];
+      
       if (this.serviceName.localeCompare("customer") == 0) {
         this.customerService
           .postCustomers(file)

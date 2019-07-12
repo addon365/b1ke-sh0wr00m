@@ -97,17 +97,20 @@ namespace addon365.Web.API
             services.AddTransient<ISellerService, SellerService>();
             services.AddTransient<IBuyerService, BuyerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+
+
+            #region CRM Services are here.
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IAppointmentStatusService, AppointmentStatusService>();
             services.AddTransient<IStatusMasterService, StatusMasterService>();
             services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
             services.AddTransient<ILeadService, LeadService>();
             services.AddTransient<ILeadSourceService, LeadSourceService>();
-
+            services.AddTransient<ILeadStatusService, LeadStatusService>();
 
             services.AddTransient<IRoleGroupService, RoleGroupService>();
 
-
+            #endregion
             services.AddScoped<RequestInfo>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

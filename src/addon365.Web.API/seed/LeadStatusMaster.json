@@ -1,0 +1,26 @@
+[
+
+  {
+    "Name": "Open",
+    "Description": "Not yet communicated with Lead"
+  },
+  {
+    "Name": "ReOpened",
+    "Description": "Already communicated, now re initiating the customer."
+
+  },
+  {
+    "Name": "FollowUp",
+    "Description": "Not picked the call, or lead what to call later so on.."
+
+  },
+  {
+    "Name": "Appointment",
+    "Description": "Now status moved to Marketing people Appointment."
+  },
+  {
+    "Name": "Customer",
+    "Description": "Converted to customer"
+  }
+
+]
