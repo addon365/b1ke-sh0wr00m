@@ -49,6 +49,8 @@ namespace addon365.Database.Service.Crm
                 obj.Contact.Landline) != null)
                 return null;
 
+            obj.CurrentLeadStatusId = obj.History[0].Id;
+
             Repository.Add(obj);
             UnitOfWork.SaveChanges();
             return obj;
@@ -71,7 +73,7 @@ namespace addon365.Database.Service.Crm
             CrmContext.Leads.Attach(foundLead);
             foundLead.History.Add(aHistory);
             //CrmContext.Entry(foundLead).State = EntityState.Modified;
-            
+
             CrmContext.SaveChanges();
 
             return CrmContext.Leads.Include(x => x.History)
@@ -112,19 +114,18 @@ namespace addon365.Database.Service.Crm
             var dbLeads = CrmContext.Leads;
             var dbLeadHistory = CrmContext.LeadHistory;
 
-            return dbLeads.Join(
-                 dbLeadHistory,
-                 l => l.CurrentLeadStatusId,
-                 h => h.Id,
-                 (l, h) =>
-                     new LeadViewModel
-                     {
-                         Id = l.Id,
-                         CompanyName = l.Contact.BusinessName,
-                         StatusName = h.Status.Name,
-                         ExtraData = h.ExtraData
-                     }
-                 ).ToList();
+            return dbLeads.Select<Lead, LeadViewModel>(
+
+                (l) =>
+
+                new LeadViewModel
+                {
+                    Id = l.Id,
+                    CompanyName = l.Contact.BusinessName,
+                    StatusName = "Open",
+                    ExtraData = "N/A"
+                }
+                ).ToList();
 
         }
     }
