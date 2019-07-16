@@ -41,9 +41,10 @@ export class LeadService {
   }
 
   postLead(lead: Lead) {
+    
     lead.sourceId=lead.source.id;
     lead.source=null;
     var url = this.URL + this.CONTROLLER;
-    return this.httpClient.post(url,lead);
+    return this.httpClient.post(url,[lead]);
   }
 }

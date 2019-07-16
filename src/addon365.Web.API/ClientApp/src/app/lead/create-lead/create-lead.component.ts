@@ -31,9 +31,10 @@ export class CreateLeadComponent implements OnInit {
   }
   onSave(){
     console.log(this.lead);
+    
     this.leadService.postLead(this.lead)
     .subscribe(x=>{
-      console.log(x);
+      console.log("RESULT:"+x);
       this.router.navigate(["/list-lead"]);
     });
   }
