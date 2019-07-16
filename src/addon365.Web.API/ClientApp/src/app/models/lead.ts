@@ -6,6 +6,7 @@ export class Lead {
   id: string;
   sourceId: string;
   contact: BusinessContact;
+  
   source: LeadSource;
   history: Array<LeadStatusHistory>;
 }

@@ -7,6 +7,6 @@ export class BusinessContact {
   landline: string;
   mobileNumber: string;
   secondaryMobileNumber: string;
-  propreitor:Contact;
+  proprietor:Contact;
   contactPerson:Contact;
 }

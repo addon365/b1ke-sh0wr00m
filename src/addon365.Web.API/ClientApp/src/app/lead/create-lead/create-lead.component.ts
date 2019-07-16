@@ -24,14 +24,14 @@ export class CreateLeadComponent implements OnInit {
     this.lead.contact.contactAddress=new AddressMaster();
     
     this.lead.contact.contactPerson=new Contact();
-    this.lead.contact.propreitor=new Contact();
+    this.lead.contact.proprietor=new Contact();
     this.leadService.getLeadSources().subscribe(x => {
       this.leadSource = x;
     });
   }
   onSave(){
     console.log(this.lead);
-    
+
     this.leadService.postLead(this.lead)
     .subscribe(x=>{
       console.log("RESULT:"+x);
