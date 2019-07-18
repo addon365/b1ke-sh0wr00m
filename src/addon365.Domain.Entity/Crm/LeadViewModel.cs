@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace addon365.Domain.Entity.Crm
 {
-   public class LeadViewModel
+    public class LeadViewModel
     {
         public Guid Id { get; set; }
         public string CompanyName { get; set; }

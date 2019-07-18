@@ -4,12 +4,11 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Threenine.Data;
 
 namespace addon365.Database.Service
 {
-   public class ZonalService:IZonalService
+    public class ZonalService : IZonalService
     {
         private readonly IUnitOfWork _unitOfWork;
         private const string Enabled = "Enabled";

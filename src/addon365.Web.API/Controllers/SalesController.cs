@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using addon365.Database.Service.Sales;
+﻿using addon365.Database.Entity.Inventory.Sales;
 using addon365.Domain.Entity.Sales;
+using addon365.IService.Sales;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using addon365.Database.Entity.Inventory.Sales;
-using addon365.IService.Sales;
 
 namespace addon365.Web.API.Controllers
 {
@@ -26,19 +25,19 @@ namespace addon365.Web.API.Controllers
         public async Task<IActionResult> Post([FromBody] Sale Model)
         {
             try
-            { 
-         
+            {
+
                 if (Model == null)
                 {
                     return BadRequest();
                 }
 
-                var identifier =await _SalesService.Insert(Model);
+                var identifier = await _SalesService.Insert(Model);
 
 
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
@@ -51,6 +50,6 @@ namespace addon365.Web.API.Controllers
         {
             return _SalesService.GetInitilizeSales();
         }
-      
+
     }
 }

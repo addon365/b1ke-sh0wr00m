@@ -5,6 +5,6 @@ namespace addon365.IService.Chit
 {
     public interface ISchemeService : IBaseService<ChitScheme>
     {
-        
+
     }
 }

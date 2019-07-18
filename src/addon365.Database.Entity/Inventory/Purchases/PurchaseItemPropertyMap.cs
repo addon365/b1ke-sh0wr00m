@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace addon365.Database.Entity.Inventory.Purchases
 {
     [Table("Inventory.Purchases.PurchasesItemsPropertiesMaps")]
-    public class PurchaseItemPropertyMap:BaseEntity
+    public class PurchaseItemPropertyMap : BaseEntity
     {
         public Guid PurchaseItemId { get; set; }
         [ForeignKey("PurchaseItemId")] public virtual PurchaseItem PurchaseItem { get; set; }

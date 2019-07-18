@@ -1,18 +1,14 @@
 ﻿using addon365.Database.Entity.Enquiries;
+using addon365.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Service;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using addon365.IService;
 
 namespace addon365.Web.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
-    public class EnquiryTypeController: Controller
+    public class EnquiryTypeController : Controller
     {
         private readonly IEnquiryTypeService _enquirytypeService;
         public EnquiryTypeController(IEnquiryTypeService enquirytypeService)

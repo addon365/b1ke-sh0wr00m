@@ -2,7 +2,7 @@
 
 namespace addon365.Database.Entity.Enquiries
 {
-    public class EnquiryFinanceQuotation:BaseEntityWithLogFields
+    public class EnquiryFinanceQuotation : BaseEntityWithLogFields
     {
         public Guid EnquiryProductId { get; set; }
         public double InitialDownPayment { get; set; }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using addon365.Database.Entity.Crm;
-using Microsoft.AspNetCore.Authorization;
+﻿using addon365.Database.Entity.Crm;
+using addon365.IService.Crm;
+using addon365.Web.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using addon365.Database.Service.Crm;
-using addon365.Web.API.Utils;
-using addon365.IService.Crm;
 
 namespace addon365.Web.API.Controllers
 {

@@ -1,23 +1,22 @@
-using System.Collections.Generic;
-using System.Linq;
+using addon365.Database;
+using addon365.Database.Entity;
+using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Crm.Address;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Finance;
+using addon365.Database.Entity.Inventory.Catalog;
+using addon365.Database.Entity.Permission;
+using addon365.Database.Entity.Report;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System.IO;
-using Newtonsoft.Json;
-using addon365.Database;
-using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity;
-using addon365.Database.Entity.Finance;
-using addon365.Database.Entity.Accounts;
-using addon365.Database.Entity.Crm;
-using System.Diagnostics;
-using addon365.Database.Entity.Report;
-using System;
-using addon365.Database.Entity.Inventory.Catalog;
 using Microsoft.Extensions.DependencyInjection;
-using addon365.Database.Service;
-using addon365.Database.Entity.Permission;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace addon365.Web.API
 {
@@ -42,6 +41,48 @@ namespace addon365.Web.API
         {
 
             #region CRM Seeds
+
+            #region Address
+            string path = $"seed" +
+                    $"{Path.DirectorySeparatorChar}" +
+                    $"Address{Path.DirectorySeparatorChar}";
+            if (!context.States.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<StateMaster>>(
+                    File.ReadAllText($"{path}State.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.Districts.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<DistrictMaster>>(
+                    File.ReadAllText($"{path}District.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.SubDistricts.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<SubDistrictMaster>>(
+                    File.ReadAllText($"{path}SubDistrict.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.Localities.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<LocalityOrVillageMaster>>(
+                    File.ReadAllText($"{path}LocalityVillage.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            if (!context.Pincodes.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<PincodeMaster>>(
+                    File.ReadAllText($"{path}Pincode.json"));
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            #endregion
+
             //TODO: Need to move CRM Seeds inside this region.
             if (!context.LeadStatusMasters.Any())
             {

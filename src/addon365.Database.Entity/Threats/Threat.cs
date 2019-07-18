@@ -6,7 +6,7 @@ namespace addon365.Database.Entity.Threats
 {
     public class Threat : BaseEntityWithLogFields
     {
-      
+
         public string Identifier { get; set; }
 
         [StringLength(255)]

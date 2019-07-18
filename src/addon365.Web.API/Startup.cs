@@ -1,42 +1,43 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Threenine.Map;
-using addon365.Database;
+﻿using addon365.Database;
 using addon365.Database.Service;
-using Threenine.Data.DependencyInjection;
-using addon365.Web.API.Utils;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using addon365.Database.Service.Sales;
+using addon365.Database.Service.Accounts;
+using addon365.Database.Service.Chit;
 using addon365.Database.Service.Crm;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+using addon365.Database.Service.Crm.Address;
+using addon365.Database.Service.Inventory;
+using addon365.Database.Service.Permission;
 using addon365.Database.Service.Report;
+using addon365.Database.Service.Sales;
+using addon365.IService;
+using addon365.IService.Accounts;
+using addon365.IService.Chit;
+using addon365.IService.Crm;
+using addon365.IService.Crm.Address;
+using addon365.IService.Inventory;
+using addon365.IService.Permission;
+using addon365.IService.Sales;
+using addon365.Web.API.Utils;
 using addon365.Web.API.Utils.Exceptions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Newtonsoft.Json.Serialization;
-using addon365.Database.Service.Chit;
-using addon365.Database.Service.Accounts;
-using addon365.Database.Service.Inventory;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using addon365.IService;
-using addon365.IService.Sales;
-using addon365.IService.Crm;
-using addon365.IService.Chit;
-using addon365.IService.Accounts;
-using addon365.IService.Inventory;
-using addon365.Database.Entity.Crm;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
-using addon365.IService.Permission;
-using addon365.Database.Service.Permission;
+using System.Globalization;
+using System.Text;
+using Threenine.Data.DependencyInjection;
+using Threenine.Map;
 
 namespace addon365.Web.API
 {
@@ -100,6 +101,15 @@ namespace addon365.Web.API
 
 
             #region CRM Services are here.
+
+            #region Address Services goes here
+            services.AddTransient<IStateService, StateService>();
+            services.AddTransient<IDistrictService, DistrictService>();
+            services.AddTransient<ISubDistrictService, SubDistrictService>();
+            services.AddTransient<ILocalityService, LocalityService>();
+            services.AddTransient<IPincodeService, PincodeService>();
+            #endregion
+
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IAppointmentStatusService, AppointmentStatusService>();
             services.AddTransient<IStatusMasterService, StatusMasterService>();

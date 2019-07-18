@@ -1,17 +1,16 @@
 ﻿using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Domain.Entity.Paging;
+using addon365.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Service;
 using System.Collections.Generic;
-using addon365.IService;
 
 namespace addon365.Web.API.Controllers
 {
     /// <inheritdoc />
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
-    public class ProductController :Controller
+    public class ProductController : Controller
     {
         private readonly IProductService _productService;
 
@@ -33,7 +32,7 @@ namespace addon365.Web.API.Controllers
             PagingParams pagingParams = new PagingParams();
             pagingParams.PageNumber = PageNumber;
             pagingParams.PageSize = PageSize;
-        
+
             return _productService.GetAllActive(pagingParams);
         }
 
@@ -131,6 +130,6 @@ namespace addon365.Web.API.Controllers
 
             return Ok(referer);
         }
-        
+
     }
 }

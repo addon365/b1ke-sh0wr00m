@@ -16,7 +16,7 @@ namespace addon365.Database.Service.Crm
 
         public Employee Save(Employee obj)
         {
-            if (FindByMobile(obj.Profile.MobileNumber)!=null)
+            if (FindByMobile(obj.Profile.MobileNumber) != null)
                 return null;
 
             Repository.Add(obj);
@@ -27,7 +27,7 @@ namespace addon365.Database.Service.Crm
         {
             return Repository.GetList(
                 include: item => item.Include(x => x.User)
-                .ThenInclude(u=>u.RoleGroup)
+                .ThenInclude(u => u.RoleGroup)
                 .Include(c => c.Profile)
                 .ThenInclude(ct => ct.ContactAddress)
                 ).Items;

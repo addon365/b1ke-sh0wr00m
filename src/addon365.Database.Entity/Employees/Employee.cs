@@ -1,13 +1,11 @@
 ﻿using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Users;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace addon365.Database.Entity.Employees
 {
-    public class Employee:BaseEntityWithLogFields
+    public class Employee : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
         public Guid ContactId { get; set; }

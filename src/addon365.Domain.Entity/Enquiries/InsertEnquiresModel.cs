@@ -1,16 +1,12 @@
-﻿using addon365.Database.Entity;
-using addon365.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity.Inventory.Catalog;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace addon365.Domain.Entity.Enquiries
 {
     public class InsertEnquiryModel
     {
-        public Enquiry Enquiry {get;set;}
+        public Enquiry Enquiry { get; set; }
         public IList<EnquiryCatalogItem> EnquiryItems { get; set; }
         public IEnumerable<EnquiryExchangeQuotation> enquiryExchangeQuotations { get; set; }
         public IEnumerable<EnquiryAccessories> enquiryAccessories { get; set; }

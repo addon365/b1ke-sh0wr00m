@@ -1,18 +1,16 @@
-﻿using addon365.Database.Entity.Chit;
-using addon365.Database.Service.Base;
-using Threenine.Data;
-using Microsoft.EntityFrameworkCore;
-using addon365.Domain.Entity.Chit;
-using System;
-using addon365.Database.Entity.Accounts;
-using addon365.Database.Service.Accounts;
-using System.Linq;
-using addon365.Database;
-using addon365.Domain.Entity.Chit.Reports;
-using System.Collections.Generic;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Chit;
 using addon365.Database.Entity.Crm;
-using addon365.IService.Chit;
+using addon365.Database.Service.Base;
+using addon365.Domain.Entity.Chit;
+using addon365.Domain.Entity.Chit.Reports;
 using addon365.IService.Accounts;
+using addon365.IService.Chit;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Threenine.Data;
 
 namespace addon365.Database.Service.Chit
 {
@@ -138,7 +136,7 @@ namespace addon365.Database.Service.Chit
             Guid customerId)
         {
             IList<ChitSubscriber> list = FetchByCondition(schemeId, customerId);
-            
+
             var groupedResult = list.GroupBy(s => s.SubscribeId);
 
 
@@ -151,7 +149,7 @@ namespace addon365.Database.Service.Chit
                 var firstChitSub = item.First();
                 var monthlyAmount = firstChitSub.ChitSchema.MonthlyAmount;
                 var totalMonths = firstChitSub.ChitSchema.TotalMonths;
-                
+
                 var pendingAmount = (totalPaidMonths * monthlyAmount) - totalPaidAmount;
                 var domainObject = new SubscriberReportDomain
                 {

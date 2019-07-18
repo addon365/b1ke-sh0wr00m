@@ -5,15 +5,15 @@ using Threenine.Data;
 
 namespace addon365.Database.Service.Chit
 {
-    public class SchemeService : BaseService<ChitScheme>,ISchemeService
+    public class SchemeService : BaseService<ChitScheme>, ISchemeService
     {
-       
+
         public SchemeService(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
-            
+
         }
 
-       
+
     }
 }

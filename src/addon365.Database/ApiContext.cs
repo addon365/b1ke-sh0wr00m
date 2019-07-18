@@ -1,37 +1,29 @@
-﻿using System;
-using addon365.Database.Entity.Threats;
-using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using addon365.Database.Entity.Inventory.Catalog;
-using addon365.Database.Entity.Users;
-using addon365.Database.Entity.Finance;
+﻿using addon365.Database.Entity;
 using addon365.Database.Entity.Accounts;
-using addon365.Database.Entity.Employees;
-using addon365.Database.Entity.Crm;
-using addon365.Database.Entity.Report;
-using addon365.Database.Entity.Inventory;
 using addon365.Database.Entity.Chit;
-using addon365.Database.Entity.Inventory.Sales;
+using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Crm.Address;
+using addon365.Database.Entity.Employees;
+using addon365.Database.Entity.Enquiries;
+using addon365.Database.Entity.Finance;
+using addon365.Database.Entity.Inventory;
+using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Database.Entity.Inventory.Sales;
 using addon365.Database.Entity.Permission;
+using addon365.Database.Entity.Report;
+using addon365.Database.Entity.Threats;
+using addon365.Database.Entity.Users;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace addon365.Database
 {
     public class ApiContext : DbContext
     {
         public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
-
-        //public ApiContext()
-        //{
-        //}
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=portal;Trusted_Connection=True;MultipleActiveResultSets=True;");
-        //}
 
         public DbSet<User> Users { get; set; }
         public DbSet<LicenseMaster> LicenseMasters { get; set; }
@@ -48,7 +40,19 @@ namespace addon365.Database
         #endregion
 
 
+
+
         #region Crm
+
+        #region Address
+        public DbSet<Master> AddressMasters { get; set; }
+        public DbSet<StateMaster> States { get; set; }
+        public DbSet<DistrictMaster> Districts { get; set; }
+        public DbSet<SubDistrictMaster> SubDistricts { get; set; }
+        public DbSet<LocalityOrVillageMaster> Localities { get; set; }
+        public DbSet<PincodeMaster> Pincodes { get; set; }
+        #endregion
+
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<MarketingZone> marketingZones { get; set; }
@@ -59,7 +63,7 @@ namespace addon365.Database
 
         public DbSet<BusinessCustomer> BusinessCustomers { get; set; }
         public DbSet<BusinessContact> BusinessContacts { get; set; }
-        public DbSet<AddressMaster> AddressMasters { get; set; }
+
 
         public DbSet<LeadStatusHistory> LeadHistory { get; set; }
         public DbSet<Lead> Leads { get; set; }

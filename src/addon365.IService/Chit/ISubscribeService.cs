@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace addon365.IService.Chit
 {
-    public interface ISubscribeService:IBaseService<ChitSubscriber>
+    public interface ISubscribeService : IBaseService<ChitSubscriber>
     {
         ChitSubscriber FindBySubscriptionId(string id);
         string CloseSubscription(string id, double amount);

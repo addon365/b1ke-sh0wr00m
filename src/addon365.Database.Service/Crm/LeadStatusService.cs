@@ -15,12 +15,12 @@ namespace addon365.Database.Service.Crm
 
         public LeadStatusMaster FindByName(string name)
         {
-            var items=Repository.GetList(predicate: x => x.Name.CompareTo(name) == 0)
+            var items = Repository.GetList(predicate: x => x.Name.CompareTo(name) == 0)
                 .Items;
             if (items.Count == 0)
                 return null;
             return items[0];
         }
-        
+
     }
 }

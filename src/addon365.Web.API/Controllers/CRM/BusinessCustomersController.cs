@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace addon365.Web.API.Controllers.CRM
 {
@@ -94,7 +92,7 @@ namespace addon365.Web.API.Controllers.CRM
                     customer.Contact = new BusinessContact
                     {
                         BusinessName = businessName,
-                        ContactAddress = new AddressMaster
+                        ContactAddress = new Master
                         {
                             AddressLine1 = address1,
                             AddressLine2 = address2,

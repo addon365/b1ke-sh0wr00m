@@ -10,10 +10,10 @@ namespace addon365.Database.Entity.Crm
         public string MobileNumber { get; set; }
         public string SecondaryMobileNo { get; set; }
         public string Place { get; set; }
-        public AddressMaster ContactAddress { get; set; }
+        public Master ContactAddress { get; set; }
         public string Address { get; set; }
         public Guid? AddressId { get; set; }
 
-      
+
     }
 }

@@ -35,6 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListLeadComponent } from './lead/list-lead/list-lead.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
+import { Globals } from "./global";
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
@@ -95,7 +96,7 @@ const routes: Routes = [
     MatTableModule,
     
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule,Globals],
   bootstrap: [AppComponent],
   entryComponents: [UploadDialogComponent]
 })

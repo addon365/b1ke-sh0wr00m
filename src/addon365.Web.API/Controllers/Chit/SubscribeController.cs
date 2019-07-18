@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using addon365.Database.Entity.Chit;
+﻿using addon365.Database.Entity.Chit;
 using addon365.Database.Entity.Crm;
 using addon365.Domain.Entity.Chit.Reports;
+using addon365.IService.Chit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Service.Chit;
-using addon365.IService.Chit;
+using System;
+using System.Collections.Generic;
 
 namespace addon365.Web.API.Controllers.Chit
 {
@@ -82,9 +79,9 @@ namespace addon365.Web.API.Controllers.Chit
         {
         }
         [HttpGet("fetchReport/{schemeId}/{customerId}")]
-        public IList<SubscriberReportDomain> FetchReport(Guid schemeId,Guid customerId)
+        public IList<SubscriberReportDomain> FetchReport(Guid schemeId, Guid customerId)
         {
-            return _subscribeService.FetchReport(schemeId,customerId);
+            return _subscribeService.FetchReport(schemeId, customerId);
         }
         [HttpGet("customers")]
         public IList<Customer> FindAllCustomers()

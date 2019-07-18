@@ -7,10 +7,10 @@ using Threenine.Data;
 
 namespace addon365.Database.Service
 {
-    public class AccessoriesService:IAccessoriesService
+    public class AccessoriesService : IAccessoriesService
     {
         private readonly IUnitOfWork _unitOfWork;
-       
+
         public AccessoriesService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -37,7 +37,7 @@ namespace addon365.Database.Service
         {
             try
             {
-                foreach(ExtraFittingsAccessories ef in extrafittings)
+                foreach (ExtraFittingsAccessories ef in extrafittings)
                 {
                     ef.CatalogItem = null;
                     ef.AccessoriesProductItem = null;
@@ -45,7 +45,7 @@ namespace addon365.Database.Service
                 _unitOfWork.GetRepository<ExtraFittingsAccessories>().Add(extrafittings);
                 _unitOfWork.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string str = ex.Message;
             }
@@ -60,9 +60,9 @@ namespace addon365.Database.Service
                 {
                     ef.CatalogItem = null;
                     ef.AccessoriesProductItem = null;
-                    
+
                 }
-                
+
 
                 _unitOfWork.GetRepository<ExtraFittingsAccessories>().Update(extrafittings);
                 _unitOfWork.SaveChanges();
@@ -77,7 +77,7 @@ namespace addon365.Database.Service
         {
 
             _unitOfWork.GetRepository<ExtraFittingsAccessories>().Delete(ProductId);
-            
+
             _unitOfWork.SaveChanges();
         }
     }

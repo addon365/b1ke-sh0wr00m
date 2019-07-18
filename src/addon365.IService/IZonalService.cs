@@ -1,7 +1,5 @@
 ﻿using addon365.Database.Entity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace addon365.IService
 {
@@ -13,5 +11,5 @@ namespace addon365.IService
         void Delete(MarketingZone marketingZone);
 
     }
-    
+
 }

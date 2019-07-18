@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using addon365.Domain.Entity.Bots;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using addon365.Database.Entity.Enquiries;
 using addon365.Database.Service;
-using Swashbuckle.AspNetCore;
 using addon365.Domain.Entity.Enquiries;
-using addon365.Database.Entity.Enquiries;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authorization;
 using addon365.Domain.Entity.Paging;
 using addon365.IService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace addon365.Web.API.Controllers
 {
@@ -39,23 +34,23 @@ namespace addon365.Web.API.Controllers
         ///</remarks>
         [AllowAnonymous]
         [HttpGet]
-        public Threenine.Data.Paging.IPaginate<Enquiry> Get(int PageNumber=0,int PageSize=30)
+        public Threenine.Data.Paging.IPaginate<Enquiry> Get(int PageNumber = 0, int PageSize = 30)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            
+
             PagingParams pagingParams = new PagingParams();
             pagingParams.PageNumber = PageNumber;
             pagingParams.PageSize = PageSize;
             _reqinfo.UserId = Request.Headers["UserId"].ToString();
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var Enquirys= _enquiriesService.GetAllActive(pagingParams);
+            var Enquirys = _enquiriesService.GetAllActive(pagingParams);
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             _logger.LogInformation("Fetching Follow up Modes");
             return Enquirys;
         }
-        
+
 
         [AllowAnonymous]
         [Route("InitilizeEnquiries")]
@@ -73,8 +68,8 @@ namespace addon365.Web.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] InsertEnquiryModel referrer)
         {
-            
-                if (referrer == null)
+
+            if (referrer == null)
             {
                 return BadRequest();
             }
@@ -84,27 +79,27 @@ namespace addon365.Web.API.Controllers
             var identifier = _enquiriesService.Insert(referrer);
 
 
-            return Ok() ;
+            return Ok();
         }
         [HttpPost]
         [Route("Update")]
         public async Task<IActionResult> Update([FromBody] Enquiry referrer)
         {
             try
-            { 
-            if (referrer == null)
             {
-                return BadRequest();
-            }
-            _reqinfo.UserId = Request.Headers["UserId"].ToString();
-            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
-            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var identifier =await _enquiriesService.Update(referrer);
+                if (referrer == null)
+                {
+                    return BadRequest();
+                }
+                _reqinfo.UserId = Request.Headers["UserId"].ToString();
+                _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+                _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+                var identifier = await _enquiriesService.Update(referrer);
 
 
-            return Ok();
+                return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(ex);
             }
@@ -137,6 +132,6 @@ namespace addon365.Web.API.Controllers
 
             return Ok(referer);
         }
-       
+
     }
 }

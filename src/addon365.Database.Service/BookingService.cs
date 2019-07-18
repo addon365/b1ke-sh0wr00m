@@ -1,14 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using addon365.Database.Entity.Accounts;
-using Threenine.Data;
-using Microsoft.Extensions.DependencyInjection;
+﻿using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity;
 using addon365.Domain.Entity.Paging;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using addon365.IService;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Threenine.Data;
 
 namespace addon365.Database.Service
 {
@@ -31,24 +30,24 @@ namespace addon365.Database.Service
                 model.Voucher.VoucherTypeId = _unitOfWork.GetRepository<VoucherTypeMaster>().GetList().Items.FirstOrDefault().Id;
                 _unitOfWork.GetRepository<Voucher>().Add(model.Voucher);
             }
-            foreach(VoucherInfo vi in model.Voucher.VoucherInfos)
+            foreach (VoucherInfo vi in model.Voucher.VoucherInfos)
             {
                 if (_unitOfWork.GetRepository<VoucherInfo>().GetList(predicate: x => x.Id == vi.Id).Count == 0)
                 {
-                    
+
                     _unitOfWork.GetRepository<VoucherInfo>().Add(vi);
                 }
             }
             double CreditAmount = 0, DebitAmount = 0;
-            foreach(VoucherInfo voucherInfo in model.Voucher.VoucherInfos)
+            foreach (VoucherInfo voucherInfo in model.Voucher.VoucherInfos)
             {
                 if (voucherInfo.IsCredit)
                 {
                     CreditAmount = CreditAmount + voucherInfo.Amount;
-                    voucherInfo.bookId = _unitOfWork.GetRepository<AccountBook>().GetList(predicate:x=>x.ProgrammerId==AccountBookEnum.Booking.ToString()).Items.FirstOrDefault().Id;
+                    voucherInfo.bookId = _unitOfWork.GetRepository<AccountBook>().GetList(predicate: x => x.ProgrammerId == AccountBookEnum.Booking.ToString()).Items.FirstOrDefault().Id;
                 }
                 else
-                { 
+                {
                     DebitAmount = DebitAmount + voucherInfo.Amount;
                     voucherInfo.bookId = _unitOfWork.GetRepository<AccountBook>().GetList(predicate: x => x.ProgrammerId == AccountBookEnum.Cash.ToString()).Items.FirstOrDefault().Id;
                 }
@@ -86,14 +85,14 @@ namespace addon365.Database.Service
 
             var enquiries = _unitOfWork.GetRepository<Enquiry>().GetList(
                 orderBy: x => x.OrderBy(m => m.Created),
-                predicate: x => x.BranchMasterId.ToString() == _requestInfo.BranchId && x.VoucherId!=null,
+                predicate: x => x.BranchMasterId.ToString() == _requestInfo.BranchId && x.VoucherId != null,
                 include: x => x.
                 Include(Contact => Contact.Contact).
                 Include(Status => Status.Status).
                 Include(m => m.EnquiryType).
                 Include(n => n.EnquiryItems).ThenInclude(c => c.Item).
                 Include(n => n.EnquiryItems).ThenInclude(a => a.EnquiryFinanceQuotations).
-                Include(n => n.EnquiryExchangeQuotations).Include(n=>n.Voucher).ThenInclude(a=>a.VoucherInfos),
+                Include(n => n.EnquiryExchangeQuotations).Include(n => n.Voucher).ThenInclude(a => a.VoucherInfos),
                 index: pagingParams.PageNumber, size: pagingParams.PageSize);
 
 

@@ -1,15 +1,13 @@
 ﻿using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Crm;
-using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
 
 namespace addon365.Database.Entity.Enquiries
 {
-    public class Enquiry:BaseEntityWithLogFields
+    public class Enquiry : BaseEntityWithLogFields
     {
 
         public string Identifier { get; set; }
@@ -24,7 +22,7 @@ namespace addon365.Database.Entity.Enquiries
         [ForeignKey("StatusId")] public virtual EnquiryStatus Status { get; set; }
 
         public ICollection<EnquiryCatalogItem> EnquiryItems { get; set; }
-       
+
         public ICollection<EnquiryExchangeQuotation> EnquiryExchangeQuotations { get; set; }
 
         public Guid? VoucherId { get; set; }

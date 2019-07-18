@@ -1,7 +1,6 @@
 ﻿using addon365.Database.Entity.Crm;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace addon365.IService.Crm
 {

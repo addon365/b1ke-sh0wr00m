@@ -5,9 +5,7 @@ using addon365.Database.Entity.Crm;
 using addon365.Database.Tests.Utils;
 using FizzWare.NBuilder;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace addon365.Database.Tests
@@ -92,7 +90,7 @@ namespace addon365.Database.Tests
                 .Build();
             var voucherInfo = Builder<VoucherInfo>.CreateNew()
                 .With(cs => cs.BranchMasterId = null)
-                
+
                 .Build();
             var voucher = Builder<Voucher>.CreateNew()
                 .With(cs => cs.BranchMasterId = null)

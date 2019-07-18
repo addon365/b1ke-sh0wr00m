@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity
 {
-    public class LicenseMaster:BaseEntityWithLogFields
+    public class LicenseMaster : BaseEntityWithLogFields
     {
-       
+
         public string BusinessName { get; set; }
         public Guid LicenseId { get; set; }
         public string URL { get; set; }

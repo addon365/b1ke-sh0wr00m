@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using addon365.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Crm;
 using addon365.Database.Entity.Employees;
 using addon365.Database.Entity.Permission;
 using addon365.Database.Entity.Users;
@@ -14,6 +9,9 @@ using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace addon365.Web.API.Controllers.CRM
 {
@@ -72,7 +70,7 @@ namespace addon365.Web.API.Controllers.CRM
             count = 0;
             var roles = _roleService.FindAll();
             var rolDict = new Dictionary<string, RoleGroupMaster>();
-            foreach(RoleGroupMaster role in roles)
+            foreach (RoleGroupMaster role in roles)
             {
                 rolDict.Add(role.Name, role);
             }
@@ -80,13 +78,13 @@ namespace addon365.Web.API.Controllers.CRM
             {
                 total = reader.RowCount - 1;
                 reader.Read();
-                
+
                 while (reader.Read())
                 {
                     string userId = reader.GetString(0);
                     string password = reader.GetString(1);
                     string userName = reader.GetString(2);
-                    
+
                     string address1 = reader.GetString(3);
                     string address2 = reader.GetString(4);
                     long pinOrZip = (long)reader.GetDouble(5);
@@ -108,7 +106,7 @@ namespace addon365.Web.API.Controllers.CRM
                     if (foundEmployee != null)
                         continue;
 
-                    if (string.IsNullOrEmpty(roleGroup) 
+                    if (string.IsNullOrEmpty(roleGroup)
                         || !rolDict.ContainsKey(roleGroup))
                         continue;
 
@@ -122,7 +120,7 @@ namespace addon365.Web.API.Controllers.CRM
                     employee.Profile = new Database.Entity.Crm.Contact
                     {
 
-                        ContactAddress = new AddressMaster
+                        ContactAddress = new Master
                         {
                             AddressLine1 = address1,
                             AddressLine2 = address2,

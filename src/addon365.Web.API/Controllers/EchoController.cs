@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -31,8 +26,8 @@ namespace addon365.Web.API.Controllers
         public IActionResult SayWelcome()
         {
             _logger.LogInformation("Invoking Say Welcome API");
-            
-            return Ok("Hi, Addon Technology Bikeshow showroom service is up and running:"+ this.RouteData.Values["license"].ToString());
+
+            return Ok("Hi, Addon Technology Bikeshow showroom service is up and running:" + this.RouteData.Values["license"].ToString());
         }
 
         [HttpGet("authorized")]

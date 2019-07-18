@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace addon365.Database.Entity.Crm
+﻿namespace addon365.Database.Entity.Crm
 {
-    public class LeadSource:BaseEntityWithLogFields
+    public class LeadSource : BaseEntityWithLogFields
     {
-        public string Name{ get;set;}
+        public string Name { get; set; }
         public string Description { get; set; }
 
     }

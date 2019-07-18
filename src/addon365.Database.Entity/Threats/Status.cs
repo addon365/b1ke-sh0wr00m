@@ -14,7 +14,7 @@ namespace addon365.Database.Entity.Threats
         public string Name { get; set; }
 
         [StringLength(255)]
-        public string  Description { get; set; }
+        public string Description { get; set; }
 
 
         public virtual ICollection<Threat> Threats { get; set; }

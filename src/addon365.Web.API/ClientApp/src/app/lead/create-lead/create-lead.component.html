@@ -82,54 +82,99 @@
       </mat-form-field>
       <mat-form-field>
         <input
+          name="pname"
+          type="text"
+          placeholder="Pincode"
+          aria-label="Number"
           matInput
-          placeholder="pincode"
+          [formControl]="pincodeControl"
+          [matAutocomplete]="pauto"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+         
+          #pauto="matAutocomplete"
+          name="pincodeauto"
+          
+          (optionSelected)="onPincodeSelectionChanged($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredPincodes | async"
+            [value]="option.pincode"
+          >
+            {{ option.pincode }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Locality or Village"
+          aria-label="Number"
+          matInput
+          [formControl]="localityControl"
+          [matAutocomplete]="lauto"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #lauto="matAutocomplete"
+          name="locality"
+          [displayWith]="displayLocality" 
+          (optionSelected)="onLocalitySelectionChanged($event)"
+          
+        >
+          <mat-option
+            *ngFor="let option of filteredLocality | async"
+            [value]="option"
+          >
+            {{ option.localityOrVillageName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Sub Districts"
+          aria-label="Number"
+          matInput
+          [formControl]="subDistrictControl"
+          [matAutocomplete]="sdauto"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #sdauto="matAutocomplete"
+          name="subDistrict"
+          [displayWith]="displaySubDistrict" 
+          (optionSelected)="onSubDistrictSelectionChanged($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredSubDistricts | async"
+            [value]="option"
+          >
+            {{ option.subDistrictName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Mobile Number"
           value=""
           type="number"
-          name="pincode"
-          [(ngModel)]="lead.contact.contactAddress.pinOrZip"
+          name="mobileNumber"
+          [(ngModel)]="lead.contact.mobileNumber"
         />
       </mat-form-field>
       <mat-form-field>
         <input
           matInput
-          placeholder="Locality/Village"
+          placeholder="Land Line"
           value=""
-          type="text"
-          name="locality"
-          [(ngModel)]="lead.contact.contactAddress.localityOrVillage"
+          type="number"
+          name="landline"
+          [(ngModel)]="lead.contact.landline"
         />
       </mat-form-field>
-      <mat-form-field>
-          <input
-            matInput
-            placeholder="Sub District"
-            value=""
-            type="text"
-            name="district"
-            [(ngModel)]="lead.contact.contactAddress.subDistrict"
-          />
-        </mat-form-field>
-        <mat-form-field>
-            <input
-              matInput
-              placeholder="Mobile Number"
-              value=""
-              type="number"
-              name="mobileNumber"
-              [(ngModel)]="lead.contact.mobileNumber"
-            />
-          </mat-form-field>
-          <mat-form-field>
-              <input
-                matInput
-                placeholder="Land Line"
-                value=""
-                type="number"
-                name="landline"
-                [(ngModel)]="lead.contact.landline"
-              />
-            </mat-form-field>
       <div>
         <button mat-raised-button (click)="onSave()">Save</button>
       </div>

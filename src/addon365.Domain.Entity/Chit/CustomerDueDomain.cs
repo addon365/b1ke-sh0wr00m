@@ -13,7 +13,7 @@ namespace addon365.Domain.Entity.Chit
         public static IList<CustomerDueDomain> FromList(IList<ChitSubriberDue> dues)
         {
             IList<CustomerDueDomain> customerDues = new List<CustomerDueDomain>();
-            foreach(var due in dues)
+            foreach (var due in dues)
             {
                 customerDues.Add(FromSingle(due));
             }
