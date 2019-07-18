@@ -25,6 +25,7 @@ namespace addon365.Web.API.Controllers.CRM
         {
             this._appointmentService = _appointmentService;
             this._statusService = statusService;
+            this._userService = userService;
         }
 
         [HttpPost]

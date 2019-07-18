@@ -85,7 +85,7 @@ namespace addon365.Web.API
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<ISalesService, SalesService>();
-            services.AddTransient<IFollowUpService, FollowUpService>();
+            
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
