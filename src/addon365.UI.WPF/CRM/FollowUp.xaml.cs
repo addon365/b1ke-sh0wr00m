@@ -8,13 +8,13 @@ namespace addon365.UI.WPF.CRM
     /// </summary>
     public partial class FollowUp : Window
     {
-        FollowUpViewModel ViewModel;
+        //FollowUpViewModel ViewModel;
         public FollowUp(object ViewModel)
         {
             InitializeComponent();
-            FollowUpViewModel followUpViewModel = (FollowUpViewModel)ViewModel;
-            followUpViewModel.OnResult = CloseMe;
-            base.DataContext = ViewModel;
+            //FollowUpViewModel followUpViewModel = (FollowUpViewModel)ViewModel;
+            //followUpViewModel.OnResult = CloseMe;
+            //base.DataContext = ViewModel;
         }
         public void CloseMe(bool isSuccess, string message, object data)
         {

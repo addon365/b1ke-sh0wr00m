@@ -33,7 +33,7 @@ namespace addon365.UI.ViewModel
                 .AddTransient<ISubscribeService, addon365.Database.Service.Chit.SubscribeService>()
                 .AddTransient<IChitDueService, addon365.Database.Service.Chit.ChitDueService>()
                 .AddTransient<ISchemeService,addon365.Database.Service.Chit.SchemeService>()
-                .AddTransient<IFollowUpService,addon365.Database.Service.Crm.FollowUpService>()
+                
                 .AddTransient<IContactService, addon365.Database.Service.Crm.ContactService>()
                 .AddTransient<IEnquiriesService,addon365.Database.Service.EnquiryService>()
                 .AddTransient<IBookingService, addon365.Database.Service.BookingService>()

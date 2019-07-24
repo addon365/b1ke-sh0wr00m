@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace addon365.Database.Entity.Crm
+namespace addon365.Database.Entity.Crm.Address
 {
     public class Master : BaseEntityWithLogFields
     {

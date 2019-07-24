@@ -73,6 +73,24 @@ namespace addon365.WebClient.Service.WebService
             return null;
         }
 
-       
+        public User FindUser(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User UpdateToken(Guid userId, string token)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetToken(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User Find(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

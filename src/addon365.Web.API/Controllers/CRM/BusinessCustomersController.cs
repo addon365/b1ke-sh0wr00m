@@ -1,4 +1,5 @@
 ﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Crm.Address;
 using addon365.Database.Entity.Users;
 using addon365.IService;
 using addon365.IService.Crm;

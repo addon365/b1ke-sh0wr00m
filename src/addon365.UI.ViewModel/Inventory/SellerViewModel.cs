@@ -40,7 +40,7 @@ namespace addon365.UI.ViewModel.Inventory
             Mode = ScreenOpenMode.New;
             CurrentSeller=new Seller();
             _CurrentSeller.BusinessContact = new addon365.Database.Entity.Crm.BusinessContact();
-            _CurrentSeller.BusinessContact.ContactAddress = new addon365.Database.Entity.Crm.AddressMaster();
+            _CurrentSeller.BusinessContact.ContactAddress = new addon365.Database.Entity.Crm.Address.Master();
         }
         [Conditional("DEBUG")]
         private void TestData()

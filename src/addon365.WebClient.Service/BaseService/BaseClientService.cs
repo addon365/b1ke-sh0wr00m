@@ -125,5 +125,10 @@ namespace addon365.WebClient.Service.BaseService
         {
             throw new NotImplementedException();
         }
+
+        public IList<T> Save(IList<T> obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -32,9 +32,9 @@ namespace addon365.UI.WPF.CRM.Contact
 
         public void ShowUI(bool success,string message,object data)
         {
-            FollowUpViewModel followUpViewModel = new FollowUpViewModel(data, null);
-            FollowUp followUp = new FollowUp(followUpViewModel);
-            followUp.ShowDialog();
+            //FollowUpViewModel followUpViewModel = new FollowUpViewModel(data, null);
+            //FollowUp followUp = new FollowUp(followUpViewModel);
+            //followUp.ShowDialog();
         }
 
        
