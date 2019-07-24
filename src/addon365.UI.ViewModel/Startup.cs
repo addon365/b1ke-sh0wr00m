@@ -40,6 +40,7 @@ namespace addon365.UI.ViewModel
                 .AddTransient<IPurchaseService, addon365.Database.Service.Inventory.PurchaseService>()
                 .AddTransient<ISellerService, addon365.Database.Service.Inventory.SellerService>()
                 .AddTransient<ISalesService, addon365.Database.Service.Sales.SalesService>()
+                .AddTransient<IProductService,addon365.Database.Service.ProductService>()
                 .AddSingleton<RequestInfo,addon365.Database.Service.RequestInfo>()
                 .BuildServiceProvider();
 

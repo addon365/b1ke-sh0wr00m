@@ -1,4 +1,4 @@
-﻿namespace addon365.Database.Entity.Crm
+﻿ namespace addon365.Database.Entity.Crm
 {
     public class FollowUpMode : BaseEntityWithLogFields
     {

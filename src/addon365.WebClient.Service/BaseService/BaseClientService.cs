@@ -120,5 +120,10 @@ namespace addon365.WebClient.Service.BaseService
         }
 
         public abstract string getUrl();
+
+        public IEnumerable<T> FindByPredicate(Func<T, bool> predicate = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

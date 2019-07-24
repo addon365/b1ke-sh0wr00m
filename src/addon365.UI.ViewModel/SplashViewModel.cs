@@ -1,4 +1,4 @@
-﻿using addon365.Database.Entity.User;
+﻿using addon365.Database.Entity.Users;
 using addon365.Database.Service;
 using addon365.IService;
 using Microsoft.Extensions.DependencyInjection;

@@ -35,6 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListLeadComponent } from './lead/list-lead/list-lead.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
+import { CreateStateMasterComponent } from './Address/StateMaster/create-StateMaster/create-statemaster.component';
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: "list-lead", component: ListLeadComponent },
   { path: "create-lead", component: CreateLeadComponent },
   { path: "list-employee", component: ListEmployeeComponent },
+  { path: "create-state", component: CreateStateMasterComponent },
 ];
 @NgModule({
   declarations: [

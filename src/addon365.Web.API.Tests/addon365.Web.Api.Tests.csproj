@@ -28,6 +28,7 @@
     <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
     <ProjectReference Include="..\addon365.IService\addon365.IService.csproj" />
     <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj" />
+    <ProjectReference Include="..\addon365.Web.API\addon365.Web.API.csproj" />
   </ItemGroup>
 
 </Project>
