@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace addon365.Database.Entity.Crm
 {
-    public class Campaign:BaseEntityWithLogFields
+    public class Campaign : BaseEntityWithLogFields
     {
         public string Name { get; set; }
+        public string Desctription { get; set; }
         public string Filter { get; set; }
+
+        public IList<CampaignInfo> Infos { get; set; }
     }
 }

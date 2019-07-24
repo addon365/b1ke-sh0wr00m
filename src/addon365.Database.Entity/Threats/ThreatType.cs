@@ -7,7 +7,7 @@ namespace addon365.Database.Entity.Threats
     {
         public ThreatType()
         {
-          
+
         }
 
         [Required]

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using addon365.Database.Entity.Inventory.Purchases;
 using addon365.Database.Service;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authorization;
-using addon365.Domain.Entity.Paging;
-using addon365.Database.Service.Inventory;
 using addon365.Domain.Entity.Inventory;
-using addon365.Database.Entity.Inventory.Purchases;
+using addon365.Domain.Entity.Paging;
 using addon365.IService.Inventory;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace addon365.Web.API.Controllers.Inventory
 {
@@ -35,23 +34,23 @@ namespace addon365.Web.API.Controllers.Inventory
         ///</remarks>
         [AllowAnonymous]
         [HttpGet]
-        public Threenine.Data.Paging.IPaginate<Purchase> Get(int PageNumber=0,int PageSize=30)
+        public Threenine.Data.Paging.IPaginate<Purchase> Get(int PageNumber = 0, int PageSize = 30)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            
+
             PagingParams pagingParams = new PagingParams();
             pagingParams.PageNumber = PageNumber;
             pagingParams.PageSize = PageSize;
             _reqinfo.UserId = Request.Headers["UserId"].ToString();
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var PurchaseList= _PurchaseService.GetAll(pagingParams);
+            var PurchaseList = _PurchaseService.GetAll(pagingParams);
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             _logger.LogInformation("Fetching Follow up Modes");
             return PurchaseList;
         }
-        
+
 
         [AllowAnonymous]
         [Route("Init")]
@@ -84,7 +83,7 @@ namespace addon365.Web.API.Controllers.Inventory
 
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(ex);
             }
@@ -94,25 +93,25 @@ namespace addon365.Web.API.Controllers.Inventory
         public async Task<IActionResult> Update([FromBody] Purchase referrer)
         {
             try
-            { 
-            if (referrer == null)
             {
-                return BadRequest();
-            }
-            _reqinfo.UserId = Request.Headers["UserId"].ToString();
-            _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
-            _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
-            var identifier =await _PurchaseService.Update(referrer);
+                if (referrer == null)
+                {
+                    return BadRequest();
+                }
+                _reqinfo.UserId = Request.Headers["UserId"].ToString();
+                _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
+                _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+                var identifier = await _PurchaseService.Update(referrer);
 
 
-            return Ok();
+                return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return NotFound(ex);
             }
         }
-       
+
         [HttpGet]
         [Route("Get/{identifier}")]
         public IActionResult Detail(string identifier)
@@ -126,6 +125,6 @@ namespace addon365.Web.API.Controllers.Inventory
 
             return Ok(referer);
         }
-       
+
     }
 }

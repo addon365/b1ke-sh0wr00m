@@ -1,16 +1,15 @@
-﻿using addon365.Database.Entity.Chit;
+﻿using addon365.Database.Entity.Accounts;
+using addon365.Database.Entity.Chit;
+using addon365.Database.Entity.Crm;
 using addon365.Database.Service.Base;
+using addon365.Domain.Entity.Chit;
+using addon365.IService.Accounts;
+using addon365.IService.Chit;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Threenine.Data;
-using Microsoft.EntityFrameworkCore;
-using addon365.Domain.Entity.Chit;
-using addon365.Database.Entity.Accounts;
-using addon365.Database.Service.Accounts;
-using addon365.Database.Entity.Crm;
-using addon365.IService.Chit;
-using addon365.IService.Accounts;
 
 namespace addon365.Database.Service.Chit
 {
@@ -75,7 +74,7 @@ namespace addon365.Database.Service.Chit
                 }
 
             };
-            if (domain.SubscribeId==Guid.Empty)
+            if (domain.SubscribeId == Guid.Empty)
             {
                 Guid customerId = Guid.Empty;
                 if (domain.CustomerId == Guid.Empty)
@@ -103,7 +102,7 @@ namespace addon365.Database.Service.Chit
                     JoinedDate = DateTime.Now,
                     SubscribeId = GenerateSubscribeId()
                 };
-               
+
 
                 chitSubriberDue.ChitSubscriber = chitSubscriber;
             }
@@ -143,10 +142,10 @@ namespace addon365.Database.Service.Chit
         {
             return FindByParam(mobileNumber, true);
         }
-        private IList<CustomerDueDomain> FindByParam(string text,bool isMobile)
+        private IList<CustomerDueDomain> FindByParam(string text, bool isMobile)
         {
-           
-           
+
+
             IList<ChitSubscriber> subscriptions = null;
             if (isMobile)
             {

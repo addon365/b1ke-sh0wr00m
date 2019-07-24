@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace addon365.Database.Entity.Crm.Address
+﻿namespace addon365.Database.Entity.Crm.Address
 {
     public class StateMaster : BaseEntityWithLogFields
     {
         public string StateName { get; set; }
 
-
+        public string Code { get; set; }
     }
 }

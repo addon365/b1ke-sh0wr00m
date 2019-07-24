@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.CompilerServices;
 using addon365.Database.Entity.Threats;
 using AutoMapper;
 using Threenine.Map;
@@ -37,6 +35,6 @@ namespace addon365.Domain.Entity.Bots
                 .ForMember(dest => dest.QueryString, opt => opt.MapFrom(src => src.QueryString))
                 .ForMember(dest => dest.Protocol, opt => opt.MapFrom(src => src.Protocol))
                 .ReverseMap();
-        }       
+        }
     }
 }

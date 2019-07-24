@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace addon365.Database.Entity.Accounts
 {
@@ -18,5 +16,5 @@ namespace addon365.Database.Entity.Accounts
         }
 
     }
-    public enum VoucherTypeMasterEnum { Receipt,Payment,Contra,Purchase,Sales}
+    public enum VoucherTypeMasterEnum { Receipt, Payment, Contra, Purchase, Sales }
 }

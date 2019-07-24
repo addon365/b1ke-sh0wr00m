@@ -1,6 +1,5 @@
 ﻿using addon365.Database.Entity.Permission;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity.Users

@@ -3,12 +3,11 @@ using addon365.Database.Entity.Crm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace addon365.Database.Entity.Inventory.Sales
 {
     [Table("Inventory.Sales.Sales")]
-    public class Sale:BaseEntityWithLogFields
+    public class Sale : BaseEntityWithLogFields
     {
         public string BillNo { get; set; }
         public DateTime BillDate { get; set; }
@@ -26,7 +25,7 @@ namespace addon365.Database.Entity.Inventory.Sales
 
 
         public virtual ICollection<SaleItem> Items { get; set; }
-        
-      
+
+
     }
 }

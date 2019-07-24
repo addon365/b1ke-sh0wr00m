@@ -1,26 +1,26 @@
-﻿using System;
-using Threenine.Data;
-using addon365.Database.Entity;
-using System.Threading.Tasks;
-using addon365.Domain.Entity.Sales;
+﻿using addon365.Database.Entity;
 using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Finance;
-using addon365.Database.Entity.Inventory.Sales;
 using addon365.Database.Entity.Inventory.Catalog;
+using addon365.Database.Entity.Inventory.Sales;
+using addon365.Domain.Entity.Sales;
 using addon365.IService.Sales;
+using System;
+using System.Threading.Tasks;
+using Threenine.Data;
 namespace addon365.Database.Service.Sales
 {
     public class SalesService : ISalesService
     {
-      
+
         private readonly IUnitOfWork _unitOfWork;
-       
+
 
         public SalesService(IUnitOfWork unitOfWork)
         {
-           _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
-     
+
         public InitilizeSales GetInitilizeSales()
         {
             InitilizeSales ie = new InitilizeSales();
@@ -35,17 +35,17 @@ namespace addon365.Database.Service.Sales
         public async Task<string> Insert(Sale model)
         {
             try
-            { 
-          
-            _unitOfWork.GetRepository<Sale>().Add(model);
-            
+            {
 
-         
-            _unitOfWork.SaveChanges();
-      
-           
+                _unitOfWork.GetRepository<Sale>().Add(model);
+
+
+
+                _unitOfWork.SaveChanges();
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string str = ex.Message;
             }

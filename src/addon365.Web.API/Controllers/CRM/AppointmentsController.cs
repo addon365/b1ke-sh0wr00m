@@ -1,17 +1,12 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Entity.Crm;
-using addon365.IService.Crm;
-using Newtonsoft.Json;
-using System.IO;
+﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Service.Util;
 using addon365.Domain.Entity.Crm;
 using addon365.IService;
+using addon365.IService.Crm;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using FirebaseAdmin.Messaging;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using addon365.Database.Service.Util;
 
 namespace addon365.Web.API.Controllers.CRM
 {
@@ -30,6 +25,7 @@ namespace addon365.Web.API.Controllers.CRM
         {
             this._appointmentService = _appointmentService;
             this._statusService = statusService;
+            this._userService = userService;
         }
 
         [HttpPost]

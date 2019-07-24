@@ -1,8 +1,6 @@
 ﻿using addon365.Database.Entity;
 using addon365.IService.Base;
-using Microsoft.EntityFrameworkCore;
 using System;
-using Microsoft.EntityFrameworkCore.Query;
 using System.Collections.Generic;
 using Threenine.Data;
 

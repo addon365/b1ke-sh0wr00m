@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using addon365.Database.Entity.Utils;
-using Newtonsoft.Json;
 
 namespace addon365.Database.Entity.Crm
 {

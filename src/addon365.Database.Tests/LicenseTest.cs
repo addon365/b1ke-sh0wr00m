@@ -1,8 +1,7 @@
-﻿using addon365.Database.Tests.Utils;
-using System.Linq;
-using Xunit;
+﻿using addon365.Database.Entity;
+using addon365.Database.Tests.Utils;
 using FizzWare.NBuilder;
-using addon365.Database.Entity;
+using Xunit;
 
 namespace addon365.Database.Tests
 {

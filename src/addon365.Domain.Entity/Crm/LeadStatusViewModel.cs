@@ -1,7 +1,5 @@
 ﻿using addon365.Database.Entity.Crm;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace addon365.Domain.Entity.Crm
 {

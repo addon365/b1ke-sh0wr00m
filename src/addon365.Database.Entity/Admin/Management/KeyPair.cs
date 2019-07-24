@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace addon365.Database.Entity.Admin
+﻿namespace addon365.Database.Entity.Admin
 {
     public class KeyPair
     {

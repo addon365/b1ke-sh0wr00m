@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace addon365.Database.Entity.Enquiries
 {
     public class EnquiryType : BaseEntityWithLogFields
     {
-        
+
         [Required]
         [StringLength(50)]
         public string Name

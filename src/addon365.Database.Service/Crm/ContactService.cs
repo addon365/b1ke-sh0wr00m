@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using addon365.Database.Entity.Crm;
+﻿using addon365.Database.Entity.Crm;
 using addon365.IService.Crm;
+using System.Collections.Generic;
 using Threenine.Data;
 
 namespace addon365.Database.Service.Crm

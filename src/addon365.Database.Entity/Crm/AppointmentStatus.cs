@@ -1,5 +1,4 @@
-﻿using addon365.Database.Entity.Employees;
-using addon365.Database.Entity.Users;
+﻿using addon365.Database.Entity.Users;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,7 +23,7 @@ namespace addon365.Database.Entity.Crm
 
         [ForeignKey("UpdatedById")]
         public User UpdatedBy { get; set; }
-        
+
         public int Order { get; set; }
 
         public Guid AppointmentId { get; set; }

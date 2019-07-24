@@ -1,15 +1,14 @@
 ﻿using addon365.Database.Entity.Inventory.Catalog;
+using addon365.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Service;
 using System.Collections.Generic;
-using addon365.IService;
 
 namespace addon365.Web.API.Controllers
 {
     [Produces("application/json")]
     [Route("api/{license:license}/v{version:apiVersion}/[controller]")]
-    public class ProductCompanyController: Controller
+    public class ProductCompanyController : Controller
     {
         private readonly IProductCompanyService _productcompanyService;
         public ProductCompanyController(IProductCompanyService productcompanyService)

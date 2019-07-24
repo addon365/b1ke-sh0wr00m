@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace addon365.Domain.Entity.Paging
+﻿namespace addon365.Domain.Entity.Paging
 {
     public class PagingParams
 

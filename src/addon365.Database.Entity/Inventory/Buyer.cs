@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace addon365.Database.Entity.Inventory
 {
     [Table("Inventory.Buyers")]
-    public class Buyer:BaseEntityWithLogFields
+    public class Buyer : BaseEntityWithLogFields
     {
         public string BuyerId { get; set; }
         public Guid BusinessContactId { get; set; }

@@ -5,7 +5,7 @@ using Threenine.Data;
 
 namespace addon365.Database.Service
 {
-   public class RequestInfo
+    public class RequestInfo
     {
         public string UserId { get; set; }
         public string DeviceId { get; set; }
@@ -26,19 +26,19 @@ namespace addon365.Database.Service
             DeviceId = "";
             var obj = _unitOfWork.GetRepository<DeviceMaster>().GetList(predicate: x => x.DeviceId == DeviceCode);
             DeviceMaster dm = null;
-            if(obj!=null)
-                dm=obj.Items.FirstOrDefault();
+            if (obj != null)
+                dm = obj.Items.FirstOrDefault();
 
-            if(dm==null)
+            if (dm == null)
             {
-                var RequestToAuthorise=new DeviceMaster() { DeviceName = "UnKnown", DeviceId = DeviceCode};
+                var RequestToAuthorise = new DeviceMaster() { DeviceName = "UnKnown", DeviceId = DeviceCode };
 
                 _unitOfWork.GetRepository<DeviceMaster>().Add(RequestToAuthorise);
                 _unitOfWork.SaveChanges();
                 return;
             }
 
-           
+
             DeviceId = dm.OtherId.ToString();
 
         }

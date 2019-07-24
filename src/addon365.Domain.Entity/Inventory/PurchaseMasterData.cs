@@ -1,9 +1,7 @@
 ﻿using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Inventory;
 using addon365.Database.Entity.Inventory.Catalog;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace addon365.Domain.Entity.Inventory
 {

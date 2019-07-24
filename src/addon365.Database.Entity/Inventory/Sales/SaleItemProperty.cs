@@ -5,7 +5,7 @@ namespace addon365.Database.Entity.Inventory.Sales
 {
 
     [Table("Inventory.Sales.SalesItemsProperties")]
-    public class SaleItemProperty:BaseEntity
+    public class SaleItemProperty : BaseEntity
     {
         public Guid SalesItemsId { get; set; }
         public Guid ProductPropertyMasterId { get; set; }

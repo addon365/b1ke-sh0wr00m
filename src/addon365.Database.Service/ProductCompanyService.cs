@@ -8,7 +8,7 @@ using Threenine.Data;
 
 namespace addon365.Database.Service
 {
-    public class ProductCompanyService:IProductCompanyService
+    public class ProductCompanyService : IProductCompanyService
     {
         private readonly IUnitOfWork _unitOfWork;
         private const string Enabled = "Enabled";
@@ -26,7 +26,7 @@ namespace addon365.Database.Service
         }
         public string Insert(CatalogBrand productcompany)
         {
-           
+
             _unitOfWork.GetRepository<CatalogBrand>().Add(productcompany);
             try
             {

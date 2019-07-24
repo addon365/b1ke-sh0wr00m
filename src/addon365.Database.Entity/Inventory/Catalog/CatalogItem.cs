@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace addon365.Database.Entity.Inventory.Catalog
 {
     [Table("Inventory.Catalog.CatalogItems")]
-    public class CatalogItem:BaseEntityWithLogFields
+    public class CatalogItem : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
         public string ItemName { get; set; }

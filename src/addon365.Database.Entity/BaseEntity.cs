@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity
 {
@@ -15,8 +14,8 @@ namespace addon365.Database.Entity
         public Guid? BranchMasterId { get; set; }
         public Guid YearId { get; set; }
     }
-       
-  
+
+
     public class BaseEntity
     {
         [Key]

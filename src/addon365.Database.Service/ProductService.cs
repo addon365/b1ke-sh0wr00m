@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
-using Threenine.Data;
-using System.Linq;
+﻿using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Domain.Entity.Paging;
-using addon365.Database.Entity.Inventory.Catalog;
 using addon365.IService;
+using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Threenine.Data;
 
 namespace addon365.Database.Service
 {
@@ -21,7 +21,7 @@ namespace addon365.Database.Service
         }
         public Threenine.Data.Paging.IPaginate<CatalogItem> GetAllActive(PagingParams pagingParams)
         {
-            var products = _unitOfWork.GetRepository<CatalogItem>().GetList(orderBy: x => x.OrderBy(m => m.Created),index: pagingParams.PageNumber, size: pagingParams.PageSize);
+            var products = _unitOfWork.GetRepository<CatalogItem>().GetList(orderBy: x => x.OrderBy(m => m.Created), index: pagingParams.PageNumber, size: pagingParams.PageSize);
 
             return products;
         }
@@ -29,8 +29,8 @@ namespace addon365.Database.Service
         {
             var typeid = _unitOfWork.GetRepository<CatalogType>().GetList().Items.Where(y => y.ProgrammerId == ProgrammerId).First<CatalogType>().Id;
 
-         
-            var products = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(x=>x.TypeId==typeid);
+
+            var products = _unitOfWork.GetRepository<CatalogItem>().GetList().Items.Where(x => x.TypeId == typeid);
 
             return products;
         }
@@ -45,8 +45,8 @@ namespace addon365.Database.Service
 
             if (LastProduct != null)
             {
-                if (LastProduct.Identifier !="")
-                    identi = (Convert.ToInt64(LastProduct.Identifier)+1).ToString();
+                if (LastProduct.Identifier != "")
+                    identi = (Convert.ToInt64(LastProduct.Identifier) + 1).ToString();
             }
             product.Identifier = identi;
             _unitOfWork.GetRepository<CatalogItem>().Add(product);
@@ -78,15 +78,16 @@ namespace addon365.Database.Service
         }
         public void Delete(CatalogItem product)
         {
-            try { 
-                
-            _unitOfWork.GetRepository<CatalogItem>().Delete(product.Id);
-                
-              
-            _unitOfWork.SaveChanges();
-              
+            try
+            {
+
+                _unitOfWork.GetRepository<CatalogItem>().Delete(product.Id);
+
+
+                _unitOfWork.SaveChanges();
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string msg = ex.Message;
             }
@@ -97,10 +98,10 @@ namespace addon365.Database.Service
             return Mapper.Map<CatalogItem>(product);
         }
         public IEnumerable<CatalogBrand> GetCompanies()
-            {
+        {
             var Companies = _unitOfWork.GetRepository<CatalogBrand>().GetList().Items;
             return Companies;
-            }
+        }
         public IEnumerable<CatalogType> GetTypes()
         {
             var Types = _unitOfWork.GetRepository<CatalogType>().GetList().Items;

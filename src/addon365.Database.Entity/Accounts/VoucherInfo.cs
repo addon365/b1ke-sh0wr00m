@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace addon365.Database.Entity.Accounts
 {
-    public class VoucherInfo:BaseEntityWithLogFields
+    public class VoucherInfo : BaseEntityWithLogFields
     {
         public Guid VoucherId { get; set; }
 

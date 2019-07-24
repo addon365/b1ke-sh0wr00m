@@ -18,5 +18,5 @@ namespace addon365.Database.Entity.Inventory.Purchases
         public decimal Amount { get { return Price * Unit; } }
 
     }
-    
+
 }

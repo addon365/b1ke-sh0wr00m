@@ -1,8 +1,5 @@
-﻿using addon365.Database.Entity.Enquiries;
-using addon365.Database.Entity.Report;
-using System;
+﻿using addon365.Database.Entity.Report;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace addon365.Database.Service.Report
 {

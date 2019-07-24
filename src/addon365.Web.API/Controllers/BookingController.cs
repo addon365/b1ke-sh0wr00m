@@ -1,11 +1,11 @@
 ﻿using addon365.Database.Entity.Enquiries;
+using addon365.Database.Service;
 using addon365.Domain.Entity.Paging;
+using addon365.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Service;
 using System;
 using System.Threading.Tasks;
-using addon365.IService;
 
 namespace addon365.Web.API.Controllers
 {
@@ -28,22 +28,22 @@ namespace addon365.Web.API.Controllers
         public async Task<IActionResult> Post([FromBody] Enquiry model)
         {
             try
-            { 
-         
+            {
+
                 if (model == null)
                 {
                     return BadRequest();
                 }
                 _reqinfo.UserId = Request.Headers["UserId"].ToString();
                 _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
-                _reqinfo.DeviceId= Request.Headers["DeviceId"].ToString();
-                
+                _reqinfo.DeviceId = Request.Headers["DeviceId"].ToString();
+
                 await _BookingService.Insert(model);
-                
+
 
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }

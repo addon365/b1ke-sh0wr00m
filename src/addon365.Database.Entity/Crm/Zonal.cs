@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace addon365.Database.Entity
+﻿namespace addon365.Database.Entity
 {
     public class MarketingZone : BaseEntityWithLogFields
     {

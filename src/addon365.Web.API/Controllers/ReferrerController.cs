@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using addon365.Domain.Entity.Bots;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using addon365.Database.Service;
-using Swashbuckle.AspNetCore;
+﻿using addon365.Domain.Entity.Bots;
 using addon365.IService;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace addon365.Web.API.Controllers
 {
@@ -49,11 +43,11 @@ namespace addon365.Web.API.Controllers
             {
                 return BadRequest();
             }
-           
-           var identifier =  _referrerService.Insert(referrer);
-            
 
-            return CreatedAtRoute("Detail",new{ identifier} ,referrer);
+            var identifier = _referrerService.Insert(referrer);
+
+
+            return CreatedAtRoute("Detail", new { identifier }, referrer);
         }
 
         /// <summary>
@@ -66,7 +60,7 @@ namespace addon365.Web.API.Controllers
         [Route("{identifier}", Name = "Detail")]
         public IActionResult Detail(string identifier)
         {
-            var referer=  _referrerService.GetReferer(identifier);
+            var referer = _referrerService.GetReferer(identifier);
             if (referer == null) return NotFound();
 
             return Ok(referer);

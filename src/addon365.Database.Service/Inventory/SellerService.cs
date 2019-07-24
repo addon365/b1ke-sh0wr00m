@@ -1,13 +1,13 @@
-﻿using System;
+﻿using addon365.Database.Entity.Inventory;
+using addon365.Domain.Entity.Paging;
+using addon365.IService.Inventory;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using addon365.Database.Entity.Inventory;
-using addon365.Domain.Entity.Paging;
-using Microsoft.Extensions.Logging;
 using Threenine.Data;
 using Threenine.Data.Paging;
-using Microsoft.EntityFrameworkCore;
-using addon365.IService.Inventory;
 
 namespace addon365.Database.Service.Inventory
 {
@@ -31,7 +31,7 @@ namespace addon365.Database.Service.Inventory
 
         public Seller Get(string id)
         {
-            var model= _unitOfWork.GetRepository<Seller>().GetList(predicate: x => x.SellerId == id);
+            var model = _unitOfWork.GetRepository<Seller>().GetList(predicate: x => x.SellerId == id);
             if (model.Items.Count == 1)
             {
                 return _unitOfWork.GetRepository<Seller>().Single(
@@ -46,7 +46,7 @@ namespace addon365.Database.Service.Inventory
             var Records = _unitOfWork.GetRepository<Seller>().GetList(
                orderBy: x => x.OrderBy(m => m.Created),
                include: x => x.
-               Include(a => a.BusinessContact).ThenInclude(a=>a.ContactAddress)
+               Include(a => a.BusinessContact).ThenInclude(a => a.ContactAddress)
                ,
                index: pagingParams.PageNumber, size: pagingParams.PageSize);
 
@@ -58,15 +58,15 @@ namespace addon365.Database.Service.Inventory
         public async Task<Seller> Insert(Seller model)
         {
 
-            string Id =  "1";
-            
+            string Id = "1";
+
             var LastRow = _unitOfWork.GetRepository<Seller>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.SellerId)));
 
 
             if (LastRow != null)
             {
                 if (LastRow.SellerId != "")
-                    Id =  (Convert.ToInt64(LastRow.SellerId) + 1).ToString();
+                    Id = (Convert.ToInt64(LastRow.SellerId) + 1).ToString();
             }
 
             model.SellerId = Id;
@@ -79,11 +79,11 @@ namespace addon365.Database.Service.Inventory
 
         public async Task<Seller> Update(Seller model)
         {
-           
+
             _unitOfWork.GetRepository<Seller>().Update(model);
             _unitOfWork.SaveChanges();
-            
-            return _unitOfWork.GetRepository<Seller>().Single(predicate: x => x.Id == model.Id);  
+
+            return _unitOfWork.GetRepository<Seller>().Single(predicate: x => x.Id == model.Id);
         }
     }
 }

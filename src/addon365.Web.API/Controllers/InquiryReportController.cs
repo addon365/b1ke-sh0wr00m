@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using addon365.Database.Entity.Report;
+﻿using addon365.Database.Service.Report;
+using addon365.Web.API.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using addon365.Database.Service.Report;
-using addon365.Web.API.Utils;
 
 namespace addon365.Web.API.Controllers
 {
@@ -38,7 +35,7 @@ namespace addon365.Web.API.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery(Name = "reportType")] ReportType type)
         {
-            var result=_inquiryReportService.GetReport(type);
+            var result = _inquiryReportService.GetReport(type);
             return Ok(result);
         }
     }

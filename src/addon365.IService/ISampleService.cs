@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using addon365.Domain.Entity.Enquiries;
+﻿using addon365.Domain.Entity.Enquiries;
+using System.Collections.Generic;
 
 namespace addon365.IService
 {
