@@ -1,0 +1,47 @@
+<div class="box" fxLayout="column" fxLayoutAlign="space-evenly none">
+  <h3>List Leads</h3>
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <button  mat-raised-button [routerLink]="['/create-campaign']">
+      Create Campaign
+    </button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="campaignName">
+      <th mat-header-cell *matHeaderCellDef>Campaign Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.name }}
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.description }}
+      </td>
+    </ng-container>
+
+     <!-- Weight Column -->
+     <ng-container matColumnDef="filter">
+      <th mat-header-cell *matHeaderCellDef>Lead Count</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.filter }}
+      </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef>Lead Count</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.count }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displcayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displcayedColumns"></tr>
+  </table>
+</div>

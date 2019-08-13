@@ -45,7 +45,7 @@ namespace addon365.Database.Service.Crm
         public override Lead Save(Lead obj)
         {
             if (FindByMobile(obj.Contact.MobileNumber,
-                obj.Contact.Landline) != null)
+                obj.Contact.Landline) != null) 
                 return null;
 
             obj.CurrentLeadStatusId = obj.History[0].Id;

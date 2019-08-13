@@ -1,6 +1,8 @@
 ﻿using addon365.Database.Entity.Crm;
+using addon365.Database.Entity.Crm.Address;
 using addon365.IService;
 using addon365.IService.Crm;
+using addon365.IService.Crm.Address;
 using ExcelDataReader;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,11 +22,17 @@ namespace addon365.Web.API.Controllers.CRM
         readonly ILeadSourceService sourceService;
         readonly ILeadStatusService leadStatusService;
         readonly IHostingEnvironment hostingEnvironment;
+        readonly IPincodeService pincodeService;
+        readonly ISubDistrictService subDistrictService;
+        readonly ILocalityService localityService;
         public LeadsController(ILeadService baseService,
             IUserService userService,
             ILeadSourceService sourceService,
             ILeadStatusService leadStatusService,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment,
+            IPincodeService pincodeService,
+            ISubDistrictService subDistrictService,
+            ILocalityService localityService)
             : base(baseService)
         {
             this.service = baseService;
@@ -32,6 +40,9 @@ namespace addon365.Web.API.Controllers.CRM
             this.sourceService = sourceService;
             this.leadStatusService = leadStatusService;
             this.hostingEnvironment = hostingEnvironment;
+            this.pincodeService = pincodeService;
+            this.subDistrictService = subDistrictService;
+            this.localityService = localityService;
         }
 
         [HttpGet("followup")]
@@ -78,10 +89,44 @@ namespace addon365.Web.API.Controllers.CRM
             }
             return keyValues;
         }
+        private IDictionary<long, PincodeMaster> GetPincodeDict()
+        {
+            IDictionary<long, PincodeMaster> keyValues =
+                new Dictionary<long, PincodeMaster>();
+            foreach (PincodeMaster source in pincodeService.FindAll())
+            {
+                keyValues.Add(source.Pincode, source);
+            }
+            return keyValues;
+        }
+        private IDictionary<string, LocalityOrVillageMaster> GetLocalityDict()
+        {
+            IDictionary<string, LocalityOrVillageMaster> keyValues =
+                new Dictionary<string, LocalityOrVillageMaster>();
+            foreach (LocalityOrVillageMaster source in localityService.FindAll())
+            {
+                keyValues.Add(source.LocalityOrVillageName, source);
+            }
+            return keyValues;
+        }
+        private IDictionary<string, SubDistrictMaster> GetSubDistDict()
+        {
+            IDictionary<string, SubDistrictMaster> keyValues =
+                new Dictionary<string, SubDistrictMaster>();
+            foreach (SubDistrictMaster source in subDistrictService.FindAll())
+            {
+                keyValues.Add(source.SubDistrictName, source);
+            }
+            return keyValues;
+        }
         private bool BulkSave(MemoryStream stream, out int count, out int total)
         {
             count = 0;
             var leadSourcesDict = GetLeadSourceDict();
+            var pincodeDict = GetPincodeDict();
+            var subDistDict = GetSubDistDict();
+            var localityDic = GetLocalityDict();
+
             using (var reader = ExcelReaderFactory.CreateReader(stream))
             {
                 total = reader.RowCount - 1;
@@ -100,8 +145,15 @@ namespace addon365.Web.API.Controllers.CRM
                     string address1 = reader.GetString(index++);
                     string address2 = reader.GetString(index++);
                     long pinOrZip = (long)reader.GetDouble(index++);
+                    Guid? pinOrZipId = pincodeDict.ContainsKey(pinOrZip) ? (Guid?)pincodeDict[pinOrZip].Id : null;
+
                     string village = reader.GetString(index++);
+
+                    Guid? villageId = localityDic.ContainsKey(village) ? (Guid?)localityDic[village].Id : null;
+
                     string subDistrict = reader.GetString(index++);
+                    Guid? subDistrictId = subDistDict.ContainsKey(subDistrict) ? (Guid?)subDistDict[subDistrict].Id : null;
+
                     string mobileNumber = reader.GetDouble(index++).ToString();
                     string landLine = reader.GetDouble(index++).ToString();
                     string leadSourceName = reader.GetString(index++);
@@ -175,8 +227,11 @@ namespace addon365.Web.API.Controllers.CRM
                             AddressLine1 = address1,
                             AddressLine2 = address2,
                             LocalityOrVillage = village,
+                            LocalityOrVillageId = villageId,
                             PinOrZip = pinOrZip,
+
                             SubDistrict = subDistrict,
+                            SubDistrictId = subDistrictId
 
                         },
                         Proprietor = proprietorcontact,

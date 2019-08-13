@@ -35,11 +35,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListLeadComponent } from './lead/list-lead/list-lead.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
-<<<<<<< HEAD
+
 import { CreateStateMasterComponent } from './Address/StateMaster/create-StateMaster/create-statemaster.component';
-=======
+import { CreateCampaignComponent } from './campaign/create-campaign/create-campaign.component';
 import { Globals } from "./global";
->>>>>>> 852dbbf138f0c2b5ea0bf025646c2cc39e0ef3b9
+import { ListCampaignComponent } from './campaign/list-campaign/list-campaign.component';
+
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
@@ -56,6 +57,8 @@ const routes: Routes = [
   { path: "create-lead", component: CreateLeadComponent },
   { path: "list-employee", component: ListEmployeeComponent },
   { path: "create-state", component: CreateStateMasterComponent },
+  { path: "create-campaign", component: CreateCampaignComponent },
+  { path: "list-campaign", component: ListCampaignComponent },
 ];
 @NgModule({
   declarations: [
@@ -69,7 +72,10 @@ const routes: Routes = [
     UploadDialogComponent,
     ListLeadComponent,
     ListEmployeeComponent,
-    CreateLeadComponent
+    CreateLeadComponent,
+    CreateCampaignComponent,
+    CreateStateMasterComponent,
+    ListCampaignComponent
   ],
   imports: [
     BrowserModule,

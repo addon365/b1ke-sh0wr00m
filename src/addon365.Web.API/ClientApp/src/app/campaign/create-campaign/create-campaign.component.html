@@ -1,0 +1,56 @@
+<h3>Create Campaign</h3>
+<div fxLayout="column" fxLayoutGap="20px" class="example-form">
+  <form name="createCampaign">
+    <div fxLayout="column">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Campaign Name"
+          value=""
+          name="campaignName"
+          [(ngModel)]="campaign.name"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Leave a Descripiton"
+          name="campaignDescription"
+          [(ngModel)]="campaign.description"
+        >
+        </textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="Sub Districts"
+          aria-label="Number"
+          matInput
+          [formControl]="subDistrictControl"
+          [matAutocomplete]="sdauto"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #sdauto="matAutocomplete"
+          name="subDistrict"
+          [displayWith]="displaySubDistrict"
+          (optionSelected)="onSubDistrictSelectionChanged($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredSubDistricts | async"
+            [value]="option"
+          >
+            {{ option.subDistrictName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <label
+        style:visibility="hidden"
+        [innerHtml]="errorMessage"
+        class="error"
+      ></label>
+      <button mat-raised-button (click)="onSave()">Save</button>
+    </div>
+  </form>
+</div>

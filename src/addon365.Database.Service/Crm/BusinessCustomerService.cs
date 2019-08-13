@@ -16,7 +16,7 @@ namespace addon365.Database.Service.Crm
         }
 
 
-        public BusinessCustomer Save(BusinessCustomer obj)
+        public override BusinessCustomer Save(BusinessCustomer obj)
         {
             if (FindByMobile(obj.Contact.MobileNumber,
                 obj.Contact.Landline) != null)
