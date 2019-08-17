@@ -171,7 +171,7 @@ namespace addon365.Web.API.Controllers.CRM
                     lead.Contact = new BusinessContact
                     {
                         BusinessName = businessName,
-                        ContactAddress = new Master
+                        ContactAddress = new Database.Entity.Crm.Address.Master
                         {
                             AddressLine1 = address1,
                             AddressLine2 = address2,

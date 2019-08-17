@@ -35,11 +35,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListLeadComponent } from './lead/list-lead/list-lead.component';
 import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
 import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
-<<<<<<< HEAD
-import { CreateStateMasterComponent } from './Address/StateMaster/create-StateMaster/create-statemaster.component';
-=======
 import { Globals } from "./global";
->>>>>>> 852dbbf138f0c2b5ea0bf025646c2cc39e0ef3b9
+import { CreateStateMasterComponent } from "./Address/StateMaster/create-StateMaster/create-statemaster.component";
+import { ListStateMasterComponent } from './Address/StateMaster/list-state-master/list-state-master.component';
+
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
@@ -69,7 +68,9 @@ const routes: Routes = [
     UploadDialogComponent,
     ListLeadComponent,
     ListEmployeeComponent,
-    CreateLeadComponent
+    CreateLeadComponent,
+    CreateStateMasterComponent,
+    ListStateMasterComponent
   ],
   imports: [
     BrowserModule,

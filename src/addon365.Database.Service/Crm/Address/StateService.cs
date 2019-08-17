@@ -12,5 +12,6 @@ namespace addon365.Database.Service.Crm.Address
             : base(unitOfWork)
         {
         }
+
     }
 }

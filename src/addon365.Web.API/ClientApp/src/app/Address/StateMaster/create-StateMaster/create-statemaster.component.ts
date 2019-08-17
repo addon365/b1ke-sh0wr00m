@@ -24,7 +24,7 @@ export class CreateStateMasterComponent implements OnInit {
     this.StateService.postState(this.StateMaster)
     .subscribe(x=>{
       console.log("RESULT:"+x);
-      this.router.navigate(["/list-lead"]);
+      
     });
   }
 }

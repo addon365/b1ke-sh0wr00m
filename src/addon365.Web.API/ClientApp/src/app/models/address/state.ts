@@ -1,5 +1,4 @@
-export class State{
-    id:string;
-    stateName:string;
-    code:string;
+export class StateMaster{
+    StateName:string;
+    Code:string;
 }

@@ -11,7 +11,7 @@ import { state } from "@angular/animations";
 })
 export class stateMasterService {
   URL: string = AppContants.BASE_URL;
-  CONTROLLER: string = "StateMasters";
+  CONTROLLER: string = "master/state";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -24,6 +24,6 @@ export class stateMasterService {
     
    
     var url = this.URL + this.CONTROLLER;
-    return this.httpClient.post(url,[stateMaster]);
+    return this.httpClient.post(url,stateMaster);
   }
 }

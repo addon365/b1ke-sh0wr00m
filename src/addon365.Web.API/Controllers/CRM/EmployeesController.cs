@@ -121,7 +121,7 @@ namespace addon365.Web.API.Controllers.CRM
                     employee.Profile = new Database.Entity.Crm.Contact
                     {
 
-                        ContactAddress = new Master
+                        ContactAddress = new Database.Entity.Crm.Address.Master
                         {
                             AddressLine1 = address1,
                             AddressLine2 = address2,
