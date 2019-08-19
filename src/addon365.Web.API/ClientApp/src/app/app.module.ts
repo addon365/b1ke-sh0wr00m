@@ -29,17 +29,18 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ListCustomerComponent } from "./customer/list-customer/list-customer.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import { UploadDialogComponent } from './dialogs/upload-dialog/upload-dialog.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { ToastrModule } from 'ngx-toastr';
-import { ListLeadComponent } from './lead/list-lead/list-lead.component';
-import { ListEmployeeComponent } from './employee/list-employee/list-employee.component';
-import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
+import { UploadDialogComponent } from "./dialogs/upload-dialog/upload-dialog.component";
+import { AngularFontAwesomeModule } from "angular-font-awesome";
+import { ToastrModule } from "ngx-toastr";
+import { MatChipsModule } from "@angular/material/chips";
+import { ListEmployeeComponent } from "./employee/list-employee/list-employee.component";
+import { CreateLeadComponent } from "./lead/create-lead/create-lead.component";
 
-import { CreateStateMasterComponent } from './Address/StateMaster/create-StateMaster/create-statemaster.component';
-import { CreateCampaignComponent } from './campaign/create-campaign/create-campaign.component';
+import { CreateStateMasterComponent } from "./Address/StateMaster/create-StateMaster/create-statemaster.component";
+import { CreateCampaignComponent } from "./campaign/create-campaign/create-campaign.component";
 import { Globals } from "./global";
-import { ListCampaignComponent } from './campaign/list-campaign/list-campaign.component';
+import { ListCampaignComponent } from "./campaign/list-campaign/list-campaign.component";
+import { ListLeadComponent } from "./lead/list-lead/list-lead.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
@@ -57,8 +58,8 @@ const routes: Routes = [
   { path: "create-lead", component: CreateLeadComponent },
   { path: "list-employee", component: ListEmployeeComponent },
   { path: "create-state", component: CreateStateMasterComponent },
-  { path: "create-campaign", component: CreateCampaignComponent },
-  { path: "list-campaign", component: ListCampaignComponent },
+  { path: "create-campaign/:id", component: CreateCampaignComponent },
+  { path: "list-campaign", component: ListCampaignComponent }
 ];
 @NgModule({
   declarations: [
@@ -70,11 +71,12 @@ const routes: Routes = [
     ListAppointmentComponent,
     ListCustomerComponent,
     UploadDialogComponent,
+    CreateStateMasterComponent,
     ListLeadComponent,
     ListEmployeeComponent,
     CreateLeadComponent,
     CreateCampaignComponent,
-    CreateStateMasterComponent,
+
     ListCampaignComponent
   ],
   imports: [
@@ -95,7 +97,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatSidenavModule,
     MatListModule,
-
+    MatChipsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
@@ -104,10 +106,9 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule,
-    
+    MatTableModule
   ],
-  providers: [MatDatepickerModule,Globals],
+  providers: [MatDatepickerModule, Globals],
   bootstrap: [AppComponent],
   entryComponents: [UploadDialogComponent]
 })

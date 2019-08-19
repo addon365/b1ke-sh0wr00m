@@ -41,13 +41,12 @@ namespace addon365.Web.API.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult Put(Guid id, T tObj)
         {
             try
             {
-                baseService.Update(id, tObj);
-                return Ok();
+                return Ok(baseService.Update(id, tObj));
             }
             catch (Exception exception)
             {

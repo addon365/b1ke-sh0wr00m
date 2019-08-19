@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AppContants } from "../../utils/AppContants";
 
-import { StateMaster } from "../../models/StateMaster";
+import { StateMaster } from "../../models/state-master";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { state } from "@angular/animations";

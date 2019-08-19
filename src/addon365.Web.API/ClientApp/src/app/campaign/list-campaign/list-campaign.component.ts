@@ -3,6 +3,7 @@ import { CampaingService } from "src/app/services/campaing.service";
 
 import { Campaign } from "src/app/models/campaign";
 import { CampaignViewModel } from "src/app/models/view-model/campaign-view-model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-list-campaign",
@@ -14,13 +15,22 @@ export class ListCampaignComponent implements OnInit {
     "campaignName",
     "description",
     "filter",
-    "count"
+    "count",
+    "edit"
   ];
   dataSource: Array<CampaignViewModel>;
-  constructor(private campaignService: CampaingService) {}
+  constructor(
+    private campaignService: CampaingService,
+    private router: Router
+  ) {}
   ngOnInit() {
     this.campaignService.getCampaigns().subscribe(campaigns => {
       this.dataSource = campaigns;
     });
+  }
+
+  handleEdit(campaignObj: CampaignViewModel) {
+    console.log("handlind Edit event");
+    this.router.navigate(["/create-campaign", campaignObj.id]);
   }
 }

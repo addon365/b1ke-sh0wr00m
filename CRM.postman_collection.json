@@ -1,0 +1,541 @@
+{
+	"info": {
+		"_postman_id": "edf46f93-c799-4f5f-afd2-3e21fef4664b",
+		"name": "CRM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"UserId\": \"kamazhi\",\n\t\"Password\": \"password\",\n\t\"UserName\": \"Kamazhi\",\n\t\"RoleGroupId\":\"59E5C8D8-5127-4322-9356-13AAE7E00ACD\"\n\t\n}"
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/User",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "userId",
+							"value": "balaji",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/User/authenticate",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lead Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"e3bc7d2f-5434-402e-af79-e2b13032ecd1\",\n    \"history\": [\n        {\n            \"id\": \"3aa49a8f-9f45-4096-90f3-56acef7d6270\",\n            \"statusId\": \"3aa49a8f-9f45-4096-90f3-56acef7d6270\",\n            \"extraData\": \"Commentas\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Leads/status",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Leads",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LeadStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/LeadStatus",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"LeadStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FCM Token",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "Id",
+							"value": "38c7ab99-a7e7-41df-bd14-e1f1860da751",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "MyToken_942d44dd443ddd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/User/token",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"User",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LeadSource",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"JustDial\",\r\n    \"Description\": \"Lead provided by Just Dial \"\r\n\r\n  }"
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/leadsource",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"leadsource"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AppointmentActual",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Appointments/actual",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Appointments",
+						"actual"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AppointmentBasedOnUserId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Appointments?userId=8bacda45-ba59-46a2-91f6-de1633c06840",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Appointments"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "8bacda45-ba59-46a2-91f6-de1633c06840"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leads Followup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Leads/followup",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Leads",
+						"followup"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1f3106e8-2810-4f44-a038-8db44e9fd59c",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/User",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LeadByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Leads?id=1f3106e8-2810-4f44-a038-8db44e9fd59c",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Leads"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1f3106e8-2810-4f44-a038-8db44e9fd59c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LeadStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/LeadStatus",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"LeadStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LeadWithStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Leads/status",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Leads",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/Employees",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"Employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Campaign",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"Name\":\"New\",\n\t\"Description\":\"Wnpro\",\n\t\"Filter\":\"82dbccaf-ee0f-471d-9308-f341f75c9789\"\n}]"
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/campaign",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"campaign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CampaignInfoById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/campaign/info?campaignId=57b18dea-642f-4810-82ec-35797afe1ec1",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"campaign",
+						"info"
+					],
+					"query": [
+						{
+							"key": "campaignId",
+							"value": "57b18dea-642f-4810-82ec-35797afe1ec1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CampaignListViewModel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/campaign/listvm",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"campaign",
+						"listvm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Campaign infos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/campaign/infos?campaignId=0f8d1928-de09-453b-9747-373509cb021b",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"campaign",
+						"infos"
+					],
+					"query": [
+						{
+							"key": "campaignId",
+							"value": "0f8d1928-de09-453b-9747-373509cb021b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Campaign Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/campaign/info?campaignInfoId=57b18dea-642f-4810-82ec-35797afe1ec1",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"campaign",
+						"info"
+					],
+					"query": [
+						{
+							"key": "campaignInfoId",
+							"value": "57b18dea-642f-4810-82ec-35797afe1ec1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -9,6 +9,12 @@ import { CampaignViewModel } from "../models/view-model/campaign-view-model";
   providedIn: "root"
 })
 export class CampaingService {
+  edit(campaign: Campaign): Observable<Campaign> {
+    return this.httpClient.put<Campaign>(
+      this.URL + "campaign/" + campaign.id,
+      campaign
+    );
+  }
   URL: string = AppContants.BASE_URL;
 
   constructor(private httpClient: HttpClient) {}
@@ -20,6 +26,11 @@ export class CampaingService {
   }
 
   getCampaigns(): Observable<Array<CampaignViewModel>> {
-    return this.httpClient.get<Array<CampaignViewModel>>(this.URL + "campaign/listvm");
+    return this.httpClient.get<Array<CampaignViewModel>>(
+      this.URL + "campaign/listvm"
+    );
+  }
+  getCampaign(id: string): Observable<Campaign> {
+    return this.httpClient.get<Campaign>(this.URL + "campaign?id=" + id);
   }
 }

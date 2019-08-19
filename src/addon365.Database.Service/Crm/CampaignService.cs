@@ -8,6 +8,7 @@ using Threenine.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using addon365.Domain.Entity.Crm;
+using addon365.Database.Entity.Crm.Address;
 
 namespace addon365.Database.Service.Crm
 {
@@ -30,24 +31,29 @@ namespace addon365.Database.Service.Crm
                 UnitOfWork.GetRepository<LeadStatusMaster>()
                 .GetList(x => x.Name == "Customer")
                 .Items.SingleOrDefault();
-            Guid? find = Guid.Parse(campaign.Filter);
 
-            var result = CrmContext.Leads
-                .Where(x => x.Contact.ContactAddress.SubDistrictId == find)
-                .ToArray();
-
-            campaign.Infos = new List<CampaignInfo>(result.Length);
-
-            for (int i = 0; i < result.Length; i++)
+            //currently we have support to parse multiple subDistrictIds with comma separator.
+            string[] strSubDistrictIds = campaign.Filter.Split(',');
+            campaign.Infos = new List<CampaignInfo>();
+            for (int si = 0; si < strSubDistrictIds.Length; si++)
             {
-                CampaignInfo campaignInfo =
-                    new CampaignInfo();
-                campaignInfo.Id = Guid.NewGuid();
-                campaignInfo.IsInProgress = false;
-                campaignInfo.LeadId = result[i].Id;
-                campaign.Infos.Add(campaignInfo);
-            }
+                Guid? find = Guid.Parse(strSubDistrictIds[si]);
 
+                var result = CrmContext.Leads
+                    .Where(x => x.Contact.ContactAddress.SubDistrictId == find)
+                    .ToArray();
+
+
+                for (int i = 0; i < result.Length; i++)
+                {
+                    CampaignInfo campaignInfo =
+                        new CampaignInfo();
+                    campaignInfo.Id = Guid.NewGuid();
+                    campaignInfo.IsInProgress = false;
+                    campaignInfo.LeadId = result[i].Id;
+                    campaign.Infos.Add(campaignInfo);
+                }
+            }
             Repository.Add(campaign);
             UnitOfWork.SaveChanges();
 
@@ -56,6 +62,8 @@ namespace addon365.Database.Service.Crm
 
         public List<CampaignViewModel> GetCampaigns()
         {
+
+            var subDistricts = CrmContext.SubDistricts.ToList();
             return CrmContext.Campaigns
                 .Include(x => x.Infos)
                 .Select<Campaign, CampaignViewModel>(x =>
@@ -64,13 +72,24 @@ namespace addon365.Database.Service.Crm
                          Id = x.Id,
                          Name = x.Name,
                          Description = x.Description,
-                         Filter = CrmContext.SubDistricts.Where(y => y.Id == Guid.Parse(x.Filter)).SingleOrDefault().SubDistrictName,
+                         Filter = GetFilterNames(subDistricts, x.Filter),
                          Count = x.Infos.Count
                      }
                 ).ToList();
 
         }
 
+        private string GetFilterNames(List<SubDistrictMaster> subDistrictMasters, string filter)
+        {
+            string[] strFilters = filter.Split(',');
+            string strFilter = subDistrictMasters.Where(y => y.Id == Guid.Parse(strFilters[0])).SingleOrDefault().SubDistrictName;
+            for (int i = 1; i < strFilters.Length; i++)
+            {
+                strFilter += "," + subDistrictMasters.Where(y => y.Id == Guid.Parse(strFilters[i])).SingleOrDefault().SubDistrictName;
+            }
+
+            return strFilter;
+        }
 
         public List<CampaignInfoViewModel> FindCampaignInfos(Guid campaignId)
         {
@@ -78,7 +97,9 @@ namespace addon365.Database.Service.Crm
             var dbCampaigns = CrmContext.Campaigns;
             var dbCampaignInfo = CrmContext.CampaignInfos;
 
-            return dbCampaigns.Join<Campaign, CampaignInfo, Guid, CampaignInfoViewModel>(
+            return dbCampaigns
+                .Where(campaign => campaign.Id == campaignId)
+                .Join<Campaign, CampaignInfo, Guid, CampaignInfoViewModel>(
                 dbCampaignInfo,
                 campaign => campaign.Id,
                 campaignInfo => campaignInfo.CampaignId,
@@ -116,5 +137,52 @@ namespace addon365.Database.Service.Crm
                  .Where(campaignInfo => campaignInfo.Id == campaignInfoId)
                  .SingleOrDefault();
         }
+        public override Campaign Update(Guid id, Campaign campaign)
+        {
+
+            Campaign foundCampaign = CrmContext.Campaigns
+                .Include(c => c.Infos)
+                .Single(c => c.Id == campaign.Id);
+
+            foundCampaign.Infos.Clear();
+            foundCampaign.Name = campaign.Name;
+            foundCampaign.Description = campaign.Description;
+            foundCampaign.Filter = campaign.Filter;
+            var customerStatus =
+                UnitOfWork.GetRepository<LeadStatusMaster>()
+                .GetList(x => x.Name == "Customer")
+                .Items.SingleOrDefault();
+
+            //currently we have support to parse multiple subDistrictIds with comma separator.
+            string[] strSubDistrictIds = campaign.Filter.Split(',');
+
+            for (int si = 0; si < strSubDistrictIds.Length; si++)
+            {
+                Guid? find = Guid.Parse(strSubDistrictIds[si]);
+
+                var result = CrmContext.Leads
+                    .Where(x => x.Contact.ContactAddress.SubDistrictId == find)
+                    .ToArray();
+
+
+                for (int i = 0; i < result.Length; i++)
+                {
+                    Lead lead = result[i];
+
+                    CampaignInfo campaignInfo =
+                        new CampaignInfo();
+                    campaignInfo.Id = Guid.NewGuid();
+                    campaignInfo.IsInProgress = false;
+                    campaignInfo.LeadId = result[i].Id;
+                    foundCampaign.Infos.Add(campaignInfo);
+                }
+            }
+
+            CrmContext.SaveChanges();
+
+            return foundCampaign;
+        }
     }
+
+
 }

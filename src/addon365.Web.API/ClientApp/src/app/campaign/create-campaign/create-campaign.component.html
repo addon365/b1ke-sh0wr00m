@@ -21,30 +21,41 @@
         </textarea>
       </mat-form-field>
 
-      <mat-form-field>
-        <input
-          type="text"
-          placeholder="Sub Districts"
-          aria-label="Number"
-          matInput
-          [formControl]="subDistrictControl"
-          [matAutocomplete]="sdauto"
-        />
+      <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Sub District Selection">
+          <mat-chip
+            *ngFor="let subDistrict of selectedSubDistricts"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(subDistrict)"
+          >
+            {{ subDistrict.subDistrictName }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Add Sub District"
+            #subDistrictInput
+            [formControl]="subDistrictCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
         <mat-autocomplete
-          autoActiveFirstOption
-          #sdauto="matAutocomplete"
-          name="subDistrict"
-          [displayWith]="displaySubDistrict"
-          (optionSelected)="onSubDistrictSelectionChanged($event)"
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
         >
           <mat-option
-            *ngFor="let option of filteredSubDistricts | async"
-            [value]="option"
+            *ngFor="let subDistrict of filteredSubDistricts | async"
+            [value]="subDistrict"
           >
-            {{ option.subDistrictName }}
+            {{ subDistrict.subDistrictName }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+
       <label
         style:visibility="hidden"
         [innerHtml]="errorMessage"
