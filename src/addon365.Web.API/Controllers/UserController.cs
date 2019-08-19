@@ -108,5 +108,19 @@ namespace addon365.Web.API.Controllers
             return Ok(createdUser);
         }
 
+        [HttpPut("changePassword/{id}")]
+        public IActionResult ChangePassword(Guid id, [FromForm]string oldPassword, [FromForm]string newPassword)
+        {
+            string errorMessage = _userService.ChangePassword(id, oldPassword, newPassword);
+            if (errorMessage != null)
+            {
+                return BadRequest(errorMessage);
+            }
+            else
+            {
+                return Ok("Password Changed Succcessfully");
+            }
+        }
+
     }
 }

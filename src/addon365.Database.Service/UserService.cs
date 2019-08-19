@@ -67,28 +67,7 @@ namespace addon365.Database.Service
         {
             return _unitOfWork.GetRepository<User>().GetList().Items;
         }
-        public User ChangePassword(Guid id, string oldPassword,
-            string newPassword)
-        {
-            User user = Find(id);
-            if (user == null)
-                return null;
-            //Validating old password
-            user = Validate(user.UserId, oldPassword);
-
-            if (user == null)
-                return null;
-
-            //Updating new password
-            user.Password = newPassword;
-            byte[] salt = CreateSalt();
-            user.ConfirmPassword = Convert.ToBase64String(salt);
-            user.Password = GenerateHash(user.Password, salt);
-            _unitOfWork.GetRepository<User>()
-                .Update(user);
-            _unitOfWork.SaveChanges();
-            return Find(id);
-        }
+      
         public User FindUser(string userId)
         {
             IRepository<User> repository = _unitOfWork
@@ -150,6 +129,31 @@ namespace addon365.Database.Service
                 return null;
 
             return users[0].NotificationToken;
+
+        }
+
+        public string ChangePassword(Guid id, string oldPassword, string newPassword)
+        {
+            IRepository<User> repository = _unitOfWork
+               .GetRepository<User>();
+            var users = repository.GetList(predicate: u => u.Id == id).Items;
+            if (users == null || users.Count == 0)
+            {
+                return "User not found";
+            }
+
+            User user = users[0];
+            string oldPasswordHash = GetHash(oldPassword, user.ConfirmPassword);
+            if (oldPasswordHash.CompareTo(user.Password) != 0)
+                return "Invalid password";
+            byte[] salt = CreateSalt();
+            string newPassHash = GenerateHash(newPassword, salt);
+            user.ConfirmPassword = Convert.ToBase64String(salt);
+            user.Password = newPassHash;
+            repository.Update(user);
+            _unitOfWork.SaveChanges();
+            return null;
+
 
         }
     }
