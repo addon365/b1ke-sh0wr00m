@@ -121,6 +121,8 @@ namespace addon365.Web.API
 
             services.AddTransient<IRoleGroupService, RoleGroupService>();
 
+            services.AddTransient<ICampaignService, CampaignService>();
+
             #endregion
             services.AddScoped<RequestInfo>();
 

@@ -9,7 +9,7 @@ namespace addon365.IService
         User Validate(string userId, string password);
         User InsertUser(User user);
         IEnumerable<User> GetUsers();
-
+        string ChangePassword(Guid id, string oldPassword, string newPassword);
         User FindUser(string userId);
 
         User UpdateToken(Guid userId, string token);

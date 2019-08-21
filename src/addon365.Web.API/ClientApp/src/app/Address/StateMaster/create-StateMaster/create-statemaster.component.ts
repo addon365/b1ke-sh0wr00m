@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { stateMasterService } from "src/app/services/Address/stateMaster.service";
 import { State} from "src/app/models/Address/State";
 import { Router } from "@angular/router";
+import { StateMaster } from "src/app/models/state-master";
 
 @Component({
   selector: "app-create-statemaster",
@@ -11,20 +12,21 @@ import { Router } from "@angular/router";
 export class CreateStateMasterComponent implements OnInit {
   StateMaster:State;
 
- 
-  constructor(private StateService: stateMasterService,private router: Router) {}
+  constructor(
+    private StateService: stateMasterService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.StateMaster=new State();
   
   }
-  onSave(){
+  onSave() {
     console.log(this.StateMaster);
 
-    this.StateService.postState(this.StateMaster)
-    .subscribe(x=>{
-      console.log("RESULT:"+x);
-      
+    this.StateService.postState(this.StateMaster).subscribe(x => {
+      console.log("RESULT:" + x);
+      this.router.navigate(["/list-lead"]);
     });
   }
 }

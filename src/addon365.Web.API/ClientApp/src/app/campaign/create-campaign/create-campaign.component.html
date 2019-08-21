@@ -1,0 +1,67 @@
+<h3>Create Campaign</h3>
+<div fxLayout="column" fxLayoutGap="20px" class="example-form">
+  <form name="createCampaign">
+    <div fxLayout="column">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Campaign Name"
+          value=""
+          name="campaignName"
+          [(ngModel)]="campaign.name"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Leave a Descripiton"
+          name="campaignDescription"
+          [(ngModel)]="campaign.description"
+        >
+        </textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Sub District Selection">
+          <mat-chip
+            *ngFor="let subDistrict of selectedSubDistricts"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(subDistrict)"
+          >
+            {{ subDistrict.subDistrictName }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="Add Sub District"
+            #subDistrictInput
+            [formControl]="subDistrictCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option
+            *ngFor="let subDistrict of filteredSubDistricts | async"
+            [value]="subDistrict"
+          >
+            {{ subDistrict.subDistrictName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <label
+        style:visibility="hidden"
+        [innerHtml]="errorMessage"
+        class="error"
+      ></label>
+      <button mat-raised-button (click)="onSave()">Save</button>
+    </div>
+  </form>
+</div>

@@ -38,6 +38,10 @@ import { CreateLeadComponent } from './lead/create-lead/create-lead.component';
 import { Globals } from "./global";
 import { CreateStateMasterComponent } from "./Address/StateMaster/create-StateMaster/create-statemaster.component";
 import { ListStateMasterComponent } from './Address/StateMaster/list-state-master/list-state-master.component';
+import { MatChipsModule } from "@angular/material/chips";
+import { CreateCampaignComponent } from "./campaign/create-campaign/create-campaign.component";
+import { ListCampaignComponent } from "./campaign/list-campaign/list-campaign.component";
+
 
 const routes: Routes = [
   { path: "", redirectTo: "list-appointment", pathMatch: "full" },
@@ -56,6 +60,8 @@ const routes: Routes = [
   { path: "list-employee", component: ListEmployeeComponent },
   { path: "list-state", component: ListStateMasterComponent },
   { path: "create-state", component: CreateStateMasterComponent },
+  { path: "create-campaign/:id", component: CreateCampaignComponent },
+  { path: "list-campaign", component: ListCampaignComponent }
 ];
 @NgModule({
   declarations: [
@@ -67,11 +73,14 @@ const routes: Routes = [
     ListAppointmentComponent,
     ListCustomerComponent,
     UploadDialogComponent,
+    CreateStateMasterComponent,
     ListLeadComponent,
     ListEmployeeComponent,
     CreateLeadComponent,
     CreateStateMasterComponent,
-    ListStateMasterComponent
+    ListStateMasterComponent,
+    CreateCampaignComponent,
+    ListCampaignComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +100,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatSidenavModule,
     MatListModule,
-
+    MatChipsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
@@ -100,10 +109,9 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule,
-    
+    MatTableModule
   ],
-  providers: [MatDatepickerModule,Globals],
+  providers: [MatDatepickerModule, Globals],
   bootstrap: [AppComponent],
   entryComponents: [UploadDialogComponent]
 })

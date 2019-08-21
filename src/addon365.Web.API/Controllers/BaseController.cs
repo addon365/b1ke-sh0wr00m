@@ -28,7 +28,7 @@ namespace addon365.Web.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public IActionResult Post(IList<T> tObj)
+        public virtual IActionResult Post(IList<T> tObj)
         {
             try
             {
@@ -41,13 +41,12 @@ namespace addon365.Web.API.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult Put(Guid id, T tObj)
         {
             try
             {
-                baseService.Update(id, tObj);
-                return Ok();
+                return Ok(baseService.Update(id, tObj));
             }
             catch (Exception exception)
             {
