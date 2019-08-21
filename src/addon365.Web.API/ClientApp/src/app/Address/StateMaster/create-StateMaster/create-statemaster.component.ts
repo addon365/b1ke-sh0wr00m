@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { stateMasterService } from "src/app/services/Address/stateMaster.service";
-import { StateMaster } from "src/app/models/StateMaster";
+import { State} from "src/app/models/Address/State";
 import { Router } from "@angular/router";
 
 @Component({
@@ -9,13 +9,13 @@ import { Router } from "@angular/router";
   styleUrls: ["./create-statemaster.component.css"]
 })
 export class CreateStateMasterComponent implements OnInit {
-  StateMaster:StateMaster;
+  StateMaster:State;
 
  
   constructor(private StateService: stateMasterService,private router: Router) {}
 
   ngOnInit() {
-    this.StateMaster=new StateMaster();
+    this.StateMaster=new State();
   
   }
   onSave(){

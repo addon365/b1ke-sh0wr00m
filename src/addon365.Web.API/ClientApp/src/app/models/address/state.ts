@@ -1,4 +1,4 @@
-export class StateMaster{
-    StateName:string;
+export class State{
+    stateName:string;
     Code:string;
 }

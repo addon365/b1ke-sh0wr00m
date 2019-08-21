@@ -1,3 +1,35 @@
-<p>
-  list-state-master works!
-</p>
+<div class="box" fxLayout="column" fxLayoutAlign="space-evenly none">
+  <h3>List States</h3>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <div>
+      <button mat-raised-button
+              color="accent"
+              mat-button
+              [matMenuTriggerFor]="menu">
+        Add State
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/create-state']">
+          Create New state
+        </button>
+      
+      </mat-menu>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+    <!-- Name Column -->
+    <ng-container matColumnDef="stateName">
+      <th mat-header-cell *matHeaderCellDef>state Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.stateName }}
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

@@ -54,6 +54,7 @@ const routes: Routes = [
   { path: "list-lead", component: ListLeadComponent },
   { path: "create-lead", component: CreateLeadComponent },
   { path: "list-employee", component: ListEmployeeComponent },
+  { path: "list-state", component: ListStateMasterComponent },
   { path: "create-state", component: CreateStateMasterComponent },
 ];
 @NgModule({
