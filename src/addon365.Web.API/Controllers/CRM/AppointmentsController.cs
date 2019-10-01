@@ -43,15 +43,15 @@ namespace addon365.Web.API.Controllers.CRM
                     string token = _userService.GetToken(id);
                     string message = "New appointment has been assigned to you.";
 
-                    NotificationService.SendNotification(token, "Appointment Assigned",
-                          message,
-                          data: new Dictionary<string, string>()
-                          {
-                            { "type","appointment" },
-                            {"id",$"{appointment.Id}" }
+                    //NotificationService.SendNotification(token, "Appointment Assigned",
+                    //      message,
+                    //      data: new Dictionary<string, string>()
+                    //      {
+                    //        { "type","appointment" },
+                    //        {"id",$"{appointment.Id}" }
 
-                          }
-                          );
+                    //      }
+                    //      );
                 }
 
 

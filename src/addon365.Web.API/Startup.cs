@@ -134,24 +134,24 @@ namespace addon365.Web.API
 
             #endregion
             services.AddScoped<RequestInfo>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver =
-                    new CamelCasePropertyNamesContractResolver();
-            }); ;
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Version = "v1",
-                    Title = "My API",
-                    Description = "My First ASP.NET Core Web API",
-                    TermsOfService = "None",
-                    Contact = new Contact() { Name = "Talking Dotnet", Email = "contact@addon.cc", Url = "www.addon.cc" }
-                });
-            });
+            services.AddControllers();
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            //    .AddJsonOptions(options =>
+            //{
+            //    options.SerializerSettings.ContractResolver =
+            //        new CamelCasePropertyNamesContractResolver();
+            //}); ;
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info
+            //    {
+            //        Version = "v1",
+            //        Title = "My API",
+            //        Description = "My First ASP.NET Core Web API",
+            //        TermsOfService = "None",
+            //        Contact = new Contact() { Name = "Talking Dotnet", Email = "contact@addon.cc", Url = "www.addon.cc" }
+            //    });
+            //});
             services.AddApiVersioning(o =>
             {
                 o.AssumeDefaultVersionWhenUnspecified = true;
@@ -233,19 +233,21 @@ namespace addon365.Web.API
                 SupportedCultures = new List<CultureInfo> { defaultCulture },
                 SupportedUICultures = new List<CultureInfo> { defaultCulture }
             });
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute("default",
+                //endpoints.MapHealthChecks("/health");
+                endpoints.MapControllerRoute("default",
                     "{controller}/{action}/{id?}",
                     new { controller = "echo" }
                 );
             });
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //});
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

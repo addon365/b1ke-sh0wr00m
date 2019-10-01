@@ -92,5 +92,10 @@ namespace addon365.WebClient.Service.WebService
         {
             throw new NotImplementedException();
         }
+
+        public string ChangePassword(Guid id, string oldPassword, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

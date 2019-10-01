@@ -3,7 +3,6 @@ using addon365.Database.Service.Base;
 using addon365.Database.Service.Util;
 using addon365.Domain.Entity.Crm;
 using addon365.IService.Crm;
-using FirebaseAdmin.Messaging;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -135,13 +134,13 @@ namespace addon365.Database.Service.Crm
 
             if (sendNotification)
             {
-                UserService service = new UserService(UnitOfWork);
-                string token = service.GetToken((Guid)model.AssignedToId);
-                NotificationService.SendNotification(token, "Appointment Assigned",
-                    "Appointment reassigned to  you", data: new Dictionary<string, string>(){
-                        {"type","Appointment" },
-                        {"id",id.ToString() }
-                });
+                //UserService service = new UserService(UnitOfWork);
+                //string token = service.GetToken((Guid)model.AssignedToId);
+                //NotificationService.SendNotification(token, "Appointment Assigned",
+                //    "Appointment reassigned to  you", data: new Dictionary<string, string>(){
+                //        {"type","Appointment" },
+                //        {"id",id.ToString() }
+                //});
             }
 
             return Find(outAppointment.Id);
@@ -222,31 +221,31 @@ namespace addon365.Database.Service.Crm
         #endregion
 
 
-        private Task<string> SendNotification(string token,
-          string title, string messageBody, IReadOnlyDictionary<string, string> data)
-        {
-            // This registration token comes from the client FCM SDKs.
-            var registrationToken = token;
+    //    private Task<string> SendNotification(string token,
+    //      string title, string messageBody, IReadOnlyDictionary<string, string> data)
+    //    {
+    //        // This registration token comes from the client FCM SDKs.
+    //        var registrationToken = token;
 
-            // See documentation on defining a message payload.
-            var message = new Message()
-            {
-                Notification = new Notification()
-                {
-                    Title = title,
-                    Body = messageBody
-                },
-                Data = data,
-                Token = registrationToken,
-            };
+    //        // See documentation on defining a message payload.
+    //        var message = new Message()
+    //        {
+    //            Notification = new Notification()
+    //            {
+    //                Title = title,
+    //                Body = messageBody
+    //            },
+    //            Data = data,
+    //            Token = registrationToken,
+    //        };
 
-            // Send a message to the device corresponding to the provided
-            // registration token.
+    //        // Send a message to the device corresponding to the provided
+    //        // registration token.
 
 
-            // Response is a message ID string.
-            return
-            FirebaseMessaging.DefaultInstance.SendAsync(message);
-        }
+    //        // Response is a message ID string.
+    //        return
+    //        FirebaseMessaging.DefaultInstance.SendAsync(message);
+    //    }
     }
 }
