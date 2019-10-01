@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="Moq" Version="4.13.0" />
     <PackageReference Include="NBuilder" Version="6.0.1" />
+    <PackageReference Include="Threenine.Data" Version="1.1.5" />
     <PackageReference Include="Threenine.Map" Version="1.0.3" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
@@ -24,11 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj" />
-    <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
-    <ProjectReference Include="..\addon365.IService\addon365.IService.csproj" />
-    <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj" />
-    <ProjectReference Include="..\addon365.Web.API\addon365.Web.API.csproj" />
+    <ProjectReference Include="..\..\addon365.Database.Entity\addon365.Database.Entity.csproj" />
+    <ProjectReference Include="..\..\addon365.Database\addon365.Database.csproj" />
+    <ProjectReference Include="..\..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
+    <ProjectReference Include="..\..\addon365.Database.Service\addon365.Database.Service.csproj" />
   </ItemGroup>
 
 </Project>

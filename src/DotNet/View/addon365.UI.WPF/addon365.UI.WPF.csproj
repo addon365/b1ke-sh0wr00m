@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B239AB87-442B-4C26-AC4E-203FA16CD40F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>addon365.UI.WPF</RootNamespace>
+    <AssemblyName>addon365.UI.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;production</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;production</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ReachFramework" />
+    <Reference Include="sapbusinessobjects.wpf.viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.ReportControls.Wpf, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.ReportViewer.WPF, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.ReportWriter.Base, Version=16.3460.0.17, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Chit\CloseSubscription.xaml.cs">
+      <DependentUpon>CloseSubscription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\DuePaymentWindow.xaml.cs">
+      <DependentUpon>DuePaymentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\FindSubscriptionsWindow.xaml.cs">
+      <DependentUpon>FindSubscriptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\NewSchemaWindow.xaml.cs">
+      <DependentUpon>NewSchemaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\NewSubscriberWindow.xaml.cs">
+      <DependentUpon>NewSubscriberWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chit\Reports\SubscriberReportWindow.xaml.cs">
+      <DependentUpon>SubscriberReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\BookingListWindow.xaml.cs">
+      <DependentUpon>BookingListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\PurchaseList.xaml.cs">
+      <DependentUpon>PurchaseList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\SellerListWindow.xaml.cs">
+      <DependentUpon>SellerListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\PropertyValue.xaml.cs">
+      <DependentUpon>PropertyValue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\Seller.xaml.cs">
+      <DependentUpon>Seller.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\Purchase.xaml.cs">
+      <DependentUpon>Purchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTab\ChitTab.xaml.cs">
+      <DependentUpon>ChitTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AppSettings.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="CRM\Contact\ContactListWindow.xaml.cs">
+      <DependentUpon>ContactListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CRM\FollowUp.xaml.cs">
+      <DependentUpon>FollowUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\EnquiryBooking.xaml.cs">
+      <DependentUpon>EnquiryBooking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportViewer.xaml.cs">
+      <DependentUpon>ReportViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\VechicleSale.xaml.cs">
+      <DependentUpon>VechicleSale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\EnquiriesStatusWindow.xaml.cs">
+      <DependentUpon>EnquiriesStatusWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\EnquiriesTypeWindow.xaml.cs">
+      <DependentUpon>EnquiriesTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\EnquriesTypeListWindow.xaml.cs">
+      <DependentUpon>EnquriesTypeListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\EnquriesListWindow.xaml.cs">
+      <DependentUpon>EnquriesListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductCompanyListWindow.xaml.cs">
+      <DependentUpon>ProductCompanyListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductCompanyWindow.xaml.cs">
+      <DependentUpon>ProductCompanyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\SparesAccessories.xaml.cs">
+      <DependentUpon>SparesAccessories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\VehicleAccessories.xaml.cs">
+      <DependentUpon>VehicleAccessories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductListWindow.xaml.cs">
+      <DependentUpon>ProductListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductWindow.xaml.cs">
+      <DependentUpon>ProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTab\Folder.xaml.cs">
+      <DependentUpon>Folder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTab\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTab\SendRecieve.xaml.cs">
+      <DependentUpon>SendRecieve.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RibbonTab\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AppSettingLocator.cs" />
+    <Compile Include="Settings\IConfigProvider.cs" />
+    <Compile Include="Settings\SettingsConfigProvider.cs" />
+    <Compile Include="SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\InternetAvailability.cs" />
+    <Compile Include="Zonal\ZonalListWindow.xaml.cs">
+      <DependentUpon>ZonalListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Zonal\ZonalWindow.xaml.cs">
+      <DependentUpon>ZonalWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Chit\CloseSubscription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\DuePaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\FindSubscriptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\NewSchemaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\NewSubscriberWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Chit\Reports\SubscriberReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContactWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CRM\Contact\ContactListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CRM\FollowUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Enquiries\EnquiryBooking.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\BookingListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\PurchaseList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\SellerListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\PropertyValue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inventory\Seller.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventory\Purchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReportViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTab\ChitTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Sales\VechicleSale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\EnquiriesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\EnquiriesStatusWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\EnquiriesTypeWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Enquiries\EnquriesTypeListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Enquiries\EnquriesListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ContactWindow.xaml.cs">
+      <DependentUpon>ContactWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enquiries\EnquiriesWindow.xaml.cs">
+      <DependentUpon>EnquiriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Products\ProductCompanyListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Products\ProductCompanyWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Products\SparesAccessories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Products\VehicleAccessories.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Products\ProductListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Products\ProductWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RibbonTab\Folder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTab\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTab\SendRecieve.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RibbonTab\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zonal\ZonalListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Zonal\ZonalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\addon365.IService\addon365.IService.csproj">
+      <Project>{8767e7b1-1143-4a00-8da0-3e8bacea0f97}</Project>
+      <Name>addon365.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj">
+      <Project>{afec9b2a-36c6-4917-9142-453928de1f35}</Project>
+      <Name>addon365.Database.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\addon365.Database\addon365.Database.csproj">
+      <Project>{c60b5fd6-d850-474d-8b59-9a312f7381ac}</Project>
+      <Name>addon365.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj">
+      <Project>{7418c14c-bd1d-4a81-9317-b5cedb714ddf}</Project>
+      <Name>addon365.Domain.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\addon365.UI.WPF.Controls\addon365.UI.WPF.Controls.csproj">
+      <Project>{341ce028-d1ff-4694-b510-153ee19b813a}</Project>
+      <Name>addon365.UI.WPF.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj">
+      <Project>{8e477d58-8c3f-4189-aebd-b991c77c033d}</Project>
+      <Name>addon365.Database.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\addon365.UI.ViewModel\addon365.UI.ViewModel.csproj">
+      <Project>{dcb74093-cd12-478b-be5a-7886295e1a2c}</Project>
+      <Name>addon365.UI.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\welcome.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BulletSplashScreen.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\search_ic.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

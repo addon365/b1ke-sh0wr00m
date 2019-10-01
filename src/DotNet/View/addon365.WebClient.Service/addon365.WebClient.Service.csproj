@@ -34,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\addon365.Database.Service\addon365.Database.Service.csproj" />
-    <ProjectReference Include="..\addon365.IService\addon365.IService.csproj" />
+    <ProjectReference Include="..\..\addon365.Database.Service\addon365.Database.Service.csproj" />
+    <ProjectReference Include="..\..\addon365.IService\addon365.IService.csproj" />
   </ItemGroup>
 
 </Project>
