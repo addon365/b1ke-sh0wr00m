@@ -39,9 +39,6 @@ namespace addon365.Database
         public DbSet<ChitScheme> ChitSchemes { get; set; }
         #endregion
 
-
-
-
         #region Crm
 
         #region Address
@@ -110,10 +107,11 @@ namespace addon365.Database
         public DbSet<PurchaseItem> PurchaseItems { get; set; }
         public DbSet<PurchaseItemPropertyValue> PurchaseItemProperties { get; set; }
 
-        #region Product
+        #region Point of Sale
         public DbSet<CatalogBrand> CatalogBrands { get; set; }
         public DbSet<CatalogType> CatalogTypes { get; set; }
         public DbSet<CatalogItem> CatalogItems { get; set; }
+        public DbSet<CategoryMaster> Categories { get; set; }
         public DbSet<CatalogItemPropertyMaster> CatalogItemPropertyMasters { get; set; }
         public DbSet<CatalogItemPropertiesMap> CatalogItemPropertiesMaps { get; set; }
 
