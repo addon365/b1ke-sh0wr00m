@@ -6,6 +6,7 @@ using addon365.Database.Service.Crm;
 using addon365.Database.Service.Crm.Address;
 using addon365.Database.Service.Inventory;
 using addon365.Database.Service.Permission;
+using addon365.Database.Service.pos;
 using addon365.Database.Service.Report;
 using addon365.Database.Service.Sales;
 using addon365.IService;
@@ -15,6 +16,7 @@ using addon365.IService.Crm;
 using addon365.IService.Crm.Address;
 using addon365.IService.Inventory;
 using addon365.IService.Permission;
+using addon365.IService.pos;
 using addon365.IService.Sales;
 using addon365.Web.API.Utils;
 using addon365.Web.API.Utils.Exceptions;
@@ -85,7 +87,7 @@ namespace addon365.Web.API
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<ISalesService, SalesService>();
-            
+
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IInquiryReportService, InquiryReportService>();
             services.AddTransient<IBookingService, BookingService>();
@@ -99,6 +101,11 @@ namespace addon365.Web.API
             services.AddTransient<IBuyerService, BuyerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
 
+            #region Point Of Sale
+            services.AddTransient<ICatelogItemService, CatelogItemService>();
+            services.AddTransient<ICategoryService, CatelogCategoryService>();
+            services.AddTransient<ICatelogBrandService, CatelogBrandService>();
+            #endregion
 
             #region CRM Services are here.
 
@@ -109,6 +116,8 @@ namespace addon365.Web.API
             services.AddTransient<ILocalityService, LocalityService>();
             services.AddTransient<IPincodeService, PincodeService>();
             #endregion
+
+
 
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IAppointmentStatusService, AppointmentStatusService>();

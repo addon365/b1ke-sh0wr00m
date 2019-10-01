@@ -9,6 +9,21 @@ namespace addon365.Database.Entity.Inventory.Catalog
     {
         public string Identifier { get; set; }
         public string ItemName { get; set; }
+
+        public string ProductCode { get; set; }
+
+        public virtual CategoryMaster Category { get; set; }
+
+        [ForeignKey("Category")]
+        public Guid CategoryId { get; set; }
+
+        public CatalogBrand Brand { get; set; }
+
+        [ForeignKey("Brand")]
+        public Guid BrandId { get; set; }
+
+        public string Image { get; set; }
+
         public double Price { get; set; }
         public double InsuranceAmount { get; set; }
         public double RoadTax { get; set; }
@@ -17,5 +32,8 @@ namespace addon365.Database.Entity.Inventory.Catalog
         public Guid CompanyId { get; set; }
         public Guid TypeId { get; set; }
         public ICollection<CatalogItemPropertiesMap> Properties { get; set; }
+
+
+
     }
 }

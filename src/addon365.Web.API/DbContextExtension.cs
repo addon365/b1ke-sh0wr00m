@@ -94,6 +94,29 @@ namespace addon365.Web.API
                 context.SaveChanges();
             }
             #endregion
+
+            #region Point of Sales Seeds
+            if (!context.CatalogBrands.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<CatalogBrand>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "pos\\BrandMaster.json")
+                        );
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+
+            if (!context.Categories.Any())
+            {
+                var types = JsonConvert.DeserializeObject<List<CategoryMaster>>(
+                    File.ReadAllText(
+                        "seed" + Path.DirectorySeparatorChar + "pos\\CategoryMaster.json")
+                        );
+                context.AddRange(types);
+                context.SaveChanges();
+            }
+            #endregion
+
             if (!context.InquiryReport.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<InquiryReport>>(
@@ -111,26 +134,7 @@ namespace addon365.Web.API
                 context.SaveChanges();
             }
 
-            if (!context.CatalogItems.Any())
-            {
-                var products = JsonConvert.DeserializeObject<List<CatalogItem>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "products.json"));
-                context.AddRange(products);
 
-                var ProductPropertyMasters = JsonConvert.DeserializeObject<List<CatalogItemPropertyMaster>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductPropertyMasters.json"));
-                context.AddRange(ProductPropertyMasters);
-
-                foreach (CatalogItem p in products)
-                {
-                    foreach (CatalogItemPropertyMaster pm in ProductPropertyMasters)
-                    {
-                        CatalogItemPropertiesMap mp = new CatalogItemPropertiesMap();
-                        mp.CatalogItemId = p.Id;
-                        mp.CatalogPropertyMasterId = pm.Id;
-                        context.Add(mp);
-                    }
-                }
-                context.SaveChanges();
-            }
             if (!context.marketingZones.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<MarketingZone>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "MarketingZones.json"));
@@ -149,7 +153,7 @@ namespace addon365.Web.API
                 context.AddRange(types);
                 context.SaveChanges();
             }
-            if (!context.CatalogItems.Any())
+            if (!context.CatalogBrands.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<CatalogBrand>>(File.ReadAllText("seed" + Path.DirectorySeparatorChar + "ProductCompanies.json"));
                 context.AddRange(types);
@@ -258,13 +262,7 @@ namespace addon365.Web.API
                     "seed" + Path.DirectorySeparatorChar + "Enquiries.json"));
                 context.AddRange(types);
             }
-            if (!context.EnquiryItems.Any())
-            {
-                var types = JsonConvert.DeserializeObject<List<EnquiryCatalogItem>>(
-                File.ReadAllText(
-                "seed" + Path.DirectorySeparatorChar + "EnquiryProducts.json"));
-                context.AddRange(types);
-            }
+           
             if (!context.DeviceMasters.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<DeviceMaster>>(

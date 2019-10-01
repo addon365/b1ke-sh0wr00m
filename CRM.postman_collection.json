@@ -51,7 +51,7 @@
 					"urlencoded": [
 						{
 							"key": "userId",
-							"value": "balaji",
+							"value": "sasi",
 							"type": "text"
 						},
 						{
@@ -230,7 +230,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{SERVER}}/api/Appointments?userId=8bacda45-ba59-46a2-91f6-de1633c06840",
+					"raw": "{{SERVER}}/api/Appointments?userId=cb141aa1-9d5a-407b-8da0-e927296edf2d",
 					"host": [
 						"{{SERVER}}"
 					],
@@ -241,7 +241,7 @@
 					"query": [
 						{
 							"key": "userId",
-							"value": "8bacda45-ba59-46a2-91f6-de1633c06840"
+							"value": "cb141aa1-9d5a-407b-8da0-e927296edf2d"
 						}
 					]
 				}
@@ -532,6 +532,36 @@
 							"key": "campaignInfoId",
 							"value": "57b18dea-642f-4810-82ec-35797afe1ec1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindCampaign",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"c8f19009-5e5d-4bf3-97ef-4939a3ccc17b\",\n    \"name\": \"Multi Campaign\",\n    \"description\": \"Multi Campaign\",\n    \"filter\": \"Panruti,Virudhachalam\"\n}"
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/campaign/c8f19009-5e5d-4bf3-97ef-4939a3ccc17b",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"campaign",
+						"c8f19009-5e5d-4bf3-97ef-4939a3ccc17b"
 					]
 				}
 			},
