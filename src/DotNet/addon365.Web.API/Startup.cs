@@ -1,6 +1,7 @@
 ﻿using addon365.Database;
 using addon365.Database.Service;
 using addon365.Database.Service.Accounts;
+using addon365.Database.Service.AddonLicense;
 using addon365.Database.Service.Chit;
 using addon365.Database.Service.Crm;
 using addon365.Database.Service.Crm.Address;
@@ -11,6 +12,7 @@ using addon365.Database.Service.Report;
 using addon365.Database.Service.Sales;
 using addon365.IService;
 using addon365.IService.Accounts;
+using addon365.IService.AddonLicense;
 using addon365.IService.Chit;
 using addon365.IService.Crm;
 using addon365.IService.Crm.Address;
@@ -19,6 +21,7 @@ using addon365.IService.Permission;
 using addon365.IService.pos;
 using addon365.IService.Sales;
 using addon365.Web.API.Utils;
+
 using addon365.Web.API.Utils.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -101,6 +104,10 @@ namespace addon365.Web.API
             services.AddTransient<ISellerService, SellerService>();
             services.AddTransient<IBuyerService, BuyerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+
+            #region Addon License
+            services.AddTransient<IAddonLicenservice, AddonLicenseService>();
+            #endregion
 
             #region Point Of Sale
             services.AddTransient<ICatelogItemService, CatelogItemService>();
