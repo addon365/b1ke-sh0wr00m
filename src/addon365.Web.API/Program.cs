@@ -55,6 +55,7 @@ namespace addon365.Web.API
                 {
 
                 })
+            .UseIIS()
             .UseSerilog();
     }
 }
