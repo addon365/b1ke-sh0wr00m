@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
       height: 350
     }
   };
-  @ViewChild("yearChartId") yearChartCtl;
+  @ViewChild("yearChartId", { static: false }) yearChartCtl;
   tableChart = {
     chartType: "Table",
     dataTable: null,

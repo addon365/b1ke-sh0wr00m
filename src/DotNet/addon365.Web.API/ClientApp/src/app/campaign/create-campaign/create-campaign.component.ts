@@ -40,8 +40,8 @@ export class CreateCampaignComponent implements OnInit {
 
   selectedSubDistricts: SubDistrict[] = [];
 
-  @ViewChild("subDistrictInput") subDistrictInput: ElementRef<HTMLInputElement>;
-  @ViewChild("auto") matAutocomplete: MatAutocomplete;
+  @ViewChild("subDistrictInput",{static:false}) subDistrictInput: ElementRef<HTMLInputElement>;
+  @ViewChild("auto",{static:false}) matAutocomplete: MatAutocomplete;
 
   constructor(
     private addressService: AddressService,
