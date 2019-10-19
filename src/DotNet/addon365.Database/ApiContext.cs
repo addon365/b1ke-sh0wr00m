@@ -126,6 +126,11 @@ namespace addon365.Database
         public DbSet<RoleGroupMaster> RoleGroup { get; set; }
         #endregion
 
+        #region addonLicense
+        public DbSet<CustomerCatalogGroup> CustomerCatalogGroups { get; set; }
+        public DbSet<CustomerCatalogGroupDetail> CustomerCatalogGroupDetails { get; set; }
+
+        #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
