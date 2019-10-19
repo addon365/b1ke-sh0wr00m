@@ -62,20 +62,22 @@ namespace addon365.Database.Service.Crm
 
         public List<CampaignViewModel> GetCampaigns()
         {
-
-            var subDistricts = CrmContext.SubDistricts.ToList();
-            return CrmContext.Campaigns
-                .Include(x => x.Infos)
-                .Select<Campaign, CampaignViewModel>(x =>
-                     new CampaignViewModel
-                     {
-                         Id = x.Id,
-                         Name = x.Name,
-                         Description = x.Description,
-                         Filter = GetFilterNames(subDistricts, x.Filter),
-                         Count = x.Infos.Count
-                     }
-                ).ToList();
+            //TODO : Need to implement this feature 
+            //again, as it throws memory leak error
+            //var subDistricts = CrmContext.SubDistricts.ToList();
+            //return CrmContext.Campaigns
+            //    .Include(x => x.Infos)
+            //    .Select<Campaign, CampaignViewModel>(x =>
+            //         new CampaignViewModel
+            //         {
+            //             Id = x.Id,
+            //             Name = x.Name,
+            //             Description = x.Description,
+            //             Filter = GetFilterNames(subDistricts, x.Filter),
+            //             Count = x.Infos.Count
+            //         }
+            //    ).ToList();
+            return new List<CampaignViewModel>();
 
         }
 

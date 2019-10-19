@@ -52,7 +52,8 @@ namespace addon365.Web.API
                 })
                 .UseStartup<Startup>()
 
-               .UseIIS()
+                })
+            .UseIIS()
             .UseSerilog();
     }
 }
