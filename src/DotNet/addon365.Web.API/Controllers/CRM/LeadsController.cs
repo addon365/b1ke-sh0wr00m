@@ -22,7 +22,7 @@ namespace addon365.Web.API.Controllers.CRM
         readonly IUserService userService;
         readonly ILeadSourceService sourceService;
         readonly ILeadStatusService leadStatusService;
-        readonly IHostingEnvironment hostingEnvironment;
+        readonly IWebHostEnvironment hostingEnvironment;
         readonly IPincodeService pincodeService;
         readonly ISubDistrictService subDistrictService;
         readonly ILocalityService localityService;
@@ -30,7 +30,7 @@ namespace addon365.Web.API.Controllers.CRM
             IUserService userService,
             ILeadSourceService sourceService,
             ILeadStatusService leadStatusService,
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment hostingEnvironment,
             IPincodeService pincodeService,
             ISubDistrictService subDistrictService,
             ILocalityService localityService)
