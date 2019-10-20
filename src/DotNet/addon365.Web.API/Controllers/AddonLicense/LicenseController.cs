@@ -50,18 +50,18 @@ namespace addon365.Web.API.Controllers.AddonLicense
         public void Validation([FromBody] LicenseValidationModel licenseValidationModel)
         {
             LicenseValidationModel lvm = licenseValidationModel;
-            CustomerCatalogGroup csl = new CustomerCatalogGroup();
-            csl.Id = Guid.NewGuid();
-
-            _Service.Add(csl);
+            
 
         }
 
         [HttpPost]
         [Route("Create")]
-        public void Create([FromBody] LicenseValidationModel licenseValidationModel)
+        public void Create([FromBody] CustomerCatalogGroup csl)
         {
            
+            csl.Id = Guid.NewGuid();
+
+            _Service.Add(csl);
         }
 
         // PUT: api/License/5

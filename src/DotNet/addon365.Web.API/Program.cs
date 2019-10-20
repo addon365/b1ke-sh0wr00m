@@ -51,10 +51,8 @@ namespace addon365.Web.API
                     config.AddEnvironmentVariables();
                 })
                 .UseStartup<Startup>()
-                .UseKestrel((options) =>
-                {
 
-                })
+              
             .UseIIS()
             .UseSerilog();
     }

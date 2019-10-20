@@ -16,6 +16,7 @@ namespace addon365.Database
             var builder = new DbContextOptionsBuilder<ApiContext>();
             builder.UseSqlServer(
                 "Server=(localdb)\\mssqllocaldb;Database=config69;Trusted_Connection=True;MultipleActiveResultSets=true");
+          
 
             return new ApiContext(builder.Options);
         }
