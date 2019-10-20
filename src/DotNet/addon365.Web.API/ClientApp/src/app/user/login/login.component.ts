@@ -3,6 +3,7 @@ import { Login } from "../../models/login";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { Toast, ToastrService } from "ngx-toastr";
+import { load } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-login",
@@ -30,15 +31,23 @@ export class LoginComponent implements OnInit {
         if (data == null) {
           this.toastr.error("User Id/Passowd not match");
         } else {
-          if (data.roleGroup.name.localeCompare("admin") != 0) {
+          if (data.roleGroup.name.localeCompare("root") == 0) {
+            
+            this.loadHomePage(data);
+            return;
+          }
+          if (data.roleGroup.name.localeCompare("root") != 0) {
             this.toastr.error("You need admin Privilage to view this app.");
             return;
           }
-          UserService.CurrentUser = data;
-          var userJson: string = JSON.stringify(data);
-          localStorage.setItem("user", userJson);
-          this.afterLogged.emit(data);
         }
       });
+  }
+
+  loadHomePage(data) {
+    UserService.CurrentUser = data;
+    var userJson: string = JSON.stringify(data);
+    localStorage.setItem("user", userJson);
+    this.afterLogged.emit(data);
   }
 }
