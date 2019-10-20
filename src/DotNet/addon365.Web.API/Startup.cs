@@ -36,6 +36,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
@@ -205,7 +206,7 @@ namespace addon365.Web.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -276,10 +277,15 @@ namespace addon365.Web.API
 
 
                     apicon.Database.Migrate();
+                    var RoleService = serviceScope.ServiceProvider.GetService<IRoleGroupService>();
                     var UserService = serviceScope.ServiceProvider.GetService<IUserService>();
+                   
+                  
                     if (!apicon.Users.Any())
                     {
-                        UserService.InsertUser(new addon365.Database.Entity.Users.User() { UserId = "user1", Password = "pass1", UserName = "user1" });
+                        var role = new addon365.Database.Entity.Permission.RoleGroupMaster() { Name = "admin", Description = "Have all permission" };
+                        RoleService.Save(role);
+                        UserService.InsertUser(new addon365.Database.Entity.Users.User() { UserId = "user1", Password = "pass1", UserName = "user1",RoleGroupId=role.Id,RoleGroup=role });
                     }
                     apicon.EnsureSeeded();
                 }

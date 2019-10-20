@@ -18,9 +18,9 @@ namespace addon365.Web.API.Controllers.CRM
     {
         IBusinessCustomerService service;
         IUserService userService;
-        IHostingEnvironment hostingEnvironment;
+        IWebHostEnvironment hostingEnvironment;
         public BusinessCustomersController(IBusinessCustomerService baseService,
-            IUserService userService, IHostingEnvironment hostingEnvironment)
+            IUserService userService, IWebHostEnvironment hostingEnvironment)
             : base(baseService)
         {
             this.service = baseService;

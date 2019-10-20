@@ -23,12 +23,12 @@ namespace addon365.Web.API.Controllers.CRM
     {
         private IEmployeeService _employeeService;
         private IUserService _userService;
-        private IHostingEnvironment hostingEnvironment;
+        private IWebHostEnvironment hostingEnvironment;
         private IRoleGroupService _roleService;
         public EmployeesController(IEmployeeService employeeService,
             IUserService userService,
             IRoleGroupService roleService,
-            IHostingEnvironment hostingEnvironment
+            IWebHostEnvironment hostingEnvironment
             )
             : base(employeeService)
         {
