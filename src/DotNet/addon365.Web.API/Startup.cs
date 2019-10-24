@@ -1,6 +1,4 @@
 ﻿using addon365.Database;
-using addon365.Database.Entity.Permission;
-using addon365.Database.Entity.Users;
 using addon365.Database.Service;
 using addon365.Database.Service.Accounts;
 using addon365.Database.Service.AddonLicense;
@@ -118,16 +116,6 @@ namespace addon365.Web.API
             services.AddTransient<ICatelogBrandService, CatelogBrandService>();
             #endregion
 
-
-
-            #region Permission registration goes here
-            services.AddTransient<IRoleGroupService, RoleGroupService>();
-            services.AddTransient<IRoleGroupPermissionService, RoleGroupPermissionService>();
-            services.AddTransient<ILogicMasterService, LogicMasterService>();
-            services.AddTransient<IUserPermissionService, UserPermissionService>();
-            #endregion
-
-
             #region CRM Services are here.
 
             #region Address Services goes here
@@ -148,6 +136,7 @@ namespace addon365.Web.API
             services.AddTransient<ILeadSourceService, LeadSourceService>();
             services.AddTransient<ILeadStatusService, LeadStatusService>();
 
+            services.AddTransient<IRoleGroupService, RoleGroupService>();
 
             services.AddTransient<ICampaignService, CampaignService>();
 
@@ -240,9 +229,8 @@ namespace addon365.Web.API
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseCors(
                     options => options
-                    .AllowAnyOrigin()
-                    //.WithOrigins("*",
-                    //"https://addon365crm.azurewebsites.net")
+                    .WithOrigins("http://localhost:4200",
+                    "https://addon365crm.azurewebsites.net")
                     .AllowAnyMethod().AllowAnyHeader()
 
                     );
@@ -289,35 +277,15 @@ namespace addon365.Web.API
 
 
                     apicon.Database.Migrate();
-
-                    var userService = serviceScope.ServiceProvider.GetService<IUserService>();
-                    User user = userService.FindUser("root");
-                    if (user == null)
+                    var RoleService = serviceScope.ServiceProvider.GetService<IRoleGroupService>();
+                    var UserService = serviceScope.ServiceProvider.GetService<IUserService>();
+                   
+                  
+                    if (!apicon.Users.Any())
                     {
-                        var roleGroupService = serviceScope.ServiceProvider.GetService<IRoleGroupService>();
-                        var logicService = serviceScope.ServiceProvider.GetService<ILogicMasterService>();
-
-                        var roleGroup = new RoleGroupMaster() { Name = "root", Description = "Root Owner of entire Application" };
-                        roleGroupService.Save(roleGroup);
-
-                        var logicMaster = new LogicMaster() { Name = "Permission", Description = "Permission Configuration" };
-                        logicService.Save(logicMaster);
-
-                        var roleGroupPermission = serviceScope.ServiceProvider.GetService<IRoleGroupPermissionService>();
-                        roleGroupPermission.Save(new RoleGroupPermission()
-                        {
-                            LogicId = logicMaster.Id,
-                            GroupId = roleGroup.Id,
-                            Create = true,
-                            Update = true,
-                            View = true,
-                            Delete = true
-                        });
-
-
-                        userService.InsertUser(new addon365.Database.Entity.Users.User() { UserId = "root", Password = "password", UserName = "Root User",
-                            RoleGroupId = roleGroup.Id });
-
+                        var role = new addon365.Database.Entity.Permission.RoleGroupMaster() { Name = "admin", Description = "Have all permission" };
+                        RoleService.Save(role);
+                        UserService.InsertUser(new addon365.Database.Entity.Users.User() { UserId = "user1", Password = "pass1", UserName = "user1",RoleGroupId=role.Id,RoleGroup=role });
                     }
                     apicon.EnsureSeeded();
                 }
