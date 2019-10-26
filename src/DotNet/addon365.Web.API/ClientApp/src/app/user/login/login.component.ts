@@ -3,6 +3,7 @@ import { Login } from "../../models/login";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/user";
 import { Toast, ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -12,8 +13,12 @@ import { Toast, ToastrService } from "ngx-toastr";
 export class LoginComponent implements OnInit {
   user: Login;
   showSpinner: boolean;
-  @Output() afterLogged = new EventEmitter<User>();
-  constructor(private userService: UserService, private toastr: ToastrService) {
+
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {
     this.showSpinner = false;
     this.user = new Login();
   }
@@ -23,22 +28,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.showSpinner = true;
     this.userService
       .validateUser(this.user.userId, this.user.password)
       .subscribe(data => {
-        console.log(data);
+        this.showSpinner = false;
         if (data == null) {
           this.toastr.error("User Id/Passowd not match");
-        } else {
-          if (data.roleGroup.name.localeCompare("admin") != 0) {
-            this.toastr.error("You need admin Privilage to view this app.");
-            return;
-          }
-          UserService.CurrentUser = data;
-          var userJson: string = JSON.stringify(data);
-          localStorage.setItem("user", userJson);
-          this.afterLogged.emit(data);
+          return;
         }
+        this.userService.saveSession(data);
+        this.router.navigate(["/home"]);
       });
   }
 }

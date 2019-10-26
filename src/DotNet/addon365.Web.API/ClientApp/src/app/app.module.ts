@@ -41,28 +41,13 @@ import { ListStateMasterComponent } from './Address/StateMaster/list-state-maste
 import { MatChipsModule } from "@angular/material/chips";
 import { CreateCampaignComponent } from "./campaign/create-campaign/create-campaign.component";
 import { ListCampaignComponent } from "./campaign/list-campaign/list-campaign.component";
+import { CreateLogicComponent } from './permission/logic/create-logic/create-logic.component';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AuthGuard } from "./guard/auth-guard";
 
 
-const routes: Routes = [
-  { path: "", redirectTo: "list-appointment", pathMatch: "full" },
-  { path: "dashboard", component: DashboardComponent, pathMatch: "full" },
-  { path: "change-password", component: ChangePasswordComponent },
-  { path: "login", component: LoginComponent },
-  {
-    path: "list-appointment",
-    component: ListAppointmentComponent,
-    pathMatch: "full"
-  },
-  { path: "create-appointment", component: CreateAppointmentComponent },
-  { path: "list-customer", component: ListCustomerComponent },
-  { path: "list-lead", component: ListLeadComponent },
-  { path: "create-lead", component: CreateLeadComponent },
-  { path: "list-employee", component: ListEmployeeComponent },
-  { path: "list-state", component: ListStateMasterComponent },
-  { path: "create-state", component: CreateStateMasterComponent },
-  { path: "create-campaign/:id", component: CreateCampaignComponent },
-  { path: "list-campaign", component: ListCampaignComponent }
-];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +65,9 @@ const routes: Routes = [
     CreateStateMasterComponent,
     ListStateMasterComponent,
     CreateCampaignComponent,
-    ListCampaignComponent
+    ListCampaignComponent,
+    CreateLogicComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +84,7 @@ const routes: Routes = [
     MatIconModule,
     MatMenuModule,
     MatDialogModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     MatSidenavModule,
     MatListModule,
     MatChipsModule,
@@ -111,8 +98,8 @@ const routes: Routes = [
     MatNativeDateModule,
     MatTableModule
   ],
-  providers: [MatDatepickerModule, Globals],
+  providers: [MatDatepickerModule, Globals,AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [UploadDialogComponent]
+  entryComponents: [UploadDialogComponent],
 })
 export class AppModule {}

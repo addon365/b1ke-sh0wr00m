@@ -9,7 +9,7 @@ import { Customer } from "../models/customer";
   providedIn: "root"
 })
 export class UserService {
-  static CurrentUser:User;
+  static CurrentUser: User;
   URL: string = AppContants.BASE_URL;
   constructor(private httpClient: HttpClient) {}
   getEmployees(): Observable<Employee[]> {
@@ -17,6 +17,24 @@ export class UserService {
   }
   getCustomers(): Observable<Customer[]> {
     return this.httpClient.get<Customer[]>(this.URL + "BusinessCustomers");
+  }
+  isAuthenticated() {
+    const userJson = localStorage.getItem("user");
+    if (userJson == null) {
+      return false;
+    }
+
+    UserService.CurrentUser = JSON.parse(userJson);
+    console.log('lllllllllllllllllllllll', UserService.CurrentUser);
+    return true;
+  }
+  clearSession() {
+    localStorage.removeItem("user");
+  }
+  saveSession(data: User) {
+    const userJson: string = JSON.stringify(data);
+    UserService.CurrentUser = data;
+    localStorage.setItem("user", userJson);
   }
   validateUser(userId: string, password: string): Observable<User> {
     let body = new URLSearchParams();

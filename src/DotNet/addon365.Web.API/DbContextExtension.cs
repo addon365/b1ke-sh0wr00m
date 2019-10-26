@@ -215,7 +215,7 @@ namespace addon365.Web.API
                 var types = JsonConvert.DeserializeObject<List<StatusMaster>>(file);
                 context.AddRange(types);
             }
-            if (!context.RoleGroup.Any())
+            if (!context.RoleGroups.Any())
             {
                 var types = JsonConvert.DeserializeObject<List<RoleGroupMaster>>(
                     File.ReadAllText(

@@ -12,7 +12,6 @@ import { Globals } from "./global";
 export class AppComponent {
   user: User;
   title = "Bike Show Room";
-  isActiveSession: boolean;
 
   constructor(
     private addressSerive: AddressService,
@@ -40,21 +39,5 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.initAddresses();
-    var userJson = localStorage.getItem("user");
-    if (userJson == null) this.isActiveSession = false;
-    else {
-      this.user = JSON.parse(userJson);
-      this.isActiveSession = true;
-    }
-    console.log(this.isActiveSession);
-  }
-  loggedIn(currentUser: User) {
-    this.user = currentUser;
-    this.isActiveSession = true;
-  }
-  logout() {
-    localStorage.removeItem("user");
-    this.user = null;
-    this.isActiveSession = false;
   }
 }

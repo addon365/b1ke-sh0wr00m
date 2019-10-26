@@ -123,7 +123,12 @@ namespace addon365.Database
         #endregion
 
         #region Permission
-        public DbSet<RoleGroupMaster> RoleGroup { get; set; }
+        public DbSet<RoleGroupMaster> RoleGroups { get; set; }
+        public DbSet<LogicMaster> LogicMasters { get; set; }
+
+        public DbSet<RolePermission> RoleGroupPermissions { get; set; }
+
+        public DbSet<UserPermission> UserPermissions { get; set; }
         #endregion
 
         #region addonLicense

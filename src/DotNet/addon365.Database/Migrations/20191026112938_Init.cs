@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace addon365.Database.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -474,6 +474,27 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LogicMasters",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LogicMasters", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "marketingZones",
                 schema: "addon",
                 columns: table => new
@@ -537,7 +558,32 @@ namespace addon365.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleGroup",
+                name: "RoleGroupPermissions",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    GroupId = table.Column<Guid>(nullable: false),
+                    LogicId = table.Column<Guid>(nullable: false),
+                    Create = table.Column<bool>(nullable: false),
+                    Update = table.Column<bool>(nullable: false),
+                    View = table.Column<bool>(nullable: false),
+                    Delete = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleGroupPermissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoleGroups",
                 schema: "addon",
                 columns: table => new
                 {
@@ -554,7 +600,7 @@ namespace addon365.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleGroup", x => x.Id);
+                    table.PrimaryKey("PK_RoleGroups", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -661,6 +707,31 @@ namespace addon365.Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Type", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserPermissions",
+                schema: "addon",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<DateTime>(nullable: true),
+                    CreatedUserId = table.Column<int>(nullable: true),
+                    CreatedDeviceId = table.Column<int>(nullable: true),
+                    BranchMasterId = table.Column<Guid>(nullable: true),
+                    YearId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    LogicId = table.Column<Guid>(nullable: false),
+                    Create = table.Column<bool>(nullable: false),
+                    Update = table.Column<bool>(nullable: false),
+                    View = table.Column<bool>(nullable: false),
+                    Delete = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPermissions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -778,10 +849,10 @@ namespace addon365.Database.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_RoleGroup_RoleGroupId",
+                        name: "FK_Users_RoleGroups_RoleGroupId",
                         column: x => x.RoleGroupId,
                         principalSchema: "addon",
-                        principalTable: "RoleGroup",
+                        principalTable: "RoleGroups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -2425,6 +2496,10 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
+                name: "LogicMasters",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
                 name: "marketingZones",
                 schema: "addon");
 
@@ -2437,6 +2512,10 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
+                name: "RoleGroupPermissions",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
                 name: "States",
                 schema: "addon");
 
@@ -2446,6 +2525,10 @@ namespace addon365.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Threats",
+                schema: "addon");
+
+            migrationBuilder.DropTable(
+                name: "UserPermissions",
                 schema: "addon");
 
             migrationBuilder.DropTable(
@@ -2561,7 +2644,7 @@ namespace addon365.Database.Migrations
                 schema: "addon");
 
             migrationBuilder.DropTable(
-                name: "RoleGroup",
+                name: "RoleGroups",
                 schema: "addon");
 
             migrationBuilder.DropTable(

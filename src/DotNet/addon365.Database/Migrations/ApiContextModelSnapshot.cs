@@ -2630,6 +2630,44 @@ namespace addon365.Database.Migrations
                     b.ToTable("marketingZones");
                 });
 
+            modelBuilder.Entity("addon365.Database.Entity.Permission.LogicMaster", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedDeviceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LogicMasters");
+                });
+
             modelBuilder.Entity("addon365.Database.Entity.Permission.RoleGroupMaster", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2665,7 +2703,107 @@ namespace addon365.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleGroup");
+                    b.ToTable("RoleGroups");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Permission.RolePermission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Create")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedDeviceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LogicId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Update")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("View")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoleGroupPermissions");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.Permission.UserPermission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Create")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedDeviceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("LogicId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Update")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("View")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserPermissions");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Report.InquiryReport", b =>

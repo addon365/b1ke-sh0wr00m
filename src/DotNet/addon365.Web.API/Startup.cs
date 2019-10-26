@@ -1,4 +1,6 @@
 ﻿using addon365.Database;
+using addon365.Database.Entity.Permission;
+using addon365.Database.Entity.Users;
 using addon365.Database.Service;
 using addon365.Database.Service.Accounts;
 using addon365.Database.Service.AddonLicense;
@@ -38,8 +40,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Serialization;
-using Swashbuckle.AspNetCore.Swagger;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -136,7 +136,13 @@ namespace addon365.Web.API
             services.AddTransient<ILeadSourceService, LeadSourceService>();
             services.AddTransient<ILeadStatusService, LeadStatusService>();
 
+            #region Permission registration goes here
             services.AddTransient<IRoleGroupService, RoleGroupService>();
+            services.AddTransient<IRolePermissionService, RolePermissionService>();
+            services.AddTransient<ILogicMasterService, LogicMasterService>();
+            services.AddTransient<IUserPermissionService, UserPermissionService>();
+            #endregion
+
 
             services.AddTransient<ICampaignService, CampaignService>();
 
@@ -278,14 +284,40 @@ namespace addon365.Web.API
 
                     apicon.Database.Migrate();
                     var RoleService = serviceScope.ServiceProvider.GetService<IRoleGroupService>();
-                    var UserService = serviceScope.ServiceProvider.GetService<IUserService>();
-                   
-                  
-                    if (!apicon.Users.Any())
+                    var userService = serviceScope.ServiceProvider.GetService<IUserService>();
+
+                    User user = userService.FindUser("root");
+                    if (user == null)
                     {
-                        var role = new addon365.Database.Entity.Permission.RoleGroupMaster() { Name = "admin", Description = "Have all permission" };
-                        RoleService.Save(role);
-                        UserService.InsertUser(new addon365.Database.Entity.Users.User() { UserId = "user1", Password = "pass1", UserName = "user1",RoleGroupId=role.Id,RoleGroup=role });
+                        var roleGroupService = serviceScope.ServiceProvider.GetService<IRoleGroupService>();
+                        var logicService = serviceScope.ServiceProvider.GetService<ILogicMasterService>();
+
+                        var roleGroup = new RoleGroupMaster() { Name = "root", Description = "Root Owner of entire Application" };
+                        roleGroupService.Save(roleGroup);
+
+                        var logicMaster = new LogicMaster() { Name = "Permission", Description = "Permission Configuration" };
+                        logicService.Save(logicMaster);
+
+                        var roleGroupPermission = serviceScope.ServiceProvider.GetService<IRolePermissionService>();
+                        roleGroupPermission.Save(new RolePermission()
+                        {
+                            LogicId = logicMaster.Id,
+                            GroupId = roleGroup.Id,
+                            Create = true,
+                            Update = true,
+                            View = true,
+                            Delete = true
+                        });
+
+
+                        userService.InsertUser(new addon365.Database.Entity.Users.User()
+                        {
+                            UserId = "root",
+                            Password = "password",
+                            UserName = "Root User",
+                            RoleGroupId = roleGroup.Id
+                        });
+
                     }
                     apicon.EnsureSeeded();
                 }
