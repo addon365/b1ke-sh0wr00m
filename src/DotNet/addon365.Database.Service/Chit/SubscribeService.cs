@@ -35,7 +35,7 @@ namespace addon365.Database.Service.Chit
                 subscriber =>
                 subscriber.SubscribeId.CompareTo(id) == 0,
                 include: s => s.Include(x => x.Customer)
-                .ThenInclude(x => x.Profile)
+                .ThenInclude(x => x.Contact)
                 .Include(x => x.ChitSchema))
                 .Items;
             if (list.Count == 0)
@@ -98,7 +98,7 @@ namespace addon365.Database.Service.Chit
                 return _unitOfWork.GetRepository<ChitSubscriber>()
                 .GetList(
                 include: s => s.Include(x => x.Customer)
-                .ThenInclude(c => c.Profile)
+                .ThenInclude(c => c.Contact)
                 .Include(sc => sc.ChitSchema),
                 predicate: s => s.Customer.Id == customerId
                 && s.ChitSchema.Id == schemeId
@@ -109,7 +109,7 @@ namespace addon365.Database.Service.Chit
                 return _unitOfWork.GetRepository<ChitSubscriber>()
                 .GetList(
                 include: s => s.Include(x => x.Customer)
-                .ThenInclude(c => c.Profile)
+                .ThenInclude(c => c.Contact)
                 .Include(sc => sc.ChitSchema),
                 predicate: s => s.ChitSchema.Id == schemeId
                 ).Items;
@@ -119,7 +119,7 @@ namespace addon365.Database.Service.Chit
                 return _unitOfWork.GetRepository<ChitSubscriber>()
                 .GetList(
                 include: s => s.Include(x => x.Customer)
-                .ThenInclude(c => c.Profile)
+                .ThenInclude(c => c.Contact)
                 .Include(sc => sc.ChitSchema),
                 predicate: s => s.Customer.Id == customerId
                 ).Items;
@@ -127,7 +127,7 @@ namespace addon365.Database.Service.Chit
             return _unitOfWork.GetRepository<ChitSubscriber>()
                 .GetList(
                 include: s => s.Include(x => x.Customer)
-                .ThenInclude(c => c.Profile)
+                .ThenInclude(c => c.Contact)
                 .Include(sc => sc.ChitSchema)
 
                 ).Items; ;
@@ -153,7 +153,7 @@ namespace addon365.Database.Service.Chit
                 var pendingAmount = (totalPaidMonths * monthlyAmount) - totalPaidAmount;
                 var domainObject = new SubscriberReportDomain
                 {
-                    CustomerName = firstChitSub.Customer.Profile.FirstName,
+                    CustomerName = firstChitSub.Customer.Contact.FirstName,
                     IsClosed = firstChitSub.ClosedVoucherId != Guid.Empty,
                     MonthlyAmount = monthlyAmount,
                     PaidMonth = totalPaidMonths,
@@ -172,7 +172,7 @@ namespace addon365.Database.Service.Chit
         {
             return UnitOfWork.GetRepository<Customer>()
                 .GetList(
-                include: c => c.Include(x => x.Profile))
+                include: c => c.Include(x => x.Contact))
                 .Items;
         }
     }

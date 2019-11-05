@@ -125,9 +125,9 @@ namespace addon365.UI.ViewModel.Chit
                 {
                     _selectedCustomer = value;
                     OnPropertyChanged("SelectedCustomer");
-                    CustomerName = SelectedCustomer.Profile.FirstName;
-                    MobileNumber = SelectedCustomer.Profile.MobileNumber;
-                    Address = SelectedCustomer.Profile.Address;
+                    CustomerName = SelectedCustomer.Contact.FirstName;
+                    MobileNumber = SelectedCustomer.Contact.MobileNumber;
+                    Address = SelectedCustomer.Contact.Address;
                     ChitSubscribe.CustomerId = SelectedCustomer.Id;
                 }
             }
@@ -191,7 +191,7 @@ namespace addon365.UI.ViewModel.Chit
             customers.Insert(0, new Customer()
             {
                 Id = Guid.Empty,
-                Profile = new Contact()
+                Contact = new Contact()
                 {
                     FirstName = "Existing Customers"
                 }

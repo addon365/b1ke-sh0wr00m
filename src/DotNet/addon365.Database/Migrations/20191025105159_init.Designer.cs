@@ -10,7 +10,7 @@ using addon365.Database;
 namespace addon365.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20191016125100_init")]
+    [Migration("20191025105159_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1028,6 +1028,9 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("BusinessContactId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -1046,9 +1049,6 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ProfileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1059,7 +1059,7 @@ namespace addon365.Database.Migrations
 
                     b.HasIndex("BusinessContactId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("ContactId");
 
                     b.ToTable("Customers");
                 });
@@ -2149,7 +2149,7 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("ActivatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("CreatedEmployeeId")
+                    b.Property<Guid>("CatalogItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerCatalogGroupId")
@@ -2158,22 +2158,22 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ItemId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("SaleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedEmployeeId");
+                    b.HasIndex("CatalogItemId");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ItemId");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("SaleId");
 
@@ -2375,7 +2375,7 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("BranchMasterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BuyerId")
+                    b.Property<Guid?>("BuyerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
@@ -2387,7 +2387,7 @@ namespace addon365.Database.Migrations
                     b.Property<int?>("CreatedUserId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("CustomerId")
+                    b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Deleted")
@@ -2399,7 +2399,7 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("ShippingAddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("VoucherId")
+                    b.Property<Guid?>("VoucherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("YearId")
@@ -2536,6 +2536,31 @@ namespace addon365.Database.Migrations
                     b.HasIndex("BusinessContactId");
 
                     b.ToTable("Inventory.Sellers");
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.License.LicensedHardware", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ActivatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CustomerCatalogGroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HardwareId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerCatalogGroupId");
+
+                    b.ToTable("LicenseHardwares");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.LicenseMaster", b =>
@@ -3019,9 +3044,9 @@ namespace addon365.Database.Migrations
                         .WithMany()
                         .HasForeignKey("BusinessContactId");
 
-                    b.HasOne("addon365.Database.Entity.Crm.Contact", "Profile")
+                    b.HasOne("addon365.Database.Entity.Crm.Contact", "Contact")
                         .WithMany()
-                        .HasForeignKey("ProfileId");
+                        .HasForeignKey("ContactId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Crm.Lead", b =>
@@ -3177,17 +3202,19 @@ namespace addon365.Database.Migrations
 
             modelBuilder.Entity("addon365.Database.Entity.Inventory.Catalog.CustomerCatalogGroup", b =>
                 {
-                    b.HasOne("addon365.Database.Entity.Employees.Employee", "CreatedEmployee")
+                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CatalogItem", "Item")
                         .WithMany()
-                        .HasForeignKey("CreatedEmployeeId");
+                        .HasForeignKey("CatalogItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("addon365.Database.Entity.Crm.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CatalogItem", "Item")
+                    b.HasOne("addon365.Database.Entity.Employees.Employee", "CreatedEmployee")
                         .WithMany()
-                        .HasForeignKey("ItemId");
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("addon365.Database.Entity.Inventory.Sales.Sale", "Sale")
                         .WithMany()
@@ -3265,21 +3292,15 @@ namespace addon365.Database.Migrations
                 {
                     b.HasOne("addon365.Database.Entity.Inventory.Buyer", "Buyer")
                         .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BuyerId");
 
                     b.HasOne("addon365.Database.Entity.Crm.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("addon365.Database.Entity.Accounts.Voucher", "Voucher")
                         .WithMany()
-                        .HasForeignKey("VoucherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VoucherId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Inventory.Sales.SaleItem", b =>
@@ -3307,6 +3328,15 @@ namespace addon365.Database.Migrations
                     b.HasOne("addon365.Database.Entity.Crm.BusinessContact", "BusinessContact")
                         .WithMany()
                         .HasForeignKey("BusinessContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.License.LicensedHardware", b =>
+                {
+                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CustomerCatalogGroup", "CustomerCatalogGroup")
+                        .WithMany()
+                        .HasForeignKey("CustomerCatalogGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

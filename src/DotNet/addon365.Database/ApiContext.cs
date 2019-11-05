@@ -10,6 +10,7 @@ using addon365.Database.Entity.Inventory;
 using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Database.Entity.Inventory.Purchases;
 using addon365.Database.Entity.Inventory.Sales;
+using addon365.Database.Entity.License;
 using addon365.Database.Entity.Permission;
 using addon365.Database.Entity.Report;
 using addon365.Database.Entity.Threats;
@@ -129,6 +130,10 @@ namespace addon365.Database
         #region addonLicense
         public DbSet<CustomerCatalogGroup> CustomerCatalogGroups { get; set; }
         public DbSet<CustomerCatalogGroupDetail> CustomerCatalogGroupDetails { get; set; }
+
+        public DbSet<LicensedHardware> LicenseHardwares { get; set; }
+
+        public DbSet<LicenseRenewedDetail> LicenseRenewedDetails { get; set; }
 
         #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)

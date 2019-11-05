@@ -3,6 +3,7 @@
     public class BusinessContact : BaseEntityWithLogFields
     {
         public string BusinessName { get; set; }
+        public string BusinessMailId { get; set; }
         public Address.Master ContactAddress { get; set; }
         public Contact Proprietor { get; set; }
         public Contact ContactPerson { get; set; }
