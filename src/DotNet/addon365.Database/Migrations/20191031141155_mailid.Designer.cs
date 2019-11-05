@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using addon365.Database;
 
 namespace addon365.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    partial class ApiContextModelSnapshot : ModelSnapshot
+    [Migration("20191031141155_mailid")]
+    partial class mailid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2168,11 +2170,11 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("NumberofSystem")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("RenewedDetailId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("SaleId")
                         .HasColumnType("uniqueidentifier");
@@ -2184,10 +2186,6 @@ namespace addon365.Database.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("RenewedDetailId")
-                        .IsUnique()
-                        .HasFilter("[RenewedDetailId] IS NOT NULL");
 
                     b.HasIndex("SaleId");
 
@@ -2550,33 +2548,6 @@ namespace addon365.Database.Migrations
                     b.HasIndex("BusinessContactId");
 
                     b.ToTable("Inventory.Sellers");
-                });
-
-            modelBuilder.Entity("addon365.Database.Entity.License.LicenseRenewedDetail", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CustomerCatalogGroupId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ExpiryOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("RenewedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("VoucherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerCatalogGroupId");
-
-                    b.HasIndex("VoucherId");
-
-                    b.ToTable("LicenseRenewedDetails");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.License.LicensedHardware", b =>
@@ -3255,10 +3226,6 @@ namespace addon365.Database.Migrations
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
-                    b.HasOne("addon365.Database.Entity.License.LicenseRenewedDetail", "RenewedDetail")
-                        .WithOne()
-                        .HasForeignKey("addon365.Database.Entity.Inventory.Catalog.CustomerCatalogGroup", "RenewedDetailId");
-
                     b.HasOne("addon365.Database.Entity.Inventory.Sales.Sale", "Sale")
                         .WithMany()
                         .HasForeignKey("SaleId");
@@ -3373,19 +3340,6 @@ namespace addon365.Database.Migrations
                         .HasForeignKey("BusinessContactId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("addon365.Database.Entity.License.LicenseRenewedDetail", b =>
-                {
-                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CustomerCatalogGroup", "CustomerCatalogGroup")
-                        .WithMany()
-                        .HasForeignKey("CustomerCatalogGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("addon365.Database.Entity.Accounts.Voucher", "Voucher")
-                        .WithMany()
-                        .HasForeignKey("VoucherId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.License.LicensedHardware", b =>

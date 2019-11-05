@@ -81,7 +81,7 @@ namespace addon365.Database.Service.Chit
                 {
                     var customer = new Customer()
                     {
-                        Profile = new Contact()
+                        Contact = new Contact()
                         {
                             FirstName = domain.CustomerName,
                             Address = domain.Address,
@@ -152,8 +152,8 @@ namespace addon365.Database.Service.Chit
                 subscriptions = this.UnitOfWork.GetRepository<ChitSubscriber>()
                     .GetList(
                      predicate: subs =>
-                     subs.Customer.Profile.MobileNumber.CompareTo(text) == 0,
-                     include: s => s.Include(t => t.Customer.Profile).Include(t => t.ChitSchema)
+                     subs.Customer.Contact.MobileNumber.CompareTo(text) == 0,
+                     include: s => s.Include(t => t.Customer.Contact).Include(t => t.ChitSchema)
                      )
                      .Items;
             }
@@ -162,8 +162,8 @@ namespace addon365.Database.Service.Chit
                 subscriptions = this.UnitOfWork.GetRepository<ChitSubscriber>()
                     .GetList(
                      predicate: subs =>
-                     subs.Customer.Profile.FirstName.Contains(text),
-                     include: s => s.Include(t => t.Customer.Profile).Include(t => t.ChitSchema)
+                     subs.Customer.Contact.FirstName.Contains(text),
+                     include: s => s.Include(t => t.Customer.Contact).Include(t => t.ChitSchema)
                      )
                      .Items;
             }
@@ -176,7 +176,7 @@ namespace addon365.Database.Service.Chit
                     chitDue.ChitSubscriberId.CompareTo(subscriptions[0].Id) == 0
                     ).Items;
                 dueDomain.SubscriptionId = subscription.SubscribeId;
-                dueDomain.Name = subscription.Customer.Profile.FirstName;
+                dueDomain.Name = subscription.Customer.Contact.FirstName;
                 dueDomain.Amount = subscription.ChitSchema.MonthlyAmount;
                 dueDomain.PaidAmount = dues.Count * subscription.ChitSchema.MonthlyAmount;
                 var totalAmount = subscription.ChitSchema.MonthlyAmount *

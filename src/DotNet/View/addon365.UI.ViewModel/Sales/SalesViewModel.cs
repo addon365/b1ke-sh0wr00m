@@ -39,13 +39,13 @@ namespace addon365.UI.ViewModel.Sales
         {
             InsertCommand.IsEnabled = true;
             CurrentCustomer = new Customer();
-            CurrentCustomer.Profile = new Contact();
+            CurrentCustomer.Contact = new Contact();
             CurrentAmount = new VoucherInfo();
             Amounts = new ObservableCollection<VoucherInfo>();
         }
         void LoadData()
         {
-            CurrentCustomer.Profile.FirstName = "Ram";
+            CurrentCustomer.Contact.FirstName = "Ram";
         }
         #region Commands
         private void WireCommands()

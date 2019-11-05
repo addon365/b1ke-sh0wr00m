@@ -25,7 +25,7 @@ namespace addon365.Domain.Entity.Chit
             {
                 SubscriptionId = due.ChitSubscriber.SubscribeId,
                 Amount = due.ChitSubscriber.ChitSchema.MonthlyAmount,
-                Name = due.ChitSubscriber.Customer.Profile.FirstName
+                Name = due.ChitSubscriber.Customer.Contact.FirstName
             };
             return dueDomain;
         }

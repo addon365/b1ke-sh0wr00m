@@ -109,7 +109,7 @@ namespace addon365.UI.ViewModel.Chit.Reports
             customers.Insert(0, new Customer()
             {
                 Id=Guid.Empty,
-                Profile = new Contact()
+                Contact = new Contact()
                 {
                     FirstName = "All Customers"
                 }

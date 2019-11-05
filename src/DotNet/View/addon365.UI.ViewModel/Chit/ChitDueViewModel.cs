@@ -108,9 +108,9 @@ namespace addon365.UI.ViewModel.Chit
             BalanceAmount = TotalDue - PaidDue;
             SubscribeDomain = new ChitSubscribeDomain()
             {
-                Address = selectedChitSubscriber.Customer.Profile.Address,
-                CustomerName = selectedChitSubscriber.Customer.Profile.FirstName,
-                MobileNumber = selectedChitSubscriber.Customer.Profile.MobileNumber,
+                Address = selectedChitSubscriber.Customer.Contact.Address,
+                CustomerName = selectedChitSubscriber.Customer.Contact.FirstName,
+                MobileNumber = selectedChitSubscriber.Customer.Contact.MobileNumber,
                 ChitSchemeId = selectedChitSubscriber.ChitSchemeId,
                 SubscribeId = selectedChitSubscriber.Id
 

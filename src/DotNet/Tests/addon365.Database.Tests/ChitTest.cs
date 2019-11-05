@@ -44,7 +44,7 @@ namespace addon365.Database.Tests
                 .Build();
             context.Contacts.Add(contact);
 
-            chitCustomer.Profile = contact;
+            chitCustomer.Contact = contact;
             context.Customers.Add(chitCustomer);
             context.SaveChanges();
             Assert.Equal(chitCustomer.Id,

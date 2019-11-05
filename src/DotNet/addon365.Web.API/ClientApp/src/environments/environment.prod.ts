@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  base_url: "https://addon365crm.azurewebsites.net/api/"
+    base_url: "https://addon365webapi.azurewebsites.net/api/"
 };

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Database.Service;
@@ -20,6 +21,7 @@ namespace addon365.Web.API.Controllers.AddonLicense
     {
 
         private readonly IAddonLicenservice _Service;
+        
         private RequestInfo _reqinfo;
         private readonly ILogger _logger;
         /// <inheritdoc />
@@ -32,31 +34,124 @@ namespace addon365.Web.API.Controllers.AddonLicense
 
         // GET: api/License
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public IEnumerable<LicenseDetail> Get() =>
+        _Service.GetAll();
 
         // GET: api/License/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<LicenseDetail> GetById(string id)
         {
-            return "value";
+            if (!_Service.TryGetLicense(id, out var license))
+            {
+                return NotFound();
+            }
+
+            return license;
         }
+
+        [HttpGet("syncsale")]
+        public IEnumerable<CustomerCatalogGroup> GetOnSaleProducts()
+        {
+            var Licenses = _Service.GetLicenses();
+
+            foreach (var license in Licenses)
+            {
+                if (license.RenewedDetail!=null)
+                {
+                    yield return license;
+                }
+            }
+        }
+
+        //[HttpGet("asyncsale")]
+        //public async IAsyncEnumerable<Product> GetOnSaleProductsAsync()
+        //{
+        //    var products = _repository.GetProductsAsync();
+
+        //    await foreach (var product in products)
+        //    {
+        //        if (product.IsOnSale)
+        //        {
+        //            yield return product;
+        //        }
+        //    }
+        //}
+
 
         // POST: api/License
         [HttpPost]
         [Route("Validation")]
-        public void Validation([FromBody] LicenseValidationModel licenseValidationModel)
+        [HttpPost]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<LicenseDetail> Validation([FromBody] LicenseValidationModel licenseValidationModel)
         {
             LicenseValidationModel lvm = licenseValidationModel;
-            
+            if (!_Service.TryGetLicense(lvm.CustomerCatalogGroupId, out var license))
+            {
+                return NotFound();
+            }
+            //var Hardware = _Service.GetLicensedHardwares().Where(x => x.CustomerCatalogGroupId == License.id);
 
+            //if(Hardware.Count()==0)
+            //{
+            //    await _Service.AddHardware(License.CustomerCatalogGroupId, lvm.HardwareId);              
+            //}
+
+            return Ok(license);
+        }
+
+        [HttpPost]
+        [Route("Activation")]
+        [HttpPost]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<LicenseDetail>> Activation([FromBody] LicenseActivationDetail licenseActivationDetail)
+        {
+            LicenseActivationDetail lad = licenseActivationDetail;
+            if (!_Service.TryGetLicense(lad.CustomerCatalogGroupId, out var license))
+            {
+                return NotFound();
+            }
+            var Hardware = _Service.GetLicensedHardwares().Where(x => x.CustomerCatalogGroupId==Guid.Parse(license.CustomerCatalogGroupId));
+            var v = Hardware.Where(x => x.HardwareId == licenseActivationDetail.HardwareId);
+            if(v.Count()==0)
+            {
+
+                if (Hardware.Count() > license.NumberofSystem)
+                    return BadRequest();
+                else
+                   _Service.AddHardware(licenseActivationDetail.CustomerCatalogGroupId, licenseActivationDetail.HardwareId);
+
+
+            }
+          
+                
+
+            if (lad.CallType==Domain.Entity.ActivateCallType.FirstTime)
+            {
+                
+                 _Service.ActivateLicense(licenseActivationDetail);
+            }
+
+            //return CreatedAtAction(nameof(GetById), new { id = license.CustomerCatalogGroupId }, license);
+            if (!_Service.TryGetLicense(lad.CustomerCatalogGroupId, out var Rlicense))
+            {
+                return NotFound();
+            }
+            return Ok(Rlicense);
         }
 
         [HttpPost]
         [Route("Create")]
-        public void Create([FromBody] CustomerCatalogGroup csl)
+        public async void Create([FromBody] CustomerCatalogGroup csl)
         {
            
             csl.Id = Guid.NewGuid();
