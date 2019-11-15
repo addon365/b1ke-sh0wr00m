@@ -27,7 +27,7 @@ namespace addon365.Web.API.Controllers.AddonLicense
         private RequestInfo _reqinfo;
         private readonly ILogger _logger;
         /// <inheritdoc />
-        public LicenseController(IAddonLicenservice Service,IEmailService emailService, RequestInfo r, ILogger<EnquiriesController> logger)
+        public LicenseController(IAddonLicenservice Service, IEmailService emailService, RequestInfo r, ILogger<EnquiriesController> logger)
         {
             _EmailService = emailService;
             _Service = Service;
@@ -36,7 +36,7 @@ namespace addon365.Web.API.Controllers.AddonLicense
         }
 
         // GET: api/License
-        
+
         [HttpGet("All")]
         public IEnumerable<LicenseDetail> Get() =>
         _Service.GetAll();
@@ -125,32 +125,32 @@ namespace addon365.Web.API.Controllers.AddonLicense
             {
                 return NotFound();
             }
-            var Hardware = _Service.GetLicensedHardwares().Where(x => x.CustomerCatalogGroupId==Guid.Parse(license.CustomerCatalogGroupId));
+            var Hardware = _Service.GetLicensedHardwares().Where(x => x.CustomerCatalogGroupId == Guid.Parse(license.CustomerCatalogGroupId));
             var v = Hardware.Where(x => x.HardwareId == licenseActivationDetail.HardwareId);
-            if(v.Count()==0)
+            if (v.Count() == 0)
             {
 
                 if (Hardware.Count() > license.NumberofSystem)
                     return BadRequest();
                 else
-                   _Service.AddHardware(licenseActivationDetail);
+                    _Service.AddHardware(licenseActivationDetail);
 
 
             }
             else
             {
-                if(lad.CallType == Domain.Entity.ActivateCallType.CheckIn)
+                if (lad.CallType == Domain.Entity.ActivateCallType.CheckIn)
                 {
 
                 }
             }
-          
-                
 
-            if (lad.CallType==Domain.Entity.ActivateCallType.FirstTime)
+
+
+            if (lad.CallType == Domain.Entity.ActivateCallType.FirstTime)
             {
-                
-                 _Service.ActivateLicense(licenseActivationDetail);
+
+                _Service.ActivateLicense(licenseActivationDetail);
             }
 
             //return CreatedAtAction(nameof(GetById), new { id = license.CustomerCatalogGroupId }, license);
@@ -165,19 +165,19 @@ namespace addon365.Web.API.Controllers.AddonLicense
         [Route("Create")]
         public async void Create([FromBody] CustomerCatalogGroup csl)
         {
-           
+
             csl.Id = Guid.NewGuid();
             csl.CustomerCatalogGroupId = Guid.NewGuid().ToString();
 
-            
+
             _Service.Add(csl);
-             EmailMessage eMailMessage = new EmailMessage();
+            EmailMessage eMailMessage = new EmailMessage();
             eMailMessage.FromAddresses.Add(new EmailAddress { Address = "tamilselvanid@outlook.com", Name = "Tamilselvan" });
             eMailMessage.ToAddresses.Add(new EmailAddress { Address = "tamilselvan@addon.cc", Name = "Old mail" });
             eMailMessage.Subject = "Checking Mail from ASP CORE";
             eMailMessage.Content = "HELLO";
             _EmailService.Send(eMailMessage);
-           
+
         }
 
         // PUT: api/License/5
@@ -191,6 +191,6 @@ namespace addon365.Web.API.Controllers.AddonLicense
         public void Delete(int id)
         {
         }
-      
+
     }
 }

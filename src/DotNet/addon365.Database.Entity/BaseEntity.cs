@@ -3,8 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace addon365.Database.Entity
 {
-
-
     public class BaseEntity
     {
         [Key]
