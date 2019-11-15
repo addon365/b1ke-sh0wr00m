@@ -7,26 +7,26 @@ using Threenine.Data;
 
 namespace addon365.Database.Service.Crm
 {
-    public class BusinessCustomerService : BaseService<BusinessCustomer>,
-        IBusinessCustomerService
+    public class CustomerService : BaseService<Customer>,
+        ICustomerService
     {
-        public BusinessCustomerService(IUnitOfWork unitOfWork)
+        public CustomerService(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
         }
 
 
-        public override BusinessCustomer Save(BusinessCustomer obj)
+        public override Customer Save(Customer obj)
         {
             if (FindByMobile(obj.Contact.MobileNumber,
-                obj.Contact.Landline) != null)
+                obj.BusinessContact.Landline) != null)
                 return null;
 
             Repository.Add(obj);
             UnitOfWork.SaveChanges();
             return obj;
         }
-        public override IEnumerable<BusinessCustomer> FindAll()
+        public override IEnumerable<Customer> FindAll()
         {
             return Repository.GetList(
                 include: item => item.Include(x => x.User)
@@ -35,12 +35,12 @@ namespace addon365.Database.Service.Crm
                 ).Items;
         }
 
-        public BusinessCustomer FindByMobile(string mobileNumber, string landLine)
+        public Customer FindByMobile(string mobileNumber, string landLine)
         {
             var list = Repository.GetList(predicate:
-                            c => c.Contact.MobileNumber.CompareTo(mobileNumber) == 0
-                            || c.Contact.Landline.CompareTo(landLine) == 0,
-                            include: x => x.Include(bc => bc.Contact));
+                            c => c.BusinessContact.MobileNumber.CompareTo(mobileNumber) == 0
+                            || c.BusinessContact.Landline.CompareTo(landLine) == 0,
+                            include: x => x.Include(bc => bc.BusinessContact));
             if (list.Count > 0)
                 return list.Items[0];
             return null;

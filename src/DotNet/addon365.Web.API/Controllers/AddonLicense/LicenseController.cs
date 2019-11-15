@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using addon365.Database.Entity.Inventory.Catalog;
 using addon365.Database.Service;
 using addon365.Domain.Entity.AddonLicense;
+using addon365.Domain.Entity.EMail;
 using addon365.IService.AddonLicense;
+using addon365.IService.EMail;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -21,19 +23,21 @@ namespace addon365.Web.API.Controllers.AddonLicense
     {
 
         private readonly IAddonLicenservice _Service;
-        
+        private IEmailService _EmailService;
         private RequestInfo _reqinfo;
         private readonly ILogger _logger;
         /// <inheritdoc />
-        public LicenseController(IAddonLicenservice Service, RequestInfo r, ILogger<EnquiriesController> logger)
+        public LicenseController(IAddonLicenservice Service,IEmailService emailService, RequestInfo r, ILogger<EnquiriesController> logger)
         {
+            _EmailService = emailService;
             _Service = Service;
             _reqinfo = r;
             this._logger = logger;
         }
 
         // GET: api/License
-        [HttpGet]
+        
+        [HttpGet("All")]
         public IEnumerable<LicenseDetail> Get() =>
         _Service.GetAll();
 
@@ -51,18 +55,19 @@ namespace addon365.Web.API.Controllers.AddonLicense
             return license;
         }
 
-        [HttpGet("syncsale")]
-        public IEnumerable<CustomerCatalogGroup> GetOnSaleProducts()
+        [HttpGet]
+        public IEnumerable<CustomerCatalogGroup> GetActiveLicenses()
         {
             var Licenses = _Service.GetLicenses();
 
-            foreach (var license in Licenses)
-            {
-                if (license.RenewedDetail!=null)
-                {
-                    yield return license;
-                }
-            }
+            //foreach (var license in Licenses)
+            //{
+            //    if (license.Customer!=null)
+            //    {
+            //        yield return license;
+            //    }
+            //}
+            return Licenses;
         }
 
         //[HttpGet("asyncsale")]
@@ -128,9 +133,16 @@ namespace addon365.Web.API.Controllers.AddonLicense
                 if (Hardware.Count() > license.NumberofSystem)
                     return BadRequest();
                 else
-                   _Service.AddHardware(licenseActivationDetail.CustomerCatalogGroupId, licenseActivationDetail.HardwareId);
+                   _Service.AddHardware(licenseActivationDetail);
 
 
+            }
+            else
+            {
+                if(lad.CallType == Domain.Entity.ActivateCallType.CheckIn)
+                {
+
+                }
             }
           
                 
@@ -155,8 +167,17 @@ namespace addon365.Web.API.Controllers.AddonLicense
         {
            
             csl.Id = Guid.NewGuid();
+            csl.CustomerCatalogGroupId = Guid.NewGuid().ToString();
 
+            
             _Service.Add(csl);
+             EmailMessage eMailMessage = new EmailMessage();
+            eMailMessage.FromAddresses.Add(new EmailAddress { Address = "tamilselvanid@outlook.com", Name = "Tamilselvan" });
+            eMailMessage.ToAddresses.Add(new EmailAddress { Address = "tamilselvan@addon.cc", Name = "Old mail" });
+            eMailMessage.Subject = "Checking Mail from ASP CORE";
+            eMailMessage.Content = "HELLO";
+            _EmailService.Send(eMailMessage);
+           
         }
 
         // PUT: api/License/5

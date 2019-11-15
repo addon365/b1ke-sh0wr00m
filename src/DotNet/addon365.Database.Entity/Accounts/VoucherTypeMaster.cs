@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity.Accounts
 {
+    [Table("Accounts.VoucherTypeMasters")]
     public class VoucherTypeMaster
     {
         [Key]

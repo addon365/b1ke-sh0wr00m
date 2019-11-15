@@ -22,7 +22,9 @@ namespace addon365.Database.Service.AddonLicense
 
         {
             IList<LicenseDetail> lstLicenseDetail = new List<LicenseDetail>();
-            foreach (var CustomerCatalogGroup in _unitOfWork.GetRepository<CustomerCatalogGroup>().GetList().Items)
+            foreach (var CustomerCatalogGroup in _unitOfWork.GetRepository<CustomerCatalogGroup>().GetList(include: x => x.
+             Include(c => c.Customer).ThenInclude(con => con.BusinessContact).ThenInclude(per => per.ContactPerson)
+             .Include(r => r.RenewedDetail)).Items)
             {
 
                 lstLicenseDetail.Add(new LicenseDetail() {CustomerCatalogGroupId=CustomerCatalogGroup.CustomerCatalogGroupId });
@@ -33,7 +35,9 @@ namespace addon365.Database.Service.AddonLicense
        
 
         public List<CustomerCatalogGroup> GetLicenses() =>
-           new List<CustomerCatalogGroup>(_unitOfWork.GetRepository<CustomerCatalogGroup>().GetList().Items);
+           new List<CustomerCatalogGroup>(_unitOfWork.GetRepository<CustomerCatalogGroup>().GetList(predicate: x => x.Customer !=null,include: x => x.
+             Include(c => c.Customer).ThenInclude(con => con.BusinessContact).ThenInclude(per => per.ContactPerson)
+             .Include(r => r.RenewedDetail)).Items);
 
         //public IAsyncEnumerable<CustomerCatalogGroup> GetProductsAsync() =>
         //    _unitOfWork.GetRepositoryAsync<CustomerCatalogGroup>().GetListAsync();
@@ -55,7 +59,7 @@ namespace addon365.Database.Service.AddonLicense
             license.CustomerCatalogGroupId = catalog.CustomerCatalogGroupId;
             license.NumberofSystem = catalog.NumberofSystem;
             if(catalog.RenewedDetail!=null)
-            license.ExpiryDate = catalog.RenewedDetail.ExpiryOn;
+            license.ExpiryDate = catalog.RenewedDetail.ExpiryDate;
 
             if (catalog.Customer != null)
             {
@@ -86,12 +90,16 @@ namespace addon365.Database.Service.AddonLicense
         {
             return _unitOfWork.GetRepository<LicensedHardware>().GetList().Items;
         }
-        public int AddHardware(string AppId,string HardwareId)
+        public int AddHardware(LicenseActivationDetail lad)
         {
-            var catalog = _unitOfWork.GetRepository<CustomerCatalogGroup>().Single(x => x.CustomerCatalogGroupId == AppId);
+            var catalog = _unitOfWork.GetRepository<CustomerCatalogGroup>().Single(x => x.CustomerCatalogGroupId == lad.CustomerCatalogGroupId);
             LicensedHardware licensedHardware = new LicensedHardware();
-            licensedHardware.HardwareId = HardwareId;
+            licensedHardware.HardwareId = lad.HardwareId;
             licensedHardware.CustomerCatalogGroupId = catalog.Id;
+            licensedHardware.DeviceName = lad.DeviceName;
+            licensedHardware.DeviceType = lad.DeviceType;
+            licensedHardware.DeviceComment = lad.DeviceComment;
+            licensedHardware.MacAddress = lad.MacAddress;
             licensedHardware.ActivatedDate = System.DateTime.Now;
             _unitOfWork.GetRepository<LicensedHardware>().Add(licensedHardware);
             return _unitOfWork.SaveChanges();
@@ -123,8 +131,9 @@ namespace addon365.Database.Service.AddonLicense
                 catalog.Customer = cus;
                 LicenseRenewedDetail licenseRenewed = new LicenseRenewedDetail();
                 licenseRenewed.CustomerCatalogGroupId = catalog.Id;
-                licenseRenewed.RenewedOn = System.DateTime.Now;
-                licenseRenewed.ExpiryOn = System.DateTime.Now.AddDays(1);
+                licenseRenewed.RenewedDate = System.DateTime.Now;
+                licenseRenewed.ExpiryDate = System.DateTime.Now.AddDays(10);
+                
                 _unitOfWork.GetRepository<LicenseRenewedDetail>().Add(licenseRenewed);
 
                 catalog.RenewedDetailId = licenseRenewed.Id;

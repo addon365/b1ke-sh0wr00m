@@ -5,11 +5,18 @@
     <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Address\**" />
+    <EmbeddedResource Remove="Address\**" />
+    <None Remove="Address\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Crm\BusinessCustomer.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Address\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 </Project>
