@@ -7,12 +7,16 @@ using System.Text;
 
 namespace addon365.Database.Entity.License
 {
+    [Table("AddonLicense.LicenseRenewedDetails")]
     public class LicenseRenewedDetail : BaseEntity
     {
         public Guid CustomerCatalogGroupId { get; set; }
         [ForeignKey("CustomerCatalogGroupId")] public virtual CustomerCatalogGroup CustomerCatalogGroup { get; set; }
-        public DateTime RenewedOn { get; set; }
-        public DateTime ExpiryOn { get; set; }
+        public DateTime RenewedDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public bool Activated { get; set; }
+        public DateTime ActivateDate { get; set; }
+        public string ActivateComment { get; set; }
         public Guid? VoucherId { get; set; }
 
         [ForeignKey("VoucherId")]

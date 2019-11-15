@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity.Accounts
 {
+    [Table("Accounts.VoucherInfos")]
     public class VoucherInfo : BaseEntityWithLogFields
     {
         public Guid VoucherId { get; set; }

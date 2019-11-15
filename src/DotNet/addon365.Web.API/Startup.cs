@@ -5,17 +5,20 @@ using addon365.Database.Service.AddonLicense;
 using addon365.Database.Service.Chit;
 using addon365.Database.Service.Crm;
 using addon365.Database.Service.Crm.Address;
+using addon365.Database.Service.EMail;
 using addon365.Database.Service.Inventory;
 using addon365.Database.Service.Permission;
 using addon365.Database.Service.pos;
 using addon365.Database.Service.Report;
 using addon365.Database.Service.Sales;
+using addon365.Domain.Entity.EMail;
 using addon365.IService;
 using addon365.IService.Accounts;
 using addon365.IService.AddonLicense;
 using addon365.IService.Chit;
 using addon365.IService.Crm;
 using addon365.IService.Crm.Address;
+using addon365.IService.EMail;
 using addon365.IService.Inventory;
 using addon365.IService.Permission;
 using addon365.IService.pos;
@@ -131,7 +134,7 @@ namespace addon365.Web.API
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IAppointmentStatusService, AppointmentStatusService>();
             services.AddTransient<IStatusMasterService, StatusMasterService>();
-            services.AddTransient<IBusinessCustomerService, BusinessCustomerService>();
+            services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<ILeadService, LeadService>();
             services.AddTransient<ILeadSourceService, LeadSourceService>();
             services.AddTransient<ILeadStatusService, LeadStatusService>();
@@ -140,6 +143,11 @@ namespace addon365.Web.API
 
             services.AddTransient<ICampaignService, CampaignService>();
 
+            #endregion
+
+            #region EMail
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
             #endregion
             services.AddScoped<RequestInfo>();
             services.AddControllers();

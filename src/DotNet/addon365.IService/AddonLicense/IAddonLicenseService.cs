@@ -16,7 +16,7 @@ namespace addon365.IService.AddonLicense
         public List<CustomerCatalogGroup> GetLicenses();
         public int Add(CustomerCatalogGroup customerCatalogGroup);
         IEnumerable<LicensedHardware> GetLicensedHardwares();
-        public int AddHardware(string AppId, string HardwareId);
+        public int AddHardware(LicenseActivationDetail lad);
 
         public bool ActivateLicense(LicenseActivationDetail lad);
     }

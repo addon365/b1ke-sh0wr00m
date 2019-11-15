@@ -10,14 +10,14 @@ using addon365.Database;
 namespace addon365.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20191025105159_init")]
+    [Migration("20191112114323_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("addon")
+                .HasDefaultSchema("addon365")
                 .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -63,7 +63,7 @@ namespace addon365.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountBooks");
+                    b.ToTable("Accounts.AccountBooks");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Accounts.PaymentMode", b =>
@@ -101,7 +101,7 @@ namespace addon365.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentModes");
+                    b.ToTable("Accounts.PaymentModes");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Accounts.Voucher", b =>
@@ -144,7 +144,7 @@ namespace addon365.Database.Migrations
 
                     b.HasIndex("VoucherTypeId");
 
-                    b.ToTable("Vouchers");
+                    b.ToTable("Accounts.Vouchers");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Accounts.VoucherInfo", b =>
@@ -195,7 +195,7 @@ namespace addon365.Database.Migrations
 
                     b.HasIndex("bookId");
 
-                    b.ToTable("VouchersInfo");
+                    b.ToTable("Accounts.VoucherInfos");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Accounts.VoucherTypeMaster", b =>
@@ -215,7 +215,7 @@ namespace addon365.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VoucherTypeMasters");
+                    b.ToTable("Accounts.VoucherTypeMasters");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.BranchMaster", b =>
@@ -774,6 +774,9 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("BranchMasterId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("BusinessMailId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BusinessName")
                         .HasColumnType("nvarchar(max)");
 
@@ -822,51 +825,6 @@ namespace addon365.Database.Migrations
                     b.HasIndex("ProprietorId");
 
                     b.ToTable("BusinessContacts");
-                });
-
-            modelBuilder.Entity("addon365.Database.Entity.Crm.BusinessCustomer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ContactId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Deleted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Identifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("YearId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContactId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BusinessCustomers");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Crm.Campaign", b =>
@@ -1040,10 +998,16 @@ namespace addon365.Database.Migrations
                     b.Property<int?>("CreatedUserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomerEmailId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Deleted")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Identifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Modified")
@@ -1060,6 +1024,8 @@ namespace addon365.Database.Migrations
                     b.HasIndex("BusinessContactId");
 
                     b.HasIndex("ContactId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Customers");
                 });
@@ -2149,7 +2115,7 @@ namespace addon365.Database.Migrations
                     b.Property<DateTime>("ActivatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CatalogItemId")
+                    b.Property<Guid?>("CatalogItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerCatalogGroupId")
@@ -2161,8 +2127,11 @@ namespace addon365.Database.Migrations
                     b.Property<Guid?>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ExpiryDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("NumberofSystem")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("RenewedDetailId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("SaleId")
                         .HasColumnType("uniqueidentifier");
@@ -2174,6 +2143,10 @@ namespace addon365.Database.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("RenewedDetailId")
+                        .IsUnique()
+                        .HasFilter("[RenewedDetailId] IS NOT NULL");
 
                     b.HasIndex("SaleId");
 
@@ -2538,6 +2511,42 @@ namespace addon365.Database.Migrations
                     b.ToTable("Inventory.Sellers");
                 });
 
+            modelBuilder.Entity("addon365.Database.Entity.License.LicenseRenewedDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ActivateComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ActivateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Activated")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("CustomerCatalogGroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RenewedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("VoucherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerCatalogGroupId");
+
+                    b.HasIndex("VoucherId");
+
+                    b.ToTable("AddonLicense.LicenseRenewedDetails");
+                });
+
             modelBuilder.Entity("addon365.Database.Entity.License.LicensedHardware", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2550,17 +2559,29 @@ namespace addon365.Database.Migrations
                     b.Property<Guid>("CustomerCatalogGroupId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("DeviceComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeviceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DeviceType")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("HardwareId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MacAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerCatalogGroupId");
 
-                    b.ToTable("LicenseHardwares");
+                    b.ToTable("AddonLicense.LicensedHardwares");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.LicenseMaster", b =>
@@ -3003,19 +3024,6 @@ namespace addon365.Database.Migrations
                         .HasForeignKey("ProprietorId");
                 });
 
-            modelBuilder.Entity("addon365.Database.Entity.Crm.BusinessCustomer", b =>
-                {
-                    b.HasOne("addon365.Database.Entity.Crm.BusinessContact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId");
-
-                    b.HasOne("addon365.Database.Entity.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("addon365.Database.Entity.Crm.CampaignInfo", b =>
                 {
                     b.HasOne("addon365.Database.Entity.Crm.Campaign", null)
@@ -3047,6 +3055,10 @@ namespace addon365.Database.Migrations
                     b.HasOne("addon365.Database.Entity.Crm.Contact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId");
+
+                    b.HasOne("addon365.Database.Entity.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.Crm.Lead", b =>
@@ -3204,9 +3216,7 @@ namespace addon365.Database.Migrations
                 {
                     b.HasOne("addon365.Database.Entity.Inventory.Catalog.CatalogItem", "Item")
                         .WithMany()
-                        .HasForeignKey("CatalogItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CatalogItemId");
 
                     b.HasOne("addon365.Database.Entity.Crm.Customer", "Customer")
                         .WithMany()
@@ -3215,6 +3225,10 @@ namespace addon365.Database.Migrations
                     b.HasOne("addon365.Database.Entity.Employees.Employee", "CreatedEmployee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
+
+                    b.HasOne("addon365.Database.Entity.License.LicenseRenewedDetail", "RenewedDetail")
+                        .WithOne()
+                        .HasForeignKey("addon365.Database.Entity.Inventory.Catalog.CustomerCatalogGroup", "RenewedDetailId");
 
                     b.HasOne("addon365.Database.Entity.Inventory.Sales.Sale", "Sale")
                         .WithMany()
@@ -3330,6 +3344,19 @@ namespace addon365.Database.Migrations
                         .HasForeignKey("BusinessContactId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("addon365.Database.Entity.License.LicenseRenewedDetail", b =>
+                {
+                    b.HasOne("addon365.Database.Entity.Inventory.Catalog.CustomerCatalogGroup", "CustomerCatalogGroup")
+                        .WithMany()
+                        .HasForeignKey("CustomerCatalogGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("addon365.Database.Entity.Accounts.Voucher", "Voucher")
+                        .WithMany()
+                        .HasForeignKey("VoucherId");
                 });
 
             modelBuilder.Entity("addon365.Database.Entity.License.LicensedHardware", b =>

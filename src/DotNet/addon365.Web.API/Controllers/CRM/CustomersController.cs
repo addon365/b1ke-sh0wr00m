@@ -14,12 +14,12 @@ namespace addon365.Web.API.Controllers.CRM
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BusinessCustomersController : BaseController<BusinessCustomer>
+    public class CustomersController : BaseController<Customer>
     {
-        IBusinessCustomerService service;
+        ICustomerService service;
         IUserService userService;
         IWebHostEnvironment hostingEnvironment;
-        public BusinessCustomersController(IBusinessCustomerService baseService,
+        public CustomersController(ICustomerService baseService,
             IUserService userService, IWebHostEnvironment hostingEnvironment)
             : base(baseService)
         {
@@ -87,10 +87,10 @@ namespace addon365.Web.API.Controllers.CRM
                         continue;
                     }
                     user = userService.InsertUser(user);
-                    BusinessCustomer customer = new BusinessCustomer();
+                    Customer customer = new Customer();
 
                     customer.UserId = user.Id;
-                    customer.Contact = new BusinessContact
+                    customer.BusinessContact = new BusinessContact
                     {
                         BusinessName = businessName,
                         ContactAddress = new Database.Entity.Crm.Address.Master

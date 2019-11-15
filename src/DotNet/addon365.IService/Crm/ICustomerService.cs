@@ -3,9 +3,9 @@ using addon365.IService.Base;
 
 namespace addon365.IService.Crm
 {
-    public interface IBusinessCustomerService : IBaseService<BusinessCustomer>
+    public interface ICustomerService : IBaseService<Customer>
     {
-        BusinessCustomer FindByMobile(string mobileNumber,
+        Customer FindByMobile(string mobileNumber,
             string landLine);
     }
 }

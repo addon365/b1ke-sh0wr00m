@@ -2,7 +2,7 @@
   {
     "Id": "a8a15e38-1c77-4b64-ada6-99b721264add",
     "Identifier": "55455ddfddf",
-    "Contact": {
+    "BusinessContact": {
       "Id": "878926a5-fef0-4656-b6b9-da3e1b6b093a",
       "BusinessName": "BusinessName1",
       "ContactAddress": {

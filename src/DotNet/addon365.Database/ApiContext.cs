@@ -59,7 +59,7 @@ namespace addon365.Database
         public DbSet<CampaignInfo> CampaignInfos { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
 
-        public DbSet<BusinessCustomer> BusinessCustomers { get; set; }
+        //public DbSet<BusinessCustomer> BusinessCustomers { get; set; }
         public DbSet<BusinessContact> BusinessContacts { get; set; }
 
 

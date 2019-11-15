@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Database.Entity.Accounts
 {
+    [Table("Accounts.AccountBooks")]
     public class AccountBook : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
@@ -11,5 +13,5 @@ namespace addon365.Database.Entity.Accounts
 
 
     }
-    public enum AccountBookEnum { Cash, Booking, Purchase, PurchaseBalance, GstBook }
+    
 }

@@ -1,4 +1,5 @@
-﻿using addon365.Database.Entity.Accounts;
+﻿using addon365.Database.Entity;
+using addon365.Database.Entity.Accounts;
 using addon365.Database.Entity.Enquiries;
 using addon365.Domain.Entity.Paging;
 using addon365.IService;
