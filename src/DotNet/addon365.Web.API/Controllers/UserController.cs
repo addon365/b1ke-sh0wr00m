@@ -1,4 +1,5 @@
-﻿using addon365.Database.Entity.Users;
+﻿using addon365.Database.Entity.Permission;
+using addon365.Database.Entity.Users;
 using addon365.Database.Service;
 using addon365.IService;
 using addon365.Web.API.Utils;
@@ -53,7 +54,7 @@ namespace addon365.Web.API.Controllers
             //String password = paramUser.Password;
             _reqinfo.BranchId = Request.Headers["BranchId"].ToString();
             _reqinfo.DeviceCode = Request.Headers["DeviceCode"].ToString();
-
+            string requestedBy = Request.Headers["requestedBy"].ToString();
             _logger.LogInformation("Validating User " + userId);
             User user = _userService.Validate(userId, password);
             if (user == null)
@@ -85,8 +86,22 @@ namespace addon365.Web.API.Controllers
             _logger.LogInformation(string.Format("Generated Token {0} for User {1}", tokenString, userId));
             user.SessionToken = tokenString;
             user.DeviceId = _reqinfo.DeviceId;
+            User currentUser = _userService.Find(user.Id);
+            var permission = new { logicName = "all", create = true, edit = true, update = true, delete = true };
+            if (String.Compare(currentUser.RoleGroup.Name, "root", StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                permission = new { logicName = "marketing", create = true, edit = true, update = true, delete = false };
+            }
 
-            return Ok(_userService.Find(user.Id));
+
+            if (String.Compare(requestedBy, "mobile", StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                return Ok(currentUser);
+            }
+
+
+            var resultData = new { id = currentUser.Id, userId = currentUser.UserId, userName = currentUser.UserName, roleGroup = currentUser.RoleGroup, permission = permission };
+            return Ok(resultData);
         }
         [AllowAnonymous]
         [HttpGet]

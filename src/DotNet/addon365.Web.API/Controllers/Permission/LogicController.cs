@@ -6,10 +6,9 @@ namespace addon365.Web.API.Controllers.Permission
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleGroupController : BaseController<RoleGroupMaster>
+    public class LogicController : BaseController<LogicMaster>
     {
-        public RoleGroupController(IRoleGroupService baseService)
-            : base(baseService)
+        public LogicController(ILogicMasterService baseService) : base(baseService)
         {
         }
     }
