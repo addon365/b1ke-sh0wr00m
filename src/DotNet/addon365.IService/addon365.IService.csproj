@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\addon365.Database.Entity\addon365.Database.Entity.csproj" />
     <ProjectReference Include="..\addon365.Database\addon365.Database.csproj" />
     <ProjectReference Include="..\addon365.Domain.Entity\addon365.Domain.Entity.csproj" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿
-using addon365.Database.Entity.Accounts;
+﻿using addon365.Database.Entity.Accounts;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 

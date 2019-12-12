@@ -10,7 +10,7 @@ using addon365.Database;
 namespace addon365.Database.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20191112114323_init")]
+    [Migration("20191126133413_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
