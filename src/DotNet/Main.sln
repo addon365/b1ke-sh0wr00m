@@ -25,23 +25,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{28
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Accounts.DataService", "Accounts\addon365.Accounts.DataService\addon365.Accounts.DataService.csproj", "{3A338134-481F-4849-8E99-E216F3C24018}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Accounts.IService", "Accounts\addon365.Accounts.IService\addon365.Accounts.IService.csproj", "{58CCE036-3A96-4216-83CA-B397A4D099D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Accounts.IDataService", "Accounts\addon365.Accounts.IDataService\addon365.Accounts.IDataService.csproj", "{58CCE036-3A96-4216-83CA-B397A4D099D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{ECA7EE4B-A05C-450F-9856-3393A9425036}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.DataEntity", "Common\addon365.Common.DataEntity\addon365.Common.DataEntity.csproj", "{510FC98A-8E9E-489E-956D-630AB8BB7691}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.IService", "Common\addon365.Common.IService\addon365.Common.IService.csproj", "{C2BB0D2A-C4F9-4464-A453-3E4CE39133BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.IDataService", "Common\addon365.Common.IDataService\addon365.Common.IDataService.csproj", "{C2BB0D2A-C4F9-4464-A453-3E4CE39133BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.Service", "Common\addon365.Common.Service\addon365.Common.Service.csproj", "{90FAD15E-BD67-4F58-9F9C-24B52CEEBC83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.DataService", "Common\addon365.Common.DataService\addon365.Common.DataService.csproj", "{90FAD15E-BD67-4F58-9F9C-24B52CEEBC83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chit", "Chit", "{0C764628-2B65-4815-8719-429C1EB7392E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.DataEntity", "Chit\addon365.Chit.DataEntity\addon365.Chit.DataEntity.csproj", "{BD950A6B-028F-43A1-8E39-D6D0D6EC43DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.Service", "Chit\addon365.Chit.Service\addon365.Chit.Service.csproj", "{23866B9E-8CF7-4B28-BF85-C5A13BE3FD8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.DataService", "Chit\addon365.Chit.DataService\addon365.Chit.DataService.csproj", "{23866B9E-8CF7-4B28-BF85-C5A13BE3FD8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.IService", "Chit\addon365.Chit.IService\addon365.Chit.IService.csproj", "{97962FFE-9A22-4ABB-AECE-E32237150708}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.IDataService", "Chit\addon365.Chit.IDataService\addon365.Chit.IDataService.csproj", "{97962FFE-9A22-4ABB-AECE-E32237150708}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Database.Entity", "addon365.Database.Entity\addon365.Database.Entity.csproj", "{EDDAD0AD-8870-47B5-A02B-4A71AFA315E3}"
 EndProject
@@ -55,11 +55,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{68F6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Crm", "Crm", "{41A50D8C-9729-4E50-A440-7A2F0A2AB2D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.Crm.DataEntity", "Crm\addon365.Crm.DataEntity\addon365.Crm.DataEntity.csproj", "{B1A84676-0C6B-4190-B4E3-E37005AB21B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Crm.DataEntity", "Crm\addon365.Crm.DataEntity\addon365.Crm.DataEntity.csproj", "{B1A84676-0C6B-4190-B4E3-E37005AB21B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.Crm.IService", "Crm\addon365.Crm.IService\addon365.Crm.IService.csproj", "{EF654A97-284F-4A49-B53A-C690FECCEF1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Crm.IService", "Crm\addon365.Crm.IService\addon365.Crm.IService.csproj", "{EF654A97-284F-4A49-B53A-C690FECCEF1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.Crm.DataService", "Crm\addon365.Crm.DataService\addon365.Crm.DataService.csproj", "{AB28D9E3-0230-402D-A6C6-1D60622CB4D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Crm.DataService", "Crm\addon365.Crm.DataService\addon365.Crm.DataService.csproj", "{AB28D9E3-0230-402D-A6C6-1D60622CB4D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.Chit.DomainEntity", "Chit\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj", "{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +247,14 @@ Global
 		{AB28D9E3-0230-402D-A6C6-1D60622CB4D7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB28D9E3-0230-402D-A6C6-1D60622CB4D7}.Release|x86.ActiveCfg = Release|Any CPU
 		{AB28D9E3-0230-402D-A6C6-1D60622CB4D7}.Release|x86.Build.0 = Release|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -268,6 +278,7 @@ Global
 		{B1A84676-0C6B-4190-B4E3-E37005AB21B1} = {41A50D8C-9729-4E50-A440-7A2F0A2AB2D6}
 		{EF654A97-284F-4A49-B53A-C690FECCEF1C} = {41A50D8C-9729-4E50-A440-7A2F0A2AB2D6}
 		{AB28D9E3-0230-402D-A6C6-1D60622CB4D7} = {41A50D8C-9729-4E50-A440-7A2F0A2AB2D6}
+		{C7AADD66-C1E3-43F2-9EF0-21E72CFFA1A1} = {0C764628-2B65-4815-8719-429C1EB7392E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E1EDFA2-04DB-4075-806B-548493C2475D}

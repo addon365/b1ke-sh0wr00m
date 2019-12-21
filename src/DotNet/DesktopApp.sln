@@ -19,13 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Database.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{5384B644-23C4-4F9D-872B-6D24375D960B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.UI.WPF", "addon365.UI.WPF\addon365.UI.WPF.csproj", "{B239AB87-442B-4C26-AC4E-203FA16CD40F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.UI.WPF", "View\Windows\addon365.UI.WPF\addon365.UI.WPF.csproj", "{B239AB87-442B-4C26-AC4E-203FA16CD40F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.UI.ViewModel", "addon365.UI.ViewModel\addon365.UI.ViewModel.csproj", "{DCB74093-CD12-478B-BE5A-7886295E1A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.UI.ViewModel", "View\Windows\addon365.UI.ViewModel\addon365.UI.ViewModel.csproj", "{DCB74093-CD12-478B-BE5A-7886295E1A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.UI.WPF.Controls", "addon365.UI.WPF.Controls\addon365.UI.WPF.Controls.csproj", "{341CE028-D1FF-4694-B510-153EE19B813A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.UI.WPF.Controls", "View\Windows\addon365.UI.WPF.Controls\addon365.UI.WPF.Controls.csproj", "{341CE028-D1FF-4694-B510-153EE19B813A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.IService", "addon365.IService\addon365.IService.csproj", "{8767E7B1-1143-4A00-8DA0-3E8BACEA0F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.Common.ViewModel", "Common\Windows\addon365.Common.ViewModel\addon365.Common.ViewModel.csproj", "{637902DE-37D9-486B-9828-D2F9831CF50C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,14 @@ Global
 		{8767E7B1-1143-4A00-8DA0-3E8BACEA0F97}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8767E7B1-1143-4A00-8DA0-3E8BACEA0F97}.Release|x86.ActiveCfg = Release|x86
 		{8767E7B1-1143-4A00-8DA0-3E8BACEA0F97}.Release|x86.Build.0 = Release|x86
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Debug|x86.Build.0 = Debug|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Release|x86.ActiveCfg = Release|Any CPU
+		{637902DE-37D9-486B-9828-D2F9831CF50C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

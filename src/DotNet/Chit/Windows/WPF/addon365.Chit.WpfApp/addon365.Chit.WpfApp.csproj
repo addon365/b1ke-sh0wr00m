@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>ChitApp</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\addon365.Chit.DataService\addon365.Chit.DataService.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.EfContext\addon365.Chit.EfContext.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.IDataService\addon365.Chit.IDataService.csproj" />
+    <ProjectReference Include="..\..\addon365.Chit.ViewModel\addon365.Chit.ViewModel.csproj" />
+    <ProjectReference Include="..\addon365.FileStore\addon365.FileStore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\ChitSubscriberListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\ChitSubscriberListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ChitSubscriberDueReceiptView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="addon365.Chit.WpfView.ucSubscriberView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:FileStore="clr-namespace:addon365.FileStore;assembly=addon365.FileStore"
+             xmlns:local="clr-namespace:addon365.Chit.WpfView"
+             mc:Ignorable="d" 
+             d:DesignHeight="300"  d:DesignWidth="600"  DataContext="{Binding Subscriber, Source={StaticResource Locator}}" >
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+
+                <ResourceDictionary Source="ChitResources.xaml"/>
+
+
+            </ResourceDictionary.MergedDictionaries>
+
+
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid>
+    <Image Source="{Binding Source={x:Static FileStore:Resource.Watermark}}" Style="{StaticResource WatermarkImage}"/>
+    <DockPanel>
+        
+    <Grid Style="{StaticResource WindowContentGrid}"> 
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        
+        
+        <Label Content="Chit Schema" Style="{StaticResource Label}" Grid.Row="1" />
+        <ComboBox Grid.Column="1" Grid.Row="1" Style="{StaticResource ComboBox}" />
+
+        <Label Content="First Name" Style="{StaticResource Label}" Grid.Row="2" />
+        <TextBox   Grid.Column="1" Grid.Row="2" Style="{StaticResource InputText}" Text="{Binding Title}"/>
+
+        <Label Content="Last Name" Style="{StaticResource Label}" Grid.Row="3" />
+        <TextBox Text="TextBox"  Grid.Column="1" Grid.Row="3" Style="{StaticResource InputText}"/>
+
+        <Label Content="Mobile No" Style="{StaticResource Label}" Grid.Row="4" />
+        <TextBox Text="TextBox"  Grid.Column="1" Grid.Row="4" Style="{StaticResource InputText}"/>
+
+        <Label Content="Place" Style="{StaticResource Label}" Grid.Row="5" />
+        <TextBox Text="TextBox"  Grid.Column="1" Grid.Row="5" Style="{StaticResource InputText}"/>
+
+        <Label Content="Address" Style="{StaticResource Label}" Grid.Row="6" />
+        <TextBox Text="TextBox"  Grid.Column="1" Grid.Row="6" Style="{StaticResource InputText}"/>
+
+        <Button Content="Add Subscriber" Grid.Column="1" Grid.Row="7" Style="{StaticResource CommandButton}"/>
+    </Grid>
+    </DockPanel>
+    </Grid>
+</UserControl>

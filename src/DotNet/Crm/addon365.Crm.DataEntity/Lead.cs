@@ -8,7 +8,7 @@ namespace addon365.Crm.DataEntity
     public class Lead : BaseEntityWithLogFields
     {
         public string Identifier { get; set; }
-        public BusinessContact Contact { get; set; }
+        public BusinessContactTable Contact { get; set; }
         public Guid SourceId { get; set; }
 
         [ForeignKey("SourceId")]

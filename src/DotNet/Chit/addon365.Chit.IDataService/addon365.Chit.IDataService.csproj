@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\addon365.Common.IDataService\addon365.Common.IDataService.csproj" />
+    <ProjectReference Include="..\..\Crm\addon365.Crm.DataEntity\addon365.Crm.DataEntity.csproj" />
+    <ProjectReference Include="..\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj" />
+  </ItemGroup>
+
+</Project>
