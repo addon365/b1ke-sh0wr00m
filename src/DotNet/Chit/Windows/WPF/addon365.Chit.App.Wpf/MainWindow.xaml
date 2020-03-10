@@ -1,0 +1,101 @@
+﻿<Window x:Class="addon365.Chit.App.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:local="clr-namespace:addon365.Chit.App.Wpf"
+       
+        mc:Ignorable="d"
+         Height="450" Width="800"  DataContext="{Binding Main, Source={StaticResource Locator}}" >
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="Ribbon" Title="{Binding Title}">
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="Smallicon.png"  />
+            </Ribbon.HelpPaneContent>
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar >
+                    <RibbonButton x:Name="QATButton1" 
+                                         SmallImageSource="Smallicon.png" />
+                    <RibbonButton x:Name="QATButton2" 
+                                         SmallImageSource="Smallicon.png" />
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu SmallImageSource="Smallicon.png">
+                    <RibbonApplicationMenuItem Header="Hello _Ribbon"
+                                                      x:Name="MenuItem1"
+                                                      ImageSource="Largeicon.png"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab x:Name="HomeTab" Header="Home">
+                <RibbonGroup x:Name="Group1" Header="Subscriber">
+                    <RibbonButton x:Name="btnSubscriber" Label="Subscriber" Click="btnSubscriber_Click" LargeImageSource="Largeicon.png" />
+                    <RibbonButton x:Name="btnSubscriberList" Label="List" Click="btnSubscriberList_Click"  LargeImageSource="Largeicon.png" />
+                    <!--<RibbonButton x:Name="Button2"
+                                         SmallImageSource="Smallicon.png"
+                                         Label="Button2" />
+                    <RibbonButton x:Name="Button3"
+                                         SmallImageSource="Smallicon.png"
+                                         Label="Button3" />
+                    <RibbonButton x:Name="Button4"
+                                         SmallImageSource="Smallicon.png"
+                                         Label="Button4" />-->
+                </RibbonGroup>
+
+                <RibbonGroup Header="Due Collection">
+                    <RibbonButton Label="Due" Click="btnDuePayment_Click"  LargeImageSource="Largeicon.png" />
+                    <RibbonButton Label="List" Click="btnDueCollectionList_Click"  LargeImageSource="Largeicon.png" />
+
+                </RibbonGroup>
+                <RibbonGroup x:Name="grpMaster" Header="Chit Group">
+                    <RibbonButton Label="Group" LargeImageSource="Largeicon.png" Click="btnGroup_Click" />
+                    <RibbonButton Label="List" Click="btnGroupList_Click"  LargeImageSource="Largeicon.png" />
+                
+                </RibbonGroup>
+                <RibbonGroup x:Name="grpAgent" Header="Agents">
+                    <RibbonButton Label="Agent" LargeImageSource="Largeicon.png" Name="btnAgent" Click="btnAgent_Click" />
+                    <RibbonButton Label="List" Name="btnAgentList" Click="btnAgentList_Click"  LargeImageSource="Largeicon.png" />
+
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+    </Grid>
+    <!--<Grid>
+
+
+        <DockPanel>
+
+           
+            <Menu DockPanel.Dock="Top">
+                <Menu.Background>
+                    <ImageBrush />
+                </Menu.Background>
+
+
+                <MenuItem Header="_File">
+                    <MenuItem  />
+                    <Separator />
+                    <MenuItem />
+                </MenuItem>
+
+
+                <MenuItem Header="_Help">
+                    <MenuItem  />
+                </MenuItem>
+
+            </Menu>
+        </DockPanel>
+        <Button Content="Subscriber" HorizontalAlignment="Left" Margin="78,154,0,0" VerticalAlignment="Top" Name="btnSubscriber" Click="btnSubscriber_Click"/>
+        <Button Content="Chit Group" HorizontalAlignment="Left" Margin="400,149,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Chit Group List" HorizontalAlignment="Left" Margin="208,154,0,0" VerticalAlignment="Top" Name="btnGroupList" Click="btnGroupList_Click"/>
+        <Button Content="Subscriber List" HorizontalAlignment="Left" Margin="208,197,0,0" VerticalAlignment="Top" Name="btnSubscriberList" Click="btnSubscriberList_Click"/>
+        <Button Content="Due Payment" HorizontalAlignment="Left" Margin="78,197,0,0" VerticalAlignment="Top" Name="btnDuePayment" Click="btnDuePayment_Click"/>
+
+    </Grid>-->
+</Window>

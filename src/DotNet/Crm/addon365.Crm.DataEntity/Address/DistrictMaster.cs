@@ -1,8 +1,10 @@
 ﻿using addon365.Common.DataEntity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Crm.DataEntity.Address
 {
-    public class DistrictMaster : BaseEntityWithLogFields
+    [Table("Crm.Address.Districts")]
+    public class DistrictTable : BaseEntity
     {
         public string DistrictName { get; set; }
 

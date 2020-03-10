@@ -1,5 +1,5 @@
 ﻿using addon365.Chit.DomainEntity;
-using addon365.Chit.IDataService;
+using addon365.Chit.DataHelper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -14,27 +14,38 @@ namespace addon365.Chit.ViewModel
     public class ChitSubscriberListViewModel : ViewModelBase
     {
         private IChitSubscriberListDataService _chitSubscriberListDataService;
-        private ObservableCollection<ChitSubscriberModel> _chitSubscriberList;
-        private ChitGroupModel _selectedChitGroup;
+        private ObservableCollection<ChitSubscriberListModel> _chitSubscriberList;
+        private ChitSubscriberListModel _selectedSubscriber;
         public ChitSubscriberListViewModel(IChitSubscriberListDataService chitSubscriberListDataService)
         {
-            this._chitSubscriberListDataService = chitSubscriberListDataService;
+            try
+            {
+                this._chitSubscriberListDataService = chitSubscriberListDataService;
             if (IsInDesignMode)
             {
-                Title = "Hello MVVM Light (Design Mode)";
+                Title = "Subscriber List (Design Mode)";
             }
             else
             {
-                Title = "Hello MVVM Light";
+                Title = "Subscriber List";
                 LoadMethod();
             }
-            
-            DeleteChitGroupCommand = new RelayCommand(DeleteChitGroup);
+
+            DeleteSubscriberCommand = new RelayCommand(DeleteSubscriber);
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage(ex.Message));
+            }
         }
-        public ICommand DeleteChitGroupCommand { get; private set; }
+        public RelayCommand DeleteSubscriberCommand { get; private set; }
         public string Title { get; set; }
 
-        public ObservableCollection<ChitSubscriberModel> ChitSubscriberList
+        public ObservableCollection<ChitSubscriberListModel> ChitSubscriberList
         {
             get
             {
@@ -42,27 +53,45 @@ namespace addon365.Chit.ViewModel
             }
         }
 
-        public ChitGroupModel SelectedChitGroup
+        public ChitSubscriberListModel SelectedSubscriber
         {
             get
             {
-                return _selectedChitGroup;
+                return _selectedSubscriber;
             }
             set
             {
-                _selectedChitGroup = value;
-                RaisePropertyChanged("SelectedChitGroup");
+                _selectedSubscriber = value;
+                RaisePropertyChanged("SelectedSubscriber");
             }
         }
         private void LoadMethod()
         {
-            _chitSubscriberList = new ObservableCollection<ChitSubscriberModel>(_chitSubscriberListDataService.GetAll());
+            _chitSubscriberList = new ObservableCollection<ChitSubscriberListModel>(_chitSubscriberListDataService.GetAll());
             this.RaisePropertyChanged(() => this.ChitSubscriberList);
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Chit Group Loaded."));
         }
-        void DeleteChitGroup()
+        public void DeleteSubscriber()
         {
-
+            try
+            { 
+            if (SelectedSubscriber == null)
+            {
+            
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Subscriber not Selected"));
+                return;
+            }
+            _chitSubscriberListDataService.Delete(SelectedSubscriber.KeyId);
+            Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Deleted"));
+                LoadMethod();
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage(ex.Message));
+            }
         }
 
     }

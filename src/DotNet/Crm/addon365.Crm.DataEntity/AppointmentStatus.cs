@@ -17,12 +17,12 @@ namespace addon365.Crm.DataEntity
         public Guid? AssignedToId { get; set; }
 
         [ForeignKey("AssignedToId")]
-        public User AssignedTo { get; set; }
+        public UserTable AssignedTo { get; set; }
 
         public Guid? UpdatedById { get; set; }
 
         [ForeignKey("UpdatedById")]
-        public User UpdatedBy { get; set; }
+        public UserTable UpdatedBy { get; set; }
 
         public int Order { get; set; }
 

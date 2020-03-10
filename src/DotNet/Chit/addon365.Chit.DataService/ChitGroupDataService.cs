@@ -1,13 +1,14 @@
 ﻿using addon365.Chit.DataEntity;
 using addon365.Chit.DomainEntity;
 using addon365.Chit.EfContext;
-using addon365.Chit.IDataService;
+using addon365.Chit.DataHelper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Threenine.Data;
 
-namespace addon365.Chit.DataService
+namespace addon365.Chit.EfDataService
 {
     public class ChitGroupDataService : IChitGroupDataService
     {
@@ -21,10 +22,44 @@ namespace addon365.Chit.DataService
             throw new NotImplementedException();
         }
 
-        public void Get(Guid KeyId)
+        public ChitGroupModel Get(Guid keyId)
         {
-            throw new NotImplementedException();
+            ChitGroupTable chitGroupTable;
+
+            chitGroupTable = _unitOfWork.GetRepository<ChitGroupTable>().Single(x => x.KeyId == keyId);
+            if (chitGroupTable != null)
+            {
+
+                return ConvertTo(chitGroupTable);
+
+
+            }
+            return null;
         }
+        public ChitGroupModel Get(string accessId)
+        {
+            ChitGroupTable chitGroupTable;
+
+            chitGroupTable = _unitOfWork.GetRepository<ChitGroupTable>().Single(x => x.AccessId == accessId);
+            if (chitGroupTable != null)
+            {
+                return ConvertTo(chitGroupTable);
+            }
+            return null;
+        }
+        private ChitGroupModel ConvertTo(ChitGroupTable chitGroupTable)
+        {
+            return new ChitGroupModel
+            {
+                KeyId = chitGroupTable.KeyId,
+                AccessId = chitGroupTable.AccessId,
+                GroupName = chitGroupTable.GroupName,
+                ChitDueAmount = chitGroupTable.ChitDueAmount,
+                TotalDues = chitGroupTable.TotalDues
+
+            };
+        }
+
 
         public void GetAll()
         {
@@ -33,27 +68,33 @@ namespace addon365.Chit.DataService
 
         public ChitGroupMasterModel GetMasterData()
         {
-            IList<ChitGroupModel> lst = new List<ChitGroupModel>();
-            foreach (ChitGroupTable chitGroupTable in _unitOfWork.GetRepository<ChitGroupTable>().GetList().Items)
-            {
-                lst.Add(new ChitGroupModel { GroupName = chitGroupTable.GroupName, Amount = chitGroupTable.Amount });
-            }
-
+            
             ChitGroupMasterModel m = new ChitGroupMasterModel();
-            m.ChitGroupList = lst;
+           
 
             return m;
         }
 
         public void Insert(ChitGroupModel chitGroupModel)
         {
-            _unitOfWork.GetRepository<ChitGroupTable>().Add(new ChitGroupTable { KeyId = Guid.NewGuid(), GroupName = chitGroupModel.GroupName, Amount = chitGroupModel.Amount });
+            var record = _unitOfWork.GetRepository<ChitGroupTable>().Single(predicate:m => m.AccessId==chitGroupModel.AccessId);
+            if (record != null)
+                throw new Exception("Id already used, Please try new Id");
+
+            _unitOfWork.GetRepository<ChitGroupTable>().Add(new ChitGroupTable { KeyId = Guid.NewGuid(),AccessId=chitGroupModel.AccessId.ToUpper(), GroupName = chitGroupModel.GroupName, ChitDueAmount = chitGroupModel.ChitDueAmount,TotalDues=chitGroupModel.TotalDues,StartDate=chitGroupModel.StartDate });
             _unitOfWork.SaveChanges();
         }
 
         public void Update(ChitGroupModel domainModel)
         {
-            throw new NotImplementedException();
+            var chitGroupTable = _unitOfWork.GetRepository<ChitGroupTable>().Single(x => x.KeyId == domainModel.KeyId);
+
+            chitGroupTable.AccessId = domainModel.AccessId;
+            chitGroupTable.GroupName = domainModel.GroupName;
+            chitGroupTable.TotalDues = domainModel.TotalDues;
+            chitGroupTable.ChitDueAmount = domainModel.ChitDueAmount;
+
+            _unitOfWork.GetRepository<ChitGroupTable>().Update(chitGroupTable);
         }
     }
 }

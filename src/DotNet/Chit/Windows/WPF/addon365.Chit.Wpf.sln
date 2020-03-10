@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.WpfView", "addon365.Chit.WpfView\addon365.Chit.WpfView.csproj", "{BCB70A88-D290-48F7-B62A-BA71802DB46D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.WpfApp", "addon365.Chit.WpfApp\addon365.Chit.WpfApp.csproj", "{BEE1E35C-C9FA-4797-B0A1-884FDB22F788}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.App.Wpf", "addon365.Chit.App.Wpf\addon365.Chit.App.Wpf.csproj", "{BEE1E35C-C9FA-4797-B0A1-884FDB22F788}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.EfContext", "..\..\addon365.Chit.EfContext\addon365.Chit.EfContext.csproj", "{9650AB1C-0F5E-4C88-A8DF-5F5585640629}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.IDataService", "..\..\addon365.Chit.IDataService\addon365.Chit.IDataService.csproj", "{D119417C-55D4-44DD-8619-3BCB5AC613C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.DataHelper", "..\..\addon365.Chit.DataHelper\addon365.Chit.DataHelper.csproj", "{D119417C-55D4-44DD-8619-3BCB5AC613C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.DataEntity", "..\..\addon365.Chit.DataEntity\addon365.Chit.DataEntity.csproj", "{01D0F940-04EA-4A9C-8F5F-F76EC329E5F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.DataService", "..\..\addon365.Chit.DataService\addon365.Chit.DataService.csproj", "{30C03523-7784-4577-BC49-A59A7F805D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.EfDataService", "..\..\addon365.Chit.DataService\addon365.Chit.EfDataService.csproj", "{30C03523-7784-4577-BC49-A59A7F805D69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B5FB5A72-63CF-4647-A204-09293CE02756}"
 EndProject
@@ -37,7 +37,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.ViewModel",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Chit.DomainEntity", "..\..\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj", "{02F4683C-E62B-4245-A9FE-9B4F6B759203}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.IDataService", "..\..\..\Common\addon365.Common.IDataService\addon365.Common.IDataService.csproj", "{9484B77B-BE12-41AE-B56D-8D286BC172B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.DataHelper", "..\..\..\Common\addon365.Common.DataHelper\addon365.Common.DataHelper.csproj", "{9484B77B-BE12-41AE-B56D-8D286BC172B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Common.Helper", "..\..\..\Common\addon365.Common.Helper\addon365.Common.Helper.csproj", "{A792F0D4-B510-404F-A849-3F2E90D9E9E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "addon365.Accounts.DomainEntity", "..\..\..\Accounts\addon365.Accounts.DomainEntity\addon365.Accounts.DomainEntity.csproj", "{3AF948D7-7AAA-4690-BBE8-91EF3449C4A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threenine.Data", "..\..\..\..\..\..\Threenine.Data\src\Threenine.Data.csproj", "{ACDF7524-4080-4A3B-990F-6A57DF270930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addon365.Common.EfDataHelper", "..\..\..\Common\addon365.Common.EfDataHelper\addon365.Common.EfDataHelper.csproj", "{FB657F6A-5593-4525-A9A6-DA63F31E2E89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +109,22 @@ Global
 		{9484B77B-BE12-41AE-B56D-8D286BC172B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9484B77B-BE12-41AE-B56D-8D286BC172B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9484B77B-BE12-41AE-B56D-8D286BC172B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A792F0D4-B510-404F-A849-3F2E90D9E9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A792F0D4-B510-404F-A849-3F2E90D9E9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A792F0D4-B510-404F-A849-3F2E90D9E9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A792F0D4-B510-404F-A849-3F2E90D9E9E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF948D7-7AAA-4690-BBE8-91EF3449C4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF948D7-7AAA-4690-BBE8-91EF3449C4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF948D7-7AAA-4690-BBE8-91EF3449C4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF948D7-7AAA-4690-BBE8-91EF3449C4A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACDF7524-4080-4A3B-990F-6A57DF270930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACDF7524-4080-4A3B-990F-6A57DF270930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACDF7524-4080-4A3B-990F-6A57DF270930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACDF7524-4080-4A3B-990F-6A57DF270930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB657F6A-5593-4525-A9A6-DA63F31E2E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB657F6A-5593-4525-A9A6-DA63F31E2E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB657F6A-5593-4525-A9A6-DA63F31E2E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB657F6A-5593-4525-A9A6-DA63F31E2E89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +138,9 @@ Global
 		{F93286E8-B59F-4D11-BDE8-6B46503EC7F8} = {E3BC7847-BC13-4B87-B608-B01D6A7B2437}
 		{A948E371-8540-4AAE-838E-2FC8521D5BFA} = {B5FB5A72-63CF-4647-A204-09293CE02756}
 		{9484B77B-BE12-41AE-B56D-8D286BC172B9} = {B5FB5A72-63CF-4647-A204-09293CE02756}
+		{A792F0D4-B510-404F-A849-3F2E90D9E9E4} = {B5FB5A72-63CF-4647-A204-09293CE02756}
+		{3AF948D7-7AAA-4690-BBE8-91EF3449C4A2} = {791A62F3-95ED-427B-9665-17ED17CFCFD9}
+		{FB657F6A-5593-4525-A9A6-DA63F31E2E89} = {B5FB5A72-63CF-4647-A204-09293CE02756}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C20A6705-5E98-4EE4-AE8B-FC5166B54ABD}

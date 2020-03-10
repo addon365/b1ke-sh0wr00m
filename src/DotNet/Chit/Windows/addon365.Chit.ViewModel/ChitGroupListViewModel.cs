@@ -1,5 +1,5 @@
 ﻿using addon365.Chit.DomainEntity;
-using addon365.Chit.IDataService;
+using addon365.Chit.DataHelper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -11,27 +11,38 @@ using System.Windows.Input;
 
 namespace addon365.Chit.ViewModel
 {
-    public class ChitGroupListViewModel: ViewModelBase
+    public class ChitGroupListViewModel : ViewModelBase
     {
         private IChitGroupListDataService _groupDataService;
         private ObservableCollection<ChitGroupModel> _chitGroupList;
         private ChitGroupModel _selectedChitGroup;
         public ChitGroupListViewModel(IChitGroupListDataService groupDataService)
         {
-            this._groupDataService = groupDataService;
-            if (IsInDesignMode)
+            try
             {
-                Title = "Hello MVVM Light (Design Mode)";
+                this._groupDataService = groupDataService;
+                if (IsInDesignMode)
+                {
+                    Title = "Hello MVVM Light (Design Mode)";
+                }
+                else
+                {
+                    Title = "Hello MVVM Light";
+                    LoadChitGroup();
+                }
+
+                DeleteChitGroupCommand = new RelayCommand(DeleteChitGroup);
             }
-            else
+            catch (Exception ex)
             {
-                Title = "Hello MVVM Light";
-                LoadMethod();
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage(ex.Message));
             }
-            
-            DeleteChitGroupCommand = new RelayCommand(DeleteChitGroup);
         }
-        public ICommand DeleteChitGroupCommand { get; private set; }
+        public RelayCommand DeleteChitGroupCommand { get; private set; }
         public string Title { get; set; }
 
         public ObservableCollection<ChitGroupModel> ChitGroupList
@@ -54,15 +65,31 @@ namespace addon365.Chit.ViewModel
                 RaisePropertyChanged("SelectedChitGroup");
             }
         }
-        private void LoadMethod()
+        public int PageSize { get; set; }
+        private void LoadChitGroup()
         {
-            _chitGroupList = new ObservableCollection<ChitGroupModel>(_groupDataService.GetAll());
+            var data = _groupDataService.Get(1, 5000);
+            _chitGroupList = new ObservableCollection<ChitGroupModel>(data);
             this.RaisePropertyChanged(() => this.ChitGroupList);
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Chit Group Loaded."));
+    
         }
+        
         void DeleteChitGroup()
         {
-
+            try
+            {
+                _groupDataService.Delete(SelectedChitGroup.KeyId);
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Deleted"));
+                LoadChitGroup();
+            }
+            catch (Exception ex)
+            {
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                }
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage(ex.Message));
+            }
         }
 
     }

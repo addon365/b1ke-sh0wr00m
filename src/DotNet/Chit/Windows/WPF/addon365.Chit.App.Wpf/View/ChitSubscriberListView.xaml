@@ -1,0 +1,62 @@
+﻿<Window x:Class="addon365.Chit.App.Wpf.View.ChitSubscriberListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:FileStore="clr-namespace:addon365.FileStore;assembly=addon365.FileStore"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:local="clr-namespace:addon365.Chit.App.Wpf.View"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="800" DataContext="{Binding ChitSubscriberList, Source={StaticResource Locator}}">
+    <Grid>
+        <Image Source="{Binding Source={x:Static FileStore:Resource.Watermark}}" Style="{StaticResource WatermarkImage}"/>
+        <DockPanel>
+
+            <Grid Style="{StaticResource WindowContentGrid}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
+
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel  Orientation="Horizontal"  >
+                        <Button Content="Delete" Width="120" Style="{StaticResource CommandButton}" Command="{Binding DeleteSubscriberCommand}" />
+                        <Button Content="Edit" Width="120" Style="{StaticResource CommandButton}" Name="btnEdit" Click="btnEdit_Click" />
+                    </StackPanel>
+                    <StackPanel  Orientation="Horizontal" Grid.Column="1">
+                        <TextBox Name="txtSearchText" Width="150" Height="24" Style="{StaticResource InputText}"/>
+                        <Button Content="Find" Width="120" Name="btnFind" Style="{StaticResource CommandButton}" Click="btnFind_Click"/>
+                        <Button Content="Reset" Width="120" Name="btnReset" Style="{StaticResource CommandButton}" Click="btnReset_Click"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Name="DialogOption" >
+                    <Button Content="Okay" Width="120" Style="{StaticResource CommandButton}" Name="btnOkay" Click="btnOkay_Click"/>
+                    <Button Content="Cancel" Width="120" Style="{StaticResource CommandButton}" Name="btnCancel" Click="btnCancel_Click"/>
+                    </StackPanel>
+                </Grid>
+                <syncfusion:SfDataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ChitSubscriberList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSubscriber}" AllowFiltering="True" Name="dgSubscriberList">
+                    <syncfusion:SfDataGrid.Columns>
+                        <syncfusion:GridTextColumn HeaderText="Id" MappingName="AccessId" Width="50"/>
+                        <syncfusion:GridTextColumn HeaderText="Group Name" MappingName="ChitGroupName" Width="130"/>
+                        <syncfusion:GridTextColumn HeaderText="Agent" MappingName="FirstName" Width="130"/>
+                        <syncfusion:GridTextColumn HeaderText="Total Dues" MappingName="TotalDue" Width="80"/>
+                        <syncfusion:GridTextColumn HeaderText="First Name" MappingName="FirstName" Width="130"/>
+                        <syncfusion:GridTextColumn HeaderText="Last Name" MappingName="LastName" Width="130"/>
+                        <syncfusion:GridTextColumn HeaderText="Mobile No" MappingName="MobileNo" Width="130"/>
+                        <syncfusion:GridTextColumn HeaderText="Place" MappingName="Place" Width="130" />
+                    </syncfusion:SfDataGrid.Columns>
+                </syncfusion:SfDataGrid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

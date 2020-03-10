@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Crm.DataEntity
 {
-    public class CustomerTable : BaseEntityWithLogFields
+    [Table("Crm.Customers")]
+    public class CustomerTable : BaseEntity
     {
-        public string Identifier { get; set; }
-
+        public string AccessId { get; set; }
         public string CustomerEmailId { get; set; }
         public string MobileNo { get; set; }
         public Guid? ContactKeyId { get; set; }
@@ -17,6 +17,6 @@ namespace addon365.Crm.DataEntity
         public Guid? UserKeyId {get;set;}
 
         [ForeignKey("UserKeyId")]
-        public User User { get; set; }
+        public UserTable User { get; set; }
     }
 }

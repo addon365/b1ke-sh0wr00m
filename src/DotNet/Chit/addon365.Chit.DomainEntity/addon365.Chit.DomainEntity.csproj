@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Accounts\addon365.Accounts.DomainEntity\addon365.Accounts.DomainEntity.csproj" />
+  </ItemGroup>
+
 </Project>

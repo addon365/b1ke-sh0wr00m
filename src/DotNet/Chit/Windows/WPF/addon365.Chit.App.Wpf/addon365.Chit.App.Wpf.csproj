@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>ChitApp</AssemblyName>
+    <ReferencePath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\</ReferencePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Largeicon.png" />
+    <None Remove="Smallicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="Syncfusion.SfGrid.WPF" Version="17.4.0.40" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common\addon365.Common.DataHelper\addon365.Common.DataHelper.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.DataHelper\addon365.Chit.DataHelper.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.DataService\addon365.Chit.EfDataService.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.EfContext\addon365.Chit.EfContext.csproj" />
+    <ProjectReference Include="..\..\addon365.Chit.ViewModel\addon365.Chit.ViewModel.csproj" />
+    <ProjectReference Include="..\addon365.FileStore\addon365.FileStore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Largeicon.png" />
+    <Resource Include="Smallicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\AgentView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\AgentListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ChitSubscriberDueListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ChitSubscriberListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Database\config69.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Largeicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Smallicon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\AgentView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AgentListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ChitSubscriberDueListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ChitSubscriberListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ChitSubscriberDueView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{c0c07587-41a7-46c8-8fbd-3f9c8ebe2ddc}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
+
+</Project>

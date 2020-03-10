@@ -20,44 +20,526 @@ namespace addon365.Chit.EfContext.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("addon365.Accounts.DataEntity.AccountBookFieldMapTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccountBookKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FieldNameKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("KeyId");
+
+                    b.HasIndex("AccountBookKeyId");
+
+                    b.ToTable("Accounts.AccountBookFieldMaps");
+
+                    b.HasData(
+                        new
+                        {
+                            KeyId = new Guid("695ef085-3109-499f-86dc-ef753ae26aa9"),
+                            AccountBookKeyId = new Guid("30941403-b26a-451b-84b8-0fa8dea05a29"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FieldNameKey = "addon365.Chit.DataEntity.ChitSubscriberDueTable.DueAmountInfoKeyId",
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            YearId = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.AccountBookTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BookName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Identifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProgId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UnderAccountGroupKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("KeyId");
+
+                    b.ToTable("Accounts.AccountBooks");
+
+                    b.HasData(
+                        new
+                        {
+                            KeyId = new Guid("4e8a9e56-bf45-465e-b414-6025e7482371"),
+                            BookName = "Cash",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProgId = 1,
+                            UnderAccountGroupKeyId = new Guid("1bc990b2-7d3a-4e00-a0e5-5e0ca2784c1b"),
+                            YearId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            KeyId = new Guid("30941403-b26a-451b-84b8-0fa8dea05a29"),
+                            BookName = "Chit Collection",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProgId = 0,
+                            UnderAccountGroupKeyId = new Guid("70bbde02-2486-4491-9406-6cfb93a51ab1"),
+                            YearId = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.AccountGroupTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccountGroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ParentGroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProgId")
+                        .HasColumnType("int");
+
+                    b.HasKey("KeyId");
+
+                    b.ToTable("Accounts.AccountGroups");
+
+                    b.HasData(
+                        new
+                        {
+                            KeyId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            AccountGroupName = "Assets",
+                            ProgId = 1
+                        },
+                        new
+                        {
+                            KeyId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            AccountGroupName = "Liabilities",
+                            ProgId = 2
+                        },
+                        new
+                        {
+                            KeyId = new Guid("3a6caf12-c606-45a0-8089-1c25e29210e0"),
+                            AccountGroupName = "Income",
+                            ProgId = 3
+                        },
+                        new
+                        {
+                            KeyId = new Guid("c19bd82a-fa96-47fe-bc83-d7c33ab08f01"),
+                            AccountGroupName = "Expense",
+                            ProgId = 4
+                        },
+                        new
+                        {
+                            KeyId = new Guid("1bc990b2-7d3a-4e00-a0e5-5e0ca2784c1b"),
+                            AccountGroupName = "Cash In Hand",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("70bbde02-2486-4491-9406-6cfb93a51ab1"),
+                            AccountGroupName = "Current Liabilities",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("b6afeff9-abf0-4530-a62a-831c30300200"),
+                            AccountGroupName = "Bank Account",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("35a5708d-fff1-4ab6-99e3-024a18a26efb"),
+                            AccountGroupName = "Loan & Advance(Assets)",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("54c6d740-3992-4a9c-ad68-1c5b87f21ba5"),
+                            AccountGroupName = "Inventments",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("24f5284a-1736-4753-b1d9-cd9e3a3c5555"),
+                            AccountGroupName = "Fixed Assets",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("e36f2ad7-4f29-44b5-81da-681aaf4a1944"),
+                            AccountGroupName = "Suspense A/c",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("f2464796-afd0-4c57-939d-e94a877a4834"),
+                            AccountGroupName = "Unsecured Loans",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("e3899175-8ddf-4b3d-90b2-56e34a61a093"),
+                            AccountGroupName = "Miscellineous Expenses(Assets)",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("96f43f7e-e420-429d-ba48-b4cd1bbf878a"),
+                            AccountGroupName = "Current Assets",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("320dd5b5-84db-4934-b46a-3252eec89382"),
+                            AccountGroupName = "Deposits(Assets)",
+                            ParentGroupId = new Guid("6b50177f-9812-4bdc-ba44-f2ce472deea1"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("40915c92-5209-4605-9bd2-768811498b9e"),
+                            AccountGroupName = "Bank OCC",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("a9300868-d060-4b20-888d-710ab02358a8"),
+                            AccountGroupName = "Loan(Liability)",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("87017279-3131-4580-a346-d91b0d1c55e0"),
+                            AccountGroupName = "Duties & Taxes",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("72c2686b-e4fe-497f-8d11-c9f15c31a381"),
+                            AccountGroupName = "Sundry Creditors",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("8562d6be-2f27-47b5-aeee-2c93023017aa"),
+                            AccountGroupName = "Sundry Debitors",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("f90f407c-d1ae-468a-9200-9063c6f5e07b"),
+                            AccountGroupName = "Provisions",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("1bc11c71-01bf-4d90-9f78-1ec29d22dba3"),
+                            AccountGroupName = "Capital Account",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("f226b659-bb8e-494f-ae37-969775fc7e74"),
+                            AccountGroupName = "Branch / Divisions",
+                            ParentGroupId = new Guid("21673da4-3a5b-49b1-933d-36024d01e528"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("8df7698e-e265-44b4-9003-ffd36cf8fc1a"),
+                            AccountGroupName = "Direct Incomes",
+                            ParentGroupId = new Guid("3a6caf12-c606-45a0-8089-1c25e29210e0"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("1601306a-b43c-46c7-8dd8-58df32572517"),
+                            AccountGroupName = "InDirect Incomes",
+                            ParentGroupId = new Guid("3a6caf12-c606-45a0-8089-1c25e29210e0"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("e8b52185-ffde-438e-b207-2f64f62577d4"),
+                            AccountGroupName = "Provisions",
+                            ParentGroupId = new Guid("3a6caf12-c606-45a0-8089-1c25e29210e0"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("28e93b35-2a73-4054-ab78-f6216d5fa2fa"),
+                            AccountGroupName = "Reserves & Surplus",
+                            ParentGroupId = new Guid("3a6caf12-c606-45a0-8089-1c25e29210e0"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("e730cf45-f39c-47e5-83e3-066276767c15"),
+                            AccountGroupName = "SalesAccount",
+                            ParentGroupId = new Guid("3a6caf12-c606-45a0-8089-1c25e29210e0"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("5cdee992-dfd0-4375-8b75-d1c1be386a8c"),
+                            AccountGroupName = "Direct Expenses",
+                            ParentGroupId = new Guid("c19bd82a-fa96-47fe-bc83-d7c33ab08f01"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("3528693d-7ac0-48c3-9e9b-b18fc83aeb16"),
+                            AccountGroupName = "Indirect Expenses",
+                            ParentGroupId = new Guid("c19bd82a-fa96-47fe-bc83-d7c33ab08f01"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("79494c17-5183-45e6-8694-ed13fd62cbc5"),
+                            AccountGroupName = "Purchase Accounts",
+                            ParentGroupId = new Guid("c19bd82a-fa96-47fe-bc83-d7c33ab08f01"),
+                            ProgId = 0
+                        },
+                        new
+                        {
+                            KeyId = new Guid("7c8d793e-b92f-4331-bf56-82e73e32e342"),
+                            AccountGroupName = "Ratained Earnings",
+                            ParentGroupId = new Guid("c19bd82a-fa96-47fe-bc83-d7c33ab08f01"),
+                            ProgId = 0
+                        });
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.VoucherInfoTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountBookKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FieldInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCredit")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VoucherKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("KeyId");
+
+                    b.HasIndex("AccountBookKeyId");
+
+                    b.HasIndex("VoucherKeyId");
+
+                    b.ToTable("Accounts.VoucherInfos");
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.VoucherTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccessId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("VoucherDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("VoucherTypeKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("YearId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("KeyId");
+
+                    b.HasIndex("VoucherTypeKeyId");
+
+                    b.ToTable("Accounts.Vouchers");
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.VoucherTypeTable", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProgrammerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accounts.VoucherTypes");
+                });
+
+            modelBuilder.Entity("addon365.Chit.DataEntity.AgentTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccessId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("KeyId");
+
+                    b.HasIndex("ContactId");
+
+                    b.ToTable("Agency.Agent");
+
+                    b.HasData(
+                        new
+                        {
+                            KeyId = new Guid("52860493-d41d-489d-a2bc-f75fc5366e92"),
+                            AccessId = "0",
+                            ContactId = new Guid("288f6529-e1bf-4aaf-b348-63df7dc3d7ee")
+                        });
+                });
+
             modelBuilder.Entity("addon365.Chit.DataEntity.ChitGroupTable", b =>
                 {
                     b.Property<Guid>("KeyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChitGroupAccessId")
+                    b.Property<string>("AccessId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ChitDueAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid?>("ChitSchemeKeyId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Deleted")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GroupName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("PaymentFrequency")
                         .HasColumnType("int");
@@ -71,14 +553,11 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<short>("TotalMember")
                         .HasColumnType("smallint");
 
-                    b.Property<Guid>("YearId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("KeyId");
 
                     b.HasIndex("ChitSchemeKeyId");
 
-                    b.ToTable("ChitGroups");
+                    b.ToTable("Chit.ChitGroups");
                 });
 
             modelBuilder.Entity("addon365.Chit.DataEntity.ChitSchemeTable", b =>
@@ -90,21 +569,6 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<double>("BonusAmount")
                         .HasColumnType("float");
 
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Deleted")
-                        .HasColumnType("datetime2");
-
                     b.Property<double>("FinalBonus")
                         .HasColumnType("float");
 
@@ -113,9 +577,6 @@ namespace addon365.Chit.EfContext.Migrations
 
                     b.Property<int>("MaxMembers")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
 
                     b.Property<double>("MonthlyAmount")
                         .HasColumnType("float");
@@ -129,12 +590,57 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<int>("TotalMonths")
                         .HasColumnType("int");
 
+                    b.HasKey("KeyId");
+
+                    b.ToTable("Chit.ChitSchemes");
+                });
+
+            modelBuilder.Entity("addon365.Chit.DataEntity.ChitSubscriberDueTable", b =>
+                {
+                    b.Property<Guid>("KeyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccessId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ChitSubscriberKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DueAmountInfoKeyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("DueNo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Modified")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("YearId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("KeyId");
 
-                    b.ToTable("ChitSchemes");
+                    b.HasIndex("ChitSubscriberKeyId");
+
+                    b.HasIndex("DueAmountInfoKeyId");
+
+                    b.ToTable("Chit.ChitSubscriberDues");
                 });
 
             modelBuilder.Entity("addon365.Chit.DataEntity.ChitSubscriberTable", b =>
@@ -143,7 +649,10 @@ namespace addon365.Chit.EfContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BranchMasterId")
+                    b.Property<string>("AccessId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("AgentKeyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ChitGroupKeyId")
@@ -152,14 +661,17 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<Guid>("ClosedVoucherId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CustomerKeyId")
                         .HasColumnType("uniqueidentifier");
@@ -173,38 +685,37 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("SubscribeAccessId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("YearId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("KeyId");
 
+                    b.HasIndex("AgentKeyId");
+
                     b.HasIndex("ChitGroupKeyId");
 
                     b.HasIndex("CustomerKeyId");
 
-                    b.ToTable("ChitSubscribers");
+                    b.ToTable("Chit.ChitSubscribers");
                 });
 
-            modelBuilder.Entity("addon365.Common.DataEntity.RoleGroupMaster", b =>
+            modelBuilder.Entity("addon365.Common.DataEntity.UserRoleGroupTable", b =>
                 {
                     b.Property<Guid>("KeyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BranchMasterId")
+                    b.Property<Guid?>("CompanyMasterId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Deleted")
                         .HasColumnType("datetime2");
@@ -223,10 +734,10 @@ namespace addon365.Chit.EfContext.Migrations
 
                     b.HasKey("KeyId");
 
-                    b.ToTable("RoleGroupMaster");
+                    b.ToTable("User.UserRoleGroups");
                 });
 
-            modelBuilder.Entity("addon365.Common.DataEntity.User", b =>
+            modelBuilder.Entity("addon365.Common.DataEntity.UserTable", b =>
                 {
                     b.Property<Guid>("KeyId")
                         .ValueGeneratedOnAdd()
@@ -244,7 +755,7 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("RoleGroupId")
+                    b.Property<Guid?>("RoleGroupKeyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SessionToken")
@@ -258,12 +769,12 @@ namespace addon365.Chit.EfContext.Migrations
 
                     b.HasKey("KeyId");
 
-                    b.HasIndex("RoleGroupId");
+                    b.HasIndex("RoleGroupKeyId");
 
-                    b.ToTable("User");
+                    b.ToTable("User.Users");
                 });
 
-            modelBuilder.Entity("addon365.Crm.DataEntity.Address.Master", b =>
+            modelBuilder.Entity("addon365.Crm.DataEntity.Address.AddressTable", b =>
                 {
                     b.Property<Guid>("KeyId")
                         .ValueGeneratedOnAdd()
@@ -275,23 +786,8 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<string>("AddressLine2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("CountryId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Deleted")
-                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DistrictId")
                         .HasColumnType("uniqueidentifier");
@@ -301,9 +797,6 @@ namespace addon365.Chit.EfContext.Migrations
 
                     b.Property<Guid?>("LocalityOrVillageId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
 
                     b.Property<long>("PinOrZip")
                         .HasColumnType("bigint");
@@ -317,12 +810,9 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<Guid?>("SubDistrictId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("YearId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("KeyId");
 
-                    b.ToTable("Master");
+                    b.ToTable("Crm.Address.Address");
                 });
 
             modelBuilder.Entity("addon365.Crm.DataEntity.BusinessContactTable", b =>
@@ -331,14 +821,14 @@ namespace addon365.Chit.EfContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("BusinessMailId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BusinessName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CompanyMasterId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ContactAddressKeyId")
                         .HasColumnType("uniqueidentifier");
@@ -349,11 +839,11 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedDeviceId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Deleted")
                         .HasColumnType("datetime2");
@@ -384,7 +874,7 @@ namespace addon365.Chit.EfContext.Migrations
 
                     b.HasIndex("ProprietorKeyId");
 
-                    b.ToTable("BusinessContactTable");
+                    b.ToTable("Crm.BusinessContacts");
                 });
 
             modelBuilder.Entity("addon365.Crm.DataEntity.ContactTable", b =>
@@ -399,28 +889,10 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("ContactAddressKeyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Deleted")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Identifier")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -429,23 +901,24 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<string>("MobileNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Place")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecondaryMobileNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("YearId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("KeyId");
 
                     b.HasIndex("ContactAddressKeyId");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Crm.Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            KeyId = new Guid("288f6529-e1bf-4aaf-b348-63df7dc3d7ee"),
+                            FirstName = "None"
+                        });
                 });
 
             modelBuilder.Entity("addon365.Crm.DataEntity.CustomerTable", b =>
@@ -454,8 +927,8 @@ namespace addon365.Chit.EfContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BranchMasterId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("AccessId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("BusinessContactKeyId")
                         .HasColumnType("uniqueidentifier");
@@ -463,34 +936,13 @@ namespace addon365.Chit.EfContext.Migrations
                     b.Property<Guid?>("ContactKeyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CustomerEmailId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Deleted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Identifier")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MobileNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid?>("UserKeyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("YearId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("KeyId");
@@ -501,7 +953,45 @@ namespace addon365.Chit.EfContext.Migrations
 
                     b.HasIndex("UserKeyId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Crm.Customers");
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.AccountBookFieldMapTable", b =>
+                {
+                    b.HasOne("addon365.Accounts.DataEntity.AccountBookTable", "AccountBookTable")
+                        .WithMany()
+                        .HasForeignKey("AccountBookKeyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.VoucherInfoTable", b =>
+                {
+                    b.HasOne("addon365.Accounts.DataEntity.AccountBookTable", "AccountBook")
+                        .WithMany()
+                        .HasForeignKey("AccountBookKeyId");
+
+                    b.HasOne("addon365.Accounts.DataEntity.VoucherTable", "Voucher")
+                        .WithMany("VoucherInfos")
+                        .HasForeignKey("VoucherKeyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("addon365.Accounts.DataEntity.VoucherTable", b =>
+                {
+                    b.HasOne("addon365.Accounts.DataEntity.VoucherTypeTable", "VoucherType")
+                        .WithMany()
+                        .HasForeignKey("VoucherTypeKeyId");
+                });
+
+            modelBuilder.Entity("addon365.Chit.DataEntity.AgentTable", b =>
+                {
+                    b.HasOne("addon365.Crm.DataEntity.ContactTable", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("addon365.Chit.DataEntity.ChitGroupTable", b =>
@@ -511,9 +1001,28 @@ namespace addon365.Chit.EfContext.Migrations
                         .HasForeignKey("ChitSchemeKeyId");
                 });
 
+            modelBuilder.Entity("addon365.Chit.DataEntity.ChitSubscriberDueTable", b =>
+                {
+                    b.HasOne("addon365.Chit.DataEntity.ChitSubscriberTable", "ChitSubscriber")
+                        .WithMany()
+                        .HasForeignKey("ChitSubscriberKeyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("addon365.Accounts.DataEntity.VoucherInfoTable", "DueAmountInfo")
+                        .WithMany()
+                        .HasForeignKey("DueAmountInfoKeyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("addon365.Chit.DataEntity.ChitSubscriberTable", b =>
                 {
-                    b.HasOne("addon365.Chit.DataEntity.ChitGroupTable", "ChitSchema")
+                    b.HasOne("addon365.Chit.DataEntity.AgentTable", "Agent")
+                        .WithMany()
+                        .HasForeignKey("AgentKeyId");
+
+                    b.HasOne("addon365.Chit.DataEntity.ChitGroupTable", "ChitGroup")
                         .WithMany()
                         .HasForeignKey("ChitGroupKeyId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -526,16 +1035,16 @@ namespace addon365.Chit.EfContext.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("addon365.Common.DataEntity.User", b =>
+            modelBuilder.Entity("addon365.Common.DataEntity.UserTable", b =>
                 {
-                    b.HasOne("addon365.Common.DataEntity.RoleGroupMaster", "RoleGroup")
+                    b.HasOne("addon365.Common.DataEntity.UserRoleGroupTable", "RoleGroup")
                         .WithMany()
-                        .HasForeignKey("RoleGroupId");
+                        .HasForeignKey("RoleGroupKeyId");
                 });
 
             modelBuilder.Entity("addon365.Crm.DataEntity.BusinessContactTable", b =>
                 {
-                    b.HasOne("addon365.Crm.DataEntity.Address.Master", "ContactAddress")
+                    b.HasOne("addon365.Crm.DataEntity.Address.AddressTable", "ContactAddress")
                         .WithMany()
                         .HasForeignKey("ContactAddressKeyId");
 
@@ -550,7 +1059,7 @@ namespace addon365.Chit.EfContext.Migrations
 
             modelBuilder.Entity("addon365.Crm.DataEntity.ContactTable", b =>
                 {
-                    b.HasOne("addon365.Crm.DataEntity.Address.Master", "ContactAddress")
+                    b.HasOne("addon365.Crm.DataEntity.Address.AddressTable", "ContactAddress")
                         .WithMany()
                         .HasForeignKey("ContactAddressKeyId");
                 });
@@ -565,7 +1074,7 @@ namespace addon365.Chit.EfContext.Migrations
                         .WithMany()
                         .HasForeignKey("ContactKeyId");
 
-                    b.HasOne("addon365.Common.DataEntity.User", "User")
+                    b.HasOne("addon365.Common.DataEntity.UserTable", "User")
                         .WithMany()
                         .HasForeignKey("UserKeyId");
                 });

@@ -2,7 +2,5 @@
 
 namespace addon365.Accounts.DataEntity
 {
-    public class Class1
-    {
-    }
+    public enum AccountBookProgs { None, CashBook }
 }

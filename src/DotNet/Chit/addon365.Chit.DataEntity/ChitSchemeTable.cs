@@ -1,9 +1,11 @@
 ﻿using addon365.Common.DataEntity;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace addon365.Chit.DataEntity
 {
-    public class ChitSchemeTable : BaseEntityWithLogFields
+    [Table("Chit.ChitSchemes")]
+    public class ChitSchemeTable : BaseEntity
     {
         public string SchemaName { get; set; }
         public int TotalMonths { get; set; }

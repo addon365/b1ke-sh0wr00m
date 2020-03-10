@@ -6,14 +6,15 @@ using System.Text;
 
 namespace addon365.Chit.DataEntity
 {
-    public class ChitGroupTable: BaseEntityWithLogFields
+    [Table("Chit.ChitGroups")]
+    public class ChitGroupTable: BaseEntity
     {
-        public string  ChitGroupAccessId { get; set; }
+        public string  AccessId { get; set; }
         public string GroupName { get; set; }
         public Guid? ChitSchemeKeyId { get; set; }
         [ForeignKey("ChitSchemeKeyId")]
         public virtual ChitSchemeTable ChitSchema { get; set; }
-        public Decimal Amount { get; set; }
+        public Decimal ChitDueAmount { get; set; }
         public short TotalMember { get; set; }
         public short TotalDues { get; set; }
         public ChitPaymentFrequency PaymentFrequency { get; set; }

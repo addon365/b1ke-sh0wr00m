@@ -9,10 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\addon365.Common.DataHelper\addon365.Common.DataHelper.csproj" />
     <ProjectReference Include="..\..\..\Common\Windows\addon365.Common.ViewModel\addon365.Common.ViewModel.csproj" />
+    <ProjectReference Include="..\..\addon365.Chit.DataHelper\addon365.Chit.DataHelper.csproj" />
+    <ProjectReference Include="..\..\addon365.Chit.DataService\addon365.Chit.EfDataService.csproj" />
     <ProjectReference Include="..\..\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj" />
     <ProjectReference Include="..\..\addon365.Chit.EfContext\addon365.Chit.EfContext.csproj" />
-    <ProjectReference Include="..\..\addon365.Chit.IDataService\addon365.Chit.IDataService.csproj" />
   </ItemGroup>
 
 </Project>
