@@ -1,5 +1,5 @@
 ﻿using addon365.Chit.DomainEntity;
-using addon365.Chit.DataHelper;
+using addon365.Chit.DataService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;

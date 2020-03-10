@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Threenine.Data\src\Threenine.Data.csproj" />
+    <ProjectReference Include="..\..\Common\addon365.Common.DataService.Ef\addon365.Common.DataService.Ef.csproj" />
+    <ProjectReference Include="..\..\Common\addon365.Common.DataService\addon365.Common.DataService.csproj" />
+    <ProjectReference Include="..\..\Common\addon365.Common.Helper\addon365.Common.Helper.csproj" />
+    <ProjectReference Include="..\addon365.Chit.Context.Ef\addon365.Chit.Context.Ef.csproj" />
+    <ProjectReference Include="..\addon365.Chit.DataService\addon365.Chit.DataService.csproj" />
+    <ProjectReference Include="..\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,12 +1,9 @@
-﻿using addon365.Chit.EfDataService;
-using addon365.Chit.EfContext;
-using addon365.Chit.DataHelper;
+﻿using addon365.Chit.Context.Ef;
+using addon365.Chit.DataService;
+using addon365.Chit.DataService.Ef;
 using addon365.Chit.ViewModel;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using Threenine.Data;
 

@@ -19,10 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Common\addon365.Common.DataHelper\addon365.Common.DataHelper.csproj" />
-    <ProjectReference Include="..\..\..\addon365.Chit.DataHelper\addon365.Chit.DataHelper.csproj" />
-    <ProjectReference Include="..\..\..\addon365.Chit.DataService\addon365.Chit.EfDataService.csproj" />
-    <ProjectReference Include="..\..\..\addon365.Chit.EfContext\addon365.Chit.EfContext.csproj" />
+    <ProjectReference Include="..\..\..\..\Common\addon365.Common.DataService\addon365.Common.DataService.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.Context.Ef\addon365.Chit.Context.Ef.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.DataService.Ef\addon365.Chit.DataService.Ef.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.DataService\addon365.Chit.DataService.csproj" />
     <ProjectReference Include="..\..\addon365.Chit.ViewModel\addon365.Chit.ViewModel.csproj" />
     <ProjectReference Include="..\addon365.FileStore\addon365.FileStore.csproj" />
   </ItemGroup>

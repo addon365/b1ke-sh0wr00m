@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace addon365.Crm.DataService
+namespace addon365.Crm.IService
 {
     public class Class1
     {
