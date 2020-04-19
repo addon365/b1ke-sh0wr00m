@@ -1,6 +1,7 @@
-﻿using addon365.Chit.Context.Ef;
+﻿using addon365.Chit.Database.EfContext;
 using addon365.Chit.DataEntity;
 using addon365.Chit.DomainEntity;
+using addon365.Common.Helper;
 using addon365.Crm.DataEntity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ namespace addon365.Chit.DataService.Ef
     public class ChitSubscriberDataService : IChitSubscriberDataService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ChitSubscriberDataService(IUnitOfWork<DatabaseContext> unitOfWork)
+        public ChitSubscriberDataService(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
@@ -20,11 +21,26 @@ namespace addon365.Chit.DataService.Ef
         {
             throw new NotImplementedException();
         }
+        public ChitSubscriberModel Get(string accessId)
+        {
+            ChitSubscriberTable subscriberTable;
+
+            subscriberTable = _unitOfWork.GetRepository<ChitSubscriberTable>().Single(x => x.AccessId == accessId, include: x => x.Include(x => x.Customer).ThenInclude(x => x.Contact).Include(x => x.ChitGroup).Include(x => x.Agent).ThenInclude(x => x.Contact));
+            return ConvertTo(subscriberTable);
+        }
         public ChitSubscriberModel Get(Guid keyId)
         {
             ChitSubscriberTable subscriberTable;
           
             subscriberTable = _unitOfWork.GetRepository<ChitSubscriberTable>().Single(x => x.KeyId == keyId, include: x => x.Include(x => x.Customer).ThenInclude(x => x.Contact).Include(x => x.ChitGroup).Include(x => x.Agent).ThenInclude(x => x.Contact));
+            
+
+
+
+            return ConvertTo(subscriberTable);
+        }
+        public ChitSubscriberModel ConvertTo(ChitSubscriberTable subscriberTable)
+        {
             if (subscriberTable != null)
             {
 
@@ -36,7 +52,7 @@ namespace addon365.Chit.DataService.Ef
                     {
 
                         KeyId = subscriberTable.Customer.KeyId,
-                        ContactKeyId=subscriberTable.Customer.ContactKeyId,
+                        ContactKeyId = subscriberTable.Customer.ContactKeyId,
                         AccessId = subscriberTable.Customer.AccessId,
                         FirstName = subscriberTable.Customer.Contact.FirstName,
                         LastName = subscriberTable.Customer.Contact.LastName,
@@ -50,6 +66,7 @@ namespace addon365.Chit.DataService.Ef
                         KeyId = subscriberTable.ChitGroup.KeyId,
                         AccessId = subscriberTable.ChitGroup.AccessId,
                         GroupName = subscriberTable.ChitGroup.GroupName,
+                        ChitDueAmount = subscriberTable.ChitGroup.ChitDueAmount,
                         TotalDues = subscriberTable.ChitGroup.TotalDues
                     },
 
@@ -60,12 +77,9 @@ namespace addon365.Chit.DataService.Ef
                         FirstName = subscriberTable.Agent.Contact.FirstName,
                         LastName = subscriberTable.Agent.Contact.LastName
                     },
-                    
+
                 };
             }
-
-
-
             return null;
         }
         public void GetAll()
@@ -77,7 +91,13 @@ namespace addon365.Chit.DataService.Ef
         }
         public ChitSubscriberScreenModel GetMasterData()
         {
-           
+
+   
+            ChitFeatureService chitFeatureService = new ChitFeatureService(_unitOfWork);
+            
+            Feature v=chitFeatureService.GetFeature();
+
+
             var Max = _unitOfWork.GetRepository<ChitSubscriberTable>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.AccessId)));
            
             ChitSubscriberScreenModel m = new ChitSubscriberScreenModel();

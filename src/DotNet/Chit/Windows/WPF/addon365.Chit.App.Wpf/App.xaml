@@ -50,6 +50,22 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="DateText" TargetType="{x:Type DatePicker}">
+                <Setter Property="FontFamily" Value="Trebuchet MS" />
+                <Setter Property="Foreground" Value="#0066CC" />
+                <Setter Property="FontSize" Value="10pt" />
+                <Setter Property="Margin" Value="0,5,5,0" />
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                    </Trigger>
+                    <Trigger Property="Validation.HasError" Value="false">
+                        <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self}, Path=ToolTip.Content}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <Style x:Key="ComboBox" TargetType="{x:Type ComboBox}">
                 <Setter Property="Margin" Value="0,5,5,0" />
             </Style>

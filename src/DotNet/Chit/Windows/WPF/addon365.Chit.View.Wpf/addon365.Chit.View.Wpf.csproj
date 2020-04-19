@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\addon365.Chit.Context.Ef\addon365.Chit.Context.Ef.csproj" />
+    <ProjectReference Include="..\..\..\addon365.Chit.Database.EfContext\addon365.Chit.Database.EfContext.csproj" />
     <ProjectReference Include="..\..\addon365.Chit.ViewModel\addon365.Chit.ViewModel.csproj" />
     <ProjectReference Include="..\addon365.FileStore\addon365.FileStore.csproj" />
   </ItemGroup>

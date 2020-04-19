@@ -8,7 +8,9 @@ namespace addon365.Chit.DataService
         void Insert(ChitSubscriberDueModel chitSubscriberModel);
         void Update(ChitSubscriberDueModel chitSubscriberModel);
         void Delete(Guid KeyId);
-        void Get(Guid KeyId);
+        ChitSubscriberDueModel Get(Guid KeyId);
+        ChitSubscriberDueModel Get(string AccessId);
+        ChitDueSubscriberDetailModel GetSubscriberDetail(string AccessId);
         void GetAll();
         ChitSubscriberDueScreenModel GetMasterData(); 
     }

@@ -1,8 +1,11 @@
 ﻿
+using System;
 using System.Windows;
 using addon365.Chit.App.Wpf.View;
 using addon365.Chit.App.Wpf.ViewModel;
+using addon365.Chit.Database.EfContext;
 using GalaSoft.MvvmLight.Ioc;
+using Microsoft.EntityFrameworkCore;
 
 namespace addon365.Chit.App.Wpf
 {
@@ -53,10 +56,13 @@ namespace addon365.Chit.App.Wpf
 
         private void btnDuePayment_Click(object sender, RoutedEventArgs e)
         {
-            ChitSubscriberDueView win = new ChitSubscriberDueView();
-            win.Height = 400;
-            win.Width = 600;
-            win.ShowDialog();
+            
+                ChitSubscriberDueView win = new ChitSubscriberDueView();
+                win.Height = 400;
+                win.Width = 600;
+                win.ShowDialog();
+            
+            
         }
 
         private void btnDueCollectionList_Click(object sender, RoutedEventArgs e)
@@ -82,6 +88,11 @@ namespace addon365.Chit.App.Wpf
             win.Height = 300;
             win.Width = 600;
             win.ShowDialog();
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            new DatabaseContext().Database.Migrate()    ;
         }
     }
 

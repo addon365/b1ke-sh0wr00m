@@ -1,4 +1,4 @@
-﻿using addon365.Chit.Context.Ef;
+﻿using addon365.Chit.Database.EfContext;
 using addon365.Chit.DataService;
 using addon365.Chit.DataService.Ef;
 using addon365.Chit.ViewModel;
@@ -17,10 +17,13 @@ namespace addon365.Chit.App.Wpf.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             
-            SimpleIoc.Default.Register<DatabaseContext>();
-            SimpleIoc.Default.Register<IUnitOfWork<DatabaseContext>,UnitOfWork<DatabaseContext>>();
+            SimpleIoc.Default.Register<DatabaseContext>(()=>new DatabaseContext());
 
-            SimpleIoc.Default.Register<ChitSubscriberViewModel>(()=>new ChitSubscriberViewModel(SubscriberDataService));
+            SimpleIoc.Default.Register<IUnitOfWork,UnitOfWork<DatabaseContext>>();
+
+            SimpleIoc.Default.Register<IChitFeatureService, ChitFeatureService>();
+
+            SimpleIoc.Default.Register<ChitSubscriberViewModel>(()=>new ChitSubscriberViewModel(SubscriberDataService,ChitFeatureService));
             SimpleIoc.Default.Register<IChitSubscriberDataService,ChitSubscriberDataService>();
 
             SimpleIoc.Default.Register<ChitSubscriberListViewModel>();
@@ -73,6 +76,13 @@ namespace addon365.Chit.App.Wpf.ViewModel
             get
             {
                 return SimpleIoc.Default.GetInstanceWithoutCaching<IChitSubscriberDataService>();
+            }
+        }
+        public IChitFeatureService ChitFeatureService
+        {
+            get
+            {
+                return SimpleIoc.Default.GetInstanceWithoutCaching<IChitFeatureService>();
             }
         }
         public ChitSubscriberListViewModel ChitSubscriberList

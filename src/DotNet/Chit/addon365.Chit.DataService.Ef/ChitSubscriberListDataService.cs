@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Threenine.Data;
-using addon365.Chit.Context.Ef;
+using addon365.Chit.Database.EfContext;
 
 namespace addon365.Chit.DataService.Ef
 {

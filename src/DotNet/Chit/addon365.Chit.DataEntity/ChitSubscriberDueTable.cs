@@ -1,5 +1,5 @@
 ﻿
-using addon365.Accounts.DataEntity;
+using addon365.Accounting.DataEntity;
 using addon365.Common.DataEntity;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;

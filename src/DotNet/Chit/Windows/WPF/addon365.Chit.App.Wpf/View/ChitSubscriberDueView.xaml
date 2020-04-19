@@ -31,6 +31,7 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
@@ -53,21 +54,32 @@
                 <TextBox   Grid.Column="1" Grid.Row="3" Style="{StaticResource InputText}" Text="{Binding FullName,Mode=OneWay}" IsReadOnly="True" />
 
                 <Label Content="Mobile No" Style="{StaticResource Label}" Grid.Row="4" />
-                <TextBox Text="{Binding SelectedChitSubscriber.MobileNo}"  Grid.Column="1" Grid.Row="4" Style="{StaticResource InputText}" IsReadOnly="True" />
+                <TextBox Text="{Binding SelectedChitSubscriber.Customer.MobileNo}"  Grid.Column="1" Grid.Row="4" Style="{StaticResource InputText}" IsReadOnly="True" />
 
                 <Label Content="Place" Style="{StaticResource Label}" Grid.Row="5" />
-                <TextBox Text="{Binding SelectedChitSubscriber.Place}"  Grid.Column="1" Grid.Row="5" Style="{StaticResource InputText}" IsReadOnly="True"/>
+                <TextBox Text="{Binding SelectedChitSubscriber.Customer.Place}"  Grid.Column="1" Grid.Row="5" Style="{StaticResource InputText}" IsReadOnly="True"/>
 
                 <Label Content="BillNo" Style="{StaticResource Label}" Grid.Row="6" />
                 <TextBox Text="{Binding AccessId}"  Grid.Column="1" Grid.Row="6" Style="{StaticResource InputText}" IsReadOnly="True"/>
-                
-                <Label Content="Number of Due" Style="{StaticResource Label}" Grid.Row="7"/>
-                <ComboBox Grid.Column="1" Grid.Row="7" Style="{StaticResource ComboBox}" ItemsSource="{Binding DueNumbers}" SelectedItem="{Binding SelectedDueNumber}" IsReadOnly="True"/>
-                
-                <Label Content="Amount" Style="{StaticResource Label}" Grid.Row="8" />
-                <TextBox Text="{Binding PaymentAmount}"  Grid.Column="1" Grid.Row="8" Style="{StaticResource InputText}" IsReadOnly="True"/>
 
-                <Button Content="Save Due" Grid.Column="1" Grid.Row="9" Style="{StaticResource CommandButton}" Command="{Binding SaveSubscriberDueCommand}"/>
+                <Label Content="Bill Date" Style="{StaticResource Label}" Grid.Row="7" />
+                <DatePicker SelectedDate="{Binding BillDate}"  Grid.Column="1" Grid.Row="7" Style="{StaticResource DateText}"  />
+
+                <Label Content="Number of Due" Style="{StaticResource Label}" Grid.Row="8"/>
+                <ComboBox Grid.Column="1" Grid.Row="8" Style="{StaticResource ComboBox}" ItemsSource="{Binding DueNumbers}" SelectedItem="{Binding SelectedDueNumber}" IsReadOnly="True"/>
+                
+                <Label Content="Amount" Style="{StaticResource Label}" Grid.Row="9" />
+                <TextBox Text="{Binding PaymentAmount}"  Grid.Column="1" Grid.Row="9" Style="{StaticResource InputText}" IsReadOnly="True"/>
+
+                <Button Content="Save Due" Grid.Column="1" Grid.Row="10" Style="{StaticResource CommandButton}" Command="{Binding SaveSubscriberDueCommand}"/>
+                <DataGrid Grid.Row="11" Grid.Column="1" ItemsSource="{Binding DueDetail}" AutoGenerateColumns="False"  >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Receipt Id" Binding="{Binding AccessId}" Width="100"/>
+                        <DataGridTextColumn Header="Date" Binding="{Binding TransactionDate,StringFormat=d}" Width="100"/>
+                        <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="100"/>
+
+                   </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </DockPanel>
     </Grid>

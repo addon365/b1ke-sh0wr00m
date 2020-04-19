@@ -5,7 +5,7 @@
   </PropertyGroup>
 
  <ItemGroup>
-   <ProjectReference Include="..\..\Accounts\addon365.Accounts.DataEntity\addon365.Accounts.DataEntity.csproj" />
+   <ProjectReference Include="..\..\Accounting\addon365.Accounting.DataEntity\addon365.Accounting.DataEntity.csproj" />
    <ProjectReference Include="..\..\Common\addon365.Common.DataEntity\addon365.Common.DataEntity.csproj" />
    <ProjectReference Include="..\..\Crm\addon365.Crm.DataEntity\addon365.Crm.DataEntity.csproj" />
  </ItemGroup>

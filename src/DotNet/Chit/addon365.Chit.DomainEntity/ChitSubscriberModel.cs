@@ -9,7 +9,7 @@ namespace addon365.Chit.DomainEntity
        public CustomerModel Customer { get; set; }
         public ChitGroupModel ChitGroup { get; set; }
         public AgentModel Agent { get; set; }
-        public decimal ChitDueAmount { get; set; }
+       
 
     }
 }

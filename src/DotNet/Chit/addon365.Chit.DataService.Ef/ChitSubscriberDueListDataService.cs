@@ -1,4 +1,4 @@
-﻿using addon365.Chit.Context.Ef;
+﻿using addon365.Chit.Database.EfContext;
 using addon365.Chit.DataEntity;
 using addon365.Chit.DomainEntity;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +36,30 @@ namespace addon365.Chit.DataService.Ef
             {
                 var Contact = chitSubscriberDue.ChitSubscriber.Customer.Contact;
                 lst.Add(new ChitSubscriberDueListModel { FirstName = Contact.FirstName, LastName = Contact.LastName, Place = Contact.Place, MobileNo = Contact.MobileNumber, AccessId = chitSubscriberDue.AccessId, KeyId = chitSubscriberDue.KeyId,Amount=chitSubscriberDue.DueAmountInfo.Amount,GroupName=chitSubscriberDue.ChitSubscriber.ChitGroup.GroupName,TransactionDate=chitSubscriberDue.DueAmountInfo.Voucher.VoucherDate });
+            }
+
+            return lst;
+        }
+        public IList<ChitSubscriberDueListModel> Get(string subscriberAccessId)
+        {
+            IList<ChitSubscriberDueListModel> lst = new List<ChitSubscriberDueListModel>();
+            var data = _unitOfWork.GetRepository<ChitSubscriberDueTable>().GetList(orderBy: x => x.OrderBy(x => Convert.ToInt32(x.AccessId)), include: x => x.Include(x => x.ChitSubscriber).ThenInclude(x => x.Customer).ThenInclude(x => x.Contact).Include(x => x.DueAmountInfo).Include(x => x.ChitSubscriber.ChitGroup).Include(x => x.DueAmountInfo.Voucher), index: 0, size: 5000);
+            foreach (ChitSubscriberDueTable chitSubscriberDue in data.Items)
+            {
+                var Contact = chitSubscriberDue.ChitSubscriber.Customer.Contact;
+                lst.Add(new ChitSubscriberDueListModel { FirstName = Contact.FirstName, LastName = Contact.LastName, Place = Contact.Place, MobileNo = Contact.MobileNumber, AccessId = chitSubscriberDue.AccessId, KeyId = chitSubscriberDue.KeyId, Amount = chitSubscriberDue.DueAmountInfo.Amount, GroupName = chitSubscriberDue.ChitSubscriber.ChitGroup.GroupName, TransactionDate = chitSubscriberDue.DueAmountInfo.Voucher.VoucherDate });
+            }
+
+            return lst;
+        }
+        public IList<ChitSubscriberDueListModel> Get(Guid subscriberKeyId)
+        {
+            IList<ChitSubscriberDueListModel> lst = new List<ChitSubscriberDueListModel>();
+            var data = _unitOfWork.GetRepository<ChitSubscriberDueTable>().GetList(x=>x.ChitSubscriberKeyId==subscriberKeyId,orderBy: x => x.OrderBy(x => Convert.ToInt32(x.AccessId)), include: x => x.Include(x => x.ChitSubscriber).ThenInclude(x => x.Customer).ThenInclude(x => x.Contact).Include(x => x.DueAmountInfo).Include(x => x.ChitSubscriber.ChitGroup).Include(x => x.DueAmountInfo.Voucher), index: 0, size: 5000);
+            foreach (ChitSubscriberDueTable chitSubscriberDue in data.Items)
+            {
+                var Contact = chitSubscriberDue.ChitSubscriber.Customer.Contact;
+                lst.Add(new ChitSubscriberDueListModel { FirstName = Contact.FirstName, LastName = Contact.LastName, Place = Contact.Place, MobileNo = Contact.MobileNumber, AccessId = chitSubscriberDue.AccessId, KeyId = chitSubscriberDue.KeyId, Amount = chitSubscriberDue.DueAmountInfo.Amount, GroupName = chitSubscriberDue.ChitSubscriber.ChitGroup.GroupName, TransactionDate = chitSubscriberDue.DueAmountInfo.Voucher.VoucherDate });
             }
 
             return lst;

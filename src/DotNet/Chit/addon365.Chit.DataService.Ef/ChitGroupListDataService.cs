@@ -1,4 +1,4 @@
-﻿using addon365.Chit.Context.Ef;
+﻿using addon365.Chit.Database.EfContext;
 using addon365.Chit.DomainEntity;
 using addon365.Common.DataService;
 using addon365.Common.DataService.Ef;

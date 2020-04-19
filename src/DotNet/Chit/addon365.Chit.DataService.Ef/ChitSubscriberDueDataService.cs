@@ -1,5 +1,5 @@
-﻿using addon365.Accounts.DataEntity;
-using addon365.Chit.Context.Ef;
+﻿using addon365.Accounting.DataEntity;
+using addon365.Chit.Database.EfContext;
 using addon365.Chit.DataEntity;
 using addon365.Chit.DomainEntity;
 using addon365.Common.Helper;
@@ -11,21 +11,67 @@ using Threenine.Data;
 
 namespace addon365.Chit.DataService.Ef
 {
+
     public class ChitSubscriberDueDataService : IChitSubscriberDueDataService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ChitSubscriberDueDataService(IUnitOfWork<DatabaseContext> unitOfWork)
+        private IChitSubscriberDueListDataService _dueListService;
+        private IChitSubscriberDataService _chitSubscriberDataService;
+        public ChitSubscriberDueDataService(IUnitOfWork<DatabaseContext> unitOfWork, IChitSubscriberDueListDataService dueListService, IChitSubscriberDataService chitSubscriberDataService)
         {
             this._unitOfWork = unitOfWork;
+            this._dueListService = dueListService;
+            this._chitSubscriberDataService = chitSubscriberDataService;
         }
         public void Delete(Guid KeyId)
         {
             throw new NotImplementedException();
         }
 
-        public void Get(Guid KeyId)
+        public ChitSubscriberDueModel Get(Guid KeyId)
         {
             throw new NotImplementedException();
+        }
+        public ChitSubscriberDueModel Get(string AccessId)
+        {
+            var data = _unitOfWork.GetRepository<ChitSubscriberDueTable>().Single(x => x.AccessId == AccessId, include:x=>x.Include(x=>x.DueAmountInfo).ThenInclude(x=>x.Voucher).Include(x => x.ChitSubscriber).ThenInclude(x => x.Customer).ThenInclude(x => x.Contact).Include(x=>x.ChitSubscriber).ThenInclude(x=>x.Agent).ThenInclude(x=>x.Contact).Include(x=>x.ChitSubscriber).ThenInclude(x=>x.ChitGroup));
+            ChitSubscriberDueModel chit = new ChitSubscriberDueModel
+            {
+                AccessId = data.AccessId,
+                ChitSubscriber = new ChitSubscriberModel
+                {
+                    AccessId = data.ChitSubscriber.AccessId,
+                    Customer = new CustomerModel
+                    {
+                        AccessId = data.ChitSubscriber.Customer.AccessId,
+                        ContactKeyId = data.ChitSubscriber.Customer.Contact.KeyId,
+                        FirstName = data.ChitSubscriber.Customer.Contact.FirstName,
+                        LastName = data.ChitSubscriber.Customer.Contact.LastName,
+                        MobileNo = data.ChitSubscriber.Customer.Contact.MobileNumber
+
+                    },
+                    Agent = new AgentModel { AccessId = data.ChitSubscriber.Agent.AccessId },
+                    ChitGroup = new ChitGroupModel { AccessId = data.ChitSubscriber.ChitGroup.AccessId }
+
+
+
+                },
+                Amount = data.DueAmountInfo.Amount,
+                TransactionDate = data.DueAmountInfo.Voucher.VoucherDate
+
+
+            };
+            return chit;
+           
+        }
+        public ChitDueSubscriberDetailModel GetSubscriberDetail(string accessId)
+        {
+            ChitDueSubscriberDetailModel model = new ChitDueSubscriberDetailModel();
+            var dataSubscriber = _chitSubscriberDataService.Get(accessId);
+            model.Subscriber = dataSubscriber;
+            model.DueDetail = _dueListService.Get(dataSubscriber.KeyId);
+        
+            return model;
         }
 
         public void GetAll()
@@ -41,14 +87,7 @@ namespace addon365.Chit.DataService.Ef
             ChitSubscriberDueScreenModel m = new ChitSubscriberDueScreenModel();
   
 
-            IList<ChitSubscriberModel> lstSub = new List<ChitSubscriberModel>();
-            var data = _unitOfWork.GetRepository<ChitSubscriberTable>().GetList(include: x => x.Include(x => x.Customer).ThenInclude(x => x.Contact).Include(x => x.ChitGroup),index:0,size:5000);
-            foreach (ChitSubscriberTable chitSubscriber in data.Items)
-            {
-                var Contact = chitSubscriber.Customer.Contact;
-                lstSub.Add(new ChitSubscriberModel { Customer=new CustomerModel { FirstName = Contact.FirstName, LastName = Contact.LastName, Place = Contact.Place, MobileNo = Contact.MobileNumber }, AccessId = chitSubscriber.AccessId, KeyId = chitSubscriber.KeyId,ChitDueAmount=chitSubscriber.ChitGroup.ChitDueAmount, ChitGroup=new ChitGroupModel { KeyId = chitSubscriber.ChitGroup.KeyId, GroupName = chitSubscriber.ChitGroup.GroupName, } });
-            }
-            m.ChitSubscriberList = lstSub;
+         
 
             var Max = _unitOfWork.GetRepository<ChitSubscriberDueTable>().Single(orderBy: x => x.OrderByDescending(m => Convert.ToInt64(m.AccessId)));
 
@@ -93,5 +132,7 @@ namespace addon365.Chit.DataService.Ef
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

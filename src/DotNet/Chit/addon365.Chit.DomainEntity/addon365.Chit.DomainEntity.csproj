@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Accounts\addon365.Accounts.DomainEntity\addon365.Accounts.DomainEntity.csproj" />
+    <ProjectReference Include="..\..\Accounting\addon365.Accounting.DomainEntity\addon365.Accounting.DomainEntity.csproj" />
+    <ProjectReference Include="..\..\Common\addon365.Common.DomainEntity\addon365.Common.DomainEntity.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\addon365.Common.DataService\addon365.Common.DataService.csproj" />
     <ProjectReference Include="..\..\Crm\addon365.Crm.DataEntity\addon365.Crm.DataEntity.csproj" />
+    <ProjectReference Include="..\addon365.Chit.DataEntity\addon365.Chit.DataEntity.csproj" />
     <ProjectReference Include="..\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj" />
   </ItemGroup>
 

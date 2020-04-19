@@ -9,34 +9,45 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using System.Diagnostics;
+using System.Text.Json;
+using System.IO;
+using addon365.Chit.ViewModel.ReportModel;
 
 namespace addon365.Chit.ViewModel
 {
     public class ChitSubscriberDueViewModel : ViewModelBase
     {
         private IChitSubscriberDueDataService _chitSubscriberDueDataService;
-        private ChitGroupModel _selectedChitGroup;
         private ChitSubscriberModel _selectedChitSubscriber;
         string _title,_accessId,_searchSubscriberAccessId;
-        int _totalDue;
+        DateTime _billDate;
+        int? _totalDue;
         decimal _paymentAmount;
-        private ObservableCollection<ChitGroupModel> _chitGroupList;
-        private ObservableCollection<ChitSubscriberModel> _chitSubscriberList;
+        private ObservableCollection<ChitSubscriberDueListModel> _dueDetail;
         public ChitSubscriberDueViewModel(IChitSubscriberDueDataService chitSubscriberDueDataService)
         {
-            this._chitSubscriberDueDataService = chitSubscriberDueDataService;
-            if (IsInDesignMode)
-            {
-                Title = "Hello MVVM Light (Design Mode)";
+            try { 
+                this._chitSubscriberDueDataService = chitSubscriberDueDataService;
+                if (IsInDesignMode)
+                {
+                    Title = "Hello MVVM Light (Design Mode)";
+                }
+                else
+                {
+                    Title = "Hello MVVM Light";
+                    LoadMasterData();
+                }
+
+                SaveSubscriberDueCommand = new RelayCommand(SaveSubscriberDue);
+                FindSubscriberByIdCommand = new RelayCommand(FindSubscriberById);
             }
-            else
+            catch(Exception ex)
             {
-                Title = "Hello MVVM Light";
-                LoadMasterData();
+                ex = addon365.Common.Helper.ExceptionHelper.GetRootException(ex);
+                Messenger.Default.Send<NotificationMessage>(new NotificationMessage(ex.Message));
+
             }
-            
-            SaveSubscriberDueCommand = new RelayCommand(SaveSubscriberDue);
-            FindSubscriberByIdCommand = new RelayCommand(FindSubscriberById);
         }
         public RelayCommand SaveSubscriberDueCommand { get; private set; }
         public RelayCommand FindSubscriberByIdCommand { get; private set; }
@@ -62,6 +73,18 @@ namespace addon365.Chit.ViewModel
             {
                 _accessId = value;
                 RaisePropertyChanged("AccessId");
+            }
+        }
+        public DateTime BillDate
+        {
+            get
+            {
+                return _billDate;
+            }
+            set
+            {
+                _billDate = value;
+                RaisePropertyChanged("BillDate");
             }
         }
         public string SearchSubscriberAccessId
@@ -98,7 +121,7 @@ namespace addon365.Chit.ViewModel
 
             }
         }
-        public int SelectedDueNumber
+        public int? SelectedDueNumber
         {
             get
             {
@@ -109,7 +132,7 @@ namespace addon365.Chit.ViewModel
                 _totalDue = value;
 
                 if(SelectedChitSubscriber!=null)
-                    PaymentAmount=SelectedChitSubscriber.ChitDueAmount* _totalDue;
+                    PaymentAmount=SelectedChitSubscriber.ChitGroup.ChitDueAmount*(int) _totalDue;
                 
                 RaisePropertyChanged("SelectedDueNumber");
             }
@@ -127,11 +150,11 @@ namespace addon365.Chit.ViewModel
             }
         }
 
-        public ObservableCollection<ChitSubscriberModel> ChitSubscriberList
+        public ObservableCollection<ChitSubscriberDueListModel>  DueDetail
         {
             get
             {
-                return _chitSubscriberList;
+                return _dueDetail;
             }
         }
 
@@ -146,7 +169,8 @@ namespace addon365.Chit.ViewModel
                 _selectedChitSubscriber = value;
                 RaisePropertyChanged("SelectedChitSubscriber");
                 RaisePropertyChanged("FullName");
-               
+                RaisePropertyChanged("SelectedDueNumber");
+
             }
         }
         public void LoadMasterData()
@@ -155,8 +179,8 @@ namespace addon365.Chit.ViewModel
             
 
             
-            _chitSubscriberList = new ObservableCollection<ChitSubscriberModel>(masterData.ChitSubscriberList);
-            this.RaisePropertyChanged(() => this.ChitSubscriberList);
+            //_chitSubscriberList = new ObservableCollection<ChitSubscriberModel>(masterData.ChitSubscriberList);
+            //this.RaisePropertyChanged(() => this.ChitSubscriberList);
 
             Int64 id = 1;
             if (masterData.MaxAccessId != null && masterData.MaxAccessId != "")
@@ -171,6 +195,40 @@ namespace addon365.Chit.ViewModel
             {
                 _chitSubscriberDueDataService.Insert(GetCurrentSubcriberDue());
                 Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Subscriber Saved."));
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                };
+                var jsonModel = SelectedChitSubscriber;
+                var DueDetail = _chitSubscriberDueDataService.Get(AccessId);
+                var DueDetailReportModel = new ChitDueBillMasterReportModel { KeyId = DueDetail.KeyId.ToString(), BillNo = DueDetail.AccessId, BillDate = DueDetail.TransactionDate, CustomerAccessId = DueDetail.ChitSubscriber.AccessId, CustomerName = DueDetail.ChitSubscriber.Customer.FirstName };
+                var modelJson = JsonSerializer.Serialize(DueDetailReportModel, options);
+                var composedJson = "{'master1':[" + modelJson + "]}";
+                File.WriteAllText(@"d:\test.json", composedJson);
+                string ReportName = "DueReceipt.rpt";
+                using (var process = new Process())
+                {
+                    
+                    process.StartInfo.FileName = @"D:\Development\Project\GitHub\addon365.CrystalReportViewer.Net4\addon365.CrystalReportViewer.Net4\bin\Debug\addon365.CrystalReportViewer.Net4.exe";
+                    process.StartInfo.Arguments = $"{ReportName}";
+                    //process.StartInfo.FileName = @"cmd.exe";
+                    //process.StartInfo.Arguments = @"/c dir";      // print the current working directory information
+                    //process.StartInfo.CreateNoWindow = true;
+                    //process.StartInfo.UseShellExecute = false;
+                    //process.StartInfo.RedirectStandardOutput = true;
+                    //process.StartInfo.RedirectStandardError = true;
+
+                    //process.OutputDataReceived += (sender, data) => Console.WriteLine(data.Data);
+                    //process.ErrorDataReceived += (sender, data) => Console.WriteLine(data.Data);
+                    //Console.WriteLine("starting");
+                    process.Start();
+                    //process.BeginOutputReadLine();
+                    //process.BeginErrorReadLine();
+                    //var exited = process.WaitForExit(1000 * 10);     // (optional) wait up to 10 seconds
+                    //Console.WriteLine($"exit {exited}");
+                }
                 Clear();
             }
             catch (Exception ex)
@@ -191,8 +249,13 @@ namespace addon365.Chit.ViewModel
                 {
                     throw new Exception("Please enter Id");
                 }
+                ChitDueSubscriberDetailModel chitDueSubscriberDetailModel = _chitSubscriberDueDataService.GetSubscriberDetail(SearchSubscriberAccessId);
+                    //SelectedChitSubscriber = _chitSubscriberList.First(x => x.AccessId == SearchSubscriberAccessId);
+                SelectedChitSubscriber = chitDueSubscriberDetailModel.Subscriber;
 
-                    SelectedChitSubscriber = _chitSubscriberList.First(x => x.AccessId == SearchSubscriberAccessId);
+                _dueDetail = new ObservableCollection<ChitSubscriberDueListModel>(chitDueSubscriberDetailModel.DueDetail);
+                this.RaisePropertyChanged(() => this.DueDetail);
+
             }
 
             catch (Exception ex)
@@ -209,7 +272,7 @@ namespace addon365.Chit.ViewModel
         private ChitSubscriberDueModel GetCurrentSubcriberDue()
         {
             Validate();
-            var model = new ChitSubscriberDueModel {ChitSubscriberKeyId=SelectedChitSubscriber.KeyId,Amount=this.PaymentAmount,AccessId=this.AccessId};
+            var model = new ChitSubscriberDueModel {ChitSubscriberKeyId=SelectedChitSubscriber.KeyId, TransactionDate=BillDate,Amount = this.PaymentAmount,AccessId=this.AccessId};
             return model;
         }
 
@@ -221,7 +284,8 @@ namespace addon365.Chit.ViewModel
         {
             SearchSubscriberAccessId = string.Empty;
             SelectedChitSubscriber = null;
-          
+            SelectedDueNumber =null;
+            PaymentAmount = 0;
             LoadMasterData();
 
         }

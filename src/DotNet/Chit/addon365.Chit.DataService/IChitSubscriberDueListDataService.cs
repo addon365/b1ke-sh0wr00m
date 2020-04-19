@@ -10,5 +10,7 @@ namespace addon365.Chit.DataService
         void Delete(Guid KeyId);
         void Edit(Guid KeyId);
         IList<ChitSubscriberDueListModel> GetAll();
+        IList<ChitSubscriberDueListModel> Get(Guid subscriberKeyId);
+        IList<ChitSubscriberDueListModel> Get(string subscriberAccessId);
     }
 }

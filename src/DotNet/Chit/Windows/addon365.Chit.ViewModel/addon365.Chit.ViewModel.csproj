@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\addon365.Common.DataService\addon365.Common.DataService.csproj" />
+    <ProjectReference Include="..\..\..\Common\addon365.Common.Helper\addon365.Common.Helper.csproj" />
     <ProjectReference Include="..\..\..\Common\Windows\addon365.Common.ViewModel\addon365.Common.ViewModel.csproj" />
     <ProjectReference Include="..\..\addon365.Chit.DataService\addon365.Chit.DataService.csproj" />
     <ProjectReference Include="..\..\addon365.Chit.DomainEntity\addon365.Chit.DomainEntity.csproj" />

@@ -63,6 +63,10 @@
                     <RibbonButton Label="List" Name="btnAgentList" Click="btnAgentList_Click"  LargeImageSource="Largeicon.png" />
 
                 </RibbonGroup>
+                <RibbonGroup x:Name="grpDatabase" Header="Database">
+                    <RibbonButton Label="Updata" LargeImageSource="Largeicon.png" Name="btnUpdate" Click="btnUpdate_Click" />
+                   
+                </RibbonGroup>
             </RibbonTab>
         </Ribbon>
     </Grid>

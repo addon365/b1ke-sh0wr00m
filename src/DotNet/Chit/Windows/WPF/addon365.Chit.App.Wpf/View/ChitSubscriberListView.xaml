@@ -44,11 +44,11 @@
                     <Button Content="Cancel" Width="120" Style="{StaticResource CommandButton}" Name="btnCancel" Click="btnCancel_Click"/>
                     </StackPanel>
                 </Grid>
-                <syncfusion:SfDataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ChitSubscriberList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSubscriber}" AllowFiltering="True" Name="dgSubscriberList">
+                <syncfusion:SfDataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ChitSubscriberList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedSubscriber}" AllowFiltering="True"  ColumnSizer="Star" Name="dgSubscriberList" >
                     <syncfusion:SfDataGrid.Columns>
                         <syncfusion:GridTextColumn HeaderText="Id" MappingName="AccessId" Width="50"/>
                         <syncfusion:GridTextColumn HeaderText="Group Name" MappingName="ChitGroupName" Width="130"/>
-                        <syncfusion:GridTextColumn HeaderText="Agent" MappingName="FirstName" Width="130"/>
+                        <syncfusion:GridTextColumn HeaderText="Agent" MappingName="Agent.FirstName" Width="130"/>
                         <syncfusion:GridTextColumn HeaderText="Total Dues" MappingName="TotalDue" Width="80"/>
                         <syncfusion:GridTextColumn HeaderText="First Name" MappingName="FirstName" Width="130"/>
                         <syncfusion:GridTextColumn HeaderText="Last Name" MappingName="LastName" Width="130"/>

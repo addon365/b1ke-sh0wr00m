@@ -35,9 +35,9 @@ namespace addon365.Chit.App.Wpf.View
                 if (vm.SelectedSubscriber != null)
                 {
                     ChitSubscriberDueViewModel vm1 = this.DataContext as ChitSubscriberDueViewModel;
-
-                    vm1.SelectedChitSubscriber = vm1.ChitSubscriberList.Where(x => x.KeyId == vm.SelectedSubscriber.KeyId).FirstOrDefault();
-                    vm1.SearchSubscriberAccessId = vm1.SelectedChitSubscriber.AccessId;
+                    vm1.SearchSubscriberAccessId = vm.SelectedSubscriber.AccessId;
+                    vm1.FindSubscriberById();
+                    
                 }
             }
         }

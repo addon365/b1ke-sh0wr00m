@@ -44,7 +44,7 @@
                         <Button Content="Cancel" Width="120" Style="{StaticResource CommandButton}" Name="btnCancel" />
                     </StackPanel>
                 </Grid>
-                <syncfusion:SfDataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding AgentList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAgent}" Name="dgAgentList">
+                <syncfusion:SfDataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding AgentList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAgent}" ColumnSizer="Star" Name="dgAgentList">
                     <syncfusion:SfDataGrid.Columns>
                         <syncfusion:GridTextColumn HeaderText="Id" MappingName="AccessId" Width="50"/>
                         <syncfusion:GridTextColumn  HeaderText="First Name" MappingName="FirstName"/>

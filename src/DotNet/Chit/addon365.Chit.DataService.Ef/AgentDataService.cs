@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using addon365.Chit.DataEntity;
 using addon365.Chit.DomainEntity;
-using addon365.Chit.Context.Ef;
+using addon365.Chit.Database.EfContext;
 using addon365.Chit.DataService;
 using addon365.Common.DataService;
 using addon365.Crm.DataEntity;

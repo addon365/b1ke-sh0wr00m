@@ -17,5 +17,18 @@ namespace addon365.Common.Helper
             }
             return FullName;
         }
+        public static string GetFullName(object src)
+        {
+            string FullName = "";
+            try
+            {
+                FullName = src.GetType().FullName;
+            }
+            catch
+            {
+                FullName = "";
+            }
+            return FullName;
+        }
     }
 }

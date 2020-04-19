@@ -16,15 +16,13 @@ namespace addon365.Chit.ViewModel
     {
         private IChitSubscriberDataService _chitSubscriberDataService;
         Guid _keyId;
-        string _title,_accessId,_firstName,_lastName,_mobileNumber,_place,_address;
-        private ObservableCollection<ChitGroupModel> _chitGroupList;
+        string _title, _accessId;
         private ChitGroupModel _selectedChitGroup;
         private CustomerModel _selectedCustomer;
-        private ObservableCollection<AgentModel> _agentList;
         private AgentModel _selectedAgent;
         private string _searchAgentAccessId,_searchChitGroupAccessId,_searchCustomerAccessId;
         private bool _editMode = false;
-        public ChitSubscriberViewModel(IChitSubscriberDataService chitSubscriberDataService)
+        public ChitSubscriberViewModel(IChitSubscriberDataService chitSubscriberDataService,IChitFeatureService chitFeatureService)
         {
             try
             {
@@ -38,7 +36,7 @@ namespace addon365.Chit.ViewModel
                     Title = "Subscriber Window";
                     LoadMasterData();
                 }
-
+                AgentFeature = chitFeatureService.GetFeature().Agent;
                 SaveSubscriberCommand = new RelayCommand(SaveSubscriber);
                 FindAgentByIdCommand = new RelayCommand(FindAgentById);
                 FindChitGroupByIdCommand = new RelayCommand(FindChitGroupById);
@@ -56,6 +54,7 @@ namespace addon365.Chit.ViewModel
         public RelayCommand SaveSubscriberCommand { get; private set; }
         public RelayCommand FindAgentByIdCommand { get; private set; }
         public RelayCommand FindChitGroupByIdCommand { get; private set; }
+
 
         public string Title 
         {
@@ -295,34 +294,13 @@ namespace addon365.Chit.ViewModel
             }
 
         }
-        public void FindCustomerById()
-        {
-            try
-            {
-                if (SearchAgentAccessId == String.Empty)
-                {
-                    throw new Exception("Please enter Id");
-                }
-
-                SelectedAgent = _agentList.First(x => x.AccessId == SearchAgentAccessId);
-            }
-
-            catch (Exception ex)
-            {
-                while (ex.InnerException != null)
-                {
-                    ex = ex.InnerException;
-                }
-                Messenger.Default.Send<NotificationMessage>(new NotificationMessage(ex.Message));
-            }
-
-        }
+      
         public void LoadSubscriber(Guid keyId)
         {
            var subscriber= _chitSubscriberDataService.Get(keyId);
             _editMode = true;
             SetSubcriber(subscriber);
         }
-        
+        public  Boolean AgentFeature { get; set; }
     }
 }

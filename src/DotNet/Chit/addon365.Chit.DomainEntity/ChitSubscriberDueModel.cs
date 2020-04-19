@@ -9,6 +9,7 @@ namespace addon365.Chit.DomainEntity
         public Guid? KeyId  { get; set; }
         public string AccessId { get; set; }
         public Guid ChitSubscriberKeyId  { get; set; }
+        public ChitSubscriberModel ChitSubscriber { get; set; }
         public DateTime TransactionDate { get; set; }
         public Decimal Amount { get; set; }
     }
